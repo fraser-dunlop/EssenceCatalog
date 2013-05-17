@@ -1,0 +1,41 @@
+language ESSENCE 1.2.0
+
+letting Character be new type enum {a,b,c,d,e}
+
+letting maxDist be 2
+
+letting codeWordLength be 6
+
+letting numOfCodeWords be 10
+
+letting minDist be 4
+
+$ Lee distance function. 
+letting dist be function( 
+(a,a) --> 0,
+(a,b) --> 1,
+(a,c) --> 2,
+(a,d) --> 2,
+(a,e) --> 1,
+
+(b,a) --> 1,
+(b,b) --> 0,
+(b,c) --> 1,
+(b,d) --> 2,
+(b,e) --> 2,
+
+(c,a) --> 2,
+(c,b) --> 1,
+(c,c) --> 0,
+(c,d) --> 1,
+(c,e) --> 2,
+
+(d,a) --> 2,                
+(d,b) --> 2,
+(d,c) --> 1,
+(d,d) --> 0,
+(d,e) --> 1
+)
+
+
+                                       

@@ -1,0 +1,19 @@
+language Essence 1.3
+letting nnodes be 10
+letting nrings be 6
+letting capacity be 3
+letting demand be {{4, 5},
+{5, 4},
+{9, 5},
+{3, 3},
+{4, 15},
+{6, 3},
+{10, 2},
+{4, 1},
+{9, 4},
+{7, 5},
+{9, 5},
+{10, 4},
+{9, 14},
+{10, 5},
+{10, 2}}

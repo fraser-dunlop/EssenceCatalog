@@ -6,7 +6,7 @@ $ n_models: the number of rack models
 $ n_types: the number of card types
 $ n_cards: the number of cards being plugged in
 $ n_racks: the number of racks to use
-given n_models, n_types, n_cards, n_racks : int(1..)
+given n_models, n_types, n_cards, n_racks : int(1..5000)
 
 $ Model: a rack model is represented as an integer between 1 and n_models
 $ Type: a card type is represented as an integer between 1 and n_types
@@ -22,10 +22,11 @@ $ max_connects : the maximum number of connections a rack model can accomodate
 $ price: the price of a rack model
 $ req_power: the amount of power required by a particular card type
 $ ctype: the type of a particular card
-given max_power    : function (total) Model --> int(1..),
-      max_connects : function (total) Model --> int(1..),
-      price        : function (total) Model --> int(1..),
-      req_power    : function (total) Type  --> int(1..),
+$ I make up some 5000 here, just to give a bound for savilerow
+given max_power    : function (total) Model --> int(1..5000),
+      max_connects : function (total) Model --> int(1..5000),
+      price        : function (total) Model --> int(1..5000),
+      req_power    : function (total) Type  --> int(1..5000),
       ctype        : function (total) Card  --> Type
 
 $ model: the model of each rack

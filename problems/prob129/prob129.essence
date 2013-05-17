@@ -1,4 +1,4 @@
-language ESSENCE 1.2.0
+language Essence 1.2.0
 $ prob129.essence: SONET Configuration
 $
 $ A SONET communication network comprises a number of rings, each joining a
@@ -14,7 +14,7 @@ $
 $ 03 September 2007
 $
 
-given nrings, nnodes, capacity : int(1..)
+given nnodes, nrings, capacity : int(1..)
 
 letting Nodes be domain int(1..nnodes)
 
@@ -24,4 +24,8 @@ find network : mset (size nrings) of set (maxSize capacity) of Nodes
 
 minimising sum ring in network . |ring|
 
-such that forAll pair in demand . exists ring in network . pair subsetEq ring
+such that 
+
+forAll pair in demand . 
+    exists ring in network . 
+        pair subsetEq ring

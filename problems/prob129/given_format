@@ -1,0 +1,187 @@
+ From: Cole Smith [cole@sie.arizona.edu]
+Sent: 18 October 2000 21:41
+To: B M Smith
+Subject: Re: [Fwd: Symmetry paper]
+
+Dear Barbara,
+
+Please excuse the late response.  I've been out of town and I'm afraid
+that your message got buried.  
+
+Attached is a zipped file, sset.zip.  These contain three sets of 15
+problems.  The ones you're interested in are the problems contained in
+the third set.  Files are named "sXringY", where X is the set (again,
+you're interested in X = 3) and Y is the instance (Y ranges from 1 to
+15).
+
+Each of the problems are simple data files.  To describe the format of
+these problem, consider the following parameter definitions (as defined
+in the paper).  n = number of nodes in the demand graph, m = available
+SONET rings to route the demand, b = maximum amount of demand allowed on
+any one ring, r = maximum number of nodes allowed to be placed on any
+one ring.  Also, let "a" be the number of arcs that exist in the demand
+graph. 
+ 
+Each file is formatted as follows.
+
+n m b r a
+list of inter-node demands for each arc in the graph
+list of origin nodes for each arc in the graph
+list of destination nodes for each arc in the graph
+
+For example, the following SONET problem:
+
+5 3 15 4 6
+1 8 4 2 3 5
+1 1 1 2 3 3
+2 3 4 3 4 5
+
+has 5 nodes and 6 arcs in the demand graph.  These arcs are (1,2) with 1
+demand unit, (1,3) with 8 demand units, (1,4) with 4 demand units, (2,3)
+with 2 demand units, (3,4) with 3 demand units, and (3,5) with 5 demand
+units.
+
+Three SONET rings are available to route this demand in this problem. 
+Each ring should route no more than 15 demand units and should be
+attached to no more than 4 nodes.
+
+Please contact me if I can answer any questions or provide any more
+assistance.
+
+Sincerely,
+Cole
+
+ps:  Set 1 has 7 nodes per problem, Set 2 has 10 nodes per problem, and
+Set 3 has 13 nodes per problem.  Other parameter descriptions for each
+set are provided in the paper.  
+
+
+B M Smith wrote:
+> 
+> Dear Cole,
+> 
+> Thanks for the prompt reply.  Yes, it was the SONET problem I
+> was primarily interested in, so I'd be glad if you would send me those 15
+> test problems.
+> 
+> Thanks very much. As I said earlier, I will certainly let you know if I
+> get anywhere using constraint programming on it (or even if not).
+> 
+> Best wishes
+> 
+> Barbara
+> 
+> On Wed, 11 Oct 2000, Cole Smith wrote:
+> 
+> > Dear Barbara,
+> >
+> > I would be happy to send this data to you.  For this paper, we generated
+> > sets of test problems for three separate applications.  Are you
+> > interested in the 15 problems related to the SONET problem?
+> >
+> > Thanks,
+> > Cole
+> >
+> >
+> > Hanif Sherali wrote:
+> > >
+> > > Dear Barbara:
+> > > We'd be pleased to help and cooperate in any way we can. I'm
+> > > forwarding this to my co-author Cole Smith (who made the ISMP
+> > > presentation), and he'll forward to you the requested files as well as
+> > > a copy of the most recent version of this paper.
+> > > Thanks. Best, Hanif.
+> > >
+> > > At 10:42 AM 10/11/00 +0100, you wrote:
+> > > >
+> > > >Dear Professor Sherali,
+> > > >
+> > > >Two colleagues of mine, Les Proll and Sarah Fores, attended the Math
+> > > >Programming conference in Atlanta in the summer, and heard your talk
+> > > on
+> > > >"Improving Discrete Model Representations via Symmetry
+> > > Considerations".
+> > > >Les gave me a copy of your paper, since he knew that I have been
+> > > working
+> > > >on methods to deal with symmetry in constraint programming (my
+> > > research
+> > > >field).
+> > > >
+> > > >Having read your description of the SONET Network Design Problem, I
+> > > am not
+> > > >sure whether it would be amenable to constraint programming, but I
+> > > think
+> > > >it would be interesting to try.  If it does prove suitable, then our
+> > > >approach to breaking symmetry would also be interesting to
+> > > investigate;
+> > > >what we do is to add constraints during the search for solutions, to
+> > > >prevent exploration of branches symmetrical to those already
+> > > explored.
+> > > >This has proved very successful for some problems, but is still under
+> > > >development, so that we are looking for new problems where symmetry
+> > > is a
+> > > >difficulty.
+> > > >
+> > > >I wonder if you could send me the data for the 15 sample problems you
+> > > >mention in your paper?  Of course, it would be possible to generate a
+> > > new
+> > > >set of problems, since you give a sufficiently detailed description
+> > > of the
+> > > >problem generator, but  it would allow better comparison of results
+> > > (if
+> > > >any), as well as saving me some work.  I'd be very grateful if you
+> > > could
+> > > >help in this.
+> > > >
+> > > >I shall, of course, let you know of any progress I make with this
+> > > problem
+> > > >- or indeed, if I get nowhere at all with it.
+> > > >
+> > > >Thanks very much if you can help
+> > > >
+> > > >Best wishes
+> > > >
+> > > >Dr Barbara Smith
+> > > >Senior Lecturer
+> > > >School of Computing
+> > > >University of Leeds
+> > > >Leeds LS2 9JT
+> > > >U.K.
+> > > >
+> > > >
+> > > >PS  Our approach to symmetry breaking is described in:
+> > > >
+> > > >@inproceedings{Gent00,
+> > > >   author = {Ian P. Gent and Barbara M. Smith},
+> > > >   booktitle = {Proceedings ECAI'2000},
+> > > >   editor = {Werner Horn},
+> > > >   pages = {599-603},
+> > > >   title = {{Symmetry Breaking During Search in Constraint
+> > > Programming}},
+> > > >   year = {2000},
+> > > >   city = {Berlin}
+> > > >}
+> > > >
+> > > ____________________________________________________
+> > > Hanif D. Sherali
+> > > W. Thomas Rice Professor of Engineering
+> > > Department of Industrial and Systems Engineering (0118)
+> > > Virginia Polytechnic Institute and State University
+> > > Blacksburg, VA 24061
+> > > _____________________________________________________
+> > > Tel: (540) 231 5474
+> > > Fax: (540) 231 3322
+> > > E-Mail: hanifs@vt.edu
+> > > URL: http://ise.vt.edu/sherali
+> > > ______________________________________________________
+> >
+> > bms@comp.leeds.ac.uk
+> >
+> >
+
+-- 
+Dr. Cole Smith
+University of Arizona
+Department of Systems and Industrial Engineering
+ph:  (520) 621-2605
+fx:  (520) 621-6555

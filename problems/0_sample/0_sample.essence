@@ -1,0 +1,12 @@
+language Essence 1.3
+
+given n,a,b : int(0..100)
+
+given s : set of int(1..n)
+
+find x : set of int(a..b)
+
+such that
+    x subsetEq s,
+    |x| in x
+

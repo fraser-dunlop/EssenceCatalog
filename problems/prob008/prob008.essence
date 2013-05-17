@@ -6,39 +6,39 @@ $
 
 given n_upper : int
 
-$ deck_width: the width of the ship deck
-$ deck_length: the length of the ship deck
-$ n_containers: the number of containers
-$ n_classes: the number of container classes
+$ deck_width   : the width of the ship deck
+$ deck_length  : the length of the ship deck
+$ n_containers : the number of containers
+$ n_classes    : the number of container classes
 given deck_width, deck_length, n_containers, n_classes : int(1..)
 
-$ Container: containers are represented as an integer between 1 and n_containers
-$ Class: classes are represented as an integer between 1 and n_classes
-$ Width: a container width may be between 1 and the width of the deck
-$ Length: a container length may be between 1 and the length of the deck
+$ Container : containers are represented as an integer between 1 and n_containers
+$ Class     : classes are represented as an integer between 1 and n_classes
+$ Width     : a container width may be between 1 and the width of the deck
+$ Length    : a container length may be between 1 and the length of the deck
 $ X: a position on x-axis (width) of the deck
 $ Y: a position on y-axis (length) of the deck
 letting Container be domain int(1..n_containers),
-        Class be domain int(1..n_classes),
-        Width be domain int(1..deck_width),
-        Length be domain int(1..deck_length),
-        X be domain int(0..deck_width),
-        Y be domain int(0..deck_length)
+        Class     be domain int(1..n_classes),
+        Width     be domain int(1..deck_width),
+        Length    be domain int(1..deck_length),
+        X         be domain int(0..deck_width),
+        Y         be domain int(0..deck_length)
 
-$ width: a container's width
-$ length: a container's length
-$ class: a container's class
+$ width  : a container's width
+$ length : a container's length
+$ class  : a container's class
 $ separation: the minimum allowed separation between two container classes
-given width : function (total) Container --> Width,
-      length : function (total) Container --> Length,
-      class : function (total) Container --> Class,
+given width      : function (total) Container --> Width,
+      length     : function (total) Container --> Length,
+      class      : function (total) Container --> Class,
       separation : function (total) set (size 2) of Class --> int(0..n_upper)
 
-$ west: the x coordinate of a container's western edge
-$ north: the y coordinate of a container's northern edge
-$ east: the x coordinate of a container's eastern edge
-$ south: the y coordinate of a container's southern edge
-find west, east : function (total) Container --> X,
+$ west  : the x coordinate of a container's western edge
+$ north : the y coordinate of a container's northern edge
+$ east  : the x coordinate of a container's eastern edge
+$ south : the y coordinate of a container's southern edge
+find west,  east  : function (total) Container --> X,
      north, south : function (total) Container --> Y
 
 such that
