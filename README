@@ -3,7 +3,8 @@ This repository is for problem specifications written in Essence.
 
 It will not contain Essence' outputs, and etc.
 
-It will instead contain a README file per problem containing insights and findings about the problem.
+It will instead contain a README file per problem containing insights
+and findings about the problem.
 
 Optionally, it will also contain:
 
