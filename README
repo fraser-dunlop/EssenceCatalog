@@ -8,6 +8,6 @@ and findings about the problem.
 
 Optionally, it will also contain:
 
-* parameter and solution files to known instances.
+* parameter and solution files for known/published instances.
 * scripts to generate random parameter files.
 
