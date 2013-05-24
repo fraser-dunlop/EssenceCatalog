@@ -1,0 +1,17 @@
+syntax: glob
+*.hi
+*.o
+dist/
+*.eprime
+*.eprime-param
+*.eprime-solution
+*.minion
+*.minion-stats
+*fails*
+*success*
+*.eprime.logs
+*.time.*
+*.stats
+*.output
+*.*.output
+*.*.output.*
