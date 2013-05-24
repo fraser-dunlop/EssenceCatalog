@@ -1,7 +1,6 @@
 language Essence 1.3
-$ prob005.essence: Low Autocorellation Binary Sequences
+$ prob005.essence: Low Autocorrellation Binary Sequences
 $ Problem details available at http://www.csplib.org/prob/prob005/
-$ 05 September 2007
 
 given n : int(1..)
 
