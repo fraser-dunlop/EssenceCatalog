@@ -17,6 +17,8 @@ letting end  be (3,3)
 find steps: function(total) Num --> set (minSize 1, maxSize 32) of Peg
 
 find path : matrix indexed by [int(0..maxSteps-1)] of (Peg, Peg)
+$ This fails to refine 
+$find path : matrix indexed by [int(0..maxSteps-1)] of function (size 1)  Peg --> Peg
 
 given lookup : function (size 76) Peg --> Peg
 
@@ -86,5 +88,6 @@ forAll i : int(0..maxSteps-1) .
     !( (fro[1] + (to[1] - fro[1])/2, fro[2] + (to[2] - fro[2])/2 ) in steps(i+1) )
 
     $ record the move that was made
-    /\ path[i] = (fro, to)
+    /\ path[i] = (fro, to)    
+    $/\ path[i] = function( fro --> to)
 
