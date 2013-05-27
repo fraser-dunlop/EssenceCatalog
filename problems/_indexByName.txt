@@ -1,0 +1,85 @@
+Car sequencing                                  : prob001
+Template design                                 : prob002
+Quasigroup existence                            : prob003
+Mystery shopper                                 : prob004
+Low autocorellation binary sequences            : prob005
+Golomb rulers                                   : prob006
+All-interval series                             : prob007
+Vessel loading                                  : prob008
+Perfect square placement                        : prob009
+Social golfer problem                           : prob010
+ACC basketball schedule                         : prob011
+Nonograms                                       : prob012
+Progressive party problem                       : prob013
+Solitaire Battleships                           : prob014
+Schur's lemma                                   : prob015
+Traffic lights                                  : prob016
+Ramsey numbers                                  : prob017
+Water bucket problem                            : prob018
+Magic squares and sequences                     : prob019
+Darts tournament                                : prob020
+Crossfigures                                    : prob021
+Bus driver scheduling                           : prob022
+Magic hexagon                                   : prob023
+Langford's number problem                       : prob024
+Lam's problem                                   : prob025
+Round-robin tournaments                         : prob026
+Alien tiles                                     : prob027
+Balanced incomplete block designs               : prob028
+Prime queen attacking problem                   : prob029
+Balanced academic curriculum problem            : prob030
+Rack configuration problem                      : prob031
+Maximum density still life                      : prob032
+Word design for DNA computing on surfaces       : prob033
+Warehouse location problem                      : prob034
+Molnar's problem                                : prob035
+Fixed-length error correcting codes             : prob036
+Peg solitaire                                   : prob037
+Steel mill slab design problem                  : prob038
+Rehearsal problem                               : prob039
+A distribution problem with Wagner-Whitin costs : prob040
+N-fractions puzzle                              : prob041
+Circuit fault diagnosis                         : prob042
+Differential fault diagnosis                    : prob043
+Steiner triple systems                          : prob044
+Covering arrays                                 : prob045
+Meeting Scheduling Problem                      : prob046
+Supply Chain Coordination                       : prob047
+Minimum Energy Broadcast                        : prob048
+Number Partitioning                             : prob049
+Diamond-free Degree Sequences                   : prob050
+Tank Allocation                                 : prob051
+Extremal Graphs with Small Girth                : prob052
+Stable Marriages Problem                        : prob101
+Worker Allocation                               : prob102
+Travelling Salesman Problem                     : prob103
+Travelling Tournament Problem                   : prob104
+Transport Design Problem                        : prob105
+Temporal Knapsack Problem                       : prob106
+Stable Set Problem                              : prob107
+Winner Determination Problem                    : prob108
+N-Queens Problem                                : prob109
+Peaceably Co-existing Armies of Queens          : prob110
+Maximum Clique Problem                          : prob111
+Lot Sizing Problem                              : prob112
+Doctors without Borders                         : prob113
+Graph Isomorphism                               : prob114
+Tail Assignment                                 : prob115
+Vellino's Problem                               : prob116
+Decentralisation                                : prob117
+Power Generation                                : prob118
+Celular Frequency Assignment                    : prob119
+Staffing Problem                                : prob120
+Factory Planning                                : prob121
+Maximal Independent Set                         : prob122
+Milk Collection                                 : prob123
+Permutation Generation                          : prob124
+Scheduling with Precedence Constraints          : prob125
+Cryptarithmetic Puzzles                         : prob126
+Graph Colouring                                 : prob127
+Crossword Problem                               : prob128
+SONET Configuration                             : prob129
+Nurse Rostering                                 : prob130
+Production Line Sequencing                      : prob131
+A Layout Problem                                : prob132
+Knapsack Problem                                : prob133

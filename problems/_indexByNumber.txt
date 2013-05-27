@@ -1,0 +1,85 @@
+prob001: Car sequencing.
+prob002: Template design.
+prob003: Quasigroup existence.
+prob004: Mystery shopper.
+prob005: Low autocorellation binary sequences.
+prob006: Golomb rulers.
+prob007: All-interval series.
+prob008: Vessel loading.
+prob009: Perfect square placement.
+prob010: Social golfer problem.
+prob011: ACC basketball schedule.
+prob012: Nonograms.
+prob013: Progressive party problem.
+prob014: Solitaire Battleships.
+prob015: Schur's lemma.
+prob016: Traffic lights.
+prob017: Ramsey numbers.
+prob018: Water bucket problem.
+prob019: Magic squares and sequences.
+prob020: Darts tournament.
+prob021: Crossfigures.
+prob022: Bus driver scheduling.
+prob023: Magic hexagon.
+prob024: Langford's number problem.
+prob025: Lam's problem.
+prob026: Round-robin tournaments.
+prob027: Alien tiles.
+prob028: Balanced incomplete block designs.
+prob029: Prime queen attacking problem.
+prob030: Balanced academic curriculum problem.
+prob031: Rack configuration problem.
+prob032: Maximum density still life.
+prob033: Word design for DNA computing on surfaces.
+prob034: Warehouse location problem.
+prob035: Molnar's problem.
+prob036: Fixed-length error correcting codes.
+prob037: Peg solitaire.
+prob038: Steel mill slab design problem.
+prob039: Rehearsal problem.
+prob040: A distribution problem with Wagner-Whitin costs.
+prob041: N-fractions puzzle.
+prob042: Circuit fault diagnosis.
+prob043: Differential fault diagnosis.
+prob044: Steiner triple systems.
+prob045: Covering arrays.
+prob046: Meeting Scheduling Problem.
+prob047: Supply Chain Coordination.
+prob048: Minimum Energy Broadcast.
+prob049: Number Partitioning.
+prob050: Diamond-free Degree Sequences.
+prob051: Tank Allocation.
+prob052: Extremal Graphs with Small Girth.
+prob101: Stable Marriages Problem.
+prob102: Worker Allocation.
+prob103: Travelling Salesman Problem.
+prob104: Travelling Tournament Problem.
+prob105: Transport Design Problem.
+prob106: Temporal Knapsack Problem.
+prob107: Stable Set Problem.
+prob108: Winner Determination Problem.
+prob109: N-Queens Problem.
+prob110: Peaceably Co-existing Armies of Queens.
+prob111: Maximum Clique Problem.
+prob112: Lot Sizing Problem.
+prob113: Doctors without Borders.
+prob114: Graph Isomorphism.
+prob115: Tail Assignment.
+prob116: Vellino's Problem.
+prob117: Decentralisation.
+prob118: Power Generation.
+prob119: Celular Frequency Assignment.
+prob120: Staffing Problem.
+prob121: Factory Planning.
+prob122: Maximal Independent Set.
+prob123: Milk Collection.
+prob124: Permutation Generation.
+prob125: Scheduling with Precedence Constraints.
+prob126: Cryptarithmetic Puzzles.
+prob127: Graph Colouring.
+prob128: Crossword Problem.
+prob129: SONET Configuration.
+prob130: Nurse Rostering.
+prob131: Production Line Sequencing.
+prob132: A Layout Problem.
+prob133: Knapsack Problem.
