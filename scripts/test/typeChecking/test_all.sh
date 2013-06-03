@@ -11,7 +11,7 @@ export FAIL_COUNT_FILE="$SCRIPT_DIR/countFail.txt"
 export PASS_COUNT_FILE="$SCRIPT_DIR/countPass.txt"
 export ALL_COUNT_FILE="$SCRIPT_DIR/countAll.txt"
 
-export TOP_DIR=$(cd "$SCRIPT_DIR/../.." ; pwd)
+export TOP_DIR=$(cd "$SCRIPT_DIR/../../.." ; pwd)
 
 function perEssence {
     SPEC=$1
