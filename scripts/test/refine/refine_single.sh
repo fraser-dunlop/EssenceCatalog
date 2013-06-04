@@ -72,7 +72,7 @@ touch "$FAIL_FILE" "$PASS_FILE"
 rm -rf "$OUT_DIR"
 mkdir -p "$OUT_DIR"
 if [[ $MODE == df* ]] ; then
-    conjure --mode $MODE --in "$SPEC.essence"                               +RTS -M16G -s 2> >(tee "${MODE}_conjure.stats" >&2)
+    conjure --mode $MODE --in "$SPEC.essence" --limit-models 15             +RTS -M16G -s 2> >(tee "${MODE}_conjure.stats" >&2)
 else
     conjure --mode $MODE --in "$SPEC.essence" --out "$OUT_DIR/$MODE.eprime" +RTS -M16G -s 2> >(tee "${MODE}_conjure.stats" >&2)
 fi
