@@ -37,6 +37,34 @@ elif [ $MODE == "df-no-channelling" ] ; then
     OUT_DIR="${SPEC}-df-no-channelling"
 fi
 
+function perModelperParam {
+    MODEL=$1
+    PARAM=$2
+
+    MSG_TEMPLATE="$MODE $WD $MODEL $PARAM"
+
+
+    RESULTOF_REFINEPARAM=0
+    MSG_REFINEPARAM="[refineParam] $MSG_TEMPLATE"
+    echo "$MSG_REFINEPARAM"
+    # echo "conjure --mode refineParam --in-essence $SPEC.essence --in-eprime $MODEL.eprime --in-essence-param $PARAM.param --out-eprime-param $MODEL-$PARAM.eprime-param"
+    conjure                                                                 \
+        --mode       refineParam                                            \
+        --in-essence $SPEC.essence                                          \
+        --in-eprime  $MODEL.eprime                                          \
+        --in-essence-param $PARAM.param                                     \
+        --out-eprime-param $MODEL-`basename $PARAM`.eprime-param
+    RESULTOF_REFINEPARAM=$?
+    if (( $RESULTOF_REFINEPARAM != 0 )) ; then
+        echo "$MSG_REFINEPARAM" >> "$FAIL_FILE"
+        exit 1
+	else 
+		echo "$MSG_REFINEPARAM" >> "$PASS_FILE"
+    fi
+
+}
+
+export -f perModelperParam;
 
 rm -f "$FAIL_FILE" "$PASS_FILE"
 touch "$FAIL_FILE" "$PASS_FILE"
@@ -54,5 +82,9 @@ NB_EPRIMES=$(ls -1 "$OUT_DIR"/*.eprime 2> /dev/null | wc -l)
 if (( $NB_EPRIMES == 0 )) ; then
     echo "[generatesZeroModels] $MODE $WD" >> "$FAIL_FILE"
 else
-    echo "[refine] $MODE $WD" >> "$PASS_FILE"
+	echo "[refine] $MODE $WD" >> "$PASS_FILE"
+	[ -d "params" ] &&  parallel -j3                                                            \
+	perModelperParam {1.} {2.}                                          \
+		::: $(ls -1 "$OUT_DIR"/*.eprime | head -n 10)                                \
+		::: $(ls -1 params/*.param | head -n 2 )
 fi
