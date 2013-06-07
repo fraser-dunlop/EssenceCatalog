@@ -29,17 +29,27 @@ function perDirectory {
     if [ "$BUILD_FREQ" == "all" ] || [ "$BUILD_FREQ" == "$(cat ${DIR}/build_frequency 2> /dev/null)" ] ; then
 
     FAIL_FILE="$WD/${MODE}_fail.txt"
+    FAIL_REFINE_FILE="$WD/${MODE}_refine_fail.txt"
+    FAIL_PARAM_FILE="$WD/${MODE}_param_fail.txt"
     PASS_FILE="$WD/${MODE}_pass.txt"
     ALL_FILE="$WD/${MODE}_all.txt"
 
     cd "$DIR"
     rm -f "${MODE}_fail.txt" "${MODE}_pass.txt"
+    rm -f "${MODE}_refine_fail.txt" "${MODE}_param_fail.txt"
     touch "${MODE}_fail.txt" "${MODE}_pass.txt"
+    touch "${MODE}_refine_fail.txt" "${MODE}_param_fail.txt"
+    
     time bash "$SCRIPT_TEST_SINGLE" "$MODE"
+    
     cat "${MODE}_fail.txt" >> "$FAIL_FILE"
     cat "${MODE}_pass.txt" >> "$PASS_FILE"
     cat "${MODE}_fail.txt" >> "$ALL_FILE"
     cat "${MODE}_pass.txt" >> "$ALL_FILE"
+
+    cat "${MODE}_refine_fail.txt"  >> "$FAIL_REFINE_FILE"
+    cat "${MODE}_param_fail.txt"   >> "$FAIL_PARAM_FILE"
+
 
     fi
 }
@@ -52,12 +62,15 @@ for MODE in $MODES ; do
     PASS_FILE="$WD/${MODE}_pass.txt"
     ALL_FILE="$WD/${MODE}_all.txt"
 
-    FAIL_COUNT_FILE="$WD/${MODE}_countFail.txt"
-    PASS_COUNT_FILE="$WD/${MODE}_countPass.txt"
-    ALL_COUNT_FILE="$WD/${MODE}_countAll.txt"
+
+    FAIL_REFINE_FILE="$WD/${MODE}_refine_fail.txt"
+    FAIL_PARAM_FILE="$WD/${MODE}_param_fail.txt"
 
     rm -f "$FAIL_FILE" "$PASS_FILE" "$ALL_FILE"
     touch "$FAIL_FILE" "$PASS_FILE" "$ALL_FILE"
+    
+    rm -f "$FAIL_REFINE_FILE" "$FAIL_PARAM_FILE"
+    touch  "$FAIL_REFINE_FILE" "$FAIL_PARAM_FILE"    
 done
 
 parallel -k --tag perDirectory {2} {1//} ::: $(find "$WD" -name "*.essence") ::: $MODES
@@ -71,13 +84,27 @@ for MODE in $MODES ; do
     PASS_COUNT_FILE="$WD/${MODE}_countPass.txt"
     ALL_COUNT_FILE="$WD/${MODE}_countAll.txt"
 
+    FAIL_REFINE_FILE="$WD/${MODE}_refine_fail.txt"
+    FAIL_PARAM_FILE="$WD/${MODE}_param_fail.txt"
+
+    FAIL_REFINE_COUNT_FILE="$WD/${MODE}_countRefineFail.txt"
+    FAIL_PARAM_COUNT_FILE="$WD/${MODE}_countParamFail.txt"
+
     FAIL_COUNT=$(cat "$FAIL_FILE" | wc -l | tr -d ' ')
     PASS_COUNT=$(cat "$PASS_FILE" | wc -l | tr -d ' ')
     ALL_COUNT=$( cat "$ALL_FILE"  | wc -l | tr -d ' ')
 
+    FAIL_REFINE_COUNT=$( cat "$FAIL_REFINE_FILE"  | wc -l | tr -d ' ')
+    FAIL_PARAM_COUNT=$( cat "$FAIL_PARAM_FILE"  | wc -l | tr -d ' ')
+
+
     echo "YVALUE=$FAIL_COUNT" > "$FAIL_COUNT_FILE"
     echo "YVALUE=$PASS_COUNT" > "$PASS_COUNT_FILE"
     echo "YVALUE=$ALL_COUNT"  > "$ALL_COUNT_FILE"
+
+    echo "YVALUE=$FAIL_REFINE_COUNT" > "$FAIL_REFINE_COUNT_FILE"
+    echo "YVALUE=$FAIL_PARAM_COUNT" > "$FAIL_PARAM_COUNT_FILE"
+
 
     echo "($MODE) Number of failing tests: "
     cat "$FAIL_COUNT_FILE"
@@ -88,5 +115,12 @@ for MODE in $MODES ; do
 
     echo "($MODE) Number of all tests: "
     cat "$ALL_COUNT_FILE"
+    
+    echo "($MODE) Number of failing spec refinments: "
+    cat "$FAIL_REFINE_COUNT_FILE"
+    
+    echo "($MODE) Number of failing param refinments: "
+    cat "$FAIL_PARAM_COUNT_FILE"
+    
 done
 

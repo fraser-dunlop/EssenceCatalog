@@ -25,6 +25,10 @@ export WD="$(pwd)"
 
 export MODE=$1
 export FAIL_FILE="${MODE}_fail.txt"
+export FAIL_REFINE_FILE="${MODE}_refine_fail.txt"
+export FAIL_PARAM_FILE="${MODE}_param_fail.txt"
+
+
 export PASS_FILE="${MODE}_pass.txt"
 
 export SPEC=$(ls -1 *.essence | head -n 1)
@@ -57,6 +61,7 @@ function perModelperParam {
     RESULTOF_REFINEPARAM=$?
     if (( $RESULTOF_REFINEPARAM != 0 )) ; then
         echo "$MSG_REFINEPARAM" >> "$FAIL_FILE"
+        echo "$MSG_REFINEPARAM" >> "$FAIL_PARAM_FILE"
         exit 1
 	else 
 		echo "$MSG_REFINEPARAM" >> "$PASS_FILE"
@@ -72,7 +77,7 @@ touch "$FAIL_FILE" "$PASS_FILE"
 rm -rf "$OUT_DIR"
 mkdir -p "$OUT_DIR"
 if [[ $MODE == df* ]] ; then
-    conjure --mode $MODE --in "$SPEC.essence" --limit-models 15             +RTS -M16G -s 2> >(tee "${MODE}_conjure.stats" >&2)
+    conjure --mode $MODE --in "$SPEC.essence" --limit-models 1             +RTS -M16G -s 2> >(tee "${MODE}_conjure.stats" >&2)
 else
     conjure --mode $MODE --in "$SPEC.essence" --out "$OUT_DIR/$MODE.eprime" +RTS -M16G -s 2> >(tee "${MODE}_conjure.stats" >&2)
 fi
@@ -81,6 +86,7 @@ NB_EPRIMES=$(ls -1 "$OUT_DIR"/*.eprime 2> /dev/null | wc -l)
 
 if (( $NB_EPRIMES == 0 )) ; then
     echo "[generatesZeroModels] $MODE $WD" >> "$FAIL_FILE"
+    echo "[generatesZeroModels] $MODE $WD" >> "$FAIL_REFINE_FILE"
 else
 	echo "[refine] $MODE $WD" >> "$PASS_FILE"
 	[ -d "params" ] &&  parallel -j3                                                            \
