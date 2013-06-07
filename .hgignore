@@ -33,3 +33,5 @@ dist/
 tags
 *countFail.txt
 *.time
+*countParamFail.txt
+*countRefineFail.txt
