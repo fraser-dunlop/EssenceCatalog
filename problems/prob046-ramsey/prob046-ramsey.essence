@@ -28,12 +28,12 @@ forAll i, j :  Vertex , i != j .
 
 forAll i : Vertex .
     forAll (c,e1) in toSet(graph(_, i, _) ) .
-        forAll t in ( toSet(graph(c, i, _) ) union toSet(graph(c, _, i) )  ) , t[1] != e1 .
-            !graph(c, t[1],e1) /\  !graph(c, e1, t[1]),
+        forAll tuple (t) in ( toSet(graph(c, i, _) ) union toSet(graph(c, _, i) )  ) , t != e1 .
+            !graph(c, t, e1) /\  !graph(c, e1, t),
 
 
 forAll i : Vertex .
     forAll (c,e1) in toSet(graph(_, _, i) ) .
-        forAll t in ( toSet(graph(c, i, _) ) union toSet(graph(c, _, i) )  ) , t[1] != e1 .
-            !graph(c, t[1],e1) /\  !graph(c, e1, t[1])
+        forAll tuple (t) in ( toSet(graph(c, i, _) ) union toSet(graph(c, _, i) )  ) , t != e1 .
+            !graph(c, t, e1) /\  !graph(c, e1, t)
 
