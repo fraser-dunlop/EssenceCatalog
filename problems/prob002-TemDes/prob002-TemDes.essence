@@ -23,6 +23,6 @@ find design: function (total) (templates,variations) --> int (0..n_slots)  $ Thi
 find printings: function (total) templates --> int (0..max(range(demand)))                  $ This tells us how many times each
                                                          $   template is to be printed           
 
-such that forAll v:variations. (sum t:templates. design(t,v)) >= demand(v)    $ demand must be met
+such that forAll v:variations. (sum t:templates. design((t,v))) >= demand(v)    $ demand must be met
 
 minimising sum t:templates. printings(t)                 $ minimise the total number of printings 
