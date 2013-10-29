@@ -1,0 +1,29 @@
+language Essence 1.3
+$ Ramsey's theorem
+$ Decide if a complete graph K_n  with edges coloured with c colours must have a monochromatic triangle
+$ Keeps edges in both directions
+
+given n : int(1..20)
+given colours : int(1..10)
+
+letting num_edges be  (n * (n-1)) 
+
+letting  Colour be domain int(1..colours)
+letting  Vertex be domain int(1..n)
+
+
+find graph: function (size  num_edges) (Vertex, Vertex ) --> Colour
+
+
+such that
+
+forAll i : Vertex . 
+   ! ( (i,i) in defined(graph) ),
+
+forAll i, j : Vertex . 
+    graph((i,j)) = graph((j,i)),
+
+forAll (u,v) in defined(graph) . 
+     forAll (u2,v2) in defined(graph), u2 = v /\ v2 != u .
+            graph((u,v)) != graph((u2,v2)) \/  graph((u2,v2)) !=  graph((v2,u)) \/ graph((v2,u)) != graph((u,v))
+
