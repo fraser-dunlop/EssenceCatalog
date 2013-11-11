@@ -1,4 +1,4 @@
-language ESSENCE 1.2.0
+language Essence 1.3
 $ prob115.essence: Tail Assignment
 $ Problem details available in:
 $   A Constraint Programming Model for Tail Assignment
@@ -6,9 +6,6 @@ $   M. Gronkvist
 $   Proc. First International Conference on Integration of AI and OR Techniques
 $   in Constraint Programming for Combinatorial Optimization Problems (CPAIOR
 $   2004), LNCS 3011, pp. 287-301, 2004.
-$
-$ 06 August 2007
-$
 
 $ n_flights: the number of flights
 $ n_planes: the number of aircraft
@@ -40,7 +37,7 @@ $ the route for each aircraft begins with a flight that may follow on from the
 $ last flight that it made
     forAll p : Plane . (carry_in(p), route(p)(1)) in network,
 $ each aircraft is able to make the flights on its route
-    forAll p : Plane . forAll a in range(route(p)) . (a) in can_fly(p,_),
+    forAll p : Plane . forAll a in range(route(p)) . tuple (a) in can_fly(p,_),
 $ flights are made in the correct order
     forAll s in range(route) . forAll i : int(1..n_flights) , i <= |s|-1 .
         (s(i),s(i+1)) in network,
