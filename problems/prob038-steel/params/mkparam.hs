@@ -42,7 +42,7 @@ mkparam (info:n_colours:n_orders:rest) =
         [sizes,colours]  = transpose pairs
         (mSize,mColours) = unzip $zipWith3 handleMapping sizes colours [1..]
 
-        fsizes   = toFunc "ordSize" mSize
+        fsizes   = toFunc "ordsize" mSize
         fColours = toFunc "ordcol"  mColours
 
     in  handleData $ getInfo info ++  [n_colours,n_orders,fsizes,fColours ]
