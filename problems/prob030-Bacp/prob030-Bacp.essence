@@ -4,13 +4,13 @@ $ Problem details available at http://www.csplib.org/prob/prob030/
 $ 07 September 2007
 $
 
-given n_periods, maxl, minl, n_courses, maxc, minc : int(1..)
+given n_periods, maxl, minl, n_courses, maxc, minc, n_credits : int(1..)
 
 letting Course be domain int(1..n_courses),
         Period be domain int(1..n_periods)
 
 given prereq : relation of (Course*Course),
-      credits : function (total) Course --> int(1..)
+      credits : function (total) Course --> int(1..n_credits)
 
 find curr : function (total) Course --> Period
 
