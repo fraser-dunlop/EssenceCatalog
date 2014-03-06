@@ -7,14 +7,15 @@ letting n_stores be 2
 letting opencost be function
 (
   1 --> 30,
-  2 --> 0,
+  2 --> 10,
   3 --> 40
 )
 
 letting capacity be function
 (
   1 --> 20,
-  2 --> 10
+  2 --> 10,
+  3 --> 10
 )
 
 letting cost be function
