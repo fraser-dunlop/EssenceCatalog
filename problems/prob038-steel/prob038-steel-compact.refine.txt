@@ -1,0 +1,25 @@
++ca:25> set -x
++ca:25> conjure --mode compact --in-essence /Users/bilalh/CS/essenceCatalog/problems/prob038-steel/prob038-steel.essence --out /Users/bilalh/CS/essenceCatalog/problems/prob038-steel/prob038-steel/0001.eprime +RTS -M10G -s
+ 241,343,444,248 bytes allocated in the heap
+  33,904,370,648 bytes copied during GC
+     532,662,920 bytes maximum residency (716 sample(s))
+       6,321,632 bytes maximum slop
+            1343 MB total memory in use (0 MB lost due to fragmentation)
+
+                                    Tot time (elapsed)  Avg pause  Max pause
+  Gen  0     464897 colls,     0 par   49.91s   50.51s     0.0001s    0.0090s
+  Gen  1       716 colls,     0 par   15.55s   16.80s     0.0235s    0.6739s
+
+  INIT    time    0.00s  (  0.00s elapsed)
+  MUT     time   94.17s  ( 95.02s elapsed)
+  GC      time   65.46s  ( 67.31s elapsed)
+  EXIT    time    0.01s  (  0.09s elapsed)
+  Total   time  159.64s  (162.42s elapsed)
+
+  %GC     time      41.0%  (41.4% elapsed)
+
+  Alloc rate    2,562,948,394 bytes per MUT second
+
+  Productivity  59.0% of total user, 58.0% of total elapsed
+
+  159.64s user 2.78s system 99% cpu 2:42.43 total

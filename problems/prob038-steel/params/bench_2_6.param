@@ -5,7 +5,7 @@ letting col_per_slab be 48
 letting n_colours    be 88
 letting n_orders     be 111
 
-letting ordSize be function( 1 --> 4
+letting ordsize be function( 1 --> 4
 	,2 --> 22
 	,3 --> 9
 	,4 --> 5

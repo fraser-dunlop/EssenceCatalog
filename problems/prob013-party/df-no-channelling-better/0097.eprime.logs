@@ -1,0 +1,159 @@
+[useChannelling] False
+[representation] find hosts: set of int(1..n_boats) (#4) Set~ExplicitVarSize, Set~ExplicitVarSizeWithDefault, Set~ExplicitVarSizeWithMarker, Set~Occurrence
+[representation] find sched: set (size n_periods) of function (total) int(1..n_boats) --> int(1..n_boats) (#1) Set~Explicit
+[representation] given capacity: function (total) int(1..n_boats) --> int(1..n_upper) (#2) Function~1D, Function~AsReln
+[representation] given crew: function (total) int(1..n_boats) --> int(1..n_upper) (#2) Function~1D, Function~AsReln
+[configuration] sched§regionS#Set~Explicit crew§regionS#Function~1D capacity§regionS#Function~AsReln hosts§regionS#Set~ExplicitVarSizeWithMarker
+[addedDecl] find sched_Set~Explicit: matrix indexed by [int(1..n_periods)] of function (total) int(1..n_boats) --> int(1..n_boats)
+[addedDecl] find hosts_Set~ExplicitVarSizeWithMarker: (int(0..n_boats), matrix indexed by [int(1..n_boats)] of int(1..n_boats))
+[addedDecl] given crew_Function~1D: matrix indexed by [int(1..n_boats)] of int(1..n_upper)
+[addedDecl] given capacity_Function~AsReln: relation of (int(1..n_boats) * int(1..n_upper))
+[addedStructuralCons] {Set~Explicit}
+                      (forAll v__4 : int(1..n_periods - 1) . sched_Set~Explicit§regionS[v__4] .< sched_Set~Explicit§regionS[v__4 + 1])
+[addedStructuralCons] {Set~ExplicitVarSizeWithMarker}
+                      (forAll v__3 : int(1..n_boats) , v__3 + 1 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+                           . hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__3] .< hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__3 + 1])
+                      /\
+                      (forAll v__3 : int(1..n_boats) , v__3 > hosts_Set~ExplicitVarSizeWithMarker§regionS[1] . hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__3] = 1)
+[refn] 0
+[applied] hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__3] .< hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__3 + 1]
+          {rules/refns/horizontal/DotLt-ints.rule}
+              hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__3] < hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__3 + 1]
+[applied] |hosts§regionS#Set~ExplicitVarSizeWithMarker|
+          {rules/refns/vertical/Set~ExplicitVarSizeWithMarker/card.rule}
+              hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+[applied] p(h) = h
+          {rules/refns/horizontal/function-apply-eq-1.rule}
+              (forAll v__9 in toSet(p) , v__9[1] = h . v__9[2] = h)
+[applied] p(b1) = p(b2)
+          {rules/refns/horizontal/function-apply-eq-1.rule}
+              (forAll v__10 in toSet(p) , v__10[1] = b1 . v__10[2] = p(b2))
+[applied] v__10[2] = p(b2)
+          {rules/refns/horizontal/function-apply-eq-2.rule}
+              (forAll v__11 in toSet(p) , v__11[1] = b2 . v__11[2] = v__10[2])
+[applied] range(p) subsetEq hosts§regionS#Set~ExplicitVarSizeWithMarker
+          {rules/refns/horizontal/set/subseteq-to-quantified.rule}
+              (forAll v__12 in range(p) . v__12 in hosts§regionS#Set~ExplicitVarSizeWithMarker)
+[applied] v__12 in hosts§regionS#Set~ExplicitVarSizeWithMarker
+          {rules/refns/horizontal/set/in-to-quantified.rule}
+              (exists v__13 in hosts§regionS#Set~ExplicitVarSizeWithMarker . v__13 = v__12)
+[applied] (exists v__13 in hosts§regionS#Set~ExplicitVarSizeWithMarker . v__13 = v__12)
+          {rules/refns/vertical/Set~ExplicitVarSizeWithMarker/quantified.rule}
+              (exists v__14 : int(1..n_boats) , v__14 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1] . hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__14] = v__12)
+[applied] (forAll v__12 in range(p)
+               . (exists v__14 : int(1..n_boats) , v__14 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1] . hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__14] = v__12))
+          {rules/refns/horizontal/function-range-quantified.rule}
+              (forAll v__15 in toSet(p)
+                   . (exists v__14 : int(1..n_boats) , v__14 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1] . hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__14] = v__15[2]))
+[applied] (forAll p in sched§regionS#Set~Explicit
+               . (forAll v__15 in toSet(p)
+                      . (exists v__14 : int(1..n_boats) , v__14 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+                             . hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__14] = v__15[2])))
+          {rules/refns/vertical/Set~Explicit/quantified.rule}
+              (forAll v__16 : int(1..n_periods)
+                   . (forAll v__15 in toSet(sched_Set~Explicit§regionS[v__16])
+                          . (exists v__14 : int(1..n_boats) , v__14 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+                                 . hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__14] = v__15[2])))
+[applied] (forAll h in hosts§regionS#Set~ExplicitVarSizeWithMarker . (forAll v__9 in toSet(p) , v__9[1] = h . v__9[2] = h))
+          {rules/refns/vertical/Set~ExplicitVarSizeWithMarker/quantified.rule}
+              (forAll v__17 : int(1..n_boats) , v__17 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+                   . (forAll v__9 in toSet(p) , v__9[1] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__17] . v__9[2] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__17]))
+[applied] (forAll p in sched§regionS#Set~Explicit
+               . (forAll v__17 : int(1..n_boats) , v__17 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+                      . (forAll v__9 in toSet(p) , v__9[1] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__17]
+                             . v__9[2] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__17])))
+          {rules/refns/vertical/Set~Explicit/quantified.rule}
+              (forAll v__18 : int(1..n_periods)
+                   . (forAll v__17 : int(1..n_boats) , v__17 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+                          . (forAll v__9 in toSet(sched_Set~Explicit§regionS[v__18]) , v__9[1] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__17]
+                                 . v__9[2] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__17])))
+[applied] crew§regionS#Function~1D(b)
+          {rules/refns/vertical/Function~1D/image.rule}
+              crew_Function~1D§regionS[b]
+[applied] capacity§regionS#Function~AsReln(h)
+          {rules/refns/vertical/Function~AsReln/image-int.rule}
+              (sum v__19 in toSet(capacity_Function~AsReln§regionS) , v__19[1] = h . v__19[2])
+[applied] (forAll h in hosts§regionS#Set~ExplicitVarSizeWithMarker
+               . (sum b in preImage(p, h) . crew_Function~1D§regionS[b]) <= (sum v__19 in toSet(capacity_Function~AsReln§regionS) , v__19[1] = h . v__19[2]))
+          {rules/refns/vertical/Set~ExplicitVarSizeWithMarker/quantified.rule}
+              (forAll v__20 : int(1..n_boats) , v__20 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+                   . (sum b in preImage(p, hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20]) . crew_Function~1D§regionS[b])
+                     <=
+                     (sum v__19 in toSet(capacity_Function~AsReln§regionS) , v__19[1] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20] . v__19[2]))
+[applied] (forAll p in sched§regionS#Set~Explicit
+               . (forAll v__20 : int(1..n_boats) , v__20 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+                      . (sum b in preImage(p, hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20]) . crew_Function~1D§regionS[b])
+                        <=
+                        (sum v__19 in toSet(capacity_Function~AsReln§regionS) , v__19[1] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20] . v__19[2])))
+          {rules/refns/vertical/Set~Explicit/quantified.rule}
+              (forAll v__21 : int(1..n_periods)
+                   . (forAll v__20 : int(1..n_boats) , v__20 <= hosts_Set~ExplicitVarSizeWithMarker§regionS[1]
+                          . (sum b in preImage(sched_Set~Explicit§regionS[v__21], hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20]) . crew_Function~1D§regionS[b])
+                            <=
+                            (sum v__19 in toSet(capacity_Function~AsReln§regionS) , v__19[1] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20] . v__19[2])))
+[applied] (sum b in preImage(sched_Set~Explicit§regionS[v__21], hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20]) . crew_Function~1D§regionS[b])
+          {rules/refns/horizontal/function-preImage-quantified.rule}
+              (sum v__22 : int(1..n_boats) , sched_Set~Explicit§regionS[v__21](v__22) = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20]
+                   . crew_Function~1D§regionS[v__22])
+[applied] (sum p in sched§regionS#Set~Explicit . (forAll v__10 in toSet(p) , v__10[1] = b1 . (forAll v__11 in toSet(p) , v__11[1] = b2 . v__11[2] = v__10[2])))
+          {rules/refns/vertical/Set~Explicit/quantified.rule}
+              (sum v__23 : int(1..n_periods)
+                   . (forAll v__10 in toSet(sched_Set~Explicit§regionS[v__23]) , v__10[1] = b1
+                          . (forAll v__11 in toSet(sched_Set~Explicit§regionS[v__23]) , v__11[1] = b2 . v__11[2] = v__10[2])))
+[applied] sched_Set~Explicit§regionS[v__21](v__22) = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20]
+          {rules/refns/horizontal/function-apply-eq-1.rule}
+              (forAll v__24 in toSet(sched_Set~Explicit§regionS[v__21]) , v__24[1] = v__22 . v__24[2] = hosts_Set~ExplicitVarSizeWithMarker§regionS[2, v__20])
+[removeRefinedDecl] find hosts: set of int(1..n_boats)
+[removeRefinedDecl] find sched: set (size n_periods) of function (total) int(1..n_boats) --> int(1..n_boats)
+[removeRefinedDecl] given capacity: function (total) int(1..n_boats) --> int(1..n_upper)
+[removeRefinedDecl] given crew: function (total) int(1..n_boats) --> int(1..n_upper)
+[removedDecl] find hosts_Set~ExplicitVarSizeWithMarker: (int(0..n_boats), matrix indexed by [int(1..n_boats)] of int(1..n_boats))
+              Added the following:
+              find hosts_Set~ExplicitVarSizeWithMarker_tuple1: int(0..n_boats)
+              find hosts_Set~ExplicitVarSizeWithMarker_tuple2: matrix indexed by [int(1..n_boats)] of int(1..n_boats)
+[repr] 1
+[representation] find sched_Set~Explicit: matrix indexed by [int(1..n_periods)] of function (total) int(1..n_boats) --> int(1..n_boats)
+                 (#2)
+                 Function~1D, Function~AsReln
+[representation] given capacity_Function~AsReln: relation of (int(1..n_boats) * int(1..n_upper)) (#2) Relation~AsSet, Relation~IntMatrix2
+[configuration] sched_Set~Explicit§regionS#Function~1D capacity_Function~AsReln§regionS#Relation~IntMatrix2
+[addedDecl] find sched_Set~Explicit_Function~1D: matrix indexed by [int(1..n_periods), int(1..n_boats)] of int(1..n_boats)
+[addedDecl] given capacity_Function~AsReln_Relation~IntMatrix2: matrix indexed by [int(1..n_boats), int(1..n_upper)] of bool
+[refn] 1
+[applied] sched_Set~Explicit§regionS#Function~1D[v__0] .< sched_Set~Explicit§regionS#Function~1D[v__0 + 1]
+          {rules/refns/vertical/Function~1D/DotLt.rule}
+              sched_Set~Explicit_Function~1D§regionS[v__0] .< sched_Set~Explicit_Function~1D§regionS[v__0 + 1]
+[applied] (forAll v__1 in toSet(sched_Set~Explicit§regionS#Function~1D[v__0])
+               . (exists v__2 : int(1..n_boats) , v__2 <= hosts_Set~ExplicitVarSizeWithMarker_tuple1§regionS
+                      . hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__2] = v__1[2]))
+          {rules/refns/vertical/Function~1D/toSet-quantified.rule}
+              (forAll v__29 : int(1..n_boats)
+                   . (exists v__2 : int(1..n_boats) , v__2 <= hosts_Set~ExplicitVarSizeWithMarker_tuple1§regionS
+                          . hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__2] = sched_Set~Explicit_Function~1D§regionS[v__0, v__29]))
+[applied] (forAll v__2 in toSet(sched_Set~Explicit§regionS#Function~1D[v__0]) , v__2[1] = hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__1]
+               . v__2[2] = hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__1])
+          {rules/refns/vertical/Function~1D/toSet-quantified.rule}
+              (forAll v__30 : int(1..n_boats) , v__30 = hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__1]
+                   . sched_Set~Explicit_Function~1D§regionS[v__0, v__30] = hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__1])
+[applied] (forAll v__3 in toSet(sched_Set~Explicit§regionS#Function~1D[v__0]) , v__3[1] = v__2
+               . v__3[2] = hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__1])
+          {rules/refns/vertical/Function~1D/toSet-quantified.rule}
+              (forAll v__31 : int(1..n_boats) , v__31 = v__2 . sched_Set~Explicit_Function~1D§regionS[v__0, v__31] = hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__1])
+[applied] (sum v__2 in toSet(capacity_Function~AsReln§regionS#Relation~IntMatrix2) , v__2[1] = hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__1]
+               . v__2[2])
+          {rules/refns/vertical/Relation~IntMatrix2/toSet.rule}
+              (sum v__32 : int(1..n_boats)
+                   . (sum v__33 : int(1..n_upper)
+                          , v__32 = hosts_Set~ExplicitVarSizeWithMarker_tuple2§regionS[v__1] /\ capacity_Function~AsReln_Relation~IntMatrix2§regionS[v__32, v__33]
+                          . v__33))
+[applied] (forAll v__4 in toSet(sched_Set~Explicit§regionS#Function~1D[v__2]) , v__4[1] = v__1 . v__4[2] = v__3[2])
+          {rules/refns/vertical/Function~1D/toSet-quantified.rule}
+              (forAll v__34 : int(1..n_boats) , v__34 = v__1 . sched_Set~Explicit_Function~1D§regionS[v__2, v__34] = v__3[2])
+[applied] (forAll v__3 in toSet(sched_Set~Explicit§regionS#Function~1D[v__2]) , v__3[1] = v__0
+               . (forAll v__34 : int(1..n_boats) , v__34 = v__1 . sched_Set~Explicit_Function~1D§regionS[v__2, v__34] = v__3[2]))
+          {rules/refns/vertical/Function~1D/toSet-quantified.rule}
+              (forAll v__35 : int(1..n_boats) , v__35 = v__0
+                   . (forAll v__34 : int(1..n_boats) , v__34 = v__1 . sched_Set~Explicit_Function~1D§regionS[v__2, v__34] = sched_Set~Explicit_Function~1D§regionS[v__2, v__35]))
+[removeRefinedDecl] find sched_Set~Explicit: matrix indexed by [int(1..n_periods)] of function (total) int(1..n_boats) --> int(1..n_boats)
+[removeRefinedDecl] given capacity_Function~AsReln: relation of (int(1..n_boats) * int(1..n_upper))
+[repr] 2
