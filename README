@@ -3,7 +3,7 @@ This repository is for problem specifications written in Essence.
 
 It will not contain Essence' outputs, and etc.
 
-It will instead contain a README file per problem containing insights
+It will instead optionally contain a README file per problem containing insights
 and findings about the problem.
 
 Optionally, it will also contain:
@@ -11,3 +11,10 @@ Optionally, it will also contain:
 * parameter and solution files for known/published instances.
 * scripts to generate random parameter files.
 
+
+
+automated testing 
+https://keith.cs.st-andrews.ac.uk:8443/job/conjure-refine-essence-catalog/
+
+The first 10 models from df-no-channelling  are refined  
+params should be placed in params/  since param refined is also tested
