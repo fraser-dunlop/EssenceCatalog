@@ -15,5 +15,5 @@ find sched : set (size w) of partition (regular, size g) from Golfers
 such that
     forAll {week1, week2} subsetEq sched .
         forAll group1 in parts(week1) .
-			forAll group2 in parts(week2) .
-            	|group1 intersect group2| < 2
+            forAll group2 in parts(week2) .
+                |group1 intersect group2| < 2
