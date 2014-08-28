@@ -10,11 +10,11 @@ $
 $ 30 July 2007
 $
 
-given n_upper : int(1..)
+given n_upper : int(1..100)
 
 $ n_places: the number of positions to place words
 $ n_words: the number of words in the dictionary
-given n_places, n_words : int(1..)
+given n_places, n_words : int(1..100)
 
 $ Place: place identifiers are represented as integers
 $ Word: word identifiers are represented as integers
