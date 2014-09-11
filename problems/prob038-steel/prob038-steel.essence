@@ -4,7 +4,8 @@ $ Problem details available at http://www.csplib.org/prob/prob038/
 $ 07 September 2007
 
 given n_colours, n_orders, col_per_slab, n_orderSize : int(1..)
-given sizes new domain int
+given nbSizes : int(1..)
+letting sizes be domain int(1..nbSizes)
 
 letting Colour be domain int(1..n_colours),
         Order be domain int(1..n_orders)

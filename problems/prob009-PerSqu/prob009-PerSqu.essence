@@ -4,7 +4,8 @@ $ Problem details available at http://www.csplib.org/prob/prob009/
 $ 05 September 2007
 $
 
-given sizes new domain int
+given nbSizes : int(1..)
+letting sizes be domain int(1..nbSizes)
 
 letting container_size be sum i : sizes . 1
 

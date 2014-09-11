@@ -1,6 +1,7 @@
 language Essence 1.3
 
-given dom  new domain int 
+given nbDom : int(1..)
+letting dom be domain int(1..nbDom)
 given bound : int(1..100)
 letting Postion be domain (int(1..bound),int(1..bound))
 
