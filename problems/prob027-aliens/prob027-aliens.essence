@@ -9,27 +9,27 @@ $
 $ Licenced under CC-BY-4.0 : http://creativecommons.org/licenses/by/4.0/
 
 
-given gridSize : int(1..)
+given grid : int(1..)
 given colours : int(1..)
 
-letting dGridSize be domain int(1..gridSize)
+letting dGrid be domain int(1..grid)
 letting dColours be domain int(0..colours-1)
 
 $ colours moves is always equal to no moves
-find clickMatrix : matrix indexed by [dGridSize, dGridSize] of dColours
+find clickMatrix : matrix indexed by [dGrid, dGrid] of dColours
 
-maximising (sum i,j : dGridSize . clickMatrix[i][j])
+maximising (sum i,j : dGrid . clickMatrix[i][j])
 
 such that
     $ no way of reaching same state faster exists
-    forAll simplerClickMatrix : matrix indexed by [dGridSize, dGridSize] of dColours .
+    forAll simplerClickMatrix : matrix indexed by [dGrid, dGrid] of dColours .
 
         $ ensure not faster
-        (sum i,j : dGridSize . clickMatrix[i][j]) <= (sum i,j : dGridSize . simplerClickMatrix[i][j])
+        (sum i,j : dGrid . clickMatrix[i][j]) <= (sum i,j : dGrid . simplerClickMatrix[i][j])
         \/
         
         $ ensure not same (for each tile, check if sum of clicks effecting it %colours same as other clickmatrix)
-        exists x,y : dGridSize .
+        exists x,y : dGrid .
 
             ((sum index : dGrid . clickMatrix[index][y] + clickMatrix[x][index]) - clickMatrix[x][y]) % colours
             !=
