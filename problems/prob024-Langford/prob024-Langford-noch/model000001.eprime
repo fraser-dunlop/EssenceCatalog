@@ -1,0 +1,60 @@
+language ESSENCE' 1.0
+
+given k: int(2..5)
+given n: int(1..30)
+letting seqLength be k * n
+letting seqIndex be domain int(1..seqLength)
+find seq_Function1D: matrix indexed by [int(1..seqLength)] of int(1..n)
+such that
+    and([seq_Function1D[i] = seq_Function1D[j] -> seq_Function1D[i] = j - i - 1 | i : int(1..seqLength), j : int(1..seqLength), i < j]),
+    and([or([seq_Function1D[q2] = q1 | q2 : int(1..seqLength)]) | q1 : int(1..n)])
+
+$ Conjure's
+$ {"finds": ["seq"],
+$  "givens": ["k", "n"],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$  "trailVerbose": [],
+$  "representations": [["k",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 2}},
+$                                                        {"Constant": {"ConstantInt": 5}}]}]}],
+$                      ["n",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 30}}]}]}],
+$                      ["seq",
+$                       {"DomainFunction": [{"HasRepresentation": "Function1D"},
+$                                           [{"SizeAttrNone": []}, "FunctionAttr_Total", "ISBAttr_Surjective"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["seqLength",
+$                                                                                           {"Alias": {"Op": {"MkOpTimes": [{"Reference": ["k",
+$                                                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                                                           "k",
+$                                                                                                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 2}},
+$                                                                                                                                                                                            {"Constant": {"ConstantInt": 5}}]}]}]}]},
+$                                                                                                                           {"Reference": ["n",
+$                                                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                                                           "n",
+$                                                                                                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                            {"Constant": {"ConstantInt": 30}}]}]}]}]}]}}}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["n",
+$                                                                                           {"DeclHasRepr": ["Given", "n",
+$                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                             {"Constant": {"ConstantInt": 30}}]}]}]}]}]}]}]}]],
+$  "originalDomains": [["k",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 2}},
+$                                                        {"Constant": {"ConstantInt": 5}}]}]}],
+$                      ["n",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 30}}]}]}],
+$                      ["seq",
+$                       {"DomainFunction": [[],
+$                                           [{"SizeAttrNone": []}, "FunctionAttr_Total", "ISBAttr_Surjective"],
+$                                           {"DomainReference": ["seqIndex", null]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["n", null]}]}]}]}]]}

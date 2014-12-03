@@ -1,0 +1,37 @@
+language ESSENCE' 1.0
+
+given n: int(1..)
+find seq_Function1D: matrix indexed by [int(1..n)] of int(-1, 1)
+minimising sum([sum([seq_Function1D[i] * seq_Function1D[i + k] | i : int(1..n - k)]) ** 2 | k : int(1..n)])
+such that true
+
+$ Conjure's
+$ {"finds": ["seq"],
+$  "givens": ["n"],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]]],
+$  "trailVerbose": [],
+$  "representations": [["n",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["seq",
+$                       {"DomainFunction": [{"HasRepresentation": "Function1D"},
+$                                           [{"SizeAttrNone": []}, "FunctionAttr_Total", "ISBAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["n",
+$                                                                                           {"DeclHasRepr": ["Given", "n",
+$                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                           {"DomainInt": [{"RangeSingle": {"Op": {"MkOpNegate": {"Constant": {"ConstantInt": 1}}}}},
+$                                                          {"RangeSingle": {"Constant": {"ConstantInt": 1}}}]}]}]],
+$  "originalDomains": [["n",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["seq",
+$                       {"DomainFunction": [[],
+$                                           [{"SizeAttrNone": []}, "FunctionAttr_Total", "ISBAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["n", null]}]}]},
+$                                           {"DomainInt": [{"RangeSingle": {"Op": {"MkOpNegate": {"Constant": {"ConstantInt": 1}}}}},
+$                                                          {"RangeSingle": {"Constant": {"ConstantInt": 1}}}]}]}]]}
