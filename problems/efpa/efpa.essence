@@ -17,16 +17,12 @@ letting String be domain function (total) Index --> Character
 
 find c : set (size numCodeWords) of String
 
+$ each codeword must contain each symbol lambda times.
 such that
-
-$ each codeword must contain each symbol lambda times. 
-
-forAll s in c . forAll a : Character . 
-    ( (sum i : Index . toInt(s(i)=a) )=lam),
+    forAll s in c . forAll a : Character .
+        ( (sum i : Index . toInt(s(i)=a) )=lam)
 
 $ each pair of codewords must differ in exactly d places.
-
-forAll s1, s2 in c, s1 != s2
-        . (sum i : Index . toInt(s1(i)!=s2(i))) = dist
-        
-        
+such that
+    forAll s1, s2 in c .
+        s1 != s2 -> (sum i : Index . toInt(s1(i)!=s2(i))) = dist
