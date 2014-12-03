@@ -17,3 +17,11 @@ such that
         forAll group1 in parts(week1) .
             forAll group2 in parts(week2) .
                 |group1 intersect group2| < 2
+
+$ such that
+$     and([ |group1 intersect group2| < 2
+$         | week1  <- sched
+$         , group1 <- parts(week1)
+$         , week2  <- sched
+$         , group2 <- parts(week2)
+$         ])
