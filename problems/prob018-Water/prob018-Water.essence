@@ -16,9 +16,9 @@ letting capacity be function (1 --> 8, 2 --> 5, 3 --> 3)
 
 letting goal be function (1 --> 4, 2 --> 4, 3 --> 0)
 
-find plan: function int(1..(totalWater+1)**n_buckets) --> State
+find plan: function int(1..(totalWater+1)**nBuckets) --> State
 
-find plan_len: int(1..(totalWater+1)**n_buckets)
+find plan_len: int(1..(totalWater+1)**nBuckets)
 
 
 minimising plan_len
@@ -29,7 +29,7 @@ plan_len = |plan|,
 
 $the partial function 'plan' maps integers between 1 and |plan| to values, to
 $ensure a correct sequence representation
-forAll i : int(1..(totalWater+1)**n_buckets) ,
+forAll i : int(1..(totalWater+1)**nBuckets) ,
     i <= plan_len .
     i in defined(plan),
 
@@ -48,13 +48,13 @@ $ goal
 plan(|plan|) = goal,
 
 $ only two buckets changes in each stage
-forAll i : int(1..(totalWater+1)**n_buckets) 
+forAll i : int(1..(totalWater+1)**nBuckets) 
     , i <= plan_len .
      |plan(i) intersect plan(i+1)| = 1,
 
 $ in state i+1, the 2 involved buckets containt the same total amount of water 
 $ as in state i
-forAll i : int(1..(totalWater+1)**n_buckets) ,
+forAll i : int(1..(totalWater+1)**nBuckets) ,
     i <= plan_len-1 .
     (sum w in range(plan(i) - (plan(i) intersect plan(i+1))) . w) =
     (sum w in range(plan(i+1) - (plan(i) intersect plan(i+1))) . w)
