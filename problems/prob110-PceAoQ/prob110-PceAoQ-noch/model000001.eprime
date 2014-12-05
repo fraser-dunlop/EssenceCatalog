@@ -12,15 +12,15 @@ find white_ExplicitVarSizeWithMarker_Values_2: matrix indexed by [int(1..(1 + (n
 maximising black_ExplicitVarSizeWithMarker_Marker + white_ExplicitVarSizeWithMarker_Marker
 such that
     black_ExplicitVarSizeWithMarker_Marker = white_ExplicitVarSizeWithMarker_Marker,
-    and([q3 <= black_ExplicitVarSizeWithMarker_Marker ->
-         and([q4 <= white_ExplicitVarSizeWithMarker_Marker ->
-              black_ExplicitVarSizeWithMarker_Values_1[q3] != white_ExplicitVarSizeWithMarker_Values_1[q4] /\
-              black_ExplicitVarSizeWithMarker_Values_2[q3] != white_ExplicitVarSizeWithMarker_Values_2[q4]
+    and([q4 <= black_ExplicitVarSizeWithMarker_Marker ->
+         and([q5 <= white_ExplicitVarSizeWithMarker_Marker ->
+              black_ExplicitVarSizeWithMarker_Values_1[q4] != white_ExplicitVarSizeWithMarker_Values_1[q5] /\
+              black_ExplicitVarSizeWithMarker_Values_2[q4] != white_ExplicitVarSizeWithMarker_Values_2[q5]
               /\
-              |white_ExplicitVarSizeWithMarker_Values_1[q4] - black_ExplicitVarSizeWithMarker_Values_1[q3]| !=
-              |white_ExplicitVarSizeWithMarker_Values_2[q4] - black_ExplicitVarSizeWithMarker_Values_2[q3]|
-                  | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
-             | q3 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+              |white_ExplicitVarSizeWithMarker_Values_1[q5] - black_ExplicitVarSizeWithMarker_Values_1[q4]| !=
+              |white_ExplicitVarSizeWithMarker_Values_2[q5] - black_ExplicitVarSizeWithMarker_Values_2[q4]|
+                  | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+             | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([q1 + 1 <= black_ExplicitVarSizeWithMarker_Marker ->
          black_ExplicitVarSizeWithMarker_Values_1[q1] < black_ExplicitVarSizeWithMarker_Values_1[q1 + 1] \/
          black_ExplicitVarSizeWithMarker_Values_1[q1] = black_ExplicitVarSizeWithMarker_Values_1[q1 + 1] /\
@@ -42,25 +42,24 @@ $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1, 2]], [1, [1, 2, 3, 4]],
 $                   [1, [1, 2]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["black",
 $                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                      {"SizeAttrNone": []},
+$                                      {"SizeAttr_None": []},
 $                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                        {"Reference": ["n",
 $                                                                                                       {"DeclHasRepr": ["Given",
@@ -73,7 +72,7 @@ $                                                                               
 $                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
 $                      ["white",
 $                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                      {"SizeAttrNone": []},
+$                                      {"SizeAttr_None": []},
 $                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                        {"Reference": ["n",
 $                                                                                                       {"DeclHasRepr": ["Given",
@@ -87,8 +86,8 @@ $                                                                               
 $  "originalDomains": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["black",
-$                       {"DomainSet": [[], {"SizeAttrNone": []},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
 $                                      {"DomainReference": ["Square", null]}]}],
 $                      ["white",
-$                       {"DomainSet": [[], {"SizeAttrNone": []},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
 $                                      {"DomainReference": ["Square", null]}]}]]}

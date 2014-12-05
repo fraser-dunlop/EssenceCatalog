@@ -9,10 +9,9 @@ such that
           {arrangement_Function1DPartial_Values[q2] @ such that arrangement_Function1DPartial_Flags[q2]}|
          != |q1 - q2|
              | q1 : int(1..n), q2 : int(1..n), q1 < q2]),
-    and([and([arrangement_Function1DPartial_Flags[q3] /\ arrangement_Function1DPartial_Flags[q4] ->
-              arrangement_Function1DPartial_Values[q3] != arrangement_Function1DPartial_Values[q4]
-                  | q4 : int(1..n)])
-             | q3 : int(1..n)]),
+    and([arrangement_Function1DPartial_Flags[q3] /\ arrangement_Function1DPartial_Flags[q4] ->
+         arrangement_Function1DPartial_Values[q3] != arrangement_Function1DPartial_Values[q4]
+             | q3 : int(1..n), q4 : int(1..n), q3 != q4]),
     and([or([arrangement_Function1DPartial_Flags[q4] /\ arrangement_Function1DPartial_Values[q4] = q3 | q4 : int(1..n)]) | q3 : int(1..n)]),
     and([arrangement_Function1DPartial_Flags[q3] = false -> arrangement_Function1DPartial_Values[q3] = 1 | q3 : int(1..n)])
 
@@ -22,7 +21,7 @@ $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3]],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
@@ -30,7 +29,7 @@ $  "representations": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["arrangement",
 $                       {"DomainFunction": [{"HasRepresentation": "Function1DPartial"},
-$                                           [{"SizeAttrNone": []}, "FunctionAttr_Partial", "ISBAttr_Bijective"],
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_Bijective"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": ["n",
 $                                                                                           {"DeclHasRepr": ["Given", "n",
@@ -43,6 +42,6 @@ $  "originalDomains": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["arrangement",
 $                       {"DomainFunction": [[],
-$                                           [{"SizeAttrNone": []}, "FunctionAttr_Partial", "ISBAttr_Bijective"],
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_Bijective"],
 $                                           {"DomainReference": ["Index", null]},
 $                                           {"DomainReference": ["Index", null]}]}]]}

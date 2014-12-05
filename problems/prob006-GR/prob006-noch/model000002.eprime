@@ -4,15 +4,15 @@ given n: int
 where n >= 0
 letting bound be 2 ** n
 find Ticks_Explicit: matrix indexed by [int(1..n)] of int(0..bound)
-minimising max([Ticks_Explicit[q2] | q2 : int(1..n)])
+minimising max([Ticks_Explicit[q7] | q7 : int(1..n)])
 such that
-    and([Ticks_Explicit[Ticks_Explicit[pair1_1]] < Ticks_Explicit[Ticks_Explicit[pair1_2]] ->
-         and([Ticks_Explicit[Ticks_Explicit[pair2_1]] < Ticks_Explicit[Ticks_Explicit[pair2_2]] ->
-              ((Ticks_Explicit[pair1_1], Ticks_Explicit[pair1_2]) != (Ticks_Explicit[pair2_1], Ticks_Explicit[pair2_2]) ->
-               max([Ticks_Explicit[pair1_1], Ticks_Explicit[pair1_2]; int(1..2)]) - min([Ticks_Explicit[pair1_1], Ticks_Explicit[pair1_2]; int(1..2)]) !=
-               max([Ticks_Explicit[pair2_1], Ticks_Explicit[pair2_2]; int(1..2)]) - min([Ticks_Explicit[pair2_1], Ticks_Explicit[pair2_2]; int(1..2)]))
-                  | pair2_1 : int(1..n), pair2_2 : int(1..n)])
-             | pair1_1 : int(1..n), pair1_2 : int(1..n)]),
+    and([Ticks_Explicit[q2] < Ticks_Explicit[q3] ->
+         and([Ticks_Explicit[q4] < Ticks_Explicit[q5] ->
+              (!(Ticks_Explicit[q2] = Ticks_Explicit[q4] /\ Ticks_Explicit[q3] = Ticks_Explicit[q5]) ->
+               max([Ticks_Explicit[q2], Ticks_Explicit[q3]; int(1..2)]) - min([Ticks_Explicit[q2], Ticks_Explicit[q3]; int(1..2)]) !=
+               max([Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)]) - min([Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)]))
+                  | q4 : int(1..n), q5 : int(1..n)])
+             | q2 : int(1..n), q3 : int(1..n)]),
     and([Ticks_Explicit[q1] < Ticks_Explicit[q1 + 1] | q1 : int(1..n - 1)])
 
 $ Conjure's
@@ -21,22 +21,21 @@ $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [2, [1, 2]], [1, [1, 2]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [2, [1, 2]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n", {"DomainInt": []}],
 $                      ["Ticks",
 $                       {"DomainSet": [{"HasRepresentation": "Explicit"},
-$                                      {"SizeAttrSize": {"Reference": ["n",
-$                                                                      {"DeclHasRepr": ["Given", "n",
-$                                                                                       {"DomainInt": []}]}]}},
+$                                      {"SizeAttr_Size": {"Reference": ["n",
+$                                                                       {"DeclHasRepr": ["Given", "n",
+$                                                                                        {"DomainInt": []}]}]}},
 $                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
 $                                                                       {"Reference": ["bound",
 $                                                                                      {"Alias": {"Op": {"MkOpPow": [{"Constant": {"ConstantInt": 2}},
@@ -46,6 +45,6 @@ $                                                                               
 $                                                                                                                                                    {"DomainInt": []}]}]}]}}}]}]}]}]}]],
 $  "originalDomains": [["n", {"DomainInt": []}],
 $                      ["Ticks",
-$                       {"DomainSet": [[], {"SizeAttrSize": {"Reference": ["n", null]}},
+$                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["n", null]}},
 $                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
 $                                                                       {"Reference": ["bound", null]}]}]}]}]]}

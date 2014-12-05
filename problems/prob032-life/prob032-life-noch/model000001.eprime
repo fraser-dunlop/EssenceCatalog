@@ -8,32 +8,32 @@ find alive_ExplicitVarSizeWithMarker_Values_1: matrix indexed by [int(1..(1 + (n
 find alive_ExplicitVarSizeWithMarker_Values_2: matrix indexed by [int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))] of int(1..n + 2)
 maximising alive_ExplicitVarSizeWithMarker_Marker
 such that
-    and([!or([q2 <= alive_ExplicitVarSizeWithMarker_Marker /\
-              (alive_ExplicitVarSizeWithMarker_Values_1[q2] = q10 /\ alive_ExplicitVarSizeWithMarker_Values_2[q2] = q11)
-                  | q2 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
-             | q10 : int(1..n + 2), q11 : int(1..n + 2), sum([1 | q3 <- {q10, q11}, or([1 = q3, n + 2 = q3; int(1..2)])]) = 0]),
-    and([q4 <= alive_ExplicitVarSizeWithMarker_Marker ->
+    and([!or([q3 <= alive_ExplicitVarSizeWithMarker_Marker /\
+              (alive_ExplicitVarSizeWithMarker_Values_1[q3] = q10 /\ alive_ExplicitVarSizeWithMarker_Values_2[q3] = q11)
+                  | q3 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
+             | q10 : int(1..n + 2), q11 : int(1..n + 2), sum([1 | q2 <- {q10, q11}, or([1 = q2, n + 2 = q2; int(1..2)])]) = 0]),
+    and([q5 <= alive_ExplicitVarSizeWithMarker_Marker ->
          3 <=
-         sum([or([q5 <= alive_ExplicitVarSizeWithMarker_Marker /\
-                  (alive_ExplicitVarSizeWithMarker_Values_1[q5] = alive_ExplicitVarSizeWithMarker_Values_1[q4] + i /\
-                   alive_ExplicitVarSizeWithMarker_Values_2[q5] = alive_ExplicitVarSizeWithMarker_Values_2[q4] + j)
-                      | q5 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
-                  | i : int(-1..1), j : int(-1..1)])
-         /\
          sum([or([q6 <= alive_ExplicitVarSizeWithMarker_Marker /\
-                  (alive_ExplicitVarSizeWithMarker_Values_1[q6] = alive_ExplicitVarSizeWithMarker_Values_1[q4] + i /\
-                   alive_ExplicitVarSizeWithMarker_Values_2[q6] = alive_ExplicitVarSizeWithMarker_Values_2[q4] + j)
+                  (alive_ExplicitVarSizeWithMarker_Values_1[q6] = alive_ExplicitVarSizeWithMarker_Values_1[q5] + i /\
+                   alive_ExplicitVarSizeWithMarker_Values_2[q6] = alive_ExplicitVarSizeWithMarker_Values_2[q5] + j)
                       | q6 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
                   | i : int(-1..1), j : int(-1..1)])
-         <= 4
-             | q4 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))]),
-    and([!or([q8 <= alive_ExplicitVarSizeWithMarker_Marker /\
-              (alive_ExplicitVarSizeWithMarker_Values_1[q8] = q12 /\ alive_ExplicitVarSizeWithMarker_Values_2[q8] = q13)
-                  | q8 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
-         ->
+         /\
          sum([or([q7 <= alive_ExplicitVarSizeWithMarker_Marker /\
-                  (alive_ExplicitVarSizeWithMarker_Values_1[q7] = q12 + i /\ alive_ExplicitVarSizeWithMarker_Values_2[q7] = q13 + j)
+                  (alive_ExplicitVarSizeWithMarker_Values_1[q7] = alive_ExplicitVarSizeWithMarker_Values_1[q5] + i /\
+                   alive_ExplicitVarSizeWithMarker_Values_2[q7] = alive_ExplicitVarSizeWithMarker_Values_2[q5] + j)
                       | q7 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
+                  | i : int(-1..1), j : int(-1..1)])
+         <= 4
+             | q5 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))]),
+    and([!or([q9 <= alive_ExplicitVarSizeWithMarker_Marker /\
+              (alive_ExplicitVarSizeWithMarker_Values_1[q9] = q12 /\ alive_ExplicitVarSizeWithMarker_Values_2[q9] = q13)
+                  | q9 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
+         ->
+         sum([or([q8 <= alive_ExplicitVarSizeWithMarker_Marker /\
+                  (alive_ExplicitVarSizeWithMarker_Values_1[q8] = q12 + i /\ alive_ExplicitVarSizeWithMarker_Values_2[q8] = q13 + j)
+                      | q8 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
                   | i : int(-1..1), j : int(-1..1)])
          != 3
              | q12 : int(1..n + 2), q13 : int(1..n + 2)]),
@@ -52,7 +52,7 @@ $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
 $  "trailCompact": [[1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1, 2]], [1, [1, 2]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4, 5]],
@@ -60,20 +60,18 @@ $                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
 $                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
@@ -81,7 +79,7 @@ $  "representations": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["alive",
 $                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                      {"SizeAttrNone": []},
+$                                      {"SizeAttr_None": []},
 $                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                        {"Op": {"MkOpPlus": [{"Reference": ["n",
 $                                                                                                                            {"DeclHasRepr": ["Given",
@@ -97,5 +95,5 @@ $                                                                               
 $  "originalDomains": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["alive",
-$                       {"DomainSet": [[], {"SizeAttrNone": []},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
 $                                      {"DomainReference": ["Cell", null]}]}]]}

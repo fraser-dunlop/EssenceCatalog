@@ -8,7 +8,7 @@ minimising max([Ticks_Occurrence[q2] * q2 | q2 : int(0..bound)])
 such that
     and([Ticks_Occurrence[pair1_1] /\ Ticks_Occurrence[pair1_2] ->
          and([Ticks_Occurrence[pair2_1] /\ Ticks_Occurrence[pair2_2] ->
-              ((pair1_1, pair1_2) != (pair2_1, pair2_2) ->
+              (!(pair1_1 = pair2_1 /\ pair1_2 = pair2_2) ->
                max([pair1_1, pair1_2; int(1..2)]) - min([pair1_1, pair1_2; int(1..2)]) != max([pair2_1, pair2_2; int(1..2)]) - min([pair2_1, pair2_2; int(1..2)]))
                   | pair2_1 : int(0..bound), pair2_2 : int(0..bound), pair2_1 < pair2_2])
              | pair1_1 : int(0..bound), pair1_2 : int(0..bound), pair1_1 < pair1_2]),
@@ -20,23 +20,22 @@ $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1, 2]], [1, [1, 2]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1, 2]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n", {"DomainInt": []}],
 $                      ["Ticks",
 $                       {"DomainSet": [{"HasRepresentation": "Occurrence"},
-$                                      {"SizeAttrSize": {"Reference": ["n",
-$                                                                      {"DeclHasRepr": ["Given", "n",
-$                                                                                       {"DomainInt": []}]}]}},
+$                                      {"SizeAttr_Size": {"Reference": ["n",
+$                                                                       {"DeclHasRepr": ["Given", "n",
+$                                                                                        {"DomainInt": []}]}]}},
 $                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
 $                                                                       {"Reference": ["bound",
 $                                                                                      {"Alias": {"Op": {"MkOpPow": [{"Constant": {"ConstantInt": 2}},
@@ -46,6 +45,6 @@ $                                                                               
 $                                                                                                                                                    {"DomainInt": []}]}]}]}}}]}]}]}]}]],
 $  "originalDomains": [["n", {"DomainInt": []}],
 $                      ["Ticks",
-$                       {"DomainSet": [[], {"SizeAttrSize": {"Reference": ["n", null]}},
+$                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["n", null]}},
 $                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
 $                                                                       {"Reference": ["bound", null]}]}]}]}]]}

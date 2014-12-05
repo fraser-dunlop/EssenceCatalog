@@ -8,10 +8,10 @@ letting dSequnce be domain int(1..q * lam)
 letting dElement be domain int(1..q)
 find E_Explicit: matrix indexed by [int(1..v), int(1..q * lam)] of int(1..q)
 such that
-    and([and([sum([E_Explicit[m, index] = element | index : int(1..q * lam)]) = lam | element : int(1..q)]) | m : int(1..v)]),
-    and([and([E_Explicit[seqA, q2] = E_Explicit[seqB, q2] | q2 : int(1..q * lam)]) \/
-         sum([E_Explicit[seqA, index] != E_Explicit[seqB, index] | index : int(1..q * lam)]) = d
-             | seqA : int(1..v), seqB : int(1..v)]),
+    and([and([sum([E_Explicit[q2, index] = element | index : int(1..q * lam)]) = lam | element : int(1..q)]) | q2 : int(1..v)]),
+    and([and([E_Explicit[q3, q5] = E_Explicit[q4, q5] | q5 : int(1..q * lam)]) \/
+         sum([E_Explicit[q3, index] != E_Explicit[q4, index] | index : int(1..q * lam)]) = d
+             | q3 : int(1..v), q4 : int(1..v)]),
     and([E_Explicit[q1, ..] <lex E_Explicit[q1 + 1, ..] | q1 : int(1..v - 1)])
 
 $ Conjure's
@@ -21,16 +21,7 @@ $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
 $  "trailCompact": [[1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-$                     22]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]],
-$                   [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]],
-$                   [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
@@ -38,10 +29,9 @@ $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
@@ -50,9 +40,7 @@ $                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["q",
@@ -62,9 +50,9 @@ $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"Cons
 $                      ["v", {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["E",
 $                       {"DomainSet": [{"HasRepresentation": "Explicit"},
-$                                      {"SizeAttrSize": {"Reference": ["v",
-$                                                                      {"DeclHasRepr": ["Given", "v",
-$                                                                                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
+$                                      {"SizeAttr_Size": {"Reference": ["v",
+$                                                                       {"DeclHasRepr": ["Given", "v",
+$                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
 $                                      {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                         {"Op": {"MkOpTimes": [{"Reference": ["q",
 $                                                                                                                              {"DeclHasRepr": ["Given",
@@ -88,6 +76,6 @@ $                      ["q", {"DomainInt": [{"RangeLowerBounded": {"Constant": {
 $                      ["lam",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["E",
-$                       {"DomainSet": [[], {"SizeAttrSize": {"Reference": ["v", null]}},
+$                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["v", null]}},
 $                                      {"DomainMatrix": [{"DomainReference": ["dSequnce", null]},
 $                                                        {"DomainReference": ["dElement", null]}]}]}]]}

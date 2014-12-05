@@ -6,8 +6,8 @@ letting Index be domain int(1..n * k)
 letting Num be domain int(1..n)
 find seq_Function1D: matrix indexed by [int(1..n * k)] of int(1..n)
 such that
-    and([or([and([or([q3[2] = i | q3 <- f]) =
-                  or([seq_Function1D[((q4, seq_Function1D[q4]), seq_Function1D[(q4, seq_Function1D[q4])])] = m /\ q4 = i | q4 : int(1..n * k)])
+    and([or([and([or([q4[2] = i | q4 <- f]) =
+                  or([seq_Function1D[((q3, seq_Function1D[q3]), seq_Function1D[(q3, seq_Function1D[q3])])] = m /\ q3 = i | q3 : int(1..n * k)])
                       | i : int(1..n * k)])
              /\ and([image(f, j + 1) - image(f, j) = m + 1 | j : int(1..k - 1)])
                  | f : function (total, injective) int(1..k) --> int(1..n * k)])
@@ -20,13 +20,11 @@ $  "givens": ["k", "n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
-$  "trailCompact": [[1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2]], [1, [1]],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
@@ -36,7 +34,7 @@ $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"Constant
 $                                                        {"Constant": {"ConstantInt": 5}}]}]}],
 $                      ["seq",
 $                       {"DomainFunction": [{"HasRepresentation": "Function1D"},
-$                                           [{"SizeAttrNone": []}, "FunctionAttr_Total", "ISBAttr_Surjective"],
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_Surjective"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Op": {"MkOpTimes": [{"Reference": ["n",
 $                                                                                                                 {"DeclHasRepr": ["Given",
@@ -61,5 +59,5 @@ $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"Constant
 $                                                        {"Constant": {"ConstantInt": 30}}]}]}],
 $                      ["seq",
 $                       {"DomainFunction": [[],
-$                                           [{"SizeAttrNone": []}, "FunctionAttr_Total", "ISBAttr_Surjective"],
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_Surjective"],
 $                                           {"DomainReference": ["Index", null]}, {"DomainReference": ["Num", null]}]}]]}

@@ -10,20 +10,20 @@ find white_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..(1 + (n - 1
 find white_ExplicitVarSizeWithFlags_Values_1: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
 find white_ExplicitVarSizeWithFlags_Values_2: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
 maximising
-    sum([black_ExplicitVarSizeWithFlags_Flags[q3] * 1 | q3 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]) +
-    sum([white_ExplicitVarSizeWithFlags_Flags[q4] * 1 | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+    sum([black_ExplicitVarSizeWithFlags_Flags[q4] * 1 | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]) +
+    sum([white_ExplicitVarSizeWithFlags_Flags[q5] * 1 | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
 such that
-    sum([black_ExplicitVarSizeWithFlags_Flags[q5] * 1 | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]) =
-    sum([white_ExplicitVarSizeWithFlags_Flags[q6] * 1 | q6 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
-    and([black_ExplicitVarSizeWithFlags_Flags[q7] ->
-         and([white_ExplicitVarSizeWithFlags_Flags[q8] ->
-              black_ExplicitVarSizeWithFlags_Values_1[q7] != white_ExplicitVarSizeWithFlags_Values_1[q8] /\
-              black_ExplicitVarSizeWithFlags_Values_2[q7] != white_ExplicitVarSizeWithFlags_Values_2[q8]
+    sum([black_ExplicitVarSizeWithFlags_Flags[q6] * 1 | q6 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]) =
+    sum([white_ExplicitVarSizeWithFlags_Flags[q7] * 1 | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([black_ExplicitVarSizeWithFlags_Flags[q8] ->
+         and([white_ExplicitVarSizeWithFlags_Flags[q9] ->
+              black_ExplicitVarSizeWithFlags_Values_1[q8] != white_ExplicitVarSizeWithFlags_Values_1[q9] /\
+              black_ExplicitVarSizeWithFlags_Values_2[q8] != white_ExplicitVarSizeWithFlags_Values_2[q9]
               /\
-              |white_ExplicitVarSizeWithFlags_Values_1[q8] - black_ExplicitVarSizeWithFlags_Values_1[q7]| !=
-              |white_ExplicitVarSizeWithFlags_Values_2[q8] - black_ExplicitVarSizeWithFlags_Values_2[q7]|
-                  | q8 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
-             | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+              |white_ExplicitVarSizeWithFlags_Values_1[q9] - black_ExplicitVarSizeWithFlags_Values_1[q8]| !=
+              |white_ExplicitVarSizeWithFlags_Values_2[q9] - black_ExplicitVarSizeWithFlags_Values_2[q8]|
+                  | q9 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+             | q8 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([black_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
          black_ExplicitVarSizeWithFlags_Values_1[q1] < black_ExplicitVarSizeWithFlags_Values_1[q1 + 1] \/
          black_ExplicitVarSizeWithFlags_Values_1[q1] = black_ExplicitVarSizeWithFlags_Values_1[q1 + 1] /\
@@ -47,32 +47,30 @@ $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [2, [1, 2]], [1, [1, 2, 3, 4]],
 $                   [2, [1, 2]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
-$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["black",
 $                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithFlags"},
-$                                      {"SizeAttrNone": []},
+$                                      {"SizeAttr_None": []},
 $                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                        {"Reference": ["n",
 $                                                                                                       {"DeclHasRepr": ["Given",
@@ -85,7 +83,7 @@ $                                                                               
 $                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
 $                      ["white",
 $                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithFlags"},
-$                                      {"SizeAttrNone": []},
+$                                      {"SizeAttr_None": []},
 $                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                        {"Reference": ["n",
 $                                                                                                       {"DeclHasRepr": ["Given",
@@ -99,8 +97,8 @@ $                                                                               
 $  "originalDomains": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["black",
-$                       {"DomainSet": [[], {"SizeAttrNone": []},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
 $                                      {"DomainReference": ["Square", null]}]}],
 $                      ["white",
-$                       {"DomainSet": [[], {"SizeAttrNone": []},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
 $                                      {"DomainReference": ["Square", null]}]}]]}

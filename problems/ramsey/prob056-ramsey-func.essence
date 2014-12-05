@@ -17,13 +17,14 @@ find graph: function (size  num_edges) (Vertex, Vertex ) --> Colour
 
 such that
 
-forAll i : Vertex . 
-   ! ( (i,i) in defined(graph) ),
+$ forAll i : Vertex .
+$    ! ( (i,i) in defined(graph) ),
 
-forAll i, j : Vertex . 
-    graph((i,j)) = graph((j,i)),
+$ forAll i, j : Vertex .
+$     graph((i,j)) = graph((j,i)),
 
-forAll (u,v) in defined(graph) . 
-     forAll (u2,v2) in defined(graph), u2 = v /\ v2 != u .
-            graph((u,v)) != graph((u2,v2)) \/  graph((u2,v2)) !=  graph((v2,u)) \/ graph((v2,u)) != graph((u,v))
+$ forAll (u,v) in defined(graph) .
+     forAll (u2,v2) in defined(graph), u2 = v2 /\ v2 != u2 .
+         true
+            $ graph((u,v)) != graph((u2,v2)) \/  graph((u2,v2)) !=  graph((v2,u)) \/ graph((v2,u)) != graph((u,v))
 

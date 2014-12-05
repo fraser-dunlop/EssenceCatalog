@@ -9,15 +9,15 @@ given values_Function1DPartial_Values: matrix indexed by [int(1..n)] of int(1..1
 find picked_ExplicitVarSizeWithMarker_Marker: int(0..n)
 find picked_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..n)] of int(1..n)
 maximising
-    sum([(i <= picked_ExplicitVarSizeWithMarker_Marker) *
-         {values_Function1DPartial_Values[picked_ExplicitVarSizeWithMarker_Values[i]] @ such that
-                                                                                            values_Function1DPartial_Flags[picked_ExplicitVarSizeWithMarker_Values[i]]}
-             | i : int(1..n)])
+    sum([(q2 <= picked_ExplicitVarSizeWithMarker_Marker) *
+         {values_Function1DPartial_Values[picked_ExplicitVarSizeWithMarker_Values[q2]] @ such that
+                                                                                             values_Function1DPartial_Flags[picked_ExplicitVarSizeWithMarker_Values[q2]]}
+             | q2 : int(1..n)])
 such that
-    sum([(i <= picked_ExplicitVarSizeWithMarker_Marker) *
-         {weights_Function1DPartial_Values[picked_ExplicitVarSizeWithMarker_Values[i]] @ such that
-                                                                                             weights_Function1DPartial_Flags[picked_ExplicitVarSizeWithMarker_Values[i]]}
-             | i : int(1..n)])
+    sum([(q3 <= picked_ExplicitVarSizeWithMarker_Marker) *
+         {weights_Function1DPartial_Values[picked_ExplicitVarSizeWithMarker_Values[q3]] @ such that
+                                                                                              weights_Function1DPartial_Flags[picked_ExplicitVarSizeWithMarker_Values[q3]]}
+             | q3 : int(1..n)])
     <= totalWeight,
     and([q1 + 1 <= picked_ExplicitVarSizeWithMarker_Marker -> picked_ExplicitVarSizeWithMarker_Values[q1] < picked_ExplicitVarSizeWithMarker_Values[q1 + 1]
              | q1 : int(1..n - 1)]),
@@ -31,26 +31,23 @@ $  "givens": ["n", "totalWeight", "weights", "values"],
 $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7]], [2, [1, 2, 3]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [2, [1, 2, 3]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                        {"Constant": {"ConstantInt": 100}}]}]}],
 $                      ["values",
 $                       {"DomainFunction": [{"HasRepresentation": "Function1DPartial"},
-$                                           [{"SizeAttrSize": {"Reference": ["n",
-$                                                                            {"DeclHasRepr": ["Given", "n",
-$                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                                                              {"Constant": {"ConstantInt": 100}}]}]}]}]}},
-$                                            "FunctionAttr_Partial", "ISBAttr_None"],
+$                                           [{"SizeAttr_Size": {"Reference": ["n",
+$                                                                             {"DeclHasRepr": ["Given", "n",
+$                                                                                              {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                               {"Constant": {"ConstantInt": 100}}]}]}]}]}},
+$                                            "PartialityAttr_Partial", "JectivityAttr_None"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": ["n",
 $                                                                                           {"DeclHasRepr": ["Given", "n",
@@ -60,11 +57,11 @@ $                                           {"DomainInt": [{"RangeBounded": [{"C
 $                                                                            {"Constant": {"ConstantInt": 100}}]}]}]}],
 $                      ["picked",
 $                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                      {"SizeAttrMinMaxSize": [{"Constant": {"ConstantInt": 1}},
-$                                                              {"Reference": ["n",
-$                                                                             {"DeclHasRepr": ["Given", "n",
-$                                                                                              {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                                                               {"Constant": {"ConstantInt": 100}}]}]}]}]}]},
+$                                      {"SizeAttr_MinMaxSize": [{"Constant": {"ConstantInt": 1}},
+$                                                               {"Reference": ["n",
+$                                                                              {"DeclHasRepr": ["Given", "n",
+$                                                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                {"Constant": {"ConstantInt": 100}}]}]}]}]}]},
 $                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                       {"Reference": ["n",
 $                                                                                      {"DeclHasRepr": ["Given", "n",
@@ -72,11 +69,11 @@ $                                                                               
 $                                                                                                                                        {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]}]}],
 $                      ["weights",
 $                       {"DomainFunction": [{"HasRepresentation": "Function1DPartial"},
-$                                           [{"SizeAttrSize": {"Reference": ["n",
-$                                                                            {"DeclHasRepr": ["Given", "n",
-$                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                                                              {"Constant": {"ConstantInt": 100}}]}]}]}]}},
-$                                            "FunctionAttr_Partial", "ISBAttr_None"],
+$                                           [{"SizeAttr_Size": {"Reference": ["n",
+$                                                                             {"DeclHasRepr": ["Given", "n",
+$                                                                                              {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                               {"Constant": {"ConstantInt": 100}}]}]}]}]}},
+$                                            "PartialityAttr_Partial", "JectivityAttr_None"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": ["n",
 $                                                                                           {"DeclHasRepr": ["Given", "n",
@@ -95,23 +92,23 @@ $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"Constant
 $                                                        {"Constant": {"ConstantInt": 1000}}]}]}],
 $                      ["weights",
 $                       {"DomainFunction": [[],
-$                                           [{"SizeAttrSize": {"Reference": ["n", null]}}, "FunctionAttr_Partial",
-$                                            "ISBAttr_None"],
+$                                           [{"SizeAttr_Size": {"Reference": ["n", null]}}, "PartialityAttr_Partial",
+$                                            "JectivityAttr_None"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": ["n", null]}]}]},
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Constant": {"ConstantInt": 100}}]}]}]}],
 $                      ["values",
 $                       {"DomainFunction": [[],
-$                                           [{"SizeAttrSize": {"Reference": ["n", null]}}, "FunctionAttr_Partial",
-$                                            "ISBAttr_None"],
+$                                           [{"SizeAttr_Size": {"Reference": ["n", null]}}, "PartialityAttr_Partial",
+$                                            "JectivityAttr_None"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": ["n", null]}]}]},
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Constant": {"ConstantInt": 100}}]}]}]}],
 $                      ["picked",
 $                       {"DomainSet": [[],
-$                                      {"SizeAttrMinMaxSize": [{"Constant": {"ConstantInt": 1}},
-$                                                              {"Reference": ["n", null]}]},
+$                                      {"SizeAttr_MinMaxSize": [{"Constant": {"ConstantInt": 1}},
+$                                                               {"Reference": ["n", null]}]},
 $                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                       {"Reference": ["n", null]}]}]}]}]]}
