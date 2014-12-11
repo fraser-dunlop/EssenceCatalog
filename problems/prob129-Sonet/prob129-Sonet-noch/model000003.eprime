@@ -1,0 +1,166 @@
+language ESSENCE' 1.0
+
+given nnodes: int(1..)
+given nrings: int(1..)
+given capacity: int(1..)
+letting Nodes be domain int(1..nnodes)
+given p1: int
+given demand_Explicit_Occurrence: matrix indexed by [int(1..p1), int(1..nnodes)] of bool
+find network_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..nrings)] of int(0..min(nrings, 2 ** (1 + (nnodes - 1))))
+find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..nrings), int(1..capacity)] of bool
+find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values: matrix indexed by [int(1..nrings), int(1..capacity)] of int(1..nnodes)
+minimising
+    sum([(network_ExplicitVarSizeWithFlags_Flags[q3] > 0) *
+         sum([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q3, q7] * 1 | q7 : int(1..capacity)])
+             | q3 : int(1..nrings)])
+such that
+    and([or([network_ExplicitVarSizeWithFlags_Flags[q5] > 0 /\
+             and([or([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q5, q9] /\
+                      network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q5, q9] = q6
+                          | q9 : int(1..capacity)])
+                      | q6 : int(1..nnodes), demand_Explicit_Occurrence[q4, q6]])
+                 | q5 : int(1..nrings)])
+             | q4 : int(1..p1)]),
+    and([network_ExplicitVarSizeWithFlags_Flags[q1 + 1] > 0 ->
+         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, ..] <lex
+         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1 + 1, ..]
+         \/
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q8] =
+              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1 + 1, q8]
+                  | q8 : int(1..capacity)])
+         /\
+         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, ..] <lex
+         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1 + 1, ..]
+             | q1 : int(1..nrings - 1)]),
+    and([network_ExplicitVarSizeWithFlags_Flags[q1] = 0 ->
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q10] = false | q10 : int(1..capacity)]) /\
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q11] = 1 | q11 : int(1..capacity)])
+             | q1 : int(1..nrings)]),
+    and([network_ExplicitVarSizeWithFlags_Flags[q1 + 1] > 0 -> network_ExplicitVarSizeWithFlags_Flags[q1] > 0 | q1 : int(1..nrings - 1)]),
+    nrings = sum([network_ExplicitVarSizeWithFlags_Flags[q1] | q1 : int(1..nrings)]),
+    and([network_ExplicitVarSizeWithFlags_Flags[q1] > 0 ->
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2 + 1] ->
+              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q2] <
+              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q2 + 1]
+                  | q2 : int(1..capacity - 1)])
+             | q1 : int(1..nrings)]),
+    and([network_ExplicitVarSizeWithFlags_Flags[q1] > 0 ->
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2] = false ->
+              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q2] = 1
+                  | q2 : int(1..capacity)])
+             | q1 : int(1..nrings)]),
+    and([network_ExplicitVarSizeWithFlags_Flags[q1] > 0 ->
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2 + 1] ->
+              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2]
+                  | q2 : int(1..capacity - 1)])
+             | q1 : int(1..nrings)]),
+    and([network_ExplicitVarSizeWithFlags_Flags[q1] > 0 ->
+         sum([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2] | q2 : int(1..capacity)]) <= capacity
+             | q1 : int(1..nrings)])
+
+$ Conjure's
+$ {"finds": ["network"],
+$  "givens": ["nnodes", "nrings", "capacity", "demand"],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [3, [1, 2, 3]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]],
+$                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]],
+$                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]],
+$                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]],
+$                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23, 24, 25, 26, 27, 28, 29, 30]],
+$                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23, 24, 25, 26, 27, 28]],
+$                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23]],
+$                   [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$  "trailVerbose": [],
+$  "representations": [["nnodes",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["p1", {"DomainInt": []}],
+$                      ["nrings",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["capacity",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["network",
+$                       {"DomainMSet": [{"HasRepresentation": "ExplicitVarSizeWithFlags"},
+$                                       [{"SizeAttr_Size": {"Reference": ["nrings",
+$                                                                         {"DeclHasRepr": ["Given", "nrings",
+$                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
+$                                        {"OccurAttr_None": []}],
+$                                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithFlags"},
+$                                                      {"SizeAttr_MaxSize": {"Reference": ["capacity",
+$                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                           "capacity",
+$                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
+$                                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                       {"Reference": ["nnodes",
+$                                                                                                      {"DeclHasRepr": ["Given",
+$                                                                                                                       "nnodes",
+$                                                                                                                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
+$                      ["demand",
+$                       {"DomainSet": [{"HasRepresentation": "Explicit"},
+$                                      {"SizeAttr_Size": {"Reference": ["p1",
+$                                                                       {"DeclHasRepr": ["Given", "p1",
+$                                                                                        {"DomainInt": []}]}]}},
+$                                      {"DomainSet": [{"HasRepresentation": "Occurrence"},
+$                                                     {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
+$                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                      {"Reference": ["nnodes",
+$                                                                                                     {"DeclHasRepr": ["Given",
+$                                                                                                                      "nnodes",
+$                                                                                                                      {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]],
+$  "originalDomains": [["nnodes",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["nrings",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["capacity",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["demand",
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainSet": [[], {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
+$                                                     {"DomainReference": ["Nodes", null]}]}]}],
+$                      ["network",
+$                       {"DomainMSet": [[],
+$                                       [{"SizeAttr_Size": {"Reference": ["nrings", null]}}, {"OccurAttr_None": []}],
+$                                       {"DomainSet": [[], {"SizeAttr_MaxSize": {"Reference": ["capacity", null]}},
+$                                                      {"DomainReference": ["Nodes", null]}]}]}]]}

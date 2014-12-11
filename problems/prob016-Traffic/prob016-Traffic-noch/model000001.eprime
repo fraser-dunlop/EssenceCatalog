@@ -1,0 +1,113 @@
+language ESSENCE' 1.0
+
+given n_roads: int(1..)
+letting Road be domain int(1..n_roads)
+letting VCol be domain int(1..4)
+letting PCol be domain int(1..2)
+find valid_ExplicitVarSizeWithMarker_Marker:
+        int(0..factorial((1 + (4 - 1)) * (1 + (2 - 1))) / (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1)))))
+find valid_ExplicitVarSizeWithMarker_Values_Function1D_1:
+        matrix indexed by [int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) /
+                                  (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1))))),
+                           int(1..n_roads)] of int(1..4)
+find valid_ExplicitVarSizeWithMarker_Values_Function1D_2:
+        matrix indexed by [int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) /
+                                  (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1))))),
+                           int(1..n_roads)] of int(1..2)
+such that
+    and([q2 <= valid_ExplicitVarSizeWithMarker_Marker ->
+         and([or([and([or([valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd] = 1 /\ valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd] = 1,
+                           valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd % n_roads + 1] = 1 /\
+                           valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd % n_roads + 1] = 1; int(1..2)]),
+                       or([valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd] = 3 /\ valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd] = 2,
+                           valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd % n_roads + 1] = 3 /\
+                           valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd % n_roads + 1] = 2; int(1..2)]); int(1..2)])
+                  /\
+                  and([or([1 = valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd] /\ 1 = valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd],
+                           3 = valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd] /\ 2 = valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd]; int(1..2)]),
+                       or([1 = valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd % n_roads + 1] /\
+                           1 = valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd % n_roads + 1],
+                           3 = valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd % n_roads + 1] /\
+                           2 = valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd % n_roads + 1]; int(1..2)]); int(1..2)]),
+                  and([or([valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd] = 2 /\ valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd] = 1,
+                           valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd % n_roads + 1] = 2 /\
+                           valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd % n_roads + 1] = 1; int(1..2)]),
+                       or([valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd] = 4 /\ valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd] = 1,
+                           valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd % n_roads + 1] = 4 /\
+                           valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd % n_roads + 1] = 1; int(1..2)]); int(1..2)])
+                  /\
+                  and([or([2 = valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd] /\ 1 = valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd],
+                           4 = valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd] /\ 1 = valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd]; int(1..2)]),
+                       or([2 = valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd % n_roads + 1] /\
+                           1 = valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd % n_roads + 1],
+                           4 = valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q2, rd % n_roads + 1] /\
+                           1 = valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q2, rd % n_roads + 1]; int(1..2)]); int(1..2)]); int(1..2)])
+                  | rd : int(1..n_roads)])
+             | q2 : int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) / (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1)))))]),
+    and([q1 + 1 <= valid_ExplicitVarSizeWithMarker_Marker ->
+         valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q1, ..] <lex valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q1 + 1, ..] \/
+         and([valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q1, q8] = valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q1 + 1, q8] | q8 : int(1..n_roads)]) /\
+         valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q1, ..] <lex valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q1 + 1, ..]
+             | q1 : int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) / (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1)))) - 1)]),
+    and([q1 > valid_ExplicitVarSizeWithMarker_Marker ->
+         and([valid_ExplicitVarSizeWithMarker_Values_Function1D_1[q1, q3] = 1 /\ valid_ExplicitVarSizeWithMarker_Values_Function1D_2[q1, q3] = 1 | q3 : int(1..n_roads)])
+             | q1 : int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) / (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1)))))])
+
+$ Conjure's
+$ {"finds": ["valid"],
+$  "givens": ["n_roads"],
+$  "enumGivens": [],
+$  "enumLettings": [{"LettingDomainDefnEnum": ["VCol", ["r", "ry", "g", "y"]]},
+$                   {"LettingDomainDefnEnum": ["PCol", ["pr", "pg"]]}],
+$  "unnameds": [],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2]], [1, [1, 2]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]]],
+$  "trailVerbose": [],
+$  "representations": [["n_roads",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["valid",
+$                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
+$                                      {"SizeAttr_None": []},
+$                                      {"DomainFunction": [{"HasRepresentation": "Function1D"},
+$                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                           "JectivityAttr_None"],
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": ["n_roads",
+$                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                           "n_roads",
+$                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                          {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                            {"Constant": {"ConstantInt": 4}}]}]},
+$                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                            {"Constant": {"ConstantInt": 2}}]}]}]}]}]}]],
+$  "originalDomains": [["n_roads",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["valid",
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainFunction": [[],
+$                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                           "JectivityAttr_None"],
+$                                                          {"DomainReference": ["Road", null]},
+$                                                          {"DomainTuple": [{"DomainReference": ["VCol", null]},
+$                                                                           {"DomainReference": ["PCol", null]}]}]}]}]]}
