@@ -6,7 +6,7 @@ letting dNum be domain int(1..n)
 find setA_Explicit: matrix indexed by [int(1..n / 2)] of int(1..n)
 find setB_Explicit: matrix indexed by [int(1..n / 2)] of int(1..n)
 such that
-    sum([1 | q8 : int(1..n / 2)]) + sum([!or([setA_Explicit[q10] = setB_Explicit[q9] | q10 : int(1..n / 2)]) * 1 | q9 : int(1..n / 2)]) = n,
+    sum(flatten([[1 | q8 : int(1..n / 2)], [1 | q9 : int(1..n / 2), !or([setA_Explicit[q10] = setB_Explicit[q9] | q10 : int(1..n / 2)])]; int(1..2)])) = n,
     sum([or([setB_Explicit[q12] = setA_Explicit[q11] | q12 : int(1..n / 2)]) * 1 | q11 : int(1..n / 2)]) = 0,
     sum([setA_Explicit[q3] | q3 : int(1..n / 2)]) = sum([setB_Explicit[q4] | q4 : int(1..n / 2)]),
     sum([setA_Explicit[q5] * setA_Explicit[q5] | q5 : int(1..n / 2)]) = sum([setB_Explicit[q6] * setB_Explicit[q6] | q6 : int(1..n / 2)]),
@@ -30,9 +30,8 @@ $                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

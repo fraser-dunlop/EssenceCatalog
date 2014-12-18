@@ -31,45 +31,45 @@ such that
     and([steps_Function1D_ExplicitVarSizeWithFlags_Flags[31, q7] ->
          or([end_1 = steps_Function1D_ExplicitVarSizeWithFlags_Values_1[31, q7] /\ end_2 = steps_Function1D_ExplicitVarSizeWithFlags_Values_2[31, q7]; int(1..1)])
              | q7 : int(1..32)]),
-    and([or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[31, q10] /\
-             (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[31, q10] = end_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[31, q10] = end_2)
-                 | q10 : int(1..32)]); int(1..1)]),
-    and([sum([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q11] * 1 | q11 : int(1..32)]) = numPegs - i /\
-         sum([(steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q12] /\
-               or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i + 1, q13] /\
-                   (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i + 1, q13] = steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i, q12] /\
-                    steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i + 1, q13] = steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i, q12])
-                       | q13 : int(1..32)]))
-              * 1 | q12 : int(1..32)])
-         = sum([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q14] * 1 | q14 : int(1..32)]) - 2
+    and([or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[31, q8] /\
+             (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[31, q8] = end_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[31, q8] = end_2)
+                 | q8 : int(1..32)]); int(1..1)]),
+    and([sum([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q9] * 1 | q9 : int(1..32)]) = numPegs - i /\
+         sum([(steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q10] /\
+               or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i + 1, q11] /\
+                   (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i + 1, q11] = steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i, q10] /\
+                    steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i + 1, q11] = steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i, q10])
+                       | q11 : int(1..32)]))
+              * 1 | q10 : int(1..32)])
+         = sum([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q12] * 1 | q12 : int(1..32)]) - 2
              | i : int(0..maxSteps - 1)]),
-    and([or([or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q15] /\
-                 (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i, q15] = fro_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i, q15] = fro_2)
+    and([or([or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q13] /\
+                 (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i, q13] = fro_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i, q13] = fro_2)
+                     | q13 : int(1..32)])
+             /\
+             !or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i + 1, q14] /\
+                  (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i + 1, q14] = fro_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i + 1, q14] = fro_2)
+                      | q14 : int(1..32)])
+             /\
+             or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i + 1, q15] /\
+                 (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i + 1, q15] = to_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i + 1, q15] = to_2)
                      | q15 : int(1..32)])
              /\
-             !or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i + 1, q16] /\
-                  (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i + 1, q16] = fro_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i + 1, q16] = fro_2)
+             !or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q16] /\
+                  (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i, q16] = to_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i, q16] = to_2)
                       | q16 : int(1..32)])
-             /\
-             or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i + 1, q17] /\
-                 (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i + 1, q17] = to_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i + 1, q17] = to_2)
-                     | q17 : int(1..32)])
-             /\
-             !or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q18] /\
-                  (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i, q18] = to_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i, q18] = to_2)
-                      | q18 : int(1..32)])
              /\ (to_1 < 2 \/ to_1 > 4 -> to_2 >= 2 \/ to_2 <= 4)
              /\ (to_2 < 2 \/ to_2 > 4 -> to_1 >= 2 \/ to_1 <= 4)
              /\
-             or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q19] /\
-                 (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i, q19] = fro_1 + (to_1 - fro_1) / 2 /\
-                  steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i, q19] = fro_2 + (to_2 - fro_2) / 2)
-                     | q19 : int(1..32)])
+             or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q17] /\
+                 (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i, q17] = fro_1 + (to_1 - fro_1) / 2 /\
+                  steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i, q17] = fro_2 + (to_2 - fro_2) / 2)
+                     | q17 : int(1..32)])
              /\
-             !or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i + 1, q20] /\
-                  (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i + 1, q20] = fro_1 + (to_1 - fro_1) / 2 /\
-                   steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i + 1, q20] = fro_2 + (to_2 - fro_2) / 2)
-                      | q20 : int(1..32)])
+             !or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i + 1, q18] /\
+                  (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[i + 1, q18] = fro_1 + (to_1 - fro_1) / 2 /\
+                   steps_Function1D_ExplicitVarSizeWithFlags_Values_2[i + 1, q18] = fro_2 + (to_2 - fro_2) / 2)
+                      | q18 : int(1..32)])
                  | fro_1 : int(0..6), fro_2 : int(0..6), to_1 : int(0..6), to_2 : int(0..6)])
              | i : int(0..maxSteps - 1)]),
     and([and([steps_Function1D_ExplicitVarSizeWithFlags_Flags[q1, q2 + 1] ->
@@ -270,34 +270,30 @@ $                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]],
-$                   [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]],
-$                   [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
-$                   [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],

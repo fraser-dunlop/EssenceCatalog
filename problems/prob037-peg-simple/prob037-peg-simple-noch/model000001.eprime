@@ -31,45 +31,45 @@ such that
     and([q7 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[31] ->
          or([end_1 = steps_Function1D_ExplicitVarSizeWithMarker_Values_1[31, q7] /\ end_2 = steps_Function1D_ExplicitVarSizeWithMarker_Values_2[31, q7]; int(1..1)])
              | q7 : int(1..32)]),
-    and([or([q10 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[31] /\
-             (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[31, q10] = end_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[31, q10] = end_2)
-                 | q10 : int(1..32)]); int(1..1)]),
+    and([or([q8 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[31] /\
+             (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[31, q8] = end_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[31, q8] = end_2)
+                 | q8 : int(1..32)]); int(1..1)]),
     and([steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] = numPegs - i /\
-         sum([(q11 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] /\
-               or([q12 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i + 1] /\
-                   (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i + 1, q12] = steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i, q11] /\
-                    steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i + 1, q12] = steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i, q11])
-                       | q12 : int(1..32)]))
-              * 1 | q11 : int(1..32)])
+         sum([(q9 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] /\
+               or([q10 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i + 1] /\
+                   (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i + 1, q10] = steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i, q9] /\
+                    steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i + 1, q10] = steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i, q9])
+                       | q10 : int(1..32)]))
+              * 1 | q9 : int(1..32)])
          = steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] - 2
              | i : int(0..maxSteps - 1)]),
-    and([or([or([q13 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] /\
-                 (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i, q13] = fro_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i, q13] = fro_2)
+    and([or([or([q11 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] /\
+                 (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i, q11] = fro_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i, q11] = fro_2)
+                     | q11 : int(1..32)])
+             /\
+             !or([q12 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i + 1] /\
+                  (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i + 1, q12] = fro_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i + 1, q12] = fro_2)
+                      | q12 : int(1..32)])
+             /\
+             or([q13 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i + 1] /\
+                 (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i + 1, q13] = to_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i + 1, q13] = to_2)
                      | q13 : int(1..32)])
              /\
-             !or([q14 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i + 1] /\
-                  (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i + 1, q14] = fro_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i + 1, q14] = fro_2)
+             !or([q14 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] /\
+                  (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i, q14] = to_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i, q14] = to_2)
                       | q14 : int(1..32)])
-             /\
-             or([q15 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i + 1] /\
-                 (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i + 1, q15] = to_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i + 1, q15] = to_2)
-                     | q15 : int(1..32)])
-             /\
-             !or([q16 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] /\
-                  (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i, q16] = to_1 /\ steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i, q16] = to_2)
-                      | q16 : int(1..32)])
              /\ (to_1 < 2 \/ to_1 > 4 -> to_2 >= 2 \/ to_2 <= 4)
              /\ (to_2 < 2 \/ to_2 > 4 -> to_1 >= 2 \/ to_1 <= 4)
              /\
-             or([q17 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] /\
-                 (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i, q17] = fro_1 + (to_1 - fro_1) / 2 /\
-                  steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i, q17] = fro_2 + (to_2 - fro_2) / 2)
-                     | q17 : int(1..32)])
+             or([q15 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i] /\
+                 (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i, q15] = fro_1 + (to_1 - fro_1) / 2 /\
+                  steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i, q15] = fro_2 + (to_2 - fro_2) / 2)
+                     | q15 : int(1..32)])
              /\
-             !or([q18 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i + 1] /\
-                  (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i + 1, q18] = fro_1 + (to_1 - fro_1) / 2 /\
-                   steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i + 1, q18] = fro_2 + (to_2 - fro_2) / 2)
-                      | q18 : int(1..32)])
+             !or([q16 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[i + 1] /\
+                  (steps_Function1D_ExplicitVarSizeWithMarker_Values_1[i + 1, q16] = fro_1 + (to_1 - fro_1) / 2 /\
+                   steps_Function1D_ExplicitVarSizeWithMarker_Values_2[i + 1, q16] = fro_2 + (to_2 - fro_2) / 2)
+                      | q16 : int(1..32)])
                  | fro_1 : int(0..6), fro_2 : int(0..6), to_1 : int(0..6), to_2 : int(0..6)])
              | i : int(0..maxSteps - 1)]),
     and([and([q2 + 1 <= steps_Function1D_ExplicitVarSizeWithMarker_Marker[q1] ->
@@ -258,25 +258,25 @@ $                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],

@@ -12,7 +12,8 @@ find c_Explicit_Function1D: matrix indexed by [int(1..numCodeWords), int(1..word
 such that
     and([and([sum([c_Explicit_Function1D[q2, i] = a | i : int(1..wordLength)]) = lam | a : int(1..numChars)]) | q2 : int(1..numCodeWords)]),
     and([!(and([c_Explicit_Function1D[q4, q6] = c_Explicit_Function1D[q3, q6] | q6 : int(1..wordLength)]) /\
-           and([c_Explicit_Function1D[q3, q7] = c_Explicit_Function1D[q4, q7] | q7 : int(1..wordLength)]))
+           and([c_Explicit_Function1D[q3, q7] = c_Explicit_Function1D[q4, q7] | q7 : int(1..wordLength)])
+           /\ (and([or([q8 = q5 | q8 : int(1..wordLength)]) | q5 : int(1..wordLength)]) /\ and([or([q10 = q9 | q10 : int(1..wordLength)]) | q9 : int(1..wordLength)])))
          -> sum([c_Explicit_Function1D[q3, i] != c_Explicit_Function1D[q4, i] | i : int(1..wordLength)]) = dist
              | q3 : int(1..numCodeWords), q4 : int(1..numCodeWords)]),
     and([c_Explicit_Function1D[q1, ..] <lex c_Explicit_Function1D[q1 + 1, ..] | q1 : int(1..numCodeWords - 1)])
@@ -37,8 +38,15 @@ $                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, 
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["numChars",

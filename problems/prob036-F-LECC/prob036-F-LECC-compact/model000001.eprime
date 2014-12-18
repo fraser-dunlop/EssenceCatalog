@@ -12,7 +12,10 @@ given minDist: int(0..maxDist * codeWordLength)
 find c_Explicit_Function1D: matrix indexed by [int(1..numOfCodeWords), int(1..codeWordLength)] of int(1..Character_EnumSize)
 such that
     and([!(and([c_Explicit_Function1D[q3, q5] = c_Explicit_Function1D[q2, q5] | q5 : int(1..codeWordLength)]) /\
-           and([c_Explicit_Function1D[q2, q6] = c_Explicit_Function1D[q3, q6] | q6 : int(1..codeWordLength)]))
+           and([c_Explicit_Function1D[q2, q6] = c_Explicit_Function1D[q3, q6] | q6 : int(1..codeWordLength)])
+           /\
+           (and([or([q7 = q4 | q7 : int(1..codeWordLength)]) | q4 : int(1..codeWordLength)]) /\
+            and([or([q9 = q8 | q9 : int(1..codeWordLength)]) | q8 : int(1..codeWordLength)])))
          ->
          sum([{dist_FunctionNDPartial_Values[c_Explicit_Function1D[q2, i], c_Explicit_Function1D[q3, i]] @ such that
                                                                                                                dist_FunctionNDPartial_Flags[c_Explicit_Function1D[q2, i], c_Explicit_Function1D[q3, i]]}
@@ -61,8 +64,17 @@ $                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["codeWordLength",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
