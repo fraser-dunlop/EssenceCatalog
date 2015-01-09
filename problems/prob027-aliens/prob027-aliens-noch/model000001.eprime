@@ -2,8 +2,6 @@ language ESSENCE' 1.0
 
 given grid: int(1..)
 given colours: int(1..)
-letting dGrid be domain int(1..grid)
-letting dColours be domain int(0..colours - 1)
 find clickMatrix: matrix indexed by [int(1..grid), int(1..grid)] of int(0..colours - 1)
 maximising sum([clickMatrix[i, j] | i : int(1..grid), j : int(1..grid)])
 such that

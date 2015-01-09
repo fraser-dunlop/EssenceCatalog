@@ -3,8 +3,6 @@ language ESSENCE' 1.0
 given n: int(1..20)
 given colours: int(1..10)
 letting num_edges be n * (n - 1) / 2
-letting Colour be domain int(1..colours)
-letting Vertex be domain int(1..n)
 find graph_RelationAsMatrix: matrix indexed by [int(1..colours), int(1..n), int(1..n)] of bool
 such that
     and([sum([graph_RelationAsMatrix[q4_1, q4_2, q4_3] * 1 | q4_1 : int(1..colours), q4_2 : int(1..n), q4_3 : int(1..n), q4_2 = i]) +

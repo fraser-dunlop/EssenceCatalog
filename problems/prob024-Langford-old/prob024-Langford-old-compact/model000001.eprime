@@ -2,8 +2,6 @@ language ESSENCE' 1.0
 
 given k: int(1..5)
 given n: int(1..30)
-letting Index be domain int(1..n * k)
-letting Num be domain int(1..n)
 find seq_Function1D: matrix indexed by [int(1..n * k)] of int(1..n)
 such that
     and([or([and([or([f_Function1D[q3] = i | q3 : int(1..k)]) = or([seq_Function1D[q4] = m /\ q4 = i | q4 : int(1..n * k)]) | i : int(1..n * k)]) /\

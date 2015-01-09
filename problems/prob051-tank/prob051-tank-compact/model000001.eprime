@@ -2,9 +2,6 @@ language ESSENCE' 1.0
 
 given numCargos: int(2..)
 given numTanks: int(1..)
-letting dCargos be domain int(1..numCargos)
-letting dAllCargos be domain int(0..numCargos)
-letting dTanks be domain int(1..numTanks)
 given capacities: matrix indexed by [int(1..numTanks)] of int(1..)
 given neighbours_Occurrence: matrix indexed by [int(1..numTanks), int(1..numTanks)] of bool
 given impossibleCargos_Occurrence: matrix indexed by [int(1..numTanks), int(0..numCargos)] of bool
@@ -16,8 +13,9 @@ maximising sum([allocation[tank] = 0 | tank : int(1..numTanks)])
 such that
     and([sum([capacities[tank] * (allocation[tank] = cargo) | tank : int(1..numTanks)]) >= volumeToShip[cargo] | cargo : int(1..numCargos)]),
     and([!impossibleCargos_Occurrence[tank, allocation[tank]] /\
-         and([!or([and([or([allocation[tank] = q1, allocation[neighbour] = q1; int(1..2)]) | q1 : int(1..numCargos), incompatibilities_Explicit_Occurrence[q2, q1]]) /\
-                   and([incompatibilities_Explicit_Occurrence[q2, allocation[tank]], incompatibilities_Explicit_Occurrence[q2, allocation[neighbour]]; int(1..2)])
+         and([!or([and([or([[allocation[tank], allocation[neighbour]; int(1..2)][q3] = q1 | q3 : int(1..2)])
+                            | q1 : int(1..numCargos), incompatibilities_Explicit_Occurrence[q2, q1]])
+                   /\ and([incompatibilities_Explicit_Occurrence[q2, [allocation[tank], allocation[neighbour]; int(1..2)][q4]] | q4 : int(1..2)])
                        | q2 : int(1..p1)])
                   | neighbour : int(1..numTanks), neighbours_Occurrence[tank, neighbour]])
              | tank : int(1..numTanks)])
@@ -126,8 +124,9 @@ $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]]
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["numCargos",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 2}}}]}],

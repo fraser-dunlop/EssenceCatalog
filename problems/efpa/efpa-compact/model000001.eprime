@@ -4,10 +4,7 @@ given numChars: int(1..)
 given lam: int(1..)
 given numCodeWords: int(1..)
 given dist: int(1..)
-letting Character be domain int(1..numChars)
 letting wordLength be lam * numChars
-letting Index be domain int(1..wordLength)
-letting String be domain function (total) int(1..wordLength) --> int(1..numChars)
 find c_Explicit_Function1D: matrix indexed by [int(1..numCodeWords), int(1..wordLength)] of int(1..numChars)
 such that
     and([and([sum([c_Explicit_Function1D[q2, i] = a | i : int(1..wordLength)]) = lam | a : int(1..numChars)]) | q2 : int(1..numCodeWords)]),

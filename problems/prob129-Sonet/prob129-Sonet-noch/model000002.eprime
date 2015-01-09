@@ -3,7 +3,6 @@ language ESSENCE' 1.0
 given nnodes: int(1..)
 given nrings: int(1..)
 given capacity: int(1..)
-letting Nodes be domain int(1..nnodes)
 given p1: int
 given demand_Explicit_Occurrence: matrix indexed by [int(1..p1), int(1..nnodes)] of bool
 find network_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..nrings)] of int(0..min(nrings, 2 ** (1 + (nnodes - 1))))

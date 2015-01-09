@@ -3,8 +3,6 @@ language ESSENCE' 1.0
 given numNodes: int(1..)
 given maxPower: int(1..)
 given initialNode: int(1..)
-letting dNodes be domain int(1..numNodes)
-letting dPower be domain int(0..maxPower)
 given linkCosts: matrix indexed by [int(1..numNodes), int(1..numNodes)] of int(0..maxPower)
 find nodeBroadcastPower: matrix indexed by [int(1..numNodes)] of int(0..maxPower)
 find directChildrenMatrix_ExplicitVarSizeWithMarker_Marker: matrix indexed by [int(1..numNodes)] of int(0..1 + (numNodes - 1))

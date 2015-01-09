@@ -4,8 +4,6 @@ given v: int(1..)
 given d: int(1..)
 given q: int(1..)
 given lam: int(1..)
-letting dSequnce be domain int(1..q * lam)
-letting dElement be domain int(1..q)
 find E_Explicit: matrix indexed by [int(1..v), int(1..q * lam)] of int(1..q)
 such that
     and([and([sum([E_Explicit[q2, index] = element | index : int(1..q * lam)]) = lam | element : int(1..q)]) | q2 : int(1..v)]),

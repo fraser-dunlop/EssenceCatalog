@@ -3,14 +3,12 @@ language ESSENCE' 1.0
 given n: int(1..20)
 given colours: int(1..10)
 letting num_edges be n * (n - 1)
-letting Colour be domain int(1..colours)
-letting Vertex be domain int(1..n)
 find graph_FunctionNDPartial_Flags: matrix indexed by [int(1..n), int(1..n)] of bool
 find graph_FunctionNDPartial_Values: matrix indexed by [int(1..n), int(1..n)] of int(1..colours)
 such that
-    and([graph_FunctionNDPartial_Flags[q6, q7] -> true | q6 : int(1..n), q7 : int(1..n), q6 = q7 /\ q7 != q6]),
-    and([graph_FunctionNDPartial_Flags[q2, q3] = false -> graph_FunctionNDPartial_Values[q2, q3] = 1 | q2 : int(1..n), q3 : int(1..n)]),
-    num_edges = sum([graph_FunctionNDPartial_Flags[(q4, q5)] | q4 : int(1..n), q5 : int(1..n)])
+    and([graph_FunctionNDPartial_Flags[q2_1, q2_2] -> true | q2_1 : int(1..n), q2_2 : int(1..n), q2_1 = q2_2 /\ q2_2 != q2_1]),
+    and([graph_FunctionNDPartial_Flags[q1_1, q1_2] = false -> graph_FunctionNDPartial_Values[q1_1, q1_2] = 1 | q1_1 : int(1..n), q1_2 : int(1..n)]),
+    num_edges = sum([graph_FunctionNDPartial_Flags[q1_1, q1_2] | q1_1 : int(1..n), q1_2 : int(1..n)])
 
 $ Conjure's
 $ {"finds": ["graph"],
@@ -19,10 +17,12 @@ $  "enumGivens": [],
 $  "enumLettings": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4, 5]],
-$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],

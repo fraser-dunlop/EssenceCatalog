@@ -1,7 +1,5 @@
 language ESSENCE' 1.0
 
-letting Base be domain int(1..4)
-letting Index be domain int(1..8)
 find words_ExplicitVarSizeWithMarker_Marker: int(0..factorial(1 + (4 - 1)) / (factorial(1 + (8 - 1)) * factorial(1 + (4 - 1) - (1 + (8 - 1)))))
 find words_ExplicitVarSizeWithMarker_Values_Function1D:
         matrix indexed by [int(1..factorial(1 + (4 - 1)) / (factorial(1 + (8 - 1)) * factorial(1 + (4 - 1) - (1 + (8 - 1))))), int(1..8)] of int(1..4)

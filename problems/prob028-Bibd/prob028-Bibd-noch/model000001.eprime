@@ -7,8 +7,6 @@ given k: int(1..20)
 given lambda_: int(1..20)
 where v = b
 where r = k
-letting Obj be domain int(1..v)
-letting Block be domain int(1..b)
 find bibd_RelationAsMatrix: matrix indexed by [int(1..v), int(1..b)] of bool
 such that
     and([sum([bibd_RelationAsMatrix[q1_1, q1_2] * 1 | q1_1 : int(1..v), q1_2 : int(1..b), q1_1 = o]) = r | o : int(1..v)]),

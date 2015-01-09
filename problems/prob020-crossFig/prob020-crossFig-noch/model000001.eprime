@@ -1,13 +1,8 @@
 language ESSENCE' 1.0
 
 given nbDom: int(1..)
-letting dom be domain int(1..nbDom)
 given bound: int(1..100)
-letting Postion be domain (int(1..bound), int(1..bound))
 given numClues: int(1..bound ** 2)
-letting Clue be domain int(1..numClues)
-letting Arg be domain int(1..numClues)
-letting Type be domain int(1..2)
 given l_Function1D_1: matrix indexed by [int(1..numClues)] of int(1..2)
 given l_Function1D_2: matrix indexed by [int(1..numClues)] of int(1..numClues)
 given l_Function1D_3: matrix indexed by [int(1..numClues)] of int(1..numClues)

@@ -1,8 +1,6 @@
 language ESSENCE' 1.0
 
 given n: int(1..)
-letting Index be domain int(1..n)
-letting Square be domain (int(1..n), int(1..n))
 find black_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of bool
 find black_ExplicitVarSizeWithFlags_Values_1: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
 find black_ExplicitVarSizeWithFlags_Values_2: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)

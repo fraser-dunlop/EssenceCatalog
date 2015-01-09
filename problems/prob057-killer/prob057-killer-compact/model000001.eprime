@@ -3,10 +3,6 @@ language ESSENCE' 1.0
 given gridSize: int(1..)
 given numHints: int(1..)
 given maxHintCells: int(1..)
-letting dHintGrid be domain int(1..numHints)
-letting dIndivHint be domain int(1..maxHintCells)
-letting dSolutionGrid be domain int(1..gridSize * gridSize)
-letting dHintFormat be domain int(1..2)
 letting hintSumIndex be maxHintCells + 1
 given hintMatrix: matrix indexed by [int(1..numHints), int(1..hintSumIndex), int(1..2)] of int(0..)
 find solutionGrid: matrix indexed by [int(1..gridSize * gridSize), int(1..gridSize * gridSize)] of int(1..gridSize * gridSize)

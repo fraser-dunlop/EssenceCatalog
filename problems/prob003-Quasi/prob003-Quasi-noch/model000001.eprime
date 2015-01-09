@@ -1,7 +1,6 @@
 language ESSENCE' 1.0
 
 given n: int(1..100)
-letting dom be domain int(0..n - 1)
 find quasigroup: matrix indexed by [int(0..n - 1), int(0..n - 1)] of int(0..n - 1)
 such that
     and([allDiff(quasigroup[.., col]) | col : int(0..n - 1)]),

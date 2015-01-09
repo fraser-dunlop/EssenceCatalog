@@ -7,8 +7,6 @@ given n_courses: int(1..)
 given maxc: int(1..)
 given minc: int(1..)
 given n_credits: int(1..)
-letting Course be domain int(1..n_courses)
-letting Period be domain int(1..n_periods)
 given prereq_RelationAsMatrix: matrix indexed by [int(1..n_courses), int(1..n_courses)] of bool
 given credits_Function1D: matrix indexed by [int(1..n_courses)] of int(1..n_credits)
 find curr_Function1D: matrix indexed by [int(1..n_courses)] of int(1..n_periods)

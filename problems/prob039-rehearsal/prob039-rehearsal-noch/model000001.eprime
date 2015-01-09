@@ -2,9 +2,6 @@ language ESSENCE' 1.0
 
 given n_pieces: int(1..)
 given n_players: int(1..)
-letting Piece be domain int(1..n_pieces)
-letting Index be domain int(1..n_pieces)
-letting Player be domain int(1..n_players)
 given duration_Function1D: matrix indexed by [int(1..n_pieces)] of int(1..)
 given plays_in_RelationAsMatrix: matrix indexed by [int(1..n_players), int(1..n_pieces)] of bool
 find order_Function1D: matrix indexed by [int(1..n_pieces)] of int(1..n_pieces)

@@ -1,8 +1,6 @@
 language ESSENCE' 1.0
 
 given n: int(1..)
-letting Num be domain int(0..n - 1)
-letting Interval be domain int(1..n - 1)
 find s_Function1D: matrix indexed by [int(1..n)] of int(0..n - 1)
 find v_Function1D: matrix indexed by [int(1..n - 1)] of int(1..n - 1)
 such that

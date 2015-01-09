@@ -2,7 +2,6 @@ language ESSENCE' 1.0
 
 given n: int(1..)
 where n % 2 = 0
-letting dNum be domain int(1..n)
 find setA_Explicit: matrix indexed by [int(1..n / 2)] of int(1..n)
 find setB_Explicit: matrix indexed by [int(1..n / 2)] of int(1..n)
 such that

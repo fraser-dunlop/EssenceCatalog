@@ -1,7 +1,6 @@
 language ESSENCE' 1.0
 
 given indexSize: int
-letting Index be domain int(1..indexSize)
 find m: matrix indexed by [int(1..indexSize), int(1..indexSize)] of bool
 such that
     and([sum([!m[r, c] | c : int(1..indexSize)]) = 11 | r : int(1..indexSize)]),
