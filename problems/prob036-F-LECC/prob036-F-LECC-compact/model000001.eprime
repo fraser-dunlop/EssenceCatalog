@@ -6,21 +6,22 @@ given codeWordLength: int(1..)
 given numOfCodeWords: int(1..)
 given dist_FunctionNDPartial_Flags: matrix indexed by [int(1..Character_EnumSize), int(1..Character_EnumSize)] of bool
 given dist_FunctionNDPartial_Values: matrix indexed by [int(1..Character_EnumSize), int(1..Character_EnumSize)] of int(0..maxDist)
-given minDist: int(0..maxDist * codeWordLength)
+letting q1 be maxDist * codeWordLength
+given minDist: int(0..q1)
 find c_Explicit_Function1D: matrix indexed by [int(1..numOfCodeWords), int(1..codeWordLength)] of int(1..Character_EnumSize)
 such that
-    and([!(and([c_Explicit_Function1D[q3, q5] = c_Explicit_Function1D[q2, q5] | q5 : int(1..codeWordLength)]) /\
-           and([c_Explicit_Function1D[q2, q6] = c_Explicit_Function1D[q3, q6] | q6 : int(1..codeWordLength)])
+    and([!(and([c_Explicit_Function1D[q4, q6] = c_Explicit_Function1D[q3, q6] | q6 : int(1..codeWordLength)]) /\
+           and([c_Explicit_Function1D[q3, q7] = c_Explicit_Function1D[q4, q7] | q7 : int(1..codeWordLength)])
            /\
-           (and([or([q7 = q4 | q7 : int(1..codeWordLength)]) | q4 : int(1..codeWordLength)]) /\
-            and([or([q9 = q8 | q9 : int(1..codeWordLength)]) | q8 : int(1..codeWordLength)])))
+           (and([or([q8 = q5 | q8 : int(1..codeWordLength)]) | q5 : int(1..codeWordLength)]) /\
+            and([or([q10 = q9 | q10 : int(1..codeWordLength)]) | q9 : int(1..codeWordLength)])))
          ->
-         sum([{dist_FunctionNDPartial_Values[c_Explicit_Function1D[q2, i], c_Explicit_Function1D[q3, i]] @ such that
-                                                                                                               dist_FunctionNDPartial_Flags[c_Explicit_Function1D[q2, i], c_Explicit_Function1D[q3, i]]}
+         sum([{dist_FunctionNDPartial_Values[c_Explicit_Function1D[q3, i], c_Explicit_Function1D[q4, i]] @ such that
+                                                                                                               dist_FunctionNDPartial_Flags[c_Explicit_Function1D[q3, i], c_Explicit_Function1D[q4, i]]}
                   | i : int(1..codeWordLength)])
          >= minDist
-             | q2 : int(1..numOfCodeWords), q3 : int(1..numOfCodeWords)]),
-    and([c_Explicit_Function1D[q1, ..] <lex c_Explicit_Function1D[q1 + 1, ..] | q1 : int(1..numOfCodeWords - 1)])
+             | q3 : int(1..numOfCodeWords), q4 : int(1..numOfCodeWords)]),
+    and([c_Explicit_Function1D[q2, ..] <lex c_Explicit_Function1D[q2 + 1, ..] | q2 : int(1..numOfCodeWords - 1)])
 
 $ Conjure's
 $ {"finds": ["c"],
@@ -45,18 +46,16 @@ $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
@@ -103,14 +102,15 @@ $                                                                               
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      ["minDist",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                        {"Op": {"MkOpTimes": [{"Reference": ["maxDist",
-$                                                                                             {"DeclHasRepr": ["Given",
-$                                                                                                              "maxDist",
-$                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                              {"Reference": ["codeWordLength",
-$                                                                                             {"DeclHasRepr": ["Given",
-$                                                                                                              "codeWordLength",
-$                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}}]}]}],
+$                                                        {"Reference": ["q1",
+$                                                                       {"Alias": {"Op": {"MkOpTimes": [{"Reference": ["maxDist",
+$                                                                                                                      {"DeclNoRepr": ["Given",
+$                                                                                                                                      "maxDist",
+$                                                                                                                                      {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                       {"Reference": ["codeWordLength",
+$                                                                                                                      {"DeclNoRepr": ["Given",
+$                                                                                                                                      "codeWordLength",
+$                                                                                                                                      {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}}}]}]}]}],
 $                      ["c",
 $                       {"DomainSet": [{"HasRepresentation": "Explicit"},
 $                                      {"SizeAttr_Size": {"Reference": ["numOfCodeWords",
@@ -150,9 +150,7 @@ $                                           {"DomainInt": [{"RangeBounded": [{"C
 $                                                                            {"Reference": ["maxDist", null]}]}]}]}],
 $                      ["minDist",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                        {"Op": {"MkOpTimes": [{"Reference": ["maxDist", null]},
-$                                                                              {"Reference": ["codeWordLength",
-$                                                                                             null]}]}}]}]}],
+$                                                        {"Reference": ["q1", null]}]}]}],
 $                      ["c",
 $                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["numOfCodeWords", null]}},
 $                                      {"DomainReference": ["String", null]}]}]]}

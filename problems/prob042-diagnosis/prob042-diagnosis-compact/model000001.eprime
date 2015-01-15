@@ -7,24 +7,25 @@ given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithM
         matrix indexed by [int(1..numGates), int(1..2 ** (1 + (2 - 1)) * 2), int(1..2)] of bool
 given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2:
         matrix indexed by [int(1..numGates), int(1..2 ** (1 + (2 - 1)) * 2)] of bool
-given gateInpts_Function1D: matrix indexed by [int(1..numGates), int(1..2)] of int(-1..numGates)
+letting q1 be -1
+given gateInpts_Function1D: matrix indexed by [int(1..numGates), int(1..2)] of int(q1..numGates)
 given finalOutputs_Function1DPartial_Flags: matrix indexed by [int(1..numGates)] of bool
 given finalOutputs_Function1DPartial_Values: matrix indexed by [int(1..numGates)] of bool
 find faultyGates_Function1DPartial_Flags: matrix indexed by [int(1..numGates)] of bool
 find faultyGates_Function1DPartial_Values: matrix indexed by [int(1..numGates)] of bool
-minimising sum([faultyGates_Function1DPartial_Flags[q5] * 1 | q5 : int(1..numGates)])
+minimising sum([faultyGates_Function1DPartial_Flags[q6] * 1 | q6 : int(1..numGates)])
 such that
     or([gateOutput_Function1D[-1] = false /\ gateOutput_Function1D[0] = true /\
-        and([or([and([gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[gate, q3, q2] =
-                      [gateOutput_Function1D[gateInpts_Function1D[gate, 1]], gateOutput_Function1D[gateInpts_Function1D[gate, 2]]; int(1..2)][q2]
-                          | q2 : int(1..2)])
-                 /\ gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[gate, q3] = gateOutput_Function1D[gate]
-                     | q3 : int(1..2 ** (1 + (2 - 1)) * 2), q3 <= gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker[gate]])
+        and([or([and([gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[gate, q4, q3] =
+                      [gateOutput_Function1D[gateInpts_Function1D[gate, 1]], gateOutput_Function1D[gateInpts_Function1D[gate, 2]]; int(1..2)][q3]
+                          | q3 : int(1..2)])
+                 /\ gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[gate, q4] = gateOutput_Function1D[gate]
+                     | q4 : int(1..2 ** (1 + (2 - 1)) * 2), q4 <= gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker[gate]])
              \/ gateOutput_Function1D[gate] = (faultyGates_Function1DPartial_Values[gate] /\ faultyGates_Function1DPartial_Flags[gate])
                  | gate : int(1..numGates)])
-        /\ and([gateOutput_Function1D[q6] = finalOutputs_Function1DPartial_Values[q6] | q6 : int(1..numGates), finalOutputs_Function1DPartial_Flags[q6]])
+        /\ and([gateOutput_Function1D[q7] = finalOutputs_Function1DPartial_Values[q7] | q7 : int(1..numGates), finalOutputs_Function1DPartial_Flags[q7]])
             | gateOutput_Function1D : matrix indexed by [int(-1..numGates)] of bool]),
-    and([faultyGates_Function1DPartial_Flags[q1] = false -> faultyGates_Function1DPartial_Values[q1] = false | q1 : int(1..numGates)])
+    and([faultyGates_Function1DPartial_Flags[q2] = false -> faultyGates_Function1DPartial_Values[q2] = false | q2 : int(1..numGates)])
 
 $ Conjure's
 $ {"finds": ["faultyGates"],
@@ -133,7 +134,8 @@ $                                                                               
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
 $                                           {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                              {"Constant": {"ConstantInt": 2}}]}]},
-$                                                             {"DomainInt": [{"RangeBounded": [{"Op": {"MkOpNegate": {"Constant": {"ConstantInt": 1}}}},
+$                                                             {"DomainInt": [{"RangeBounded": [{"Reference": ["q1",
+$                                                                                                             {"Alias": {"Op": {"MkOpNegate": {"Constant": {"ConstantInt": 1}}}}}]},
 $                                                                                              {"Reference": ["numGates",
 $                                                                                                             {"DeclHasRepr": ["Given",
 $                                                                                                                              "numGates",
@@ -166,7 +168,8 @@ $                                           [{"SizeAttr_None": []}, "PartialityA
 $                                           {"DomainReference": ["dGates", null]},
 $                                           {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                              {"Constant": {"ConstantInt": 2}}]}]},
-$                                                             {"DomainInt": [{"RangeBounded": [{"Op": {"MkOpNegate": {"Constant": {"ConstantInt": 1}}}},
+$                                                             {"DomainInt": [{"RangeBounded": [{"Reference": ["q1",
+$                                                                                                             null]},
 $                                                                                              {"Reference": ["numGates",
 $                                                                                                             null]}]}]}]}]}],
 $                      ["finalOutputs",

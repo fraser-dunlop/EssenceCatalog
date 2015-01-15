@@ -5,39 +5,38 @@ letting totalWater be 8
 letting start be function(1 --> 8, 2 --> 0, 3 --> 0)
 letting capacity be function(1 --> 8, 2 --> 5, 3 --> 3)
 letting goal be function(1 --> 4, 2 --> 4, 3 --> 0)
-find plan_Function1DPartial_Flags: matrix indexed by [int(1..(totalWater + 1) ** nBuckets)] of bool
-find plan_Function1DPartial_Values_Function1D: matrix indexed by [int(1..(totalWater + 1) ** nBuckets), int(1..nBuckets)] of int(0..totalWater)
-find plan_len: int(1..(totalWater + 1) ** nBuckets)
+letting q1 be (totalWater + 1) ** nBuckets
+find plan_Function1DPartial_Flags: matrix indexed by [int(1..q1)] of bool
+find plan_Function1DPartial_Values_Function1D: matrix indexed by [int(1..q1), int(1..nBuckets)] of int(0..totalWater)
+letting q2 be (totalWater + 1) ** nBuckets
+find plan_len: int(1..q2)
 minimising plan_len
 such that
-    plan_len = sum([plan_Function1DPartial_Flags[q3] * 1 | q3 : int(1..(totalWater + 1) ** nBuckets)]),
+    plan_len = sum([plan_Function1DPartial_Flags[q5] * 1 | q5 : int(1..q1)]),
     and([i <= plan_len -> plan_Function1DPartial_Flags[i] | i : int(1..(totalWater + 1) ** nBuckets)]),
-    and([plan_Function1DPartial_Flags[q4] -> sum([plan_Function1DPartial_Values_Function1D[q4, b] | b : int(1..nBuckets)]) = totalWater
-             | q4 : int(1..(totalWater + 1) ** nBuckets)]),
-    and([plan_Function1DPartial_Flags[q5] -> and([plan_Function1DPartial_Values_Function1D[q5, b] <= image(capacity, b) | b : int(1..nBuckets)])
-             | q5 : int(1..(totalWater + 1) ** nBuckets)]),
-    and([plan_Function1DPartial_Flags[1] -> image(start, q24) = plan_Function1DPartial_Values_Function1D[1, q24] | q24 : int(1..nBuckets)]),
-    and([plan_Function1DPartial_Values_Function1D[1, q2[1]] = q2[2] /\ plan_Function1DPartial_Flags[1] | q2 <- start]),
-    and([plan_Function1DPartial_Flags[1] -> or([q8[1] = q25 | q8 <- start]) | q25 : int(1..nBuckets)]),
-    and([or([plan_Function1DPartial_Flags[1] /\ q7 = q9[1] | q7 : int(1..nBuckets)]) | q9 <- start]),
-    and([plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q13] * 1 | q13 : int(1..(totalWater + 1) ** nBuckets)])] ->
-         image(goal, q10) = plan_Function1DPartial_Values_Function1D[sum([plan_Function1DPartial_Flags[q12] * 1 | q12 : int(1..(totalWater + 1) ** nBuckets)]), q10]
-             | q10 : int(1..nBuckets)]),
-    and([plan_Function1DPartial_Values_Function1D[sum([plan_Function1DPartial_Flags[q14] * 1 | q14 : int(1..(totalWater + 1) ** nBuckets)]), q6[1]] = q6[2] /\
-         plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q15] * 1 | q15 : int(1..(totalWater + 1) ** nBuckets)])]
-             | q6 <- goal]),
-    and([plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q19] * 1 | q19 : int(1..(totalWater + 1) ** nBuckets)])] -> or([q17[1] = q26 | q17 <- goal])
-             | q26 : int(1..nBuckets)]),
-    and([or([plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q23] * 1 | q23 : int(1..(totalWater + 1) ** nBuckets)])] /\ q16 = q20[1]
-                 | q16 : int(1..nBuckets)])
-             | q20 <- goal]),
+    and([plan_Function1DPartial_Flags[q6] -> sum([plan_Function1DPartial_Values_Function1D[q6, b] | b : int(1..nBuckets)]) = totalWater | q6 : int(1..q1)]),
+    and([plan_Function1DPartial_Flags[q7] -> and([plan_Function1DPartial_Values_Function1D[q7, b] <= image(capacity, b) | b : int(1..nBuckets)])
+             | q7 : int(1..q1)]),
+    and([plan_Function1DPartial_Flags[1] -> image(start, q26) = plan_Function1DPartial_Values_Function1D[1, q26] | q26 : int(1..nBuckets)]),
+    and([plan_Function1DPartial_Values_Function1D[1, q4[1]] = q4[2] /\ plan_Function1DPartial_Flags[1] | q4 <- start]),
+    and([plan_Function1DPartial_Flags[1] -> or([q10[1] = q27 | q10 <- start]) | q27 : int(1..nBuckets)]),
+    and([or([plan_Function1DPartial_Flags[1] /\ q9 = q11[1] | q9 : int(1..nBuckets)]) | q11 <- start]),
+    and([plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q15] * 1 | q15 : int(1..q1)])] ->
+         image(goal, q12) = plan_Function1DPartial_Values_Function1D[sum([plan_Function1DPartial_Flags[q14] * 1 | q14 : int(1..q1)]), q12]
+             | q12 : int(1..nBuckets)]),
+    and([plan_Function1DPartial_Values_Function1D[sum([plan_Function1DPartial_Flags[q16] * 1 | q16 : int(1..q1)]), q8[1]] = q8[2] /\
+         plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q17] * 1 | q17 : int(1..q1)])]
+             | q8 <- goal]),
+    and([plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q21] * 1 | q21 : int(1..q1)])] -> or([q19[1] = q28 | q19 <- goal])
+             | q28 : int(1..nBuckets)]),
+    and([or([plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q25] * 1 | q25 : int(1..q1)])] /\ q18 = q22[1] | q18 : int(1..nBuckets)])
+             | q22 <- goal]),
     and([i <= plan_len ->
          sum([plan_Function1DPartial_Flags[i] *
-              ({plan_Function1DPartial_Values_Function1D[i + 1, (q18, plan_Function1DPartial_Values_Function1D[i, q18])] @ such that plan_Function1DPartial_Flags[i + 1]} * 1)
-                  | q18 : int(1..nBuckets)])
+              ({plan_Function1DPartial_Values_Function1D[i + 1, (q20, plan_Function1DPartial_Values_Function1D[i, q20])] @ such that plan_Function1DPartial_Flags[i + 1]} * 1)
+                  | q20 : int(1..nBuckets)])
          = 1 | i : int(1..(totalWater + 1) ** nBuckets)]),
-    and([plan_Function1DPartial_Flags[q1] = false -> and([plan_Function1DPartial_Values_Function1D[q1, q11] = 0 | q11 : int(1..nBuckets)])
-             | q1 : int(1..(totalWater + 1) ** nBuckets)])
+    and([plan_Function1DPartial_Flags[q3] = false -> and([plan_Function1DPartial_Values_Function1D[q3, q13] = 0 | q13 : int(1..nBuckets)]) | q3 : int(1..q1)])
 
 $ Conjure's
 $ {"finds": ["plan", "plan_len"],
@@ -209,20 +208,22 @@ $                   [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["plan_len",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                        {"Op": {"MkOpPow": [{"Op": {"MkOpPlus": [{"Reference": ["totalWater",
-$                                                                                                                {"Alias": {"Constant": {"ConstantInt": 8}}}]},
-$                                                                                                 {"Constant": {"ConstantInt": 1}}]}},
-$                                                                            {"Reference": ["nBuckets",
-$                                                                                           {"Alias": {"Constant": {"ConstantInt": 3}}}]}]}}]}]}],
+$                                                        {"Reference": ["q2",
+$                                                                       {"Alias": {"Op": {"MkOpPow": [{"Op": {"MkOpPlus": [{"Reference": ["totalWater",
+$                                                                                                                                         {"Alias": {"Constant": {"ConstantInt": 8}}}]},
+$                                                                                                                          {"Constant": {"ConstantInt": 1}}]}},
+$                                                                                                     {"Reference": ["nBuckets",
+$                                                                                                                    {"Alias": {"Constant": {"ConstantInt": 3}}}]}]}}}]}]}]}],
 $                      ["plan",
 $                       {"DomainFunction": [{"HasRepresentation": "Function1DPartial"},
 $                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                            {"Op": {"MkOpPow": [{"Op": {"MkOpPlus": [{"Reference": ["totalWater",
-$                                                                                                                                    {"Alias": {"Constant": {"ConstantInt": 8}}}]},
-$                                                                                                                     {"Constant": {"ConstantInt": 1}}]}},
-$                                                                                                {"Reference": ["nBuckets",
-$                                                                                                               {"Alias": {"Constant": {"ConstantInt": 3}}}]}]}}]}]},
+$                                                                            {"Reference": ["q1",
+$                                                                                           {"Alias": {"Op": {"MkOpPow": [{"Op": {"MkOpPlus": [{"Reference": ["totalWater",
+$                                                                                                                                                             {"Alias": {"Constant": {"ConstantInt": 8}}}]},
+$                                                                                                                                              {"Constant": {"ConstantInt": 1}}]}},
+$                                                                                                                         {"Reference": ["nBuckets",
+$                                                                                                                                        {"Alias": {"Constant": {"ConstantInt": 3}}}]}]}}}]}]}]},
 $                                           {"DomainFunction": [{"HasRepresentation": "Function1D"},
 $                                                               [{"SizeAttr_None": []}, "PartialityAttr_Total",
 $                                                                "JectivityAttr_None"],
@@ -236,15 +237,8 @@ $  "originalDomains": [["plan",
 $                       {"DomainFunction": [[],
 $                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                            {"Op": {"MkOpPow": [{"Op": {"MkOpPlus": [{"Reference": ["totalWater",
-$                                                                                                                                    null]},
-$                                                                                                                     {"Constant": {"ConstantInt": 1}}]}},
-$                                                                                                {"Reference": ["nBuckets",
-$                                                                                                               null]}]}}]}]},
+$                                                                            {"Reference": ["q1", null]}]}]},
 $                                           {"DomainReference": ["State", null]}]}],
 $                      ["plan_len",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                        {"Op": {"MkOpPow": [{"Op": {"MkOpPlus": [{"Reference": ["totalWater",
-$                                                                                                                null]},
-$                                                                                                 {"Constant": {"ConstantInt": 1}}]}},
-$                                                                            {"Reference": ["nBuckets", null]}]}}]}]}]]}
+$                                                        {"Reference": ["q2", null]}]}]}]]}
