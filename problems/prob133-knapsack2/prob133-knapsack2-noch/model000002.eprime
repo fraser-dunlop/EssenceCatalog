@@ -9,14 +9,12 @@ given values_Function1DPartial_Values: matrix indexed by [int(1..n)] of int(1..1
 find picked_ExplicitVarSizeWithMarker_Marker: int(0..n)
 find picked_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..n)] of int(1..n)
 maximising
-    sum([(q2 <= picked_ExplicitVarSizeWithMarker_Marker) *
-         {values_Function1DPartial_Values[picked_ExplicitVarSizeWithMarker_Values[q2]] @ such that
-                                                                                             values_Function1DPartial_Flags[picked_ExplicitVarSizeWithMarker_Values[q2]]}
+    sum([{(q2 <= picked_ExplicitVarSizeWithMarker_Marker) * values_Function1DPartial_Values[picked_ExplicitVarSizeWithMarker_Values[q2]] @ such that
+                                                                                                                                               values_Function1DPartial_Flags[picked_ExplicitVarSizeWithMarker_Values[q2]]}
              | q2 : int(1..n)])
 such that
-    sum([(q3 <= picked_ExplicitVarSizeWithMarker_Marker) *
-         {weights_Function1DPartial_Values[picked_ExplicitVarSizeWithMarker_Values[q3]] @ such that
-                                                                                              weights_Function1DPartial_Flags[picked_ExplicitVarSizeWithMarker_Values[q3]]}
+    sum([{(q3 <= picked_ExplicitVarSizeWithMarker_Marker) * weights_Function1DPartial_Values[picked_ExplicitVarSizeWithMarker_Values[q3]] @ such that
+                                                                                                                                                weights_Function1DPartial_Flags[picked_ExplicitVarSizeWithMarker_Values[q3]]}
              | q3 : int(1..n)])
     <= totalWeight,
     and([q1 + 1 <= picked_ExplicitVarSizeWithMarker_Marker -> picked_ExplicitVarSizeWithMarker_Values[q1] < picked_ExplicitVarSizeWithMarker_Values[q1 + 1]

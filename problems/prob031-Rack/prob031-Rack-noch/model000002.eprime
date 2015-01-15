@@ -12,50 +12,33 @@ given ctype_Function1D: matrix indexed by [int(1..n_cards)] of int(1..n_types)
 find model_Function1DPartial_Flags: matrix indexed by [int(1..n_racks)] of bool
 find model_Function1DPartial_Values: matrix indexed by [int(1..n_racks)] of int(1..n_models)
 find plugged_Function1DPartial_Flags: matrix indexed by [int(1..n_racks)] of bool
-find plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker: matrix indexed by [int(1..n_racks)] of int(0..1 + (n_cards - 1))
-find plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..n_racks), int(1..1 + (n_cards - 1))] of int(1..n_cards)
+find plugged_Function1DPartial_Values_Occurrence: matrix indexed by [int(1..n_racks), int(1..n_cards)] of bool
 minimising
-    sum([model_Function1DPartial_Flags[q5] * {price_Function1D[model_Function1DPartial_Values[q5]] @ such that model_Function1DPartial_Flags[q5]}
-             | q5 : int(1..n_racks)])
+    sum([{model_Function1DPartial_Flags[q4] * price_Function1D[model_Function1DPartial_Values[q4]] @ such that model_Function1DPartial_Flags[q4]}
+             | q4 : int(1..n_racks)])
 such that
-    and([or([model_Function1DPartial_Flags[q6] /\
-             or([q14 <= plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q6] /\ plugged_Function1DPartial_Flags[q6] /\
-                 plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q6, q14] = c
-                     | q14 : int(1..1 + (n_cards - 1))])
-                 | q6 : int(1..n_racks)])
+    and([or([model_Function1DPartial_Flags[q5] /\
+             or([plugged_Function1DPartial_Values_Occurrence[q5, q3] /\ plugged_Function1DPartial_Flags[q5] /\ q3 = c | q3 : int(1..n_cards)])
+                 | q5 : int(1..n_racks)])
              | c : int(1..n_cards)]),
-    and([model_Function1DPartial_Flags[q8] /\ model_Function1DPartial_Flags[q9] ->
-         sum([(q4 <= plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q8] /\ plugged_Function1DPartial_Flags[q8]) *
-              (or([q7 <= plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q9] /\ plugged_Function1DPartial_Flags[q9] /\
-                   plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q9, q7] = plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q8, q4]
-                       | q7 : int(1..1 + (n_cards - 1))])
-               * 1)
-                  | q4 : int(1..1 + (n_cards - 1))])
-         = 0 | q8 : int(1..n_racks), q9 : int(1..n_racks), q8 != q9]),
+    and([model_Function1DPartial_Flags[q7] /\ model_Function1DPartial_Flags[q8] ->
+         sum([(plugged_Function1DPartial_Values_Occurrence[q7, q6] /\ plugged_Function1DPartial_Flags[q7]) *
+              (or([plugged_Function1DPartial_Values_Occurrence[q8, q9] /\ plugged_Function1DPartial_Flags[q8] /\ q9 = q6 | q9 : int(1..n_cards)]) * 1)
+                  | q6 : int(1..n_cards)])
+         = 0 | q7 : int(1..n_racks), q8 : int(1..n_racks), q7 != q8]),
+    and([model_Function1DPartial_Flags[q11] ->
+         sum([(plugged_Function1DPartial_Values_Occurrence[q11, c] /\ plugged_Function1DPartial_Flags[q11]) * req_power_Function1D[ctype_Function1D[c]]
+                  | c : int(1..n_cards)])
+         <= max_power_Function1D[model_Function1DPartial_Values[q11]]
+         /\ model_Function1DPartial_Flags[q11]
+             | q11 : int(1..n_racks)]),
     and([model_Function1DPartial_Flags[q12] ->
-         sum([(q10 <= plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q12] /\ plugged_Function1DPartial_Flags[q12]) *
-              req_power_Function1D[ctype_Function1D[plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q12, q10]]]
-                  | q10 : int(1..1 + (n_cards - 1))])
-         <= {max_power_Function1D[model_Function1DPartial_Values[q12]] @ such that model_Function1DPartial_Flags[q12]}
+         sum([(plugged_Function1DPartial_Values_Occurrence[q12, q10] /\ plugged_Function1DPartial_Flags[q12]) * 1 | q10 : int(1..n_cards)]) <=
+         max_connects_Function1D[model_Function1DPartial_Values[q12]]
+         /\ model_Function1DPartial_Flags[q12]
              | q12 : int(1..n_racks)]),
-    and([model_Function1DPartial_Flags[q13] ->
-         sum([(q15 <= plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q13] /\ plugged_Function1DPartial_Flags[q13]) * 1
-                  | q15 : int(1..1 + (n_cards - 1))])
-         <= {max_connects_Function1D[model_Function1DPartial_Values[q13]] @ such that model_Function1DPartial_Flags[q13]}
-             | q13 : int(1..n_racks)]),
     and([model_Function1DPartial_Flags[q1] = false -> model_Function1DPartial_Values[q1] = 1 | q1 : int(1..n_racks)]),
-    and([plugged_Function1DPartial_Flags[q2] = false ->
-         plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q2] = 0 /\
-         and([plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q2, q11] = 1 | q11 : int(1..1 + (n_cards - 1))])
-             | q2 : int(1..n_racks)]),
-    and([plugged_Function1DPartial_Flags[q2] ->
-         and([q3 + 1 <= plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q2] ->
-              plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q2, q3] < plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q2, q3 + 1]
-                  | q3 : int(1..1 + (n_cards - 1) - 1)])
-             | q2 : int(1..n_racks)]),
-    and([plugged_Function1DPartial_Flags[q2] ->
-         and([q3 > plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q2] -> plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q2, q3] = 1
-                  | q3 : int(1..1 + (n_cards - 1))])
+    and([plugged_Function1DPartial_Flags[q2] = false -> and([plugged_Function1DPartial_Values_Occurrence[q2, q13] = false | q13 : int(1..n_cards)])
              | q2 : int(1..n_racks)])
 
 $ Conjure's
@@ -89,31 +72,11 @@ $                   [1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 $                     22]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [2, [1, 2, 3]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24, 25, 26]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24, 25]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-$                     22]],
-$                   [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1, 2, 3]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
@@ -138,35 +101,42 @@ $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
 $                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23]],
+$                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+$                     22]],
+$                   [1, [1, 2]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+$                     22]],
+$                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]],
 $                   [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]],
-$                   [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1, 2]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [2, [1, 2]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n_models",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
@@ -215,8 +185,7 @@ $                                                                               
 $                                                                                                            "n_racks",
 $                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                                                                             {"Constant": {"ConstantInt": 5000}}]}]}]}]}]}]},
-$                                           {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                                          {"SizeAttr_None": []},
+$                                           {"DomainSet": [{"HasRepresentation": "Occurrence"}, {"SizeAttr_None": []},
 $                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                           {"Reference": ["n_cards",
 $                                                                                                          {"DeclHasRepr": ["Given",

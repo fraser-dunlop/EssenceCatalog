@@ -3,7 +3,6 @@ language ESSENCE' 1.0
 given nbDom: int(1..)
 given bound: int(1..100)
 given numClues: int(1..bound ** 2)
-given numClues: int(1..bound ** 2)
 given l_Function1D_1: matrix indexed by [int(1..numClues)] of int(1..2)
 given l_Function1D_2: matrix indexed by [int(1..numClues)] of int(1..numClues)
 given l_Function1D_3: matrix indexed by [int(1..numClues)] of int(1..numClues)

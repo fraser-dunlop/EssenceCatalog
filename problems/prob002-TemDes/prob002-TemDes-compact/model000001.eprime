@@ -10,7 +10,7 @@ letting q1 be max([demand_Function1DPartial_Values[q2] | q2 : int(1..n_variation
 find printings_Function1D: matrix indexed by [int(1..n_templates)] of int(0..q1)
 minimising sum([printings_Function1D[t] | t : int(1..n_templates)])
 such that
-    and([sum([design_FunctionND[t, v] | t : int(1..n_templates)]) >= {demand_Function1DPartial_Values[v] @ such that demand_Function1DPartial_Flags[v]}
+    and([sum([design_FunctionND[t, v] | t : int(1..n_templates)]) >= demand_Function1DPartial_Values[v] /\ demand_Function1DPartial_Flags[v]
              | v : int(1..n_variations)])
 
 $ Conjure's
@@ -49,8 +49,8 @@ $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [
 $                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n_variations",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

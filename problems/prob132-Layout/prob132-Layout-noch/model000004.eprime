@@ -21,23 +21,15 @@ such that
                               | q3_1 : int(1..x_max), q3_2 : int(1..y_max)])
                           | q10_1 : int(1..x_max), q10_2 : int(1..y_max)])
                  /\
-                 and([{layout_FunctionNDPartial_Values[min([sx_ExplicitVarSizeWithMarker_Values[q8] | q8 : int(1..1 + (x_max - 1)), q8 <= sx_ExplicitVarSizeWithMarker_Marker]) +
-                                                       form_Function1D_ExplicitVarSizeWithMarker_Values_1[s, q12],
-                                                       min([q7 | q7 : int(1..y_max), sy_Occurrence[q7]]) + form_Function1D_ExplicitVarSizeWithMarker_Values_2[s, q12]] @ such that
-                                                                                                                                                                             layout_FunctionNDPartial_Flags[min([sx_ExplicitVarSizeWithMarker_Values[q8]
-                                                                                                                                                                                                                     | q8 : int(1..1 +
-                                                                                                                                                                                                                                   (x_max - 1)),
-                                                                                                                                                                                                                       q8 <=
-                                                                                                                                                                                                                       sx_ExplicitVarSizeWithMarker_Marker])
-                                                                                                                                                                                                            +
-                                                                                                                                                                                                            form_Function1D_ExplicitVarSizeWithMarker_Values_1[s,
-                                                                                                                                                                                                                                                               q12],
-                                                                                                                                                                                                            min([q7  | q7 : int(1..y_max),
-                                                                                                                                                                                                                       sy_Occurrence[q7]])
-                                                                                                                                                                                                            +
-                                                                                                                                                                                                            form_Function1D_ExplicitVarSizeWithMarker_Values_2[s,
-                                                                                                                                                                                                                                                               q12]]}
-                      = s | q12 : int(1..(1 + (x_max - 1)) * (1 + (y_max - 1))), q12 <= form_Function1D_ExplicitVarSizeWithMarker_Marker[s]])
+                 and([layout_FunctionNDPartial_Values[min([sx_ExplicitVarSizeWithMarker_Values[q8] | q8 : int(1..1 + (x_max - 1)), q8 <= sx_ExplicitVarSizeWithMarker_Marker]) +
+                                                      form_Function1D_ExplicitVarSizeWithMarker_Values_1[s, q12],
+                                                      min([q7 | q7 : int(1..y_max), sy_Occurrence[q7]]) + form_Function1D_ExplicitVarSizeWithMarker_Values_2[s, q12]]
+                      = s
+                      /\
+                      layout_FunctionNDPartial_Flags[min([sx_ExplicitVarSizeWithMarker_Values[q8] | q8 : int(1..1 + (x_max - 1)), q8 <= sx_ExplicitVarSizeWithMarker_Marker]) +
+                                                     form_Function1D_ExplicitVarSizeWithMarker_Values_1[s, q12],
+                                                     min([q7 | q7 : int(1..y_max), sy_Occurrence[q7]]) + form_Function1D_ExplicitVarSizeWithMarker_Values_2[s, q12]]
+                          | q12 : int(1..(1 + (x_max - 1)) * (1 + (y_max - 1))), q12 <= form_Function1D_ExplicitVarSizeWithMarker_Marker[s]])
                      | sy_Occurrence : matrix indexed by [int(1..y_max)] of bool])
                  | sx_ExplicitVarSizeWithMarker_Marker : int(0..1 + (x_max - 1)),
                    sx_ExplicitVarSizeWithMarker_Values : matrix indexed by [int(1..1 + (x_max - 1))] of int(1..x_max),
@@ -106,14 +98,15 @@ $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1,
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n_shapes",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
