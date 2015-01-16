@@ -10,6 +10,8 @@ $
 $ 10 August 2007
 $
 
+given maxLot : int
+
 $ n_orders: the number of orders being placed
 $ n_lines: the number of assembly lines
 $ n_days: the number of non-zero capacity days
@@ -73,7 +75,7 @@ letting Lot be domain tuple (Order,int(1..batch_size)),
 $ batches: each batch consists of a number of lots
 $ batch_attr: the set of attributes that a batch requires
 $ schedule: each slot on each day on each assembly line maps to a batch
-find batches : function (total) Batch --> mset of Lot,
+find batches : function (total) Batch --> mset (maxSize maxLot) of Lot,
      batch_attr : function (total) Batch --> set of Attribute,
      schedule : function (total, injective) tuple (Line,Day,Slot) --> Batch
 
