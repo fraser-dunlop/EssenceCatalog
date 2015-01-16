@@ -11,17 +11,14 @@ given maint_Occurrence: matrix indexed by [int(1..n_flights)] of bool
 find route_Function1D_Function1DPartial_Flags: matrix indexed by [int(1..n_planes), int(1..n_flights)] of bool
 find route_Function1D_Function1DPartial_Values: matrix indexed by [int(1..n_planes), int(1..n_flights)] of int(1..n_flights)
 such that
-    and([and([{route_Function1D_Function1DPartial_Flags[q5, q4] ->
-               route_Function1D_Function1DPartial_Values[q5, (q4, route_Function1D_Function1DPartial_Values[q5, q4]) - 1] @ such that
-                                                                                                                                route_Function1D_Function1DPartial_Flags[q5, (q4, route_Function1D_Function1DPartial_Values[q5, q4]) - 1]}
-                  | q4 : int(1..n_flights)])
+    and([and([route_Function1D_Function1DPartial_Flags[q5, q6] -> q6 = 1 \/ route_Function1D_Function1DPartial_Flags[q5, q6 - 1] | q6 : int(1..n_flights)])
              | q5 : int(1..n_planes)]),
     and([or([q7_1 = carry_in_Function1D[p] /\ (q7_2 = route_Function1D_Function1DPartial_Values[p, 1] /\ route_Function1D_Function1DPartial_Flags[p, 1])
                  | q7_1 : int(1..n_flights), q7_2 : int(1..n_flights), network_RelationAsMatrix[q7_1, q7_2]])
              | p : int(1..n_planes)]),
     and([and([route_Function1D_Function1DPartial_Flags[p, q8] ->
-              or([q6_2 = route_Function1D_Function1DPartial_Values[p, q8]
-                      | q6_1 : int(1..n_planes), q6_2 : int(1..n_flights), can_fly_RelationAsMatrix[q6_1, q6_2], q6_1 = p])
+              or([q4_2 = route_Function1D_Function1DPartial_Values[p, q8]
+                      | q4_1 : int(1..n_planes), q4_2 : int(1..n_flights), can_fly_RelationAsMatrix[q4_1, q4_2], q4_1 = p])
                   | q8 : int(1..n_flights)])
              | p : int(1..n_planes)]),
     and([and([i <= sum([route_Function1D_Function1DPartial_Flags[q10, q12] * 1 | q12 : int(1..n_flights)]) - 1 ->
@@ -279,12 +276,12 @@ $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [
 $                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
@@ -318,7 +315,6 @@ $                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],

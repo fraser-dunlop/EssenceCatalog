@@ -32,7 +32,7 @@ find route : function (total) Plane --> function int(1..n_flights) --> Flight
 
 such that
 $ all elements of the range of the function 'route' are valid sequences
-    forAll s in range(route) . forAll i in s . (i-1) in s,
+    forAll s in range(route) . forAll i in defined(s) . i=1 \/ (i-1) in defined(s),
 $ the route for each aircraft begins with a flight that may follow on from the
 $ last flight that it made
     forAll p : Plane . (carry_in(p), route(p)(1)) in network,
