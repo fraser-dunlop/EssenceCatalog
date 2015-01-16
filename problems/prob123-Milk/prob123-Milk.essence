@@ -21,8 +21,8 @@ $ large: the set of farms that are visited every day
 $ distance: a function that maps two farms to a distance measure
 $ milk: the amount of milk a farm produces between collections
 given small, large : set of Farm,
-      distance : function (total) set (size 2) of Farm --> int(0..),
-      milk : function (total) Farm --> int(0..)
+      distance : function (total) set (size 2) of Farm --> int(0..100),
+      milk : function (total) Farm --> int(0..100)
 
 where
 $ all farms are either small or large, and the depot is not a farm
@@ -37,29 +37,32 @@ find odd : function int(1..n_farms+2) --> Farm,
      even : function int(1..n_farms+2) --> Farm
 
 $ minimise the total distance travelled
-minimising (sum i : int(1..|odd|-1) . distance({odd(i),odd(i+1)}))
-         + (sum i : int(1..|even|-1) . distance({even(i),even(i+1)}))
+$ Ozgur: this is just wrong
+$ minimising (sum i : int(1..|odd|-1) . distance({odd(i),odd(i+1)}))
+$          + (sum i : int(1..|even|-1) . distance({even(i),even(i+1)}))
 
 such that
 $ the partial functions 'odd' and 'even' map integers between 1 and |odd| or
 $ |even| to values, to ensure a correct sequence representation
-    $forAll i : int(1..|odd|) . i in defined(odd),
-    $forAll i : int(1..|even|) . i in defined(even),
+$ $ Ozgur: this is just wrong
+$     forAll i : int(1..|odd|) . i in defined(odd),
+$     forAll i : int(1..|even|) . i in defined(even),
 $ the first and last stops in both sequences are the depot
     odd(1) = 1,
     even(1) = 1,
     $odd(|odd|) = 1,
     $even(|even|) = 1,
 $ all large farms are visited on both odd and even days
-    $forAll f in large . f in range(odd) intersect range(even),
+    forAll f in large . f in range(odd) intersect range(even),
 $ all small farms are visited only every other day
-    $forAll f in small . f in range(odd) union range(even) /\
-                        $!(f in range(odd) intersect range(even)),
+    forAll f in small . f in range(odd) union range(even) /\
+                        !(f in range(odd) intersect range(even)),
 $ no farm is visited more than once a day
-    $forAll i,j : int(2..|odd|-1) . odd(i) = odd(j) -> i = j,
-    $forAll i,j : int(2..|even|-1) . even(i) = even(j) -> i = j,
+$ Ozgur: this is just wrong
+    $ forAll i,j : int(2..|odd|-1) . odd(i) = odd(j) -> i = j,
+    $ forAll i,j : int(2..|even|-1) . even(i) = even(j) -> i = j,
 $ the amount of milk collected cannot exceed the tanker's capacity
-    $(sum f in range(odd) . milk(f)) <= capacity,
-    $(sum f in range(even) . milk(f)) <= capacity,
+    (sum f in range(odd) . milk(f)) <= capacity,
+    (sum f in range(even) . milk(f)) <= capacity,
     true
 
