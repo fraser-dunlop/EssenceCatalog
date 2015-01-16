@@ -8,6 +8,8 @@ $
 $ 27 July 2007
 $
 
+given maxMaterial : int
+
 $ Material: there are five different types of materials
 $ Colour: there are three different types of bin, distinguished by colour
 letting Material be new type enum {glass,plastic,steel,wood,copper},
@@ -25,7 +27,7 @@ letting Bin be new type of size (sum m : Material . quantity(m))
 $ colour: each bin is assigned a colour
 $ contents: the contents of each bin is a multiset of materials
 find colour : function Bin --> Colour,
-     contents : function Bin --> mset of Material
+     contents : function Bin --> mset (maxOccur maxMaterial) of Material
 
 $ minimise the number of bins that have colours & materials assigned to them
 minimising |defined(colour)|
