@@ -35,7 +35,7 @@ where
 $ intersections should be symmetric
     forAll ((p1,p2),(i1,i2)) in inter . inter((p2,p1)) = (i2,i1),
 $ the dictionary maps identifiers to valid sequences
-    forAll s in range(dict) . forAll i : int(1..|s|) . i in defined(s)
+    forAll s in range(dict) . forAll i in defined(s) . i=1 \/ (i-1) in defined(s)
 
 $ crossword: a function mapping word places to words from the dictionary
 find crossword : function (total) Place --> Word
