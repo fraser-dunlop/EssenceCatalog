@@ -29,7 +29,7 @@ find moves_Function1DPartial_Values_1_2: matrix indexed by [int(1..q2)] of int(1
 find moves_Function1DPartial_Values_2_1: matrix indexed by [int(1..q2)] of int(1..x_size)
 find moves_Function1DPartial_Values_2_2: matrix indexed by [int(1..q2)] of int(1..y_size)
 such that
-    and([plan_Function1DPartial_Flags[i] | i : int(1..sum([plan_Function1DPartial_Flags[q12] * 1 | q12 : int(1..q1)]))]),
+    and([plan_Function1DPartial_Flags[q12] -> q12 = 1 \/ plan_Function1DPartial_Flags[q12 - 1] | q12 : int(1..q1)]),
     and([moves_Function1DPartial_Flags[q37] ->
          or([q34 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q37] /\ plan_Function1DPartial_Flags[q37] /\
              (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q37, q34] = moves_Function1DPartial_Values_1_1[q37] /\
@@ -81,21 +81,22 @@ such that
          |moves_Function1DPartial_Values_1_1[q17] - moves_Function1DPartial_Values_2_1[q17]| = 0 /\
          |moves_Function1DPartial_Values_1_2[q17] - moves_Function1DPartial_Values_2_2[q17]| = 2
              | q17 : int(1..q2)]),
-    and([sum([(q38 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[t] /\ plan_Function1DPartial_Flags[t]) * 1
+    and([t <= sum([plan_Function1DPartial_Flags[q22] * 1 | q22 : int(1..q1)]) - 1 ->
+         sum([(q38 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[t] /\ plan_Function1DPartial_Flags[t]) * 1
                   | q38 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
          -
          sum([(q20 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[t + 1] /\ plan_Function1DPartial_Flags[t + 1]) * 1
                   | q20 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
-         = 1 | t : int(1..sum([plan_Function1DPartial_Flags[q24] * 1 | q24 : int(1..q1)]) - 1)]),
-    and([q22 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[1] /\ plan_Function1DPartial_Flags[1] ->
-         or([init_Explicit_1[q26] = plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[1, q22] /\
-             init_Explicit_2[q26] = plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[1, q22]
+         = 1 | t : int(1..p1)]),
+    and([q23 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[1] /\ plan_Function1DPartial_Flags[1] ->
+         or([init_Explicit_1[q26] = plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[1, q23] /\
+             init_Explicit_2[q26] = plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[1, q23]
                  | q26 : int(1..p2)])
-             | q22 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))]),
-    and([or([q23 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[1] /\ plan_Function1DPartial_Flags[1] /\
-             (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[1, q23] = init_Explicit_1[q27] /\
-              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[1, q23] = init_Explicit_2[q27])
-                 | q23 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+             | q23 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))]),
+    and([or([q24 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[1] /\ plan_Function1DPartial_Flags[1] /\
+             (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[1, q24] = init_Explicit_1[q27] /\
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[1, q24] = init_Explicit_2[q27])
+                 | q24 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
              | q27 : int(1..p2)]),
     and([q25 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[sum([plan_Function1DPartial_Flags[q31] * 1 | q31 : int(1..q1)])] /\
          plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q32] * 1 | q32 : int(1..q1)])]
@@ -170,27 +171,23 @@ $                     23, 24, 25, 26, 27, 28, 29, 30, 31, 32]],
 $                   [1, [1]],
 $                   [1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24, 25, 26, 27, 28]],
+$                     23, 24, 25, 26, 27]],
 $                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23, 24, 25]],
+$                   [1, [1]],
+$                   [1,
+$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+$                     23]],
+$                   [1, [1, 2]],
 $                   [1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
 $                     23, 24, 25, 26]],
 $                   [1, [1]],
 $                   [1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-$                     22]],
-$                   [1, [1, 2]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24, 25]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24, 25]],
+$                     23, 24, 25, 26]],
 $                   [1, [1]],
 $                   [1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -200,6 +197,7 @@ $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
@@ -219,11 +217,9 @@ $                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
@@ -232,9 +228,9 @@ $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1]], [1, [1
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
@@ -441,15 +437,15 @@ $                   [1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]],
 $                   [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]],
 $                   [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
