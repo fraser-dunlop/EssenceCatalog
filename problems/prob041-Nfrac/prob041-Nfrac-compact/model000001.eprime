@@ -1,11 +1,12 @@
 language ESSENCE' 1.0
 
 given n: int(1..)
-find assign_Function1D: matrix indexed by [int(1..3 * n)] of int(1..9)
+letting q1 be 3 * n
+find assign_Function1D: matrix indexed by [int(1..q1)] of int(1..9)
 such that
     sum([assign_Function1D[3 * i + 1] / (assign_Function1D[3 * i + 2] * 10 + assign_Function1D[3 * i + 3]) | i : int(0..n - 1)]) = 1,
     and([sum([assign_Function1D[i] = d | i : int(1..3 * n)]) <= (n + 1) / 3 | d : int(1..9)]),
-    and([or([assign_Function1D[q2] = q1 | q2 : int(1..3 * n)]) | q1 : int(1..9)])
+    and([or([assign_Function1D[q3] = q2 | q3 : int(1..q1)]) | q2 : int(1..9)])
 
 $ Conjure's
 $ {"finds": ["assign"],
@@ -18,17 +19,15 @@ $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
-$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -36,11 +35,12 @@ $                      ["assign",
 $                       {"DomainFunction": [{"HasRepresentation": "Function1D"},
 $                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_Surjective"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                            {"Op": {"MkOpTimes": [{"Constant": {"ConstantInt": 3}},
-$                                                                                                  {"Reference": ["n",
-$                                                                                                                 {"DeclHasRepr": ["Given",
-$                                                                                                                                  "n",
-$                                                                                                                                  {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}}]}]},
+$                                                                            {"Reference": ["q1",
+$                                                                                           {"Alias": {"Op": {"MkOpTimes": [{"Constant": {"ConstantInt": 3}},
+$                                                                                                                           {"Reference": ["n",
+$                                                                                                                                          {"DeclNoRepr": ["Given",
+$                                                                                                                                                          "n",
+$                                                                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}}}]}]}]},
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Constant": {"ConstantInt": 9}}]}]}]}]],
 $  "originalDomains": [["n",
@@ -48,5 +48,7 @@ $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"Cons
 $                      ["assign",
 $                       {"DomainFunction": [[],
 $                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_Surjective"],
-$                                           {"DomainReference": ["Index", null]},
-$                                           {"DomainReference": ["Digit", null]}]}]]}
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["q1", null]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Constant": {"ConstantInt": 9}}]}]}]}]]}

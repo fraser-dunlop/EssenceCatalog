@@ -134,4 +134,11 @@ $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"Constant
 $                                                        {"Reference": ["q1", null]}]}]}],
 $                      ["c",
 $                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["numOfCodeWords", null]}},
-$                                      {"DomainReference": ["String", null]}]}]]}
+$                                      {"DomainFunction": [[],
+$                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                           "JectivityAttr_None"],
+$                                                          {"DomainReference": ["Index", null]},
+$                                                          {"DomainReference": ["Character",
+$                                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                {"Reference": ["Character_EnumSize",
+$                                                                                                                               {"Alias": {"Domain": {"DomainInt": []}}}]}]}]}]}]}]}]]}

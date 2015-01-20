@@ -48,5 +48,7 @@ $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"Cons
 $                      ["arrangement",
 $                       {"DomainFunction": [[],
 $                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_Bijective"],
-$                                           {"DomainReference": ["Index", null]},
-$                                           {"DomainReference": ["Index", null]}]}]]}
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["n", null]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["n", null]}]}]}]}]]}

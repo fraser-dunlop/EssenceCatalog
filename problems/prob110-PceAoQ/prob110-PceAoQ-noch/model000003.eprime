@@ -93,7 +93,9 @@ $  "originalDomains": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["black",
 $                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainReference": ["Square", null]}]}],
+$                                      {"DomainTuple": [{"DomainReference": ["Index", null]},
+$                                                       {"DomainReference": ["Index", null]}]}]}],
 $                      ["white",
 $                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainReference": ["Square", null]}]}]]}
+$                                      {"DomainTuple": [{"DomainReference": ["Index", null]},
+$                                                       {"DomainReference": ["Index", null]}]}]}]]}

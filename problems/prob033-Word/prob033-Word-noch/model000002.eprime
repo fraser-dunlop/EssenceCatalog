@@ -113,5 +113,6 @@ $                       {"DomainSet": [[], {"SizeAttr_None": []},
 $                                      {"DomainFunction": [[],
 $                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
 $                                                           "JectivityAttr_None"],
-$                                                          {"DomainReference": ["Index", null]},
-$                                                          {"DomainReference": ["Base", null]}]}]}]]}
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Constant": {"ConstantInt": 8}}]}]},
+$                                                          {"DomainEnum": ["Base", null, null]}]}]}]]}

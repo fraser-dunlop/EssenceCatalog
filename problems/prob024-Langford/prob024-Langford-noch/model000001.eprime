@@ -56,6 +56,7 @@ $                                                        {"Constant": {"Constant
 $                      ["seq",
 $                       {"DomainFunction": [[],
 $                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_Surjective"],
-$                                           {"DomainReference": ["seqIndex", null]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["seqLength", null]}]}]},
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": ["n", null]}]}]}]}]]}

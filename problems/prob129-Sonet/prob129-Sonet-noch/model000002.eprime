@@ -132,9 +132,13 @@ $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"Cons
 $                      ["demand",
 $                       {"DomainSet": [[], {"SizeAttr_None": []},
 $                                      {"DomainSet": [[], {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
-$                                                     {"DomainReference": ["Nodes", null]}]}]}],
+$                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                      {"Reference": ["nnodes",
+$                                                                                                     null]}]}]}]}]}],
 $                      ["network",
 $                       {"DomainMSet": [[],
 $                                       [{"SizeAttr_Size": {"Reference": ["nrings", null]}}, {"OccurAttr_None": []}],
 $                                       {"DomainSet": [[], {"SizeAttr_MaxSize": {"Reference": ["capacity", null]}},
-$                                                      {"DomainReference": ["Nodes", null]}]}]}]]}
+$                                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                       {"Reference": ["nnodes",
+$                                                                                                      null]}]}]}]}]}]]}

@@ -83,7 +83,9 @@ $  "originalDomains": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["setA",
 $                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["q1", null]}},
-$                                      {"DomainReference": ["dNum", null]}]}],
+$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                       {"Reference": ["n", null]}]}]}]}],
 $                      ["setB",
 $                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["q2", null]}},
-$                                      {"DomainReference": ["dNum", null]}]}]]}
+$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                       {"Reference": ["n", null]}]}]}]}]]}

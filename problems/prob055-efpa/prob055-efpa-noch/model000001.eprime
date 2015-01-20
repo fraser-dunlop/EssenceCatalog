@@ -4,13 +4,13 @@ given v: int(1..)
 given d: int(1..)
 given q: int(1..)
 given lam: int(1..)
-find E_Explicit: matrix indexed by [int(1..v), int(1..q * lam)] of int(1..q)
+letting q1 be q * lam
+find E_Explicit: matrix indexed by [int(1..v), int(1..q1)] of int(1..q)
 such that
-    and([and([sum([E_Explicit[q2, index] = element | index : int(1..q * lam)]) = lam | element : int(1..q)]) | q2 : int(1..v)]),
-    and([and([E_Explicit[q3, q5] = E_Explicit[q4, q5] | q5 : int(1..q * lam)]) \/
-         sum([E_Explicit[q3, index] != E_Explicit[q4, index] | index : int(1..q * lam)]) = d
-             | q3 : int(1..v), q4 : int(1..v)]),
-    and([E_Explicit[q1, ..] <lex E_Explicit[q1 + 1, ..] | q1 : int(1..v - 1)])
+    and([and([sum([E_Explicit[q3, index] = element | index : int(1..q * lam)]) = lam | element : int(1..q)]) | q3 : int(1..v)]),
+    and([and([E_Explicit[q4, q6] = E_Explicit[q5, q6] | q6 : int(1..q1)]) \/ sum([E_Explicit[q4, index] != E_Explicit[q5, index] | index : int(1..q * lam)]) = d
+             | q4 : int(1..v), q5 : int(1..v)]),
+    and([E_Explicit[q2, ..] <lex E_Explicit[q2 + 1, ..] | q2 : int(1..v - 1)])
 
 $ Conjure's
 $ {"finds": ["E"],
@@ -43,14 +43,15 @@ $                                      {"SizeAttr_Size": {"Reference": ["v",
 $                                                                       {"DeclHasRepr": ["Given", "v",
 $                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
 $                                      {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                         {"Op": {"MkOpTimes": [{"Reference": ["q",
-$                                                                                                                              {"DeclHasRepr": ["Given",
-$                                                                                                                                               "q",
-$                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                                                               {"Reference": ["lam",
-$                                                                                                                              {"DeclHasRepr": ["Given",
-$                                                                                                                                               "lam",
-$                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}}]}]},
+$                                                                                         {"Reference": ["q1",
+$                                                                                                        {"Alias": {"Op": {"MkOpTimes": [{"Reference": ["q",
+$                                                                                                                                                       {"DeclHasRepr": ["Given",
+$                                                                                                                                                                        "q",
+$                                                                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                        {"Reference": ["lam",
+$                                                                                                                                                       {"DeclHasRepr": ["Given",
+$                                                                                                                                                                        "lam",
+$                                                                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}}}]}]}]},
 $                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                         {"Reference": ["q",
 $                                                                                                        {"DeclHasRepr": ["Given",
@@ -66,5 +67,8 @@ $                      ["lam",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["E",
 $                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["v", null]}},
-$                                      {"DomainMatrix": [{"DomainReference": ["dSequnce", null]},
-$                                                        {"DomainReference": ["dElement", null]}]}]}]]}
+$                                      {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": ["q1", null]}]}]},
+$                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": ["q",
+$                                                                                                        null]}]}]}]}]}]]}

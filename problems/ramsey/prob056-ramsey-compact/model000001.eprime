@@ -607,5 +607,9 @@ $                                                        {"Constant": {"Constant
 $                      ["graph",
 $                       {"DomainRelation": [[],
 $                                           [{"SizeAttr_Size": {"Reference": ["num_edges", null]}}, []],
-$                                           [{"DomainReference": ["Colour", null]}, {"DomainReference": ["Vertex", null]},
-$                                            {"DomainReference": ["Vertex", null]}]]}]]}
+$                                           [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": ["colours", null]}]}]},
+$                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": ["n", null]}]}]},
+$                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": ["n", null]}]}]}]]}]]}

@@ -286,7 +286,9 @@ $                                                                          {"Ref
 $                                         {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                            {"Reference": ["d",
 $                                                                                                           null]}]}]},
-$                                                           {"DomainReference": ["Value", null]}]}]}],
+$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                            {"Reference": ["maxval",
+$                                                                                                           null]}]}]}]}]}],
 $                      ["s",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                        {"Reference": ["maxsum", null]}]}]}]]}

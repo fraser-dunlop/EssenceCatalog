@@ -1,11 +1,12 @@
 language ESSENCE' 1.0
 
 given n: int(1..)
-find square: matrix indexed by [int(1..n), int(1..n)] of int(1..n ** 2)
-letting q1 be sum([i | i : int(n ** 2 + 1 - n..n ** 2)])
-find s: int(1..q1)
+letting q1 be n ** 2
+find square: matrix indexed by [int(1..n), int(1..n)] of int(1..q1)
+letting q2 be sum([i | i : int(n ** 2 + 1 - n..n ** 2)])
+find s: int(1..q2)
 such that
-    and([square[q2] != square[q3] | q2 : int(1..n), q3 : int(1..n), q2 < q3]),
+    and([square[q3] != square[q4] | q3 : int(1..n), q4 : int(1..n), q3 < q4]),
     and([sum([square[r, c] | c : int(1..n)]) = s | r : int(1..n)]),
     and([sum([square[r, c] | r : int(1..n)]) = s | c : int(1..n)]),
     sum([square[d, d] | d : int(1..n)]) = s,
@@ -51,14 +52,15 @@ $                                                                               
 $                                                                                                                            "n",
 $                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
 $                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                            {"Op": {"MkOpPow": [{"Reference": ["n",
-$                                                                                                                               {"DeclHasRepr": ["Given",
-$                                                                                                                                                "n",
-$                                                                                                                                                {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                                                                {"Constant": {"ConstantInt": 2}}]}}]}]}]}]}],
+$                                                                                            {"Reference": ["q1",
+$                                                                                                           {"Alias": {"Op": {"MkOpPow": [{"Reference": ["n",
+$                                                                                                                                                        {"DeclHasRepr": ["Given",
+$                                                                                                                                                                         "n",
+$                                                                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                         {"Constant": {"ConstantInt": 2}}]}}}]}]}]}]}]}],
 $                      ["s",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                        {"Reference": ["q1",
+$                                                        {"Reference": ["q2",
 $                                                                       {"Alias": {"Op": {"MkOpPlus": [{"Comprehension": [{"Reference": ["i",
 $                                                                                                                                        {"DeclNoRepr": ["Quantified",
 $                                                                                                                                                        "i",
@@ -96,9 +98,14 @@ $                                                                               
 $  "originalDomains": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["square",
-$                       {"DomainMatrix": [{"DomainReference": ["Index", null]},
-$                                         {"DomainMatrix": [{"DomainReference": ["Index", null]},
-$                                                           {"DomainReference": ["Value", null]}]}]}],
+$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                          {"Reference": ["n", null]}]}]},
+$                                         {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                            {"Reference": ["n",
+$                                                                                                           null]}]}]},
+$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                            {"Reference": ["q1",
+$                                                                                                           null]}]}]}]}]}],
 $                      ["s",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                        {"Reference": ["q1", null]}]}]}]]}
+$                                                        {"Reference": ["q2", null]}]}]}]]}

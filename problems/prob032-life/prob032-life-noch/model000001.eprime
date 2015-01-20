@@ -105,4 +105,5 @@ $  "originalDomains": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["alive",
 $                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainReference": ["Cell", null]}]}]]}
+$                                      {"DomainTuple": [{"DomainReference": ["Index", null]},
+$                                                       {"DomainReference": ["Index", null]}]}]}]]}

@@ -164,4 +164,5 @@ $                                             "isRegular": false,
 $                                             "participantsSize": {"SizeAttr_Size": {"Reference": ["n_boxes", null]}},
 $                                             "partsNum": {"SizeAttr_None": []},
 $                                             "partsSize": {"SizeAttr_None": []}},
-$                                            {"DomainReference": ["Ball", null]}]}]]}
+$                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": ["n_balls", null]}]}]}]}]]}

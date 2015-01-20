@@ -97,4 +97,8 @@ $                      ["dist",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["c",
 $                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["numCodeWords", null]}},
-$                                      {"DomainReference": ["String", null]}]}]]}
+$                                      {"DomainFunction": [[],
+$                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                           "JectivityAttr_None"],
+$                                                          {"DomainReference": ["Index", null]},
+$                                                          {"DomainReference": ["Character", null]}]}]}]]}

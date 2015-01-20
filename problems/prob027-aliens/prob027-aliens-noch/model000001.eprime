@@ -2,7 +2,8 @@ language ESSENCE' 1.0
 
 given grid: int(1..)
 given colours: int(1..)
-find clickMatrix: matrix indexed by [int(1..grid), int(1..grid)] of int(0..colours - 1)
+letting q1 be colours - 1
+find clickMatrix: matrix indexed by [int(1..grid), int(1..grid)] of int(0..q1)
 maximising sum([clickMatrix[i, j] | i : int(1..grid), j : int(1..grid)])
 such that
     and([sum([clickMatrix[i, j] | i : int(1..grid), j : int(1..grid)]) <= sum([simplerClickMatrix[i, j] | i : int(1..grid), j : int(1..grid)]) \/
@@ -68,16 +69,22 @@ $                                                                               
 $                                                                                                                            "grid",
 $                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
 $                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                                            {"Op": {"MkOpMinus": [{"Reference": ["colours",
-$                                                                                                                                 {"DeclHasRepr": ["Given",
-$                                                                                                                                                  "colours",
-$                                                                                                                                                  {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                                                                  {"Constant": {"ConstantInt": 1}}]}}]}]}]}]}]],
+$                                                                                            {"Reference": ["q1",
+$                                                                                                           {"Alias": {"Op": {"MkOpMinus": [{"Reference": ["colours",
+$                                                                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                                                                           "colours",
+$                                                                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                           {"Constant": {"ConstantInt": 1}}]}}}]}]}]}]}]}]],
 $  "originalDomains": [["grid",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["colours",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["clickMatrix",
-$                       {"DomainMatrix": [{"DomainReference": ["dGrid", null]},
-$                                         {"DomainMatrix": [{"DomainReference": ["dGrid", null]},
-$                                                           {"DomainReference": ["dColours", null]}]}]}]]}
+$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                          {"Reference": ["grid", null]}]}]},
+$                                         {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                            {"Reference": ["grid",
+$                                                                                                           null]}]}]},
+$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
+$                                                                                            {"Reference": ["q1",
+$                                                                                                           null]}]}]}]}]}]]}

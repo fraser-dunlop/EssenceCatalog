@@ -95,6 +95,8 @@ $                       {"DomainSet": [[], {"SizeAttr_None": []},
 $                                      {"DomainFunction": [[],
 $                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
 $                                                           "JectivityAttr_None"],
-$                                                          {"DomainReference": ["Road", null]},
-$                                                          {"DomainTuple": [{"DomainReference": ["VCol", null]},
-$                                                                           {"DomainReference": ["PCol", null]}]}]}]}]]}
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": ["n_roads",
+$                                                                                                          null]}]}]},
+$                                                          {"DomainTuple": [{"DomainEnum": ["VCol", null, null]},
+$                                                                           {"DomainEnum": ["PCol", null, null]}]}]}]}]]}
