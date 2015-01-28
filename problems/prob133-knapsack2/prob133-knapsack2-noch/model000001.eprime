@@ -7,9 +7,15 @@ given weights_Function1DPartial_Values: matrix indexed by [int(1..n)] of int(1..
 given values_Function1DPartial_Flags: matrix indexed by [int(1..n)] of bool
 given values_Function1DPartial_Values: matrix indexed by [int(1..n)] of int(1..100)
 find picked_Occurrence: matrix indexed by [int(1..n)] of bool
-maximising sum([{picked_Occurrence[i] * values_Function1DPartial_Values[i] @ such that values_Function1DPartial_Flags[i]} | i : int(1..n)])
+maximising
+    sum([{ picked_Occurrence[i] * values_Function1DPartial_Values[i]
+         @ such that values_Function1DPartial_Flags[i]
+         }   | i : int(1..n)])
 such that
-    sum([{picked_Occurrence[i] * weights_Function1DPartial_Values[i] @ such that weights_Function1DPartial_Flags[i]} | i : int(1..n)]) <= totalWeight,
+    sum([{ picked_Occurrence[i] * weights_Function1DPartial_Values[i]
+         @ such that weights_Function1DPartial_Flags[i]
+         }   | i : int(1..n)])
+    <= totalWeight,
     1 <= sum([picked_Occurrence[q1] | q1 : int(1..n)]),
     sum([picked_Occurrence[q1] | q1 : int(1..n)]) <= n
 
@@ -21,12 +27,11 @@ $  "enumLettings": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1, 2, 3]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n",
 $                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},

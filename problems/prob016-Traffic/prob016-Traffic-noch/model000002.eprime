@@ -1,17 +1,11 @@
 language ESSENCE' 1.0
 
 given n_roads: int(1..)
-find valid_ExplicitVarSizeWithFlags_Flags:
-        matrix indexed by [int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) /
-                                  (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1)))))] of bool
+find valid_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..2 ** ((1 + (n_roads - 1)) * ((1 + (4 - 1)) * (1 + (2 - 1)))))] of bool
 find valid_ExplicitVarSizeWithFlags_Values_Function1D_1:
-        matrix indexed by [int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) /
-                                  (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1))))),
-                           int(1..n_roads)] of int(1..4)
+        matrix indexed by [int(1..2 ** ((1 + (n_roads - 1)) * ((1 + (4 - 1)) * (1 + (2 - 1))))), int(1..n_roads)] of int(1..4)
 find valid_ExplicitVarSizeWithFlags_Values_Function1D_2:
-        matrix indexed by [int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) /
-                                  (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1))))),
-                           int(1..n_roads)] of int(1..2)
+        matrix indexed by [int(1..2 ** ((1 + (n_roads - 1)) * ((1 + (4 - 1)) * (1 + (2 - 1))))), int(1..n_roads)] of int(1..2)
 such that
     and([valid_ExplicitVarSizeWithFlags_Flags[q2] ->
          and([or([and([or([[valid_ExplicitVarSizeWithFlags_Values_Function1D_1[q2, rd],
@@ -32,17 +26,17 @@ such that
                            | q6 : int(1..2)])
                       | q3 : int(1..2)])
                   | rd : int(1..n_roads)])
-             | q2 : int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) / (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1)))))]),
+             | q2 : int(1..2 ** ((1 + (n_roads - 1)) * ((1 + (4 - 1)) * (1 + (2 - 1)))))]),
     and([valid_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
          valid_ExplicitVarSizeWithFlags_Values_Function1D_1[q1, ..] <lex valid_ExplicitVarSizeWithFlags_Values_Function1D_1[q1 + 1, ..] \/
          and([valid_ExplicitVarSizeWithFlags_Values_Function1D_1[q1, q7] = valid_ExplicitVarSizeWithFlags_Values_Function1D_1[q1 + 1, q7] | q7 : int(1..n_roads)]) /\
          valid_ExplicitVarSizeWithFlags_Values_Function1D_2[q1, ..] <lex valid_ExplicitVarSizeWithFlags_Values_Function1D_2[q1 + 1, ..]
-             | q1 : int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) / (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1)))) - 1)]),
+             | q1 : int(1..2 ** ((1 + (n_roads - 1)) * ((1 + (4 - 1)) * (1 + (2 - 1)))) - 1)]),
     and([valid_ExplicitVarSizeWithFlags_Flags[q1] = false ->
          and([valid_ExplicitVarSizeWithFlags_Values_Function1D_1[q1, q9] = 1 /\ valid_ExplicitVarSizeWithFlags_Values_Function1D_2[q1, q9] = 1 | q9 : int(1..n_roads)])
-             | q1 : int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) / (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1)))))]),
+             | q1 : int(1..2 ** ((1 + (n_roads - 1)) * ((1 + (4 - 1)) * (1 + (2 - 1)))))]),
     and([valid_ExplicitVarSizeWithFlags_Flags[q1 + 1] -> valid_ExplicitVarSizeWithFlags_Flags[q1]
-             | q1 : int(1..factorial((1 + (4 - 1)) * (1 + (2 - 1))) / (factorial(1 + (n_roads - 1)) * factorial((1 + (4 - 1)) * (1 + (2 - 1)) - (1 + (n_roads - 1)))) - 1)])
+             | q1 : int(1..2 ** ((1 + (n_roads - 1)) * ((1 + (4 - 1)) * (1 + (2 - 1)))) - 1)])
 
 $ Conjure's
 $ {"finds": ["valid"],
@@ -51,25 +45,23 @@ $  "enumGivens": [],
 $  "enumLettings": [{"LettingDomainDefnEnum": ["VCol", ["r", "ry", "g", "y"]]},
 $                   {"LettingDomainDefnEnum": ["PCol", ["pr", "pg"]]}],
 $  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2]], [2, [1, 2]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
-$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2]], [2, [1, 2]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n_roads",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
