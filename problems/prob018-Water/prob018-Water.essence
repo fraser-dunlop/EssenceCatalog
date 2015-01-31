@@ -21,21 +21,21 @@ find plan: function int(1..(totalWater+1)**nBuckets) --> State
 find plan_len: int(1..(totalWater+1)**nBuckets)
 
 
-$ minimising plan_len
+minimising plan_len
 
 such that
 
-$ plan_len = |plan|,
-$
-$ $the partial function 'plan' maps integers between 1 and |plan| to values, to
-$ $ensure a correct sequence representation
-$ forAll i : int(1..(totalWater+1)**nBuckets) ,
-$     i <= plan_len .
-$     i in defined(plan),
-$
-$ $ no water lost
-$ forAll s in range(plan) . (sum b : Bucket . s(b) )  = totalWater,
-$
+plan_len = |plan|,
+
+$the partial function 'plan' maps integers between 1 and |plan| to values, to
+$ensure a correct sequence representation
+forAll i : int(1..(totalWater+1)**nBuckets) ,
+    i <= plan_len .
+    i in defined(plan),
+
+$ no water lost
+forAll s in range(plan) . (sum b : Bucket . s(b) )  = totalWater,
+
 $ $ no water gained
 $ forAll s in range(plan) .
 $     forAll b : Bucket .
@@ -51,9 +51,9 @@ $ only two buckets changes in each stage
 forAll i : int(1..(totalWater+1)**nBuckets)
     . |plan(i) intersect plan(i+1)| = 1,
 
-$ $ $ in state i+1, the 2 involved buckets containt the same total amount of water
-$ $ $ as in state i
-$ $ forAll i : int(1..(totalWater+1)**nBuckets) ,
-$ $     i <= plan_len-1 .
-$ $     (sum w in range(plan(i) - (plan(i) intersect plan(i+1))) . w) =
-$ $     (sum w in range(plan(i+1) - (plan(i) intersect plan(i+1))) . w)
+$ $ in state i+1, the 2 involved buckets containt the same total amount of water
+$ $ as in state i
+$ forAll i : int(1..(totalWater+1)**nBuckets) ,
+$     i <= plan_len-1 .
+$     (sum w in range(plan(i) - (plan(i) intersect plan(i+1))) . w) =
+$     (sum w in range(plan(i+1) - (plan(i) intersect plan(i+1))) . w)
