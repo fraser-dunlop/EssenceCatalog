@@ -26,15 +26,11 @@ such that
                   | j : int(5..6)])
              | i : int(2..4)]),
     and([steps_Function1D_ExplicitVarSizeWithFlags_Flags[31, q7] ->
-         or([[end_1; int(1..1)][q3] = steps_Function1D_ExplicitVarSizeWithFlags_Values_1[31, q7] /\
-             [end_2; int(1..1)][q3] = steps_Function1D_ExplicitVarSizeWithFlags_Values_2[31, q7]
-                 | q3 : int(1..1)])
+         end_1 = steps_Function1D_ExplicitVarSizeWithFlags_Values_1[31, q7] /\ end_2 = steps_Function1D_ExplicitVarSizeWithFlags_Values_2[31, q7]
              | q7 : int(1..32)]),
-    and([or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[31, q10] /\
-             (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[31, q10] = [end_1; int(1..1)][q8] /\
-              steps_Function1D_ExplicitVarSizeWithFlags_Values_2[31, q10] = [end_2; int(1..1)][q8])
-                 | q10 : int(1..32)])
-             | q8 : int(1..1)]),
+    or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[31, q10] /\
+        (steps_Function1D_ExplicitVarSizeWithFlags_Values_1[31, q10] = end_1 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[31, q10] = end_2)
+            | q10 : int(1..32)]),
     and([sum([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q11] * 1 | q11 : int(1..32)]) = numPegs - i /\
          sum([(steps_Function1D_ExplicitVarSizeWithFlags_Flags[i, q12] /\
                or([steps_Function1D_ExplicitVarSizeWithFlags_Flags[i + 1, q13] /\
@@ -77,13 +73,13 @@ such that
               steps_Function1D_ExplicitVarSizeWithFlags_Values_1[q1, q2] < steps_Function1D_ExplicitVarSizeWithFlags_Values_1[q1, q2 + 1] \/
               steps_Function1D_ExplicitVarSizeWithFlags_Values_1[q1, q2] = steps_Function1D_ExplicitVarSizeWithFlags_Values_1[q1, q2 + 1] /\
               steps_Function1D_ExplicitVarSizeWithFlags_Values_2[q1, q2] < steps_Function1D_ExplicitVarSizeWithFlags_Values_2[q1, q2 + 1]
-                  | q2 : int(1..32 - 1)])
+                  | q2 : int(1..31)])
              | q1 : int(0..maxSteps)]),
     and([and([steps_Function1D_ExplicitVarSizeWithFlags_Flags[q1, q2] = false ->
               steps_Function1D_ExplicitVarSizeWithFlags_Values_1[q1, q2] = 0 /\ steps_Function1D_ExplicitVarSizeWithFlags_Values_2[q1, q2] = 0
                   | q2 : int(1..32)])
              | q1 : int(0..maxSteps)]),
-    and([and([steps_Function1D_ExplicitVarSizeWithFlags_Flags[q1, q2 + 1] -> steps_Function1D_ExplicitVarSizeWithFlags_Flags[q1, q2] | q2 : int(1..32 - 1)])
+    and([and([steps_Function1D_ExplicitVarSizeWithFlags_Flags[q1, q2 + 1] -> steps_Function1D_ExplicitVarSizeWithFlags_Flags[q1, q2] | q2 : int(1..31)])
              | q1 : int(0..maxSteps)]),
     and([1 <= sum([steps_Function1D_ExplicitVarSizeWithFlags_Flags[q1, q2] | q2 : int(1..32)]) | q1 : int(0..maxSteps)]),
     and([sum([steps_Function1D_ExplicitVarSizeWithFlags_Flags[q1, q2] | q2 : int(1..32)]) <= 32 | q1 : int(0..maxSteps)])
@@ -105,7 +101,7 @@ $                   [1, [1]],
 $                   [1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
 $                     23, 24]],
-$                   [2, [1, 2]],
+$                   [2, [1, 2]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
@@ -237,7 +233,10 @@ $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["steps",
 $                       {"DomainFunction": [{"HasRepresentation": "Function1D"},
