@@ -13,7 +13,7 @@ find square : matrix indexed by [Index,Index] of Value,
      s : int(1..sum i : int(n**2+1-n..n**2) . i)
 
 such that
-    allDiff(square),
+    allDiff(flatten(square)),
     forAll r : Index . (sum c : Index . square[r,c]) = s,
     forAll c : Index . (sum r : Index . square[r,c]) = s,
     (sum d : Index . square[d,d]) = s,

@@ -25,7 +25,7 @@ $ all border cells are dead
 $ alive cells have between 2 and 3 alive neighbours (between 3 and 4, when
 $ including the cell itself)
     forAll (a,b) in alive .
-        3 <= ( sum i,j : int(-1..1) . (a+i,b+j) in alive ) /\
+        3 <= ( sum i,j : int(-1..1) . toInt((a+i,b+j) in alive) ) /\
         (sum i,j : int(-1..1) . toInt((a+i,b+j) in alive)) <= 4,
 
 $ dead cells must not have 3 alive neighbours

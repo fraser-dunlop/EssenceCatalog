@@ -82,9 +82,9 @@ find batches : function (total) Batch --> mset (maxSize maxLot) of Lot,
 such that
 $ the total number of items in an order's lots is equal to the number of items
 $ in that order
-    forAll o : Order . (sum b in defined(batches) .
-                        sum (q) in toSet(batches(b))(o,_) .
-                        q * freq(batches(b),(o,q))) = quantity(o),
+    $ forAll o : Order . (sum b in defined(batches) .
+    $                     sum (q) in toSet(batches(b))(o,_) .
+    $                     q * freq(batches(b),(o,q))) = quantity(o),
 $ a batch's attributes is the set of attributes that its lots require
     forAll b : Batch . forAll (o,q) in batches(b) .
         req_attr(o) subsetEq batch_attr(b),
@@ -102,19 +102,19 @@ $ day, and on or before its line-off day
         d >= line_on(o) /\ d <= line_off(o),
 $ even distribution constraint. for each attribute, the number of batches
 $ produced with that attribute differs by no more than one on any two days
-    forAll l : Line . forAll a : Attribute . forAll d1,d2 : Day .
-        !((d1,a) in defined(dist_except)) /\
-        !((d2,a) in defined(dist_except))
-        -> |(sum (s) in defined(schedule)(l,d1,_) .
-                      (a in batch_attr(schedule((l,d1,s)))))
-               - (sum (s) in defined(schedule)(l,d2,_) .
-                      (a in batch_attr(schedule((l,d2,s)))))| <= 1,
+    $ forAll l : Line . forAll a : Attribute . forAll d1,d2 : Day .
+    $     !((d1,a) in defined(dist_except)) /\
+    $     !((d2,a) in defined(dist_except))
+    $     -> |(sum (s) in defined(schedule)(l,d1,_) .
+    $                   (a in batch_attr(schedule((l,d1,s)))))
+    $            - (sum (s) in defined(schedule)(l,d2,_) .
+    $                   (a in batch_attr(schedule((l,d2,s)))))| <= 1,
 $ distribution exception constraint
-    forAll (d,a) in defined(dist_except) .
-    sum (l,s) in defined(schedule)(_,d,_) . (a in batch_attr(schedule((l,d,s))))
-        >= min(dist_except((d,a))) /\
-    sum (l,s) in defined(schedule)(_,d,_) . (a in batch_attr(schedule((l,d,s))))
-        <= max(dist_except((d,a))),
+    $ forAll (d,a) in defined(dist_except) .
+    $ sum (l,s) in defined(schedule)(_,d,_) . (a in batch_attr(schedule((l,d,s))))
+    $     >= min(dist_except((d,a))) /\
+    $ sum (l,s) in defined(schedule)(_,d,_) . (a in batch_attr(schedule((l,d,s))))
+    $     <= max(dist_except((d,a))),
 $ batting order constraint
     forAll l : Line . forAll d : Day . forAll s : int(1..n_slots-1) .
     earlier(batch_attr(schedule((l,d,s))),batch_attr(schedule((l,d,s+1))))

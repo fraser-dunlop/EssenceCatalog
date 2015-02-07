@@ -21,5 +21,5 @@ such that
                                             <= capacity(h),
     forAll b1,b2 : Boat
         , b1 != b2
-        . (sum p in sched . (p(b1) = p(b2))) <= 1
+        . (sum p in sched . toInt(p(b1) = p(b2))) <= 1
 
