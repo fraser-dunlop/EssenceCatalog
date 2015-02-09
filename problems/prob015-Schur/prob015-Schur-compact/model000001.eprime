@@ -17,11 +17,11 @@ such that
                   | q4 : int(1..2 ** (1 + (n_balls - 1)))])
              | b1 : int(1..n_balls), b2 : int(1..n_balls), b3 : int(1..n_balls)]),
     and([1 >=
-         sum([(q3 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
-               or([q9 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q3] /\
-                   schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q3, q9] = q1
-                       | q9 : int(1..1 + (n_balls - 1))]))
-              * 1 | q3 : int(1..2 ** (1 + (n_balls - 1)))])
+         sum([q3 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
+              or([q9 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q3] /\
+                  schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q3, q9] = q1
+                      | q9 : int(1..1 + (n_balls - 1))])
+                  | q3 : int(1..2 ** (1 + (n_balls - 1)))])
              | q1 : int(1..n_balls)]),
     n_boxes =
     sum([(q5 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker) * schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
@@ -91,6 +91,8 @@ $                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
 $                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],

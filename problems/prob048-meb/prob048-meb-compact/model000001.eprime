@@ -9,12 +9,12 @@ find directChildrenMatrix_Occurrence: matrix indexed by [int(1..numNodes), int(1
 find totalChildrenMatrix_Occurrence: matrix indexed by [int(1..numNodes), int(1..numNodes)] of bool
 minimising sum([nodeBroadcastPower[i] | i : int(1..numNodes)])
 such that
-    and([i = j \/ sum([(directChildrenMatrix_Occurrence[i, q1] /\ directChildrenMatrix_Occurrence[j, q1]) * 1 | q1 : int(1..numNodes)]) = 0
+    and([i = j \/ sum([directChildrenMatrix_Occurrence[i, q1] /\ directChildrenMatrix_Occurrence[j, q1] | q1 : int(1..numNodes)]) = 0
              | i : int(1..numNodes), j : int(1..numNodes)]),
-    sum([totalChildrenMatrix_Occurrence[initialNode, q2] * 1 | q2 : int(1..numNodes)]) = numNodes,
+    sum([totalChildrenMatrix_Occurrence[initialNode, q2] | q2 : int(1..numNodes)]) = numNodes,
     and([totalChildrenMatrix_Occurrence[node, node] /\
-         sum([directChildrenMatrix_Occurrence[node, i] * sum([totalChildrenMatrix_Occurrence[i, q3] * 1 | q3 : int(1..numNodes)]) | i : int(1..numNodes)]) =
-         sum([totalChildrenMatrix_Occurrence[node, q4] * 1 | q4 : int(1..numNodes)]) - 1
+         sum([directChildrenMatrix_Occurrence[node, i] * sum([totalChildrenMatrix_Occurrence[i, q3] | q3 : int(1..numNodes)]) | i : int(1..numNodes)]) =
+         sum([totalChildrenMatrix_Occurrence[node, q4] | q4 : int(1..numNodes)]) - 1
          /\
          and([directChildrenMatrix_Occurrence[node, childNode] ->
               and([totalChildrenMatrix_Occurrence[childNode, q5] -> totalChildrenMatrix_Occurrence[node, q5] | q5 : int(1..numNodes)]) /\ linkCosts[node, childNode] != 0 /\
@@ -154,9 +154,15 @@ $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, 
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["numNodes",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
