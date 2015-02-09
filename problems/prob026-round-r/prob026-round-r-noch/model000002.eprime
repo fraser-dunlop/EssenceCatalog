@@ -15,9 +15,9 @@ such that
     and([and([sum([(sched_RelationAsSet_Explicit_2[q5] = p) * or([sched_RelationAsSet_Explicit_3_Explicit[q5, q15] = t | q15 : int(1..2)]) | q5 : int(1..q3)]) <= 2
                   | p : int(1..q2)])
              | t : int(1..n_teams)]),
-    and([sum([(and([or([[t1, t2; int(1..2)][q9] = sched_RelationAsSet_Explicit_3_Explicit[q8, q10] | q9 : int(1..2)]) | q10 : int(1..2)]) /\
-               and([or([sched_RelationAsSet_Explicit_3_Explicit[q8, q13] = [t1, t2; int(1..2)][q11] | q13 : int(1..2)]) | q11 : int(1..2)]))
-              * 1 | q8 : int(1..q3)])
+    and([sum([and([or([[t1, t2; int(1..2)][q9] = sched_RelationAsSet_Explicit_3_Explicit[q8, q10] | q9 : int(1..2)]) | q10 : int(1..2)]) /\
+              and([or([sched_RelationAsSet_Explicit_3_Explicit[q8, q13] = [t1, t2; int(1..2)][q11] | q13 : int(1..2)]) | q11 : int(1..2)])
+                  | q8 : int(1..q3)])
          = 1 | t1 : int(1..n_teams), t2 : int(1..n_teams), t1 != t2]),
     and([sched_RelationAsSet_Explicit_1[q4] < sched_RelationAsSet_Explicit_1[q4 + 1] \/
          sched_RelationAsSet_Explicit_1[q4] = sched_RelationAsSet_Explicit_1[q4 + 1] /\
@@ -57,22 +57,26 @@ $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1,
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n_teams",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["sched",
 $                       {"DomainRelation": [{"HasRepresentation": "RelationAsSet"},
 $                                           [{"SizeAttr_Size": {"Reference": ["q3",
-$                                                                             {"Alias": {"Op": {"MkOpDiv": [{"Op": {"MkOpTimes": [{"Op": {"MkOpMinus": [{"Reference": ["n_teams",
-$                                                                                                                                                                      {"DeclHasRepr": ["Given",
-$                                                                                                                                                                                       "n_teams",
-$                                                                                                                                                                                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                                                                                                       {"Constant": {"ConstantInt": 1}}]}},
-$                                                                                                                                 {"Reference": ["n_teams",
-$                                                                                                                                                {"DeclHasRepr": ["Given",
-$                                                                                                                                                                 "n_teams",
-$                                                                                                                                                                 {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}},
+$                                                                             {"Alias": {"Op": {"MkOpDiv": [{"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                         {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                                        [{"Op": {"MkOpMinus": [{"Reference": ["n_teams",
+$                                                                                                                                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                               "n_teams",
+$                                                                                                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                                                               {"Constant": {"ConstantInt": 1}}]}},
+$                                                                                                                                                                         {"Reference": ["n_teams",
+$                                                                                                                                                                                        {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                         "n_teams",
+$                                                                                                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]]}}}},
 $                                                                                                           {"Constant": {"ConstantInt": 2}}]}}}]}},
 $                                            []],
 $                                           [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},

@@ -10,7 +10,7 @@ find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags: mat
 find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values: matrix indexed by [int(1..nrings), int(1..capacity)] of int(1..nnodes)
 minimising
     sum([(network_ExplicitVarSizeWithFlags_Flags[q3] > 0) *
-         sum([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q3, q7] * 1 | q7 : int(1..capacity)])
+         sum([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q3, q7] | q7 : int(1..capacity)])
              | q3 : int(1..nrings)])
 such that
     and([or([network_ExplicitVarSizeWithFlags_Flags[q5] > 0 /\
@@ -85,6 +85,8 @@ $                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["nnodes",

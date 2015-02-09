@@ -9,7 +9,7 @@ find x_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..1 + (b - a))] o
 find x_ExplicitVarSizeWithFlags_Values: matrix indexed by [int(1..1 + (b - a))] of int(a..b)
 such that
     and([x_ExplicitVarSizeWithFlags_Flags[q3] -> s_Occurrence[x_ExplicitVarSizeWithFlags_Values[q3]] | q3 : int(1..1 + (b - a))]),
-    or([x_ExplicitVarSizeWithFlags_Flags[q4] /\ x_ExplicitVarSizeWithFlags_Values[q4] = sum([x_ExplicitVarSizeWithFlags_Flags[q5] * 1 | q5 : int(1..1 + (b - a))])
+    or([x_ExplicitVarSizeWithFlags_Flags[q4] /\ x_ExplicitVarSizeWithFlags_Values[q4] = sum([x_ExplicitVarSizeWithFlags_Flags[q5] | q5 : int(1..1 + (b - a))])
             | q4 : int(1..1 + (b - a))]),
     and([x_ExplicitVarSizeWithFlags_Flags[q1 + 1] -> x_ExplicitVarSizeWithFlags_Values[q1] < x_ExplicitVarSizeWithFlags_Values[q1 + 1]
              | q1 : int(1..1 + (b - a) - 1)]),
@@ -30,7 +30,9 @@ $                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["p1", {"DomainInt": []}],
 $                      ["n",

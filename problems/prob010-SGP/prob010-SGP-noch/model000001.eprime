@@ -12,12 +12,12 @@ find sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarS
 such that
     and([and([q8 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q6] ->
               and([q9 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q7] ->
-                   sum([(q14 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q6, q8] /\
-                         or([q15 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q7, q9] /\
-                             sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7, q9, q15] =
-                             sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q6, q8, q14]
-                                 | q15 : int(1..1 + (q1 - 1))]))
-                        * 1 | q14 : int(1..1 + (q1 - 1))])
+                   sum([q14 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q6, q8] /\
+                        or([q15 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q7, q9] /\
+                            sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7, q9, q15] =
+                            sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q6, q8, q14]
+                                | q15 : int(1..1 + (q1 - 1))])
+                            | q14 : int(1..1 + (q1 - 1))])
                    < 2 | q9 : int(1..2 ** (1 + (q1 - 1)))])
                   | q8 : int(1..2 ** (1 + (q1 - 1)))])
              | q6 : int(1..w), q7 : int(1..w), q7 > q6]),
@@ -34,11 +34,11 @@ such that
           flatten(sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2 + 1, .., ..]))
              | q2 : int(1..w - 1)]),
     and([and([1 >=
-              sum([(q5 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2] /\
-                    or([q17 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2, q5] /\
-                        sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2, q5, q17] = q3
-                            | q17 : int(1..1 + (q1 - 1))]))
-                   * 1 | q5 : int(1..2 ** (1 + (q1 - 1)))])
+              sum([q5 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2] /\
+                   or([q17 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2, q5] /\
+                       sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2, q5, q17] = q3
+                           | q17 : int(1..1 + (q1 - 1))])
+                       | q5 : int(1..2 ** (1 + (q1 - 1)))])
                   | q3 : int(1..q1)])
              | q2 : int(1..w)]),
     and([g =
@@ -118,7 +118,10 @@ $                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
 $                   [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
@@ -142,14 +145,16 @@ $                                                            "partsNum": {"SizeA
 $                                                            "partsSize": {"SizeAttr_None": []}},
 $                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                            {"Reference": ["q1",
-$                                                                                                           {"Alias": {"Op": {"MkOpTimes": [{"Reference": ["g",
-$                                                                                                                                                          {"DeclHasRepr": ["Given",
-$                                                                                                                                                                           "g",
-$                                                                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                                                                                           {"Reference": ["s",
-$                                                                                                                                                          {"DeclHasRepr": ["Given",
-$                                                                                                                                                                           "s",
-$                                                                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}}}]}]}]}]}]}]],
+$                                                                                                           {"Alias": {"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                   {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                                                  [{"Reference": ["g",
+$                                                                                                                                                                                                  {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                   "g",
+$                                                                                                                                                                                                                   {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                                                   {"Reference": ["s",
+$                                                                                                                                                                                                  {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                   "s",
+$                                                                                                                                                                                                                   {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]]}}}}}]}]}]}]}]}]],
 $  "originalDomains": [["w",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["g", {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

@@ -8,11 +8,11 @@ find white_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..(1 + (n - 1
 find white_ExplicitVarSizeWithFlags_Values_1: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
 find white_ExplicitVarSizeWithFlags_Values_2: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
 maximising
-    sum([black_ExplicitVarSizeWithFlags_Flags[q4] * 1 | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]) +
-    sum([white_ExplicitVarSizeWithFlags_Flags[q5] * 1 | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+    sum([black_ExplicitVarSizeWithFlags_Flags[q4] | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]) +
+    sum([white_ExplicitVarSizeWithFlags_Flags[q5] | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
 such that
-    sum([black_ExplicitVarSizeWithFlags_Flags[q6] * 1 | q6 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]) =
-    sum([white_ExplicitVarSizeWithFlags_Flags[q7] * 1 | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    sum([black_ExplicitVarSizeWithFlags_Flags[q6] | q6 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]) =
+    sum([white_ExplicitVarSizeWithFlags_Flags[q7] | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([black_ExplicitVarSizeWithFlags_Flags[q8] ->
          and([white_ExplicitVarSizeWithFlags_Flags[q9] ->
               black_ExplicitVarSizeWithFlags_Values_1[q8] != white_ExplicitVarSizeWithFlags_Values_1[q9] /\
@@ -61,9 +61,14 @@ $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [
 $                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

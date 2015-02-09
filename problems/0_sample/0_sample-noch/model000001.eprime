@@ -8,7 +8,7 @@ given s_Occurrence: matrix indexed by [int(1..n)] of bool
 find x_Occurrence: matrix indexed by [int(a..b)] of bool
 such that
     and([x_Occurrence[q1] -> s_Occurrence[q1] | q1 : int(a..b)]),
-    x_Occurrence[sum([x_Occurrence[q2] * 1 | q2 : int(a..b)])]
+    x_Occurrence[sum([x_Occurrence[q2] | q2 : int(a..b)])]
 
 $ Conjure's
 $ {"finds": ["x"],
@@ -22,7 +22,8 @@ $                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1,
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["p1", {"DomainInt": []}],
 $                      ["n",

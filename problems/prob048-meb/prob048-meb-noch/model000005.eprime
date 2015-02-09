@@ -12,11 +12,11 @@ find totalChildrenMatrix_ExplicitVarSizeWithMarker_Values: matrix indexed by [in
 minimising sum([nodeBroadcastPower[i] | i : int(1..numNodes)])
 such that
     and([i = j \/
-         sum([(q8 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[i] /\
-               or([q9 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[j] /\
-                   directChildrenMatrix_ExplicitVarSizeWithMarker_Values[j, q9] = directChildrenMatrix_ExplicitVarSizeWithMarker_Values[i, q8]
-                       | q9 : int(1..1 + (numNodes - 1))]))
-              * 1 | q8 : int(1..1 + (numNodes - 1))])
+         sum([q8 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[i] /\
+              or([q9 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[j] /\
+                  directChildrenMatrix_ExplicitVarSizeWithMarker_Values[j, q9] = directChildrenMatrix_ExplicitVarSizeWithMarker_Values[i, q8]
+                      | q9 : int(1..1 + (numNodes - 1))])
+                  | q8 : int(1..1 + (numNodes - 1))])
          = 0 | i : int(1..numNodes), j : int(1..numNodes)]),
     totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[initialNode] = numNodes,
     and([or([q10 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] /\ totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q10] = node
@@ -89,7 +89,10 @@ $                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
 $                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
 $                   [1, [1]], [1, [1]]],

@@ -8,7 +8,7 @@ letting q2 be n / 2
 find setB_Explicit: matrix indexed by [int(1..q2)] of int(1..n)
 such that
     sum(flatten([[1 | q10 : int(1..q1)], [1 | q11 : int(1..q2), !or([setA_Explicit[q12] = setB_Explicit[q11] | q12 : int(1..q1)])]; int(1..2)])) = n,
-    sum([or([setB_Explicit[q14] = setA_Explicit[q13] | q14 : int(1..q2)]) * 1 | q13 : int(1..q1)]) = 0,
+    sum([or([setB_Explicit[q14] = setA_Explicit[q13] | q14 : int(1..q2)]) | q13 : int(1..q1)]) = 0,
     sum([setA_Explicit[q5] | q5 : int(1..q1)]) = sum([setB_Explicit[q6] | q6 : int(1..q2)]),
     sum([setA_Explicit[q7] * setA_Explicit[q7] | q7 : int(1..q1)]) = sum([setB_Explicit[q8] * setB_Explicit[q8] | q8 : int(1..q2)]),
     and([setA_Explicit[q3] < setA_Explicit[q3 + 1] | q3 : int(1..q1 - 1)]),
@@ -31,7 +31,8 @@ $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

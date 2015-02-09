@@ -8,7 +8,7 @@ letting q2 be n / 2
 find setB_Occurrence: matrix indexed by [int(1..n)] of bool
 such that
     sum(flatten([[1 | q5 : int(1..n), setA_Occurrence[q5]], [1 | q5 : int(1..n), setB_Occurrence[q5], !setA_Occurrence[q5]]; int(1..2)])) = n,
-    sum([(setA_Occurrence[q6] /\ setB_Occurrence[q6]) * 1 | q6 : int(1..n)]) = 0,
+    sum([setA_Occurrence[q6] /\ setB_Occurrence[q6] | q6 : int(1..n)]) = 0,
     sum([setA_Occurrence[i] * i | i : int(1..n)]) = sum([setB_Occurrence[i] * i | i : int(1..n)]),
     sum([setA_Occurrence[i] * (i * i) | i : int(1..n)]) = sum([setB_Occurrence[i] * (i * i) | i : int(1..n)]),
     q1 = sum([setA_Occurrence[q3] | q3 : int(1..n)]),
@@ -30,6 +30,8 @@ $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1,
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],

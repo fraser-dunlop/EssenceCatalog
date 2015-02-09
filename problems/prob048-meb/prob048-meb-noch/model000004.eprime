@@ -11,18 +11,18 @@ find totalChildrenMatrix_Occurrence: matrix indexed by [int(1..numNodes), int(1.
 minimising sum([nodeBroadcastPower[i] | i : int(1..numNodes)])
 such that
     and([i = j \/
-         sum([(q6 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[i] /\
-               or([q7 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[j] /\
-                   directChildrenMatrix_ExplicitVarSizeWithMarker_Values[j, q7] = directChildrenMatrix_ExplicitVarSizeWithMarker_Values[i, q6]
-                       | q7 : int(1..1 + (numNodes - 1))]))
-              * 1 | q6 : int(1..1 + (numNodes - 1))])
+         sum([q6 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[i] /\
+              or([q7 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[j] /\
+                  directChildrenMatrix_ExplicitVarSizeWithMarker_Values[j, q7] = directChildrenMatrix_ExplicitVarSizeWithMarker_Values[i, q6]
+                      | q7 : int(1..1 + (numNodes - 1))])
+                  | q6 : int(1..1 + (numNodes - 1))])
          = 0 | i : int(1..numNodes), j : int(1..numNodes)]),
-    sum([totalChildrenMatrix_Occurrence[initialNode, q5] * 1 | q5 : int(1..numNodes)]) = numNodes,
+    sum([totalChildrenMatrix_Occurrence[initialNode, q5] | q5 : int(1..numNodes)]) = numNodes,
     and([totalChildrenMatrix_Occurrence[node, node] /\
          sum([(q3 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node]) *
-              sum([totalChildrenMatrix_Occurrence[directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q3], q8] * 1 | q8 : int(1..numNodes)])
+              sum([totalChildrenMatrix_Occurrence[directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q3], q8] | q8 : int(1..numNodes)])
                   | q3 : int(1..1 + (numNodes - 1))])
-         = sum([totalChildrenMatrix_Occurrence[node, q9] * 1 | q9 : int(1..numNodes)]) - 1
+         = sum([totalChildrenMatrix_Occurrence[node, q9] | q9 : int(1..numNodes)]) - 1
          /\
          and([q4 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] ->
               and([totalChildrenMatrix_Occurrence[directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q4], q10] -> totalChildrenMatrix_Occurrence[node, q10]
@@ -73,10 +73,16 @@ $                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, 
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["numNodes",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

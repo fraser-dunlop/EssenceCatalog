@@ -10,15 +10,15 @@ find totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(
 find totalChildrenMatrix_ExplicitVarSizeWithFlags_Values: matrix indexed by [int(1..numNodes), int(1..1 + (numNodes - 1))] of int(1..numNodes)
 minimising sum([nodeBroadcastPower[i] | i : int(1..numNodes)])
 such that
-    and([i = j \/ sum([(directChildrenMatrix_Occurrence[i, q3] /\ directChildrenMatrix_Occurrence[j, q3]) * 1 | q3 : int(1..numNodes)]) = 0
+    and([i = j \/ sum([directChildrenMatrix_Occurrence[i, q3] /\ directChildrenMatrix_Occurrence[j, q3] | q3 : int(1..numNodes)]) = 0
              | i : int(1..numNodes), j : int(1..numNodes)]),
-    sum([totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags[initialNode, q5] * 1 | q5 : int(1..1 + (numNodes - 1))]) = numNodes,
+    sum([totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags[initialNode, q5] | q5 : int(1..1 + (numNodes - 1))]) = numNodes,
     and([or([totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags[node, q6] /\ totalChildrenMatrix_ExplicitVarSizeWithFlags_Values[node, q6] = node
                  | q6 : int(1..1 + (numNodes - 1))])
          /\
-         sum([directChildrenMatrix_Occurrence[node, i] * sum([totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags[i, q7] * 1 | q7 : int(1..1 + (numNodes - 1))])
+         sum([directChildrenMatrix_Occurrence[node, i] * sum([totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags[i, q7] | q7 : int(1..1 + (numNodes - 1))])
                   | i : int(1..numNodes)])
-         = sum([totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags[node, q8] * 1 | q8 : int(1..1 + (numNodes - 1))]) - 1
+         = sum([totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags[node, q8] | q8 : int(1..1 + (numNodes - 1))]) - 1
          /\
          and([directChildrenMatrix_Occurrence[node, childNode] ->
               and([totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags[childNode, q9] ->
@@ -77,6 +77,14 @@ $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
