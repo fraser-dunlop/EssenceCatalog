@@ -9,6 +9,6 @@ function conjure_noch {
 # timestamp: 20141203-115937
 function conjure_compact {
     parallel --tag --joblog parallel-joblog-compact --results parallel-results-compact \
-        "conjure -q f -a f {} -o {.}-compact" ::: $(find problems -name *.essence)
+        "conjure -q f -a c {} -o {.}-compact" ::: $(find problems -name *.essence)
     find parallel-results-compact -type f -size 0 -delete
 }
