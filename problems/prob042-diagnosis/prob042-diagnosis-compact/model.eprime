@@ -3,29 +3,30 @@ language ESSENCE' 1.0
 given numGates: int(1..)
 given p1: int
 given p2: int
-given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..numGates), int(1..p2), int(1..2)] of bool
-given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..numGates), int(1..p2)] of bool
-letting q1 be -1
+given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker: matrix indexed by [int(1..numGates)] of int(0..p2)
+given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..numGates), int(1..p2), int(1..2)] of bool
+given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2: matrix indexed by [int(1..numGates), int(1..p2)] of bool
 given p3: int
-given gateInpts_Function1D: matrix indexed by [int(1..numGates), int(1..2)] of int(q1..numGates)
+given gateInpts_Function1D: matrix indexed by [int(1..numGates), int(1..2)] of int(-1..numGates)
 given p4: int
 given finalOutputs_Function1DPartial_Flags: matrix indexed by [int(1..numGates)] of bool
 given finalOutputs_Function1DPartial_Values: matrix indexed by [int(1..numGates)] of bool
 find faultyGates_Function1DPartial_Flags: matrix indexed by [int(1..numGates)] of bool
 find faultyGates_Function1DPartial_Values: matrix indexed by [int(1..numGates)] of bool
-minimising sum([faultyGates_Function1DPartial_Flags[q6] | q6 : int(1..numGates)])
+minimising sum([faultyGates_Function1DPartial_Flags[q5] | q5 : int(1..numGates)])
 such that
     or([gateOutput_Function1D[-1] = false /\ gateOutput_Function1D[0] = true /\
-        and([or([and([gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_Explicit_1[gate, q4, q3] =
-                      [gateOutput_Function1D[gateInpts_Function1D[gate, 1]], gateOutput_Function1D[gateInpts_Function1D[gate, 2]]; int(1..2)][q3]
-                          | q3 : int(1..2)])
-                 /\ gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_Explicit_2[gate, q4] = gateOutput_Function1D[gate]
-                     | q4 : int(1..p2)])
+        and([or([and([gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[gate, q3, q2] =
+                      [gateOutput_Function1D[gateInpts_Function1D[gate, 1]], gateOutput_Function1D[gateInpts_Function1D[gate, 2]]; int(1..2)][q2]
+                          | q2 : int(1..2)])
+                 /\ gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[gate, q3] = gateOutput_Function1D[gate]
+                     | q3 : int(1..p2), q3 <= gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker[gate]])
              \/ gateOutput_Function1D[gate] = faultyGates_Function1DPartial_Values[gate] /\ faultyGates_Function1DPartial_Flags[gate]
                  | gate : int(1..numGates)])
-        /\ and([gateOutput_Function1D[q7] = finalOutputs_Function1DPartial_Values[q7] | q7 : int(1..numGates), finalOutputs_Function1DPartial_Flags[q7]])
+        /\ and([gateOutput_Function1D[q6] = finalOutputs_Function1DPartial_Values[q6] | q6 : int(1..numGates), finalOutputs_Function1DPartial_Flags[q6]])
             | gateOutput_Function1D : matrix indexed by [int(-1..numGates)] of bool]),
-    and([faultyGates_Function1DPartial_Flags[q2] = false -> faultyGates_Function1DPartial_Values[q2] = false | q2 : int(1..numGates)])
+    and([faultyGates_Function1DPartial_Flags[q1] = false -> faultyGates_Function1DPartial_Values[q1] = false | q1 : int(1..numGates)])
 
 $ Conjure's
 $ {"finds": ["faultyGates"],
@@ -40,7 +41,8 @@ $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4,
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]],
 $                   [1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
 $                     22]],
@@ -50,8 +52,8 @@ $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
@@ -91,10 +93,10 @@ $                                                                               
 $                                                                                                            "numGates",
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
 $                                           {"DomainFunction": [{"HasRepresentation": "FunctionAsRelation"},
-$                                                               [{"SizeAttr_Size": {"Reference": ["p2",
-$                                                                                                 {"DeclHasRepr": ["Given",
-$                                                                                                                  "p2",
-$                                                                                                                  {"DomainInt": []}]}]}},
+$                                                               [{"SizeAttr_MaxSize": {"Reference": ["p2",
+$                                                                                                    {"DeclHasRepr": ["Given",
+$                                                                                                                     "p2",
+$                                                                                                                     {"DomainInt": []}]}]}},
 $                                                                "PartialityAttr_Partial", "JectivityAttr_None"],
 $                                                               {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                                                  {"Constant": {"ConstantInt": 2}}]}]},
@@ -113,8 +115,7 @@ $                                                                               
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
 $                                           {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                              {"Constant": {"ConstantInt": 2}}]}]},
-$                                                             {"DomainInt": [{"RangeBounded": [{"Reference": ["q1",
-$                                                                                                             {"Alias": {"Op": {"MkOpNegate": {"Constant": {"ConstantInt": 1}}}}}]},
+$                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": -1}},
 $                                                                                              {"Reference": ["numGates",
 $                                                                                                             {"DeclHasRepr": ["Given",
 $                                                                                                                              "numGates",
@@ -131,6 +132,50 @@ $                                                                               
 $                                                                                                            "numGates",
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
 $                                           {"DomainBool": []}]}]],
+$  "representationsTree": [["numGates",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["p1",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["p2",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["p3",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["p4",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["faultyGates",
+$                           {"rootLabel": {"HasRepresentation": "Function1DPartial"},
+$                            "subForest": [{"rootLabel": null,
+$                                           "subForest": []},
+$                                          {"rootLabel": null,
+$                                           "subForest": []}]}],
+$                          ["gateFuncs",
+$                           {"rootLabel": {"HasRepresentation": "Function1D"},
+$                            "subForest": [{"rootLabel": null,
+$                                           "subForest": []},
+$                                          {"rootLabel": {"HasRepresentation": "FunctionAsRelation"},
+$                                           "subForest": [{"rootLabel": null,
+$                                                          "subForest": [{"rootLabel": null,
+$                                                                         "subForest": []}]},
+$                                                         {"rootLabel": null,
+$                                                          "subForest": []}]}]}],
+$                          ["gateInpts",
+$                           {"rootLabel": {"HasRepresentation": "Function1D"},
+$                            "subForest": [{"rootLabel": null,
+$                                           "subForest": []},
+$                                          {"rootLabel": null,
+$                                           "subForest": [{"rootLabel": null,
+$                                                          "subForest": []}]}]}],
+$                          ["finalOutputs",
+$                           {"rootLabel": {"HasRepresentation": "Function1DPartial"},
+$                            "subForest": [{"rootLabel": null,
+$                                           "subForest": []},
+$                                          {"rootLabel": null,
+$                                           "subForest": []}]}]],
 $  "originalDomains": [["numGates",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["gateFuncs",
@@ -152,8 +197,7 @@ $                                           {"DomainInt": [{"RangeBounded": [{"C
 $                                                                            {"Reference": ["numGates", null]}]}]},
 $                                           {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                              {"Constant": {"ConstantInt": 2}}]}]},
-$                                                             {"DomainInt": [{"RangeBounded": [{"Reference": ["q1",
-$                                                                                                             null]},
+$                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": -1}},
 $                                                                                              {"Reference": ["numGates",
 $                                                                                                             null]}]}]}]}]}],
 $                      ["finalOutputs",

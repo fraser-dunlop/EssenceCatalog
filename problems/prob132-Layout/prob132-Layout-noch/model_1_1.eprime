@@ -8,8 +8,9 @@ given grid_Explicit_1: matrix indexed by [int(1..p1)] of int(1..x_max)
 given grid_Explicit_2: matrix indexed by [int(1..p1)] of int(1..y_max)
 given p2: int
 given p3: int
-given form_Function1D_Explicit_1: matrix indexed by [int(1..n_shapes), int(1..p3)] of int(1..x_max)
-given form_Function1D_Explicit_2: matrix indexed by [int(1..n_shapes), int(1..p3)] of int(1..y_max)
+given form_Function1D_ExplicitVarSizeWithMarker_Marker: matrix indexed by [int(1..n_shapes)] of int(0..p3)
+given form_Function1D_ExplicitVarSizeWithMarker_Values_1: matrix indexed by [int(1..n_shapes), int(1..p3)] of int(1..x_max)
+given form_Function1D_ExplicitVarSizeWithMarker_Values_2: matrix indexed by [int(1..n_shapes), int(1..p3)] of int(1..y_max)
 find layout_FunctionNDPartial_Flags: matrix indexed by [int(1..x_max), int(1..y_max)] of bool
 find layout_FunctionNDPartial_Values: matrix indexed by [int(1..x_max), int(1..y_max)] of int(1..n_shapes)
 such that
@@ -20,17 +21,18 @@ such that
                               | q2_1 : int(1..x_max), q2_2 : int(1..y_max)])
                           | q10_1 : int(1..x_max), q10_2 : int(1..y_max)])
                  /\
-                 and([layout_FunctionNDPartial_Values[min([q5 | q5 : int(1..x_max), sx_Occurrence[q5]]) + form_Function1D_Explicit_1[s, q12],
-                                                      min([q6 | q6 : int(1..y_max), sy_Occurrence[q6]]) + form_Function1D_Explicit_2[s, q12]]
+                 and([layout_FunctionNDPartial_Values[min([q5 | q5 : int(1..x_max), sx_Occurrence[q5]]) + form_Function1D_ExplicitVarSizeWithMarker_Values_1[s, q12],
+                                                      min([q6 | q6 : int(1..y_max), sy_Occurrence[q6]]) + form_Function1D_ExplicitVarSizeWithMarker_Values_2[s, q12]]
                       = s
                       /\
-                      layout_FunctionNDPartial_Flags[min([q7 | q7 : int(1..x_max), sx_Occurrence[q7]]) + form_Function1D_Explicit_1[s, q12],
-                                                     min([q8 | q8 : int(1..y_max), sy_Occurrence[q8]]) + form_Function1D_Explicit_2[s, q12]]
-                          | q12 : int(1..p3)])
+                      layout_FunctionNDPartial_Flags[min([q7 | q7 : int(1..x_max), sx_Occurrence[q7]]) + form_Function1D_ExplicitVarSizeWithMarker_Values_1[s, q12],
+                                                     min([q8 | q8 : int(1..y_max), sy_Occurrence[q8]]) + form_Function1D_ExplicitVarSizeWithMarker_Values_2[s, q12]]
+                          | q12 : int(1..p3), q12 <= form_Function1D_ExplicitVarSizeWithMarker_Marker[s]])
                      | sy_Occurrence : matrix indexed by [int(1..y_max)] of bool])
                  | sx_Occurrence : matrix indexed by [int(1..x_max)] of bool])
              | s : int(1..n_shapes)]),
-    and([p3 = sum([layout_FunctionNDPartial_Flags[q9_1, q9_2] /\ layout_FunctionNDPartial_Values[q9_1, q9_2] = s | q9_1 : int(1..x_max), q9_2 : int(1..y_max)])
+    and([form_Function1D_ExplicitVarSizeWithMarker_Marker[s] =
+         sum([layout_FunctionNDPartial_Flags[q9_1, q9_2] /\ layout_FunctionNDPartial_Values[q9_1, q9_2] = s | q9_1 : int(1..x_max), q9_2 : int(1..y_max)])
              | s : int(1..n_shapes)]),
     and([layout_FunctionNDPartial_Flags[q1_1, q1_2] = false -> layout_FunctionNDPartial_Values[q1_1, q1_2] = 1 | q1_1 : int(1..x_max), q1_2 : int(1..y_max)])
 
@@ -141,11 +143,11 @@ $                                                                            {"R
 $                                                                                           {"DeclHasRepr": ["Given",
 $                                                                                                            "n_shapes",
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                           {"DomainSet": [{"HasRepresentation": "Explicit"},
-$                                                          {"SizeAttr_Size": {"Reference": ["p3",
-$                                                                                           {"DeclHasRepr": ["Given",
-$                                                                                                            "p3",
-$                                                                                                            {"DomainInt": []}]}]}},
+$                                           {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
+$                                                          {"SizeAttr_MaxSize": {"Reference": ["p3",
+$                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                               "p3",
+$                                                                                                               {"DomainInt": []}]}]}},
 $                                                          {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                                            {"Reference": ["x_max",
 $                                                                                                                           {"DeclHasRepr": ["Given",
@@ -156,6 +158,50 @@ $                                                                               
 $                                                                                                                           {"DeclHasRepr": ["Given",
 $                                                                                                                                            "y_max",
 $                                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]}]],
+$  "representationsTree": [["n_shapes",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["x_max",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["y_max",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["p1",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["p2",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["p3",
+$                           {"rootLabel": null,
+$                            "subForest": []}],
+$                          ["grid",
+$                           {"rootLabel": {"HasRepresentation": "Explicit"},
+$                            "subForest": [{"rootLabel": null,
+$                                           "subForest": [{"rootLabel": null,
+$                                                          "subForest": []},
+$                                                         {"rootLabel": null,
+$                                                          "subForest": []}]}]}],
+$                          ["layout",
+$                           {"rootLabel": {"HasRepresentation": "FunctionNDPartial"},
+$                            "subForest": [{"rootLabel": null,
+$                                           "subForest": [{"rootLabel": null,
+$                                                          "subForest": []},
+$                                                         {"rootLabel": null,
+$                                                          "subForest": []}]},
+$                                          {"rootLabel": null,
+$                                           "subForest": []}]}],
+$                          ["form",
+$                           {"rootLabel": {"HasRepresentation": "Function1D"},
+$                            "subForest": [{"rootLabel": null,
+$                                           "subForest": []},
+$                                          {"rootLabel": {"HasRepresentation": "ExplicitVarSizeWithMarker"},
+$                                           "subForest": [{"rootLabel": null,
+$                                                          "subForest": [{"rootLabel": null,
+$                                                                         "subForest": []},
+$                                                                        {"rootLabel": null,
+$                                                                         "subForest": []}]}]}]}]],
 $  "originalDomains": [["x_max",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      ["y_max",
