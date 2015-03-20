@@ -1,0 +1,31 @@
+language Essence 1.3
+
+given k : int(1..) $ the size of a red graph
+given l : int(1..) $ the size of a blue graph
+given r : int(1..) $ the proposed ramsey number
+
+letting Colour be new type enum {red,blue}
+letting V be domain int(0..r-1)
+$ These could be sets, but the model is not good yet.
+$letting E be domain set(size 2) of V
+letting E be domain (V,V)
+
+find colouring : function(total) E --> Colour
+
+such that
+  $ All subgraphs of size k have at least one blue element
+  forAll g : set (size k) of V .
+    $exists {v,u} subsetEq g . colouring({u,v}) = blue,
+    exists {v,u} subsetEq g . colouring((v,u)) = blue,
+
+  $ All subgraphs of size l have at least one red element
+  forAll g : set (size l) of V .
+    exists {v,u} subsetEq g . colouring((v,u)) = red,
+
+  $ Edges are the same in both directions
+  forAll u,v : V .
+    colouring((v,u)) = colouring((u,v)),
+
+  $ Set all loops to red as they shouldn't be here anyway!
+  forAll u : V .
+    colouring((u,u)) = red
