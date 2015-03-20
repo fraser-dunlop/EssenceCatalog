@@ -4,8 +4,6 @@ $ all data in Table 1 of the paper and in csplib
 $ csplib says 6 time periods.
 $ Reduced period to 5 here, otherwise suspect a bit hard
 
-$ Really should have two uppers: one for capacity, one for crew
-letting n_upper be 12
 letting n_boats be 9
 letting n_periods be 5
 letting capacity be function(1 --> 6, 
