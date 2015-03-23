@@ -1,16 +1,24 @@
 
-# timestamp: 20141203-115734
-function conjure_noch {
-    parallel --tag --joblog parallel-joblog-noch --results parallel-results-noch \
-        "conjure --smart-filenames -q f -a x {} -o {.}-noch --channelling=no" ::: \
-            $(find problems -name *.essence | grep -v 'prob131\|prob116\|prob115\|prob123\|prob038\|prob031\|prob037\|prob128')
-    find parallel-results-noch -type f -size 0 -delete
-}
+function gen_eprimes {
 
-# timestamp: 20141203-115937
-function conjure_compact {
-    parallel --tag --joblog parallel-joblog-compact --results parallel-results-compact \
-        "conjure --smart-filenames -q f -a c {} -o {.}-compact --channelling=no" ::: \
-            $(find problems -name *.essence)
-    find parallel-results-compact -type f -size 0 -delete
+    # remove old eprimes
+    rm problems/*/*/*.eprime
+
+    # prepare the commands to be run
+    find problems -name "*.essence" > essences_all.temp
+    cp essences_all.temp essences_compact.temp
+    cat essences_all.temp | grep -v 'prob131\|prob116\|prob115\|prob123\|prob038\|prob031\|prob037\|prob128' > essences_noch.temp
+    parallel -j1 "echo conjure --smart-filenames -qf -ac {} --channelling=no -o {.}-compact" \
+        :::: essences_compact.temp > all_commands.temp
+    parallel -j1 "echo conjure --smart-filenames -qf -ax {} --channelling=no -o {.}-noch" \
+        :::: essences_noch.temp >> all_commands.temp
+
+    # run the commands
+    parallel --tag --joblog parallel-joblog --results parallel-results :::: all_commands.temp
+
+    # remove temp files
+    rm *.temp
+
+    # strip the json bits from the eprimes
+    parallel "[ -f {} ] && (cat {} | grep -v '\\$' > {}.temp ; mv {}.temp {})" ::: $(find problems -name "*.eprime")
 }
