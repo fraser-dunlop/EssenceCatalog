@@ -1,0 +1,20 @@
+language ESSENCE' 1.0
+
+given k: int(1..)
+given l: int(1..)
+given r: int(1..)
+find colouring_FunctionND:
+        matrix indexed by [int(0..r - 1), int(0..r - 1)] of int(1..2)
+such that
+    and([or([colouring_FunctionND[g_Explicit[q4], g_Explicit[q5]] = 2
+                 | q4 : int(1..k), q5 : int(1..k), q5 > q4])
+             | g_Explicit : matrix indexed by [int(1..k)] of int(0..r - 1),
+               and([g_Explicit[q1] < g_Explicit[q1 + 1] | q1 : int(1..k - 1)])]),
+    and([or([colouring_FunctionND[g_Explicit[q6], g_Explicit[q7]] = 1
+                 | q6 : int(1..l), q7 : int(1..l), q7 > q6])
+             | g_Explicit : matrix indexed by [int(1..l)] of int(0..r - 1),
+               and([g_Explicit[q2] < g_Explicit[q2 + 1] | q2 : int(1..l - 1)])]),
+    and([colouring_FunctionND[v, u] = colouring_FunctionND[u, v]
+             | u : int(0..r - 1), v : int(0..r - 1)]),
+    and([colouring_FunctionND[u, u] = 1 | u : int(0..r - 1)])
+
