@@ -6,73 +6,18 @@ letting q1 be colours - 1
 find clickMatrix: matrix indexed by [int(1..grid), int(1..grid)] of int(0..q1)
 maximising sum([clickMatrix[i, j] | i : int(1..grid), j : int(1..grid)])
 such that
-    and([sum([clickMatrix[i, j] | i : int(1..grid), j : int(1..grid)]) <= sum([simplerClickMatrix[i, j] | i : int(1..grid), j : int(1..grid)]) \/
-         or([(sum([clickMatrix[index, y] + clickMatrix[x, index] | index : int(1..grid)]) - clickMatrix[x, y]) % colours !=
-             (sum([simplerClickMatrix[index, y] + simplerClickMatrix[x, index] | index : int(1..grid)]) - simplerClickMatrix[x, y]) % colours
+    and([sum([clickMatrix[i, j] | i : int(1..grid), j : int(1..grid)]) <=
+         sum([simplerClickMatrix[i, j] | i : int(1..grid), j : int(1..grid)])
+         \/
+         or([(sum([clickMatrix[index, y] + clickMatrix[x, index] | index : int(1..grid)])
+              - clickMatrix[x, y])
+             % colours
+             !=
+             (sum([simplerClickMatrix[index, y] + simplerClickMatrix[x, index]
+                       | index : int(1..grid)])
+              - simplerClickMatrix[x, y])
+             % colours
                  | x : int(1..grid), y : int(1..grid)])
-             | simplerClickMatrix : matrix indexed by [int(1..grid), int(1..grid)] of int(0..colours - 1)])
+             | simplerClickMatrix : matrix indexed by [int(1..grid),
+                                                       int(1..grid)] of int(0..colours - 1)])
 
-$ Conjure's
-$ {"finds": ["clickMatrix"],
-$  "givens": ["grid", "colours"],
-$  "enumGivens": [],
-$  "enumLettings": [],
-$  "unnameds": [],
-$  "trailCompact": [[1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
-$  "trailVerbose": [],
-$  "representations": [["grid",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["colours",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["clickMatrix",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["grid",
-$                                                                                         {"DeclHasRepr": ["Given",
-$                                                                                                          "grid",
-$                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                         {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                            {"Reference": ["grid",
-$                                                                                                           {"DeclHasRepr": ["Given",
-$                                                                                                                            "grid",
-$                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                                            {"Reference": ["q1",
-$                                                                                                           {"Alias": {"Op": {"MkOpMinus": [{"Reference": ["colours",
-$                                                                                                                                                          {"DeclHasRepr": ["Given",
-$                                                                                                                                                                           "colours",
-$                                                                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                                                                                           {"Constant": {"ConstantInt": 1}}]}}}]}]}]}]}]}]],
-$  "representationsTree": [["clickMatrix",
-$                           [{"rootLabel": null,
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": [{"rootLabel": null,
-$                                                           "subForest": []}]}]}]],
-$                          ["colours",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["grid",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]]],
-$  "originalDomains": [["grid",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["colours",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["clickMatrix",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["grid", null]}]}]},
-$                                         {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                            {"Reference": ["grid",
-$                                                                                                           null]}]}]},
-$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                                            {"Reference": ["q1",
-$                                                                                                           null]}]}]}]}]}]]}

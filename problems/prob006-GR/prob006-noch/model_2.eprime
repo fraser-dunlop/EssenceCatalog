@@ -8,57 +8,18 @@ minimising max([Ticks_Explicit[q7] | q7 : int(1..n)])
 such that
     and([Ticks_Explicit[q2] < Ticks_Explicit[q3] ->
          and([Ticks_Explicit[q4] < Ticks_Explicit[q5] ->
-              (!(Ticks_Explicit[q2] = Ticks_Explicit[q4] /\ Ticks_Explicit[q3] = Ticks_Explicit[q5]) ->
-               max([[Ticks_Explicit[q2], Ticks_Explicit[q3]; int(1..2)][q6] | q6 : int(1..2)]) -
+              (!(Ticks_Explicit[q2] = Ticks_Explicit[q4] /\
+                 Ticks_Explicit[q3] = Ticks_Explicit[q5])
+               ->
+               max([[Ticks_Explicit[q2], Ticks_Explicit[q3]; int(1..2)][q6] | q6 : int(1..2)])
+               -
                min([[Ticks_Explicit[q2], Ticks_Explicit[q3]; int(1..2)][q8] | q8 : int(1..2)])
                !=
-               max([[Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)][q9] | q9 : int(1..2)]) -
-               min([[Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)][q10] | q10 : int(1..2)]))
+               max([[Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)][q9] | q9 : int(1..2)])
+               -
+               min([[Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)][q10]
+                        | q10 : int(1..2)]))
                   | q4 : int(1..n), q5 : int(1..n)])
              | q2 : int(1..n), q3 : int(1..n)]),
     and([Ticks_Explicit[q1] < Ticks_Explicit[q1 + 1] | q1 : int(1..n - 1)])
 
-$ Conjure's
-$ {"finds": ["Ticks"],
-$  "givens": ["n"],
-$  "enumGivens": [],
-$  "enumLettings": [],
-$  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [2, [1, 2]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]]],
-$  "trailVerbose": [],
-$  "representations": [["n", {"DomainInt": []}],
-$                      ["Ticks",
-$                       {"DomainSet": [{"HasRepresentation": "Explicit"},
-$                                      {"SizeAttr_Size": {"Reference": ["n",
-$                                                                       {"DeclHasRepr": ["Given", "n",
-$                                                                                        {"DomainInt": []}]}]}},
-$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                       {"Reference": ["bound",
-$                                                                                      {"Alias": {"Op": {"MkOpPow": [{"Constant": {"ConstantInt": 2}},
-$                                                                                                                    {"Reference": ["n",
-$                                                                                                                                   {"DeclHasRepr": ["Given",
-$                                                                                                                                                    "n",
-$                                                                                                                                                    {"DomainInt": []}]}]}]}}}]}]}]}]}]],
-$  "representationsTree": [["Ticks",
-$                           [{"rootLabel": {"HasRepresentation": "Explicit"},
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": []}]}]],
-$                          ["n",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]]],
-$  "originalDomains": [["n", {"DomainInt": []}],
-$                      ["Ticks",
-$                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": ["n", null]}},
-$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                       {"Reference": ["bound", null]}]}]}]}]]}

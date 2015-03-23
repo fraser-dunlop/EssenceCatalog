@@ -1,0 +1,209 @@
+language ESSENCE' 1.0
+
+given n_upper: int(1..100)
+given n_places: int(1..100)
+given n_words: int(1..100)
+given p1: int
+given length_Function1D: matrix indexed by [int(1..n_places)] of int(1..n_upper)
+given p2: int
+given inter_FunctionNDPartial_Flags:
+        matrix indexed by [int(1..n_places), int(1..n_places)] of bool
+given inter_FunctionNDPartial_Values_1:
+        matrix indexed by [int(1..n_places), int(1..n_places)] of int(1..n_upper)
+given inter_FunctionNDPartial_Values_2:
+        matrix indexed by [int(1..n_places), int(1..n_places)] of int(1..n_upper)
+given p3: int
+given p4: int
+given dict_Function1D_Function1DPartial_Flags:
+        matrix indexed by [int(1..n_words), int(1..n_upper)] of bool
+given dict_Function1D_Function1DPartial_Values:
+        matrix indexed by [int(1..n_words), int(1..n_upper)] of int(65..90)
+where
+    and([inter_FunctionNDPartial_Values_1[q44_2, q44_1] =
+         inter_FunctionNDPartial_Values_2[q44_1, q44_2]
+         /\
+         inter_FunctionNDPartial_Values_2[q44_2, q44_1] =
+         inter_FunctionNDPartial_Values_1[q44_1, q44_2]
+         /\ inter_FunctionNDPartial_Flags[q44_2, q44_1]
+             | q44_1 : int(1..n_places), q44_2 : int(1..n_places),
+               inter_FunctionNDPartial_Flags[q44_1, q44_2]])
+find q3_ExplicitVarSizeWithMarker_Marker:
+        int(0..2 ** ((1 + (n_upper - 1)) * 26))
+find q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags:
+        matrix indexed by [int(1..2 ** ((1 + (n_upper - 1)) * 26)),
+                           int(1..n_upper)] of bool
+find q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values:
+        matrix indexed by [int(1..2 ** ((1 + (n_upper - 1)) * 26)),
+                           int(1..n_upper)] of int(65..90)
+find q21_Occurrence:
+        matrix indexed by [int(1..n_words), int(1..2 ** ((1 + (n_upper - 1)) * 26)),
+                           int(1..n_upper)] of bool
+find q26_Occurrence:
+        matrix indexed by [int(1..n_words), int(1..2 ** ((1 + (n_upper - 1)) * 26)),
+                           int(1..n_upper)] of bool
+find q33_Occurrence:
+        matrix indexed by [int(1..2 ** ((1 + (n_upper - 1)) * 26)), int(1..n_words),
+                           int(1..n_upper)] of bool
+find q38_Occurrence:
+        matrix indexed by [int(1..2 ** ((1 + (n_upper - 1)) * 26)), int(1..n_words),
+                           int(1..n_upper)] of bool
+find q6_Occurrence:
+        matrix indexed by [int(1..2 ** ((1 + (n_upper - 1)) * 26)),
+                           int(1..n_upper)] of bool
+where
+    and([q9 <= q3_ExplicitVarSizeWithMarker_Marker ->
+         and([q6_Occurrence[q9, q11] ->
+              q11 = 1 \/
+              q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q9, q11 - 1]
+                  | q11 : int(1..n_upper)])
+             | q9 : int(1..2 ** ((1 + (n_upper - 1)) * 26))])
+find crossword_Function1D:
+        matrix indexed by [int(1..n_places)] of int(1..n_words)
+such that
+    and([q7 + 1 <= q3_ExplicitVarSizeWithMarker_Marker ->
+         q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q7, ..] <lex
+         q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q7 + 1, ..]
+         \/
+         and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q7, q13] =
+              q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q7 + 1, q13]
+                  | q13 : int(1..n_upper)])
+         /\ and([or([q13 = q16 | q16 : int(1..n_upper)]) | q13 : int(1..n_upper)])
+         /\ and([or([q13 = q16 | q16 : int(1..n_upper)]) | q13 : int(1..n_upper)])
+         /\
+         q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q7, ..] <lex
+         q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q7 + 1, ..]
+             | q7 : int(1..2 ** ((1 + (n_upper - 1)) * 26) - 1)]),
+    and([q7 > q3_ExplicitVarSizeWithMarker_Marker ->
+         and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q7, q41] =
+              false
+                  | q41 : int(1..n_upper)])
+         /\
+         and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q7, q45] = 65
+                  | q45 : int(1..n_upper)])
+             | q7 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([q7 <= q3_ExplicitVarSizeWithMarker_Marker ->
+         and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q7, q8] = false
+              -> q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q7, q8] = 65
+                  | q8 : int(1..n_upper)])
+             | q7 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([q7 <= q3_ExplicitVarSizeWithMarker_Marker ->
+         sum([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q7, q8]
+                  | q8 : int(1..n_upper)])
+         <= p4
+             | q7 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([and([and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q18,
+                                                                               q17]
+                   -> q21_Occurrence[q4, q18, q17]
+                       | q17 : int(1..n_upper)])
+                  | q18 : int(1..2 ** ((1 + (n_upper - 1)) * 26))])
+             | q4 : int(1..n_words)]),
+    and([and([and([q21_Occurrence[q4, q18, q23] ->
+                   or([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q18, q25] /\
+                       q25 = q23
+                           | q25 : int(1..n_upper)])
+                       | q23 : int(1..n_upper)])
+                  | q18 : int(1..2 ** ((1 + (n_upper - 1)) * 26))])
+             | q4 : int(1..n_words)]),
+    and([and([and([q26_Occurrence[q4, q18, q24]
+                       | q24 : int(1..n_upper), dict_Function1D_Function1DPartial_Flags[q4, q24]])
+                  | q18 : int(1..2 ** ((1 + (n_upper - 1)) * 26))])
+             | q4 : int(1..n_words)]),
+    and([and([and([q26_Occurrence[q4, q18, q28] ->
+                   or([q30 = q28
+                           | q30 : int(1..n_upper), dict_Function1D_Function1DPartial_Flags[q4, q30]])
+                       | q28 : int(1..n_upper)])
+                  | q18 : int(1..2 ** ((1 + (n_upper - 1)) * 26))])
+             | q4 : int(1..n_words)]),
+    and([or([q18 <= q3_ExplicitVarSizeWithMarker_Marker /\
+             (and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q18, q19] ->
+                   dict_Function1D_Function1DPartial_Values[q4, q19] =
+                   q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q18, q19]
+                   /\ dict_Function1D_Function1DPartial_Flags[q4, q19]
+                       | q19 : int(1..n_upper)])
+              /\
+              and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q18, q20] =
+                   dict_Function1D_Function1DPartial_Values[q4, q20]
+                   /\ q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q18, q20]
+                       | q20 : int(1..n_upper), dict_Function1D_Function1DPartial_Flags[q4, q20]])
+              /\
+              (and([q21_Occurrence[q4, q18, q22] ->
+                    dict_Function1D_Function1DPartial_Flags[q4, q22]
+                        | q22 : int(1..n_upper)])
+               /\
+               and([q26_Occurrence[q4, q18, q27] ->
+                    q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q18, q27]
+                        | q27 : int(1..n_upper)])))
+                 | q18 : int(1..2 ** ((1 + (n_upper - 1)) * 26))])
+             | q4 : int(1..n_words)]),
+    and([and([and([q33_Occurrence[q10, q5, q29]
+                       | q29 : int(1..n_upper), dict_Function1D_Function1DPartial_Flags[q5, q29]])
+                  | q5 : int(1..n_words)])
+             | q10 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([and([and([q33_Occurrence[q10, q5, q35] ->
+                   or([q37 = q35
+                           | q37 : int(1..n_upper), dict_Function1D_Function1DPartial_Flags[q5, q37]])
+                       | q35 : int(1..n_upper)])
+                  | q5 : int(1..n_words)])
+             | q10 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([and([and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q10,
+                                                                               q36]
+                   -> q38_Occurrence[q10, q5, q36]
+                       | q36 : int(1..n_upper)])
+                  | q5 : int(1..n_words)])
+             | q10 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([and([and([q38_Occurrence[q10, q5, q40] ->
+                   or([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q10, q42] /\
+                       q42 = q40
+                           | q42 : int(1..n_upper)])
+                       | q40 : int(1..n_upper)])
+                  | q5 : int(1..n_words)])
+             | q10 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([q10 <= q3_ExplicitVarSizeWithMarker_Marker ->
+         or([and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q10, q31]
+                  = dict_Function1D_Function1DPartial_Values[q5, q31]
+                  /\ q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q10, q31]
+                      | q31 : int(1..n_upper), dict_Function1D_Function1DPartial_Flags[q5, q31]])
+             /\
+             and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q10, q32] ->
+                  dict_Function1D_Function1DPartial_Values[q5, q32] =
+                  q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q10, q32]
+                  /\ dict_Function1D_Function1DPartial_Flags[q5, q32]
+                      | q32 : int(1..n_upper)])
+             /\
+             (and([q33_Occurrence[q10, q5, q34] ->
+                   q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q10, q34]
+                       | q34 : int(1..n_upper)])
+              /\
+              and([q38_Occurrence[q10, q5, q39] ->
+                   dict_Function1D_Function1DPartial_Flags[q5, q39]
+                       | q39 : int(1..n_upper)]))
+                 | q5 : int(1..n_words)])
+             | q10 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([and([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q9, q14]
+              -> q6_Occurrence[q9, q14]
+                  | q14 : int(1..n_upper)])
+             | q9 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([and([q6_Occurrence[q9, q12] ->
+              or([q3_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q9, q15] /\
+                  q15 = q12
+                      | q15 : int(1..n_upper)])
+                  | q12 : int(1..n_upper)])
+             | q9 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
+    and([sum([dict_Function1D_Function1DPartial_Flags[crossword_Function1D[p], q43]
+                  | q43 : int(1..n_upper)])
+         = length_Function1D[p]
+             | p : int(1..n_places)]),
+    and([and([dict_Function1D_Function1DPartial_Values[crossword_Function1D[q47_1],
+                                                       inter_FunctionNDPartial_Values_1[q47_1, q47_2]]
+              =
+              dict_Function1D_Function1DPartial_Values[crossword_Function1D[q47_2],
+                                                       inter_FunctionNDPartial_Values_2[q47_1, q47_2]],
+              dict_Function1D_Function1DPartial_Flags[crossword_Function1D[q47_1],
+                                                      inter_FunctionNDPartial_Values_1[q47_1, q47_2]],
+              dict_Function1D_Function1DPartial_Flags[crossword_Function1D[q47_2],
+                                                      inter_FunctionNDPartial_Values_2[q47_1, q47_2]]; int(1..3)])
+             | q47_1 : int(1..n_places), q47_2 : int(1..n_places),
+               inter_FunctionNDPartial_Flags[q47_1, q47_2]]),
+    and([crossword_Function1D[q1] = crossword_Function1D[q2] -> q1 = q2
+             | q1 : int(1..n_places), q2 : int(1..n_places)])
+

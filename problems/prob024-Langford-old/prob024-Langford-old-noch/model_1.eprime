@@ -1,0 +1,31 @@
+language ESSENCE' 1.0
+
+given k: int(1..5)
+given n: int(1..30)
+letting q1 be n * k
+find seq_Function1D: matrix indexed by [int(1..q1)] of int(1..n)
+find q5_Occurrence:
+        matrix indexed by [int(1..n), matrix indexed by [int(1..k)] of int(1..n * k),
+                           int(1..n * k), int(1..n * k)] of bool
+such that
+    and([and([and([and([q5_Occurrence[m, f_Function1D, i, f_Function1D[q4]]
+                            | q4 : int(1..k)])
+                       | i : int(1..n * k)])
+                  | f_Function1D : matrix indexed by [int(1..k)] of int(1..n * k)])
+             | m : int(1..n)]),
+    and([and([and([and([q5_Occurrence[m, f_Function1D, i, q7] ->
+                        or([f_Function1D[q9] = q7 | q9 : int(1..k)])
+                            | q7 : int(1..n * k)])
+                       | i : int(1..n * k)])
+                  | f_Function1D : matrix indexed by [int(1..k)] of int(1..n * k)])
+             | m : int(1..n)]),
+    and([or([and([or([q5_Occurrence[m, f_Function1D, i, q6] /\ q6 = i
+                          | q6 : int(1..n * k)])
+                  <-> or([seq_Function1D[q8] = m /\ q8 = i | q8 : int(1..q1)])
+                      | i : int(1..n * k)])
+             /\ and([f_Function1D[j + 1] - f_Function1D[j] = m + 1 | j : int(1..k - 1)])
+                 | f_Function1D : matrix indexed by [int(1..k)] of int(1..n * k),
+                   allDiff(f_Function1D)])
+             | m : int(1..n)]),
+    and([or([seq_Function1D[q3] = q2 | q3 : int(1..q1)]) | q2 : int(1..n)])
+

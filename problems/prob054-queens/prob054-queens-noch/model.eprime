@@ -2,60 +2,26 @@ language ESSENCE' 1.0
 
 given n: int(1..)
 find arrangement_Function1DPartial_Flags: matrix indexed by [int(1..n)] of bool
-find arrangement_Function1DPartial_Values: matrix indexed by [int(1..n)] of int(1..n)
+find arrangement_Function1DPartial_Values:
+        matrix indexed by [int(1..n)] of int(1..n)
 such that
-    and([and([|arrangement_Function1DPartial_Values[q1] - arrangement_Function1DPartial_Values[q2]| != |q1 - q2|, arrangement_Function1DPartial_Flags[q1],
+    and([and([|arrangement_Function1DPartial_Values[q1] -
+               arrangement_Function1DPartial_Values[q2]|
+              != |q1 - q2|,
+              arrangement_Function1DPartial_Flags[q1],
               arrangement_Function1DPartial_Flags[q2]; int(1..3)])
              | q1 : int(1..n), q2 : int(1..n), q1 < q2]),
-    and([arrangement_Function1DPartial_Flags[q3] /\ arrangement_Function1DPartial_Flags[q4] ->
-         arrangement_Function1DPartial_Values[q3] != arrangement_Function1DPartial_Values[q4]
+    and([arrangement_Function1DPartial_Flags[q3] /\
+         arrangement_Function1DPartial_Flags[q4]
+         ->
+         arrangement_Function1DPartial_Values[q3] !=
+         arrangement_Function1DPartial_Values[q4]
              | q3 : int(1..n), q4 : int(1..n), q3 != q4]),
-    and([or([arrangement_Function1DPartial_Flags[q4] /\ arrangement_Function1DPartial_Values[q4] = q3 | q4 : int(1..n)]) | q3 : int(1..n)]),
-    and([arrangement_Function1DPartial_Flags[q3] = false -> arrangement_Function1DPartial_Values[q3] = 1 | q3 : int(1..n)])
+    and([or([arrangement_Function1DPartial_Flags[q4] /\
+             arrangement_Function1DPartial_Values[q4] = q3
+                 | q4 : int(1..n)])
+             | q3 : int(1..n)]),
+    and([arrangement_Function1DPartial_Flags[q3] = false ->
+         arrangement_Function1DPartial_Values[q3] = 1
+             | q3 : int(1..n)])
 
-$ Conjure's
-$ {"finds": ["arrangement"],
-$  "givens": ["n"],
-$  "enumGivens": [],
-$  "enumLettings": [],
-$  "unnameds": [],
-$  "trailCompact": [[1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]],
-$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]]],
-$  "trailVerbose": [],
-$  "representations": [["n",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["arrangement",
-$                       {"DomainFunction": [{"HasRepresentation": "Function1DPartial"},
-$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_Bijective"],
-$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                            {"Reference": ["n",
-$                                                                                           {"DeclHasRepr": ["Given", "n",
-$                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                            {"Reference": ["n",
-$                                                                                           {"DeclHasRepr": ["Given", "n",
-$                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]],
-$  "representationsTree": [["arrangement",
-$                           [{"rootLabel": {"HasRepresentation": "Function1DPartial"},
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": []},
-$                                           {"rootLabel": null,
-$                                            "subForest": []}]}]],
-$                          ["n",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]]],
-$  "originalDomains": [["n",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["arrangement",
-$                       {"DomainFunction": [[],
-$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_Bijective"],
-$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                            {"Reference": ["n", null]}]}]},
-$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                            {"Reference": ["n", null]}]}]}]}]]}
