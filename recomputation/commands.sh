@@ -3,7 +3,7 @@
 function conjure_noch {
     parallel --tag --joblog parallel-joblog-noch --results parallel-results-noch \
         "conjure --smart-filenames -q f -a x {} -o {.}-noch --channelling=no" ::: \
-            $(find problems -name *.essence | grep -v 'prob131\|prob116\|prob115\|prob123\|prob038')
+            $(find problems -name *.essence | grep -v 'prob131\|prob116\|prob115\|prob123\|prob038\|prob031\|prob037\|prob128')
     find parallel-results-noch -type f -size 0 -delete
 }
 
