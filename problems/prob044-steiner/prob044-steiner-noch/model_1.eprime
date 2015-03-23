@@ -5,7 +5,11 @@ where n % 6 = 1 \/ n % 6 = 3
 letting nb be n * (n - 1) / 6
 find sets_Occurrence: matrix indexed by [int(1..nb), int(1..n)] of bool
 such that
-    and([and([sum([sets_Occurrence[setA, q3] /\ sets_Occurrence[setB, q3] | q3 : int(1..n)]) <= 1 | setB : int(setA + 1..nb)]) | setA : int(1..nb - 1)]),
+    and([and([sum([sets_Occurrence[setA, q3] /\ sets_Occurrence[setB, q3]
+                       | q3 : int(1..n)])
+              <= 1
+                  | setB : int(setA + 1..nb)])
+             | setA : int(1..nb - 1)]),
     and([3 = sum([sets_Occurrence[q1, q2] | q2 : int(1..n)]) | q1 : int(1..nb)])
 
 $ Conjure's
@@ -13,6 +17,7 @@ $ {"finds": ["sets"],
 $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],

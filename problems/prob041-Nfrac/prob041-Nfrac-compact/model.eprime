@@ -4,8 +4,12 @@ given n: int(1..)
 letting q1 be 3 * n
 find assign_Function1D: matrix indexed by [int(1..q1)] of int(1..9)
 such that
-    sum([assign_Function1D[3 * i + 1] / (assign_Function1D[3 * i + 2] * 10 + assign_Function1D[3 * i + 3]) | i : int(0..n - 1)]) = 1,
-    and([sum([assign_Function1D[i] = d | i : int(1..3 * n)]) <= (n + 1) / 3 | d : int(1..9)]),
+    sum([assign_Function1D[3 * i + 1] /
+         (assign_Function1D[3 * i + 2] * 10 + assign_Function1D[3 * i + 3])
+             | i : int(0..n - 1)])
+    = 1,
+    and([sum([assign_Function1D[i] = d | i : int(1..3 * n)]) <= (n + 1) / 3
+             | d : int(1..9)]),
     and([or([assign_Function1D[q3] = q2 | q3 : int(1..q1)]) | q2 : int(1..9)])
 
 $ Conjure's
@@ -13,6 +17,7 @@ $ {"finds": ["assign"],
 $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],

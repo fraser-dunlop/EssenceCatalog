@@ -1,0 +1,147 @@
+language ESSENCE' 1.0
+
+given k: int(1..5)
+given n: int(1..30)
+letting q1 be n * k
+find seq_Function1D: matrix indexed by [int(1..q1)] of int(1..n)
+find q5_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..n), matrix indexed by [int(1..k)] of int(1..n * k),
+                           int(1..n * k), int(1..1 + (n * k - 1))] of bool
+find q5_ExplicitVarSizeWithFlags_Values:
+        matrix indexed by [int(1..n), matrix indexed by [int(1..k)] of int(1..n * k),
+                           int(1..n * k), int(1..1 + (n * k - 1))] of int(1..n * k)
+such that
+    and([and([and([and([q5_ExplicitVarSizeWithFlags_Flags[m, f_Function1D, i,
+                                                          q4 + 1]
+                        ->
+                        q5_ExplicitVarSizeWithFlags_Values[m, f_Function1D, i, q4] <
+                        q5_ExplicitVarSizeWithFlags_Values[m, f_Function1D, i, q4 + 1]
+                            | q4 : int(1..1 + (n * k - 1) - 1)])
+                       | i : int(1..n * k)])
+                  | f_Function1D : matrix indexed by [int(1..k)] of int(1..n * k)])
+             | m : int(1..n)]),
+    and([and([and([and([q5_ExplicitVarSizeWithFlags_Flags[m, f_Function1D, i, q4] =
+                        false
+                        -> dontCare(q5_ExplicitVarSizeWithFlags_Values[m, f_Function1D, i, q4])
+                            | q4 : int(1..1 + (n * k - 1))])
+                       | i : int(1..n * k)])
+                  | f_Function1D : matrix indexed by [int(1..k)] of int(1..n * k)])
+             | m : int(1..n)]),
+    and([and([and([and([q5_ExplicitVarSizeWithFlags_Flags[m, f_Function1D, i,
+                                                          q4 + 1]
+                        -> q5_ExplicitVarSizeWithFlags_Flags[m, f_Function1D, i, q4]
+                            | q4 : int(1..1 + (n * k - 1) - 1)])
+                       | i : int(1..n * k)])
+                  | f_Function1D : matrix indexed by [int(1..k)] of int(1..n * k)])
+             | m : int(1..n)]),
+    and([and([and([and([or([q5_ExplicitVarSizeWithFlags_Flags[m, f_Function1D, i,
+                                                              q11]
+                            /\
+                            q5_ExplicitVarSizeWithFlags_Values[m, f_Function1D, i, q11] = f_Function1D[q6]
+                                | q11 : int(1..1 + (n * k - 1))])
+                            | q6 : int(1..k)])
+                       | i : int(1..n * k)])
+                  | f_Function1D : matrix indexed by [int(1..k)] of int(1..n * k)])
+             | m : int(1..n)]),
+    and([and([and([and([q5_ExplicitVarSizeWithFlags_Flags[m, f_Function1D, i, q10]
+                        ->
+                        or([f_Function1D[q7] =
+                            q5_ExplicitVarSizeWithFlags_Values[m, f_Function1D, i, q10]
+                                | q7 : int(1..k)])
+                            | q10 : int(1..1 + (n * k - 1))])
+                       | i : int(1..n * k)])
+                  | f_Function1D : matrix indexed by [int(1..k)] of int(1..n * k)])
+             | m : int(1..n)]),
+    and([or([and([or([q5_ExplicitVarSizeWithFlags_Flags[m, f_Function1D, i, q9] /\
+                      q5_ExplicitVarSizeWithFlags_Values[m, f_Function1D, i, q9] = i
+                          | q9 : int(1..1 + (n * k - 1))])
+                  <-> or([seq_Function1D[q8] = m /\ q8 = i | q8 : int(1..q1)])
+                      | i : int(1..n * k)])
+             /\ and([f_Function1D[j + 1] - f_Function1D[j] = m + 1 | j : int(1..k - 1)])
+                 | f_Function1D : matrix indexed by [int(1..k)] of int(1..n * k),
+                   allDiff(f_Function1D)])
+             | m : int(1..n)]),
+    and([or([seq_Function1D[q3] = q2 | q3 : int(1..q1)]) | q2 : int(1..n)])
+
+$ Conjure's
+$ {"finds": ["seq"],
+$  "givens": ["k", "n"],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "questionAnswered": [],
+$  "unnameds": [],
+$  "trailCompact": [[1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [3, [1, 2, 3]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$  "trailVerbose": [],
+$  "representations": [["n",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 30}}]}]}],
+$                      ["k",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 5}}]}]}],
+$                      ["seq",
+$                       {"DomainFunction": [{"HasRepresentation": "Function1D"},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_Surjective"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["q1",
+$                                                                                           {"Alias": {"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                   {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                                  [{"Reference": ["n",
+$                                                                                                                                                                                  {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                   "n",
+$                                                                                                                                                                                                   {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                    {"Constant": {"ConstantInt": 30}}]}]}]}]},
+$                                                                                                                                                                   {"Reference": ["k",
+$                                                                                                                                                                                  {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                   "k",
+$                                                                                                                                                                                                   {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                    {"Constant": {"ConstantInt": 5}}]}]}]}]}]]}}}}}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["n",
+$                                                                                           {"DeclHasRepr": ["Given", "n",
+$                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                             {"Constant": {"ConstantInt": 30}}]}]}]}]}]}]}]}]],
+$  "representationsTree": [["k",
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          ["n",
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          ["seq",
+$                           [{"rootLabel": {"HasRepresentation": "Function1D"},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]]],
+$  "originalDomains": [["k",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 5}}]}]}],
+$                      ["n",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 30}}]}]}],
+$                      ["seq",
+$                       {"DomainFunction": [[],
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_Surjective"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["q1", null]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["n", null]}]}]}]}]]}

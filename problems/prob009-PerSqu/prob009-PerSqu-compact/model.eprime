@@ -8,13 +8,18 @@ find x_Function1D: matrix indexed by [int(1..nbSizes)] of int(0..q1)
 letting q2 be container_size - 1
 find y_Function1D: matrix indexed by [int(1..nbSizes)] of int(0..q2)
 such that
-    and([x_Function1D[s] + s < container_size /\ y_Function1D[s] + s < container_size | s : int(1..nbSizes)]),
-    and([max([[x_Function1D[s1], x_Function1D[s2]; int(1..2)][q3] | q3 : int(1..2)]) -
-         min([[x_Function1D[s1] + s1, x_Function1D[s2] + s2; int(1..2)][q4] | q4 : int(1..2)])
+    and([x_Function1D[s] + s < container_size /\
+         y_Function1D[s] + s < container_size
+             | s : int(1..nbSizes)]),
+    and([max([[x_Function1D[s1], x_Function1D[s2]; int(1..2)][q3] | q3 : int(1..2)])
+         -
+         min([[x_Function1D[s1] + s1, x_Function1D[s2] + s2; int(1..2)][q4]
+                  | q4 : int(1..2)])
          >= 0
          \/
          max([[y_Function1D[s1], y_Function1D[s2]; int(1..2)][q5] | q5 : int(1..2)]) -
-         min([[y_Function1D[s1] + s1, y_Function1D[s2] + s2; int(1..2)][q6] | q6 : int(1..2)])
+         min([[y_Function1D[s1] + s1, y_Function1D[s2] + s2; int(1..2)][q6]
+                  | q6 : int(1..2)])
          >= 0
              | s1 : int(1..nbSizes), s2 : int(1..nbSizes), s1 != s2])
 
@@ -23,6 +28,7 @@ $ {"finds": ["x", "y"],
 $  "givens": ["nbSizes"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],

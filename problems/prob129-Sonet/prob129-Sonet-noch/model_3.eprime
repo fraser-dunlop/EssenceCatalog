@@ -4,57 +4,97 @@ given nnodes: int(1..)
 given nrings: int(1..)
 given capacity: int(1..)
 given p1: int
-given demand_Explicit_Occurrence: matrix indexed by [int(1..p1), int(1..nnodes)] of bool
-find network_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..nrings)] of int(0..min(nrings, 2 ** (1 + (nnodes - 1))))
-find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..nrings), int(1..capacity)] of bool
-find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values: matrix indexed by [int(1..nrings), int(1..capacity)] of int(1..nnodes)
+given demand_Explicit_Occurrence:
+        matrix indexed by [int(1..p1), int(1..nnodes)] of bool
+find network_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..nrings)] of int(0..min([nrings,
+                                                          2 ** (1 + (nnodes - 1)); int(1..2)]))
+find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..nrings), int(1..capacity)] of bool
+find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values:
+        matrix indexed by [int(1..nrings), int(1..capacity)] of int(1..nnodes)
 minimising
     sum([(network_ExplicitVarSizeWithFlags_Flags[q3] > 0) *
-         sum([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q3, q7] | q7 : int(1..capacity)])
+         sum([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q3,
+                                                                                     q7]
+                  | q7 : int(1..capacity)])
              | q3 : int(1..nrings)])
 such that
     and([or([network_ExplicitVarSizeWithFlags_Flags[q5] > 0 /\
-             and([or([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q5, q9] /\
-                      network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q5, q9] = q6
+             and([or([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q5,
+                                                                                             q9]
+                      /\
+                      network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q5, q9]
+                      = q6
                           | q9 : int(1..capacity)])
                       | q6 : int(1..nnodes), demand_Explicit_Occurrence[q4, q6]])
                  | q5 : int(1..nrings)])
              | q4 : int(1..p1)]),
     and([network_ExplicitVarSizeWithFlags_Flags[q1 + 1] > 0 ->
-         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, ..] <lex
-         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1 + 1, ..]
+         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, ..]
+         <lex
+         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1 + 1,
+                                                                                ..]
          \/
-         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q8] =
-              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1 + 1, q8]
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                     q8]
+              =
+              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1 + 1,
+                                                                                     q8]
                   | q8 : int(1..capacity)])
+         /\ and([or([q8 = q10 | q10 : int(1..capacity)]) | q8 : int(1..capacity)])
+         /\ and([or([q8 = q10 | q10 : int(1..capacity)]) | q8 : int(1..capacity)])
          /\
-         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, ..] <lex
-         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1 + 1, ..]
+         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, ..]
+         <lex
+         network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1 + 1,
+                                                                                 ..]
              | q1 : int(1..nrings - 1)]),
     and([network_ExplicitVarSizeWithFlags_Flags[q1] = 0 ->
-         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q10] = false | q10 : int(1..capacity)]) /\
-         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q11] = 1 | q11 : int(1..capacity)])
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                     q11]
+              = false
+                  | q11 : int(1..capacity)])
+         /\
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1,
+                                                                                      q12]
+              = 1 | q12 : int(1..capacity)])
              | q1 : int(1..nrings)]),
-    and([network_ExplicitVarSizeWithFlags_Flags[q1 + 1] > 0 -> network_ExplicitVarSizeWithFlags_Flags[q1] > 0 | q1 : int(1..nrings - 1)]),
-    nrings = sum([network_ExplicitVarSizeWithFlags_Flags[q1] | q1 : int(1..nrings)]),
+    and([network_ExplicitVarSizeWithFlags_Flags[q1 + 1] > 0 ->
+         network_ExplicitVarSizeWithFlags_Flags[q1] > 0
+             | q1 : int(1..nrings - 1)]),
+    nrings =
+    sum([network_ExplicitVarSizeWithFlags_Flags[q1] | q1 : int(1..nrings)]),
     and([network_ExplicitVarSizeWithFlags_Flags[q1] > 0 ->
-         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2 + 1] ->
-              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q2] <
-              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q2 + 1]
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                     q2 + 1]
+              ->
+              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q2]
+              <
+              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1,
+                                                                                      q2 + 1]
                   | q2 : int(1..capacity - 1)])
              | q1 : int(1..nrings)]),
     and([network_ExplicitVarSizeWithFlags_Flags[q1] > 0 ->
-         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2] = false ->
-              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q2] = 1
-                  | q2 : int(1..capacity)])
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                     q2]
+              = false
+              ->
+              network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Values[q1, q2]
+              = 1 | q2 : int(1..capacity)])
              | q1 : int(1..nrings)]),
     and([network_ExplicitVarSizeWithFlags_Flags[q1] > 0 ->
-         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2 + 1] ->
+         and([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                     q2 + 1]
+              ->
               network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2]
                   | q2 : int(1..capacity - 1)])
              | q1 : int(1..nrings)]),
     and([network_ExplicitVarSizeWithFlags_Flags[q1] > 0 ->
-         sum([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1, q2] | q2 : int(1..capacity)]) <= capacity
+         sum([network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                     q2]
+                  | q2 : int(1..capacity)])
+         <= capacity
              | q1 : int(1..nrings)])
 
 $ Conjure's
@@ -62,6 +102,7 @@ $ {"finds": ["network"],
 $  "givens": ["nnodes", "nrings", "capacity", "demand"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
@@ -79,15 +120,15 @@ $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2,
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["nnodes",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

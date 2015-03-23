@@ -5,13 +5,15 @@ find m: matrix indexed by [int(1..indexSize), int(1..indexSize)] of bool
 such that
     and([sum([!m[r, c] | c : int(1..indexSize)]) = 11 | r : int(1..indexSize)]),
     and([sum([!m[r, c] | r : int(1..indexSize)]) = 11 | c : int(1..indexSize)]),
-    and([sum([!(m[r1, c] \/ m[r2, c]) | c : int(1..indexSize)]) = 1 | r1 : int(1..indexSize), r2 : int(1..indexSize), r1 != r2])
+    and([sum([!(m[r1, c] \/ m[r2, c]) | c : int(1..indexSize)]) = 1
+             | r1 : int(1..indexSize), r2 : int(1..indexSize), r1 != r2])
 
 $ Conjure's
 $ {"finds": ["m"],
 $  "givens": ["indexSize"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [["Index", {"Reference": ["indexSize", null]}]],
 $  "trailCompact": [[1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]],

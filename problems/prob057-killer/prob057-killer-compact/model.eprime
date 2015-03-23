@@ -4,20 +4,29 @@ given gridSize: int(1..)
 given numHints: int(1..)
 given maxHintCells: int(1..)
 letting hintSumIndex be maxHintCells + 1
-given hintMatrix: matrix indexed by [int(1..numHints), int(1..hintSumIndex), int(1..2)] of int(0..)
+given hintMatrix:
+        matrix indexed by [int(1..numHints), int(1..hintSumIndex),
+                           int(1..2)] of int(0..)
 letting q1 be gridSize * gridSize
 letting q2 be gridSize * gridSize
 letting q3 be gridSize * gridSize
 find solutionGrid: matrix indexed by [int(1..q1), int(1..q2)] of int(1..q3)
 such that
-    and([allDiff(solutionGrid[.., i]) /\ allDiff(solutionGrid[i, ..]) | i : int(1..gridSize * gridSize)]),
-    and([or([and([numberMapping_Function1D[boxColumn + (boxRow - 1) * gridSize] = solutionGrid[gridColumn * gridSize + boxColumn, gridRow * gridSize + boxRow]
+    and([allDiff(solutionGrid[.., i, ..]) /\ allDiff(solutionGrid[i, .., ..])
+             | i : int(1..gridSize * gridSize)]),
+    and([or([and([numberMapping_Function1D[boxColumn + (boxRow - 1) * gridSize] =
+                  solutionGrid[gridColumn * gridSize + boxColumn, gridRow * gridSize + boxRow]
                       | boxColumn : int(1..gridSize), boxRow : int(1..gridSize)])
-                 | numberMapping_Function1D : matrix indexed by [int(1..gridSize * gridSize)] of int(1..gridSize * gridSize), allDiff(numberMapping_Function1D),
-                   and([or([numberMapping_Function1D[q5] = q4 | q5 : int(1..gridSize * gridSize)]) | q4 : int(1..gridSize * gridSize)])])
+                 | numberMapping_Function1D : matrix indexed by [int(1..gridSize *
+                                                                        gridSize)] of int(1..gridSize * gridSize),
+                   allDiff(numberMapping_Function1D),
+                   and([or([numberMapping_Function1D[q5] = q4 | q5 : int(1..gridSize * gridSize)])
+                            | q4 : int(1..gridSize * gridSize)])])
              | gridColumn : int(0..gridSize - 1), gridRow : int(0..gridSize - 1)]),
-    and([sum([solutionGrid[hintMatrix[hintSet, index, 1], hintMatrix[hintSet, index, 2]] | index : int(1..hintMatrix[hintSet, hintSumIndex, 2])]) =
-         hintMatrix[hintSet, hintSumIndex, 1]
+    and([sum([solutionGrid[hintMatrix[hintSet, index, 1],
+                           hintMatrix[hintSet, index, 2]]
+                  | index : int(1..hintMatrix[hintSet, hintSumIndex, 2])])
+         = hintMatrix[hintSet, hintSumIndex, 1]
              | hintSet : int(1..numHints)])
 
 $ Conjure's
@@ -25,6 +34,7 @@ $ {"finds": ["solutionGrid"],
 $  "givens": ["gridSize", "numHints", "maxHintCells", "hintMatrix"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1]], [1, [1]],
 $                   [1,

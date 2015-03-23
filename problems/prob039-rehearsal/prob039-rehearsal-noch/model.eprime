@@ -5,23 +5,31 @@ given n_players: int(1..)
 given p1: int
 given duration_Function1D: matrix indexed by [int(1..n_pieces)] of int(1..)
 given p2: int
-given plays_in_RelationAsMatrix: matrix indexed by [int(1..n_players), int(1..n_pieces)] of bool
+given plays_in_RelationAsMatrix:
+        matrix indexed by [int(1..n_players), int(1..n_pieces)] of bool
 find order_Function1D: matrix indexed by [int(1..n_pieces)] of int(1..n_pieces)
-find arrive_Function1D: matrix indexed by [int(1..n_players)] of int(1..n_pieces)
+find arrive_Function1D:
+        matrix indexed by [int(1..n_players)] of int(1..n_pieces)
 find leave_Function1D: matrix indexed by [int(1..n_players)] of int(1..n_pieces)
 such that
-    and([plays_in_RelationAsMatrix[p, arrive_Function1D[p]] | p : int(1..n_players)]),
-    and([plays_in_RelationAsMatrix[p, leave_Function1D[p]] | p : int(1..n_players)]),
-    and([and([plays_in_RelationAsMatrix[p, order_Function1D[i]] -> arrive_Function1D[p] <= i /\ leave_Function1D[p] >= i | i : int(1..n_pieces)])
+    and([plays_in_RelationAsMatrix[p, arrive_Function1D[p]]
+             | p : int(1..n_players)]),
+    and([plays_in_RelationAsMatrix[p, leave_Function1D[p]]
+             | p : int(1..n_players)]),
+    and([and([plays_in_RelationAsMatrix[p, order_Function1D[i]] ->
+              arrive_Function1D[p] <= i /\ leave_Function1D[p] >= i
+                  | i : int(1..n_pieces)])
              | p : int(1..n_players)]),
     allDiff(order_Function1D),
-    and([or([order_Function1D[q2] = q1 | q2 : int(1..n_pieces)]) | q1 : int(1..n_pieces)])
+    and([or([order_Function1D[q2] = q1 | q2 : int(1..n_pieces)])
+             | q1 : int(1..n_pieces)])
 
 $ Conjure's
 $ {"finds": ["order", "arrive", "leave"],
 $  "givens": ["n_pieces", "n_players", "duration", "plays_in"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],

@@ -8,16 +8,26 @@ given maxc: int(1..)
 given minc: int(1..)
 given n_credits: int(1..)
 given p1: int
-given prereq_RelationAsMatrix: matrix indexed by [int(1..n_courses), int(1..n_courses)] of bool
+given prereq_RelationAsMatrix:
+        matrix indexed by [int(1..n_courses), int(1..n_courses)] of bool
 given p2: int
-given credits_Function1D: matrix indexed by [int(1..n_courses)] of int(1..n_credits)
+given credits_Function1D:
+        matrix indexed by [int(1..n_courses)] of int(1..n_credits)
 find curr_Function1D: matrix indexed by [int(1..n_courses)] of int(1..n_periods)
 such that
-    and([prereq_RelationAsMatrix[c1, c2] -> curr_Function1D[c1] < curr_Function1D[c2] | c1 : int(1..n_courses), c2 : int(1..n_courses)]),
-    and([sum([(curr_Function1D[q2] = p) * credits_Function1D[q2] | q2 : int(1..n_courses)]) <= maxl /\
-         sum([(curr_Function1D[q3] = p) * credits_Function1D[q3] | q3 : int(1..n_courses)]) >= minl
+    and([prereq_RelationAsMatrix[c1, c2] ->
+         curr_Function1D[c1] < curr_Function1D[c2]
+             | c1 : int(1..n_courses), c2 : int(1..n_courses)]),
+    and([sum([(curr_Function1D[q2] = p) * credits_Function1D[q2]
+                  | q2 : int(1..n_courses)])
+         <= maxl
+         /\
+         sum([(curr_Function1D[q3] = p) * credits_Function1D[q3]
+                  | q3 : int(1..n_courses)])
+         >= minl
              | p : int(1..n_periods)]),
-    and([sum([curr_Function1D[q1] = p | q1 : int(1..n_courses)]) <= maxc /\ sum([curr_Function1D[q4] = p | q4 : int(1..n_courses)]) >= minc
+    and([sum([curr_Function1D[q1] = p | q1 : int(1..n_courses)]) <= maxc /\
+         sum([curr_Function1D[q4] = p | q4 : int(1..n_courses)]) >= minc
              | p : int(1..n_periods)])
 
 $ Conjure's
@@ -26,6 +36,7 @@ $  "givens": ["n_periods", "maxl", "minl", "n_courses", "maxc", "minc",
 $             "n_credits", "prereq", "credits"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],

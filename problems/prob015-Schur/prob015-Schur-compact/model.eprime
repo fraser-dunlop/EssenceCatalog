@@ -2,54 +2,90 @@ language ESSENCE' 1.0
 
 given n_balls: int(1..)
 given n_boxes: int(1..)
-find schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker: int(0..2 ** (1 + (n_balls - 1)))
+find schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker:
+        int(0..2 ** (1 + (n_balls - 1)))
 find schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..2 ** (1 + (n_balls - 1)))] of int(0..1 + (n_balls - 1))
+        matrix indexed by [int(1..2 ** (1 + (n_balls - 1)))] of int(0..1 +
+                                                                       (n_balls - 1))
 find schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values:
-        matrix indexed by [int(1..2 ** (1 + (n_balls - 1))), int(1..1 + (n_balls - 1))] of int(1..n_balls)
+        matrix indexed by [int(1..2 ** (1 + (n_balls - 1))),
+                           int(1..1 + (n_balls - 1))] of int(1..n_balls)
 such that
     and([and([q4 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
               (b1 != b2 /\ b1 + b2 = b3 ->
-               !and([or([q8 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q4] /\
-                         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q4, q8] = [b1, b2, b3; int(1..3)][q6]
-                             | q8 : int(1..1 + (n_balls - 1))])
-                         | q6 : int(1..3)]))
+               !and([or([q9 <=
+                         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q4]
+                         /\
+                         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q4,
+                                                                                                                q9]
+                         = [b1, b2, b3; int(1..3)][q7]
+                             | q9 : int(1..1 + (n_balls - 1))])
+                         | q7 : int(1..3)]))
                   | q4 : int(1..2 ** (1 + (n_balls - 1)))])
              | b1 : int(1..n_balls), b2 : int(1..n_balls), b3 : int(1..n_balls)]),
     and([1 >=
          sum([q3 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
-              or([q9 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q3] /\
-                  schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q3, q9] = q1
-                      | q9 : int(1..1 + (n_balls - 1))])
+              or([q10 <=
+                  schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q3]
+                  /\
+                  schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q3,
+                                                                                                         q10]
+                  = q1
+                      | q10 : int(1..1 + (n_balls - 1))])
                   | q3 : int(1..2 ** (1 + (n_balls - 1)))])
              | q1 : int(1..n_balls)]),
     n_boxes =
-    sum([(q5 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker) * schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
+    sum([(q5 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker) *
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
              | q5 : int(1..2 ** (1 + (n_balls - 1)))]),
+    and([q6 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q6]
+         >= 1
+             | q6 : int(1..2 ** (1 + (n_balls - 1)))]),
     and([q1 + 1 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] <
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1 + 1]
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+         <
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1
+                                                                                                + 1]
          \/
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] =
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1 + 1]
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+         =
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1
+                                                                                                + 1]
          /\
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, ..] <lex
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1 + 1, ..]
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                ..]
+         <lex
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1
+                                                                                                + 1,
+                                                                                                ..]
              | q1 : int(1..2 ** (1 + (n_balls - 1)) - 1)]),
     and([q1 > schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] = 0 /\
-         and([schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, q7] = 1 | q7 : int(1..1 + (n_balls - 1))])
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+         = 0
+         /\
+         and([schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                     q8]
+              = 1 | q8 : int(1..1 + (n_balls - 1))])
              | q1 : int(1..2 ** (1 + (n_balls - 1)))]),
     and([q1 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q2 + 1 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] ->
-              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, q2] <
-              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, q2 + 1]
+         and([q2 + 1 <=
+              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+              ->
+              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                     q2]
+              <
+              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                     q2 + 1]
                   | q2 : int(1..1 + (n_balls - 1) - 1)])
              | q1 : int(1..2 ** (1 + (n_balls - 1)))]),
     and([q1 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q2 > schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] ->
-              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, q2] = 1
-                  | q2 : int(1..1 + (n_balls - 1))])
+         and([q2 >
+              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+              ->
+              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                     q2]
+              = 1 | q2 : int(1..1 + (n_balls - 1))])
              | q1 : int(1..2 ** (1 + (n_balls - 1)))])
 
 $ Conjure's
@@ -57,25 +93,28 @@ $ {"finds": ["schur"],
 $  "givens": ["n_balls", "n_boxes"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]],
 $                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]],
-$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["n_balls",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

@@ -1,45 +1,79 @@
 language ESSENCE' 1.0
 
 given n: int(1..)
-find black_ExplicitVarSizeWithMarker_Marker: int(0..(1 + (n - 1)) * (1 + (n - 1)))
-find black_ExplicitVarSizeWithMarker_Values_1: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
-find black_ExplicitVarSizeWithMarker_Values_2: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
-find white_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of bool
-find white_ExplicitVarSizeWithFlags_Values_1: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
-find white_ExplicitVarSizeWithFlags_Values_2: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
-maximising black_ExplicitVarSizeWithMarker_Marker + sum([white_ExplicitVarSizeWithFlags_Flags[q4] | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+find black_ExplicitVarSizeWithMarker_Marker:
+        int(0..(1 + (n - 1)) * (1 + (n - 1)))
+find black_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+find black_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+find white_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of bool
+find white_ExplicitVarSizeWithFlags_Values_1:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+find white_ExplicitVarSizeWithFlags_Values_2:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+maximising
+    black_ExplicitVarSizeWithMarker_Marker +
+    sum([white_ExplicitVarSizeWithFlags_Flags[q4]
+             | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
 such that
-    black_ExplicitVarSizeWithMarker_Marker = sum([white_ExplicitVarSizeWithFlags_Flags[q5] | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    black_ExplicitVarSizeWithMarker_Marker =
+    sum([white_ExplicitVarSizeWithFlags_Flags[q5]
+             | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([q6 <= black_ExplicitVarSizeWithMarker_Marker ->
          and([white_ExplicitVarSizeWithFlags_Flags[q7] ->
-              black_ExplicitVarSizeWithMarker_Values_1[q6] != white_ExplicitVarSizeWithFlags_Values_1[q7] /\
-              black_ExplicitVarSizeWithMarker_Values_2[q6] != white_ExplicitVarSizeWithFlags_Values_2[q7]
+              black_ExplicitVarSizeWithMarker_Values_1[q6] !=
+              white_ExplicitVarSizeWithFlags_Values_1[q7]
               /\
-              |white_ExplicitVarSizeWithFlags_Values_1[q7] - black_ExplicitVarSizeWithMarker_Values_1[q6]| !=
-              |white_ExplicitVarSizeWithFlags_Values_2[q7] - black_ExplicitVarSizeWithMarker_Values_2[q6]|
+              black_ExplicitVarSizeWithMarker_Values_2[q6] !=
+              white_ExplicitVarSizeWithFlags_Values_2[q7]
+              /\
+              |white_ExplicitVarSizeWithFlags_Values_1[q7] -
+               black_ExplicitVarSizeWithMarker_Values_1[q6]|
+              !=
+              |white_ExplicitVarSizeWithFlags_Values_2[q7] -
+               black_ExplicitVarSizeWithMarker_Values_2[q6]|
                   | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
              | q6 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([q1 + 1 <= black_ExplicitVarSizeWithMarker_Marker ->
-         black_ExplicitVarSizeWithMarker_Values_1[q1] < black_ExplicitVarSizeWithMarker_Values_1[q1 + 1] \/
-         black_ExplicitVarSizeWithMarker_Values_1[q1] = black_ExplicitVarSizeWithMarker_Values_1[q1 + 1] /\
-         black_ExplicitVarSizeWithMarker_Values_2[q1] < black_ExplicitVarSizeWithMarker_Values_2[q1 + 1]
+         black_ExplicitVarSizeWithMarker_Values_1[q1] <
+         black_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
+         \/
+         black_ExplicitVarSizeWithMarker_Values_1[q1] =
+         black_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
+         /\
+         black_ExplicitVarSizeWithMarker_Values_2[q1] <
+         black_ExplicitVarSizeWithMarker_Values_2[q1 + 1]
              | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([q1 > black_ExplicitVarSizeWithMarker_Marker -> black_ExplicitVarSizeWithMarker_Values_1[q1] = 1 /\ black_ExplicitVarSizeWithMarker_Values_2[q1] = 1
+    and([q1 > black_ExplicitVarSizeWithMarker_Marker ->
+         black_ExplicitVarSizeWithMarker_Values_1[q1] = 1 /\
+         black_ExplicitVarSizeWithMarker_Values_2[q1] = 1
              | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([white_ExplicitVarSizeWithFlags_Flags[q2 + 1] ->
-         white_ExplicitVarSizeWithFlags_Values_1[q2] < white_ExplicitVarSizeWithFlags_Values_1[q2 + 1] \/
-         white_ExplicitVarSizeWithFlags_Values_1[q2] = white_ExplicitVarSizeWithFlags_Values_1[q2 + 1] /\
-         white_ExplicitVarSizeWithFlags_Values_2[q2] < white_ExplicitVarSizeWithFlags_Values_2[q2 + 1]
+         white_ExplicitVarSizeWithFlags_Values_1[q2] <
+         white_ExplicitVarSizeWithFlags_Values_1[q2 + 1]
+         \/
+         white_ExplicitVarSizeWithFlags_Values_1[q2] =
+         white_ExplicitVarSizeWithFlags_Values_1[q2 + 1]
+         /\
+         white_ExplicitVarSizeWithFlags_Values_2[q2] <
+         white_ExplicitVarSizeWithFlags_Values_2[q2 + 1]
              | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([white_ExplicitVarSizeWithFlags_Flags[q2] = false -> white_ExplicitVarSizeWithFlags_Values_1[q2] = 1 /\ white_ExplicitVarSizeWithFlags_Values_2[q2] = 1
+    and([white_ExplicitVarSizeWithFlags_Flags[q2] = false ->
+         white_ExplicitVarSizeWithFlags_Values_1[q2] = 1 /\
+         white_ExplicitVarSizeWithFlags_Values_2[q2] = 1
              | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
-    and([white_ExplicitVarSizeWithFlags_Flags[q2 + 1] -> white_ExplicitVarSizeWithFlags_Flags[q2] | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)])
+    and([white_ExplicitVarSizeWithFlags_Flags[q2 + 1] ->
+         white_ExplicitVarSizeWithFlags_Flags[q2]
+             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)])
 
 $ Conjure's
 $ {"finds": ["black", "white"],
 $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]],
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1, 2]], [1, [1, 2, 3, 4, 5, 6]],

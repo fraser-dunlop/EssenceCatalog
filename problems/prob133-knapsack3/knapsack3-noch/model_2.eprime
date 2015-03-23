@@ -7,13 +7,24 @@ given weights_Function1D: matrix indexed by [int(1..n)] of int(1..100)
 given p2: int
 given values_Function1D: matrix indexed by [int(1..n)] of int(1..100)
 find picked_ExplicitVarSizeWithMarker_Marker: int(0..n)
-find picked_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..n)] of int(1..n)
-maximising sum([(q2 <= picked_ExplicitVarSizeWithMarker_Marker) * values_Function1D[picked_ExplicitVarSizeWithMarker_Values[q2]] | q2 : int(1..n)])
+find picked_ExplicitVarSizeWithMarker_Values:
+        matrix indexed by [int(1..n)] of int(1..n)
+maximising
+    sum([(q2 <= picked_ExplicitVarSizeWithMarker_Marker) *
+         values_Function1D[picked_ExplicitVarSizeWithMarker_Values[q2]]
+             | q2 : int(1..n)])
 such that
-    sum([(q3 <= picked_ExplicitVarSizeWithMarker_Marker) * weights_Function1D[picked_ExplicitVarSizeWithMarker_Values[q3]] | q3 : int(1..n)]) <= totalWeight,
-    and([q1 + 1 <= picked_ExplicitVarSizeWithMarker_Marker -> picked_ExplicitVarSizeWithMarker_Values[q1] < picked_ExplicitVarSizeWithMarker_Values[q1 + 1]
+    sum([(q3 <= picked_ExplicitVarSizeWithMarker_Marker) *
+         weights_Function1D[picked_ExplicitVarSizeWithMarker_Values[q3]]
+             | q3 : int(1..n)])
+    <= totalWeight,
+    and([q1 + 1 <= picked_ExplicitVarSizeWithMarker_Marker ->
+         picked_ExplicitVarSizeWithMarker_Values[q1] <
+         picked_ExplicitVarSizeWithMarker_Values[q1 + 1]
              | q1 : int(1..n - 1)]),
-    and([q1 > picked_ExplicitVarSizeWithMarker_Marker -> picked_ExplicitVarSizeWithMarker_Values[q1] = 1 | q1 : int(1..n)]),
+    and([q1 > picked_ExplicitVarSizeWithMarker_Marker ->
+         picked_ExplicitVarSizeWithMarker_Values[q1] = 1
+             | q1 : int(1..n)]),
     1 <= picked_ExplicitVarSizeWithMarker_Marker,
     picked_ExplicitVarSizeWithMarker_Marker <= n
 
@@ -22,6 +33,7 @@ $ {"finds": ["picked"],
 $  "givens": ["n", "totalWeight", "weights", "values"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],

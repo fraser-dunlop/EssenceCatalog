@@ -3,22 +3,35 @@ language ESSENCE' 1.0
 given numNodes: int(1..)
 given maxPower: int(1..)
 given initialNode: int(1..)
-given linkCosts: matrix indexed by [int(1..numNodes), int(1..numNodes)] of int(0..maxPower)
-find nodeBroadcastPower: matrix indexed by [int(1..numNodes)] of int(0..maxPower)
-find directChildrenMatrix_Occurrence: matrix indexed by [int(1..numNodes), int(1..numNodes)] of bool
-find totalChildrenMatrix_Occurrence: matrix indexed by [int(1..numNodes), int(1..numNodes)] of bool
+given linkCosts:
+        matrix indexed by [int(1..numNodes), int(1..numNodes)] of int(0..maxPower)
+find nodeBroadcastPower:
+        matrix indexed by [int(1..numNodes)] of int(0..maxPower)
+find directChildrenMatrix_Occurrence:
+        matrix indexed by [int(1..numNodes), int(1..numNodes)] of bool
+find totalChildrenMatrix_Occurrence:
+        matrix indexed by [int(1..numNodes), int(1..numNodes)] of bool
 minimising sum([nodeBroadcastPower[i] | i : int(1..numNodes)])
 such that
-    and([i = j \/ sum([directChildrenMatrix_Occurrence[i, q1] /\ directChildrenMatrix_Occurrence[j, q1] | q1 : int(1..numNodes)]) = 0
-             | i : int(1..numNodes), j : int(1..numNodes)]),
-    sum([totalChildrenMatrix_Occurrence[initialNode, q2] | q2 : int(1..numNodes)]) = numNodes,
+    and([i = j \/
+         sum([directChildrenMatrix_Occurrence[i, q1] /\
+              directChildrenMatrix_Occurrence[j, q1]
+                  | q1 : int(1..numNodes)])
+         = 0 | i : int(1..numNodes), j : int(1..numNodes)]),
+    sum([totalChildrenMatrix_Occurrence[initialNode, q2] | q2 : int(1..numNodes)]) =
+    numNodes,
     and([totalChildrenMatrix_Occurrence[node, node] /\
-         sum([directChildrenMatrix_Occurrence[node, i] * sum([totalChildrenMatrix_Occurrence[i, q3] | q3 : int(1..numNodes)]) | i : int(1..numNodes)]) =
-         sum([totalChildrenMatrix_Occurrence[node, q4] | q4 : int(1..numNodes)]) - 1
+         sum([directChildrenMatrix_Occurrence[node, i] *
+              sum([totalChildrenMatrix_Occurrence[i, q3] | q3 : int(1..numNodes)])
+                  | i : int(1..numNodes)])
+         = sum([totalChildrenMatrix_Occurrence[node, q4] | q4 : int(1..numNodes)]) - 1
          /\
          and([directChildrenMatrix_Occurrence[node, childNode] ->
-              and([totalChildrenMatrix_Occurrence[childNode, q5] -> totalChildrenMatrix_Occurrence[node, q5] | q5 : int(1..numNodes)]) /\ linkCosts[node, childNode] != 0 /\
-              nodeBroadcastPower[node] >= linkCosts[node, childNode]
+              and([totalChildrenMatrix_Occurrence[childNode, q5] ->
+                   totalChildrenMatrix_Occurrence[node, q5]
+                       | q5 : int(1..numNodes)])
+              /\ linkCosts[node, childNode] != 0
+              /\ nodeBroadcastPower[node] >= linkCosts[node, childNode]
                   | childNode : int(1..numNodes)])
              | node : int(1..numNodes)])
 
@@ -27,6 +40,7 @@ $ {"finds": ["nodeBroadcastPower", "directChildrenMatrix", "totalChildrenMatrix"
 $  "givens": ["numNodes", "maxPower", "initialNode", "linkCosts"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,

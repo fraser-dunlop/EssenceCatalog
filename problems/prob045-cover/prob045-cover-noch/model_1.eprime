@@ -1,0 +1,141 @@
+language ESSENCE' 1.0
+
+given k: int(1..)
+given b: int(1..)
+given t: int(1..)
+given g: int(2..)
+where k >= t
+where b >= g ** t
+find CoverTest_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..b)] of int(0..min([b,
+                                                     2 ** ((1 + (k - 1)) * (1 + (g - 1))); int(1..2)]))
+find CoverTest_ExplicitVarSizeWithFlags_Values_Function1D:
+        matrix indexed by [int(1..b), int(1..k)] of int(1..g)
+find q6_Occurrence:
+        matrix indexed by [matrix indexed by [int(1..k)] of bool, int(1..b),
+                           int(1..k)] of bool
+such that
+    and([and([and([q6_Occurrence[testcase_Function1DPartial_Flags, q3, q4]
+                       | q4 : int(1..k), testcase_Function1DPartial_Flags[q4]])
+                  | q3 : int(1..b)])
+             | testcase_Function1DPartial_Flags : matrix indexed by [int(1..k)] of bool]),
+    and([and([and([q6_Occurrence[testcase_Function1DPartial_Flags, q3, q8] ->
+                   or([q10 = q8 | q10 : int(1..k), testcase_Function1DPartial_Flags[q10]])
+                       | q8 : int(1..k)])
+                  | q3 : int(1..b)])
+             | testcase_Function1DPartial_Flags : matrix indexed by [int(1..k)] of bool]),
+    and([or([CoverTest_ExplicitVarSizeWithFlags_Flags[q3] > 0 /\
+             (and([CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q3, q5] =
+                   testcase_Function1DPartial_Values[q5]
+                       | q5 : int(1..k), testcase_Function1DPartial_Flags[q5]])
+              /\
+              and([q6_Occurrence[testcase_Function1DPartial_Flags, q3, q7] ->
+                   or([q11 = q7 | q11 : int(1..k)])
+                       | q7 : int(1..k)]))
+                 | q3 : int(1..b)])
+             | testcase_Function1DPartial_Flags : matrix indexed by [int(1..k)] of bool,
+               testcase_Function1DPartial_Values : matrix indexed by [int(1..k)] of int(1..g),
+               and([testcase_Function1DPartial_Flags[q1] = false ->
+                    testcase_Function1DPartial_Values[q1] = 1
+                        | q1 : int(1..k)]),
+               sum([1 | q12 : int(1..k), testcase_Function1DPartial_Flags[q12]]) = t]),
+    and([CoverTest_ExplicitVarSizeWithFlags_Flags[q2 + 1] > 0 ->
+         CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q2, ..] <lex
+         CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q2 + 1, ..]
+             | q2 : int(1..b - 1)]),
+    and([CoverTest_ExplicitVarSizeWithFlags_Flags[q2] = 0 ->
+         and([CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q2, q9] = 1
+                  | q9 : int(1..k)])
+             | q2 : int(1..b)]),
+    and([CoverTest_ExplicitVarSizeWithFlags_Flags[q2 + 1] > 0 ->
+         CoverTest_ExplicitVarSizeWithFlags_Flags[q2] > 0
+             | q2 : int(1..b - 1)]),
+    b = sum([CoverTest_ExplicitVarSizeWithFlags_Flags[q2] | q2 : int(1..b)])
+
+$ Conjure's
+$ {"finds": ["CoverTest"],
+$  "givens": ["k", "b", "t", "g"],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "questionAnswered": [],
+$  "unnameds": [["alphabet", {"Reference": ["g", null]}],
+$               ["switches", {"Reference": ["k", null]}]],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$  "trailVerbose": [],
+$  "representations": [["k",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["t", {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["b", {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["g", {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 2}}}]}],
+$                      ["CoverTest",
+$                       {"DomainMSet": [{"HasRepresentation": "ExplicitVarSizeWithFlags"},
+$                                       [{"SizeAttr_Size": {"Reference": ["b",
+$                                                                         {"DeclHasRepr": ["Given", "b",
+$                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
+$                                        {"OccurAttr_None": []}],
+$                                       {"DomainFunction": [{"HasRepresentation": "Function1D"},
+$                                                           [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                            "JectivityAttr_None"],
+$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                            {"Reference": ["k",
+$                                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                                            "k",
+$                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                            {"Reference": ["g",
+$                                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                                            "g",
+$                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 2}}}]}]}]}]}]}]}]}]],
+$  "representationsTree": [["CoverTest",
+$                           [{"rootLabel": {"HasRepresentation": "ExplicitVarSizeWithFlags"},
+$                             "subForest": [{"rootLabel": {"HasRepresentation": "Function1D"},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          ["b",
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          ["g",
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          ["k",
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          ["t",
+$                           [{"rootLabel": null,
+$                             "subForest": []}]]],
+$  "originalDomains": [["k",
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["b", {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["t", {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      ["g", {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 2}}}]}],
+$                      ["CoverTest",
+$                       {"DomainMSet": [[],
+$                                       [{"SizeAttr_Size": {"Reference": ["b", null]}}, {"OccurAttr_None": []}],
+$                                       {"DomainFunction": [[],
+$                                                           [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                            "JectivityAttr_None"],
+$                                                           {"DomainReference": ["switches", null]},
+$                                                           {"DomainReference": ["alphabet", null]}]}]}]]}

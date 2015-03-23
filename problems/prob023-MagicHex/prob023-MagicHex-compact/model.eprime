@@ -8,15 +8,23 @@ letting maxsum be sum([i | i : int(maxval + 1 - d..maxval)])
 find hexagon: matrix indexed by [int(1..d), int(1..d)] of int(1..maxval)
 find s: int(1..maxsum)
 such that
-    and([and([and([r1 != r2 \/ i1 != i2 -> hexagon[r1, i1] != hexagon[r2, i2] | i2 : int(1..d - |o - r2|)]) | i1 : int(1..d - |o - r1|)])
+    and([and([and([r1 != r2 \/ i1 != i2 -> hexagon[r1, i1] != hexagon[r2, i2]
+                       | i2 : int(1..d - |o - r2|)])
+                  | i1 : int(1..d - |o - r1|)])
              | r1 : int(1..d), r2 : int(1..d)]),
     and([sum([hexagon[r, i] | i : int(1..d - |o - r|)]) = s | r : int(1..d)]),
     and([sum([hexagon[i + max([[0, o - r; int(1..2)][q1] | q1 : int(1..2)]),
-                      r - max([[0, o - (i + max([[0, o - r; int(1..2)][q3] | q3 : int(1..2)])); int(1..2)][q2] | q2 : int(1..2)])]
+                      r -
+                      max([[0,
+                            o - (i + max([[0, o - r; int(1..2)][q3] | q3 : int(1..2)])); int(1..2)][q2]
+                               | q2 : int(1..2)])]
                   | i : int(1..d - |o - r|)])
          = s | r : int(1..d)]),
     and([sum([hexagon[i + max([[0, r - o; int(1..2)][q4] | q4 : int(1..2)]),
-                      r - max([[0, i + max([[0, r - o; int(1..2)][q6] | q6 : int(1..2)]) - o; int(1..2)][q5] | q5 : int(1..2)])]
+                      r -
+                      max([[0,
+                            i + max([[0, r - o; int(1..2)][q6] | q6 : int(1..2)]) - o; int(1..2)][q5]
+                               | q5 : int(1..2)])]
                   | i : int(1..d - |o - r|)])
          = s | r : int(1..d)])
 
@@ -25,6 +33,7 @@ $ {"finds": ["hexagon", "s"],
 $  "givens": ["d"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,

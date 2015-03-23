@@ -9,9 +9,15 @@ where v = b
 where r = k
 find bibd_RelationAsMatrix: matrix indexed by [int(1..v), int(1..b)] of bool
 such that
-    and([sum([bibd_RelationAsMatrix[q1_1, q1_2] | q1_1 : int(1..v), q1_2 : int(1..b), q1_1 = o]) = r | o : int(1..v)]),
-    and([sum([bibd_RelationAsMatrix[q2_1, q2_2] | q2_1 : int(1..v), q2_2 : int(1..b), q2_2 = bl]) = k | bl : int(1..b)]),
-    and([sum([bibd_RelationAsMatrix[q3_1, q3_2] /\ or([bibd_RelationAsMatrix[q4_1, q4_2] /\ q4_2 = q3_2 | q4_1 : int(1..v), q4_2 : int(1..b), q4_1 = o2])
+    and([sum([bibd_RelationAsMatrix[q1_1, q1_2]
+                  | q1_1 : int(1..v), q1_2 : int(1..b), q1_1 = o])
+         = r | o : int(1..v)]),
+    and([sum([bibd_RelationAsMatrix[q2_1, q2_2]
+                  | q2_1 : int(1..v), q2_2 : int(1..b), q2_2 = bl])
+         = k | bl : int(1..b)]),
+    and([sum([bibd_RelationAsMatrix[q3_1, q3_2] /\
+              or([bibd_RelationAsMatrix[q4_1, q4_2] /\ q4_2 = q3_2
+                      | q4_1 : int(1..v), q4_2 : int(1..b), q4_1 = o2])
                   | q3_1 : int(1..v), q3_2 : int(1..b), q3_1 = o1])
          = lambda_
              | o1 : int(1..v), o2 : int(1..v), o1 != o2])
@@ -21,6 +27,7 @@ $ {"finds": ["bibd"],
 $  "givens": ["v", "b", "r", "k", "lambda_"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [["Obj", {"Reference": ["v", null]}],
 $               ["Block", {"Reference": ["b", null]}]],
 $  "trailCompact": [[1,

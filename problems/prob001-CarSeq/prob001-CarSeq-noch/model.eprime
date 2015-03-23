@@ -5,17 +5,25 @@ given n_classes: int(1..)
 given n_options: int(1..)
 given n_upperBound: int(1..)
 given p1: int
-given quantity_Function1D: matrix indexed by [int(1..n_classes)] of int(1..n_upperBound)
+given quantity_Function1D:
+        matrix indexed by [int(1..n_classes)] of int(1..n_upperBound)
 given p2: int
-given maxcars_Function1D: matrix indexed by [int(1..n_options)] of int(1..n_upperBound)
+given maxcars_Function1D:
+        matrix indexed by [int(1..n_options)] of int(1..n_upperBound)
 given p3: int
-given blksize_Function1D: matrix indexed by [int(1..n_options)] of int(1..n_upperBound)
+given blksize_Function1D:
+        matrix indexed by [int(1..n_options)] of int(1..n_upperBound)
 given p4: int
-given usage_RelationAsMatrix: matrix indexed by [int(1..n_classes), int(1..n_options)] of bool
+given usage_RelationAsMatrix:
+        matrix indexed by [int(1..n_classes), int(1..n_options)] of bool
 find car_Function1D: matrix indexed by [int(1..n_cars)] of int(1..n_classes)
 such that
-    and([sum([car_Function1D[q1] = c | q1 : int(1..n_cars)]) = quantity_Function1D[c] | c : int(1..n_classes)]),
-    and([and([sum([usage_RelationAsMatrix[car_Function1D[i], opt] | i : int(s..s + blksize_Function1D[opt] - 1)]) <= maxcars_Function1D[opt]
+    and([sum([car_Function1D[q1] = c | q1 : int(1..n_cars)]) =
+         quantity_Function1D[c]
+             | c : int(1..n_classes)]),
+    and([and([sum([usage_RelationAsMatrix[car_Function1D[i], opt]
+                       | i : int(s..s + blksize_Function1D[opt] - 1)])
+              <= maxcars_Function1D[opt]
                   | s : int(1..n_cars + 1 - blksize_Function1D[opt])])
              | opt : int(1..n_options)])
 
@@ -25,6 +33,7 @@ $  "givens": ["n_cars", "n_classes", "n_options", "n_upperBound", "quantity",
 $             "maxcars", "blksize", "usage"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],

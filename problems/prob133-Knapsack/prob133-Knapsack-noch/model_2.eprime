@@ -8,19 +8,31 @@ given v_Function1D: matrix indexed by [int(1..U_EnumSize)] of int(1..)
 given B: int(1..)
 given K: int(1..)
 find U'_ExplicitVarSizeWithMarker_Marker: int(0..1 + (U_EnumSize - 1))
-find U'_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..1 + (U_EnumSize - 1))] of int(1..U_EnumSize)
+find U'_ExplicitVarSizeWithMarker_Values:
+        matrix indexed by [int(1..1 + (U_EnumSize - 1))] of int(1..U_EnumSize)
 such that
-    sum([(q2 <= U'_ExplicitVarSizeWithMarker_Marker) * s_Function1D[U'_ExplicitVarSizeWithMarker_Values[q2]] | q2 : int(1..1 + (U_EnumSize - 1))]) <= B,
-    sum([(q3 <= U'_ExplicitVarSizeWithMarker_Marker) * v_Function1D[U'_ExplicitVarSizeWithMarker_Values[q3]] | q3 : int(1..1 + (U_EnumSize - 1))]) >= K,
-    and([q1 + 1 <= U'_ExplicitVarSizeWithMarker_Marker -> U'_ExplicitVarSizeWithMarker_Values[q1] < U'_ExplicitVarSizeWithMarker_Values[q1 + 1]
+    sum([(q2 <= U'_ExplicitVarSizeWithMarker_Marker) *
+         s_Function1D[U'_ExplicitVarSizeWithMarker_Values[q2]]
+             | q2 : int(1..1 + (U_EnumSize - 1))])
+    <= B,
+    sum([(q3 <= U'_ExplicitVarSizeWithMarker_Marker) *
+         v_Function1D[U'_ExplicitVarSizeWithMarker_Values[q3]]
+             | q3 : int(1..1 + (U_EnumSize - 1))])
+    >= K,
+    and([q1 + 1 <= U'_ExplicitVarSizeWithMarker_Marker ->
+         U'_ExplicitVarSizeWithMarker_Values[q1] <
+         U'_ExplicitVarSizeWithMarker_Values[q1 + 1]
              | q1 : int(1..1 + (U_EnumSize - 1) - 1)]),
-    and([q1 > U'_ExplicitVarSizeWithMarker_Marker -> U'_ExplicitVarSizeWithMarker_Values[q1] = 1 | q1 : int(1..1 + (U_EnumSize - 1))])
+    and([q1 > U'_ExplicitVarSizeWithMarker_Marker ->
+         U'_ExplicitVarSizeWithMarker_Values[q1] = 1
+             | q1 : int(1..1 + (U_EnumSize - 1))])
 
 $ Conjure's
 $ {"finds": ["U'"],
 $  "givens": ["s", "v", "B", "K"],
 $  "enumGivens": ["U"],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]], [1, [1]],

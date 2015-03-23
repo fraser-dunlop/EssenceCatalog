@@ -1,0 +1,155 @@
+language ESSENCE' 1.0
+
+given n: int(1..20)
+given colours: int(1..10)
+letting num_edges be n * (n - 1)
+find graph_FunctionNDPartial_Flags:
+        matrix indexed by [int(1..n), int(1..n)] of bool
+find graph_FunctionNDPartial_Values:
+        matrix indexed by [int(1..n), int(1..n)] of int(1..colours)
+find q3_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of bool
+find q3_ExplicitVarSizeWithFlags_Values_1:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+find q3_ExplicitVarSizeWithFlags_Values_2:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+such that
+    and([q3_ExplicitVarSizeWithFlags_Flags[q2 + 1] ->
+         q3_ExplicitVarSizeWithFlags_Values_1[q2] <
+         q3_ExplicitVarSizeWithFlags_Values_1[q2 + 1]
+         \/
+         q3_ExplicitVarSizeWithFlags_Values_1[q2] =
+         q3_ExplicitVarSizeWithFlags_Values_1[q2 + 1]
+         /\
+         q3_ExplicitVarSizeWithFlags_Values_2[q2] <
+         q3_ExplicitVarSizeWithFlags_Values_2[q2 + 1]
+             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
+    and([q3_ExplicitVarSizeWithFlags_Flags[q2] = false ->
+         q3_ExplicitVarSizeWithFlags_Values_1[q2] = 1 /\
+         q3_ExplicitVarSizeWithFlags_Values_2[q2] = 1
+             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([q3_ExplicitVarSizeWithFlags_Flags[q2 + 1] ->
+         q3_ExplicitVarSizeWithFlags_Flags[q2]
+             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
+    and([graph_FunctionNDPartial_Flags[q4_1, q4_2] ->
+         or([q3_ExplicitVarSizeWithFlags_Flags[q9] /\
+             (q3_ExplicitVarSizeWithFlags_Values_1[q9] = q4_1 /\
+              q3_ExplicitVarSizeWithFlags_Values_2[q9] = q4_2)
+                 | q9 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+             | q4_1 : int(1..n), q4_2 : int(1..n)]),
+    and([q3_ExplicitVarSizeWithFlags_Flags[q8] ->
+         or([graph_FunctionNDPartial_Flags[q5_1, q5_2] /\
+             (q5_1 = q3_ExplicitVarSizeWithFlags_Values_1[q8] /\
+              q5_2 = q3_ExplicitVarSizeWithFlags_Values_2[q8])
+                 | q5_1 : int(1..n), q5_2 : int(1..n)])
+             | q8 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([true | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([graph_FunctionNDPartial_Flags[q1_1, q1_2] = false ->
+         graph_FunctionNDPartial_Values[q1_1, q1_2] = 1
+             | q1_1 : int(1..n), q1_2 : int(1..n)]),
+    num_edges =
+    sum([graph_FunctionNDPartial_Flags[q1_1, q1_2]
+             | q1_1 : int(1..n), q1_2 : int(1..n)])
+
+$ Conjure's
+$ {"finds": ["graph"],
+$  "givens": ["n", "colours"],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "questionAnswered": [],
+$  "unnameds": [],
+$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [2, [1, 2]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
+$  "trailVerbose": [],
+$  "representations": [["n",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 20}}]}]}],
+$                      ["colours",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 10}}]}]}],
+$                      ["graph",
+$                       {"DomainFunction": [{"HasRepresentation": "FunctionNDPartial"},
+$                                           [{"SizeAttr_Size": {"Reference": ["num_edges",
+$                                                                             {"Alias": {"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                     {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                    [{"Reference": ["n",
+$                                                                                                                                                                    {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                     "n",
+$                                                                                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                      {"Constant": {"ConstantInt": 20}}]}]}]}]},
+$                                                                                                                                                     {"Op": {"MkOpMinus": [{"Reference": ["n",
+$                                                                                                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                           "n",
+$                                                                                                                                                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                            {"Constant": {"ConstantInt": 20}}]}]}]}]},
+$                                                                                                                                                                           {"Constant": {"ConstantInt": 1}}]}}]]}}}}}]}},
+$                                            "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": ["n",
+$                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                             "n",
+$                                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                              {"Constant": {"ConstantInt": 20}}]}]}]}]}]}]},
+$                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": ["n",
+$                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                             "n",
+$                                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                              {"Constant": {"ConstantInt": 20}}]}]}]}]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["colours",
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            "colours",
+$                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                             {"Constant": {"ConstantInt": 10}}]}]}]}]}]}]}]}]],
+$  "representationsTree": [["colours",
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          ["graph",
+$                           [{"rootLabel": {"HasRepresentation": "FunctionNDPartial"},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          ["n",
+$                           [{"rootLabel": null,
+$                             "subForest": []}]]],
+$  "originalDomains": [["n",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 20}}]}]}],
+$                      ["colours",
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 10}}]}]}],
+$                      ["graph",
+$                       {"DomainFunction": [[],
+$                                           [{"SizeAttr_Size": {"Reference": ["num_edges", null]}},
+$                                            "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": ["n",
+$                                                                                                            null]}]}]},
+$                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": ["n",
+$                                                                                                            null]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": ["colours", null]}]}]}]}]]}

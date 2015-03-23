@@ -2,7 +2,9 @@ language ESSENCE' 1.0
 
 given n: int(1..)
 find seq_Function1D: matrix indexed by [int(1..n)] of int(-1, 1)
-minimising sum([sum([seq_Function1D[i] * seq_Function1D[i + k] | i : int(1..n - k)]) ** 2 | k : int(1..n)])
+minimising
+    sum([sum([seq_Function1D[i] * seq_Function1D[i + k] | i : int(1..n - k)]) ** 2
+             | k : int(1..n)])
 such that true
 
 $ Conjure's
@@ -10,6 +12,7 @@ $ {"finds": ["seq"],
 $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
 $                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],

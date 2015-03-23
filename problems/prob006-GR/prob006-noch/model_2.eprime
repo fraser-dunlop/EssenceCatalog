@@ -8,12 +8,17 @@ minimising max([Ticks_Explicit[q7] | q7 : int(1..n)])
 such that
     and([Ticks_Explicit[q2] < Ticks_Explicit[q3] ->
          and([Ticks_Explicit[q4] < Ticks_Explicit[q5] ->
-              (!(Ticks_Explicit[q2] = Ticks_Explicit[q4] /\ Ticks_Explicit[q3] = Ticks_Explicit[q5]) ->
-               max([[Ticks_Explicit[q2], Ticks_Explicit[q3]; int(1..2)][q6] | q6 : int(1..2)]) -
+              (!(Ticks_Explicit[q2] = Ticks_Explicit[q4] /\
+                 Ticks_Explicit[q3] = Ticks_Explicit[q5])
+               ->
+               max([[Ticks_Explicit[q2], Ticks_Explicit[q3]; int(1..2)][q6] | q6 : int(1..2)])
+               -
                min([[Ticks_Explicit[q2], Ticks_Explicit[q3]; int(1..2)][q8] | q8 : int(1..2)])
                !=
-               max([[Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)][q9] | q9 : int(1..2)]) -
-               min([[Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)][q10] | q10 : int(1..2)]))
+               max([[Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)][q9] | q9 : int(1..2)])
+               -
+               min([[Ticks_Explicit[q4], Ticks_Explicit[q5]; int(1..2)][q10]
+                        | q10 : int(1..2)]))
                   | q4 : int(1..n), q5 : int(1..n)])
              | q2 : int(1..n), q3 : int(1..n)]),
     and([Ticks_Explicit[q1] < Ticks_Explicit[q1 + 1] | q1 : int(1..n - 1)])
@@ -23,6 +28,7 @@ $ {"finds": ["Ticks"],
 $  "givens": ["n"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6]], [2, [1, 2]], [1, [1]], [1, [1]], [1, [1, 2, 3]],

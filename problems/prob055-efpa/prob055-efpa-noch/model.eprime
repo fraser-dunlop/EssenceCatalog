@@ -7,9 +7,15 @@ given lam: int(1..)
 letting q1 be q * lam
 find E_Explicit: matrix indexed by [int(1..v), int(1..q1)] of int(1..q)
 such that
-    and([and([sum([E_Explicit[q3, index] = element | index : int(1..q * lam)]) = lam | element : int(1..q)]) | q3 : int(1..v)]),
-    and([and([E_Explicit[q4, q6] = E_Explicit[q5, q6] | q6 : int(1..q1)]) \/ sum([E_Explicit[q4, index] != E_Explicit[q5, index] | index : int(1..q * lam)]) = d
-             | q4 : int(1..v), q5 : int(1..v)]),
+    and([and([sum([E_Explicit[q3, index] = element | index : int(1..q * lam)]) = lam
+                  | element : int(1..q)])
+             | q3 : int(1..v)]),
+    and([and([E_Explicit[q4, q6] = E_Explicit[q5, q6] | q6 : int(1..q1)]) /\
+         and([or([q6 = q7 | q7 : int(1..q1)]) | q6 : int(1..q1)])
+         /\ and([or([q6 = q7 | q7 : int(1..q1)]) | q6 : int(1..q1)])
+         \/
+         sum([E_Explicit[q4, index] != E_Explicit[q5, index] | index : int(1..q * lam)])
+         = d | q4 : int(1..v), q5 : int(1..v)]),
     and([E_Explicit[q2, ..] <lex E_Explicit[q2 + 1, ..] | q2 : int(1..v - 1)])
 
 $ Conjure's
@@ -17,6 +23,7 @@ $ {"finds": ["E"],
 $  "givens": ["v", "d", "q", "lam"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]],
@@ -25,9 +32,10 @@ $                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]], [1, [1, 2, 3, 4,
 $                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
 $                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
 $                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["q",
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

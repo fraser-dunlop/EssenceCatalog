@@ -6,19 +6,29 @@ given b: int(0..100)
 given p1: int
 given s_Occurrence: matrix indexed by [int(1..n)] of bool
 find x_ExplicitVarSizeWithMarker_Marker: int(0..1 + (b - a))
-find x_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..1 + (b - a))] of int(a..b)
+find x_ExplicitVarSizeWithMarker_Values:
+        matrix indexed by [int(1..1 + (b - a))] of int(a..b)
 such that
-    and([q3 <= x_ExplicitVarSizeWithMarker_Marker -> s_Occurrence[x_ExplicitVarSizeWithMarker_Values[q3]] | q3 : int(1..1 + (b - a))]),
-    or([q4 <= x_ExplicitVarSizeWithMarker_Marker /\ x_ExplicitVarSizeWithMarker_Values[q4] = x_ExplicitVarSizeWithMarker_Marker | q4 : int(1..1 + (b - a))]),
-    and([q1 + 1 <= x_ExplicitVarSizeWithMarker_Marker -> x_ExplicitVarSizeWithMarker_Values[q1] < x_ExplicitVarSizeWithMarker_Values[q1 + 1]
+    and([q3 <= x_ExplicitVarSizeWithMarker_Marker ->
+         s_Occurrence[x_ExplicitVarSizeWithMarker_Values[q3]]
+             | q3 : int(1..1 + (b - a))]),
+    or([q4 <= x_ExplicitVarSizeWithMarker_Marker /\
+        x_ExplicitVarSizeWithMarker_Values[q4] = x_ExplicitVarSizeWithMarker_Marker
+            | q4 : int(1..1 + (b - a))]),
+    and([q1 + 1 <= x_ExplicitVarSizeWithMarker_Marker ->
+         x_ExplicitVarSizeWithMarker_Values[q1] <
+         x_ExplicitVarSizeWithMarker_Values[q1 + 1]
              | q1 : int(1..1 + (b - a) - 1)]),
-    and([q1 > x_ExplicitVarSizeWithMarker_Marker -> x_ExplicitVarSizeWithMarker_Values[q1] = a | q1 : int(1..1 + (b - a))])
+    and([q1 > x_ExplicitVarSizeWithMarker_Marker ->
+         x_ExplicitVarSizeWithMarker_Values[q1] = a
+             | q1 : int(1..1 + (b - a))])
 
 $ Conjure's
 $ {"finds": ["x"],
 $  "givens": ["n", "a", "b", "s"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],

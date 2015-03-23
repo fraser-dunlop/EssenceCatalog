@@ -6,21 +6,43 @@ given rowRules: matrix indexed by [int(1..nGrid), int(1..maxRules)] of int(0..)
 given colRules: matrix indexed by [int(1..nGrid), int(1..maxRules)] of int(0..)
 find grid: matrix indexed by [int(1..nGrid), int(1..nGrid)] of int(0..1)
 such that
-    and([sum([grid[i, column] | i : int(1..nGrid)]) = sum([colRules[column, j] | j : int(1..maxRules)]) /\
+    and([sum([grid[i, column] | i : int(1..nGrid)]) =
+         sum([colRules[column, j] | j : int(1..maxRules)])
+         /\
          or([and([colRules[column, ruleIndex] = 0 \/
-                  (ruleIndex = 1 \/ startingIndexes[ruleIndex] > startingIndexes[ruleIndex - 1]) /\
-                  sum([grid[i, column] | i : int(startingIndexes[ruleIndex]..startingIndexes[ruleIndex] + colRules[column, ruleIndex] - 1)]) = colRules[column, ruleIndex]
-                  /\ (startingIndexes[ruleIndex] = 1 \/ grid[startingIndexes[ruleIndex] - 1, column] = 0)
-                  /\ (startingIndexes[ruleIndex] + colRules[column, ruleIndex] - 1 = nGrid \/ grid[startingIndexes[ruleIndex] + colRules[column, ruleIndex], column] = 0)
+                  (ruleIndex = 1 \/ startingIndexes[ruleIndex] > startingIndexes[ruleIndex - 1])
+                  /\
+                  sum([grid[i, column]
+                           | i : int(startingIndexes[ruleIndex]..startingIndexes[ruleIndex] +
+                                                                 colRules[column, ruleIndex]
+                                                                 - 1)])
+                  = colRules[column, ruleIndex]
+                  /\
+                  (startingIndexes[ruleIndex] = 1 \/
+                   grid[startingIndexes[ruleIndex] - 1, column] = 0)
+                  /\
+                  (startingIndexes[ruleIndex] + colRules[column, ruleIndex] - 1 = nGrid \/
+                   grid[startingIndexes[ruleIndex] + colRules[column, ruleIndex], column] = 0)
                       | ruleIndex : int(1..maxRules)])
                  | startingIndexes : matrix indexed by [int(1..maxRules)] of int(1..nGrid)])
              | column : int(1..nGrid)]),
-    and([sum([grid[row, i] | i : int(1..nGrid)]) = sum([rowRules[row, j] | j : int(1..maxRules)]) /\
+    and([sum([grid[row, i] | i : int(1..nGrid)]) =
+         sum([rowRules[row, j] | j : int(1..maxRules)])
+         /\
          or([and([rowRules[row, ruleIndex] = 0 \/
-                  (ruleIndex = 1 \/ startingIndexes[ruleIndex] > startingIndexes[ruleIndex - 1]) /\
-                  sum([grid[row, i] | i : int(startingIndexes[ruleIndex]..startingIndexes[ruleIndex] + rowRules[row, ruleIndex] - 1)]) = rowRules[row, ruleIndex]
-                  /\ (startingIndexes[ruleIndex] = 1 \/ grid[row, startingIndexes[ruleIndex] - 1] = 0)
-                  /\ (startingIndexes[ruleIndex] + rowRules[row, ruleIndex] - 1 = nGrid \/ grid[row, startingIndexes[ruleIndex] + rowRules[row, ruleIndex]] = 0)
+                  (ruleIndex = 1 \/ startingIndexes[ruleIndex] > startingIndexes[ruleIndex - 1])
+                  /\
+                  sum([grid[row, i]
+                           | i : int(startingIndexes[ruleIndex]..startingIndexes[ruleIndex] +
+                                                                 rowRules[row, ruleIndex]
+                                                                 - 1)])
+                  = rowRules[row, ruleIndex]
+                  /\
+                  (startingIndexes[ruleIndex] = 1 \/
+                   grid[row, startingIndexes[ruleIndex] - 1] = 0)
+                  /\
+                  (startingIndexes[ruleIndex] + rowRules[row, ruleIndex] - 1 = nGrid \/
+                   grid[row, startingIndexes[ruleIndex] + rowRules[row, ruleIndex]] = 0)
                       | ruleIndex : int(1..maxRules)])
                  | startingIndexes : matrix indexed by [int(1..maxRules)] of int(0..nGrid)])
              | row : int(1..nGrid)])
@@ -30,6 +52,7 @@ $ {"finds": ["grid"],
 $  "givens": ["nGrid", "maxRules", "rowRules", "colRules"],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1,
 $                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,

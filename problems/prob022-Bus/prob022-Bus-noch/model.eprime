@@ -3,56 +3,98 @@ language ESSENCE' 1.0
 given Tasks_EnumSize: int
 given p1: int
 given p2: int
-given shifts_Explicit_Occurrence: matrix indexed by [int(1..p1), int(1..Tasks_EnumSize)] of bool
-find sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker: int(0..2 ** (1 + (Tasks_EnumSize - 1)))
+given shifts_Explicit_Occurrence:
+        matrix indexed by [int(1..p1), int(1..Tasks_EnumSize)] of bool
+find sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker:
+        int(0..2 ** (1 + (Tasks_EnumSize - 1)))
 find sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..2 ** (1 + (Tasks_EnumSize - 1)))] of int(0..1 + (Tasks_EnumSize - 1))
+        matrix indexed by [int(1..2 ** (1 + (Tasks_EnumSize - 1)))] of int(0..1 +
+                                                                              (Tasks_EnumSize - 1))
 find sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values:
-        matrix indexed by [int(1..2 ** (1 + (Tasks_EnumSize - 1))), int(1..1 + (Tasks_EnumSize - 1))] of int(1..Tasks_EnumSize)
-minimising sum([q5 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker | q5 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
+        matrix indexed by [int(1..2 ** (1 + (Tasks_EnumSize - 1))),
+                           int(1..1 + (Tasks_EnumSize - 1))] of int(1..Tasks_EnumSize)
+minimising
+    sum([q6 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker
+             | q6 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
 such that
     and([q4 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         or([and([or([q9 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q4] /\
-                      sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q4, q9] = q6
-                          | q9 : int(1..1 + (Tasks_EnumSize - 1))])
-                      | q6 : int(1..Tasks_EnumSize), shifts_Explicit_Occurrence[q7, q6]])
+         or([and([or([q10 <=
+                      sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q4]
+                      /\
+                      sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q4,
+                                                                                                             q10]
+                      = q7
+                          | q10 : int(1..1 + (Tasks_EnumSize - 1))])
+                      | q7 : int(1..Tasks_EnumSize), shifts_Explicit_Occurrence[q8, q7]])
              /\
-             and([q10 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q4] ->
-                  shifts_Explicit_Occurrence[q7, sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q4, q10]]
-                      | q10 : int(1..1 + (Tasks_EnumSize - 1))])
-                 | q7 : int(1..p1)])
+             and([q11 <=
+                  sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q4]
+                  ->
+                  shifts_Explicit_Occurrence[q8,
+                                             sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q4,
+                                                                                                                                    q11]]
+                      | q11 : int(1..1 + (Tasks_EnumSize - 1))])
+                 | q8 : int(1..p1)])
              | q4 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
     and([1 >=
          sum([q3 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
-              or([q11 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q3] /\
-                  sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q3, q11] = q1
-                      | q11 : int(1..1 + (Tasks_EnumSize - 1))])
+              or([q12 <=
+                  sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q3]
+                  /\
+                  sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q3,
+                                                                                                         q12]
+                  = q1
+                      | q12 : int(1..1 + (Tasks_EnumSize - 1))])
                   | q3 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
              | q1 : int(1..Tasks_EnumSize)]),
+    and([q5 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
+         >= 1
+             | q5 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
     and([q1 + 1 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] <
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1 + 1]
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+         <
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1
+                                                                                                + 1]
          \/
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] =
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1 + 1]
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+         =
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1
+                                                                                                + 1]
          /\
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, ..] <lex
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1 + 1, ..]
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                ..]
+         <lex
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1
+                                                                                                + 1,
+                                                                                                ..]
              | q1 : int(1..2 ** (1 + (Tasks_EnumSize - 1)) - 1)]),
     and([q1 > sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] = 0 /\
-         and([sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, q8] = 1 | q8 : int(1..1 + (Tasks_EnumSize - 1))])
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+         = 0
+         /\
+         and([sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                     q9]
+              = 1 | q9 : int(1..1 + (Tasks_EnumSize - 1))])
              | q1 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
     and([q1 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q2 + 1 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] ->
-              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, q2] <
-              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, q2 + 1]
+         and([q2 + 1 <=
+              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+              ->
+              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                     q2]
+              <
+              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                     q2 + 1]
                   | q2 : int(1..1 + (Tasks_EnumSize - 1) - 1)])
              | q1 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
     and([q1 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q2 > sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1] ->
-              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1, q2] = 1
-                  | q2 : int(1..1 + (Tasks_EnumSize - 1))])
+         and([q2 >
+              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1]
+              ->
+              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
+                                                                                                     q2]
+              = 1 | q2 : int(1..1 + (Tasks_EnumSize - 1))])
              | q1 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
 
 $ Conjure's
@@ -60,30 +102,32 @@ $ {"finds": ["sched"],
 $  "givens": ["shifts"],
 $  "enumGivens": ["Tasks"],
 $  "enumLettings": [],
+$  "questionAnswered": [],
 $  "unnameds": [],
 $  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
 $                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
 $                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
-$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
+$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
+$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
+$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
+$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
+$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
 $  "trailVerbose": [],
 $  "representations": [["Tasks_EnumSize", {"DomainInt": []}],
 $                      ["p1", {"DomainInt": []}], ["p2", {"DomainInt": []}],
