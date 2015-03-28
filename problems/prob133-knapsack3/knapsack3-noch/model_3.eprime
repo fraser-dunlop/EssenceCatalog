@@ -2,33 +2,33 @@ language ESSENCE' 1.0
 
 given n: int(1..100)
 given totalWeight: int(1..1000)
-given p1: int
+given fin1: int
 given weights_Function1D: matrix indexed by [int(1..n)] of int(1..100)
-given p2: int
+given fin2: int
 given values_Function1D: matrix indexed by [int(1..n)] of int(1..100)
 find picked_ExplicitVarSizeWithFlags_Flags:
         matrix indexed by [int(1..n)] of bool
 find picked_ExplicitVarSizeWithFlags_Values:
         matrix indexed by [int(1..n)] of int(1..n)
 maximising
-    sum([picked_ExplicitVarSizeWithFlags_Flags[q2] *
-         values_Function1D[picked_ExplicitVarSizeWithFlags_Values[q2]]
-             | q2 : int(1..n)])
+    sum([picked_ExplicitVarSizeWithFlags_Flags[q6] *
+         values_Function1D[picked_ExplicitVarSizeWithFlags_Values[q6]]
+             | q6 : int(1..n)])
 such that
-    sum([picked_ExplicitVarSizeWithFlags_Flags[q3] *
-         weights_Function1D[picked_ExplicitVarSizeWithFlags_Values[q3]]
-             | q3 : int(1..n)])
+    sum([picked_ExplicitVarSizeWithFlags_Flags[q7] *
+         weights_Function1D[picked_ExplicitVarSizeWithFlags_Values[q7]]
+             | q7 : int(1..n)])
     <= totalWeight,
     and([picked_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
          picked_ExplicitVarSizeWithFlags_Values[q1] <
          picked_ExplicitVarSizeWithFlags_Values[q1 + 1]
              | q1 : int(1..n - 1)]),
-    and([picked_ExplicitVarSizeWithFlags_Flags[q1] = false ->
-         picked_ExplicitVarSizeWithFlags_Values[q1] = 1
-             | q1 : int(1..n)]),
-    and([picked_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
-         picked_ExplicitVarSizeWithFlags_Flags[q1]
-             | q1 : int(1..n - 1)]),
-    1 <= sum([picked_ExplicitVarSizeWithFlags_Flags[q1] | q1 : int(1..n)]),
-    sum([picked_ExplicitVarSizeWithFlags_Flags[q1] | q1 : int(1..n)]) <= n
+    and([picked_ExplicitVarSizeWithFlags_Flags[q2] = false ->
+         picked_ExplicitVarSizeWithFlags_Values[q2] = 1
+             | q2 : int(1..n)]),
+    and([picked_ExplicitVarSizeWithFlags_Flags[q3 + 1] ->
+         picked_ExplicitVarSizeWithFlags_Flags[q3]
+             | q3 : int(1..n - 1)]),
+    1 <= sum([picked_ExplicitVarSizeWithFlags_Flags[q4] | q4 : int(1..n)]),
+    sum([picked_ExplicitVarSizeWithFlags_Flags[q4] | q4 : int(1..n)]) <= n
 

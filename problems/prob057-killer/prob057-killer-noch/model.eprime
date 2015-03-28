@@ -7,10 +7,11 @@ letting hintSumIndex be maxHintCells + 1
 given hintMatrix:
         matrix indexed by [int(1..numHints), int(1..hintSumIndex),
                            int(1..2)] of int(0..)
-letting q1 be gridSize * gridSize
-letting q2 be gridSize * gridSize
-letting q3 be gridSize * gridSize
-find solutionGrid: matrix indexed by [int(1..q1), int(1..q2)] of int(1..q3)
+letting let1 be gridSize * gridSize
+letting let2 be gridSize * gridSize
+letting let3 be gridSize * gridSize
+find solutionGrid:
+        matrix indexed by [int(1..let1), int(1..let2)] of int(1..let3)
 such that
     and([allDiff(solutionGrid[.., i, ..]) /\ allDiff(solutionGrid[i, .., ..])
              | i : int(1..gridSize * gridSize)]),
@@ -20,8 +21,8 @@ such that
                  | numberMapping_Function1D : matrix indexed by [int(1..gridSize *
                                                                         gridSize)] of int(1..gridSize * gridSize),
                    allDiff(numberMapping_Function1D),
-                   and([or([numberMapping_Function1D[q5] = q4 | q5 : int(1..gridSize * gridSize)])
-                            | q4 : int(1..gridSize * gridSize)])])
+                   and([or([numberMapping_Function1D[q4] = q3 | q4 : int(1..gridSize * gridSize)])
+                            | q3 : int(1..gridSize * gridSize)])])
              | gridColumn : int(0..gridSize - 1), gridRow : int(0..gridSize - 1)]),
     and([sum([solutionGrid[hintMatrix[hintSet, index, 1],
                            hintMatrix[hintSet, index, 2]]

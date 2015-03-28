@@ -1,0 +1,32 @@
+language ESSENCE' 1.0
+
+given numCargos: int(2..)
+given numTanks: int(1..)
+given capacities: matrix indexed by [int(1..numTanks)] of int(1..)
+given neighbours_Occurrence:
+        matrix indexed by [int(1..numTanks), int(1..numTanks)] of bool
+given impossibleCargos_Occurrence:
+        matrix indexed by [int(1..numTanks), int(0..numCargos)] of bool
+given volumeToShip: matrix indexed by [int(1..numCargos)] of int(1..)
+given fin1: int
+given incompatibilities_Explicit_Occurrence:
+        matrix indexed by [int(1..fin1), int(1..numCargos)] of bool
+find allocation: matrix indexed by [int(1..numTanks)] of int(0..numCargos)
+maximising sum([allocation[tank] = 0 | tank : int(1..numTanks)])
+such that
+    and([sum([capacities[tank] * (allocation[tank] = cargo)
+                  | tank : int(1..numTanks)])
+         >= volumeToShip[cargo]
+             | cargo : int(1..numCargos)]),
+    and([!impossibleCargos_Occurrence[tank, allocation[tank]] /\
+         and([!or([and([or([[allocation[tank], allocation[neighbour]; int(1..2)][q7] = q4
+                                | q7 : int(1..2)])
+                            | q4 : int(1..numCargos), incompatibilities_Explicit_Occurrence[q3, q4]])
+                   /\
+                   and([incompatibilities_Explicit_Occurrence[q3,
+                                                              [allocation[tank], allocation[neighbour]; int(1..2)][q10]]
+                            | q10 : int(1..2)])
+                       | q3 : int(1..fin1)])
+                  | neighbour : int(1..numTanks), neighbours_Occurrence[tank, neighbour]])
+             | tank : int(1..numTanks)])
+

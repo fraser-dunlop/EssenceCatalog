@@ -2,8 +2,8 @@ language ESSENCE' 1.0
 
 given grid: int(1..)
 given colours: int(1..)
-letting q1 be colours - 1
-find clickMatrix: matrix indexed by [int(1..grid), int(1..grid)] of int(0..q1)
+letting let1 be colours - 1
+find clickMatrix: matrix indexed by [int(1..grid), int(1..grid)] of int(0..let1)
 maximising sum([clickMatrix[i, j] | i : int(1..grid), j : int(1..grid)])
 such that
     and([sum([clickMatrix[i, j] | i : int(1..grid), j : int(1..grid)]) <=

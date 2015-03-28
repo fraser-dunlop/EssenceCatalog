@@ -2,12 +2,12 @@ language ESSENCE' 1.0
 
 given n: int(1..)
 letting C be 2 * n
-letting q1 be 2 * n
-letting q2 be 4 * n
-find colouring_Function1D: matrix indexed by [int(0..q1)] of int(0..q2)
-letting q3 be 4 * n - 1
-letting q4 be 4 * n
-find edgeID_Function1D: matrix indexed by [int(0..q3)] of int(0..q4)
+letting let1 be 2 * n
+letting let2 be 4 * n
+find colouring_Function1D: matrix indexed by [int(0..let1)] of int(0..let2)
+letting let3 be 4 * n - 1
+letting let4 be 4 * n
+find edgeID_Function1D: matrix indexed by [int(0..let3)] of int(0..let4)
 such that
     and([edgeID_Function1D[v] =
          |colouring_Function1D[v] - colouring_Function1D[(v + 1) % n]|

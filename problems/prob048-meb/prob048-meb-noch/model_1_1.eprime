@@ -14,22 +14,22 @@ find totalChildrenMatrix_Occurrence:
 minimising sum([nodeBroadcastPower[i] | i : int(1..numNodes)])
 such that
     and([i = j \/
-         sum([directChildrenMatrix_Occurrence[i, q1] /\
-              directChildrenMatrix_Occurrence[j, q1]
-                  | q1 : int(1..numNodes)])
+         sum([directChildrenMatrix_Occurrence[i, q6] /\
+              directChildrenMatrix_Occurrence[j, q6]
+                  | q6 : int(1..numNodes)])
          = 0 | i : int(1..numNodes), j : int(1..numNodes)]),
-    sum([totalChildrenMatrix_Occurrence[initialNode, q2] | q2 : int(1..numNodes)]) =
+    sum([totalChildrenMatrix_Occurrence[initialNode, q7] | q7 : int(1..numNodes)]) =
     numNodes,
     and([totalChildrenMatrix_Occurrence[node, node] /\
          sum([directChildrenMatrix_Occurrence[node, i] *
-              sum([totalChildrenMatrix_Occurrence[i, q3] | q3 : int(1..numNodes)])
+              sum([totalChildrenMatrix_Occurrence[i, q8] | q8 : int(1..numNodes)])
                   | i : int(1..numNodes)])
-         = sum([totalChildrenMatrix_Occurrence[node, q4] | q4 : int(1..numNodes)]) - 1
+         = sum([totalChildrenMatrix_Occurrence[node, q9] | q9 : int(1..numNodes)]) - 1
          /\
          and([directChildrenMatrix_Occurrence[node, childNode] ->
-              and([totalChildrenMatrix_Occurrence[childNode, q5] ->
-                   totalChildrenMatrix_Occurrence[node, q5]
-                       | q5 : int(1..numNodes)])
+              and([totalChildrenMatrix_Occurrence[childNode, q10] ->
+                   totalChildrenMatrix_Occurrence[node, q10]
+                       | q10 : int(1..numNodes)])
               /\ linkCosts[node, childNode] != 0
               /\ nodeBroadcastPower[node] >= linkCosts[node, childNode]
                   | childNode : int(1..numNodes)])

@@ -2,19 +2,19 @@ language ESSENCE' 1.0
 
 given n: int(1..)
 where n % 2 = 0
-letting q1 be n / 2
+letting let1 be n / 2
 find setA_Occurrence: matrix indexed by [int(1..n)] of bool
-letting q2 be n / 2
+letting let2 be n / 2
 find setB_Occurrence: matrix indexed by [int(1..n)] of bool
 such that
-    sum(flatten([[setA_Occurrence[q5] | q5 : int(1..n)],
-                 [setB_Occurrence[q5] /\ !setA_Occurrence[q5] | q5 : int(1..n)]; int(1..2)]))
+    sum(flatten([[setA_Occurrence[q3] | q3 : int(1..n)],
+                 [setB_Occurrence[q3] /\ !setA_Occurrence[q3] | q3 : int(1..n)]; int(1..2)]))
     = n,
-    sum([setA_Occurrence[q6] /\ setB_Occurrence[q6] | q6 : int(1..n)]) = 0,
+    sum([setA_Occurrence[q4] /\ setB_Occurrence[q4] | q4 : int(1..n)]) = 0,
     sum([setA_Occurrence[i] * i | i : int(1..n)]) =
     sum([setB_Occurrence[i] * i | i : int(1..n)]),
     sum([setA_Occurrence[i] * (i * i) | i : int(1..n)]) =
     sum([setB_Occurrence[i] * (i * i) | i : int(1..n)]),
-    q1 = sum([setA_Occurrence[q3] | q3 : int(1..n)]),
-    q2 = sum([setB_Occurrence[q4] | q4 : int(1..n)])
+    let1 = sum([setA_Occurrence[q1] | q1 : int(1..n)]),
+    let2 = sum([setB_Occurrence[q2] | q2 : int(1..n)])
 

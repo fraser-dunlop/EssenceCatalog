@@ -2,9 +2,9 @@ language ESSENCE' 1.0
 
 given n: int(1..100)
 given totalWeight: int(1..1000)
-given p1: int
+given fin1: int
 given weights_Function1D: matrix indexed by [int(1..n)] of int(1..100)
-given p2: int
+given fin2: int
 given values_Function1D: matrix indexed by [int(1..n)] of int(1..100)
 find picked_Occurrence: matrix indexed by [int(1..n)] of bool
 maximising sum([picked_Occurrence[i] * values_Function1D[i] | i : int(1..n)])

@@ -9,11 +9,11 @@ such that
     and([Ticks_Occurrence[pair1_1] /\ Ticks_Occurrence[pair1_2] ->
          and([Ticks_Occurrence[pair2_1] /\ Ticks_Occurrence[pair2_2] ->
               (!(pair1_1 = pair2_1 /\ pair1_2 = pair2_2) ->
-               max([[pair1_1, pair1_2; int(1..2)][q3] | q3 : int(1..2)]) -
-               min([[pair1_1, pair1_2; int(1..2)][q4] | q4 : int(1..2)])
+               max([[pair1_1, pair1_2; int(1..2)][q5] | q5 : int(1..2)]) -
+               min([[pair1_1, pair1_2; int(1..2)][q8] | q8 : int(1..2)])
                !=
-               max([[pair2_1, pair2_2; int(1..2)][q5] | q5 : int(1..2)]) -
-               min([[pair2_1, pair2_2; int(1..2)][q6] | q6 : int(1..2)]))
+               max([[pair2_1, pair2_2; int(1..2)][q11] | q11 : int(1..2)]) -
+               min([[pair2_1, pair2_2; int(1..2)][q14] | q14 : int(1..2)]))
                   | pair2_1 : int(0..bound), pair2_2 : int(0..bound), pair2_1 < pair2_2])
              | pair1_1 : int(0..bound), pair1_2 : int(0..bound), pair1_1 < pair1_2]),
     n = sum([Ticks_Occurrence[q1] | q1 : int(0..bound)])
