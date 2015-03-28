@@ -1,9 +1,9 @@
 language ESSENCE' 1.0
 
 given U_EnumSize: int
-given p1: int
+given fin1: int
 given s_Function1D: matrix indexed by [int(1..U_EnumSize)] of int(1..)
-given p2: int
+given fin2: int
 given v_Function1D: matrix indexed by [int(1..U_EnumSize)] of int(1..)
 given B: int(1..)
 given K: int(1..)
@@ -11,19 +11,19 @@ find U'_ExplicitVarSizeWithMarker_Marker: int(0..1 + (U_EnumSize - 1))
 find U'_ExplicitVarSizeWithMarker_Values:
         matrix indexed by [int(1..1 + (U_EnumSize - 1))] of int(1..U_EnumSize)
 such that
-    sum([(q2 <= U'_ExplicitVarSizeWithMarker_Marker) *
-         s_Function1D[U'_ExplicitVarSizeWithMarker_Values[q2]]
-             | q2 : int(1..1 + (U_EnumSize - 1))])
+    sum([(q4 <= U'_ExplicitVarSizeWithMarker_Marker) *
+         s_Function1D[U'_ExplicitVarSizeWithMarker_Values[q4]]
+             | q4 : int(1..1 + (U_EnumSize - 1))])
     <= B,
-    sum([(q3 <= U'_ExplicitVarSizeWithMarker_Marker) *
-         v_Function1D[U'_ExplicitVarSizeWithMarker_Values[q3]]
-             | q3 : int(1..1 + (U_EnumSize - 1))])
+    sum([(q5 <= U'_ExplicitVarSizeWithMarker_Marker) *
+         v_Function1D[U'_ExplicitVarSizeWithMarker_Values[q5]]
+             | q5 : int(1..1 + (U_EnumSize - 1))])
     >= K,
     and([q1 + 1 <= U'_ExplicitVarSizeWithMarker_Marker ->
          U'_ExplicitVarSizeWithMarker_Values[q1] <
          U'_ExplicitVarSizeWithMarker_Values[q1 + 1]
              | q1 : int(1..1 + (U_EnumSize - 1) - 1)]),
-    and([q1 > U'_ExplicitVarSizeWithMarker_Marker ->
-         U'_ExplicitVarSizeWithMarker_Values[q1] = 1
-             | q1 : int(1..1 + (U_EnumSize - 1))])
+    and([q2 > U'_ExplicitVarSizeWithMarker_Marker ->
+         U'_ExplicitVarSizeWithMarker_Values[q2] = 1
+             | q2 : int(1..1 + (U_EnumSize - 1))])
 

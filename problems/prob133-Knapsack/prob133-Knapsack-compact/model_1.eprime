@@ -1,9 +1,9 @@
 language ESSENCE' 1.0
 
 given U_EnumSize: int
-given p1: int
+given fin1: int
 given s_Function1D: matrix indexed by [int(1..U_EnumSize)] of int(1..)
-given p2: int
+given fin2: int
 given v_Function1D: matrix indexed by [int(1..U_EnumSize)] of int(1..)
 given B: int(1..)
 given K: int(1..)

@@ -1,0 +1,305 @@
+language ESSENCE' 1.0
+
+given maxLot: int
+given n_orders: int(1..)
+given n_lines: int(1..)
+given n_days: int(1..)
+given n_slots: int(1..)
+given batch_size: int(1..)
+given Attribute_EnumSize: int
+given fin1: int
+given quantity_Function1D: matrix indexed by [int(1..n_orders)] of int(1..)
+given fin2: int
+given fin3: int
+given req_attr_Function1D_Occurrence:
+        matrix indexed by [int(1..n_orders), int(1..Attribute_EnumSize)] of bool
+given fin4: int
+given capacity_FunctionND:
+        matrix indexed by [int(1..n_lines), int(1..n_days)] of int(1..)
+given fin5: int
+given fin6: int
+given line_attr_Function1D_Occurrence:
+        matrix indexed by [int(1..n_lines), int(1..Attribute_EnumSize)] of bool
+given fin7: int
+given line_on_Function1D: matrix indexed by [int(1..n_orders)] of int(1..n_days)
+given fin8: int
+given line_off_Function1D:
+        matrix indexed by [int(1..n_orders)] of int(1..n_days)
+given fin9: int
+given dist_except_FunctionNDPartial_Flags:
+        matrix indexed by [int(1..n_days), int(1..Attribute_EnumSize)] of bool
+given dist_except_FunctionNDPartial_Values_Occurrence:
+        matrix indexed by [int(1..n_days), int(1..Attribute_EnumSize), int(0..)] of bool
+given fin10: int
+given fin11: int
+given fin12: int
+given earlier_RelationAsSet_Explicit_1_Occurrence:
+        matrix indexed by [int(1..fin10), int(1..Attribute_EnumSize)] of bool
+given earlier_RelationAsSet_Explicit_2_Occurrence:
+        matrix indexed by [int(1..fin10), int(1..Attribute_EnumSize)] of bool
+where
+    sum([capacity_FunctionND[q23_1, q23_2]
+             | q23_1 : int(1..n_lines), q23_2 : int(1..n_days)])
+    * batch_size
+    = sum([quantity_Function1D[o] | o : int(1..n_orders)])
+where
+    and([or([and([s1_Occurrence[q28]
+                      | q28 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSet_Explicit_1_Occurrence[q27, q28]])
+             /\
+             and([earlier_RelationAsSet_Explicit_1_Occurrence[q27, q29]
+                      | q29 : int(1..Attribute_EnumSize), s1_Occurrence[q29]])
+             /\
+             (and([s1_Occurrence[q30]
+                       | q30 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSet_Explicit_2_Occurrence[q27, q30]])
+              /\
+              and([earlier_RelationAsSet_Explicit_2_Occurrence[q27, q31]
+                       | q31 : int(1..Attribute_EnumSize), s1_Occurrence[q31]]))
+                 | q27 : int(1..fin10)])
+             | s1_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool])
+where
+    and([or([and([s1_Occurrence[q34]
+                      | q34 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSet_Explicit_1_Occurrence[q33, q34]])
+             /\
+             and([earlier_RelationAsSet_Explicit_1_Occurrence[q33, q35]
+                      | q35 : int(1..Attribute_EnumSize), s1_Occurrence[q35]])
+             /\
+             (and([s2_Occurrence[q36]
+                       | q36 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSet_Explicit_2_Occurrence[q33, q36]])
+              /\
+              and([earlier_RelationAsSet_Explicit_2_Occurrence[q33, q37]
+                       | q37 : int(1..Attribute_EnumSize), s2_Occurrence[q37]]))
+                 | q33 : int(1..fin10)])
+         /\
+         or([and([s2_Occurrence[q40]
+                      | q40 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSet_Explicit_1_Occurrence[q39, q40]])
+             /\
+             and([earlier_RelationAsSet_Explicit_1_Occurrence[q39, q41]
+                      | q41 : int(1..Attribute_EnumSize), s2_Occurrence[q41]])
+             /\
+             (and([s1_Occurrence[q42]
+                       | q42 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSet_Explicit_2_Occurrence[q39, q42]])
+              /\
+              and([earlier_RelationAsSet_Explicit_2_Occurrence[q39, q43]
+                       | q43 : int(1..Attribute_EnumSize), s1_Occurrence[q43]]))
+                 | q39 : int(1..fin10)])
+         ->
+         and([s2_Occurrence[q44] | q44 : int(1..Attribute_EnumSize), s1_Occurrence[q44]])
+         /\
+         and([s1_Occurrence[q45] | q45 : int(1..Attribute_EnumSize), s2_Occurrence[q45]])
+             | s1_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool,
+               s2_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool])
+where
+    and([or([and([s1_Occurrence[q48]
+                      | q48 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSet_Explicit_1_Occurrence[q47, q48]])
+             /\
+             and([earlier_RelationAsSet_Explicit_1_Occurrence[q47, q49]
+                      | q49 : int(1..Attribute_EnumSize), s1_Occurrence[q49]])
+             /\
+             (and([s2_Occurrence[q50]
+                       | q50 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSet_Explicit_2_Occurrence[q47, q50]])
+              /\
+              and([earlier_RelationAsSet_Explicit_2_Occurrence[q47, q51]
+                       | q51 : int(1..Attribute_EnumSize), s2_Occurrence[q51]]))
+                 | q47 : int(1..fin10)])
+         /\
+         or([and([s2_Occurrence[q54]
+                      | q54 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSet_Explicit_1_Occurrence[q53, q54]])
+             /\
+             and([earlier_RelationAsSet_Explicit_1_Occurrence[q53, q55]
+                      | q55 : int(1..Attribute_EnumSize), s2_Occurrence[q55]])
+             /\
+             (and([s3_Occurrence[q56]
+                       | q56 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSet_Explicit_2_Occurrence[q53, q56]])
+              /\
+              and([earlier_RelationAsSet_Explicit_2_Occurrence[q53, q57]
+                       | q57 : int(1..Attribute_EnumSize), s3_Occurrence[q57]]))
+                 | q53 : int(1..fin10)])
+         ->
+         or([and([s1_Occurrence[q60]
+                      | q60 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSet_Explicit_1_Occurrence[q59, q60]])
+             /\
+             and([earlier_RelationAsSet_Explicit_1_Occurrence[q59, q61]
+                      | q61 : int(1..Attribute_EnumSize), s1_Occurrence[q61]])
+             /\
+             (and([s3_Occurrence[q62]
+                       | q62 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSet_Explicit_2_Occurrence[q59, q62]])
+              /\
+              and([earlier_RelationAsSet_Explicit_2_Occurrence[q59, q63]
+                       | q63 : int(1..Attribute_EnumSize), s3_Occurrence[q63]]))
+                 | q59 : int(1..fin10)])
+             | s1_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool,
+               s2_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool,
+               s3_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool])
+letting let1 be
+        sum([capacity_FunctionND[q24_1, q24_2]
+                 | q24_1 : int(1..n_lines), q24_2 : int(1..n_days)])
+find batches_Function1D_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..let1), int(1..maxLot)] of int(0..min([maxLot,
+                                                                        (1 + (n_orders - 1)) *
+                                                                        (1 + (batch_size - 1)); int(1..2)]))
+find batches_Function1D_ExplicitVarSizeWithFlags_Values_1:
+        matrix indexed by [int(1..let1), int(1..maxLot)] of int(1..n_orders)
+find batches_Function1D_ExplicitVarSizeWithFlags_Values_2:
+        matrix indexed by [int(1..let1), int(1..maxLot)] of int(1..batch_size)
+find batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..let1), int(1..1 + (Attribute_EnumSize - 1))] of bool
+find batch_attr_Function1D_ExplicitVarSizeWithFlags_Values:
+        matrix indexed by [int(1..let1),
+                           int(1..1 + (Attribute_EnumSize - 1))] of int(1..Attribute_EnumSize)
+find schedule_FunctionND:
+        matrix indexed by [int(1..n_lines), int(1..n_days),
+                           int(1..n_slots)] of int(1..let1)
+such that
+    and([and([batches_Function1D_ExplicitVarSizeWithFlags_Flags[b, q81] > 0 ->
+              and([req_attr_Function1D_Occurrence[batches_Function1D_ExplicitVarSizeWithFlags_Values_1[b,
+                                                                                                       q81],
+                                                  q64]
+                   ->
+                   or([batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[b, q66] /\
+                       batch_attr_Function1D_ExplicitVarSizeWithFlags_Values[b, q66] = q64
+                           | q66 : int(1..1 + (Attribute_EnumSize - 1))])
+                       | q64 : int(1..Attribute_EnumSize)])
+                  | q81 : int(1..maxLot)])
+             | b : int(1..let1)]),
+    and([and([batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[b, q25] ->
+              or([batches_Function1D_ExplicitVarSizeWithFlags_Flags[b, q83] > 0 /\
+                  req_attr_Function1D_Occurrence[batches_Function1D_ExplicitVarSizeWithFlags_Values_1[b,
+                                                                                                      q83],
+                                                 batch_attr_Function1D_ExplicitVarSizeWithFlags_Values[b, q25]]
+                      | q83 : int(1..maxLot)])
+                  | q25 : int(1..1 + (Attribute_EnumSize - 1))])
+             | b : int(1..let1)]),
+    and([and([batches_Function1D_ExplicitVarSizeWithFlags_Flags[schedule_FunctionND[q85_1,
+                                                                                    q85_2, q85_3],
+                                                                q87]
+              > 0
+              ->
+              and([req_attr_Function1D_Occurrence[batches_Function1D_ExplicitVarSizeWithFlags_Values_1[schedule_FunctionND[q85_1,
+                                                                                                                           q85_2,
+                                                                                                                           q85_3],
+                                                                                                       q87],
+                                                  q67]
+                   -> line_attr_Function1D_Occurrence[q85_1, q67]
+                       | q67 : int(1..Attribute_EnumSize)])
+                  | q87 : int(1..maxLot)])
+             | q85_1 : int(1..n_lines), q85_2 : int(1..n_days), q85_3 : int(1..n_slots)]),
+    and([and([batches_Function1D_ExplicitVarSizeWithFlags_Flags[schedule_FunctionND[q89_1,
+                                                                                    q89_2, q89_3],
+                                                                q91]
+              > 0
+              ->
+              q89_2 >=
+              line_on_Function1D[batches_Function1D_ExplicitVarSizeWithFlags_Values_1[schedule_FunctionND[q89_1,
+                                                                                                          q89_2, q89_3],
+                                                                                      q91]]
+              /\
+              q89_2 <=
+              line_off_Function1D[batches_Function1D_ExplicitVarSizeWithFlags_Values_1[schedule_FunctionND[q89_1,
+                                                                                                           q89_2,
+                                                                                                           q89_3],
+                                                                                       q91]]
+                  | q91 : int(1..maxLot)])
+             | q89_1 : int(1..n_lines), q89_2 : int(1..n_days), q89_3 : int(1..n_slots)]),
+    and([and([and([or([and([or([batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[schedule_FunctionND[l,
+                                                                                                         d, s],
+                                                                                     q72]
+                                /\
+                                batch_attr_Function1D_ExplicitVarSizeWithFlags_Values[schedule_FunctionND[l, d,
+                                                                                                          s],
+                                                                                      q72]
+                                = q70
+                                    | q72 : int(1..1 + (Attribute_EnumSize - 1))])
+                                | q70 : int(1..Attribute_EnumSize),
+                                  earlier_RelationAsSet_Explicit_1_Occurrence[q69, q70]])
+                       /\
+                       and([batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[schedule_FunctionND[l,
+                                                                                                     d, s],
+                                                                                 q74]
+                            ->
+                            earlier_RelationAsSet_Explicit_1_Occurrence[q69,
+                                                                        batch_attr_Function1D_ExplicitVarSizeWithFlags_Values[schedule_FunctionND[l,
+                                                                                                                                                  d,
+                                                                                                                                                  s],
+                                                                                                                              q74]]
+                                | q74 : int(1..1 + (Attribute_EnumSize - 1))])
+                       /\
+                       (and([or([batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[schedule_FunctionND[l,
+                                                                                                          d, s + 1],
+                                                                                      q77]
+                                 /\
+                                 batch_attr_Function1D_ExplicitVarSizeWithFlags_Values[schedule_FunctionND[l, d,
+                                                                                                           s + 1],
+                                                                                       q77]
+                                 = q75
+                                     | q77 : int(1..1 + (Attribute_EnumSize - 1))])
+                                 | q75 : int(1..Attribute_EnumSize),
+                                   earlier_RelationAsSet_Explicit_2_Occurrence[q69, q75]])
+                        /\
+                        and([batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[schedule_FunctionND[l,
+                                                                                                      d, s + 1],
+                                                                                  q79]
+                             ->
+                             earlier_RelationAsSet_Explicit_2_Occurrence[q69,
+                                                                         batch_attr_Function1D_ExplicitVarSizeWithFlags_Values[schedule_FunctionND[l,
+                                                                                                                                                   d,
+                                                                                                                                                   s
+                                                                                                                                                   +
+                                                                                                                                                   1],
+                                                                                                                               q79]]
+                                 | q79 : int(1..1 + (Attribute_EnumSize - 1))]))
+                           | q69 : int(1..fin10)])
+                       | s : int(1..n_slots - 1)])
+                  | d : int(1..n_days)])
+             | l : int(1..n_lines)]),
+    and([and([batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[q7, q8 + 1] ->
+              batch_attr_Function1D_ExplicitVarSizeWithFlags_Values[q7, q8] <
+              batch_attr_Function1D_ExplicitVarSizeWithFlags_Values[q7, q8 + 1]
+                  | q8 : int(1..1 + (Attribute_EnumSize - 1) - 1)])
+             | q7 : int(1..let1)]),
+    and([and([batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[q7, q9] = false
+              -> batch_attr_Function1D_ExplicitVarSizeWithFlags_Values[q7, q9] = 1
+                  | q9 : int(1..1 + (Attribute_EnumSize - 1))])
+             | q7 : int(1..let1)]),
+    and([and([batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[q7, q10 + 1] ->
+              batch_attr_Function1D_ExplicitVarSizeWithFlags_Flags[q7, q10]
+                  | q10 : int(1..1 + (Attribute_EnumSize - 1) - 1)])
+             | q7 : int(1..let1)]),
+    and([and([batches_Function1D_ExplicitVarSizeWithFlags_Flags[q13, q14 + 1] > 0 ->
+              batches_Function1D_ExplicitVarSizeWithFlags_Values_1[q13, q14] <
+              batches_Function1D_ExplicitVarSizeWithFlags_Values_1[q13, q14 + 1]
+              \/
+              batches_Function1D_ExplicitVarSizeWithFlags_Values_1[q13, q14] =
+              batches_Function1D_ExplicitVarSizeWithFlags_Values_1[q13, q14 + 1]
+              /\
+              batches_Function1D_ExplicitVarSizeWithFlags_Values_2[q13, q14] <
+              batches_Function1D_ExplicitVarSizeWithFlags_Values_2[q13, q14 + 1]
+                  | q14 : int(1..maxLot - 1)])
+             | q13 : int(1..let1)]),
+    and([and([batches_Function1D_ExplicitVarSizeWithFlags_Flags[q13, q15] = 0 ->
+              batches_Function1D_ExplicitVarSizeWithFlags_Values_1[q13, q15] = 1 /\
+              batches_Function1D_ExplicitVarSizeWithFlags_Values_2[q13, q15] = 1
+                  | q15 : int(1..maxLot)])
+             | q13 : int(1..let1)]),
+    and([and([batches_Function1D_ExplicitVarSizeWithFlags_Flags[q13, q16 + 1] > 0 ->
+              batches_Function1D_ExplicitVarSizeWithFlags_Flags[q13, q16] > 0
+                  | q16 : int(1..maxLot - 1)])
+             | q13 : int(1..let1)]),
+    and([sum([batches_Function1D_ExplicitVarSizeWithFlags_Flags[q13, q18]
+                  | q18 : int(1..maxLot)])
+         <= maxLot
+             | q13 : int(1..let1)]),
+    allDiff([schedule_FunctionND[q20_1, q20_2, q20_3]
+                 | q20_1 : int(1..n_lines), q20_2 : int(1..n_days), q20_3 : int(1..n_slots)])
+

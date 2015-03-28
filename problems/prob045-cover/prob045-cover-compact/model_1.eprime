@@ -11,44 +11,44 @@ find CoverTest_ExplicitVarSizeWithFlags_Flags:
                                                      2 ** ((1 + (k - 1)) * (1 + (g - 1))); int(1..2)]))
 find CoverTest_ExplicitVarSizeWithFlags_Values_Function1D:
         matrix indexed by [int(1..b), int(1..k)] of int(1..g)
-find q6_Occurrence:
+find aux1_Occurrence:
         matrix indexed by [matrix indexed by [int(1..k)] of bool, int(1..b),
                            int(1..k)] of bool
 such that
-    and([and([and([q6_Occurrence[testcase_Function1DPartial_Flags, q3, q4]
-                       | q4 : int(1..k), testcase_Function1DPartial_Flags[q4]])
-                  | q3 : int(1..b)])
+    and([and([and([aux1_Occurrence[testcase_Function1DPartial_Flags, q11, q19]
+                       | q19 : int(1..k), testcase_Function1DPartial_Flags[q19]])
+                  | q11 : int(1..b)])
              | testcase_Function1DPartial_Flags : matrix indexed by [int(1..k)] of bool]),
-    and([and([and([q6_Occurrence[testcase_Function1DPartial_Flags, q3, q8] ->
-                   or([q10 = q8 | q10 : int(1..k), testcase_Function1DPartial_Flags[q10]])
-                       | q8 : int(1..k)])
-                  | q3 : int(1..b)])
+    and([and([and([aux1_Occurrence[testcase_Function1DPartial_Flags, q11, q16] ->
+                   or([q20 = q16 | q20 : int(1..k), testcase_Function1DPartial_Flags[q20]])
+                       | q16 : int(1..k)])
+                  | q11 : int(1..b)])
              | testcase_Function1DPartial_Flags : matrix indexed by [int(1..k)] of bool]),
-    and([or([CoverTest_ExplicitVarSizeWithFlags_Flags[q3] > 0 /\
-             (and([CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q3, q5] =
-                   testcase_Function1DPartial_Values[q5]
-                       | q5 : int(1..k), testcase_Function1DPartial_Flags[q5]])
+    and([or([CoverTest_ExplicitVarSizeWithFlags_Flags[q11] > 0 /\
+             (and([CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q11, q13] =
+                   testcase_Function1DPartial_Values[q13]
+                       | q13 : int(1..k), testcase_Function1DPartial_Flags[q13]])
               /\
-              and([q6_Occurrence[testcase_Function1DPartial_Flags, q3, q7] ->
-                   or([q11 = q7 | q11 : int(1..k)])
-                       | q7 : int(1..k)]))
-                 | q3 : int(1..b)])
+              and([aux1_Occurrence[testcase_Function1DPartial_Flags, q11, q15] ->
+                   or([q22 = q15 | q22 : int(1..k)])
+                       | q15 : int(1..k)]))
+                 | q11 : int(1..b)])
              | testcase_Function1DPartial_Flags : matrix indexed by [int(1..k)] of bool,
                testcase_Function1DPartial_Values : matrix indexed by [int(1..k)] of int(1..g),
                and([testcase_Function1DPartial_Flags[q1] = false ->
                     testcase_Function1DPartial_Values[q1] = 1
                         | q1 : int(1..k)]),
-               sum([1 | q12 : int(1..k), testcase_Function1DPartial_Flags[q12]]) = t]),
-    and([CoverTest_ExplicitVarSizeWithFlags_Flags[q2 + 1] > 0 ->
-         CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q2, ..] <lex
-         CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q2 + 1, ..]
-             | q2 : int(1..b - 1)]),
-    and([CoverTest_ExplicitVarSizeWithFlags_Flags[q2] = 0 ->
-         and([CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q2, q9] = 1
-                  | q9 : int(1..k)])
-             | q2 : int(1..b)]),
-    and([CoverTest_ExplicitVarSizeWithFlags_Flags[q2 + 1] > 0 ->
-         CoverTest_ExplicitVarSizeWithFlags_Flags[q2] > 0
-             | q2 : int(1..b - 1)]),
-    b = sum([CoverTest_ExplicitVarSizeWithFlags_Flags[q2] | q2 : int(1..b)])
+               sum([1 | q24 : int(1..k), testcase_Function1DPartial_Flags[q24]]) = t]),
+    and([CoverTest_ExplicitVarSizeWithFlags_Flags[q4 + 1] > 0 ->
+         CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q4, ..] <lex
+         CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q4 + 1, ..]
+             | q4 : int(1..b - 1)]),
+    and([CoverTest_ExplicitVarSizeWithFlags_Flags[q5] = 0 ->
+         and([CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q5, q30] = 1
+                  | q30 : int(1..k)])
+             | q5 : int(1..b)]),
+    and([CoverTest_ExplicitVarSizeWithFlags_Flags[q6 + 1] > 0 ->
+         CoverTest_ExplicitVarSizeWithFlags_Flags[q6] > 0
+             | q6 : int(1..b - 1)]),
+    b = sum([CoverTest_ExplicitVarSizeWithFlags_Flags[q8] | q8 : int(1..b)])
 

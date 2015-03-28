@@ -1,18 +1,18 @@
 language ESSENCE' 1.0
 
 given numGates: int(1..)
-given p1: int
-given p2: int
+given fin1: int
+given fin2: int
 given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..numGates)] of int(0..p2)
+        matrix indexed by [int(1..numGates)] of int(0..fin2)
 given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1:
-        matrix indexed by [int(1..numGates), int(1..p2), int(1..2)] of bool
+        matrix indexed by [int(1..numGates), int(1..fin2), int(1..2)] of bool
 given gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2:
-        matrix indexed by [int(1..numGates), int(1..p2)] of bool
-given p3: int
+        matrix indexed by [int(1..numGates), int(1..fin2)] of bool
+given fin3: int
 given gateInpts_Function1D:
         matrix indexed by [int(1..numGates), int(1..2)] of int(-1..numGates)
-given p4: int
+given fin4: int
 given finalOutputs_Function1DPartial_Flags:
         matrix indexed by [int(1..numGates)] of bool
 given finalOutputs_Function1DPartial_Values:
@@ -22,29 +22,29 @@ find faultyGates_Function1DPartial_Flags:
 find faultyGates_Function1DPartial_Values:
         matrix indexed by [int(1..numGates)] of bool
 minimising
-    sum([faultyGates_Function1DPartial_Flags[q5] | q5 : int(1..numGates)])
+    sum([faultyGates_Function1DPartial_Flags[q10] | q10 : int(1..numGates)])
 such that
     or([gateOutput_Function1D[-1] = false /\ gateOutput_Function1D[0] /\
         and([or([and([gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[gate,
-                                                                                                               q3, q2]
+                                                                                                               q6, q7]
                       =
                       [gateOutput_Function1D[gateInpts_Function1D[gate, 1]],
-                       gateOutput_Function1D[gateInpts_Function1D[gate, 2]]; int(1..2)][q2]
-                          | q2 : int(1..2)])
+                       gateOutput_Function1D[gateInpts_Function1D[gate, 2]]; int(1..2)][q7]
+                          | q7 : int(1..2)])
                  /\
                  gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[gate,
-                                                                                                          q3]
+                                                                                                          q6]
                  = gateOutput_Function1D[gate]
-                     | q3 : int(1..p2),
-                       q3 <=
+                     | q6 : int(1..fin2),
+                       q6 <=
                        gateFuncs_Function1D_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker[gate]])
              \/
              gateOutput_Function1D[gate] = faultyGates_Function1DPartial_Values[gate] /\
              faultyGates_Function1DPartial_Flags[gate]
                  | gate : int(1..numGates)])
         /\
-        and([gateOutput_Function1D[q6] = finalOutputs_Function1DPartial_Values[q6]
-                 | q6 : int(1..numGates), finalOutputs_Function1DPartial_Flags[q6]])
+        and([gateOutput_Function1D[q12] = finalOutputs_Function1DPartial_Values[q12]
+                 | q12 : int(1..numGates), finalOutputs_Function1DPartial_Flags[q12]])
             | gateOutput_Function1D : matrix indexed by [int(-1..numGates)] of bool]),
     and([faultyGates_Function1DPartial_Flags[q1] = false ->
          faultyGates_Function1DPartial_Values[q1] = false

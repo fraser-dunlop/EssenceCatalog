@@ -4,17 +4,17 @@ given v: int(1..)
 given d: int(1..)
 given q: int(1..)
 given lam: int(1..)
-letting q1 be q * lam
-find E_Explicit: matrix indexed by [int(1..v), int(1..q1)] of int(1..q)
+letting let1 be q * lam
+find E_Explicit: matrix indexed by [int(1..v), int(1..let1)] of int(1..q)
 such that
-    and([and([sum([E_Explicit[q3, index] = element | index : int(1..q * lam)]) = lam
+    and([and([sum([E_Explicit[q4, index] = element | index : int(1..q * lam)]) = lam
                   | element : int(1..q)])
-             | q3 : int(1..v)]),
-    and([and([E_Explicit[q4, q6] = E_Explicit[q5, q6] | q6 : int(1..q1)]) /\
-         and([or([q6 = q7 | q7 : int(1..q1)]) | q6 : int(1..q1)])
-         /\ and([or([q6 = q7 | q7 : int(1..q1)]) | q6 : int(1..q1)])
+             | q4 : int(1..v)]),
+    and([and([E_Explicit[q5, q7] = E_Explicit[q6, q7] | q7 : int(1..let1)]) /\
+         and([or([q7 = q8 | q8 : int(1..let1)]) | q7 : int(1..let1)])
+         /\ and([or([q7 = q8 | q8 : int(1..let1)]) | q7 : int(1..let1)])
          \/
-         sum([E_Explicit[q4, index] != E_Explicit[q5, index] | index : int(1..q * lam)])
-         = d | q4 : int(1..v), q5 : int(1..v)]),
-    and([E_Explicit[q2, ..] <lex E_Explicit[q2 + 1, ..] | q2 : int(1..v - 1)])
+         sum([E_Explicit[q5, index] != E_Explicit[q6, index] | index : int(1..q * lam)])
+         = d | q5 : int(1..v), q6 : int(1..v)]),
+    and([E_Explicit[q1, ..] <lex E_Explicit[q1 + 1, ..] | q1 : int(1..v - 1)])
 

@@ -17,21 +17,21 @@ maximising
     black_ExplicitVarSizeWithMarker_Marker + white_ExplicitVarSizeWithMarker_Marker
 such that
     black_ExplicitVarSizeWithMarker_Marker = white_ExplicitVarSizeWithMarker_Marker,
-    and([q4 <= black_ExplicitVarSizeWithMarker_Marker ->
-         and([q5 <= white_ExplicitVarSizeWithMarker_Marker ->
-              black_ExplicitVarSizeWithMarker_Values_1[q4] !=
-              white_ExplicitVarSizeWithMarker_Values_1[q5]
+    and([q8 <= black_ExplicitVarSizeWithMarker_Marker ->
+         and([q10 <= white_ExplicitVarSizeWithMarker_Marker ->
+              black_ExplicitVarSizeWithMarker_Values_1[q8] !=
+              white_ExplicitVarSizeWithMarker_Values_1[q10]
               /\
-              black_ExplicitVarSizeWithMarker_Values_2[q4] !=
-              white_ExplicitVarSizeWithMarker_Values_2[q5]
+              black_ExplicitVarSizeWithMarker_Values_2[q8] !=
+              white_ExplicitVarSizeWithMarker_Values_2[q10]
               /\
-              |white_ExplicitVarSizeWithMarker_Values_1[q5] -
-               black_ExplicitVarSizeWithMarker_Values_1[q4]|
+              |white_ExplicitVarSizeWithMarker_Values_1[q10] -
+               black_ExplicitVarSizeWithMarker_Values_1[q8]|
               !=
-              |white_ExplicitVarSizeWithMarker_Values_2[q5] -
-               black_ExplicitVarSizeWithMarker_Values_2[q4]|
-                  | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
-             | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+              |white_ExplicitVarSizeWithMarker_Values_2[q10] -
+               black_ExplicitVarSizeWithMarker_Values_2[q8]|
+                  | q10 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+             | q8 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([q1 + 1 <= black_ExplicitVarSizeWithMarker_Marker ->
          black_ExplicitVarSizeWithMarker_Values_1[q1] <
          black_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
@@ -42,22 +42,22 @@ such that
          black_ExplicitVarSizeWithMarker_Values_2[q1] <
          black_ExplicitVarSizeWithMarker_Values_2[q1 + 1]
              | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([q1 > black_ExplicitVarSizeWithMarker_Marker ->
-         black_ExplicitVarSizeWithMarker_Values_1[q1] = 1 /\
-         black_ExplicitVarSizeWithMarker_Values_2[q1] = 1
-             | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
-    and([q2 + 1 <= white_ExplicitVarSizeWithMarker_Marker ->
-         white_ExplicitVarSizeWithMarker_Values_1[q2] <
-         white_ExplicitVarSizeWithMarker_Values_1[q2 + 1]
+    and([q2 > black_ExplicitVarSizeWithMarker_Marker ->
+         black_ExplicitVarSizeWithMarker_Values_1[q2] = 1 /\
+         black_ExplicitVarSizeWithMarker_Values_2[q2] = 1
+             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([q4 + 1 <= white_ExplicitVarSizeWithMarker_Marker ->
+         white_ExplicitVarSizeWithMarker_Values_1[q4] <
+         white_ExplicitVarSizeWithMarker_Values_1[q4 + 1]
          \/
-         white_ExplicitVarSizeWithMarker_Values_1[q2] =
-         white_ExplicitVarSizeWithMarker_Values_1[q2 + 1]
+         white_ExplicitVarSizeWithMarker_Values_1[q4] =
+         white_ExplicitVarSizeWithMarker_Values_1[q4 + 1]
          /\
-         white_ExplicitVarSizeWithMarker_Values_2[q2] <
-         white_ExplicitVarSizeWithMarker_Values_2[q2 + 1]
-             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([q2 > white_ExplicitVarSizeWithMarker_Marker ->
-         white_ExplicitVarSizeWithMarker_Values_1[q2] = 1 /\
-         white_ExplicitVarSizeWithMarker_Values_2[q2] = 1
-             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+         white_ExplicitVarSizeWithMarker_Values_2[q4] <
+         white_ExplicitVarSizeWithMarker_Values_2[q4 + 1]
+             | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
+    and([q5 > white_ExplicitVarSizeWithMarker_Marker ->
+         white_ExplicitVarSizeWithMarker_Values_1[q5] = 1 /\
+         white_ExplicitVarSizeWithMarker_Values_2[q5] = 1
+             | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
 

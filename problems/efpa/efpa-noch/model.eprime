@@ -8,19 +8,19 @@ letting wordLength be lam * numChars
 find c_Explicit_Function1D:
         matrix indexed by [int(1..numCodeWords), int(1..wordLength)] of int(1..numChars)
 such that
-    and([and([sum([c_Explicit_Function1D[q2, i] = a | i : int(1..wordLength)]) = lam
+    and([and([sum([c_Explicit_Function1D[q4, i] = a | i : int(1..wordLength)]) = lam
                   | a : int(1..numChars)])
-             | q2 : int(1..numCodeWords)]),
-    and([or([!(c_Explicit_Function1D[q4, q6] = c_Explicit_Function1D[q3, q6])
-                 | q6 : int(1..wordLength)])
+             | q4 : int(1..numCodeWords)]),
+    and([or([!(c_Explicit_Function1D[q6, q8] = c_Explicit_Function1D[q5, q8])
+                 | q8 : int(1..wordLength)])
          \/
-         or([!(c_Explicit_Function1D[q3, q7] = c_Explicit_Function1D[q4, q7])
-                 | q7 : int(1..wordLength)])
+         or([!(c_Explicit_Function1D[q5, q9] = c_Explicit_Function1D[q6, q9])
+                 | q9 : int(1..wordLength)])
          ->
-         sum([c_Explicit_Function1D[q3, i] != c_Explicit_Function1D[q4, i]
+         sum([c_Explicit_Function1D[q5, i] != c_Explicit_Function1D[q6, i]
                   | i : int(1..wordLength)])
          = dist
-             | q3 : int(1..numCodeWords), q4 : int(1..numCodeWords)]),
+             | q5 : int(1..numCodeWords), q6 : int(1..numCodeWords)]),
     and([c_Explicit_Function1D[q1, ..] <lex c_Explicit_Function1D[q1 + 1, ..]
              | q1 : int(1..numCodeWords - 1)])
 

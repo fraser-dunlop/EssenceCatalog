@@ -1,10 +1,10 @@
 language ESSENCE' 1.0
 
 given n: int(1..)
-letting q1 be n ** 2
-find square: matrix indexed by [int(1..n), int(1..n)] of int(1..q1)
-letting q2 be sum([i | i : int(n ** 2 + 1 - n..n ** 2)])
-find s: int(1..q2)
+letting let1 be n ** 2
+find square: matrix indexed by [int(1..n), int(1..n)] of int(1..let1)
+letting let2 be sum([i | i : int(n ** 2 + 1 - n..n ** 2)])
+find s: int(1..let2)
 such that
     allDiff(flatten(square)),
     and([sum([square[r, c] | c : int(1..n)]) = s | r : int(1..n)]),

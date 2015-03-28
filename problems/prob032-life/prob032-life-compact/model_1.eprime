@@ -11,47 +11,48 @@ find alive_ExplicitVarSizeWithMarker_Values_2:
                                                                                     2)
 maximising alive_ExplicitVarSizeWithMarker_Marker
 such that
-    and([!or([q3 <= alive_ExplicitVarSizeWithMarker_Marker /\
-              (alive_ExplicitVarSizeWithMarker_Values_1[q3] = q5_1 /\
-               alive_ExplicitVarSizeWithMarker_Values_2[q3] = q5_2)
-                  | q3 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
-             | q5_1 : int(1..n + 2), q5_2 : int(1..n + 2),
-               sum([1   | q2 : int(1..2),
-                          or([[1, n + 2; int(1..2)][q4] = [q5_1, q5_2; int(1..2)][q2] | q4 : int(1..2)])])
+    and([!or([q5 <= alive_ExplicitVarSizeWithMarker_Marker /\
+              (alive_ExplicitVarSizeWithMarker_Values_1[q5] = q20_1 /\
+               alive_ExplicitVarSizeWithMarker_Values_2[q5] = q20_2)
+                  | q5 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
+             | q20_1 : int(1..n + 2), q20_2 : int(1..n + 2),
+               sum([1   | q8 : int(1..2),
+                          or([[1, n + 2; int(1..2)][q11] = [q20_1, q20_2; int(1..2)][q8]
+                                  | q11 : int(1..2)])])
                = 0]),
-    and([q11 <= alive_ExplicitVarSizeWithMarker_Marker ->
+    and([q22 <= alive_ExplicitVarSizeWithMarker_Marker ->
          3 <=
-         sum([or([q6 <= alive_ExplicitVarSizeWithMarker_Marker /\
-                  (alive_ExplicitVarSizeWithMarker_Values_1[q6] =
-                   alive_ExplicitVarSizeWithMarker_Values_1[q11] + i
+         sum([or([q13 <= alive_ExplicitVarSizeWithMarker_Marker /\
+                  (alive_ExplicitVarSizeWithMarker_Values_1[q13] =
+                   alive_ExplicitVarSizeWithMarker_Values_1[q22] + i
                    /\
-                   alive_ExplicitVarSizeWithMarker_Values_2[q6] =
-                   alive_ExplicitVarSizeWithMarker_Values_2[q11] + j)
-                      | q6 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
+                   alive_ExplicitVarSizeWithMarker_Values_2[q13] =
+                   alive_ExplicitVarSizeWithMarker_Values_2[q22] + j)
+                      | q13 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
                   | i : int(-1..1), j : int(-1..1)])
          /\
-         sum([or([q7 <= alive_ExplicitVarSizeWithMarker_Marker /\
-                  (alive_ExplicitVarSizeWithMarker_Values_1[q7] =
-                   alive_ExplicitVarSizeWithMarker_Values_1[q11] + i
+         sum([or([q15 <= alive_ExplicitVarSizeWithMarker_Marker /\
+                  (alive_ExplicitVarSizeWithMarker_Values_1[q15] =
+                   alive_ExplicitVarSizeWithMarker_Values_1[q22] + i
                    /\
-                   alive_ExplicitVarSizeWithMarker_Values_2[q7] =
-                   alive_ExplicitVarSizeWithMarker_Values_2[q11] + j)
-                      | q7 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
+                   alive_ExplicitVarSizeWithMarker_Values_2[q15] =
+                   alive_ExplicitVarSizeWithMarker_Values_2[q22] + j)
+                      | q15 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
                   | i : int(-1..1), j : int(-1..1)])
          <= 4
-             | q11 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))]),
-    and([!or([q9 <= alive_ExplicitVarSizeWithMarker_Marker /\
-              (alive_ExplicitVarSizeWithMarker_Values_1[q9] = q10_1 /\
-               alive_ExplicitVarSizeWithMarker_Values_2[q9] = q10_2)
-                  | q9 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
+             | q22 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))]),
+    and([!or([q19 <= alive_ExplicitVarSizeWithMarker_Marker /\
+              (alive_ExplicitVarSizeWithMarker_Values_1[q19] = q23_1 /\
+               alive_ExplicitVarSizeWithMarker_Values_2[q19] = q23_2)
+                  | q19 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
          ->
-         sum([or([q8 <= alive_ExplicitVarSizeWithMarker_Marker /\
-                  (alive_ExplicitVarSizeWithMarker_Values_1[q8] = q10_1 + i /\
-                   alive_ExplicitVarSizeWithMarker_Values_2[q8] = q10_2 + j)
-                      | q8 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
+         sum([or([q17 <= alive_ExplicitVarSizeWithMarker_Marker /\
+                  (alive_ExplicitVarSizeWithMarker_Values_1[q17] = q23_1 + i /\
+                   alive_ExplicitVarSizeWithMarker_Values_2[q17] = q23_2 + j)
+                      | q17 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
                   | i : int(-1..1), j : int(-1..1)])
          != 3
-             | q10_1 : int(1..n + 2), q10_2 : int(1..n + 2)]),
+             | q23_1 : int(1..n + 2), q23_2 : int(1..n + 2)]),
     and([q1 + 1 <= alive_ExplicitVarSizeWithMarker_Marker ->
          alive_ExplicitVarSizeWithMarker_Values_1[q1] <
          alive_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
@@ -62,8 +63,8 @@ such that
          alive_ExplicitVarSizeWithMarker_Values_2[q1] <
          alive_ExplicitVarSizeWithMarker_Values_2[q1 + 1]
              | q1 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)) - 1)]),
-    and([q1 > alive_ExplicitVarSizeWithMarker_Marker ->
-         alive_ExplicitVarSizeWithMarker_Values_1[q1] = 1 /\
-         alive_ExplicitVarSizeWithMarker_Values_2[q1] = 1
-             | q1 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
+    and([q2 > alive_ExplicitVarSizeWithMarker_Marker ->
+         alive_ExplicitVarSizeWithMarker_Values_1[q2] = 1 /\
+         alive_ExplicitVarSizeWithMarker_Values_2[q2] = 1
+             | q2 : int(1..(1 + (n + 2 - 1)) * (1 + (n + 2 - 1)))])
 

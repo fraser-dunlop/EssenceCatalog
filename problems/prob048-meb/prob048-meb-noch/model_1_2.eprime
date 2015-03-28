@@ -17,14 +17,14 @@ find totalChildrenMatrix_ExplicitVarSizeWithMarker_Values:
 minimising sum([nodeBroadcastPower[i] | i : int(1..numNodes)])
 such that
     and([i = j \/
-         sum([directChildrenMatrix_Occurrence[i, q3] /\
-              directChildrenMatrix_Occurrence[j, q3]
-                  | q3 : int(1..numNodes)])
+         sum([directChildrenMatrix_Occurrence[i, q8] /\
+              directChildrenMatrix_Occurrence[j, q8]
+                  | q8 : int(1..numNodes)])
          = 0 | i : int(1..numNodes), j : int(1..numNodes)]),
     totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[initialNode] = numNodes,
-    and([or([q5 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] /\
-             totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q5] = node
-                 | q5 : int(1..1 + (numNodes - 1))])
+    and([or([q10 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] /\
+             totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q10] = node
+                 | q10 : int(1..1 + (numNodes - 1))])
          /\
          sum([directChildrenMatrix_Occurrence[node, i] *
               totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[i]
@@ -32,23 +32,23 @@ such that
          = totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] - 1
          /\
          and([directChildrenMatrix_Occurrence[node, childNode] ->
-              and([q6 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[childNode] ->
-                   or([q7 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] /\
-                       totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q7] =
-                       totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[childNode, q6]
-                           | q7 : int(1..1 + (numNodes - 1))])
-                       | q6 : int(1..1 + (numNodes - 1))])
+              and([q12 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[childNode] ->
+                   or([q14 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] /\
+                       totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q14] =
+                       totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[childNode, q12]
+                           | q14 : int(1..1 + (numNodes - 1))])
+                       | q12 : int(1..1 + (numNodes - 1))])
               /\ linkCosts[node, childNode] != 0
               /\ nodeBroadcastPower[node] >= linkCosts[node, childNode]
                   | childNode : int(1..numNodes)])
              | node : int(1..numNodes)]),
-    and([and([q2 + 1 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q1] ->
-              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q1, q2] <
-              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q1, q2 + 1]
-                  | q2 : int(1..1 + (numNodes - 1) - 1)])
-             | q1 : int(1..numNodes)]),
-    and([and([q2 > totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q1] ->
-              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q1, q2] = 1
-                  | q2 : int(1..1 + (numNodes - 1))])
-             | q1 : int(1..numNodes)])
+    and([and([q5 + 1 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q4] ->
+              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q4, q5] <
+              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q4, q5 + 1]
+                  | q5 : int(1..1 + (numNodes - 1) - 1)])
+             | q4 : int(1..numNodes)]),
+    and([and([q6 > totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q4] ->
+              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q4, q6] = 1
+                  | q6 : int(1..1 + (numNodes - 1))])
+             | q4 : int(1..numNodes)])
 

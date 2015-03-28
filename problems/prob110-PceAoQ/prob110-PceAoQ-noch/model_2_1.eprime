@@ -14,28 +14,28 @@ find white_ExplicitVarSizeWithMarker_Values_1:
 find white_ExplicitVarSizeWithMarker_Values_2:
         matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
 maximising
-    sum([black_ExplicitVarSizeWithFlags_Flags[q4]
-             | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+    sum([black_ExplicitVarSizeWithFlags_Flags[q10]
+             | q10 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
     + white_ExplicitVarSizeWithMarker_Marker
 such that
-    sum([black_ExplicitVarSizeWithFlags_Flags[q5]
-             | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+    sum([black_ExplicitVarSizeWithFlags_Flags[q12]
+             | q12 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
     = white_ExplicitVarSizeWithMarker_Marker,
-    and([black_ExplicitVarSizeWithFlags_Flags[q6] ->
-         and([q7 <= white_ExplicitVarSizeWithMarker_Marker ->
-              black_ExplicitVarSizeWithFlags_Values_1[q6] !=
-              white_ExplicitVarSizeWithMarker_Values_1[q7]
+    and([black_ExplicitVarSizeWithFlags_Flags[q14] ->
+         and([q16 <= white_ExplicitVarSizeWithMarker_Marker ->
+              black_ExplicitVarSizeWithFlags_Values_1[q14] !=
+              white_ExplicitVarSizeWithMarker_Values_1[q16]
               /\
-              black_ExplicitVarSizeWithFlags_Values_2[q6] !=
-              white_ExplicitVarSizeWithMarker_Values_2[q7]
+              black_ExplicitVarSizeWithFlags_Values_2[q14] !=
+              white_ExplicitVarSizeWithMarker_Values_2[q16]
               /\
-              |white_ExplicitVarSizeWithMarker_Values_1[q7] -
-               black_ExplicitVarSizeWithFlags_Values_1[q6]|
+              |white_ExplicitVarSizeWithMarker_Values_1[q16] -
+               black_ExplicitVarSizeWithFlags_Values_1[q14]|
               !=
-              |white_ExplicitVarSizeWithMarker_Values_2[q7] -
-               black_ExplicitVarSizeWithFlags_Values_2[q6]|
-                  | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
-             | q6 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+              |white_ExplicitVarSizeWithMarker_Values_2[q16] -
+               black_ExplicitVarSizeWithFlags_Values_2[q14]|
+                  | q16 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+             | q14 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([black_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
          black_ExplicitVarSizeWithFlags_Values_1[q1] <
          black_ExplicitVarSizeWithFlags_Values_1[q1 + 1]
@@ -46,25 +46,25 @@ such that
          black_ExplicitVarSizeWithFlags_Values_2[q1] <
          black_ExplicitVarSizeWithFlags_Values_2[q1 + 1]
              | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([black_ExplicitVarSizeWithFlags_Flags[q1] = false ->
-         black_ExplicitVarSizeWithFlags_Values_1[q1] = 1 /\
-         black_ExplicitVarSizeWithFlags_Values_2[q1] = 1
-             | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
-    and([black_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
-         black_ExplicitVarSizeWithFlags_Flags[q1]
-             | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([q2 + 1 <= white_ExplicitVarSizeWithMarker_Marker ->
-         white_ExplicitVarSizeWithMarker_Values_1[q2] <
-         white_ExplicitVarSizeWithMarker_Values_1[q2 + 1]
+    and([black_ExplicitVarSizeWithFlags_Flags[q2] = false ->
+         black_ExplicitVarSizeWithFlags_Values_1[q2] = 1 /\
+         black_ExplicitVarSizeWithFlags_Values_2[q2] = 1
+             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([black_ExplicitVarSizeWithFlags_Flags[q3 + 1] ->
+         black_ExplicitVarSizeWithFlags_Flags[q3]
+             | q3 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
+    and([q6 + 1 <= white_ExplicitVarSizeWithMarker_Marker ->
+         white_ExplicitVarSizeWithMarker_Values_1[q6] <
+         white_ExplicitVarSizeWithMarker_Values_1[q6 + 1]
          \/
-         white_ExplicitVarSizeWithMarker_Values_1[q2] =
-         white_ExplicitVarSizeWithMarker_Values_1[q2 + 1]
+         white_ExplicitVarSizeWithMarker_Values_1[q6] =
+         white_ExplicitVarSizeWithMarker_Values_1[q6 + 1]
          /\
-         white_ExplicitVarSizeWithMarker_Values_2[q2] <
-         white_ExplicitVarSizeWithMarker_Values_2[q2 + 1]
-             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([q2 > white_ExplicitVarSizeWithMarker_Marker ->
-         white_ExplicitVarSizeWithMarker_Values_1[q2] = 1 /\
-         white_ExplicitVarSizeWithMarker_Values_2[q2] = 1
-             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+         white_ExplicitVarSizeWithMarker_Values_2[q6] <
+         white_ExplicitVarSizeWithMarker_Values_2[q6 + 1]
+             | q6 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
+    and([q7 > white_ExplicitVarSizeWithMarker_Marker ->
+         white_ExplicitVarSizeWithMarker_Values_1[q7] = 1 /\
+         white_ExplicitVarSizeWithMarker_Values_2[q7] = 1
+             | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
 

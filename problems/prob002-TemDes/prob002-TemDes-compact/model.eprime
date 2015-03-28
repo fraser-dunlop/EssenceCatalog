@@ -3,17 +3,18 @@ language ESSENCE' 1.0
 given n_templates: int(1..)
 given n_slots: int(1..)
 given n_variations: int(1..)
-given p1: int
-given p2: int
-given p3: int
+given fin1: int
+given fin2: int
+given fin3: int
 given demand_Function1DPartial_Flags:
         matrix indexed by [int(1..n_variations)] of bool
 given demand_Function1DPartial_Values:
-        matrix indexed by [int(1..n_variations)] of int(p2..p3)
+        matrix indexed by [int(1..n_variations)] of int(fin2..fin3)
 find design_FunctionND:
         matrix indexed by [int(1..n_templates), int(1..n_variations)] of int(0..n_slots)
-letting q1 be p3
-find printings_Function1D: matrix indexed by [int(1..n_templates)] of int(0..q1)
+letting let1 be fin3
+find printings_Function1D:
+        matrix indexed by [int(1..n_templates)] of int(0..let1)
 minimising sum([printings_Function1D[t] | t : int(1..n_templates)])
 such that
     and([sum([design_FunctionND[t, v] | t : int(1..n_templates)]) >=

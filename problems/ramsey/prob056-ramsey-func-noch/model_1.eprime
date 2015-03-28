@@ -7,43 +7,44 @@ find graph_FunctionNDPartial_Flags:
         matrix indexed by [int(1..n), int(1..n)] of bool
 find graph_FunctionNDPartial_Values:
         matrix indexed by [int(1..n), int(1..n)] of int(1..colours)
-find q3_ExplicitVarSizeWithMarker_Marker: int(0..(1 + (n - 1)) * (1 + (n - 1)))
-find q3_ExplicitVarSizeWithMarker_Values_1:
+find aux1_ExplicitVarSizeWithMarker_Marker:
+        int(0..(1 + (n - 1)) * (1 + (n - 1)))
+find aux1_ExplicitVarSizeWithMarker_Values_1:
         matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
-find q3_ExplicitVarSizeWithMarker_Values_2:
+find aux1_ExplicitVarSizeWithMarker_Values_2:
         matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
 such that
-    and([q2 + 1 <= q3_ExplicitVarSizeWithMarker_Marker ->
-         q3_ExplicitVarSizeWithMarker_Values_1[q2] <
-         q3_ExplicitVarSizeWithMarker_Values_1[q2 + 1]
+    and([q8 + 1 <= aux1_ExplicitVarSizeWithMarker_Marker ->
+         aux1_ExplicitVarSizeWithMarker_Values_1[q8] <
+         aux1_ExplicitVarSizeWithMarker_Values_1[q8 + 1]
          \/
-         q3_ExplicitVarSizeWithMarker_Values_1[q2] =
-         q3_ExplicitVarSizeWithMarker_Values_1[q2 + 1]
+         aux1_ExplicitVarSizeWithMarker_Values_1[q8] =
+         aux1_ExplicitVarSizeWithMarker_Values_1[q8 + 1]
          /\
-         q3_ExplicitVarSizeWithMarker_Values_2[q2] <
-         q3_ExplicitVarSizeWithMarker_Values_2[q2 + 1]
-             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([q2 > q3_ExplicitVarSizeWithMarker_Marker ->
-         q3_ExplicitVarSizeWithMarker_Values_1[q2] = 1 /\
-         q3_ExplicitVarSizeWithMarker_Values_2[q2] = 1
-             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
-    and([graph_FunctionNDPartial_Flags[q4_1, q4_2] ->
-         or([q9 <= q3_ExplicitVarSizeWithMarker_Marker /\
-             (q3_ExplicitVarSizeWithMarker_Values_1[q9] = q4_1 /\
-              q3_ExplicitVarSizeWithMarker_Values_2[q9] = q4_2)
-                 | q9 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
-             | q4_1 : int(1..n), q4_2 : int(1..n)]),
-    and([q8 <= q3_ExplicitVarSizeWithMarker_Marker ->
-         or([graph_FunctionNDPartial_Flags[q5_1, q5_2] /\
-             (q5_1 = q3_ExplicitVarSizeWithMarker_Values_1[q8] /\
-              q5_2 = q3_ExplicitVarSizeWithMarker_Values_2[q8])
-                 | q5_1 : int(1..n), q5_2 : int(1..n)])
-             | q8 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
-    and([true | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+         aux1_ExplicitVarSizeWithMarker_Values_2[q8] <
+         aux1_ExplicitVarSizeWithMarker_Values_2[q8 + 1]
+             | q8 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
+    and([q9 > aux1_ExplicitVarSizeWithMarker_Marker ->
+         aux1_ExplicitVarSizeWithMarker_Values_1[q9] = 1 /\
+         aux1_ExplicitVarSizeWithMarker_Values_2[q9] = 1
+             | q9 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([graph_FunctionNDPartial_Flags[q12_1, q12_2] ->
+         or([q16 <= aux1_ExplicitVarSizeWithMarker_Marker /\
+             (aux1_ExplicitVarSizeWithMarker_Values_1[q16] = q12_1 /\
+              aux1_ExplicitVarSizeWithMarker_Values_2[q16] = q12_2)
+                 | q16 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+             | q12_1 : int(1..n), q12_2 : int(1..n)]),
+    and([q13 <= aux1_ExplicitVarSizeWithMarker_Marker ->
+         or([graph_FunctionNDPartial_Flags[q14_1, q14_2] /\
+             (q14_1 = aux1_ExplicitVarSizeWithMarker_Values_1[q13] /\
+              q14_2 = aux1_ExplicitVarSizeWithMarker_Values_2[q13])
+                 | q14_1 : int(1..n), q14_2 : int(1..n)])
+             | q13 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([true | q11 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([graph_FunctionNDPartial_Flags[q1_1, q1_2] = false ->
          graph_FunctionNDPartial_Values[q1_1, q1_2] = 1
              | q1_1 : int(1..n), q1_2 : int(1..n)]),
     num_edges =
-    sum([graph_FunctionNDPartial_Flags[q1_1, q1_2]
-             | q1_1 : int(1..n), q1_2 : int(1..n)])
+    sum([graph_FunctionNDPartial_Flags[q2_1, q2_2]
+             | q2_1 : int(1..n), q2_2 : int(1..n)])
 

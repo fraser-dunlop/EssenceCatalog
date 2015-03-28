@@ -14,32 +14,32 @@ find white_ExplicitVarSizeWithFlags_Values_1:
 find white_ExplicitVarSizeWithFlags_Values_2:
         matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
 maximising
-    sum([black_ExplicitVarSizeWithFlags_Flags[q4]
-             | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+    sum([black_ExplicitVarSizeWithFlags_Flags[q12]
+             | q12 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
     +
-    sum([white_ExplicitVarSizeWithFlags_Flags[q5]
-             | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+    sum([white_ExplicitVarSizeWithFlags_Flags[q14]
+             | q14 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
 such that
-    sum([black_ExplicitVarSizeWithFlags_Flags[q6]
-             | q6 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+    sum([black_ExplicitVarSizeWithFlags_Flags[q16]
+             | q16 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
     =
-    sum([white_ExplicitVarSizeWithFlags_Flags[q7]
-             | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
-    and([black_ExplicitVarSizeWithFlags_Flags[q8] ->
-         and([white_ExplicitVarSizeWithFlags_Flags[q9] ->
-              black_ExplicitVarSizeWithFlags_Values_1[q8] !=
-              white_ExplicitVarSizeWithFlags_Values_1[q9]
+    sum([white_ExplicitVarSizeWithFlags_Flags[q18]
+             | q18 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([black_ExplicitVarSizeWithFlags_Flags[q20] ->
+         and([white_ExplicitVarSizeWithFlags_Flags[q22] ->
+              black_ExplicitVarSizeWithFlags_Values_1[q20] !=
+              white_ExplicitVarSizeWithFlags_Values_1[q22]
               /\
-              black_ExplicitVarSizeWithFlags_Values_2[q8] !=
-              white_ExplicitVarSizeWithFlags_Values_2[q9]
+              black_ExplicitVarSizeWithFlags_Values_2[q20] !=
+              white_ExplicitVarSizeWithFlags_Values_2[q22]
               /\
-              |white_ExplicitVarSizeWithFlags_Values_1[q9] -
-               black_ExplicitVarSizeWithFlags_Values_1[q8]|
+              |white_ExplicitVarSizeWithFlags_Values_1[q22] -
+               black_ExplicitVarSizeWithFlags_Values_1[q20]|
               !=
-              |white_ExplicitVarSizeWithFlags_Values_2[q9] -
-               black_ExplicitVarSizeWithFlags_Values_2[q8]|
-                  | q9 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
-             | q8 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+              |white_ExplicitVarSizeWithFlags_Values_2[q22] -
+               black_ExplicitVarSizeWithFlags_Values_2[q20]|
+                  | q22 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
+             | q20 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([black_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
          black_ExplicitVarSizeWithFlags_Values_1[q1] <
          black_ExplicitVarSizeWithFlags_Values_1[q1 + 1]
@@ -50,28 +50,28 @@ such that
          black_ExplicitVarSizeWithFlags_Values_2[q1] <
          black_ExplicitVarSizeWithFlags_Values_2[q1 + 1]
              | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([black_ExplicitVarSizeWithFlags_Flags[q1] = false ->
-         black_ExplicitVarSizeWithFlags_Values_1[q1] = 1 /\
-         black_ExplicitVarSizeWithFlags_Values_2[q1] = 1
-             | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
-    and([black_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
-         black_ExplicitVarSizeWithFlags_Flags[q1]
-             | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([white_ExplicitVarSizeWithFlags_Flags[q2 + 1] ->
-         white_ExplicitVarSizeWithFlags_Values_1[q2] <
-         white_ExplicitVarSizeWithFlags_Values_1[q2 + 1]
-         \/
-         white_ExplicitVarSizeWithFlags_Values_1[q2] =
-         white_ExplicitVarSizeWithFlags_Values_1[q2 + 1]
-         /\
-         white_ExplicitVarSizeWithFlags_Values_2[q2] <
-         white_ExplicitVarSizeWithFlags_Values_2[q2 + 1]
-             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([white_ExplicitVarSizeWithFlags_Flags[q2] = false ->
-         white_ExplicitVarSizeWithFlags_Values_1[q2] = 1 /\
-         white_ExplicitVarSizeWithFlags_Values_2[q2] = 1
+    and([black_ExplicitVarSizeWithFlags_Flags[q2] = false ->
+         black_ExplicitVarSizeWithFlags_Values_1[q2] = 1 /\
+         black_ExplicitVarSizeWithFlags_Values_2[q2] = 1
              | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
-    and([white_ExplicitVarSizeWithFlags_Flags[q2 + 1] ->
-         white_ExplicitVarSizeWithFlags_Flags[q2]
-             | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)])
+    and([black_ExplicitVarSizeWithFlags_Flags[q3 + 1] ->
+         black_ExplicitVarSizeWithFlags_Flags[q3]
+             | q3 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
+    and([white_ExplicitVarSizeWithFlags_Flags[q6 + 1] ->
+         white_ExplicitVarSizeWithFlags_Values_1[q6] <
+         white_ExplicitVarSizeWithFlags_Values_1[q6 + 1]
+         \/
+         white_ExplicitVarSizeWithFlags_Values_1[q6] =
+         white_ExplicitVarSizeWithFlags_Values_1[q6 + 1]
+         /\
+         white_ExplicitVarSizeWithFlags_Values_2[q6] <
+         white_ExplicitVarSizeWithFlags_Values_2[q6 + 1]
+             | q6 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
+    and([white_ExplicitVarSizeWithFlags_Flags[q7] = false ->
+         white_ExplicitVarSizeWithFlags_Values_1[q7] = 1 /\
+         white_ExplicitVarSizeWithFlags_Values_2[q7] = 1
+             | q7 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
+    and([white_ExplicitVarSizeWithFlags_Flags[q8 + 1] ->
+         white_ExplicitVarSizeWithFlags_Flags[q8]
+             | q8 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)])
 

@@ -15,7 +15,7 @@ such that
                  | v : int(0..r - 1), u : int(0..r - 1), g_Occurrence[v], u > v,
                    g_Occurrence[u]])
              | g_Occurrence : matrix indexed by [int(0..r - 1)] of bool,
-               l = sum([g_Occurrence[q2] | q2 : int(0..r - 1)])]),
+               l = sum([g_Occurrence[q4] | q4 : int(0..r - 1)])]),
     and([colouring_FunctionND[v, u] = colouring_FunctionND[u, v]
              | u : int(0..r - 1), v : int(0..r - 1)]),
     and([colouring_FunctionND[u, u] = 1 | u : int(0..r - 1)])
