@@ -21,29 +21,3 @@ such that
     forAll b1,b2 : Boat
         , b1 < b2
         . (sum p in sched . toInt(p(b1) = p(b2))) <= 1
-
-
-$$$$ implied stuff
-
-such that
-
-    $ the range of each function has at least 1 element.
-    $ this is because the functions are total, in the worst case
-    $ when everything is mapped to a single item range still has to contain 1 element.
-    forAll p in sched . minSize(range(p),1),
-
-    $ since each range(p) is subsetEq hosts (from constraint 1)
-    $ and since range(p) are minSize=1
-    $ hosts must be minSize=1
-    minSize(hosts, 1),
-
-    $ |range(p)| >= |hosts| (from constraint 2)
-    $ range(p) is a subset of hosts (from constraint 1)
-    $ hence |range(p)| = |hosts|
-    $ Ozgur: "forAll h in hosts . p(h) = h" IMPLIES "hosts subsetEq range(p)"
-    $                                       AND     "hosts subsetEq defined(p)"
-    $ range is already subsetEq hosts, hence: "hosts = range(p)"
-    forAll p in sched . range(p) = hosts,
-
-    $ |preImage(p)| > 1 (due to p(h) = h)
-
