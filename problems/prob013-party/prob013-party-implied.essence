@@ -45,5 +45,14 @@ such that
     $ range is already subsetEq hosts, hence: "hosts = range(p)"
     forAll p in sched . range(p) = hosts,
 
-    $ |preImage(p)| > 1 (due to p(h) = h)
+    $ due to p(h) = h
+    forAll p in sched . forAll h in hosts . |preImage(p,h)| >= 1,
+
+    $ non-hosts + host itself
+    forAll p in sched . forAll h in hosts . |preImage(p,h)| <= n_boats - |hosts| + 1,
+
+    $ in general "forAll h . a(h) < b(h)" -> "(sum h . a(h)) < (sum h . b(h))"
+    forAll p in sched . (sum h in hosts . (sum b in preImage(p,h) . crew(b)))
+                            <=
+                        (sum h in hosts . capacity(h))
 
