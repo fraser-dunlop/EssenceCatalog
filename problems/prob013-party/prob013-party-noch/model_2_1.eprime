@@ -1,0 +1,58 @@
+language ESSENCE' 1.0
+
+given n_boats: int(1..)
+given n_periods: int(1..)
+given p1: int
+given capacity_Function1D: matrix indexed by [int(1..n_boats)] of int(1..)
+given p2: int
+given crew_Function1D: matrix indexed by [int(1..n_boats)] of int(1..)
+find hosts_ExplicitVarSizeWithMarker_Marker: int(0..1 + (n_boats - 1))
+find hosts_ExplicitVarSizeWithMarker_Values:
+        matrix indexed by [int(1..1 + (n_boats - 1))] of int(1..n_boats)
+find sched_Explicit_Function1D:
+        matrix indexed by [int(1..n_periods), int(1..n_boats)] of int(1..n_boats)
+minimising hosts_ExplicitVarSizeWithMarker_Marker
+find q10_Occurrence:
+        matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
+such that
+    and([and([q10_Occurrence[q3, sched_Explicit_Function1D[q3, q9]]
+                  | q9 : int(1..n_boats)])
+             | q3 : int(1..n_periods)]),
+    and([and([q10_Occurrence[q3, q12] ->
+              or([sched_Explicit_Function1D[q3, q14] = q12 | q14 : int(1..n_boats)])
+                  | q12 : int(1..n_boats)])
+             | q3 : int(1..n_periods)]),
+    and([and([q10_Occurrence[q3, q11] ->
+              or([q15 <= hosts_ExplicitVarSizeWithMarker_Marker /\
+                  hosts_ExplicitVarSizeWithMarker_Values[q15] = q11
+                      | q15 : int(1..1 + (n_boats - 1))])
+                  | q11 : int(1..n_boats)])
+             | q3 : int(1..n_periods)]),
+    and([and([q5 <= hosts_ExplicitVarSizeWithMarker_Marker ->
+              sched_Explicit_Function1D[q4, hosts_ExplicitVarSizeWithMarker_Values[q5]] =
+              hosts_ExplicitVarSizeWithMarker_Values[q5]
+                  | q5 : int(1..1 + (n_boats - 1))])
+             | q4 : int(1..n_periods)]),
+    and([and([q7 <= hosts_ExplicitVarSizeWithMarker_Marker ->
+              sum([(sched_Explicit_Function1D[q6, q16] =
+                    hosts_ExplicitVarSizeWithMarker_Values[q7])
+                   * crew_Function1D[q16]
+                       | q16 : int(1..n_boats)])
+              <= capacity_Function1D[hosts_ExplicitVarSizeWithMarker_Values[q7]]
+                  | q7 : int(1..1 + (n_boats - 1))])
+             | q6 : int(1..n_periods)]),
+    and([sum([sched_Explicit_Function1D[q8, b1] = sched_Explicit_Function1D[q8, b2]
+                  | q8 : int(1..n_periods)])
+         <= 1
+             | b1 : int(1..n_boats), b2 : int(1..n_boats), b1 < b2]),
+    and([q1 + 1 <= hosts_ExplicitVarSizeWithMarker_Marker ->
+         hosts_ExplicitVarSizeWithMarker_Values[q1] <
+         hosts_ExplicitVarSizeWithMarker_Values[q1 + 1]
+             | q1 : int(1..1 + (n_boats - 1) - 1)]),
+    and([q1 > hosts_ExplicitVarSizeWithMarker_Marker ->
+         hosts_ExplicitVarSizeWithMarker_Values[q1] = 1
+             | q1 : int(1..1 + (n_boats - 1))]),
+    and([sched_Explicit_Function1D[q2, ..] <lex
+         sched_Explicit_Function1D[q2 + 1, ..]
+             | q2 : int(1..n_periods - 1)])
+

@@ -13,4 +13,4 @@ such that
   forAll v : g . injective(restrict(quasigroup,`tuple(g,int(v))`)),
 
   $ qg7 (b*a)*b = a*(b*a)
-  forAll a,b : g . quasigroup(quasigroup(b,a),b) = quasigroup(a,quasigroup(b,a))
+  forAll a,b : g . quasigroup((quasigroup((b,a)),b)) = quasigroup((a,quasigroup((b,a))))

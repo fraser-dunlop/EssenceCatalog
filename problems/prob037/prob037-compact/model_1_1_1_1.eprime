@@ -1,0 +1,497 @@
+language ESSENCE' 1.0
+
+given x_size: int(1..)
+given y_size: int(1..)
+given p1: int
+given board_Explicit_1: matrix indexed by [int(1..p1)] of int(1..x_size)
+given board_Explicit_2: matrix indexed by [int(1..p1)] of int(1..y_size)
+given p2: int
+given init_Explicit_1: matrix indexed by [int(1..p2)] of int(1..x_size)
+given init_Explicit_2: matrix indexed by [int(1..p2)] of int(1..y_size)
+given p3: int
+given goal_Explicit_1: matrix indexed by [int(1..p3)] of int(1..x_size)
+given goal_Explicit_2: matrix indexed by [int(1..p3)] of int(1..y_size)
+where
+    and(flatten([[or([board_Explicit_1[q9] = init_Explicit_1[q6] /\
+                      board_Explicit_2[q9] = init_Explicit_2[q6]
+                          | q9 : int(1..p1)])
+                      | q6 : int(1..p2)],
+                 [or([board_Explicit_1[q10] = goal_Explicit_1[q7] /\
+                      board_Explicit_2[q10] = goal_Explicit_2[q7]
+                          | q10 : int(1..p1)])
+                      | q7 : int(1..p3),
+                        !or([init_Explicit_1[q11] = goal_Explicit_1[q7] /\
+                             init_Explicit_2[q11] = goal_Explicit_2[q7]
+                                 | q11 : int(1..p2)])]; int(1..2)]))
+letting q1 be p1
+find plan_Function1DPartial_Flags: matrix indexed by [int(1..q1)] of bool
+find plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker:
+        matrix indexed by [int(1..q1)] of int(0..(1 + (x_size - 1)) *
+                                                 (1 + (y_size - 1)))
+find plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..q1),
+                           int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))] of int(1..x_size)
+find plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..q1),
+                           int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))] of int(1..y_size)
+letting q2 be p1 - 1
+find moves_Function1DPartial_Flags: matrix indexed by [int(1..q2)] of bool
+find moves_Function1DPartial_Values_1_1:
+        matrix indexed by [int(1..q2)] of int(1..x_size)
+find moves_Function1DPartial_Values_1_2:
+        matrix indexed by [int(1..q2)] of int(1..y_size)
+find moves_Function1DPartial_Values_2_1:
+        matrix indexed by [int(1..q2)] of int(1..x_size)
+find moves_Function1DPartial_Values_2_2:
+        matrix indexed by [int(1..q2)] of int(1..y_size)
+find q8_Occurrence: matrix indexed by [int(1..q1)] of bool
+find q22_ExplicitVarSizeWithMarker_Marker:
+        int(0..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1))))
+find q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker:
+        matrix indexed by [int(1..2 **
+                                  ((1 + (x_size - 1)) * (1 + (y_size - 1))))] of int(0..(1 + (x_size - 1)) *
+                                                                                        (1 + (y_size - 1)))
+find q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1)))),
+                           int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))] of int(1..x_size)
+find q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1)))),
+                           int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))] of int(1..y_size)
+find q60_ExplicitVarSizeWithMarker_Marker:
+        int(0..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+               ((1 + (x_size - 1)) * (1 + (y_size - 1))))
+find q60_ExplicitVarSizeWithMarker_Values_1_1:
+        matrix indexed by [int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+                                  ((1 + (x_size - 1)) * (1 + (y_size - 1))))] of int(1..x_size)
+find q60_ExplicitVarSizeWithMarker_Values_1_2:
+        matrix indexed by [int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+                                  ((1 + (x_size - 1)) * (1 + (y_size - 1))))] of int(1..y_size)
+find q60_ExplicitVarSizeWithMarker_Values_2_1:
+        matrix indexed by [int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+                                  ((1 + (x_size - 1)) * (1 + (y_size - 1))))] of int(1..x_size)
+find q60_ExplicitVarSizeWithMarker_Values_2_2:
+        matrix indexed by [int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+                                  ((1 + (x_size - 1)) * (1 + (y_size - 1))))] of int(1..y_size)
+such that
+    and([plan_Function1DPartial_Flags[q15] -> q8_Occurrence[q15]
+             | q15 : int(1..q1)]),
+    and([q8_Occurrence[q13] ->
+         or([plan_Function1DPartial_Flags[q16] /\ q16 = q13 | q16 : int(1..q1)])
+             | q13 : int(1..q1)]),
+    and([q8_Occurrence[q12] -> q12 = 1 \/ plan_Function1DPartial_Flags[q12 - 1]
+             | q12 : int(1..q1)]),
+    and([moves_Function1DPartial_Flags[q58] ->
+         or([q55 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q58]
+             /\
+             (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q58, q55] =
+              moves_Function1DPartial_Values_1_1[q58]
+              /\
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q58, q55] =
+              moves_Function1DPartial_Values_1_2[q58])
+                 | q55 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+         /\ plan_Function1DPartial_Flags[q58]
+         /\
+         !(or([q14 <=
+               plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q58 + 1]
+               /\
+               (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q58 + 1, q14]
+                = moves_Function1DPartial_Values_1_1[q58]
+                /\
+                plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q58 + 1, q14] =
+                moves_Function1DPartial_Values_1_2[q58])
+                   | q14 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+           /\ plan_Function1DPartial_Flags[q58 + 1])
+         /\
+         !(or([q17 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q58]
+               /\
+               (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q58, q17] =
+                moves_Function1DPartial_Values_2_1[q58]
+                /\
+                plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q58, q17] =
+                moves_Function1DPartial_Values_2_2[q58])
+                   | q17 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+           /\ plan_Function1DPartial_Flags[q58])
+         /\
+         (or([q18 <=
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q58 + 1]
+              /\
+              (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q58 + 1, q18]
+               = moves_Function1DPartial_Values_2_1[q58]
+               /\
+               plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q58 + 1, q18] =
+               moves_Function1DPartial_Values_2_2[q58])
+                  | q18 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+          /\ plan_Function1DPartial_Flags[q58 + 1])
+         /\
+         (or([q19 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q58]
+              /\
+              (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q58, q19] =
+               (moves_Function1DPartial_Values_1_1[q58] +
+                moves_Function1DPartial_Values_2_1[q58])
+               / 2
+               /\
+               plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q58, q19] =
+               (moves_Function1DPartial_Values_1_2[q58] +
+                moves_Function1DPartial_Values_2_2[q58])
+               / 2)
+                  | q19 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+          /\ plan_Function1DPartial_Flags[q58])
+         /\
+         !(or([q20 <=
+               plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q58 + 1]
+               /\
+               (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q58 + 1, q20]
+                =
+                (moves_Function1DPartial_Values_1_1[q58] +
+                 moves_Function1DPartial_Values_2_1[q58])
+                / 2
+                /\
+                plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q58 + 1, q20] =
+                (moves_Function1DPartial_Values_1_2[q58] +
+                 moves_Function1DPartial_Values_2_2[q58])
+                / 2)
+                   | q20 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+           /\ plan_Function1DPartial_Flags[q58 + 1])
+             | q58 : int(1..q2)]),
+    and([q26 + 1 <= q22_ExplicitVarSizeWithMarker_Marker ->
+         q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q26] <
+         q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q26 + 1]
+         \/
+         q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q26] =
+         q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q26 + 1]
+         /\
+         (q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26,
+                                                                                  ..]
+          <lex
+          q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26 + 1,
+                                                                                  ..]
+          \/
+          and([q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26,
+                                                                                       q25]
+               =
+               q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26 + 1,
+                                                                                       q25]
+                   | q25 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+          /\
+          and([or([q25 = q32 | q32 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+                   | q25 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+          /\
+          and([or([q25 = q32 | q32 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+                   | q25 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+          /\
+          q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q26, ..]
+          <lex
+          q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q26 + 1,
+                                                                                  ..])
+             | q26 : int(1..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1))) - 1)]),
+    and([q26 > q22_ExplicitVarSizeWithMarker_Marker ->
+         q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q26] = 0
+         /\
+         and([q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26,
+                                                                                      q21]
+              = 1
+              /\
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q26,
+                                                                                      q21]
+              = 1 | q21 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+             | q26 : int(1..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1))))]),
+    and([q26 <= q22_ExplicitVarSizeWithMarker_Marker ->
+         and([q27 + 1 <=
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q26]
+              ->
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26,
+                                                                                      q27]
+              <
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26,
+                                                                                      q27 + 1]
+              \/
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26,
+                                                                                      q27]
+              =
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26,
+                                                                                      q27 + 1]
+              /\
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q26,
+                                                                                      q27]
+              <
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q26,
+                                                                                      q27 + 1]
+                  | q27 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) - 1)])
+             | q26 : int(1..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1))))]),
+    and([q26 <= q22_ExplicitVarSizeWithMarker_Marker ->
+         and([q27 >
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q26]
+              ->
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q26,
+                                                                                      q27]
+              = 1
+              /\
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q26,
+                                                                                      q27]
+              = 1 | q27 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+             | q26 : int(1..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1))))]),
+    and([plan_Function1DPartial_Flags[q29] ->
+         or([q34 <= q22_ExplicitVarSizeWithMarker_Marker /\
+             (and([q35 <=
+                   q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q34]
+                   ->
+                   or([q36 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q29]
+                       /\
+                       (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q29, q36] =
+                        q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q34,
+                                                                                                q35]
+                        /\
+                        plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q29, q36] =
+                        q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q34,
+                                                                                                q35])
+                           | q36 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+                       | q35 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+              /\
+              and([q37 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q29]
+                   ->
+                   or([q38 <=
+                       q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q34]
+                       /\
+                       (q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q34,
+                                                                                                q38]
+                        = plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q29, q37]
+                        /\
+                        q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q34,
+                                                                                                q38]
+                        = plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q29, q37])
+                           | q38 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+                       | q37 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))]))
+                 | q34 : int(1..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1))))])
+             | q29 : int(1..q1)]),
+    and([q30 <= q22_ExplicitVarSizeWithMarker_Marker ->
+         or([plan_Function1DPartial_Flags[q24] /\
+             (and([q39 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q24]
+                   ->
+                   or([q40 <=
+                       q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q30]
+                       /\
+                       (q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q30,
+                                                                                                q40]
+                        = plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q24, q39]
+                        /\
+                        q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q30,
+                                                                                                q40]
+                        = plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q24, q39])
+                           | q40 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+                       | q39 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+              /\
+              and([q41 <=
+                   q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q30]
+                   ->
+                   or([q42 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q24]
+                       /\
+                       (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q24, q42] =
+                        q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q30,
+                                                                                                q41]
+                        /\
+                        plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q24, q42] =
+                        q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q30,
+                                                                                                q41])
+                           | q42 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+                       | q41 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))]))
+                 | q24 : int(1..q1)])
+             | q30 : int(1..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1))))]),
+    and([q28 <= q22_ExplicitVarSizeWithMarker_Marker ->
+         and([q23 <=
+              q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q28]
+              ->
+              or([board_Explicit_1[q31] =
+                  q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_1[q28,
+                                                                                          q23]
+                  /\
+                  board_Explicit_2[q31] =
+                  q22_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values_2[q28,
+                                                                                          q23]
+                      | q31 : int(1..p1)])
+                  | q23 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+             | q28 : int(1..2 ** ((1 + (x_size - 1)) * (1 + (y_size - 1))))]),
+    and([q59 + 1 <= q60_ExplicitVarSizeWithMarker_Marker ->
+         q60_ExplicitVarSizeWithMarker_Values_1_1[q59] <
+         q60_ExplicitVarSizeWithMarker_Values_1_1[q59 + 1]
+         \/
+         q60_ExplicitVarSizeWithMarker_Values_1_1[q59] =
+         q60_ExplicitVarSizeWithMarker_Values_1_1[q59 + 1]
+         /\
+         q60_ExplicitVarSizeWithMarker_Values_1_2[q59] <
+         q60_ExplicitVarSizeWithMarker_Values_1_2[q59 + 1]
+         \/
+         q60_ExplicitVarSizeWithMarker_Values_1_1[q59] =
+         q60_ExplicitVarSizeWithMarker_Values_1_1[q59 + 1]
+         /\
+         q60_ExplicitVarSizeWithMarker_Values_1_2[q59] =
+         q60_ExplicitVarSizeWithMarker_Values_1_2[q59 + 1]
+         /\
+         (q60_ExplicitVarSizeWithMarker_Values_2_1[q59] <
+          q60_ExplicitVarSizeWithMarker_Values_2_1[q59 + 1]
+          \/
+          q60_ExplicitVarSizeWithMarker_Values_2_1[q59] =
+          q60_ExplicitVarSizeWithMarker_Values_2_1[q59 + 1]
+          /\
+          q60_ExplicitVarSizeWithMarker_Values_2_2[q59] <
+          q60_ExplicitVarSizeWithMarker_Values_2_2[q59 + 1])
+             | q59 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+                            ((1 + (x_size - 1)) * (1 + (y_size - 1)))
+                            - 1)]),
+    and([q59 > q60_ExplicitVarSizeWithMarker_Marker ->
+         q60_ExplicitVarSizeWithMarker_Values_1_1[q59] = 1 /\
+         q60_ExplicitVarSizeWithMarker_Values_1_2[q59] = 1
+         /\
+         (q60_ExplicitVarSizeWithMarker_Values_2_1[q59] = 1 /\
+          q60_ExplicitVarSizeWithMarker_Values_2_2[q59] = 1)
+             | q59 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+                            ((1 + (x_size - 1)) * (1 + (y_size - 1))))]),
+    and([moves_Function1DPartial_Flags[q61] ->
+         or([q66 <= q60_ExplicitVarSizeWithMarker_Marker /\
+             (q60_ExplicitVarSizeWithMarker_Values_1_1[q66] =
+              moves_Function1DPartial_Values_1_1[q61]
+              /\
+              q60_ExplicitVarSizeWithMarker_Values_1_2[q66] =
+              moves_Function1DPartial_Values_1_2[q61]
+              /\
+              (q60_ExplicitVarSizeWithMarker_Values_2_1[q66] =
+               moves_Function1DPartial_Values_2_1[q61]
+               /\
+               q60_ExplicitVarSizeWithMarker_Values_2_2[q66] =
+               moves_Function1DPartial_Values_2_2[q61]))
+                 | q66 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+                                ((1 + (x_size - 1)) * (1 + (y_size - 1))))])
+             | q61 : int(1..q2)]),
+    and([q65 <= q60_ExplicitVarSizeWithMarker_Marker ->
+         or([moves_Function1DPartial_Flags[q62] /\
+             (moves_Function1DPartial_Values_1_1[q62] =
+              q60_ExplicitVarSizeWithMarker_Values_1_1[q65]
+              /\
+              moves_Function1DPartial_Values_1_2[q62] =
+              q60_ExplicitVarSizeWithMarker_Values_1_2[q65]
+              /\
+              (moves_Function1DPartial_Values_2_1[q62] =
+               q60_ExplicitVarSizeWithMarker_Values_2_1[q65]
+               /\
+               moves_Function1DPartial_Values_2_2[q62] =
+               q60_ExplicitVarSizeWithMarker_Values_2_2[q65]))
+                 | q62 : int(1..q2)])
+             | q65 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+                            ((1 + (x_size - 1)) * (1 + (y_size - 1))))]),
+    and([q64 <= q60_ExplicitVarSizeWithMarker_Marker ->
+         |q60_ExplicitVarSizeWithMarker_Values_1_1[q64] -
+          q60_ExplicitVarSizeWithMarker_Values_2_1[q64]|
+         = 2
+         /\
+         |q60_ExplicitVarSizeWithMarker_Values_1_2[q64] -
+          q60_ExplicitVarSizeWithMarker_Values_2_2[q64]|
+         = 0
+         \/
+         |q60_ExplicitVarSizeWithMarker_Values_1_1[q64] -
+          q60_ExplicitVarSizeWithMarker_Values_2_1[q64]|
+         = 0
+         /\
+         |q60_ExplicitVarSizeWithMarker_Values_1_2[q64] -
+          q60_ExplicitVarSizeWithMarker_Values_2_2[q64]|
+         = 2 | q64 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) *
+                            ((1 + (x_size - 1)) * (1 + (y_size - 1))))]),
+    and([t <= sum([plan_Function1DPartial_Flags[q43] | q43 : int(1..q1)]) - 1 ->
+         sum([q63 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[t]
+                  | q63 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+         -
+         sum([q33 <=
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[t + 1]
+                  | q33 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+         = 1
+         /\ plan_Function1DPartial_Flags[t + 1]
+         /\ plan_Function1DPartial_Flags[t]
+             | t : int(1..p1)]),
+    and([q44 <= plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[1] ->
+         or([init_Explicit_1[q47] =
+             plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[1, q44]
+             /\
+             init_Explicit_2[q47] =
+             plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[1, q44]
+                 | q47 : int(1..p2)])
+             | q44 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))]),
+    plan_Function1DPartial_Flags[1],
+    and([or([q45 <=
+             plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[1]
+             /\
+             (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[1, q45] =
+              init_Explicit_1[q48]
+              /\
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[1, q45] =
+              init_Explicit_2[q48])
+                 | q45 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+         /\ plan_Function1DPartial_Flags[1]
+             | q48 : int(1..p2)]),
+    and([q46 <=
+         plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[sum([plan_Function1DPartial_Flags[q52]
+                                                                                 | q52 : int(1..q1)])]
+         ->
+         or([goal_Explicit_1[q51] =
+             plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[sum([plan_Function1DPartial_Flags[q52]
+                                                                                       | q52 : int(1..q1)]),
+                                                                              q46]
+             /\
+             goal_Explicit_2[q51] =
+             plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[sum([plan_Function1DPartial_Flags[q52]
+                                                                                       | q52 : int(1..q1)]),
+                                                                              q46]
+                 | q51 : int(1..p3)])
+             | q46 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))]),
+    plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q53]
+                                          | q53 : int(1..q1)])],
+    and([or([q49 <=
+             plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[sum([plan_Function1DPartial_Flags[q56]
+                                                                                     | q56 : int(1..q1)])]
+             /\
+             (plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[sum([plan_Function1DPartial_Flags[q56]
+                                                                                        | q56 : int(1..q1)]),
+                                                                               q49]
+              = goal_Explicit_1[q54]
+              /\
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[sum([plan_Function1DPartial_Flags[q56]
+                                                                                        | q56 : int(1..q1)]),
+                                                                               q49]
+              = goal_Explicit_2[q54])
+                 | q49 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+         /\
+         plan_Function1DPartial_Flags[sum([plan_Function1DPartial_Flags[q57]
+                                               | q57 : int(1..q1)])]
+             | q54 : int(1..p3)]),
+    and([plan_Function1DPartial_Flags[q3] = false ->
+         plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q3] = 0 /\
+         and([plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q3, q50] =
+              1
+              /\ plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q3, q50] = 1
+                  | q50 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+             | q3 : int(1..q1)]),
+    and([plan_Function1DPartial_Flags[q3] ->
+         and([q4 + 1 <=
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q3]
+              ->
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q3, q4] <
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q3, q4 + 1]
+              \/
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q3, q4] =
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q3, q4 + 1]
+              /\
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q3, q4] <
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q3, q4 + 1]
+                  | q4 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)) - 1)])
+             | q3 : int(1..q1)]),
+    and([plan_Function1DPartial_Flags[q3] ->
+         and([q4 > plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q3] ->
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_1[q3, q4] = 1 /\
+              plan_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values_2[q3, q4] = 1
+                  | q4 : int(1..(1 + (x_size - 1)) * (1 + (y_size - 1)))])
+             | q3 : int(1..q1)]),
+    and([moves_Function1DPartial_Flags[q5] = false ->
+         moves_Function1DPartial_Values_1_1[q5] = 1 /\
+         moves_Function1DPartial_Values_1_2[q5] = 1
+         /\
+         (moves_Function1DPartial_Values_2_1[q5] = 1 /\
+          moves_Function1DPartial_Values_2_2[q5] = 1)
+             | q5 : int(1..q2)])
+

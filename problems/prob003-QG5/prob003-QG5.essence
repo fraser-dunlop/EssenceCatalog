@@ -13,4 +13,4 @@ such that
   forAll v : g . injective(restrict(quasigroup,`tuple(g,int(v))`)),
 
   $ qg5 (((b*a)*b)*b)=a
-  forAll a,b : g . quasigroup(quasigroup(quasigroup(b,a),b),b) = a
+  forAll a,b : g . quasigroup((quasigroup((quasigroup((b,a)),b)),b)) = a

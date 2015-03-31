@@ -5,121 +5,43 @@ where n_teams % 2 = 0
 letting q1 be n_teams - 1
 letting q2 be n_teams / 2
 letting q3 be (n_teams - 1) * n_teams / 2
-find sched_RelationAsSet_Explicit_1: matrix indexed by [int(1..q3)] of int(1..q1)
-find sched_RelationAsSet_Explicit_2: matrix indexed by [int(1..q3)] of int(1..q2)
-find sched_RelationAsSet_Explicit_3_Occurrence: matrix indexed by [int(1..q3), int(1..n_teams)] of bool
+find sched_RelationAsSet_Explicit_1:
+        matrix indexed by [int(1..q3)] of int(1..q1)
+find sched_RelationAsSet_Explicit_2:
+        matrix indexed by [int(1..q3)] of int(1..q2)
+find sched_RelationAsSet_Explicit_3_Occurrence:
+        matrix indexed by [int(1..q3), int(1..n_teams)] of bool
 such that
-    and([and([or([sched_RelationAsSet_Explicit_1[q12] = w /\ or([sched_RelationAsSet_Explicit_3_Occurrence[q12, q5] /\ q5 = t | q5 : int(1..n_teams)])
+    and([and([or([sched_RelationAsSet_Explicit_1[q12] = w /\
+                  or([sched_RelationAsSet_Explicit_3_Occurrence[q12, q5] /\ q5 = t
+                          | q5 : int(1..n_teams)])
                       | q12 : int(1..q3)])
                   | w : int(1..q1)])
              | t : int(1..n_teams)]),
-    and([and([sum([(sched_RelationAsSet_Explicit_2[q13] = p) * or([sched_RelationAsSet_Explicit_3_Occurrence[q13, q7] /\ q7 = t | q7 : int(1..n_teams)])
+    and([and([sum([(sched_RelationAsSet_Explicit_2[q13] = p) *
+                   or([sched_RelationAsSet_Explicit_3_Occurrence[q13, q7] /\ q7 = t
+                           | q7 : int(1..n_teams)])
                        | q13 : int(1..q3)])
               <= 2
                   | p : int(1..q2)])
              | t : int(1..n_teams)]),
-    and([sum([and([sched_RelationAsSet_Explicit_3_Occurrence[q8, q9] -> or([[t1, t2; int(1..2)][q10] = q9 | q10 : int(1..2)]) | q9 : int(1..n_teams)]) /\
-              and([sched_RelationAsSet_Explicit_3_Occurrence[q8, [t1, t2; int(1..2)][q11]] | q11 : int(1..2)])
+    and([sum([and([sched_RelationAsSet_Explicit_3_Occurrence[q8, q9] ->
+                   or([[t1, t2; int(1..2)][q10] = q9 | q10 : int(1..2)])
+                       | q9 : int(1..n_teams)])
+              /\
+              and([sched_RelationAsSet_Explicit_3_Occurrence[q8, [t1, t2; int(1..2)][q11]]
+                       | q11 : int(1..2)])
                   | q8 : int(1..q3)])
          = 1 | t1 : int(1..n_teams), t2 : int(1..n_teams), t1 != t2]),
-    and([sched_RelationAsSet_Explicit_1[q4] < sched_RelationAsSet_Explicit_1[q4 + 1] \/
+    and([sched_RelationAsSet_Explicit_1[q4] < sched_RelationAsSet_Explicit_1[q4 + 1]
+         \/
          sched_RelationAsSet_Explicit_1[q4] = sched_RelationAsSet_Explicit_1[q4 + 1] /\
          (sched_RelationAsSet_Explicit_2[q4] < sched_RelationAsSet_Explicit_2[q4 + 1] \/
           sched_RelationAsSet_Explicit_2[q4] = sched_RelationAsSet_Explicit_2[q4 + 1] /\
-          sched_RelationAsSet_Explicit_3_Occurrence[q4, ..] <lex sched_RelationAsSet_Explicit_3_Occurrence[q4 + 1, ..])
+          sched_RelationAsSet_Explicit_3_Occurrence[q4, ..] <lex
+          sched_RelationAsSet_Explicit_3_Occurrence[q4 + 1, ..])
              | q4 : int(1..q3 - 1)]),
-    and([2 = sum([sched_RelationAsSet_Explicit_3_Occurrence[q4, q6] | q6 : int(1..n_teams)]) | q4 : int(1..q3)])
+    and([2 =
+         sum([sched_RelationAsSet_Explicit_3_Occurrence[q4, q6] | q6 : int(1..n_teams)])
+             | q4 : int(1..q3)])
 
-$ Conjure's
-$ {"finds": ["sched"],
-$  "givens": ["n_teams"],
-$  "enumGivens": [],
-$  "enumLettings": [],
-$  "unnameds": [["Team", {"Reference": ["n_teams", null]}],
-$               ["Week", {"Reference": ["q1", null]}], ["Period", {"Reference": ["q2", null]}]],
-$  "trailCompact": [[1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]],
-$                   [1, [1, 2]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
-$  "trailVerbose": [],
-$  "representations": [["n_teams",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["sched",
-$                       {"DomainRelation": [{"HasRepresentation": "RelationAsSet"},
-$                                           [{"SizeAttr_Size": {"Reference": ["q3",
-$                                                                             {"Alias": {"Op": {"MkOpDiv": [{"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                                                                                                                                         {"Constant": {"ConstantInt": 2}}]}]},
-$                                                                                                                                                                        [{"Op": {"MkOpMinus": [{"Reference": ["n_teams",
-$                                                                                                                                                                                                              {"DeclHasRepr": ["Given",
-$                                                                                                                                                                                                                               "n_teams",
-$                                                                                                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                                                                                                                                               {"Constant": {"ConstantInt": 1}}]}},
-$                                                                                                                                                                         {"Reference": ["n_teams",
-$                                                                                                                                                                                        {"DeclHasRepr": ["Given",
-$                                                                                                                                                                                                         "n_teams",
-$                                                                                                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]]}}}},
-$                                                                                                           {"Constant": {"ConstantInt": 2}}]}}}]}},
-$                                            []],
-$                                           [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                             {"Reference": ["q1",
-$                                                                                            {"Alias": {"Op": {"MkOpMinus": [{"Reference": ["n_teams",
-$                                                                                                                                           {"DeclHasRepr": ["Given",
-$                                                                                                                                                            "n_teams",
-$                                                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                                                                            {"Constant": {"ConstantInt": 1}}]}}}]}]}]},
-$                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                             {"Reference": ["q2",
-$                                                                                            {"Alias": {"Op": {"MkOpDiv": [{"Reference": ["n_teams",
-$                                                                                                                                         {"DeclHasRepr": ["Given",
-$                                                                                                                                                          "n_teams",
-$                                                                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
-$                                                                                                                          {"Constant": {"ConstantInt": 2}}]}}}]}]}]},
-$                                            {"DomainSet": [{"HasRepresentation": "Occurrence"},
-$                                                           {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
-$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                            {"Reference": ["n_teams",
-$                                                                                                           {"DeclHasRepr": ["Given",
-$                                                                                                                            "n_teams",
-$                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]]}]],
-$  "representationsTree": [["n_teams",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["sched",
-$                           [{"rootLabel": {"HasRepresentation": "RelationAsSet"},
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": []},
-$                                           {"rootLabel": null,
-$                                            "subForest": []},
-$                                           {"rootLabel": {"HasRepresentation": "Occurrence"},
-$                                            "subForest": [{"rootLabel": null,
-$                                                           "subForest": []}]}]}]]],
-$  "originalDomains": [["n_teams",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["sched",
-$                       {"DomainRelation": [[], [{"SizeAttr_Size": {"Reference": ["q3", null]}}, []],
-$                                           [{"DomainReference": ["Week", null]}, {"DomainReference": ["Period", null]},
-$                                            {"DomainSet": [[], {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
-$                                                           {"DomainReference": ["Team", null]}]}]]}]]}

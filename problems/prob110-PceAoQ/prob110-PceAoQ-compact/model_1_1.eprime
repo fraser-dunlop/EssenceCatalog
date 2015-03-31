@@ -1,112 +1,63 @@
 language ESSENCE' 1.0
 
 given n: int(1..)
-find black_ExplicitVarSizeWithMarker_Marker: int(0..(1 + (n - 1)) * (1 + (n - 1)))
-find black_ExplicitVarSizeWithMarker_Values_1: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
-find black_ExplicitVarSizeWithMarker_Values_2: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
-find white_ExplicitVarSizeWithMarker_Marker: int(0..(1 + (n - 1)) * (1 + (n - 1)))
-find white_ExplicitVarSizeWithMarker_Values_1: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
-find white_ExplicitVarSizeWithMarker_Values_2: matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
-maximising black_ExplicitVarSizeWithMarker_Marker + white_ExplicitVarSizeWithMarker_Marker
+find black_ExplicitVarSizeWithMarker_Marker:
+        int(0..(1 + (n - 1)) * (1 + (n - 1)))
+find black_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+find black_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+find white_ExplicitVarSizeWithMarker_Marker:
+        int(0..(1 + (n - 1)) * (1 + (n - 1)))
+find white_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+find white_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
+maximising
+    black_ExplicitVarSizeWithMarker_Marker + white_ExplicitVarSizeWithMarker_Marker
 such that
     black_ExplicitVarSizeWithMarker_Marker = white_ExplicitVarSizeWithMarker_Marker,
     and([q4 <= black_ExplicitVarSizeWithMarker_Marker ->
          and([q5 <= white_ExplicitVarSizeWithMarker_Marker ->
-              black_ExplicitVarSizeWithMarker_Values_1[q4] != white_ExplicitVarSizeWithMarker_Values_1[q5] /\
-              black_ExplicitVarSizeWithMarker_Values_2[q4] != white_ExplicitVarSizeWithMarker_Values_2[q5]
+              black_ExplicitVarSizeWithMarker_Values_1[q4] !=
+              white_ExplicitVarSizeWithMarker_Values_1[q5]
               /\
-              |white_ExplicitVarSizeWithMarker_Values_1[q5] - black_ExplicitVarSizeWithMarker_Values_1[q4]| !=
-              |white_ExplicitVarSizeWithMarker_Values_2[q5] - black_ExplicitVarSizeWithMarker_Values_2[q4]|
+              black_ExplicitVarSizeWithMarker_Values_2[q4] !=
+              white_ExplicitVarSizeWithMarker_Values_2[q5]
+              /\
+              |white_ExplicitVarSizeWithMarker_Values_1[q5] -
+               black_ExplicitVarSizeWithMarker_Values_1[q4]|
+              !=
+              |white_ExplicitVarSizeWithMarker_Values_2[q5] -
+               black_ExplicitVarSizeWithMarker_Values_2[q4]|
                   | q5 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
              | q4 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([q1 + 1 <= black_ExplicitVarSizeWithMarker_Marker ->
-         black_ExplicitVarSizeWithMarker_Values_1[q1] < black_ExplicitVarSizeWithMarker_Values_1[q1 + 1] \/
-         black_ExplicitVarSizeWithMarker_Values_1[q1] = black_ExplicitVarSizeWithMarker_Values_1[q1 + 1] /\
-         black_ExplicitVarSizeWithMarker_Values_2[q1] < black_ExplicitVarSizeWithMarker_Values_2[q1 + 1]
+         black_ExplicitVarSizeWithMarker_Values_1[q1] <
+         black_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
+         \/
+         black_ExplicitVarSizeWithMarker_Values_1[q1] =
+         black_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
+         /\
+         black_ExplicitVarSizeWithMarker_Values_2[q1] <
+         black_ExplicitVarSizeWithMarker_Values_2[q1 + 1]
              | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([q1 > black_ExplicitVarSizeWithMarker_Marker -> black_ExplicitVarSizeWithMarker_Values_1[q1] = 1 /\ black_ExplicitVarSizeWithMarker_Values_2[q1] = 1
+    and([q1 > black_ExplicitVarSizeWithMarker_Marker ->
+         black_ExplicitVarSizeWithMarker_Values_1[q1] = 1 /\
+         black_ExplicitVarSizeWithMarker_Values_2[q1] = 1
              | q1 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([q2 + 1 <= white_ExplicitVarSizeWithMarker_Marker ->
-         white_ExplicitVarSizeWithMarker_Values_1[q2] < white_ExplicitVarSizeWithMarker_Values_1[q2 + 1] \/
-         white_ExplicitVarSizeWithMarker_Values_1[q2] = white_ExplicitVarSizeWithMarker_Values_1[q2 + 1] /\
-         white_ExplicitVarSizeWithMarker_Values_2[q2] < white_ExplicitVarSizeWithMarker_Values_2[q2 + 1]
+         white_ExplicitVarSizeWithMarker_Values_1[q2] <
+         white_ExplicitVarSizeWithMarker_Values_1[q2 + 1]
+         \/
+         white_ExplicitVarSizeWithMarker_Values_1[q2] =
+         white_ExplicitVarSizeWithMarker_Values_1[q2 + 1]
+         /\
+         white_ExplicitVarSizeWithMarker_Values_2[q2] <
+         white_ExplicitVarSizeWithMarker_Values_2[q2 + 1]
              | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)) - 1)]),
-    and([q2 > white_ExplicitVarSizeWithMarker_Marker -> white_ExplicitVarSizeWithMarker_Values_1[q2] = 1 /\ white_ExplicitVarSizeWithMarker_Values_2[q2] = 1
+    and([q2 > white_ExplicitVarSizeWithMarker_Marker ->
+         white_ExplicitVarSizeWithMarker_Values_1[q2] = 1 /\
+         white_ExplicitVarSizeWithMarker_Values_2[q2] = 1
              | q2 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
 
-$ Conjure's
-$ {"finds": ["black", "white"],
-$  "givens": ["n"],
-$  "enumGivens": [],
-$  "enumLettings": [],
-$  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1, 2]], [1, [1, 2, 3, 4, 5, 6]],
-$                   [1, [1, 2]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
-$  "trailVerbose": [],
-$  "representations": [["n",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["black",
-$                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                      {"SizeAttr_None": []},
-$                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                        {"Reference": ["n",
-$                                                                                                       {"DeclHasRepr": ["Given",
-$                                                                                                                        "n",
-$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                        {"Reference": ["n",
-$                                                                                                       {"DeclHasRepr": ["Given",
-$                                                                                                                        "n",
-$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
-$                      ["white",
-$                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                      {"SizeAttr_None": []},
-$                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                        {"Reference": ["n",
-$                                                                                                       {"DeclHasRepr": ["Given",
-$                                                                                                                        "n",
-$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                        {"Reference": ["n",
-$                                                                                                       {"DeclHasRepr": ["Given",
-$                                                                                                                        "n",
-$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]],
-$  "representationsTree": [["black",
-$                           [{"rootLabel": {"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": [{"rootLabel": null,
-$                                                           "subForest": []},
-$                                                          {"rootLabel": null,
-$                                                           "subForest": []}]}]}]],
-$                          ["n",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["white",
-$                           [{"rootLabel": {"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": [{"rootLabel": null,
-$                                                           "subForest": []},
-$                                                          {"rootLabel": null,
-$                                                           "subForest": []}]}]}]]],
-$  "originalDomains": [["n",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["black",
-$                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainTuple": [{"DomainReference": ["Index", null]},
-$                                                       {"DomainReference": ["Index", null]}]}]}],
-$                      ["white",
-$                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainTuple": [{"DomainReference": ["Index", null]},
-$                                                       {"DomainReference": ["Index", null]}]}]}]]}

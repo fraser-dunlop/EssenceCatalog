@@ -3,218 +3,77 @@ language ESSENCE' 1.0
 given numNodes: int(1..)
 given maxPower: int(1..)
 given initialNode: int(1..)
-given linkCosts: matrix indexed by [int(1..numNodes), int(1..numNodes)] of int(0..maxPower)
-find nodeBroadcastPower: matrix indexed by [int(1..numNodes)] of int(0..maxPower)
-find directChildrenMatrix_ExplicitVarSizeWithMarker_Marker: matrix indexed by [int(1..numNodes)] of int(0..1 + (numNodes - 1))
-find directChildrenMatrix_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..numNodes), int(1..1 + (numNodes - 1))] of int(1..numNodes)
-find totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker: matrix indexed by [int(1..numNodes)] of int(0..1 + (numNodes - 1))
-find totalChildrenMatrix_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..numNodes), int(1..1 + (numNodes - 1))] of int(1..numNodes)
+given linkCosts:
+        matrix indexed by [int(1..numNodes), int(1..numNodes)] of int(0..maxPower)
+find nodeBroadcastPower:
+        matrix indexed by [int(1..numNodes)] of int(0..maxPower)
+find directChildrenMatrix_ExplicitVarSizeWithMarker_Marker:
+        matrix indexed by [int(1..numNodes)] of int(0..1 + (numNodes - 1))
+find directChildrenMatrix_ExplicitVarSizeWithMarker_Values:
+        matrix indexed by [int(1..numNodes),
+                           int(1..1 + (numNodes - 1))] of int(1..numNodes)
+find totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker:
+        matrix indexed by [int(1..numNodes)] of int(0..1 + (numNodes - 1))
+find totalChildrenMatrix_ExplicitVarSizeWithMarker_Values:
+        matrix indexed by [int(1..numNodes),
+                           int(1..1 + (numNodes - 1))] of int(1..numNodes)
 minimising sum([nodeBroadcastPower[i] | i : int(1..numNodes)])
 such that
     and([i = j \/
          sum([q8 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[i] /\
               or([q9 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[j] /\
-                  directChildrenMatrix_ExplicitVarSizeWithMarker_Values[j, q9] = directChildrenMatrix_ExplicitVarSizeWithMarker_Values[i, q8]
+                  directChildrenMatrix_ExplicitVarSizeWithMarker_Values[j, q9] =
+                  directChildrenMatrix_ExplicitVarSizeWithMarker_Values[i, q8]
                       | q9 : int(1..1 + (numNodes - 1))])
                   | q8 : int(1..1 + (numNodes - 1))])
          = 0 | i : int(1..numNodes), j : int(1..numNodes)]),
     totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[initialNode] = numNodes,
-    and([or([q10 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] /\ totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q10] = node
+    and([or([q10 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] /\
+             totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q10] = node
                  | q10 : int(1..1 + (numNodes - 1))])
          /\
          sum([(q5 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node]) *
-              totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q5]]
+              totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node,
+                                                                                                                         q5]]
                   | q5 : int(1..1 + (numNodes - 1))])
          = totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] - 1
          /\
          and([q6 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] ->
-              and([q11 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q6]] ->
+              and([q11 <=
+                   totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node,
+                                                                                                                              q6]]
+                   ->
                    or([q12 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] /\
                        totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q12] =
-                       totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q6], q11]
+                       totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node,
+                                                                                                                                  q6],
+                                                                            q11]
                            | q12 : int(1..1 + (numNodes - 1))])
                        | q11 : int(1..1 + (numNodes - 1))])
-              /\ linkCosts[node, directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q6]] != 0
-              /\ nodeBroadcastPower[node] >= linkCosts[node, directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q6]]
+              /\
+              linkCosts[node, directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q6]]
+              != 0
+              /\
+              nodeBroadcastPower[node] >=
+              linkCosts[node, directChildrenMatrix_ExplicitVarSizeWithMarker_Values[node, q6]]
                   | q6 : int(1..1 + (numNodes - 1))])
              | node : int(1..numNodes)]),
     and([and([q2 + 1 <= directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q1] ->
-              directChildrenMatrix_ExplicitVarSizeWithMarker_Values[q1, q2] < directChildrenMatrix_ExplicitVarSizeWithMarker_Values[q1, q2 + 1]
+              directChildrenMatrix_ExplicitVarSizeWithMarker_Values[q1, q2] <
+              directChildrenMatrix_ExplicitVarSizeWithMarker_Values[q1, q2 + 1]
                   | q2 : int(1..1 + (numNodes - 1) - 1)])
              | q1 : int(1..numNodes)]),
-    and([and([q2 > directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q1] -> directChildrenMatrix_ExplicitVarSizeWithMarker_Values[q1, q2] = 1
+    and([and([q2 > directChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q1] ->
+              directChildrenMatrix_ExplicitVarSizeWithMarker_Values[q1, q2] = 1
                   | q2 : int(1..1 + (numNodes - 1))])
              | q1 : int(1..numNodes)]),
     and([and([q4 + 1 <= totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q3] ->
-              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q3, q4] < totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q3, q4 + 1]
+              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q3, q4] <
+              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q3, q4 + 1]
                   | q4 : int(1..1 + (numNodes - 1) - 1)])
              | q3 : int(1..numNodes)]),
-    and([and([q4 > totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q3] -> totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q3, q4] = 1
+    and([and([q4 > totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[q3] ->
+              totalChildrenMatrix_ExplicitVarSizeWithMarker_Values[q3, q4] = 1
                   | q4 : int(1..1 + (numNodes - 1))])
              | q3 : int(1..numNodes)])
 
-$ Conjure's
-$ {"finds": ["nodeBroadcastPower", "directChildrenMatrix", "totalChildrenMatrix"],
-$  "givens": ["numNodes", "maxPower", "initialNode", "linkCosts"],
-$  "enumGivens": [],
-$  "enumLettings": [],
-$  "unnameds": [],
-$  "trailCompact": [[1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-$                     23, 24]],
-$                   [1, [1]],
-$                   [1,
-$                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]],
-$                   [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]],
-$                   [2, [1, 2, 3]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]],
-$                   [2, [1, 2, 3]], [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7, 8]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1, 2, 3, 4, 5, 6]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5]], [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5]],
-$                   [1, [1]], [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [1, [1]],
-$                   [1, [1, 2, 3, 4]], [1, [1]], [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]],
-$                   [1, [1]], [1, [1]]],
-$  "trailVerbose": [],
-$  "representations": [["numNodes",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["maxPower",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["nodeBroadcastPower",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["numNodes",
-$                                                                                         {"DeclHasRepr": ["Given",
-$                                                                                                          "numNodes",
-$                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                         {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                          {"Reference": ["maxPower",
-$                                                                                         {"DeclHasRepr": ["Given",
-$                                                                                                          "maxPower",
-$                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
-$                      ["directChildrenMatrix",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["numNodes",
-$                                                                                         {"DeclHasRepr": ["Given",
-$                                                                                                          "numNodes",
-$                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                         {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                                        {"SizeAttr_None": []},
-$                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                         {"Reference": ["numNodes",
-$                                                                                                        {"DeclHasRepr": ["Given",
-$                                                                                                                         "numNodes",
-$                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
-$                      ["totalChildrenMatrix",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["numNodes",
-$                                                                                         {"DeclHasRepr": ["Given",
-$                                                                                                          "numNodes",
-$                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                         {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                                        {"SizeAttr_None": []},
-$                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                         {"Reference": ["numNodes",
-$                                                                                                        {"DeclHasRepr": ["Given",
-$                                                                                                                         "numNodes",
-$                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
-$                      ["initialNode",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["linkCosts",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["numNodes",
-$                                                                                         {"DeclHasRepr": ["Given",
-$                                                                                                          "numNodes",
-$                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                         {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                            {"Reference": ["numNodes",
-$                                                                                                           {"DeclHasRepr": ["Given",
-$                                                                                                                            "numNodes",
-$                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                                            {"Reference": ["maxPower",
-$                                                                                                           {"DeclHasRepr": ["Given",
-$                                                                                                                            "maxPower",
-$                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]],
-$  "representationsTree": [["directChildrenMatrix",
-$                           [{"rootLabel": null,
-$                             "subForest": [{"rootLabel": {"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                            "subForest": [{"rootLabel": null,
-$                                                           "subForest": []}]}]}]],
-$                          ["initialNode",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["linkCosts",
-$                           [{"rootLabel": null,
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": [{"rootLabel": null,
-$                                                           "subForest": []}]}]}]],
-$                          ["maxPower",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["nodeBroadcastPower",
-$                           [{"rootLabel": null,
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": []}]}]],
-$                          ["numNodes",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["totalChildrenMatrix",
-$                           [{"rootLabel": null,
-$                             "subForest": [{"rootLabel": {"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                            "subForest": [{"rootLabel": null,
-$                                                           "subForest": []}]}]}]]],
-$  "originalDomains": [["numNodes",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["maxPower",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["initialNode",
-$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      ["linkCosts",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["numNodes", null]}]}]},
-$                                         {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                            {"Reference": ["numNodes",
-$                                                                                                           null]}]}]},
-$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                                            {"Reference": ["maxPower",
-$                                                                                                           null]}]}]}]}]}],
-$                      ["nodeBroadcastPower",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["numNodes", null]}]}]},
-$                                         {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                          {"Reference": ["maxPower", null]}]}]}]}],
-$                      ["directChildrenMatrix",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["numNodes", null]}]}]},
-$                                         {"DomainSet": [[], {"SizeAttr_None": []},
-$                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                         {"Reference": ["numNodes",
-$                                                                                                        null]}]}]}]}]}],
-$                      ["totalChildrenMatrix",
-$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                          {"Reference": ["numNodes", null]}]}]},
-$                                         {"DomainSet": [[], {"SizeAttr_None": []},
-$                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                                         {"Reference": ["numNodes",
-$                                                                                                        null]}]}]}]}]}]]}

@@ -1,0 +1,19 @@
+language ESSENCE' 1.0
+
+given n: int(1..100)
+letting q1 be n - 1
+letting q2 be n - 1
+letting q3 be n - 1
+find quasigroup_FunctionND:
+        matrix indexed by [int(0..q1), int(0..q2)] of int(0..q3)
+such that
+    and([allDiff([quasigroup_FunctionND[v, q4_2] | q4_2 : int(0..n - 1)]) /\
+         and([or([v = v /\ q5_2 = q4_2 | q5_2 : int(0..n - 1)]) | q4_2 : int(0..n - 1)])
+             | v : int(0..n - 1)]),
+    and([allDiff([quasigroup_FunctionND[q6_1, v] | q6_1 : int(0..n - 1)]) /\
+         and([or([q7_1 = q6_1 /\ v = v | q7_1 : int(0..n - 1)]) | q6_1 : int(0..n - 1)])
+             | v : int(0..n - 1)]),
+    and([quasigroup_FunctionND[quasigroup_FunctionND[a, b], b] =
+         quasigroup_FunctionND[a, quasigroup_FunctionND[a, b]]
+             | a : int(0..n - 1), b : int(0..n - 1)])
+

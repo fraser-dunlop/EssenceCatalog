@@ -1,0 +1,92 @@
+language ESSENCE' 1.0
+
+given x_max: int(1..)
+given y_max: int(1..)
+given n_shapes: int(1..)
+given p1: int
+given grid_Explicit_1: matrix indexed by [int(1..p1)] of int(1..x_max)
+given grid_Explicit_2: matrix indexed by [int(1..p1)] of int(1..y_max)
+given p2: int
+given p3: int
+given form_Function1D_ExplicitVarSizeWithMarker_Marker:
+        matrix indexed by [int(1..n_shapes)] of int(0..p3)
+given form_Function1D_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..n_shapes), int(1..p3)] of int(1..x_max)
+given form_Function1D_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..n_shapes), int(1..p3)] of int(1..y_max)
+find layout_FunctionNDPartial_Flags:
+        matrix indexed by [int(1..x_max), int(1..y_max)] of bool
+find layout_FunctionNDPartial_Values:
+        matrix indexed by [int(1..x_max), int(1..y_max)] of int(1..n_shapes)
+find q2_ExplicitVarSizeWithMarker_Marker:
+        int(0..(1 + (x_max - 1)) * (1 + (y_max - 1)))
+find q2_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..(1 + (x_max - 1)) *
+                                  (1 + (y_max - 1)))] of int(1..x_max)
+find q2_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..(1 + (x_max - 1)) *
+                                  (1 + (y_max - 1)))] of int(1..y_max)
+such that
+    and([q6 + 1 <= q2_ExplicitVarSizeWithMarker_Marker ->
+         q2_ExplicitVarSizeWithMarker_Values_1[q6] <
+         q2_ExplicitVarSizeWithMarker_Values_1[q6 + 1]
+         \/
+         q2_ExplicitVarSizeWithMarker_Values_1[q6] =
+         q2_ExplicitVarSizeWithMarker_Values_1[q6 + 1]
+         /\
+         q2_ExplicitVarSizeWithMarker_Values_2[q6] <
+         q2_ExplicitVarSizeWithMarker_Values_2[q6 + 1]
+             | q6 : int(1..(1 + (x_max - 1)) * (1 + (y_max - 1)) - 1)]),
+    and([q6 > q2_ExplicitVarSizeWithMarker_Marker ->
+         q2_ExplicitVarSizeWithMarker_Values_1[q6] = 1 /\
+         q2_ExplicitVarSizeWithMarker_Values_2[q6] = 1
+             | q6 : int(1..(1 + (x_max - 1)) * (1 + (y_max - 1)))]),
+    and([layout_FunctionNDPartial_Flags[q3_1, q3_2] ->
+         or([q10 <= q2_ExplicitVarSizeWithMarker_Marker /\
+             (q2_ExplicitVarSizeWithMarker_Values_1[q10] = q3_1 /\
+              q2_ExplicitVarSizeWithMarker_Values_2[q10] = q3_2)
+                 | q10 : int(1..(1 + (x_max - 1)) * (1 + (y_max - 1)))])
+             | q3_1 : int(1..x_max), q3_2 : int(1..y_max)]),
+    and([q8 <= q2_ExplicitVarSizeWithMarker_Marker ->
+         or([layout_FunctionNDPartial_Flags[q4_1, q4_2] /\
+             (q4_1 = q2_ExplicitVarSizeWithMarker_Values_1[q8] /\
+              q4_2 = q2_ExplicitVarSizeWithMarker_Values_2[q8])
+                 | q4_1 : int(1..x_max), q4_2 : int(1..y_max)])
+             | q8 : int(1..(1 + (x_max - 1)) * (1 + (y_max - 1)))]),
+    and([q7 <= q2_ExplicitVarSizeWithMarker_Marker ->
+         or([grid_Explicit_1[q9] = q2_ExplicitVarSizeWithMarker_Values_1[q7] /\
+             grid_Explicit_2[q9] = q2_ExplicitVarSizeWithMarker_Values_2[q7]
+                 | q9 : int(1..p1)])
+             | q7 : int(1..(1 + (x_max - 1)) * (1 + (y_max - 1)))]),
+    and([or([or([and([sx_Occurrence[q16_1] /\ sy_Occurrence[q16_2] <->
+                      or([layout_FunctionNDPartial_Flags[q5_1, q5_2] /\
+                          layout_FunctionNDPartial_Values[q5_1, q5_2] = s
+                          /\ (q5_1 = q16_1 /\ q5_2 = q16_2)
+                              | q5_1 : int(1..x_max), q5_2 : int(1..y_max)])
+                          | q16_1 : int(1..x_max), q16_2 : int(1..y_max)])
+                 /\
+                 and([layout_FunctionNDPartial_Values[min([q11 | q11 : int(1..x_max),
+                                                                 sx_Occurrence[q11]])
+                                                      + form_Function1D_ExplicitVarSizeWithMarker_Values_1[s, q18],
+                                                      min([q12 | q12 : int(1..y_max), sy_Occurrence[q12]]) +
+                                                      form_Function1D_ExplicitVarSizeWithMarker_Values_2[s, q18]]
+                      = s
+                      /\
+                      layout_FunctionNDPartial_Flags[min([q13 | q13 : int(1..x_max),
+                                                                sx_Occurrence[q13]])
+                                                     + form_Function1D_ExplicitVarSizeWithMarker_Values_1[s, q18],
+                                                     min([q14 | q14 : int(1..y_max), sy_Occurrence[q14]]) +
+                                                     form_Function1D_ExplicitVarSizeWithMarker_Values_2[s, q18]]
+                          | q18 : int(1..p3), q18 <= form_Function1D_ExplicitVarSizeWithMarker_Marker[s]])
+                     | sy_Occurrence : matrix indexed by [int(1..y_max)] of bool])
+                 | sx_Occurrence : matrix indexed by [int(1..x_max)] of bool])
+             | s : int(1..n_shapes)]),
+    and([form_Function1D_ExplicitVarSizeWithMarker_Marker[s] =
+         sum([layout_FunctionNDPartial_Flags[q15_1, q15_2] /\
+              layout_FunctionNDPartial_Values[q15_1, q15_2] = s
+                  | q15_1 : int(1..x_max), q15_2 : int(1..y_max)])
+             | s : int(1..n_shapes)]),
+    and([layout_FunctionNDPartial_Flags[q1_1, q1_2] = false ->
+         layout_FunctionNDPartial_Values[q1_1, q1_2] = 1
+             | q1_1 : int(1..x_max), q1_2 : int(1..y_max)])
+

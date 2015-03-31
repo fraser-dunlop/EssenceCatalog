@@ -13,4 +13,4 @@ such that
   forAll v : g . injective(restrict(quasigroup,`tuple(g,int(v))`)),
 
   $ qg6 (a*b)*b = a*(a*b)
-  forAll a,b : g . quasigroup(quasigroup(a,b),b) = quasigroup(a,quasigroup(a,b))
+  forAll a,b : g . quasigroup((quasigroup((a,b)),b)) = quasigroup((a,quasigroup((a,b))))

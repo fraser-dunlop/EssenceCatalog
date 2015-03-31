@@ -6,94 +6,20 @@ given b: int(0..100)
 given p1: int
 given s_Occurrence: matrix indexed by [int(1..n)] of bool
 find x_ExplicitVarSizeWithMarker_Marker: int(0..1 + (b - a))
-find x_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..1 + (b - a))] of int(a..b)
+find x_ExplicitVarSizeWithMarker_Values:
+        matrix indexed by [int(1..1 + (b - a))] of int(a..b)
 such that
-    and([q3 <= x_ExplicitVarSizeWithMarker_Marker -> s_Occurrence[x_ExplicitVarSizeWithMarker_Values[q3]] | q3 : int(1..1 + (b - a))]),
-    or([q4 <= x_ExplicitVarSizeWithMarker_Marker /\ x_ExplicitVarSizeWithMarker_Values[q4] = x_ExplicitVarSizeWithMarker_Marker | q4 : int(1..1 + (b - a))]),
-    and([q1 + 1 <= x_ExplicitVarSizeWithMarker_Marker -> x_ExplicitVarSizeWithMarker_Values[q1] < x_ExplicitVarSizeWithMarker_Values[q1 + 1]
+    and([q3 <= x_ExplicitVarSizeWithMarker_Marker ->
+         s_Occurrence[x_ExplicitVarSizeWithMarker_Values[q3]]
+             | q3 : int(1..1 + (b - a))]),
+    or([q4 <= x_ExplicitVarSizeWithMarker_Marker /\
+        x_ExplicitVarSizeWithMarker_Values[q4] = x_ExplicitVarSizeWithMarker_Marker
+            | q4 : int(1..1 + (b - a))]),
+    and([q1 + 1 <= x_ExplicitVarSizeWithMarker_Marker ->
+         x_ExplicitVarSizeWithMarker_Values[q1] <
+         x_ExplicitVarSizeWithMarker_Values[q1 + 1]
              | q1 : int(1..1 + (b - a) - 1)]),
-    and([q1 > x_ExplicitVarSizeWithMarker_Marker -> x_ExplicitVarSizeWithMarker_Values[q1] = a | q1 : int(1..1 + (b - a))])
+    and([q1 > x_ExplicitVarSizeWithMarker_Marker ->
+         x_ExplicitVarSizeWithMarker_Values[q1] = a
+             | q1 : int(1..1 + (b - a))])
 
-$ Conjure's
-$ {"finds": ["x"],
-$  "givens": ["n", "a", "b", "s"],
-$  "enumGivens": [],
-$  "enumLettings": [],
-$  "unnameds": [],
-$  "trailCompact": [[1, [1, 2, 3, 4, 5, 6, 7, 8, 9]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6, 7, 8]], [1, [1]], [1, [1, 2, 3, 4, 5, 6, 7]], [1, [1]],
-$                   [1, [1, 2, 3, 4, 5, 6]], [1, [1]], [1, [1, 2, 3, 4, 5]], [2, [1, 2, 3]],
-$                   [1, [1, 2, 3]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]], [1, [1]],
-$                   [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]],
-$                   [1, [1]], [1, [1, 2]], [1, [1]], [1, [1]], [1, [1]]],
-$  "trailVerbose": [],
-$  "representations": [["p1", {"DomainInt": []}],
-$                      ["n",
-$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
-$                      ["a",
-$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
-$                      ["b",
-$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
-$                      ["x",
-$                       {"DomainSet": [{"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                                      {"SizeAttr_None": []},
-$                                      {"DomainInt": [{"RangeBounded": [{"Reference": ["a",
-$                                                                                      {"DeclHasRepr": ["Given", "a",
-$                                                                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                                                                                        {"Constant": {"ConstantInt": 100}}]}]}]}]},
-$                                                                       {"Reference": ["b",
-$                                                                                      {"DeclHasRepr": ["Given", "b",
-$                                                                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                                                                                        {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]}]}],
-$                      ["s",
-$                       {"DomainSet": [{"HasRepresentation": "Occurrence"},
-$                                      {"SizeAttr_Size": {"Reference": ["p1",
-$                                                                       {"DeclHasRepr": ["Given", "p1",
-$                                                                                        {"DomainInt": []}]}]}},
-$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                       {"Reference": ["n",
-$                                                                                      {"DeclHasRepr": ["Given", "n",
-$                                                                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                                                                                                        {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]}]}]],
-$  "representationsTree": [["a",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["b",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["n",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["p1",
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          ["s",
-$                           [{"rootLabel": {"HasRepresentation": "Occurrence"},
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": []}]}]],
-$                          ["x",
-$                           [{"rootLabel": {"HasRepresentation": "ExplicitVarSizeWithMarker"},
-$                             "subForest": [{"rootLabel": null,
-$                                            "subForest": []}]}]]],
-$  "originalDomains": [["n",
-$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
-$                      ["a",
-$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
-$                      ["b",
-$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
-$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
-$                      ["s",
-$                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
-$                                                                       {"Reference": ["n", null]}]}]}]}],
-$                      ["x",
-$                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainInt": [{"RangeBounded": [{"Reference": ["a", null]},
-$                                                                       {"Reference": ["b", null]}]}]}]}]]}

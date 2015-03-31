@@ -1,0 +1,81 @@
+language ESSENCE' 1.0
+
+letting nBuckets be 3
+letting totalWater be 8
+letting q1 be (totalWater + 1) ** nBuckets
+find plan_Function1DPartial_Flags: matrix indexed by [int(1..q1)] of bool
+find plan_Function1DPartial_Values_Function1D:
+        matrix indexed by [int(1..q1), int(1..nBuckets)] of int(0..totalWater)
+letting q2 be (totalWater + 1) ** nBuckets
+find plan_len: int(1..q2)
+minimising plan_len
+find q4_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..2 **
+                                  ((1 + (nBuckets - 1)) * (1 + (totalWater - 0))))] of bool
+find q4_ExplicitVarSizeWithFlags_Values_Function1D:
+        matrix indexed by [int(1..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0)))),
+                           int(1..nBuckets)] of int(0..totalWater)
+such that
+    plan_len = sum([plan_Function1DPartial_Flags[q5] | q5 : int(1..q1)]),
+    and([i <= plan_len -> plan_Function1DPartial_Flags[i]
+             | i : int(1..(totalWater + 1) ** nBuckets)]),
+    and([q4_ExplicitVarSizeWithFlags_Flags[q9 + 1] ->
+         q4_ExplicitVarSizeWithFlags_Values_Function1D[q9, ..] <lex
+         q4_ExplicitVarSizeWithFlags_Values_Function1D[q9 + 1, ..]
+             | q9 : int(1..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0))) - 1)]),
+    and([q4_ExplicitVarSizeWithFlags_Flags[q9] = false ->
+         and([q4_ExplicitVarSizeWithFlags_Values_Function1D[q9, q27] = 0
+                  | q27 : int(1..nBuckets)])
+             | q9 : int(1..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0))))]),
+    and([q4_ExplicitVarSizeWithFlags_Flags[q9 + 1] ->
+         q4_ExplicitVarSizeWithFlags_Flags[q9]
+             | q9 : int(1..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0))) - 1)]),
+    and([plan_Function1DPartial_Flags[q6] ->
+         or([q4_ExplicitVarSizeWithFlags_Flags[q12] /\
+             (and([plan_Function1DPartial_Values_Function1D[q6, q13] =
+                   q4_ExplicitVarSizeWithFlags_Values_Function1D[q12, q13]
+                       | q13 : int(1..nBuckets)])
+              /\
+              and([q4_ExplicitVarSizeWithFlags_Values_Function1D[q12, q14] =
+                   plan_Function1DPartial_Values_Function1D[q6, q14]
+                       | q14 : int(1..nBuckets)])
+              /\
+              (and([or([q16 = q15 | q16 : int(1..nBuckets)]) | q15 : int(1..nBuckets)]) /\
+               and([or([q18 = q17 | q18 : int(1..nBuckets)]) | q17 : int(1..nBuckets)])))
+                 | q12 : int(1..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0))))])
+             | q6 : int(1..q1)]),
+    and([q4_ExplicitVarSizeWithFlags_Flags[q11] ->
+         or([plan_Function1DPartial_Flags[q7] /\
+             (and([q4_ExplicitVarSizeWithFlags_Values_Function1D[q11, q19] =
+                   plan_Function1DPartial_Values_Function1D[q7, q19]
+                       | q19 : int(1..nBuckets)])
+              /\
+              and([plan_Function1DPartial_Values_Function1D[q7, q20] =
+                   q4_ExplicitVarSizeWithFlags_Values_Function1D[q11, q20]
+                       | q20 : int(1..nBuckets)])
+              /\
+              (and([or([q22 = q21 | q22 : int(1..nBuckets)]) | q21 : int(1..nBuckets)]) /\
+               and([or([q24 = q23 | q24 : int(1..nBuckets)]) | q23 : int(1..nBuckets)])))
+                 | q7 : int(1..q1)])
+             | q11 : int(1..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0))))]),
+    and([q4_ExplicitVarSizeWithFlags_Flags[q10] ->
+         sum([q4_ExplicitVarSizeWithFlags_Values_Function1D[q10, b]
+                  | b : int(1..nBuckets)])
+         = totalWater
+             | q10 : int(1..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0))))]),
+    and([sum([sum([plan_Function1DPartial_Values_Function1D[i + 1, q8]
+                       | q8 : int(1..nBuckets), q8 = q28])
+              = plan_Function1DPartial_Values_Function1D[i, q28]
+              /\ plan_Function1DPartial_Flags[i + 1]
+              /\
+              (or([q25 = q28 | q25 : int(1..nBuckets)]) /\
+               plan_Function1DPartial_Flags[i + 1])
+                  | q28 : int(1..nBuckets)])
+         = 1
+         /\ plan_Function1DPartial_Flags[i]
+             | i : int(1..(totalWater + 1) ** nBuckets)]),
+    and([plan_Function1DPartial_Flags[q3] = false ->
+         and([plan_Function1DPartial_Values_Function1D[q3, q26] = 0
+                  | q26 : int(1..nBuckets)])
+             | q3 : int(1..q1)])
+
