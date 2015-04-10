@@ -1,0 +1,3 @@
+letting Golfers be new type of size g * s
+
+find sched : set (size w) of partition (regular, complete, numParts g) from Golfers

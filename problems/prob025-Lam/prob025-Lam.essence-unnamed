@@ -1,0 +1,3 @@
+letting Index be new type of size indexSize
+
+find m: matrix indexed by [Index,Index] of bool

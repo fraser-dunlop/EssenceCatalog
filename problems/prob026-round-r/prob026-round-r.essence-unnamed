@@ -1,0 +1,9 @@
+
+letting Team   be new type of size n_teams,
+        Week   be new type of size n_teams-1,
+        Period be new type of size n_teams/2
+
+find sched :
+    relation (size ((n_teams-1)*n_teams)/2) of
+        (Week * Period * set (size 2) of Team)
+

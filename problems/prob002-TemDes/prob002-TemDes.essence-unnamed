@@ -1,0 +1,7 @@
+
+letting templates be new type of size n_templates        $ these are the templates
+
+find design: function (total) (templates,variations) --> int (0..n_slots)  $ This tells us how many times 
+                                                         $   each variation appears on each template
+find printings: function (total) templates --> int (0..max(range(demand)))                  $ This tells us how many times each
+

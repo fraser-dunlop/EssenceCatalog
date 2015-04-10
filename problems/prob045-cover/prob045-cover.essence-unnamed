@@ -1,0 +1,7 @@
+
+letting alphabet be new type of size g
+letting switches be new type of size k
+
+find CoverTest: mset (size b) of function (total) switches --> alphabet
+
+
