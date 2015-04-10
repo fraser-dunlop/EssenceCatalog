@@ -1,7 +1,5 @@
-
 letting Bin be new type of size (sum m : Material . quantity(m))
 
-$ colour: each bin is assigned a colour
-$ contents: the contents of each bin is a multiset of materials
-find colour : function Bin --> Colour,
-     contents : function Bin --> mset (maxOccur maxMaterial) of Material
+find colour : function Bin --> Colour
+
+find contents : function Bin --> mset (maxOccur maxMaterial) of Material

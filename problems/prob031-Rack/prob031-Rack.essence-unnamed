@@ -1,5 +1,6 @@
 letting Rack  be new type of size n_racks
 
-find model   : function Rack --> Model,
-     plugged : function Rack --> set of Card
+find model   : function Rack --> Model
+
+find plugged : function Rack --> set of Card
 
