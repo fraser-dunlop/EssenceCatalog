@@ -27,6 +27,4 @@ such that
     edgeID(2*n+v) = |colouring(C) - colouring(v)|,
 
   forAll v : C2 .
-    edgeID(2*n+v) = |colouring(C) - colouring(v)|,
-
-  true
+    edgeID(2*n+v) = |colouring(C) - colouring(v)|
