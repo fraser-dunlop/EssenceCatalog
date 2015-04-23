@@ -4,86 +4,44 @@ given s: int(1..)
 given r: int(1..)
 find colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker:
         int(0..2 ** (1 + (s - 1)))
-find colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..2 ** (1 + (s - 1)))] of int(0..1 + (s - 1))
-find colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values:
-        matrix indexed by [int(1..2 ** (1 + (s - 1))), int(1..1 + (s - 1))] of int(1..s)
+find colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence:
+        matrix indexed by [int(1..2 ** (1 + (s - 1))), int(1..s)] of bool
 such that
-    and([and([and([q12 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker
+    and([and([and([q10 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker
                    ->
-                   !and([or([q20 <=
-                             colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q12]
-                             /\
-                             colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q12,
-                                                                                                                        q20]
-                             = [x, y, x + y; int(1..3)][q18]
-                                 | q20 : int(1..1 + (s - 1))])
-                             | q18 : int(1..3)])
-                       | q12 : int(1..2 ** (1 + (s - 1)))])
+                   !and([colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q10,
+                                                                                              [x, y,
+                                                                                               x + y; int(1..3)][q16]]
+                             | q16 : int(1..3)])
+                       | q10 : int(1..2 ** (1 + (s - 1)))])
                   | y : int(1..s - x), x != y])
              | x : int(1..s - 1)]),
     and([1 =
-         sum([q13 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
-              or([q22 <=
-                  colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q13]
-                  /\
-                  colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q13,
-                                                                                                             q22]
-                  = q1
-                      | q22 : int(1..1 + (s - 1))])
-                  | q13 : int(1..2 ** (1 + (s - 1)))])
+         sum([q11 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
+              colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q11, q1]
+                  | q11 : int(1..2 ** (1 + (s - 1)))])
              | q1 : int(1..s)]),
     r =
-    sum([(q14 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker) *
-         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q14]
-             | q14 : int(1..2 ** (1 + (s - 1)))]),
-    and([q15 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q15]
+    sum([(q12 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker) *
+         sum([colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q12,
+                                                                                   q17]
+                  | q17 : int(1..s)])
+             | q12 : int(1..2 ** (1 + (s - 1)))]),
+    and([q13 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
+         sum([colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q13,
+                                                                                   q18]
+                  | q18 : int(1..s)])
          >= 1
-             | q15 : int(1..2 ** (1 + (s - 1)))]),
+             | q13 : int(1..2 ** (1 + (s - 1)))]),
     and([q5 + 1 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
-         <
-         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5
-                                                                                                    + 1]
-         \/
-         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
-         =
-         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5
-                                                                                                    + 1]
-         /\
-         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q5,
-                                                                                                    ..]
+         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q5, ..]
          <lex
-         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q5
-                                                                                                    + 1,
-                                                                                                    ..]
+         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q5 + 1, ..]
              | q5 : int(1..2 ** (1 + (s - 1)) - 1)]),
     and([q6 > colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q6]
-         = 0
-         /\
-         and([colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q6,
-                                                                                                         q23]
-              = 1 | q23 : int(1..1 + (s - 1))])
-             | q6 : int(1..2 ** (1 + (s - 1)))]),
-    and([q7 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q8 + 1 <=
-              colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q7]
-              ->
-              colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7,
-                                                                                                         q8]
-              <
-              colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7,
-                                                                                                         q8 + 1]
-                  | q8 : int(1..1 + (s - 1) - 1)])
-             | q7 : int(1..2 ** (1 + (s - 1)))]),
-    and([q7 <= colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q9 >
-              colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q7]
-              ->
-              colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7,
-                                                                                                         q9]
-              = 1 | q9 : int(1..1 + (s - 1))])
-             | q7 : int(1..2 ** (1 + (s - 1)))])
+         and([colouring_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q6,
+                                                                                   q19]
+              = false
+                  | q19 : int(1..s)])
+             | q6 : int(1..2 ** (1 + (s - 1)))])
 

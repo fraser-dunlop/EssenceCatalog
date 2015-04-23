@@ -7,8 +7,8 @@ find setA_Occurrence: matrix indexed by [int(1..n)] of bool
 letting let2 be n / 2
 find setB_Occurrence: matrix indexed by [int(1..n)] of bool
 such that
-    sum(flatten([[setA_Occurrence[q3] | q3 : int(1..n)],
-                 [setB_Occurrence[q3] /\ !setA_Occurrence[q3] | q3 : int(1..n)]; int(1..2)]))
+    sum(flatten([setA_Occurrence[q3] | q3 : int(1..n)])) +
+    sum(flatten([setB_Occurrence[q3] /\ !setA_Occurrence[q3] | q3 : int(1..n)]))
     = n,
     sum([setA_Occurrence[q4] /\ setB_Occurrence[q4] | q4 : int(1..n)]) = 0,
     sum([setA_Occurrence[i] * i | i : int(1..n)]) =

@@ -7,93 +7,40 @@ given shifts_Explicit_Occurrence:
         matrix indexed by [int(1..fin1), int(1..Tasks_EnumSize)] of bool
 find sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker:
         int(0..2 ** (1 + (Tasks_EnumSize - 1)))
-find sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..2 ** (1 + (Tasks_EnumSize - 1)))] of int(0..1 +
-                                                                              (Tasks_EnumSize - 1))
-find sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values:
+find sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence:
         matrix indexed by [int(1..2 ** (1 + (Tasks_EnumSize - 1))),
-                           int(1..1 + (Tasks_EnumSize - 1))] of int(1..Tasks_EnumSize)
+                           int(1..Tasks_EnumSize)] of bool
 minimising
-    sum([q17 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker
-             | q17 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
+    sum([q15 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker
+             | q15 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
 such that
-    and([q12 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         or([and([or([q22 <=
-                      sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q12]
-                      /\
-                      sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q12,
-                                                                                                             q22]
-                      = q20
-                          | q22 : int(1..1 + (Tasks_EnumSize - 1))])
-                      | q20 : int(1..Tasks_EnumSize), shifts_Explicit_Occurrence[q19, q20]])
+    and([q10 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
+         or([and([sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q10,
+                                                                                   q18]
+                      | q18 : int(1..Tasks_EnumSize), shifts_Explicit_Occurrence[q17, q18]])
              /\
-             and([q24 <=
-                  sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q12]
-                  ->
-                  shifts_Explicit_Occurrence[q19,
-                                             sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q12,
-                                                                                                                                    q24]]
-                      | q24 : int(1..1 + (Tasks_EnumSize - 1))])
-                 | q19 : int(1..fin1)])
-             | q12 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
+             and([sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q10, q19]
+                  -> shifts_Explicit_Occurrence[q17, q19]
+                      | q19 : int(1..Tasks_EnumSize)])
+                 | q17 : int(1..fin1)])
+             | q10 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
     and([1 >=
-         sum([q13 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
-              or([q26 <=
-                  sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q13]
-                  /\
-                  sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q13,
-                                                                                                         q26]
-                  = q1
-                      | q26 : int(1..1 + (Tasks_EnumSize - 1))])
-                  | q13 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
+         sum([q11 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
+              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q11, q1]
+                  | q11 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
              | q1 : int(1..Tasks_EnumSize)]),
-    and([q14 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q14]
+    and([q12 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
+         sum([sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q12, q20]
+                  | q20 : int(1..Tasks_EnumSize)])
          >= 1
-             | q14 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
+             | q12 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
     and([q5 + 1 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
-         <
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5
-                                                                                                + 1]
-         \/
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
-         =
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5
-                                                                                                + 1]
-         /\
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q5,
-                                                                                                ..]
-         <lex
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q5
-                                                                                                + 1,
-                                                                                                ..]
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q5, ..] <lex
+         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q5 + 1, ..]
              | q5 : int(1..2 ** (1 + (Tasks_EnumSize - 1)) - 1)]),
     and([q6 > sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q6]
-         = 0
-         /\
-         and([sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q6,
-                                                                                                     q27]
-              = 1 | q27 : int(1..1 + (Tasks_EnumSize - 1))])
-             | q6 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
-    and([q7 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q8 + 1 <=
-              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q7]
-              ->
-              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7,
-                                                                                                     q8]
-              <
-              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7,
-                                                                                                     q8 + 1]
-                  | q8 : int(1..1 + (Tasks_EnumSize - 1) - 1)])
-             | q7 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
-    and([q7 <= sched_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q9 >
-              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q7]
-              ->
-              sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7,
-                                                                                                     q9]
-              = 1 | q9 : int(1..1 + (Tasks_EnumSize - 1))])
-             | q7 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
+         and([sched_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q6, q21] =
+              false
+                  | q21 : int(1..Tasks_EnumSize)])
+             | q6 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
 

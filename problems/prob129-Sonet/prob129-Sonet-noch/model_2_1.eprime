@@ -7,8 +7,7 @@ given fin1: int
 given demand_Explicit_Occurrence:
         matrix indexed by [int(1..fin1), int(1..nnodes)] of bool
 find network_ExplicitVarSizeWithFlags_Flags:
-        matrix indexed by [int(1..nrings)] of int(0..min([nrings,
-                                                          2 ** (1 + (nnodes - 1)); int(1..2)]))
+        matrix indexed by [int(1..nrings)] of int(0..nrings)
 find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithMarker_Marker:
         matrix indexed by [int(1..nrings)] of int(0..capacity)
 find network_ExplicitVarSizeWithFlags_Values_ExplicitVarSizeWithMarker_Values:

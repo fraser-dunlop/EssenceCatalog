@@ -8,12 +8,12 @@ find plan_Function1DPartial_Values_Function1D:
         matrix indexed by [int(1..let1), int(1..nBuckets)] of int(0..totalWater)
 letting let2 be (totalWater + 1) ** nBuckets
 find plan_len: int(1..let2)
-minimising plan_len
 find aux1_ExplicitVarSizeWithMarker_Marker:
         int(0..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0))))
 find aux1_ExplicitVarSizeWithMarker_Values_Function1D:
         matrix indexed by [int(1..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0)))),
                            int(1..nBuckets)] of int(0..totalWater)
+minimising plan_len
 such that
     plan_len = sum([plan_Function1DPartial_Flags[q6] | q6 : int(1..let1)]),
     and([i <= plan_len -> plan_Function1DPartial_Flags[i]
@@ -59,19 +59,19 @@ such that
                   | b : int(1..nBuckets)])
          = totalWater
              | q14 : int(1..2 ** ((1 + (nBuckets - 1)) * (1 + (totalWater - 0))))]),
-    and([sum([sum([plan_Function1DPartial_Values_Function1D[i + 1, q47]
-                       | q47 : int(1..nBuckets), q47 = q46])
-              = plan_Function1DPartial_Values_Function1D[i, q46]
+    and([sum([sum([plan_Function1DPartial_Values_Function1D[i + 1, q48]
+                       | q48 : int(1..nBuckets), q48 = q47])
+              = plan_Function1DPartial_Values_Function1D[i, q47]
               /\ plan_Function1DPartial_Flags[i + 1]
               /\
-              (or([q48 = q46 | q48 : int(1..nBuckets)]) /\
+              (or([q49 = q47 | q49 : int(1..nBuckets)]) /\
                plan_Function1DPartial_Flags[i + 1])
-                  | q46 : int(1..nBuckets)])
+                  | q47 : int(1..nBuckets)])
          = 1
          /\ plan_Function1DPartial_Flags[i]
              | i : int(1..(totalWater + 1) ** nBuckets)]),
     and([plan_Function1DPartial_Flags[q1] = false ->
-         and([plan_Function1DPartial_Values_Function1D[q1, q49] = 0
-                  | q49 : int(1..nBuckets)])
+         and([plan_Function1DPartial_Values_Function1D[q1, q46] = 0
+                  | q46 : int(1..nBuckets)])
              | q1 : int(1..let1)])
 

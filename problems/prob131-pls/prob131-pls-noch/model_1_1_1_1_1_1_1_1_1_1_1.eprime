@@ -146,9 +146,7 @@ letting let1 be
         sum([capacity_FunctionND[q20_1, q20_2]
                  | q20_1 : int(1..n_lines), q20_2 : int(1..n_days)])
 find batches_Function1D_ExplicitVarSizeWithFlags_Flags:
-        matrix indexed by [int(1..let1), int(1..maxLot)] of int(0..min([maxLot,
-                                                                        (1 + (n_orders - 1)) *
-                                                                        (1 + (batch_size - 1)); int(1..2)]))
+        matrix indexed by [int(1..let1), int(1..maxLot)] of int(0..maxLot)
 find batches_Function1D_ExplicitVarSizeWithFlags_Values_1:
         matrix indexed by [int(1..let1), int(1..maxLot)] of int(1..n_orders)
 find batches_Function1D_ExplicitVarSizeWithFlags_Values_2:

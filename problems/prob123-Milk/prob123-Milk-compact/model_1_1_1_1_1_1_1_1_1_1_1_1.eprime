@@ -118,11 +118,11 @@ such that
                       | q54 : int(1..let7)])
                   | q50 : int(1..let8)])
              | f : int(1..let1)]),
-    and([or(flatten([[aux3_Occurrence[f, q22] /\ q22 = f | q22 : int(1..let6)],
-                     [aux4_Occurrence[f, q28] /\
+    and([(or(flatten([aux3_Occurrence[f, q22] /\ q22 = f | q22 : int(1..let6)])) \/
+          or(flatten([aux4_Occurrence[f, q28] /\
                       !or([aux5_Occurrence[f, q35] /\ q35 = q28 | q35 : int(1..let6)])
                       /\ q28 = f
-                          | q28 : int(1..let8)]; int(1..2)]))
+                          | q28 : int(1..let8)])))
          /\
          !or([aux6_Occurrence[f, q42] /\
               or([aux7_Occurrence[f, q49] /\ q49 = q42 | q49 : int(1..let8)])

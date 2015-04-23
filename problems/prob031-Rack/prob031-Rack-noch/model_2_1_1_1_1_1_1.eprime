@@ -26,16 +26,16 @@ find plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values:
         matrix indexed by [int(1..n_racks),
                            int(1..1 + (n_cards - 1))] of int(1..n_cards)
 find aux1_Occurrence: matrix indexed by [int(1..n_racks)] of bool
-minimising
-    sum([aux1_Occurrence[q10] *
-         price_Function1D[model_Function1DPartial_Values[q10]]
-             | q10 : int(1..n_racks)])
 find aux2_Occurrence:
         matrix indexed by [int(1..n_cards), int(1..n_racks)] of bool
 find aux3_Occurrence: matrix indexed by [int(1..n_racks)] of bool
 find aux4_Occurrence: matrix indexed by [int(1..n_racks)] of bool
 find aux5_Occurrence: matrix indexed by [int(1..n_racks)] of bool
 find aux6_Occurrence: matrix indexed by [int(1..n_racks)] of bool
+minimising
+    sum([aux1_Occurrence[q10] *
+         price_Function1D[model_Function1DPartial_Values[q10]]
+             | q10 : int(1..n_racks)])
 such that
     and([model_Function1DPartial_Flags[q14] -> aux1_Occurrence[q14]
              | q14 : int(1..n_racks)]),
@@ -52,11 +52,11 @@ such that
                   | q17 : int(1..n_racks)])
              | c : int(1..n_cards)]),
     and([or([aux2_Occurrence[c, q16] /\
-             (or([q52 <=
+             (or([q53 <=
                   plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q16]
                   /\
-                  plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q16, q52] = c
-                      | q52 : int(1..1 + (n_cards - 1))])
+                  plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q16, q53] = c
+                      | q53 : int(1..1 + (n_cards - 1))])
               /\ plugged_Function1DPartial_Flags[q16])
                  | q16 : int(1..n_racks)])
              | c : int(1..n_cards)]),
@@ -71,17 +71,17 @@ such that
          or([model_Function1DPartial_Flags[q34] /\ q34 = q30 | q34 : int(1..n_racks)])
              | q30 : int(1..n_racks)]),
     and([aux3_Occurrence[q23] /\ aux4_Occurrence[q29] ->
-         sum([q53 <=
+         sum([q54 <=
               plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q23]
               /\
-              (or([q54 <=
+              (or([q55 <=
                    plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q29]
                    /\
-                   plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q29, q54] =
-                   plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q23, q53]
-                       | q54 : int(1..1 + (n_cards - 1))])
+                   plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q29, q55] =
+                   plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q23, q54]
+                       | q55 : int(1..1 + (n_cards - 1))])
                /\ plugged_Function1DPartial_Flags[q29])
-                  | q53 : int(1..1 + (n_cards - 1))])
+                  | q54 : int(1..1 + (n_cards - 1))])
          = 0
          /\ plugged_Function1DPartial_Flags[q23]
              | q23 : int(1..n_racks), q29 : int(1..n_racks), q23 != q29]),
@@ -91,12 +91,12 @@ such that
          or([model_Function1DPartial_Flags[q42] /\ q42 = q38 | q42 : int(1..n_racks)])
              | q38 : int(1..n_racks)]),
     and([aux5_Occurrence[q37] ->
-         sum([(q55 <=
+         sum([(q56 <=
                plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q37])
               *
               req_power_Function1D[ctype_Function1D[plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q37,
-                                                                                                                      q55]]]
-                  | q55 : int(1..1 + (n_cards - 1))])
+                                                                                                                      q56]]]
+                  | q56 : int(1..1 + (n_cards - 1))])
          <= max_power_Function1D[model_Function1DPartial_Values[q37]]
          /\ model_Function1DPartial_Flags[q37]
          /\ plugged_Function1DPartial_Flags[q37]
@@ -107,9 +107,9 @@ such that
          or([model_Function1DPartial_Flags[q48] /\ q48 = q44 | q48 : int(1..n_racks)])
              | q44 : int(1..n_racks)]),
     and([aux6_Occurrence[q43] ->
-         sum([q56 <=
+         sum([q57 <=
               plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q43]
-                  | q56 : int(1..1 + (n_cards - 1))])
+                  | q57 : int(1..1 + (n_cards - 1))])
          <= max_connects_Function1D[model_Function1DPartial_Values[q43]]
          /\ model_Function1DPartial_Flags[q43]
          /\ plugged_Function1DPartial_Flags[q43]
@@ -119,8 +119,8 @@ such that
              | q1 : int(1..n_racks)]),
     and([plugged_Function1DPartial_Flags[q4] = false ->
          plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Marker[q4] = 0 /\
-         and([plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q4, q57]
-              = 1 | q57 : int(1..1 + (n_cards - 1))])
+         and([plugged_Function1DPartial_Values_ExplicitVarSizeWithMarker_Values[q4, q50]
+              = 1 | q50 : int(1..1 + (n_cards - 1))])
              | q4 : int(1..n_racks)]),
     and([plugged_Function1DPartial_Flags[q6] ->
          and([q7 + 1 <=

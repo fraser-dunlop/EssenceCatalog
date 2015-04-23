@@ -12,11 +12,11 @@ find hosts_ExplicitVarSizeWithFlags_Values:
         matrix indexed by [int(1..1 + (n_boats - 1))] of int(1..n_boats)
 find sched_Explicit_Function1D:
         matrix indexed by [int(1..n_periods), int(1..n_boats)] of int(1..n_boats)
+find aux1_Occurrence:
+        matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
 minimising
     sum([hosts_ExplicitVarSizeWithFlags_Flags[q16]
              | q16 : int(1..1 + (n_boats - 1))])
-find aux1_Occurrence:
-        matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
 such that
     and([and([aux1_Occurrence[q9, sched_Explicit_Function1D[q9, q22]]
                   | q22 : int(1..n_boats)])

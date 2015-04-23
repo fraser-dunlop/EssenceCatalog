@@ -19,14 +19,14 @@ given dict_Function1D_Function1DPartial_Flags:
 given dict_Function1D_Function1DPartial_Values:
         matrix indexed by [int(1..n_words), int(1..n_upper)] of int(65..90)
 where
-    and([inter_FunctionNDPartial_Values_1[q62_2, q62_1] =
-         inter_FunctionNDPartial_Values_2[q62_1, q62_2]
+    and([inter_FunctionNDPartial_Values_1[q86_2, q86_1] =
+         inter_FunctionNDPartial_Values_2[q86_1, q86_2]
          /\
-         inter_FunctionNDPartial_Values_2[q62_2, q62_1] =
-         inter_FunctionNDPartial_Values_1[q62_1, q62_2]
-         /\ inter_FunctionNDPartial_Flags[q62_2, q62_1]
-             | q62_1 : int(1..n_places), q62_2 : int(1..n_places),
-               inter_FunctionNDPartial_Flags[q62_1, q62_2]])
+         inter_FunctionNDPartial_Values_2[q86_2, q86_1] =
+         inter_FunctionNDPartial_Values_1[q86_1, q86_2]
+         /\ inter_FunctionNDPartial_Flags[q86_2, q86_1]
+             | q86_1 : int(1..n_places), q86_2 : int(1..n_places),
+               inter_FunctionNDPartial_Flags[q86_1, q86_2]])
 find aux1_ExplicitVarSizeWithMarker_Marker:
         int(0..2 ** ((1 + (n_upper - 1)) * 26))
 find aux1_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags:
@@ -74,12 +74,12 @@ such that
          aux1_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q5 + 1, ..]
              | q5 : int(1..2 ** ((1 + (n_upper - 1)) * 26) - 1)]),
     and([q6 > aux1_ExplicitVarSizeWithMarker_Marker ->
-         and([aux1_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q6, q65] =
+         and([aux1_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q6, q61] =
               false
-                  | q65 : int(1..n_upper)])
+                  | q61 : int(1..n_upper)])
          /\
-         and([aux1_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q6, q66] =
-              65  | q66 : int(1..n_upper)])
+         and([aux1_ExplicitVarSizeWithMarker_Values_Function1DPartial_Values[q6, q62] =
+              65  | q62 : int(1..n_upper)])
              | q6 : int(1..2 ** ((1 + (n_upper - 1)) * 26))]),
     and([q7 <= aux1_ExplicitVarSizeWithMarker_Marker ->
          and([aux1_ExplicitVarSizeWithMarker_Values_Function1DPartial_Flags[q7, q8] =

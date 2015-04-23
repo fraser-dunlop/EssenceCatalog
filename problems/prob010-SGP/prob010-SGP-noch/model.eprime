@@ -4,182 +4,35 @@ given w: int(1..)
 given g: int(1..)
 given s: int(1..)
 letting let1 be g * s
-find sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..w)] of int(0..2 ** (1 + (let1 - 1)))
-find sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..w), int(1..2 ** (1 + (let1 - 1)))] of int(0..1 +
-                                                                               (let1 - 1))
-find sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values:
-        matrix indexed by [int(1..w), int(1..2 ** (1 + (let1 - 1))),
-                           int(1..1 + (let1 - 1))] of int(1..let1)
+find sched_Explicit_PartitionAsSet_Explicit_Explicit:
+        matrix indexed by [int(1..w), int(1..g), int(1..s)] of int(1..let1)
 such that
-    and([and([q18 <=
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q15]
-              ->
-              and([q20 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q16]
-                   ->
-                   sum([q27 <=
-                        sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q15,
-                                                                                                                        q18]
-                        /\
-                        or([q29 <=
-                            sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q16,
-                                                                                                                            q20]
-                            /\
-                            sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q16,
-                                                                                                                            q20,
-                                                                                                                            q29]
-                            =
-                            sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q15,
-                                                                                                                            q18,
-                                                                                                                            q27]
-                                | q29 : int(1..1 + (let1 - 1))])
-                            | q27 : int(1..1 + (let1 - 1))])
-                   < 2 | q20 : int(1..2 ** (1 + (let1 - 1)))])
-                  | q18 : int(1..2 ** (1 + (let1 - 1)))])
-             | q15 : int(1..w), q16 : int(1..w), q16 > q15]),
-    and([sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q1] <
-         sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q1 + 1]
-         \/
-         sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q1] =
-         sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q1 + 1]
-         /\
-         (sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1,
-                                                                                                          ..]
-          <lex
-          sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1
-                                                                                                          + 1,
-                                                                                                          ..]
-          \/
-          and([sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1,
-                                                                                                               q30]
-               =
-               sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q1
-                                                                                                               + 1,
-                                                                                                               q30]
-                   | q30 : int(1..2 ** (1 + (let1 - 1)))])
-          /\
-          and([or([q30 = q31 | q31 : int(1..2 ** (1 + (let1 - 1)))])
-                   | q30 : int(1..2 ** (1 + (let1 - 1)))])
-          /\
-          and([or([q30 = q31 | q31 : int(1..2 ** (1 + (let1 - 1)))])
-                   | q30 : int(1..2 ** (1 + (let1 - 1)))])
-          /\
-          flatten(sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1,
-                                                                                                                  ..,
-                                                                                                                  ..])
-          <lex
-          flatten(sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q1
-                                                                                                                  + 1,
-                                                                                                                  ..,
-                                                                                                                  ..]))
+    and([and([and([sum([or([sched_Explicit_PartitionAsSet_Explicit_Explicit[q14,
+                                                                            q18, q26]
+                            = sched_Explicit_PartitionAsSet_Explicit_Explicit[q13, q16, q24]
+                                | q26 : int(1..s)])
+                            | q24 : int(1..s)])
+                   < 2 | q18 : int(1..g)])
+                  | q16 : int(1..g)])
+             | q13 : int(1..w), q14 : int(1..w), q14 > q13]),
+    and([flatten(sched_Explicit_PartitionAsSet_Explicit_Explicit[q1, .., ..]) <lex
+         flatten(sched_Explicit_PartitionAsSet_Explicit_Explicit[q1 + 1, .., ..])
              | q1 : int(1..w - 1)]),
     and([and([1 >=
-              sum([q21 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2]
-                   /\
-                   or([q33 <=
-                       sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                                       q21]
-                       /\
-                       sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2,
-                                                                                                                       q21,
-                                                                                                                       q33]
-                       = q3
-                           | q33 : int(1..1 + (let1 - 1))])
-                       | q21 : int(1..2 ** (1 + (let1 - 1)))])
+              sum([or([sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q19, q28] = q3
+                           | q28 : int(1..s)])
+                       | q19 : int(1..g)])
                   | q3 : int(1..let1)])
              | q2 : int(1..w)]),
-    and([g =
-         sum([(q22 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2])
-              *
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                              q22]
-                  | q22 : int(1..2 ** (1 + (let1 - 1)))])
+    and([and([s = s | q20 : int(1..g), q21 : int(1..g)]) | q2 : int(1..w)]),
+    and([and([s >= 1 | q22 : int(1..g)]) | q2 : int(1..w)]),
+    and([and([sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q9, ..] <lex
+              sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q9 + 1, ..]
+                  | q9 : int(1..g - 1)])
              | q2 : int(1..w)]),
-    and([and([q23 <=
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2]
-              /\ q24 <= sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2]
-              ->
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                              q23]
-              =
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                              q24]
-                  | q23 : int(1..2 ** (1 + (let1 - 1))), q24 : int(1..2 ** (1 + (let1 - 1)))])
-             | q2 : int(1..w)]),
-    and([and([q25 <=
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2]
-              ->
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                              q25]
-              >= 1
-                  | q25 : int(1..2 ** (1 + (let1 - 1)))])
-             | q2 : int(1..w)]),
-    and([and([q9 + 1 <=
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2]
-              ->
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                              q9]
-              <
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                              q9 + 1]
-              \/
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                              q9]
-              =
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                              q9 + 1]
-              /\
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2,
-                                                                                                              q9, ..]
-              <lex
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2,
-                                                                                                              q9 + 1,
-                                                                                                              ..]
-                  | q9 : int(1..2 ** (1 + (let1 - 1)) - 1)])
-             | q2 : int(1..w)]),
-    and([and([q10 >
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2]
-              ->
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                              q10]
-              = 0
-              /\
-              and([sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2,
-                                                                                                                   q10,
-                                                                                                                   q34]
-                   = 1 | q34 : int(1..1 + (let1 - 1))])
-                  | q10 : int(1..2 ** (1 + (let1 - 1)))])
-             | q2 : int(1..w)]),
-    and([and([q11 <=
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2]
-              ->
-              and([q12 + 1 <=
-                   sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                                   q11]
-                   ->
-                   sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2,
-                                                                                                                   q11,
-                                                                                                                   q12]
-                   <
-                   sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2,
-                                                                                                                   q11,
-                                                                                                                   q12 +
-                                                                                                                   1]
-                       | q12 : int(1..1 + (let1 - 1) - 1)])
-                  | q11 : int(1..2 ** (1 + (let1 - 1)))])
-             | q2 : int(1..w)]),
-    and([and([q11 <=
-              sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Marker[q2]
-              ->
-              and([q13 >
-                   sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q2,
-                                                                                                                   q11]
-                   ->
-                   sched_Explicit_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q2,
-                                                                                                                   q11,
-                                                                                                                   q13]
-                   = 1 | q13 : int(1..1 + (let1 - 1))])
-                  | q11 : int(1..2 ** (1 + (let1 - 1)))])
+    and([and([and([sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q10, q11] <
+                   sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q10, q11 + 1]
+                       | q11 : int(1..s - 1)])
+                  | q10 : int(1..g)])
              | q2 : int(1..w)])
 

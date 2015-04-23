@@ -9,9 +9,9 @@ given crew_Function1D: matrix indexed by [int(1..n_boats)] of int(1..)
 find hosts_Occurrence: matrix indexed by [int(1..n_boats)] of bool
 find sched_Explicit_Function1D:
         matrix indexed by [int(1..n_periods), int(1..n_boats)] of int(1..n_boats)
-minimising sum([hosts_Occurrence[q9] | q9 : int(1..n_boats)])
 find aux1_Occurrence:
         matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
+minimising sum([hosts_Occurrence[q9] | q9 : int(1..n_boats)])
 such that
     and([and([aux1_Occurrence[q5, sched_Explicit_Function1D[q5, q15]]
                   | q15 : int(1..n_boats)])

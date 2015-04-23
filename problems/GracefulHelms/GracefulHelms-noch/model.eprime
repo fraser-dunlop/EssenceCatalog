@@ -1,0 +1,23 @@
+language ESSENCE' 1.0
+
+given n: int(1..)
+letting C be 2 * n
+letting let1 be 2 * n
+letting let2 be 3 * n
+find colouring_Function1D: matrix indexed by [int(0..let1)] of int(0..let2)
+letting let3 be 3 * n - 1
+letting let4 be 3 * n
+find edgeID_Function1D: matrix indexed by [int(0..let3)] of int(0..let4)
+such that
+    and([edgeID_Function1D[v] =
+         |colouring_Function1D[v] - colouring_Function1D[(v + 1) % n]|
+             | v : int(0..n - 1)]),
+    and([edgeID_Function1D[v + n] =
+         |colouring_Function1D[v] - colouring_Function1D[v + n]|
+             | v : int(0..n - 1)]),
+    and([edgeID_Function1D[v + 2 * n] =
+         |colouring_Function1D[C] - colouring_Function1D[v]|
+             | v : int(0..n - 1)]),
+    allDiff(edgeID_Function1D),
+    allDiff(colouring_Function1D)
+

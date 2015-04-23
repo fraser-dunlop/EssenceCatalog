@@ -11,9 +11,9 @@ find hosts_ExplicitVarSizeWithMarker_Values:
         matrix indexed by [int(1..1 + (n_boats - 1))] of int(1..n_boats)
 find sched_Explicit_Function1D:
         matrix indexed by [int(1..n_periods), int(1..n_boats)] of int(1..n_boats)
-minimising hosts_ExplicitVarSizeWithMarker_Marker
 find aux1_Occurrence:
         matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
+minimising hosts_ExplicitVarSizeWithMarker_Marker
 such that
     and([and([aux1_Occurrence[q7, sched_Explicit_Function1D[q7, q18]]
                   | q18 : int(1..n_boats)])

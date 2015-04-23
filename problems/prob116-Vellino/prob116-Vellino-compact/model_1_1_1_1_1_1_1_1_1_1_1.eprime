@@ -15,7 +15,6 @@ find contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags:
 find contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values:
         matrix indexed by [int(1..let1), int(1..maxMaterial * 5)] of int(1..5)
 find aux1_Occurrence: matrix indexed by [int(1..let1)] of bool
-minimising sum([aux1_Occurrence[q14] | q14 : int(1..let1)])
 find aux2_Occurrence: matrix indexed by [int(1..5), int(1..let1)] of bool
 find aux3_Occurrence: matrix indexed by [int(1..let1)] of bool
 find aux4_Occurrence: matrix indexed by [int(1..let1)] of bool
@@ -26,6 +25,7 @@ find aux8_Occurrence: matrix indexed by [int(1..let1)] of bool
 find aux9_Occurrence: matrix indexed by [int(1..let1)] of bool
 find aux10_Occurrence: matrix indexed by [int(1..let1)] of bool
 find aux11_Occurrence: matrix indexed by [int(1..let1)] of bool
+minimising sum([aux1_Occurrence[q14] | q14 : int(1..let1)])
 such that
     and([colour_Function1DPartial_Flags[q18] -> aux1_Occurrence[q18]
              | q18 : int(1..let1)]),
@@ -42,11 +42,12 @@ such that
                   | q21 : int(1..let1)])
              | m : int(1..5)]),
     and([sum([aux2_Occurrence[m, q20] *
-              sum([(contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q20, q98]
+              sum([(contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q20,
+                                                                                     q100]
                     > 0)
                    *
-                   (contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q20, q98] =
-                    m) | q98 : int(1..maxMaterial * 5)])
+                   (contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q20, q100] =
+                    m) | q100 : int(1..maxMaterial * 5)])
                   | q20 : int(1..let1)])
          = quantity_Function1D[m]
          /\
@@ -59,8 +60,8 @@ such that
          or([colour_Function1DPartial_Flags[q32] /\ q32 = q28 | q32 : int(1..let1)])
              | q28 : int(1..let1)]),
     and([aux3_Occurrence[q27] ->
-         sum([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q27, q99]
-              > 0 | q99 : int(1..maxMaterial * 5)])
+         sum([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q27, q101]
+              > 0 | q101 : int(1..maxMaterial * 5)])
          <= capacity_Function1D[colour_Function1DPartial_Values[q27]]
          /\ colour_Function1DPartial_Flags[q27]
          /\ contents_Function1DPartial_Flags[q27]
@@ -74,19 +75,19 @@ such that
          (colour_Function1DPartial_Values[q34] = 1 /\ colour_Function1DPartial_Flags[q34]
           ->
           !(or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q34,
-                                                                                 q100]
+                                                                                 q102]
                 > 0
                 /\
-                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q34, q100] = 2
-                    | q100 : int(1..maxMaterial * 5)])
+                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q34, q102] = 2
+                    | q102 : int(1..maxMaterial * 5)])
             /\ contents_Function1DPartial_Flags[q34])
           /\
           !(or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q34,
-                                                                                 q101]
+                                                                                 q103]
                 > 0
                 /\
-                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q34, q101] = 3
-                    | q101 : int(1..maxMaterial * 5)])
+                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q34, q103] = 3
+                    | q103 : int(1..maxMaterial * 5)])
             /\ contents_Function1DPartial_Flags[q34]))
              | q34 : int(1..let1)]),
     and([colour_Function1DPartial_Flags[q46] -> aux5_Occurrence[q46]
@@ -98,19 +99,19 @@ such that
          (colour_Function1DPartial_Values[q42] = 3 /\ colour_Function1DPartial_Flags[q42]
           ->
           !(or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q42,
-                                                                                 q102]
+                                                                                 q104]
                 > 0
                 /\
-                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q42, q102] = 4
-                    | q102 : int(1..maxMaterial * 5)])
+                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q42, q104] = 4
+                    | q104 : int(1..maxMaterial * 5)])
             /\ contents_Function1DPartial_Flags[q42])
           /\
           !(or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q42,
-                                                                                 q103]
+                                                                                 q105]
                 > 0
                 /\
-                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q42, q103] = 2
-                    | q103 : int(1..maxMaterial * 5)])
+                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q42, q105] = 2
+                    | q105 : int(1..maxMaterial * 5)])
             /\ contents_Function1DPartial_Flags[q42]))
              | q42 : int(1..let1)]),
     and([colour_Function1DPartial_Flags[q54] -> aux6_Occurrence[q54]
@@ -122,19 +123,19 @@ such that
          (colour_Function1DPartial_Values[q50] = 2 /\ colour_Function1DPartial_Flags[q50]
           ->
           !(or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q50,
-                                                                                 q104]
+                                                                                 q106]
                 > 0
                 /\
-                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q50, q104] = 3
-                    | q104 : int(1..maxMaterial * 5)])
+                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q50, q106] = 3
+                    | q106 : int(1..maxMaterial * 5)])
             /\ contents_Function1DPartial_Flags[q50])
           /\
           !(or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q50,
-                                                                                 q105]
+                                                                                 q107]
                 > 0
                 /\
-                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q50, q105] = 1
-                    | q105 : int(1..maxMaterial * 5)])
+                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q50, q107] = 1
+                    | q107 : int(1..maxMaterial * 5)])
             /\ contents_Function1DPartial_Flags[q50]))
              | q50 : int(1..let1)]),
     and([colour_Function1DPartial_Flags[q62] -> aux7_Occurrence[q62]
@@ -146,11 +147,11 @@ such that
          (colour_Function1DPartial_Values[q58] = 1 /\ colour_Function1DPartial_Flags[q58]
           ->
           sum([(contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q58,
-                                                                                 q106]
+                                                                                 q108]
                 > 0)
                *
-               (contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q58, q106] =
-                4) | q106 : int(1..maxMaterial * 5)])
+               (contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q58, q108] =
+                4) | q108 : int(1..maxMaterial * 5)])
           <= 1
           /\ contents_Function1DPartial_Flags[q58])
              | q58 : int(1..let1)]),
@@ -163,11 +164,11 @@ such that
          (colour_Function1DPartial_Values[q65] = 2 /\ colour_Function1DPartial_Flags[q65]
           ->
           sum([(contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q65,
-                                                                                 q107]
+                                                                                 q109]
                 > 0)
                *
-               (contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q65, q107] =
-                4) | q107 : int(1..maxMaterial * 5)])
+               (contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q65, q109] =
+                4) | q109 : int(1..maxMaterial * 5)])
           <= 2
           /\ contents_Function1DPartial_Flags[q65])
              | q65 : int(1..let1)]),
@@ -177,18 +178,18 @@ such that
          or([colour_Function1DPartial_Flags[q77] /\ q77 = q73 | q77 : int(1..let1)])
              | q73 : int(1..let1)]),
     and([aux9_Occurrence[q72] ->
-         (or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q72, q108]
+         (or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q72, q110]
               > 0
               /\
-              contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q72, q108] = 4
-                  | q108 : int(1..maxMaterial * 5)])
+              contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q72, q110] = 4
+                  | q110 : int(1..maxMaterial * 5)])
           /\ contents_Function1DPartial_Flags[q72]
           ->
-          or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q72, q109]
+          or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q72, q111]
               > 0
               /\
-              contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q72, q109] = 2
-                  | q109 : int(1..maxMaterial * 5)])
+              contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q72, q111] = 2
+                  | q111 : int(1..maxMaterial * 5)])
           /\ contents_Function1DPartial_Flags[q72])
              | q72 : int(1..let1)]),
     and([colour_Function1DPartial_Flags[q84] -> aux10_Occurrence[q84]
@@ -197,19 +198,19 @@ such that
          or([colour_Function1DPartial_Flags[q85] /\ q85 = q81 | q85 : int(1..let1)])
              | q81 : int(1..let1)]),
     and([aux10_Occurrence[q80] ->
-         (or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q80, q110]
+         (or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q80, q112]
               > 0
               /\
-              contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q80, q110] = 1
-                  | q110 : int(1..maxMaterial * 5)])
+              contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q80, q112] = 1
+                  | q112 : int(1..maxMaterial * 5)])
           /\ contents_Function1DPartial_Flags[q80]
           ->
           !(or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q80,
-                                                                                 q111]
+                                                                                 q113]
                 > 0
                 /\
-                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q80, q111] = 5
-                    | q111 : int(1..maxMaterial * 5)])
+                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q80, q113] = 5
+                    | q113 : int(1..maxMaterial * 5)])
             /\ contents_Function1DPartial_Flags[q80]))
              | q80 : int(1..let1)]),
     and([colour_Function1DPartial_Flags[q92] -> aux11_Occurrence[q92]
@@ -218,30 +219,30 @@ such that
          or([colour_Function1DPartial_Flags[q93] /\ q93 = q89 | q93 : int(1..let1)])
              | q89 : int(1..let1)]),
     and([aux11_Occurrence[q88] ->
-         (or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q88, q112]
+         (or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q88, q114]
               > 0
               /\
-              contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q88, q112] = 5
-                  | q112 : int(1..maxMaterial * 5)])
+              contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q88, q114] = 5
+                  | q114 : int(1..maxMaterial * 5)])
           /\ contents_Function1DPartial_Flags[q88]
           ->
           !(or([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q88,
-                                                                                 q113]
+                                                                                 q115]
                 > 0
                 /\
-                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q88, q113] = 2
-                    | q113 : int(1..maxMaterial * 5)])
+                contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q88, q115] = 2
+                    | q115 : int(1..maxMaterial * 5)])
             /\ contents_Function1DPartial_Flags[q88]))
              | q88 : int(1..let1)]),
     and([colour_Function1DPartial_Flags[q1] = false ->
          colour_Function1DPartial_Values[q1] = 1
              | q1 : int(1..let1)]),
     and([contents_Function1DPartial_Flags[q4] = false ->
-         and([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q4, q114]
-              = 0 | q114 : int(1..maxMaterial * 5)])
+         and([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q4, q96] =
+              0   | q96 : int(1..maxMaterial * 5)])
          /\
-         and([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q4, q115]
-              = 1 | q115 : int(1..maxMaterial * 5)])
+         and([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Values[q4, q97]
+              = 1 | q97 : int(1..maxMaterial * 5)])
              | q4 : int(1..let1)]),
     and([contents_Function1DPartial_Flags[q6] ->
          and([contents_Function1DPartial_Values_ExplicitVarSizeWithFlags_Flags[q6,

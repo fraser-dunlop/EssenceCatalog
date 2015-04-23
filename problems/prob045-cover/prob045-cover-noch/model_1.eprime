@@ -7,8 +7,7 @@ given g: int(2..)
 where k >= t
 where b >= g ** t
 find CoverTest_ExplicitVarSizeWithFlags_Flags:
-        matrix indexed by [int(1..b)] of int(0..min([b,
-                                                     2 ** ((1 + (k - 1)) * (1 + (g - 1))); int(1..2)]))
+        matrix indexed by [int(1..b)] of int(0..b)
 find CoverTest_ExplicitVarSizeWithFlags_Values_Function1D:
         matrix indexed by [int(1..b), int(1..k)] of int(1..g)
 find aux1_Occurrence:
@@ -44,8 +43,8 @@ such that
          CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q4 + 1, ..]
              | q4 : int(1..b - 1)]),
     and([CoverTest_ExplicitVarSizeWithFlags_Flags[q5] = 0 ->
-         and([CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q5, q30] = 1
-                  | q30 : int(1..k)])
+         and([CoverTest_ExplicitVarSizeWithFlags_Values_Function1D[q5, q25] = 1
+                  | q25 : int(1..k)])
              | q5 : int(1..b)]),
     and([CoverTest_ExplicitVarSizeWithFlags_Flags[q6 + 1] > 0 ->
          CoverTest_ExplicitVarSizeWithFlags_Flags[q6] > 0

@@ -4,87 +4,38 @@ given n_balls: int(1..)
 given n_boxes: int(1..)
 find schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker:
         int(0..2 ** (1 + (n_balls - 1)))
-find schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..2 ** (1 + (n_balls - 1)))] of int(0..1 +
-                                                                       (n_balls - 1))
-find schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values:
-        matrix indexed by [int(1..2 ** (1 + (n_balls - 1))),
-                           int(1..1 + (n_balls - 1))] of int(1..n_balls)
+find schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence:
+        matrix indexed by [int(1..2 ** (1 + (n_balls - 1))), int(1..n_balls)] of bool
 such that
-    and([and([q12 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
+    and([and([q10 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
               (b1 != b2 /\ b1 + b2 = b3 ->
-               !and([or([q20 <=
-                         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q12]
-                         /\
-                         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q12,
-                                                                                                                q20]
-                         = [b1, b2, b3; int(1..3)][q18]
-                             | q20 : int(1..1 + (n_balls - 1))])
-                         | q18 : int(1..3)]))
-                  | q12 : int(1..2 ** (1 + (n_balls - 1)))])
+               !and([schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q10,
+                                                                                      [b1, b2, b3; int(1..3)][q16]]
+                         | q16 : int(1..3)]))
+                  | q10 : int(1..2 ** (1 + (n_balls - 1)))])
              | b1 : int(1..n_balls), b2 : int(1..n_balls), b3 : int(1..n_balls)]),
     and([1 >=
-         sum([q13 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
-              or([q22 <=
-                  schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q13]
-                  /\
-                  schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q13,
-                                                                                                         q22]
-                  = q1
-                      | q22 : int(1..1 + (n_balls - 1))])
-                  | q13 : int(1..2 ** (1 + (n_balls - 1)))])
+         sum([q11 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker /\
+              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q11, q1]
+                  | q11 : int(1..2 ** (1 + (n_balls - 1)))])
              | q1 : int(1..n_balls)]),
     n_boxes =
-    sum([(q14 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker) *
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q14]
-             | q14 : int(1..2 ** (1 + (n_balls - 1)))]),
-    and([q15 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q15]
+    sum([(q12 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker) *
+         sum([schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q12, q17]
+                  | q17 : int(1..n_balls)])
+             | q12 : int(1..2 ** (1 + (n_balls - 1)))]),
+    and([q13 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
+         sum([schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q13, q18]
+                  | q18 : int(1..n_balls)])
          >= 1
-             | q15 : int(1..2 ** (1 + (n_balls - 1)))]),
+             | q13 : int(1..2 ** (1 + (n_balls - 1)))]),
     and([q5 + 1 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
-         <
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5
-                                                                                                + 1]
-         \/
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5]
-         =
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q5
-                                                                                                + 1]
-         /\
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q5,
-                                                                                                ..]
-         <lex
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q5
-                                                                                                + 1,
-                                                                                                ..]
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q5, ..] <lex
+         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q5 + 1, ..]
              | q5 : int(1..2 ** (1 + (n_balls - 1)) - 1)]),
     and([q6 > schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q6]
-         = 0
-         /\
-         and([schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q6,
-                                                                                                     q23]
-              = 1 | q23 : int(1..1 + (n_balls - 1))])
-             | q6 : int(1..2 ** (1 + (n_balls - 1)))]),
-    and([q7 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q8 + 1 <=
-              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q7]
-              ->
-              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7,
-                                                                                                     q8]
-              <
-              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7,
-                                                                                                     q8 + 1]
-                  | q8 : int(1..1 + (n_balls - 1) - 1)])
-             | q7 : int(1..2 ** (1 + (n_balls - 1)))]),
-    and([q7 <= schur_PartitionAsSet_ExplicitVarSizeWithMarker_Marker ->
-         and([q9 >
-              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Marker[q7]
-              ->
-              schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_ExplicitVarSizeWithMarker_Values[q7,
-                                                                                                     q9]
-              = 1 | q9 : int(1..1 + (n_balls - 1))])
-             | q7 : int(1..2 ** (1 + (n_balls - 1)))])
+         and([schur_PartitionAsSet_ExplicitVarSizeWithMarker_Values_Occurrence[q6, q19] =
+              false
+                  | q19 : int(1..n_balls)])
+             | q6 : int(1..2 ** (1 + (n_balls - 1)))])
 

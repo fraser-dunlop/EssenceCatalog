@@ -1,0 +1,96 @@
+language ESSENCE' 1.0
+
+given n_boats: int(1..)
+given n_periods: int(1..)
+given fin1: int
+given capacity_Function1D: matrix indexed by [int(1..n_boats)] of int(1..)
+given fin2: int
+given crew_Function1D: matrix indexed by [int(1..n_boats)] of int(1..)
+find hosts_Occurrence: matrix indexed by [int(1..n_boats)] of bool
+find sched_Explicit_Function1D:
+        matrix indexed by [int(1..n_periods), int(1..n_boats)] of int(1..n_boats)
+find aux1_Occurrence:
+        matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
+find aux4_Occurrence:
+        matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
+find aux2_Occurrence:
+        matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
+find aux3_Occurrence:
+        matrix indexed by [int(1..n_periods), int(1..n_boats), int(1..n_boats)] of bool
+minimising sum([hosts_Occurrence[q14] | q14 : int(1..n_boats)])
+such that
+    and([and([aux1_Occurrence[q5, sched_Explicit_Function1D[q5, q20]]
+                  | q20 : int(1..n_boats)])
+             | q5 : int(1..n_periods)]),
+    and([and([aux1_Occurrence[q5, q17] ->
+              or([sched_Explicit_Function1D[q5, q21] = q17 | q21 : int(1..n_boats)])
+                  | q17 : int(1..n_boats)])
+             | q5 : int(1..n_periods)]),
+    and([and([aux1_Occurrence[q5, q16] -> hosts_Occurrence[q16]
+                  | q16 : int(1..n_boats)])
+             | q5 : int(1..n_periods)]),
+    and([and([hosts_Occurrence[h] -> sched_Explicit_Function1D[q6, h] = h
+                  | h : int(1..n_boats)])
+             | q6 : int(1..n_periods)]),
+    and([and([hosts_Occurrence[h] ->
+              sum([(sched_Explicit_Function1D[q7, q23] = h) * crew_Function1D[q23]
+                       | q23 : int(1..n_boats)])
+              <= capacity_Function1D[h]
+                  | h : int(1..n_boats)])
+             | q7 : int(1..n_periods)]),
+    and([sum([sched_Explicit_Function1D[q8, b1] = sched_Explicit_Function1D[q8, b2]
+                  | q8 : int(1..n_periods)])
+         <= 1
+             | b1 : int(1..n_boats), b2 : int(1..n_boats), b1 < b2]),
+    and([and([aux4_Occurrence[q9, sched_Explicit_Function1D[q9, q62]]
+                  | q62 : int(1..n_boats)])
+             | q9 : int(1..n_periods)]),
+    and([and([aux4_Occurrence[q9, q59] ->
+              or([sched_Explicit_Function1D[q9, q63] = q59 | q63 : int(1..n_boats)])
+                  | q59 : int(1..n_boats)])
+             | q9 : int(1..n_periods)]),
+    and([sum([aux4_Occurrence[q9, q58] | q58 : int(1..n_boats)]) >= 1
+             | q9 : int(1..n_periods)]),
+    and([and([aux2_Occurrence[q10, sched_Explicit_Function1D[q10, q29]]
+                  | q29 : int(1..n_boats)])
+             | q10 : int(1..n_periods)]),
+    and([and([aux2_Occurrence[q10, q26] ->
+              or([sched_Explicit_Function1D[q10, q30] = q26 | q30 : int(1..n_boats)])
+                  | q26 : int(1..n_boats)])
+             | q10 : int(1..n_periods)]),
+    and([and([and([aux3_Occurrence[q10, q31, sched_Explicit_Function1D[q10, q37]]
+                       | q37 : int(1..n_boats)])
+                  | q31 : int(1..n_boats)])
+             | q10 : int(1..n_periods)]),
+    and([and([and([aux3_Occurrence[q10, q31, q34] ->
+                   or([sched_Explicit_Function1D[q10, q38] = q34 | q38 : int(1..n_boats)])
+                       | q34 : int(1..n_boats)])
+                  | q31 : int(1..n_boats)])
+             | q10 : int(1..n_periods)]),
+    and([and([aux2_Occurrence[q10, q25] -> hosts_Occurrence[q25]
+                  | q25 : int(1..n_boats)])
+         /\
+         and([hosts_Occurrence[q31] ->
+              or([aux3_Occurrence[q10, q31, q33] /\ q33 = q31 | q33 : int(1..n_boats)])
+                  | q31 : int(1..n_boats)])
+             | q10 : int(1..n_periods)]),
+    and([and([hosts_Occurrence[h] ->
+              sum([sched_Explicit_Function1D[q11, q41] = h | q41 : int(1..n_boats)]) >= 1
+                  | h : int(1..n_boats)])
+             | q11 : int(1..n_periods)]),
+    and([and([hosts_Occurrence[h] ->
+              sum([sched_Explicit_Function1D[q12, q44] = h | q44 : int(1..n_boats)]) <=
+              n_boats - sum([hosts_Occurrence[q45] | q45 : int(1..n_boats)]) + 1
+                  | h : int(1..n_boats)])
+             | q12 : int(1..n_periods)]),
+    and([sum([hosts_Occurrence[h] *
+              sum([(sched_Explicit_Function1D[q13, q47] = h) * crew_Function1D[q47]
+                       | q47 : int(1..n_boats)])
+                  | h : int(1..n_boats)])
+         <= sum([hosts_Occurrence[h] * capacity_Function1D[h] | h : int(1..n_boats)])
+             | q13 : int(1..n_periods)]),
+    1 <= sum([hosts_Occurrence[q1] | q1 : int(1..n_boats)]),
+    and([sched_Explicit_Function1D[q2, ..] <lex
+         sched_Explicit_Function1D[q2 + 1, ..]
+             | q2 : int(1..n_periods - 1)])
+

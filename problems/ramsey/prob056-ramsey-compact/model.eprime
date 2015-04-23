@@ -26,37 +26,39 @@ such that
                     q18_3 = i])
          = 1 | i : int(1..n), j : int(1..n), i != j]),
     and([and([graph_RelationAsMatrix[q21_1, q21_2, q21_3] ->
-              and(flatten([[graph_RelationAsMatrix[q24_1, q24_2, q24_3] ->
-                            !graph_RelationAsMatrix[q21_1, q24_3, q21_3] /\
-                            !graph_RelationAsMatrix[q21_1, q21_3, q24_3]
-                                | q24_1 : int(1..colours), q24_2 : int(1..n), q24_3 : int(1..n), q24_1 = q21_1,
-                                  q24_2 = i, q24_3 != q21_3],
-                           [graph_RelationAsMatrix[q26_1, q26_2, q26_3] /\
-                            !or([graph_RelationAsMatrix[q29_1, q29_2, q29_3] /\ q29_3 = q26_2
-                                     | q29_1 : int(1..colours), q29_2 : int(1..n), q29_3 : int(1..n), q29_1 = q21_1,
-                                       q29_2 = i])
-                            ->
-                            !graph_RelationAsMatrix[q21_1, q26_2, q21_3] /\
-                            !graph_RelationAsMatrix[q21_1, q21_3, q26_2]
-                                | q26_1 : int(1..colours), q26_2 : int(1..n), q26_3 : int(1..n), q26_1 = q21_1,
-                                  q26_3 = i, q26_2 != q21_3]; int(1..2)]))
+              and(flatten([graph_RelationAsMatrix[q24_1, q24_2, q24_3] ->
+                           !graph_RelationAsMatrix[q21_1, q24_3, q21_3] /\
+                           !graph_RelationAsMatrix[q21_1, q21_3, q24_3]
+                               | q24_1 : int(1..colours), q24_2 : int(1..n), q24_3 : int(1..n), q24_1 = q21_1,
+                                 q24_2 = i, q24_3 != q21_3]))
+              /\
+              and(flatten([graph_RelationAsMatrix[q26_1, q26_2, q26_3] /\
+                           !or([graph_RelationAsMatrix[q29_1, q29_2, q29_3] /\ q29_3 = q26_2
+                                    | q29_1 : int(1..colours), q29_2 : int(1..n), q29_3 : int(1..n), q29_1 = q21_1,
+                                      q29_2 = i])
+                           ->
+                           !graph_RelationAsMatrix[q21_1, q26_2, q21_3] /\
+                           !graph_RelationAsMatrix[q21_1, q21_3, q26_2]
+                               | q26_1 : int(1..colours), q26_2 : int(1..n), q26_3 : int(1..n), q26_1 = q21_1,
+                                 q26_3 = i, q26_2 != q21_3]))
                   | q21_1 : int(1..colours), q21_2 : int(1..n), q21_3 : int(1..n), q21_2 = i])
              | i : int(1..n)]),
     and([and([graph_RelationAsMatrix[q32_1, q32_2, q32_3] ->
-              and(flatten([[graph_RelationAsMatrix[q35_1, q35_2, q35_3] ->
-                            !graph_RelationAsMatrix[q32_1, q35_3, q32_2] /\
-                            !graph_RelationAsMatrix[q32_1, q32_2, q35_3]
-                                | q35_1 : int(1..colours), q35_2 : int(1..n), q35_3 : int(1..n), q35_1 = q32_1,
-                                  q35_2 = i, q35_3 != q32_2],
-                           [graph_RelationAsMatrix[q37_1, q37_2, q37_3] /\
-                            !or([graph_RelationAsMatrix[q40_1, q40_2, q40_3] /\ q40_3 = q37_2
-                                     | q40_1 : int(1..colours), q40_2 : int(1..n), q40_3 : int(1..n), q40_1 = q32_1,
-                                       q40_2 = i])
-                            ->
-                            !graph_RelationAsMatrix[q32_1, q37_2, q32_2] /\
-                            !graph_RelationAsMatrix[q32_1, q32_2, q37_2]
-                                | q37_1 : int(1..colours), q37_2 : int(1..n), q37_3 : int(1..n), q37_1 = q32_1,
-                                  q37_3 = i, q37_2 != q32_2]; int(1..2)]))
+              and(flatten([graph_RelationAsMatrix[q35_1, q35_2, q35_3] ->
+                           !graph_RelationAsMatrix[q32_1, q35_3, q32_2] /\
+                           !graph_RelationAsMatrix[q32_1, q32_2, q35_3]
+                               | q35_1 : int(1..colours), q35_2 : int(1..n), q35_3 : int(1..n), q35_1 = q32_1,
+                                 q35_2 = i, q35_3 != q32_2]))
+              /\
+              and(flatten([graph_RelationAsMatrix[q37_1, q37_2, q37_3] /\
+                           !or([graph_RelationAsMatrix[q40_1, q40_2, q40_3] /\ q40_3 = q37_2
+                                    | q40_1 : int(1..colours), q40_2 : int(1..n), q40_3 : int(1..n), q40_1 = q32_1,
+                                      q40_2 = i])
+                           ->
+                           !graph_RelationAsMatrix[q32_1, q37_2, q32_2] /\
+                           !graph_RelationAsMatrix[q32_1, q32_2, q37_2]
+                               | q37_1 : int(1..colours), q37_2 : int(1..n), q37_3 : int(1..n), q37_1 = q32_1,
+                                 q37_3 = i, q37_2 != q32_2]))
                   | q32_1 : int(1..colours), q32_2 : int(1..n), q32_3 : int(1..n), q32_3 = i])
              | i : int(1..n)]),
     num_edges =

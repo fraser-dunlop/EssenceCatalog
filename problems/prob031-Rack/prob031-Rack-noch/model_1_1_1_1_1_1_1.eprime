@@ -23,15 +23,15 @@ find plugged_Function1DPartial_Flags:
 find plugged_Function1DPartial_Values_Occurrence:
         matrix indexed by [int(1..n_racks), int(1..n_cards)] of bool
 find aux1_Occurrence: matrix indexed by [int(1..n_racks)] of bool
-minimising
-    sum([aux1_Occurrence[q8] * price_Function1D[model_Function1DPartial_Values[q8]]
-             | q8 : int(1..n_racks)])
 find aux2_Occurrence:
         matrix indexed by [int(1..n_cards), int(1..n_racks)] of bool
 find aux3_Occurrence: matrix indexed by [int(1..n_racks)] of bool
 find aux4_Occurrence: matrix indexed by [int(1..n_racks)] of bool
 find aux5_Occurrence: matrix indexed by [int(1..n_racks)] of bool
 find aux6_Occurrence: matrix indexed by [int(1..n_racks)] of bool
+minimising
+    sum([aux1_Occurrence[q8] * price_Function1D[model_Function1DPartial_Values[q8]]
+             | q8 : int(1..n_racks)])
 such that
     and([model_Function1DPartial_Flags[q12] -> aux1_Occurrence[q12]
              | q12 : int(1..n_racks)]),
@@ -101,7 +101,7 @@ such that
          model_Function1DPartial_Values[q1] = 1
              | q1 : int(1..n_racks)]),
     and([plugged_Function1DPartial_Flags[q4] = false ->
-         and([plugged_Function1DPartial_Values_Occurrence[q4, q50] = false
-                  | q50 : int(1..n_cards)])
+         and([plugged_Function1DPartial_Values_Occurrence[q4, q48] = false
+                  | q48 : int(1..n_cards)])
              | q4 : int(1..n_racks)])
 

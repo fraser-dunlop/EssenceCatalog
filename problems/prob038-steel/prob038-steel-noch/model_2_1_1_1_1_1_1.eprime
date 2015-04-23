@@ -22,11 +22,6 @@ find cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1_Exp
 find cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2:
         matrix indexed by [int(1..2 ** (1 + (n_orders - 1)) *
                                   (1 + (nbSizes - 1)))] of int(1..nbSizes)
-minimising
-    sum([(q149 <=
-          cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker)
-         * cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q149]
-             | q149 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))])
 find aux1_ExplicitVarSizeWithMarker_Marker: int(0..2 ** (1 + (n_orders - 1)))
 find aux1_ExplicitVarSizeWithMarker_Values_Occurrence:
         matrix indexed by [int(1..2 ** (1 + (n_orders - 1))), int(1..n_orders)] of bool
@@ -44,14 +39,19 @@ find aux4_ExplicitVarSizeWithMarker_Values_Occurrence:
 find aux5_ExplicitVarSizeWithMarker_Marker: int(0..2 ** (1 + (n_orders - 1)))
 find aux5_ExplicitVarSizeWithMarker_Values_Occurrence:
         matrix indexed by [int(1..2 ** (1 + (n_orders - 1))), int(1..n_orders)] of bool
+minimising
+    sum([(q156 <=
+          cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker)
+         * cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q156]
+             | q156 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))])
 such that
     and([q16 + 1 <= aux1_ExplicitVarSizeWithMarker_Marker ->
          aux1_ExplicitVarSizeWithMarker_Values_Occurrence[q16, ..] <lex
          aux1_ExplicitVarSizeWithMarker_Values_Occurrence[q16 + 1, ..]
              | q16 : int(1..2 ** (1 + (n_orders - 1)) - 1)]),
     and([q17 > aux1_ExplicitVarSizeWithMarker_Marker ->
-         and([aux1_ExplicitVarSizeWithMarker_Values_Occurrence[q17, q151] = false
-                  | q151 : int(1..n_orders)])
+         and([aux1_ExplicitVarSizeWithMarker_Values_Occurrence[q17, q149] = false
+                  | q149 : int(1..n_orders)])
              | q17 : int(1..2 ** (1 + (n_orders - 1)))]),
     and([q21 <=
          cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
@@ -103,8 +103,8 @@ such that
          aux2_ExplicitVarSizeWithMarker_Values_Occurrence[q27 + 1, ..]
              | q27 : int(1..2 ** (1 + (n_orders - 1)) - 1)]),
     and([q28 > aux2_ExplicitVarSizeWithMarker_Marker ->
-         and([aux2_ExplicitVarSizeWithMarker_Values_Occurrence[q28, q150] = false
-                  | q150 : int(1..n_orders)])
+         and([aux2_ExplicitVarSizeWithMarker_Values_Occurrence[q28, q148] = false
+                  | q148 : int(1..n_orders)])
              | q28 : int(1..2 ** (1 + (n_orders - 1)))]),
     and([q32 <=
          cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
@@ -172,8 +172,8 @@ such that
                   | q64 : int(1..2 ** (1 + (n_orders - 1)) - 1)])
              | o : int(1..n_orders)]),
     and([and([q65 > aux3_ExplicitVarSizeWithMarker_Marker[o] ->
-              and([aux3_ExplicitVarSizeWithMarker_Values_Occurrence[q65, q153] = false
-                       | q153 : int(1..n_orders)])
+              and([aux3_ExplicitVarSizeWithMarker_Values_Occurrence[o, q65, q150] = false
+                       | q150 : int(1..n_orders)])
                   | q65 : int(1..2 ** (1 + (n_orders - 1)))])
              | o : int(1..n_orders)]),
     and([and([q69 <=
@@ -232,8 +232,8 @@ such that
          aux4_ExplicitVarSizeWithMarker_Values_Occurrence[q87 + 1, ..]
              | q87 : int(1..2 ** (1 + (n_orders - 1)) - 1)]),
     and([q88 > aux4_ExplicitVarSizeWithMarker_Marker ->
-         and([aux4_ExplicitVarSizeWithMarker_Values_Occurrence[q88, q154] = false
-                  | q154 : int(1..n_orders)])
+         and([aux4_ExplicitVarSizeWithMarker_Values_Occurrence[q88, q151] = false
+                  | q151 : int(1..n_orders)])
              | q88 : int(1..2 ** (1 + (n_orders - 1)))]),
     and([q92 <=
          cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
@@ -307,24 +307,24 @@ such that
                        | o : int(1..n_orders)]))
                  | q11 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))])
              | q91 : int(1..2 ** (1 + (n_orders - 1)))]),
-    and([q156 <=
+    and([q158 <=
          cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
          ->
-         sum([(q157 <=
-               cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1_ExplicitVarSizeWithMarker_Marker[q156])
+         sum([(q159 <=
+               cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1_ExplicitVarSizeWithMarker_Marker[q158])
               *
-              ordSize_Function1D[cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1_ExplicitVarSizeWithMarker_Values[q156,
-                                                                                                                                          q157]]
-                  | q157 : int(1..1 + (n_orders - 1))])
-         <= cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q156]
-             | q156 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
+              ordSize_Function1D[cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1_ExplicitVarSizeWithMarker_Values[q158,
+                                                                                                                                          q159]]
+                  | q159 : int(1..1 + (n_orders - 1))])
+         <= cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q158]
+             | q158 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
     and([q115 + 1 <= aux5_ExplicitVarSizeWithMarker_Marker ->
          aux5_ExplicitVarSizeWithMarker_Values_Occurrence[q115, ..] <lex
          aux5_ExplicitVarSizeWithMarker_Values_Occurrence[q115 + 1, ..]
              | q115 : int(1..2 ** (1 + (n_orders - 1)) - 1)]),
     and([q116 > aux5_ExplicitVarSizeWithMarker_Marker ->
-         and([aux5_ExplicitVarSizeWithMarker_Values_Occurrence[q116, q158] = false
-                  | q158 : int(1..n_orders)])
+         and([aux5_ExplicitVarSizeWithMarker_Values_Occurrence[q116, q152] = false
+                  | q152 : int(1..n_orders)])
              | q116 : int(1..2 ** (1 + (n_orders - 1)))]),
     and([q120 <=
          cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
@@ -443,8 +443,8 @@ such that
          = 0
          /\
          and([cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1_ExplicitVarSizeWithMarker_Values[q2,
-                                                                                                                       q159]
-              = 1 | q159 : int(1..1 + (n_orders - 1))])
+                                                                                                                       q153]
+              = 1 | q153 : int(1..1 + (n_orders - 1))])
          /\
          cut_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q2] = 1
              | q2 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
