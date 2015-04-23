@@ -10,7 +10,9 @@ given w, g, s : int(1..)
 
 letting Golfers be new type of size g * s
 
-find sched : set (size w) of partition (regular, size g) from Golfers
+find sched : set (size w) of
+                $ regular is implied by numParts g and partSize s
+                partition (regular, numParts g, partSize s) from Golfers
 
 such that
     forAll {week1, week2} subsetEq sched .
