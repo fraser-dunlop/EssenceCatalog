@@ -7,32 +7,32 @@ letting let1 be g * s
 find sched_Explicit_PartitionAsSet_Explicit_Explicit:
         matrix indexed by [int(1..w), int(1..g), int(1..s)] of int(1..let1)
 such that
-    and([and([and([sum([or([sched_Explicit_PartitionAsSet_Explicit_Explicit[q14,
-                                                                            q18, q26]
-                            = sched_Explicit_PartitionAsSet_Explicit_Explicit[q13, q16, q24]
-                                | q26 : int(1..s)])
-                            | q24 : int(1..s)])
-                   < 2 | q18 : int(1..g)])
-                  | q16 : int(1..g)])
-             | q13 : int(1..w), q14 : int(1..w), q14 > q13]),
+    and([and([and([sum([or([sched_Explicit_PartitionAsSet_Explicit_Explicit[q13,
+                                                                            q17, q25]
+                            = sched_Explicit_PartitionAsSet_Explicit_Explicit[q12, q15, q23]
+                                | q25 : int(1..s)])
+                            | q23 : int(1..s)])
+                   < 2 | q17 : int(1..g)])
+                  | q15 : int(1..g)])
+             | q12 : int(1..w), q13 : int(1..w), q13 > q12]),
     and([flatten(sched_Explicit_PartitionAsSet_Explicit_Explicit[q1, .., ..]) <lex
          flatten(sched_Explicit_PartitionAsSet_Explicit_Explicit[q1 + 1, .., ..])
              | q1 : int(1..w - 1)]),
-    and([and([1 >=
-              sum([or([sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q19, q28] = q3
-                           | q28 : int(1..s)])
-                       | q19 : int(1..g)])
+    and([and([1 =
+              sum([or([sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q18, q27] = q3
+                           | q27 : int(1..s)])
+                       | q18 : int(1..g)])
                   | q3 : int(1..let1)])
              | q2 : int(1..w)]),
-    and([and([s = s | q20 : int(1..g), q21 : int(1..g)]) | q2 : int(1..w)]),
-    and([and([s >= 1 | q22 : int(1..g)]) | q2 : int(1..w)]),
-    and([and([sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q9, ..] <lex
-              sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q9 + 1, ..]
-                  | q9 : int(1..g - 1)])
+    and([and([s = s | q19 : int(1..g), q20 : int(1..g)]) | q2 : int(1..w)]),
+    and([and([s >= 1 | q21 : int(1..g)]) | q2 : int(1..w)]),
+    and([and([sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q8, ..] <lex
+              sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q8 + 1, ..]
+                  | q8 : int(1..g - 1)])
              | q2 : int(1..w)]),
-    and([and([and([sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q10, q11] <
-                   sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q10, q11 + 1]
-                       | q11 : int(1..s - 1)])
-                  | q10 : int(1..g)])
+    and([and([and([sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q9, q10] <
+                   sched_Explicit_PartitionAsSet_Explicit_Explicit[q2, q9, q10 + 1]
+                       | q10 : int(1..s - 1)])
+                  | q9 : int(1..g)])
              | q2 : int(1..w)])
 
