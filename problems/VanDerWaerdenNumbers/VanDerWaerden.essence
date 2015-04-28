@@ -5,7 +5,7 @@ given l : int(1..) $ The length of the arithmetic sequence
 given n : int(1..) $ The size of the interval
 
 $ partition the interval into the colours
-find p : partition(complete,numParts k) from int(1..n)
+find p : partition (numParts k) from int(1..n)
 
 such that
   forAll s in parts(p) .

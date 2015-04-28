@@ -8,7 +8,7 @@ given n_balls, n_boxes : int(1..)
 
 letting Ball be domain int(1..n_balls)
 
-find schur : partition (size n_boxes) from Ball
+find schur : partition (numParts n_boxes) from Ball
 
 such that forAll b1,b2,b3 : Ball . forAll s in parts(schur) .
     b1 != b2 /\ b1 + b2 = b3 -> ! ({b1,b2,b3} subsetEq s)

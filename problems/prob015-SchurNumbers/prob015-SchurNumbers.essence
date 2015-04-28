@@ -3,7 +3,7 @@ language Essence 1.3
 given s : int(1..)
 given r : int(1..)
 
-find colouring : partition(complete,size r) from int(1..s)
+find colouring : partition (numParts r) from int(1..s)
 
 such that
   forAll x : int(1..s-1) .
