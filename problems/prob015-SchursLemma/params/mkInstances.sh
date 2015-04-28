@@ -6,8 +6,8 @@
 COMMAND=$( cat <<EOF
 echo "language Essence 1.3" >   {1}-{2}.param ;
 echo ""                     >>  {1}-{2}.param ;
-echo "letting n_boxes be {1}"     >>  {1}-{2}.param ;
-echo "letting n_balls be {2}"     >>  {1}-{2}.param ;
+echo "letting k be {1}"     >>  {1}-{2}.param ;
+echo "letting n be {2}"     >>  {1}-{2}.param ;
 echo ""                     >>  {1}-{2}.param
 EOF
 )

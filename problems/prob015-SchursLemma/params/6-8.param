@@ -1,5 +1,5 @@
 language Essence 1.3
 
-letting n_boxes be 6
-letting n_balls be 8
+letting k be 6
+letting n be 8
 
