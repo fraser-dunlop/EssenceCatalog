@@ -11,11 +11,11 @@ given fin5: int
 given fin6: int
 given gain_Function1D:
         matrix indexed by [int(1..items_EnumSize)] of int(fin5..fin6)
-given weightCapacity: int
+given capacity: int
 find picked_Occurrence: matrix indexed by [int(1..items_EnumSize)] of bool
 maximising
     sum([picked_Occurrence[i] * gain_Function1D[i] | i : int(1..items_EnumSize)])
 such that
     sum([picked_Occurrence[i] * weight_Function1D[i] | i : int(1..items_EnumSize)])
-    <= weightCapacity
+    <= capacity
 

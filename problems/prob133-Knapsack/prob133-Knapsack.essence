@@ -3,7 +3,7 @@ $ prob133.essence: Knapsack Problem
 
 given items new type enum
 given weight, gain : function (total) items --> int
-given weightCapacity : int
+given capacity : int
 find picked : set of items
 maximising sum i in picked . gain(i)
-such that (sum i in picked . weight(i)) <= weightCapacity
+such that (sum i in picked . weight(i)) <= capacity
