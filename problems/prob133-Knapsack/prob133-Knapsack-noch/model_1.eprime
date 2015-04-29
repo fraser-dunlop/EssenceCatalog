@@ -1,14 +1,21 @@
 language ESSENCE' 1.0
 
-given U_EnumSize: int
+given items_EnumSize: int
 given fin1: int
-given s_Function1D: matrix indexed by [int(1..U_EnumSize)] of int(1..)
 given fin2: int
-given v_Function1D: matrix indexed by [int(1..U_EnumSize)] of int(1..)
-given B: int(1..)
-given K: int(1..)
-find U'_Occurrence: matrix indexed by [int(1..U_EnumSize)] of bool
+given fin3: int
+given weight_Function1D:
+        matrix indexed by [int(1..items_EnumSize)] of int(fin2..fin3)
+given fin4: int
+given fin5: int
+given fin6: int
+given gain_Function1D:
+        matrix indexed by [int(1..items_EnumSize)] of int(fin5..fin6)
+given weightCapacity: int
+find picked_Occurrence: matrix indexed by [int(1..items_EnumSize)] of bool
+maximising
+    sum([picked_Occurrence[i] * gain_Function1D[i] | i : int(1..items_EnumSize)])
 such that
-    sum([U'_Occurrence[u] * s_Function1D[u] | u : int(1..U_EnumSize)]) <= B,
-    sum([U'_Occurrence[u] * v_Function1D[u] | u : int(1..U_EnumSize)]) >= K
+    sum([picked_Occurrence[i] * weight_Function1D[i] | i : int(1..items_EnumSize)])
+    <= weightCapacity
 
