@@ -15,7 +15,7 @@ function gen_eprimes {
         :::: essences_noch.temp >> all_commands.temp
 
     # run the commands
-    parallel :::: all_commands.temp
+    parallel --eta --results gen_eprimes.results --joblog gen_eprimes.joblog :::: all_commands.temp
 
     # remove temp files
     rm *.temp
