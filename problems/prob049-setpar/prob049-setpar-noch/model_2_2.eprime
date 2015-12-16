@@ -7,11 +7,11 @@ find setA_Explicit: matrix indexed by [int(1..let1)] of int(1..n)
 letting let2 be n / 2
 find setB_Explicit: matrix indexed by [int(1..let2)] of int(1..n)
 such that
-    sum(flatten([1 | q10 : int(1..let1)])) +
-    sum(flatten([!or([setA_Explicit[q13] = setB_Explicit[q11] | q13 : int(1..let1)])
-                     | q11 : int(1..let2)]))
+    sum([1 | q10 : int(1..let1)]) +
+    sum([toInt(!or([setA_Explicit[q13] = setB_Explicit[q11] | q13 : int(1..let1)]))
+             | q11 : int(1..let2)])
     = n,
-    sum([or([setB_Explicit[q17] = setA_Explicit[q15] | q17 : int(1..let2)])
+    sum([toInt(or([setB_Explicit[q17] = setA_Explicit[q15] | q17 : int(1..let2)]))
              | q15 : int(1..let1)])
     = 0,
     sum([setA_Explicit[q5] | q5 : int(1..let1)]) =

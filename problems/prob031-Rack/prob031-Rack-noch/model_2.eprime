@@ -1,0 +1,97 @@
+language ESSENCE' 1.0
+
+given n_models: int(1..5000)
+given n_types: int(1..5000)
+given n_cards: int(1..5000)
+given n_racks: int(1..5000)
+given fin1: int
+given max_power_Function1D: matrix indexed by [int(1..n_models)] of int(1..5000)
+given fin2: int
+given max_connects_Function1D:
+        matrix indexed by [int(1..n_models)] of int(1..5000)
+given fin3: int
+given price_Function1D: matrix indexed by [int(1..n_models)] of int(1..5000)
+given fin4: int
+given req_power_Function1D: matrix indexed by [int(1..n_types)] of int(1..5000)
+given fin5: int
+given ctype_Function1D: matrix indexed by [int(1..n_cards)] of int(1..n_types)
+find model_Function1DPartial_Flags: matrix indexed by [int(1..n_racks)] of bool
+find model_Function1DPartial_Values:
+        matrix indexed by [int(1..n_racks)] of int(1..n_models)
+find plugged_Function1DPartialR6_Flags:
+        matrix indexed by [int(1..n_racks)] of bool
+find plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..n_racks), int(1..1 + (n_cards - 1))] of int(1..n_cards
+                                                                                 + 1)
+minimising
+    sum([toInt(model_Function1DPartial_Flags[q13]) *
+         price_Function1D[model_Function1DPartial_Values[q13]]
+             | q13 : int(1..n_racks)])
+such that
+    and([model_Function1DPartial_Flags[q13] -> model_Function1DPartial_Flags[q13]
+             | q13 : int(1..n_racks)]),
+    and([or([model_Function1DPartial_Flags[q17] /\
+             or([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q17, q15] !=
+                 n_cards + 1
+                 /\ plugged_Function1DPartialR6_Flags[q17]
+                 /\ plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q17, q15] = c
+                     | q15 : int(1..1 + (n_cards - 1))])
+                 | q17 : int(1..n_racks)])
+             | c : int(1..n_cards)]),
+    and([model_Function1DPartial_Flags[q23] /\ model_Function1DPartial_Flags[q25] ->
+         sum([toInt(and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q23,
+                                                                                     q19]
+                         != n_cards + 1,
+                         or([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q25, q21] !=
+                             n_cards + 1
+                             /\
+                             plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q25, q21] =
+                             plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q23, q19]
+                                 | q21 : int(1..1 + (n_cards - 1))]),
+                         plugged_Function1DPartialR6_Flags[q23],
+                         plugged_Function1DPartialR6_Flags[q25]; int(1..4)]))
+                  | q19 : int(1..1 + (n_cards - 1))])
+         = 0 | q23 : int(1..n_racks), q25 : int(1..n_racks), q23 != q25]),
+    and([model_Function1DPartial_Flags[q28] ->
+         sum([toInt(plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q28, q26]
+                    != n_cards + 1
+                    /\ plugged_Function1DPartialR6_Flags[q28])
+              *
+              req_power_Function1D[ctype_Function1D[plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q28,
+                                                                                                                q26]]]
+                  | q26 : int(1..1 + (n_cards - 1))])
+         <= max_power_Function1D[model_Function1DPartial_Values[q28]]
+         /\ model_Function1DPartial_Flags[q28]
+             | q28 : int(1..n_racks)]),
+    and([model_Function1DPartial_Flags[q32] ->
+         sum([toInt(plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q32, q30]
+                    != n_cards + 1
+                    /\ plugged_Function1DPartialR6_Flags[q32])
+                  | q30 : int(1..1 + (n_cards - 1))])
+         <= max_connects_Function1D[model_Function1DPartial_Values[q32]]
+         /\ model_Function1DPartial_Flags[q32]
+             | q32 : int(1..n_racks)]),
+    and([model_Function1DPartial_Flags[q1] = false ->
+         model_Function1DPartial_Values[q1] = 1
+             | q1 : int(1..n_racks)]),
+    and([plugged_Function1DPartialR6_Flags[q4] = false ->
+         and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q4, q11] = 1
+                  | q11 : int(1..1 + (n_cards - 1))])
+             | q4 : int(1..n_racks)]),
+    and([plugged_Function1DPartialR6_Flags[q6] ->
+         and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q7] <
+              plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q7 + 1]
+              \/
+              plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q7] =
+              n_cards + 1
+                  | q7 : int(1..1 + (n_cards - 1) - 1)])
+             | q6 : int(1..n_racks)]),
+    and([plugged_Function1DPartialR6_Flags[q6] ->
+         and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q8] =
+              n_cards + 1
+              ->
+              plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q8 + 1] =
+              n_cards + 1
+                  | q8 : int(1..1 + (n_cards - 1) - 1)])
+             | q6 : int(1..n_racks)])
+

@@ -9,15 +9,15 @@ where v = b
 where r = k
 find bibd_RelationAsMatrix: matrix indexed by [int(1..v), int(1..b)] of bool
 such that
-    and([sum([bibd_RelationAsMatrix[q5_1, q5_2]
-                  | q5_1 : int(1..v), q5_2 : int(1..b), q5_1 = o])
+    and([sum([toInt(bibd_RelationAsMatrix[q8_1, q8_2])
+                  | q8_1 : int(1..v), q8_2 : int(1..b), q8_1 = o])
          = r | o : int(1..v)]),
-    and([sum([bibd_RelationAsMatrix[q8_1, q8_2]
-                  | q8_1 : int(1..v), q8_2 : int(1..b), q8_2 = bl])
+    and([sum([toInt(bibd_RelationAsMatrix[q5_1, q5_2])
+                  | q5_1 : int(1..v), q5_2 : int(1..b), q5_2 = bl])
          = k | bl : int(1..b)]),
-    and([sum([bibd_RelationAsMatrix[q11_1, q11_2] /\
-              or([bibd_RelationAsMatrix[q14_1, q14_2] /\ q14_2 = q11_2
-                      | q14_1 : int(1..v), q14_2 : int(1..b), q14_1 = o2])
+    and([sum([toInt(bibd_RelationAsMatrix[q11_1, q11_2] /\
+                    or([bibd_RelationAsMatrix[q14_1, q14_2] /\ q14_2 = q11_2
+                            | q14_1 : int(1..v), q14_2 : int(1..b), q14_1 = o2]))
                   | q11_1 : int(1..v), q11_2 : int(1..b), q11_1 = o1])
          = lambda_
              | o1 : int(1..v), o2 : int(1..v), o1 != o2])

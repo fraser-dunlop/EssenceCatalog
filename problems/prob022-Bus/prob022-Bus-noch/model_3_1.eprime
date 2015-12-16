@@ -1,0 +1,99 @@
+language ESSENCE' 1.0
+
+given Tasks_EnumSize: int
+given fin1: int
+given fin2: int
+given shifts_ExplicitR2_Occurrence:
+        matrix indexed by [int(1..fin1), int(1..Tasks_EnumSize)] of bool
+find sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker:
+        int(0..2 ** (1 + (Tasks_EnumSize - 1)))
+find sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker:
+        matrix indexed by [int(1..2 ** (1 + (Tasks_EnumSize - 1)))] of int(0..1 +
+                                                                              (Tasks_EnumSize - 1))
+find sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values:
+        matrix indexed by [int(1..2 ** (1 + (Tasks_EnumSize - 1))),
+                           int(1..1 + (Tasks_EnumSize - 1))] of int(1..Tasks_EnumSize)
+minimising
+    sum([toInt(q26 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker)
+             | q26 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
+such that
+    and([q15 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
+         or([and([or([q20 <=
+                      sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q15]
+                      /\
+                      sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q15,
+                                                                                                               q20]
+                      = q18
+                          | q20 : int(1..1 + (Tasks_EnumSize - 1))])
+                      | q18 : int(1..Tasks_EnumSize), shifts_ExplicitR2_Occurrence[q17, q18]])
+             /\
+             and([q22 <=
+                  sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q15]
+                  ->
+                  shifts_ExplicitR2_Occurrence[q17,
+                                               sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q15,
+                                                                                                                                        q22]]
+                      | q22 : int(1..1 + (Tasks_EnumSize - 1))])
+                 | q17 : int(1..fin1)])
+             | q15 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
+    and([1 =
+         sum([toInt(q10 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker /\
+                    or([q12 <=
+                        sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q10]
+                        /\
+                        sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q10,
+                                                                                                                 q12]
+                        = q1
+                            | q12 : int(1..1 + (Tasks_EnumSize - 1))]))
+                  | q10 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
+             | q1 : int(1..Tasks_EnumSize)]),
+    and([q23 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q23]
+         >= 1
+             | q23 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
+    and([q4 + 1 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q4]
+         <
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q4
+                                                                                                  + 1]
+         \/
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q4]
+         =
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q4
+                                                                                                  + 1]
+         /\
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q4,
+                                                                                                  ..]
+         <lex
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q4
+                                                                                                  + 1,
+                                                                                                  ..]
+             | q4 : int(1..2 ** (1 + (Tasks_EnumSize - 1)) - 1)]),
+    and([q5 > sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q5]
+         = 0
+         /\
+         and([sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q5,
+                                                                                                       q13]
+              = 1 | q13 : int(1..1 + (Tasks_EnumSize - 1))])
+             | q5 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
+    and([q6 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
+         and([q7 + 1 <=
+              sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q6]
+              ->
+              sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q6,
+                                                                                                       q7]
+              <
+              sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q6,
+                                                                                                       q7 + 1]
+                  | q7 : int(1..1 + (Tasks_EnumSize - 1) - 1)])
+             | q6 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))]),
+    and([q6 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
+         and([q8 >
+              sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q6]
+              ->
+              sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q6,
+                                                                                                       q8]
+              = 1 | q8 : int(1..1 + (Tasks_EnumSize - 1))])
+             | q6 : int(1..2 ** (1 + (Tasks_EnumSize - 1)))])
+

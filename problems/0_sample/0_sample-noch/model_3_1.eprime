@@ -5,26 +5,21 @@ given a: int(0..100)
 given b: int(0..100)
 given fin1: int
 given s_Occurrence: matrix indexed by [int(1..n)] of bool
-find x_ExplicitVarSizeWithFlags_Flags:
-        matrix indexed by [int(1..1 + (b - a))] of bool
-find x_ExplicitVarSizeWithFlags_Values:
+find x_ExplicitVarSizeWithMarker_Marker: int(0..1 + (b - a))
+find x_ExplicitVarSizeWithMarker_Values:
         matrix indexed by [int(1..1 + (b - a))] of int(a..b)
 such that
-    and([x_ExplicitVarSizeWithFlags_Flags[q7] ->
-         s_Occurrence[x_ExplicitVarSizeWithFlags_Values[q7]]
+    and([q7 <= x_ExplicitVarSizeWithMarker_Marker ->
+         s_Occurrence[x_ExplicitVarSizeWithMarker_Values[q7]]
              | q7 : int(1..1 + (b - a))]),
-    or([x_ExplicitVarSizeWithFlags_Flags[q9] /\
-        x_ExplicitVarSizeWithFlags_Values[q9] =
-        sum([x_ExplicitVarSizeWithFlags_Flags[q11] | q11 : int(1..1 + (b - a))])
-            | q9 : int(1..1 + (b - a))]),
-    and([x_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
-         x_ExplicitVarSizeWithFlags_Values[q1] <
-         x_ExplicitVarSizeWithFlags_Values[q1 + 1]
+    or([q5 <= x_ExplicitVarSizeWithMarker_Marker /\
+        x_ExplicitVarSizeWithMarker_Values[q5] = x_ExplicitVarSizeWithMarker_Marker
+            | q5 : int(1..1 + (b - a))]),
+    and([q1 + 1 <= x_ExplicitVarSizeWithMarker_Marker ->
+         x_ExplicitVarSizeWithMarker_Values[q1] <
+         x_ExplicitVarSizeWithMarker_Values[q1 + 1]
              | q1 : int(1..1 + (b - a) - 1)]),
-    and([x_ExplicitVarSizeWithFlags_Flags[q2] = false ->
-         x_ExplicitVarSizeWithFlags_Values[q2] = a
-             | q2 : int(1..1 + (b - a))]),
-    and([x_ExplicitVarSizeWithFlags_Flags[q3 + 1] ->
-         x_ExplicitVarSizeWithFlags_Flags[q3]
-             | q3 : int(1..1 + (b - a) - 1)])
+    and([q2 > x_ExplicitVarSizeWithMarker_Marker ->
+         x_ExplicitVarSizeWithMarker_Values[q2] = a
+             | q2 : int(1..1 + (b - a))])
 

@@ -1,0 +1,64 @@
+language ESSENCE' 1.0
+
+given Tasks_EnumSize: int
+given fin1: int
+given fin2: int
+given shifts_ExplicitR2_Occurrence:
+        matrix indexed by [int(1..fin1), int(1..Tasks_EnumSize)] of bool
+find sched_PartitionOccurrence_NumParts: int(1..1 + (Tasks_EnumSize - 1))
+find sched_PartitionOccurrence_WhichPart:
+        matrix indexed by [int(1..Tasks_EnumSize)] of int(1..1 + (Tasks_EnumSize - 1))
+find sched_PartitionOccurrence_PartSizes:
+        matrix indexed by [int(1..1 + (Tasks_EnumSize - 1))] of int(0..1 +
+                                                                       (Tasks_EnumSize - 1))
+find sched_PartitionOccurrence_FirstIndex:
+        matrix indexed by [int(1..1 + (Tasks_EnumSize - 1))] of int(1..Tasks_EnumSize)
+minimising
+    sum([toInt(q21 <= sched_PartitionOccurrence_NumParts)
+             | q21 : int(1..1 + (Tasks_EnumSize - 1))])
+such that
+    and([q11 <= sched_PartitionOccurrence_NumParts ->
+         or([and([or([sched_PartitionOccurrence_WhichPart[q17] = q11 /\ q17 = q15
+                          | q17 : int(1..Tasks_EnumSize)])
+                      | q15 : int(1..Tasks_EnumSize), shifts_ExplicitR2_Occurrence[q14, q15]])
+             /\
+             and([sched_PartitionOccurrence_WhichPart[q19] = q11 ->
+                  shifts_ExplicitR2_Occurrence[q14, q19]
+                      | q19 : int(1..Tasks_EnumSize)])
+                 | q14 : int(1..fin1)])
+             | q11 : int(1..1 + (Tasks_EnumSize - 1))]),
+    and([true | q1 : int(1..1 + (Tasks_EnumSize - 1))]),
+    and([q1 > sched_PartitionOccurrence_NumParts ->
+         sched_PartitionOccurrence_PartSizes[q1] = 0
+             | q1 : int(1..1 + (Tasks_EnumSize - 1))]),
+    and([q2 <= sched_PartitionOccurrence_NumParts ->
+         or([sched_PartitionOccurrence_WhichPart[q3] = q2 | q3 : int(1..Tasks_EnumSize)])
+             | q2 : int(3..1 + (Tasks_EnumSize - 1))]),
+    sched_PartitionOccurrence_NumParts =
+    max([sched_PartitionOccurrence_WhichPart[q4] | q4 : int(1..Tasks_EnumSize)]),
+    and([sched_PartitionOccurrence_PartSizes[q5] =
+         sum([toInt(sched_PartitionOccurrence_WhichPart[q6] = q5)
+                  | q6 : int(1..Tasks_EnumSize)])
+             | q5 : int(1..1 + (Tasks_EnumSize - 1))]),
+    and([q7 <= sched_PartitionOccurrence_NumParts ->
+         and([sched_PartitionOccurrence_WhichPart[q8] = q7 ->
+              sched_PartitionOccurrence_FirstIndex[q7] <= q8
+                  | q8 : int(1..Tasks_EnumSize)])
+             | q7 : int(1..1 + (Tasks_EnumSize - 1))]),
+    and([q7 <= sched_PartitionOccurrence_NumParts ->
+         or([sched_PartitionOccurrence_WhichPart[q8] = q7 /\
+             sched_PartitionOccurrence_FirstIndex[q7] = q8
+                 | q8 : int(1..Tasks_EnumSize)])
+             | q7 : int(1..1 + (Tasks_EnumSize - 1))]),
+    and([sched_PartitionOccurrence_PartSizes[q7] = 0 ->
+         sched_PartitionOccurrence_FirstIndex[q7] = 1
+             | q7 : int(1..1 + (Tasks_EnumSize - 1))]),
+    and([q9 <= sched_PartitionOccurrence_NumParts /\
+         q10 <= sched_PartitionOccurrence_NumParts
+         ->
+         (q9 < q10 <->
+          sched_PartitionOccurrence_FirstIndex[q9] <
+          sched_PartitionOccurrence_FirstIndex[q10])
+             | q9 : int(1..1 + (Tasks_EnumSize - 1)),
+               q10 : int(1..1 + (Tasks_EnumSize - 1))])
+

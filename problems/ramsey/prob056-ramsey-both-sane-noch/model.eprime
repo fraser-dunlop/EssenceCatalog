@@ -6,51 +6,51 @@ letting num_edges be n * (n - 1)
 find graph_RelationAsMatrix:
         matrix indexed by [int(1..colours), int(1..n), int(1..n)] of bool
 such that
-    and([sum([graph_RelationAsMatrix[q6_1, q6_2, q6_3]
-                  | q6_1 : int(1..colours), q6_2 : int(1..n), q6_3 : int(1..n), q6_2 = i])
+    and([sum([toInt(graph_RelationAsMatrix[q29_1, q29_2, q29_3])
+                  | q29_1 : int(1..colours), q29_2 : int(1..n), q29_3 : int(1..n), q29_2 = i])
          = n - 1
          /\
-         sum([graph_RelationAsMatrix[q9_1, q9_2, q9_3]
-                  | q9_1 : int(1..colours), q9_2 : int(1..n), q9_3 : int(1..n), q9_3 = i])
+         sum([toInt(graph_RelationAsMatrix[q32_1, q32_2, q32_3])
+                  | q32_1 : int(1..colours), q32_2 : int(1..n), q32_3 : int(1..n), q32_3 = i])
          = n - 1
          /\
-         sum([graph_RelationAsMatrix[q12_1, q12_2, q12_3]
-                  | q12_1 : int(1..colours), q12_2 : int(1..n), q12_3 : int(1..n), q12_2 = i,
-                    q12_3 = i])
+         sum([toInt(graph_RelationAsMatrix[q35_1, q35_2, q35_3])
+                  | q35_1 : int(1..colours), q35_2 : int(1..n), q35_3 : int(1..n), q35_2 = i,
+                    q35_3 = i])
          = 0 | i : int(1..n)]),
-    and([sum([graph_RelationAsMatrix[q15_1, q15_2, q15_3]
-                  | q15_1 : int(1..colours), q15_2 : int(1..n), q15_3 : int(1..n), q15_2 = i,
-                    q15_3 = j])
+    and([sum([toInt(graph_RelationAsMatrix[q6_1, q6_2, q6_3])
+                  | q6_1 : int(1..colours), q6_2 : int(1..n), q6_3 : int(1..n), q6_2 = i,
+                    q6_3 = j])
          = 1
          /\
-         sum([graph_RelationAsMatrix[q18_1, q18_2, q18_3]
-                  | q18_1 : int(1..colours), q18_2 : int(1..n), q18_3 : int(1..n), q18_2 = j,
-                    q18_3 = i])
+         sum([toInt(graph_RelationAsMatrix[q9_1, q9_2, q9_3])
+                  | q9_1 : int(1..colours), q9_2 : int(1..n), q9_3 : int(1..n), q9_2 = j,
+                    q9_3 = i])
          = 1
          /\
-         (and([graph_RelationAsMatrix[q21_1, q21_2, q21_3] ->
-               or([graph_RelationAsMatrix[q24_1, q24_2, q24_3] /\ q24_1 = q21_1
-                       | q24_1 : int(1..colours), q24_2 : int(1..n), q24_3 : int(1..n), q24_2 = j,
-                         q24_3 = i])
-                   | q21_1 : int(1..colours), q21_2 : int(1..n), q21_3 : int(1..n), q21_2 = i,
-                     q21_3 = j])
+         (and([graph_RelationAsMatrix[q12_1, q12_2, q12_3] ->
+               or([graph_RelationAsMatrix[q15_1, q15_2, q15_3] /\ q15_1 = q12_1
+                       | q15_1 : int(1..colours), q15_2 : int(1..n), q15_3 : int(1..n), q15_2 = j,
+                         q15_3 = i])
+                   | q12_1 : int(1..colours), q12_2 : int(1..n), q12_3 : int(1..n), q12_2 = i,
+                     q12_3 = j])
           /\
-          and([graph_RelationAsMatrix[q26_1, q26_2, q26_3] ->
-               or([graph_RelationAsMatrix[q29_1, q29_2, q29_3] /\ q29_1 = q26_1
-                       | q29_1 : int(1..colours), q29_2 : int(1..n), q29_3 : int(1..n), q29_2 = i,
-                         q29_3 = j])
-                   | q26_1 : int(1..colours), q26_2 : int(1..n), q26_3 : int(1..n), q26_2 = j,
-                     q26_3 = i]))
+          and([graph_RelationAsMatrix[q17_1, q17_2, q17_3] ->
+               or([graph_RelationAsMatrix[q20_1, q20_2, q20_3] /\ q20_1 = q17_1
+                       | q20_1 : int(1..colours), q20_2 : int(1..n), q20_3 : int(1..n), q20_2 = i,
+                         q20_3 = j])
+                   | q17_1 : int(1..colours), q17_2 : int(1..n), q17_3 : int(1..n), q17_2 = j,
+                     q17_3 = i]))
              | i : int(1..n), j : int(1..n), i != j]),
-    and([and([graph_RelationAsMatrix[q32_1, q32_2, q32_3] ->
-              and([graph_RelationAsMatrix[q35_1, q35_2, q35_3] ->
-                   !graph_RelationAsMatrix[q32_1, q35_3, q32_3]
-                       | q35_1 : int(1..colours), q35_2 : int(1..n), q35_3 : int(1..n), q35_1 = q32_1,
-                         q35_2 = i, q35_3 != q32_3])
-                  | q32_1 : int(1..colours), q32_2 : int(1..n), q32_3 : int(1..n), q32_2 = i])
+    and([and([graph_RelationAsMatrix[q26_1, q26_2, q26_3] ->
+              and([graph_RelationAsMatrix[q23_1, q23_2, q23_3] ->
+                   !graph_RelationAsMatrix[q26_1, q23_3, q26_3]
+                       | q23_1 : int(1..colours), q23_2 : int(1..n), q23_3 : int(1..n), q23_1 = q26_1,
+                         q23_2 = i, q23_3 != q26_3])
+                  | q26_1 : int(1..colours), q26_2 : int(1..n), q26_3 : int(1..n), q26_2 = i])
              | i : int(1..n)]),
     num_edges =
-    sum([sum([sum([graph_RelationAsMatrix[q1, q2, q3] | q3 : int(1..n)])
+    sum([sum([sum([toInt(graph_RelationAsMatrix[q1, q2, q3]) | q3 : int(1..n)])
                   | q2 : int(1..n)])
              | q1 : int(1..colours)])
 

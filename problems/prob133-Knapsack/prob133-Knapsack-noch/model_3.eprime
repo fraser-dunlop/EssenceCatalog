@@ -12,27 +12,23 @@ given fin6: int
 given gain_Function1D:
         matrix indexed by [int(1..items_EnumSize)] of int(fin5..fin6)
 given capacity: int
-find picked_ExplicitVarSizeWithFlags_Flags:
-        matrix indexed by [int(1..1 + (items_EnumSize - 1))] of bool
-find picked_ExplicitVarSizeWithFlags_Values:
+find picked_ExplicitVarSizeWithMarker_Marker: int(0..1 + (items_EnumSize - 1))
+find picked_ExplicitVarSizeWithMarker_Values:
         matrix indexed by [int(1..1 + (items_EnumSize - 1))] of int(1..items_EnumSize)
 maximising
-    sum([picked_ExplicitVarSizeWithFlags_Flags[q6] *
-         gain_Function1D[picked_ExplicitVarSizeWithFlags_Values[q6]]
-             | q6 : int(1..1 + (items_EnumSize - 1))])
+    sum([toInt(q4 <= picked_ExplicitVarSizeWithMarker_Marker) *
+         gain_Function1D[picked_ExplicitVarSizeWithMarker_Values[q4]]
+             | q4 : int(1..1 + (items_EnumSize - 1))])
 such that
-    sum([picked_ExplicitVarSizeWithFlags_Flags[q7] *
-         weight_Function1D[picked_ExplicitVarSizeWithFlags_Values[q7]]
-             | q7 : int(1..1 + (items_EnumSize - 1))])
+    sum([toInt(q5 <= picked_ExplicitVarSizeWithMarker_Marker) *
+         weight_Function1D[picked_ExplicitVarSizeWithMarker_Values[q5]]
+             | q5 : int(1..1 + (items_EnumSize - 1))])
     <= capacity,
-    and([picked_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->
-         picked_ExplicitVarSizeWithFlags_Values[q1] <
-         picked_ExplicitVarSizeWithFlags_Values[q1 + 1]
+    and([q1 + 1 <= picked_ExplicitVarSizeWithMarker_Marker ->
+         picked_ExplicitVarSizeWithMarker_Values[q1] <
+         picked_ExplicitVarSizeWithMarker_Values[q1 + 1]
              | q1 : int(1..1 + (items_EnumSize - 1) - 1)]),
-    and([picked_ExplicitVarSizeWithFlags_Flags[q2] = false ->
-         picked_ExplicitVarSizeWithFlags_Values[q2] = 1
-             | q2 : int(1..1 + (items_EnumSize - 1))]),
-    and([picked_ExplicitVarSizeWithFlags_Flags[q3 + 1] ->
-         picked_ExplicitVarSizeWithFlags_Flags[q3]
-             | q3 : int(1..1 + (items_EnumSize - 1) - 1)])
+    and([q2 > picked_ExplicitVarSizeWithMarker_Marker ->
+         picked_ExplicitVarSizeWithMarker_Values[q2] = 1
+             | q2 : int(1..1 + (items_EnumSize - 1))])
 

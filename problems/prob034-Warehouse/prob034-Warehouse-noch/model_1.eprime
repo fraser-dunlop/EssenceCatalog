@@ -16,14 +16,15 @@ find open_Function1D:
         matrix indexed by [int(1..n_stores)] of int(1..n_warehouses)
 find aux1_Occurrence: matrix indexed by [int(1..n_warehouses)] of bool
 minimising
-    sum([aux1_Occurrence[q2] * opencost_Function1D[q2] | q2 : int(1..n_warehouses)])
+    sum([toInt(aux1_Occurrence[q2]) * opencost_Function1D[q2]
+             | q2 : int(1..n_warehouses)])
     + sum([cost_FunctionND[s, open_Function1D[s]] | s : int(1..n_stores)])
 such that
     and([aux1_Occurrence[open_Function1D[q6]] | q6 : int(1..n_stores)]),
     and([aux1_Occurrence[q3] ->
          or([open_Function1D[q7] = q3 | q7 : int(1..n_stores)])
              | q3 : int(1..n_warehouses)]),
-    and([sum([open_Function1D[q10] = w | q10 : int(1..n_stores)]) <=
+    and([sum([toInt(open_Function1D[q10] = w) | q10 : int(1..n_stores)]) <=
          capacity_Function1D[w]
              | w : int(1..n_warehouses)])
 

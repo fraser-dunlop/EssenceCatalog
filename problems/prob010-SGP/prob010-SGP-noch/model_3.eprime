@@ -1,0 +1,109 @@
+language ESSENCE' 1.0
+
+given w: int(1..)
+given g: int(1..)
+given s: int(1..)
+letting let1 be g * s
+find sched_ExplicitR18_PartitionOccurrence_NumParts:
+        matrix indexed by [int(1..w)] of int(1..1 + (let1 - 1))
+find sched_ExplicitR18_PartitionOccurrence_WhichPart:
+        matrix indexed by [int(1..w), int(1..let1)] of int(1..1 + (let1 - 1))
+find sched_ExplicitR18_PartitionOccurrence_PartSizes:
+        matrix indexed by [int(1..w), int(1..1 + (let1 - 1))] of int(0..1 + (let1 - 1))
+find sched_ExplicitR18_PartitionOccurrence_FirstIndex:
+        matrix indexed by [int(1..w), int(1..1 + (let1 - 1))] of int(1..let1)
+such that
+    and([and([q20 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q18] ->
+              and([q25 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q19] ->
+                   sum([toInt(or([sched_ExplicitR18_PartitionOccurrence_WhichPart[q19, q27] = q25
+                                  /\ q27 = q23
+                                      | q27 : int(1..let1)]))
+                        * toInt(sched_ExplicitR18_PartitionOccurrence_WhichPart[q18, q23] = q20)
+                            | q23 : int(1..let1)])
+                   < 2 | q25 : int(1..1 + (let1 - 1))])
+                  | q20 : int(1..1 + (let1 - 1))])
+             | q18 : int(1..w), q19 : int(1..w), q19 > q18]),
+    and([sched_ExplicitR18_PartitionOccurrence_NumParts[q1] <
+         sched_ExplicitR18_PartitionOccurrence_NumParts[q1 + 1]
+         \/
+         sched_ExplicitR18_PartitionOccurrence_NumParts[q1] =
+         sched_ExplicitR18_PartitionOccurrence_NumParts[q1 + 1]
+         /\
+         (sched_ExplicitR18_PartitionOccurrence_WhichPart[q1, ..] <lex
+          sched_ExplicitR18_PartitionOccurrence_WhichPart[q1 + 1, ..]
+          \/
+          and([sched_ExplicitR18_PartitionOccurrence_WhichPart[q1, q14] =
+               sched_ExplicitR18_PartitionOccurrence_WhichPart[q1 + 1, q14]
+                   | q14 : int(1..let1)])
+          /\ and([or([q14 = q15 | q15 : int(1..let1)]) | q14 : int(1..let1)])
+          /\ and([or([q14 = q15 | q15 : int(1..let1)]) | q14 : int(1..let1)])
+          /\
+          (sched_ExplicitR18_PartitionOccurrence_PartSizes[q1, ..] <lex
+           sched_ExplicitR18_PartitionOccurrence_PartSizes[q1 + 1, ..]
+           \/
+           and([sched_ExplicitR18_PartitionOccurrence_PartSizes[q1, q16] =
+                sched_ExplicitR18_PartitionOccurrence_PartSizes[q1 + 1, q16]
+                    | q16 : int(1..1 + (let1 - 1))])
+           /\
+           and([or([q16 = q17 | q17 : int(1..1 + (let1 - 1))])
+                    | q16 : int(1..1 + (let1 - 1))])
+           /\
+           and([or([q16 = q17 | q17 : int(1..1 + (let1 - 1))])
+                    | q16 : int(1..1 + (let1 - 1))])
+           /\
+           sched_ExplicitR18_PartitionOccurrence_FirstIndex[q1, ..] <lex
+           sched_ExplicitR18_PartitionOccurrence_FirstIndex[q1 + 1, ..]))
+             | q1 : int(1..w - 1)]),
+    and([and([q3 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q2] ->
+              s = sched_ExplicitR18_PartitionOccurrence_PartSizes[q2, q3]
+                  | q3 : int(1..1 + (let1 - 1))])
+             | q2 : int(1..w)]),
+    and([and([q3 > sched_ExplicitR18_PartitionOccurrence_NumParts[q2] ->
+              sched_ExplicitR18_PartitionOccurrence_PartSizes[q2, q3] = 0
+                  | q3 : int(1..1 + (let1 - 1))])
+             | q2 : int(1..w)]),
+    and([g = sched_ExplicitR18_PartitionOccurrence_NumParts[q2] | q2 : int(1..w)]),
+    and([and([q4 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q2] ->
+              or([sched_ExplicitR18_PartitionOccurrence_WhichPart[q2, q5] = q4
+                      | q5 : int(1..let1)])
+                  | q4 : int(3..1 + (let1 - 1))])
+             | q2 : int(1..w)]),
+    and([and([q6 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q2] ->
+              sched_ExplicitR18_PartitionOccurrence_PartSizes[q2, q6 - 1] =
+              sched_ExplicitR18_PartitionOccurrence_PartSizes[q2, q6]
+                  | q6 : int(2..1 + (let1 - 1))])
+             | q2 : int(1..w)]),
+    and([sched_ExplicitR18_PartitionOccurrence_NumParts[q2] =
+         max([sched_ExplicitR18_PartitionOccurrence_WhichPart[q2, q7]
+                  | q7 : int(1..let1)])
+             | q2 : int(1..w)]),
+    and([and([sched_ExplicitR18_PartitionOccurrence_PartSizes[q2, q8] =
+              sum([toInt(sched_ExplicitR18_PartitionOccurrence_WhichPart[q2, q9] = q8)
+                       | q9 : int(1..let1)])
+                  | q8 : int(1..1 + (let1 - 1))])
+             | q2 : int(1..w)]),
+    and([and([q10 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q2] ->
+              and([sched_ExplicitR18_PartitionOccurrence_WhichPart[q2, q11] = q10 ->
+                   sched_ExplicitR18_PartitionOccurrence_FirstIndex[q2, q10] <= q11
+                       | q11 : int(1..let1)])
+                  | q10 : int(1..1 + (let1 - 1))])
+             | q2 : int(1..w)]),
+    and([and([q10 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q2] ->
+              or([sched_ExplicitR18_PartitionOccurrence_WhichPart[q2, q11] = q10 /\
+                  sched_ExplicitR18_PartitionOccurrence_FirstIndex[q2, q10] = q11
+                      | q11 : int(1..let1)])
+                  | q10 : int(1..1 + (let1 - 1))])
+             | q2 : int(1..w)]),
+    and([and([sched_ExplicitR18_PartitionOccurrence_PartSizes[q2, q10] = 0 ->
+              sched_ExplicitR18_PartitionOccurrence_FirstIndex[q2, q10] = 1
+                  | q10 : int(1..1 + (let1 - 1))])
+             | q2 : int(1..w)]),
+    and([and([q12 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q2] /\
+              q13 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q2]
+              ->
+              (q12 < q13 <->
+               sched_ExplicitR18_PartitionOccurrence_FirstIndex[q2, q12] <
+               sched_ExplicitR18_PartitionOccurrence_FirstIndex[q2, q13])
+                  | q12 : int(1..1 + (let1 - 1)), q13 : int(1..1 + (let1 - 1))])
+             | q2 : int(1..w)])
+

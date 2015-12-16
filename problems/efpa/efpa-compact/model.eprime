@@ -5,22 +5,32 @@ given lam: int(1..)
 given numCodeWords: int(1..)
 given dist: int(1..)
 letting wordLength be lam * numChars
-find c_Explicit_Function1D:
+find c_ExplicitR9_Function1D:
         matrix indexed by [int(1..numCodeWords), int(1..wordLength)] of int(1..numChars)
 such that
-    and([and([sum([c_Explicit_Function1D[q4, i] = a | i : int(1..wordLength)]) = lam
+    and([and([sum([toInt(sum([c_ExplicitR9_Function1D[q13, q14]
+                                  | q14 : int(1..wordLength), q14 = i])
+                         = a
+                         /\ or([q15 = i | q15 : int(1..wordLength)]))
+                       | i : int(1..wordLength)])
+              = lam
                   | a : int(1..numChars)])
-             | q4 : int(1..numCodeWords)]),
-    and([or([!(c_Explicit_Function1D[q6, q8] = c_Explicit_Function1D[q5, q8])
-                 | q8 : int(1..wordLength)])
+             | q13 : int(1..numCodeWords)]),
+    and([or([!(c_ExplicitR9_Function1D[q17, q23] =
+               c_ExplicitR9_Function1D[q16, q23])
+                 | q23 : int(1..wordLength)])
          \/
-         or([!(c_Explicit_Function1D[q5, q9] = c_Explicit_Function1D[q6, q9])
-                 | q9 : int(1..wordLength)])
+         or([!(c_ExplicitR9_Function1D[q16, q24] = c_ExplicitR9_Function1D[q17, q24])
+                 | q24 : int(1..wordLength)])
          ->
-         sum([c_Explicit_Function1D[q5, i] != c_Explicit_Function1D[q6, i]
+         sum([toInt(and([sum([c_ExplicitR9_Function1D[q16, q18]
+                                  | q18 : int(1..wordLength), q18 = i])
+                         != sum([c_ExplicitR9_Function1D[q17, q19] | q19 : int(1..wordLength), q19 = i]),
+                         or([q20 = i | q20 : int(1..wordLength)]),
+                         or([q21 = i | q21 : int(1..wordLength)]); int(1..3)]))
                   | i : int(1..wordLength)])
          = dist
-             | q5 : int(1..numCodeWords), q6 : int(1..numCodeWords)]),
-    and([c_Explicit_Function1D[q1, ..] <lex c_Explicit_Function1D[q1 + 1, ..]
-             | q1 : int(1..numCodeWords - 1)])
+             | q16 : int(1..numCodeWords), q17 : int(1..numCodeWords)]),
+    and([c_ExplicitR9_Function1D[q4, ..] <lex c_ExplicitR9_Function1D[q4 + 1, ..]
+             | q4 : int(1..numCodeWords - 1)])
 

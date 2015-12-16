@@ -13,25 +13,25 @@ given dist_FunctionNDPartial_Values:
                            int(1..Character_EnumSize)] of int(0..maxDist)
 letting let1 be maxDist * codeWordLength
 given minDist: int(0..let1)
-find c_Explicit_Function1D:
+find c_ExplicitR9_Function1D:
         matrix indexed by [int(1..numOfCodeWords),
                            int(1..codeWordLength)] of int(1..Character_EnumSize)
 such that
-    and([or([!(c_Explicit_Function1D[q5, q7] = c_Explicit_Function1D[q4, q7])
+    and([or([!(c_ExplicitR9_Function1D[q5, q7] = c_ExplicitR9_Function1D[q4, q7])
                  | q7 : int(1..codeWordLength)])
          \/
-         or([!(c_Explicit_Function1D[q4, q8] = c_Explicit_Function1D[q5, q8])
+         or([!(c_ExplicitR9_Function1D[q4, q8] = c_ExplicitR9_Function1D[q5, q8])
                  | q8 : int(1..codeWordLength)])
          ->
-         sum([dist_FunctionNDPartial_Values[c_Explicit_Function1D[q4, i],
-                                            c_Explicit_Function1D[q5, i]]
+         sum([dist_FunctionNDPartial_Values[c_ExplicitR9_Function1D[q4, i],
+                                            c_ExplicitR9_Function1D[q5, i]]
                   | i : int(1..codeWordLength)])
          >= minDist
          /\
-         and([dist_FunctionNDPartial_Flags[c_Explicit_Function1D[q4, i],
-                                           c_Explicit_Function1D[q5, i]]
+         and([dist_FunctionNDPartial_Flags[c_ExplicitR9_Function1D[q4, i],
+                                           c_ExplicitR9_Function1D[q5, i]]
                   | i : int(1..codeWordLength)])
              | q4 : int(1..numOfCodeWords), q5 : int(1..numOfCodeWords)]),
-    and([c_Explicit_Function1D[q1, ..] <lex c_Explicit_Function1D[q1 + 1, ..]
+    and([c_ExplicitR9_Function1D[q1, ..] <lex c_ExplicitR9_Function1D[q1 + 1, ..]
              | q1 : int(1..numOfCodeWords - 1)])
 

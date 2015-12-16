@@ -15,11 +15,11 @@ find white_ExplicitVarSizeWithFlags_Values_2:
         matrix indexed by [int(1..(1 + (n - 1)) * (1 + (n - 1)))] of int(1..n)
 maximising
     black_ExplicitVarSizeWithMarker_Marker +
-    sum([white_ExplicitVarSizeWithFlags_Flags[q10]
+    sum([toInt(white_ExplicitVarSizeWithFlags_Flags[q10])
              | q10 : int(1..(1 + (n - 1)) * (1 + (n - 1)))])
 such that
     black_ExplicitVarSizeWithMarker_Marker =
-    sum([white_ExplicitVarSizeWithFlags_Flags[q12]
+    sum([toInt(white_ExplicitVarSizeWithFlags_Flags[q12])
              | q12 : int(1..(1 + (n - 1)) * (1 + (n - 1)))]),
     and([q14 <= black_ExplicitVarSizeWithMarker_Marker ->
          and([white_ExplicitVarSizeWithFlags_Flags[q16] ->

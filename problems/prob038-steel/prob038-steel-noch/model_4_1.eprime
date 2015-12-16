@@ -1,0 +1,307 @@
+language ESSENCE' 1.0
+
+given n_colours: int(1..)
+given n_orders: int(1..)
+given col_per_slab: int(1..)
+given n_orderSize: int(1..)
+given nbSizes: int(1..)
+given fin1: int
+given ordSize_Function1D:
+        matrix indexed by [int(1..n_orders)] of int(1..n_orderSize)
+given fin2: int
+given ordCol_Function1D:
+        matrix indexed by [int(1..n_orders)] of int(1..n_colours)
+find cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker:
+        int(0..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))
+find cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1))),
+                           int(1..1 + (n_orders - 1))] of bool
+find cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values:
+        matrix indexed by [int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1))),
+                           int(1..1 + (n_orders - 1))] of int(1..n_orders)
+find cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_2:
+        matrix indexed by [int(1..2 ** (1 + (n_orders - 1)) *
+                                  (1 + (nbSizes - 1)))] of int(1..nbSizes)
+minimising
+    sum([toInt(q69 <=
+               cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker)
+         *
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_2[q69]
+             | q69 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))])
+such that
+    and([and([q54 <=
+              cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker,
+              q64 <=
+              cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker,
+              or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q54,
+                                                                                                                               q59]
+                  /\
+                  !or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q64,
+                                                                                                                                    q66]
+                       /\
+                       cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q64,
+                                                                                                                                     q66]
+                       =
+                       cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q54,
+                                                                                                                                     q59]
+                           | q66 : int(1..1 + (n_orders - 1))])
+                      | q59 : int(1..1 + (n_orders - 1))])
+              \/
+              or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q64,
+                                                                                                                               q67]
+                  /\
+                  !or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q54,
+                                                                                                                                    q62]
+                       /\
+                       cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q54,
+                                                                                                                                     q62]
+                       =
+                       cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q64,
+                                                                                                                                     q67]
+                           | q62 : int(1..1 + (n_orders - 1))])
+                      | q67 : int(1..1 + (n_orders - 1))]); int(1..3)])
+         ->
+         sum([toInt(cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q54,
+                                                                                                                                 q56]
+                    /\
+                    or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q64,
+                                                                                                                                     q65]
+                        /\
+                        cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q64,
+                                                                                                                                      q65]
+                        =
+                        cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q54,
+                                                                                                                                      q56]
+                            | q65 : int(1..1 + (n_orders - 1))]))
+                  | q56 : int(1..1 + (n_orders - 1))])
+         = 0 | q54 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1))),
+               q64 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
+    and([or([q12 <=
+             cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+             /\
+             or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q12,
+                                                                                                                              q14]
+                 /\
+                 cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q12,
+                                                                                                                               q14]
+                 = o | q14 : int(1..1 + (n_orders - 1))])
+                 | q12 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))])
+             | o : int(1..n_orders)]),
+    and([q43 <=
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+         ->
+         or([q35 <=
+             cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+             /\
+             (and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q35,
+                                                                                                                                q37]
+                   ->
+                   or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q43,
+                                                                                                                                    q44]
+                       /\
+                       cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q43,
+                                                                                                                                     q44]
+                       =
+                       cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q35,
+                                                                                                                                     q37]
+                           | q44 : int(1..1 + (n_orders - 1))])
+                       | q37 : int(1..1 + (n_orders - 1))])
+              /\
+              and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q43,
+                                                                                                                                q45]
+                   ->
+                   or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q35,
+                                                                                                                                    q41]
+                       /\
+                       cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q35,
+                                                                                                                                     q41]
+                       =
+                       cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q43,
+                                                                                                                                     q45]
+                           | q41 : int(1..1 + (n_orders - 1))])
+                       | q45 : int(1..1 + (n_orders - 1))])
+              /\
+              cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_2[q35]
+              >=
+              sum([toInt(cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q43,
+                                                                                                                                      q46])
+                   *
+                   ordSize_Function1D[cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q43,
+                                                                                                                                                    q46]]
+                       | q46 : int(1..1 + (n_orders - 1))]))
+                 | q35 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))])
+             | q43 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
+    and([q48 <=
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+         ->
+         sum([toInt(cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q48,
+                                                                                                                                 q49])
+              *
+              ordSize_Function1D[cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q48,
+                                                                                                                                               q49]]
+                  | q49 : int(1..1 + (n_orders - 1))])
+         <=
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_2[q48]
+             | q48 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
+    and([q51 <=
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+         ->
+         sum([toInt(cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q51,
+                                                                                                                                 q52])
+              *
+              ordCol_Function1D[cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q51,
+                                                                                                                                              q52]]
+                  | q52 : int(1..1 + (n_orders - 1))])
+         <= col_per_slab
+             | q51 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
+    and([q1 + 1 <=
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+         ->
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                                                      ..]
+         <lex
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q1
+                                                                                                                      +
+                                                                                                                      1,
+                                                                                                                      ..]
+         \/
+         and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                                                           q15]
+              =
+              cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q1
+                                                                                                                           +
+                                                                                                                           1,
+                                                                                                                           q15]
+                  | q15 : int(1..1 + (n_orders - 1))])
+         /\
+         and([or([q15 = q16 | q16 : int(1..1 + (n_orders - 1))])
+                  | q15 : int(1..1 + (n_orders - 1))])
+         /\
+         and([or([q15 = q16 | q16 : int(1..1 + (n_orders - 1))])
+                  | q15 : int(1..1 + (n_orders - 1))])
+         /\
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q1,
+                                                                                                                       ..]
+         <lex
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q1
+                                                                                                                       +
+                                                                                                                       1,
+                                                                                                                       ..]
+         \/
+         and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                                                           q18]
+              ->
+              or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q1
+                                                                                                                               +
+                                                                                                                               1,
+                                                                                                                               q20]
+                  /\
+                  cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q1
+                                                                                                                                +
+                                                                                                                                1,
+                                                                                                                                q20]
+                  =
+                  cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q1,
+                                                                                                                                q18]
+                      | q20 : int(1..1 + (n_orders - 1))])
+                  | q18 : int(1..1 + (n_orders - 1))])
+         /\
+         and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q1
+                                                                                                                           +
+                                                                                                                           1,
+                                                                                                                           q22]
+              ->
+              or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q1,
+                                                                                                                               q24]
+                  /\
+                  cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q1,
+                                                                                                                                q24]
+                  =
+                  cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q1
+                                                                                                                                +
+                                                                                                                                1,
+                                                                                                                                q22]
+                      | q24 : int(1..1 + (n_orders - 1))])
+                  | q22 : int(1..1 + (n_orders - 1))])
+         /\
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_2[q1]
+         <
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_2[q1
+                                                                                       + 1]
+             | q1 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)) - 1)]),
+    and([q2 >
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+         ->
+         and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q2,
+                                                                                                                           q25]
+              = false
+                  | q25 : int(1..1 + (n_orders - 1))])
+         /\
+         and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q2,
+                                                                                                                            q26]
+              = 1 | q26 : int(1..1 + (n_orders - 1))])
+         /\
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_2[q2]
+         = 1 | q2 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
+    and([q3 <=
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+         ->
+         and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q3,
+                                                                                                                           q4
+                                                                                                                           +
+                                                                                                                           1]
+              ->
+              cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q3,
+                                                                                                                            q4]
+              <
+              cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q3,
+                                                                                                                            q4
+                                                                                                                            +
+                                                                                                                            1]
+                  | q4 : int(1..1 + (n_orders - 1) - 1)])
+             | q3 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
+    and([q3 <=
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+         ->
+         and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q3,
+                                                                                                                           q5]
+              = false
+              ->
+              cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q3,
+                                                                                                                            q5]
+              = 1 | q5 : int(1..1 + (n_orders - 1))])
+             | q3 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
+    and([q3 <=
+         cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+         ->
+         and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q3,
+                                                                                                                           q6
+                                                                                                                           +
+                                                                                                                           1]
+              ->
+              cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q3,
+                                                                                                                           q6]
+                  | q6 : int(1..1 + (n_orders - 1) - 1)])
+             | q3 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))]),
+    and([1 >=
+         sum([toInt(q28 <=
+                    cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Marker
+                    /\
+                    (and([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q28,
+                                                                                                                                       q30]
+                          ->
+                          q9_Occurrence[cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q28,
+                                                                                                                                                      q30]]
+                              | q30 : int(1..1 + (n_orders - 1))])
+                     /\
+                     and([or([cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags[q28,
+                                                                                                                                           q33]
+                              /\
+                              cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values[q28,
+                                                                                                                                            q33]
+                              = q31
+                                  | q33 : int(1..1 + (n_orders - 1))])
+                              | q31 : int(1..n_orders), q9_Occurrence[q31]])))
+                  | q28 : int(1..2 ** (1 + (n_orders - 1)) * (1 + (nbSizes - 1)))])
+             | q9_Occurrence : matrix indexed by [int(1..n_orders)] of bool])
+

@@ -1,0 +1,18 @@
+language ESSENCE' 1.0
+
+given n: int(1..20)
+given colours: int(1..10)
+letting num_edges be n * (n - 1)
+find graph_FunctionNDPartial_Flags:
+        matrix indexed by [int(1..n), int(1..n)] of bool
+find graph_FunctionNDPartial_Values:
+        matrix indexed by [int(1..n), int(1..n)] of int(1..colours)
+such that
+    and([true | q6_1 : int(1..n), q6_2 : int(1..n), q6_1 = q6_2 /\ q6_2 != q6_1]),
+    and([graph_FunctionNDPartial_Flags[q1_1, q1_2] = false ->
+         graph_FunctionNDPartial_Values[q1_1, q1_2] = 1
+             | q1_1 : int(1..n), q1_2 : int(1..n)]),
+    num_edges =
+    sum([toInt(graph_FunctionNDPartial_Flags[q2_1, q2_2])
+             | q2_1 : int(1..n), q2_2 : int(1..n)])
+

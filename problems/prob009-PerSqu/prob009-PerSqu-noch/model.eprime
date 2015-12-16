@@ -11,15 +11,12 @@ such that
     and([x_Function1D[s] + s < container_size /\
          y_Function1D[s] + s < container_size
              | s : int(1..nbSizes)]),
-    and([max([[x_Function1D[s1], x_Function1D[s2]; int(1..2)][q5] | q5 : int(1..2)])
-         -
-         min([[x_Function1D[s1] + s1, x_Function1D[s2] + s2; int(1..2)][q8]
-                  | q8 : int(1..2)])
+    and([max([x_Function1D[s1], x_Function1D[s2]; int(1..2)]) -
+         min([x_Function1D[s1] + s1, x_Function1D[s2] + s2; int(1..2)])
          >= 0
          \/
-         max([[y_Function1D[s1], y_Function1D[s2]; int(1..2)][q11] | q11 : int(1..2)]) -
-         min([[y_Function1D[s1] + s1, y_Function1D[s2] + s2; int(1..2)][q14]
-                  | q14 : int(1..2)])
+         max([y_Function1D[s1], y_Function1D[s2]; int(1..2)]) -
+         min([y_Function1D[s1] + s1, y_Function1D[s2] + s2; int(1..2)])
          >= 0
              | s1 : int(1..nbSizes), s2 : int(1..nbSizes), s1 != s2])
 

@@ -4,24 +4,18 @@ given n: int
 where n >= 0
 letting bound be 2 ** n
 find Ticks_Explicit: matrix indexed by [int(1..n)] of int(0..bound)
-minimising max([Ticks_Explicit[q8] | q8 : int(1..n)])
+minimising max([Ticks_Explicit[q16] | q16 : int(1..n)])
 such that
     and([Ticks_Explicit[q3] < Ticks_Explicit[q4] ->
          and([Ticks_Explicit[q5] < Ticks_Explicit[q6] ->
               (!(Ticks_Explicit[q3] = Ticks_Explicit[q5] /\
                  Ticks_Explicit[q4] = Ticks_Explicit[q6])
                ->
-               max([[Ticks_Explicit[q3], Ticks_Explicit[q4]; int(1..2)][q11]
-                        | q11 : int(1..2)])
-               -
-               min([[Ticks_Explicit[q3], Ticks_Explicit[q4]; int(1..2)][q14]
-                        | q14 : int(1..2)])
+               max([Ticks_Explicit[q3], Ticks_Explicit[q4]; int(1..2)]) -
+               min([Ticks_Explicit[q3], Ticks_Explicit[q4]; int(1..2)])
                !=
-               max([[Ticks_Explicit[q5], Ticks_Explicit[q6]; int(1..2)][q17]
-                        | q17 : int(1..2)])
-               -
-               min([[Ticks_Explicit[q5], Ticks_Explicit[q6]; int(1..2)][q20]
-                        | q20 : int(1..2)]))
+               max([Ticks_Explicit[q5], Ticks_Explicit[q6]; int(1..2)]) -
+               min([Ticks_Explicit[q5], Ticks_Explicit[q6]; int(1..2)]))
                   | q5 : int(1..n), q6 : int(1..n)])
              | q3 : int(1..n), q4 : int(1..n)]),
     and([Ticks_Explicit[q1] < Ticks_Explicit[q1 + 1] | q1 : int(1..n - 1)])

@@ -18,15 +18,15 @@ such that
     and([prereq_RelationAsMatrix[c1, c2] ->
          curr_Function1D[c1] < curr_Function1D[c2]
              | c1 : int(1..n_courses), c2 : int(1..n_courses)]),
-    and([sum([(curr_Function1D[q3] = p) * credits_Function1D[q3]
+    and([sum([toInt(curr_Function1D[q3] = p) * credits_Function1D[q3]
                   | q3 : int(1..n_courses)])
          <= maxl
          /\
-         sum([(curr_Function1D[q5] = p) * credits_Function1D[q5]
+         sum([toInt(curr_Function1D[q5] = p) * credits_Function1D[q5]
                   | q5 : int(1..n_courses)])
          >= minl
              | p : int(1..n_periods)]),
-    and([sum([curr_Function1D[q8] = p | q8 : int(1..n_courses)]) <= maxc /\
-         sum([curr_Function1D[q11] = p | q11 : int(1..n_courses)]) >= minc
+    and([sum([toInt(curr_Function1D[q8] = p) | q8 : int(1..n_courses)]) <= maxc /\
+         sum([toInt(curr_Function1D[q11] = p) | q11 : int(1..n_courses)]) >= minc
              | p : int(1..n_periods)])
 

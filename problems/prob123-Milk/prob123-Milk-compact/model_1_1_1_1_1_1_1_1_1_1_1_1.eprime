@@ -10,9 +10,9 @@ given fin2: int
 given large_Occurrence: matrix indexed by [int(1..let2)] of bool
 letting let3 be n_farms + 1
 given fin3: int
-given distance_FunctionAsRelation_RelationAsSet_Explicit_1_Occurrence:
+given distance_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence:
         matrix indexed by [int(1..fin3), int(1..let3)] of bool
-given distance_FunctionAsRelation_RelationAsSet_Explicit_2:
+given distance_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_2:
         matrix indexed by [int(1..fin3)] of int(0..100)
 letting let4 be n_farms + 1
 given fin4: int
@@ -33,13 +33,13 @@ letting let8 be n_farms + 1
 find even_Function1DPartial_Flags: matrix indexed by [int(1..let7)] of bool
 find even_Function1DPartial_Values:
         matrix indexed by [int(1..let7)] of int(1..let8)
-find aux1_Occurrence: matrix indexed by [int(1..let2), int(1..let6)] of bool
 find aux2_Occurrence: matrix indexed by [int(1..let2), int(1..let8)] of bool
+find aux1_Occurrence: matrix indexed by [int(1..let2), int(1..let6)] of bool
 find aux3_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
-find aux4_Occurrence: matrix indexed by [int(1..let1), int(1..let8)] of bool
 find aux5_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
-find aux6_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
+find aux4_Occurrence: matrix indexed by [int(1..let1), int(1..let8)] of bool
 find aux7_Occurrence: matrix indexed by [int(1..let1), int(1..let8)] of bool
+find aux6_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
 find aux8_Occurrence: matrix indexed by [int(1..let6)] of bool
 find aux9_Occurrence: matrix indexed by [int(1..let8)] of bool
 such that
@@ -47,15 +47,6 @@ such that
     odd_Function1DPartial_Flags[1],
     even_Function1DPartial_Values[1] = 1,
     even_Function1DPartial_Flags[1],
-    and([and([odd_Function1DPartial_Flags[q12] ->
-              aux1_Occurrence[f, odd_Function1DPartial_Values[q12]]
-                  | q12 : int(1..let5)])
-             | f : int(1..let2)]),
-    and([and([aux1_Occurrence[f, q9] ->
-              or([odd_Function1DPartial_Flags[q13] /\ odd_Function1DPartial_Values[q13] = q9
-                      | q13 : int(1..let5)])
-                  | q9 : int(1..let6)])
-             | f : int(1..let2)]),
     and([and([even_Function1DPartial_Flags[q19] ->
               aux2_Occurrence[f, even_Function1DPartial_Values[q19]]
                   | q19 : int(1..let7)])
@@ -66,88 +57,97 @@ such that
                       | q20 : int(1..let7)])
                   | q16 : int(1..let8)])
              | f : int(1..let2)]),
+    and([and([odd_Function1DPartial_Flags[q12] ->
+              aux1_Occurrence[f, odd_Function1DPartial_Values[q12]]
+                  | q12 : int(1..let5)])
+             | f : int(1..let2)]),
+    and([and([aux1_Occurrence[f, q9] ->
+              or([odd_Function1DPartial_Flags[q13] /\ odd_Function1DPartial_Values[q13] = q9
+                      | q13 : int(1..let5)])
+                  | q9 : int(1..let6)])
+             | f : int(1..let2)]),
     and([or([aux1_Occurrence[f, q8] /\
              or([aux2_Occurrence[f, q15] /\ q15 = q8 | q15 : int(1..let8)])
              /\ q8 = f
                  | q8 : int(1..let6)])
              | f : int(1..let2), large_Occurrence[f]]),
-    and([and([odd_Function1DPartial_Flags[q26] ->
-              aux3_Occurrence[f, odd_Function1DPartial_Values[q26]]
-                  | q26 : int(1..let5)])
+    and([and([odd_Function1DPartial_Flags[q28] ->
+              aux3_Occurrence[f, odd_Function1DPartial_Values[q28]]
+                  | q28 : int(1..let5)])
              | f : int(1..let1)]),
-    and([and([aux3_Occurrence[f, q23] ->
-              or([odd_Function1DPartial_Flags[q27] /\ odd_Function1DPartial_Values[q27] = q23
-                      | q27 : int(1..let5)])
-                  | q23 : int(1..let6)])
+    and([and([aux3_Occurrence[f, q25] ->
+              or([odd_Function1DPartial_Flags[q29] /\ odd_Function1DPartial_Values[q29] = q25
+                      | q29 : int(1..let5)])
+                  | q25 : int(1..let6)])
              | f : int(1..let1)]),
-    and([and([even_Function1DPartial_Flags[q32] ->
-              aux4_Occurrence[f, even_Function1DPartial_Values[q32]]
-                  | q32 : int(1..let7)])
+    and([and([odd_Function1DPartial_Flags[q41] ->
+              aux5_Occurrence[f, odd_Function1DPartial_Values[q41]]
+                  | q41 : int(1..let5)])
              | f : int(1..let1)]),
-    and([and([aux4_Occurrence[f, q29] ->
-              or([even_Function1DPartial_Flags[q33] /\
-                  even_Function1DPartial_Values[q33] = q29
-                      | q33 : int(1..let7)])
-                  | q29 : int(1..let8)])
+    and([and([aux5_Occurrence[f, q38] ->
+              or([odd_Function1DPartial_Flags[q42] /\ odd_Function1DPartial_Values[q42] = q38
+                      | q42 : int(1..let5)])
+                  | q38 : int(1..let6)])
              | f : int(1..let1)]),
-    and([and([odd_Function1DPartial_Flags[q39] ->
-              aux5_Occurrence[f, odd_Function1DPartial_Values[q39]]
-                  | q39 : int(1..let5)])
+    and([and([even_Function1DPartial_Flags[q34] ->
+              aux4_Occurrence[f, even_Function1DPartial_Values[q34]]
+                  | q34 : int(1..let7)])
              | f : int(1..let1)]),
-    and([and([aux5_Occurrence[f, q36] ->
-              or([odd_Function1DPartial_Flags[q40] /\ odd_Function1DPartial_Values[q40] = q36
-                      | q40 : int(1..let5)])
-                  | q36 : int(1..let6)])
+    and([and([aux4_Occurrence[f, q31] ->
+              or([even_Function1DPartial_Flags[q35] /\
+                  even_Function1DPartial_Values[q35] = q31
+                      | q35 : int(1..let7)])
+                  | q31 : int(1..let8)])
              | f : int(1..let1)]),
-    and([and([odd_Function1DPartial_Flags[q46] ->
-              aux6_Occurrence[f, odd_Function1DPartial_Values[q46]]
-                  | q46 : int(1..let5)])
+    and([and([even_Function1DPartial_Flags[q55] ->
+              aux7_Occurrence[f, even_Function1DPartial_Values[q55]]
+                  | q55 : int(1..let7)])
              | f : int(1..let1)]),
-    and([and([aux6_Occurrence[f, q43] ->
-              or([odd_Function1DPartial_Flags[q47] /\ odd_Function1DPartial_Values[q47] = q43
-                      | q47 : int(1..let5)])
-                  | q43 : int(1..let6)])
+    and([and([aux7_Occurrence[f, q52] ->
+              or([even_Function1DPartial_Flags[q56] /\
+                  even_Function1DPartial_Values[q56] = q52
+                      | q56 : int(1..let7)])
+                  | q52 : int(1..let8)])
              | f : int(1..let1)]),
-    and([and([even_Function1DPartial_Flags[q53] ->
-              aux7_Occurrence[f, even_Function1DPartial_Values[q53]]
-                  | q53 : int(1..let7)])
+    and([and([odd_Function1DPartial_Flags[q48] ->
+              aux6_Occurrence[f, odd_Function1DPartial_Values[q48]]
+                  | q48 : int(1..let5)])
              | f : int(1..let1)]),
-    and([and([aux7_Occurrence[f, q50] ->
-              or([even_Function1DPartial_Flags[q54] /\
-                  even_Function1DPartial_Values[q54] = q50
-                      | q54 : int(1..let7)])
-                  | q50 : int(1..let8)])
+    and([and([aux6_Occurrence[f, q45] ->
+              or([odd_Function1DPartial_Flags[q49] /\ odd_Function1DPartial_Values[q49] = q45
+                      | q49 : int(1..let5)])
+                  | q45 : int(1..let6)])
              | f : int(1..let1)]),
-    and([(or(flatten([aux3_Occurrence[f, q22] /\ q22 = f | q22 : int(1..let6)])) \/
-          or(flatten([aux4_Occurrence[f, q28] /\
-                      !or([aux5_Occurrence[f, q35] /\ q35 = q28 | q35 : int(1..let6)])
-                      /\ q28 = f
-                          | q28 : int(1..let8)])))
+    and([(or([aux3_Occurrence[f, q24] /\ q24 = f | q24 : int(1..let6)]) \/
+          or([aux4_Occurrence[f, q30] /\
+              !or([aux5_Occurrence[f, q37] /\ q37 = q30 | q37 : int(1..let6)])
+              /\ q30 = f
+                  | q30 : int(1..let8)]))
          /\
-         !or([aux6_Occurrence[f, q42] /\
-              or([aux7_Occurrence[f, q49] /\ q49 = q42 | q49 : int(1..let8)])
-              /\ q42 = f
-                  | q42 : int(1..let6)])
+         !or([aux6_Occurrence[f, q44] /\
+              or([aux7_Occurrence[f, q51] /\ q51 = q44 | q51 : int(1..let8)])
+              /\ q44 = f
+                  | q44 : int(1..let6)])
              | f : int(1..let1), small_Occurrence[f]]),
-    and([odd_Function1DPartial_Flags[q59] ->
-         aux8_Occurrence[odd_Function1DPartial_Values[q59]]
-             | q59 : int(1..let5)]),
-    and([aux8_Occurrence[q56] ->
-         or([odd_Function1DPartial_Flags[q60] /\ odd_Function1DPartial_Values[q60] = q56
-                 | q60 : int(1..let5)])
-             | q56 : int(1..let6)]),
-    sum([aux8_Occurrence[q55] * milk_Function1D[q55] | q55 : int(1..let6)]) <=
-    capacity,
-    and([even_Function1DPartial_Flags[q65] ->
-         aux9_Occurrence[even_Function1DPartial_Values[q65]]
-             | q65 : int(1..let7)]),
-    and([aux9_Occurrence[q62] ->
-         or([even_Function1DPartial_Flags[q66] /\
-             even_Function1DPartial_Values[q66] = q62
-                 | q66 : int(1..let7)])
-             | q62 : int(1..let8)]),
-    sum([aux9_Occurrence[q61] * milk_Function1D[q61] | q61 : int(1..let8)]) <=
-    capacity,
+    and([odd_Function1DPartial_Flags[q63] ->
+         aux8_Occurrence[odd_Function1DPartial_Values[q63]]
+             | q63 : int(1..let5)]),
+    and([aux8_Occurrence[q60] ->
+         or([odd_Function1DPartial_Flags[q64] /\ odd_Function1DPartial_Values[q64] = q60
+                 | q64 : int(1..let5)])
+             | q60 : int(1..let6)]),
+    sum([toInt(aux8_Occurrence[q59]) * milk_Function1D[q59] | q59 : int(1..let6)])
+    <= capacity,
+    and([even_Function1DPartial_Flags[q69] ->
+         aux9_Occurrence[even_Function1DPartial_Values[q69]]
+             | q69 : int(1..let7)]),
+    and([aux9_Occurrence[q66] ->
+         or([even_Function1DPartial_Flags[q70] /\
+             even_Function1DPartial_Values[q70] = q66
+                 | q70 : int(1..let7)])
+             | q66 : int(1..let8)]),
+    sum([toInt(aux9_Occurrence[q65]) * milk_Function1D[q65] | q65 : int(1..let8)])
+    <= capacity,
     and([odd_Function1DPartial_Flags[q1] = false ->
          odd_Function1DPartial_Values[q1] = 1
              | q1 : int(1..let5)]),

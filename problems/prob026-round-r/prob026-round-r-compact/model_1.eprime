@@ -5,43 +5,51 @@ where n_teams % 2 = 0
 letting let1 be n_teams - 1
 letting let2 be n_teams / 2
 letting let3 be (n_teams - 1) * n_teams / 2
-find sched_RelationAsSet_Explicit_1:
+find sched_RelationAsSetR2_ExplicitR2_1:
         matrix indexed by [int(1..let3)] of int(1..let1)
-find sched_RelationAsSet_Explicit_2:
+find sched_RelationAsSetR2_ExplicitR2_2:
         matrix indexed by [int(1..let3)] of int(1..let2)
-find sched_RelationAsSet_Explicit_3_Occurrence:
+find sched_RelationAsSetR2_ExplicitR2_3_Occurrence:
         matrix indexed by [int(1..let3), int(1..n_teams)] of bool
 such that
-    and([and([or([sched_RelationAsSet_Explicit_1[q18] = w /\
-                  or([sched_RelationAsSet_Explicit_3_Occurrence[q18, q4] /\ q4 = t
-                          | q4 : int(1..n_teams)])
-                      | q18 : int(1..let3)])
+    and([and([or([sched_RelationAsSetR2_ExplicitR2_1[q19] = w /\
+                  or([sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q19, q16] /\ q16 = t
+                          | q16 : int(1..n_teams)])
+                      | q19 : int(1..let3)])
                   | w : int(1..let1)])
              | t : int(1..n_teams)]),
-    and([and([sum([(sched_RelationAsSet_Explicit_2[q21] = p) *
-                   or([sched_RelationAsSet_Explicit_3_Occurrence[q21, q5] /\ q5 = t
-                           | q5 : int(1..n_teams)])
-                       | q21 : int(1..let3)])
+    and([and([sum([toInt(sched_RelationAsSetR2_ExplicitR2_2[q7] = p) *
+                   toInt(or([sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q7, q4] /\ q4 = t
+                                 | q4 : int(1..n_teams)]))
+                       | q7 : int(1..let3)])
               <= 2
                   | p : int(1..let2)])
              | t : int(1..n_teams)]),
-    and([sum([and([sched_RelationAsSet_Explicit_3_Occurrence[q8, q9] ->
-                   or([[t1, t2; int(1..2)][q12] = q9 | q12 : int(1..2)])
-                       | q9 : int(1..n_teams)])
-              /\
-              and([sched_RelationAsSet_Explicit_3_Occurrence[q8, [t1, t2; int(1..2)][q15]]
-                       | q15 : int(1..2)])
-                  | q8 : int(1..let3)])
+    and([sum([toInt(and([sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q10, q11] ->
+                         t1 = q11 \/ t2 = q11
+                             | q11 : int(1..n_teams)])
+                    /\
+                    (sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q10, t1] /\
+                     sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q10, t2]))
+                  | q10 : int(1..let3)])
          = 1 | t1 : int(1..n_teams), t2 : int(1..n_teams), t1 != t2]),
-    and([sched_RelationAsSet_Explicit_1[q1] < sched_RelationAsSet_Explicit_1[q1 + 1]
+    and([sched_RelationAsSetR2_ExplicitR2_1[q1] <
+         sched_RelationAsSetR2_ExplicitR2_1[q1 + 1]
          \/
-         sched_RelationAsSet_Explicit_1[q1] = sched_RelationAsSet_Explicit_1[q1 + 1] /\
-         (sched_RelationAsSet_Explicit_2[q1] < sched_RelationAsSet_Explicit_2[q1 + 1] \/
-          sched_RelationAsSet_Explicit_2[q1] = sched_RelationAsSet_Explicit_2[q1 + 1] /\
-          sched_RelationAsSet_Explicit_3_Occurrence[q1, ..] <lex
-          sched_RelationAsSet_Explicit_3_Occurrence[q1 + 1, ..])
+         sched_RelationAsSetR2_ExplicitR2_1[q1] =
+         sched_RelationAsSetR2_ExplicitR2_1[q1 + 1]
+         /\
+         (sched_RelationAsSetR2_ExplicitR2_2[q1] <
+          sched_RelationAsSetR2_ExplicitR2_2[q1 + 1]
+          \/
+          sched_RelationAsSetR2_ExplicitR2_2[q1] =
+          sched_RelationAsSetR2_ExplicitR2_2[q1 + 1]
+          /\
+          sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q1, ..] <lex
+          sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q1 + 1, ..])
              | q1 : int(1..let3 - 1)]),
     and([2 =
-         sum([sched_RelationAsSet_Explicit_3_Occurrence[q2, q3] | q3 : int(1..n_teams)])
+         sum([toInt(sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q2, q3])
+                  | q3 : int(1..n_teams)])
              | q2 : int(1..let3)])
 

@@ -15,7 +15,7 @@ find orders:
 find stock:
         matrix indexed by [int(1..numNodes), int(0..numPeriods)] of int(0..maxStock)
 minimising
-    sum([sum([holdingCost[i] * stock[i, t] + procCost[i] * (orders[i, t] > 0)
+    sum([sum([holdingCost[i] * stock[i, t] + procCost[i] * toInt(orders[i, t] > 0)
                   | i : int(1..numNodes)])
              | t : int(1..numPeriods)])
 such that

@@ -13,7 +13,7 @@ letting let3 be gridSize * gridSize
 find solutionGrid:
         matrix indexed by [int(1..let1), int(1..let2)] of int(1..let3)
 such that
-    and([allDiff(solutionGrid[.., i, ..]) /\ allDiff(solutionGrid[i, .., ..])
+    and([allDiff(solutionGrid[.., i, ..]) /\ allDiff(solutionGrid[i, ..])
              | i : int(1..gridSize * gridSize)]),
     and([or([and([numberMapping_Function1D[boxColumn + (boxRow - 1) * gridSize] =
                   solutionGrid[gridColumn * gridSize + boxColumn, gridRow * gridSize + boxRow]

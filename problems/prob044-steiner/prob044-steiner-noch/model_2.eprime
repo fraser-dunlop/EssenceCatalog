@@ -5,8 +5,8 @@ where n % 6 = 1 \/ n % 6 = 3
 letting nb be n * (n - 1) / 6
 find sets_Explicit: matrix indexed by [int(1..nb), int(1..3)] of int(1..n)
 such that
-    and([and([sum([or([sets_Explicit[setB, q7] = sets_Explicit[setA, q5]
-                           | q7 : int(1..3)])
+    and([and([sum([toInt(or([sets_Explicit[setB, q7] = sets_Explicit[setA, q5]
+                                 | q7 : int(1..3)]))
                        | q5 : int(1..3)])
               <= 1
                   | setB : int(setA + 1..nb)])

@@ -12,23 +12,23 @@ given fin6: int
 given gain_Function1D:
         matrix indexed by [int(1..items_EnumSize)] of int(fin5..fin6)
 given capacity: int
-find picked_ExplicitVarSizeWithMarker_Marker: int(0..1 + (items_EnumSize - 1))
-find picked_ExplicitVarSizeWithMarker_Values:
-        matrix indexed by [int(1..1 + (items_EnumSize - 1))] of int(1..items_EnumSize)
+find picked_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..1 + (items_EnumSize - 1))] of int(1..items_EnumSize +
+                                                                       1)
 maximising
-    sum([(q4 <= picked_ExplicitVarSizeWithMarker_Marker) *
-         gain_Function1D[picked_ExplicitVarSizeWithMarker_Values[q4]]
-             | q4 : int(1..1 + (items_EnumSize - 1))])
-such that
-    sum([(q5 <= picked_ExplicitVarSizeWithMarker_Marker) *
-         weight_Function1D[picked_ExplicitVarSizeWithMarker_Values[q5]]
+    sum([toInt(picked_ExplicitVarSizeWithDummy[q5] != items_EnumSize + 1) *
+         gain_Function1D[picked_ExplicitVarSizeWithDummy[q5]]
              | q5 : int(1..1 + (items_EnumSize - 1))])
+such that
+    sum([toInt(picked_ExplicitVarSizeWithDummy[q6] != items_EnumSize + 1) *
+         weight_Function1D[picked_ExplicitVarSizeWithDummy[q6]]
+             | q6 : int(1..1 + (items_EnumSize - 1))])
     <= capacity,
-    and([q1 + 1 <= picked_ExplicitVarSizeWithMarker_Marker ->
-         picked_ExplicitVarSizeWithMarker_Values[q1] <
-         picked_ExplicitVarSizeWithMarker_Values[q1 + 1]
+    and([picked_ExplicitVarSizeWithDummy[q1] <
+         picked_ExplicitVarSizeWithDummy[q1 + 1]
+         \/ picked_ExplicitVarSizeWithDummy[q1] = items_EnumSize + 1
              | q1 : int(1..1 + (items_EnumSize - 1) - 1)]),
-    and([q2 > picked_ExplicitVarSizeWithMarker_Marker ->
-         picked_ExplicitVarSizeWithMarker_Values[q2] = 1
-             | q2 : int(1..1 + (items_EnumSize - 1))])
+    and([picked_ExplicitVarSizeWithDummy[q2] = items_EnumSize + 1 ->
+         picked_ExplicitVarSizeWithDummy[q2 + 1] = items_EnumSize + 1
+             | q2 : int(1..1 + (items_EnumSize - 1) - 1)])
 

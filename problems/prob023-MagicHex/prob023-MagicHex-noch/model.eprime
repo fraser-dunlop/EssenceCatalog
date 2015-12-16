@@ -13,18 +13,12 @@ such that
                   | i1 : int(1..d - |o - r1|)])
              | r1 : int(1..d), r2 : int(1..d)]),
     and([sum([hexagon[r, i] | i : int(1..d - |o - r|)]) = s | r : int(1..d)]),
-    and([sum([hexagon[i + max([[0, o - r; int(1..2)][q5] | q5 : int(1..2)]),
-                      r -
-                      max([[0,
-                            o - (i + max([[0, o - r; int(1..2)][q11] | q11 : int(1..2)])); int(1..2)][q8]
-                               | q8 : int(1..2)])]
+    and([sum([hexagon[i + max([0, o - r; int(1..2)]),
+                      r - max([0, o - (i + max([0, o - r; int(1..2)])); int(1..2)])]
                   | i : int(1..d - |o - r|)])
          = s | r : int(1..d)]),
-    and([sum([hexagon[i + max([[0, r - o; int(1..2)][q14] | q14 : int(1..2)]),
-                      r -
-                      max([[0,
-                            i + max([[0, r - o; int(1..2)][q20] | q20 : int(1..2)]) - o; int(1..2)][q17]
-                               | q17 : int(1..2)])]
+    and([sum([hexagon[i + max([0, r - o; int(1..2)]),
+                      r - max([0, i + max([0, r - o; int(1..2)]) - o; int(1..2)])]
                   | i : int(1..d - |o - r|)])
          = s | r : int(1..d)])
 
