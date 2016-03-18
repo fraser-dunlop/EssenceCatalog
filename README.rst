@@ -10,6 +10,13 @@ Optionally, it will also contain:
 * parameter and solution files for known/published instances.
 * scripts to generate random parameter files.
 
+Old Version
+-----------
+
+An older version of the Essence Catalog is referenced from `The Automated Modelling of Constraint Programs <http://www.cs.york.ac.uk/aig/constraints/AutoModel/>`_ webpage hosted at the University of York.
+Unfortunately this version is not available at the moment.
+We found a version of it on the `Wayback machine <http://web.archive.org/web/20150402222531/http://www.cs.york.ac.uk/aig/constraints/AutoModel/Essence/specs120/>`_ which can be used in case you need to refer to that version.
+
 Relation to CSPLib
 ------------------
 
