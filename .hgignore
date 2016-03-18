@@ -1,6 +1,0 @@
-syntax: glob
-
-parallel-results*
-parallel-joblog*
-
-problems/prob013-party/results
