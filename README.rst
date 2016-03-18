@@ -10,7 +10,8 @@ Optionally, it will also contain:
 * parameter and solution files for known/published instances.
 * scripts to generate random parameter files.
 
-# Relation to CSPLib
+Relation to CSPLib
+------------------
 
 `CSPLib <http://www.csplib.org>`_ is a library of problems specified in natural language.
 Its code is hosted at `GitHub <http://github.com/csplib/csplib>`_.
