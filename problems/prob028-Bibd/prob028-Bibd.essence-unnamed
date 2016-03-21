@@ -1,4 +1,0 @@
-letting Obj   be new type of size v,
-        Block be new type of size b
-
-find bibd : relation of (Obj * Block)
