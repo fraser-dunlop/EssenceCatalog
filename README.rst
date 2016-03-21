@@ -24,8 +24,15 @@ Relation to CSPLib
 Its code is hosted at `GitHub <http://github.com/csplib/csplib>`_.
 
 This repository uses CSPLib as a submodule.
-We will try to make sure that
+
+We will try to make sure that:
 
 * all the Essence files hosted on CSPLib are included in the Essence Catalog, and
 * if an Essence file is added to the Essence Catalog, it will be moved to CSPLib as soon as possible (when we have a natural language problem specification ready).
+
+License
+-------
+
+All files in this repository are licensed under
+`Creative Commons Attribution 4.0 International License<http://creativecommons.org/licenses/by/4.0/>`_.
 
