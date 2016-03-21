@@ -1,31 +1,7 @@
-language Essence 1.3
-$ prob013.essence: Progressive Party Problem
-$ Problem details available at http://www.csplib.org/prob/prob013/
 
-given n_boats, n_periods : int(1..)
+Some "implied constraints" for this problem specification.
 
-letting Boat be domain int(1..n_boats)
-
-given capacity, crew : function (total) Boat --> int(1..)
-
-find hosts : set of Boat,
-     sched : set (size n_periods) of function (total) Boat --> Boat
-
-minimising |hosts|
-
-such that
-    forAll p in sched . range(p) subsetEq hosts,
-    forAll p in sched . forAll h in hosts . p(h) = h,
-    forAll p in sched . forAll h in hosts . (sum b in preImage(p,h) . crew(b))
-                                            <= capacity(h),
-    forAll b1,b2 : Boat
-        , b1 < b2
-        . (sum p in sched . toInt(p(b1) = p(b2))) <= 1
-
-
-$$$$ implied stuff
-
-such that
+.. code::
 
     $ the range of each function has at least 1 element.
     $ this is because the functions are total, in the worst case
@@ -55,4 +31,5 @@ such that
     forAll p in sched . (sum h in hosts . (sum b in preImage(p,h) . crew(b)))
                             <=
                         (sum h in hosts . capacity(h))
+
 

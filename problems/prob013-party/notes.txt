@@ -1,4 +1,0 @@
-took about 17  hours on a 2.3 GHz Intel Core i7  to run
-
-conjure --mode df-no-channelling --in-essence prob013-PPP.essence --better
-
