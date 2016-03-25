@@ -1,11 +1,11 @@
 language Essence 1.3
 
-letting sizes        be domain int(1..8 )
+letting nbSizes      be 8
 letting col_per_slab be 47
 letting n_colours    be 88
 letting n_orders     be 111
 
-letting ordsize be function( 1 --> 4
+letting ordSize be function( 1 --> 4
 	,2 --> 22
 	,3 --> 9
 	,4 --> 5
@@ -117,7 +117,7 @@ letting ordsize be function( 1 --> 4
 	,110 --> 10
 	,111 --> 3 )
 
-letting ordcol be function( 1 --> 1
+letting ordCol be function( 1 --> 1
 	,2 --> 2
 	,3 --> 3
 	,4 --> 4

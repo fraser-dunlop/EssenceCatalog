@@ -42,8 +42,8 @@ mkparam (info:n_colours:n_orders:rest) =
         [sizes,colours]  = transpose pairs
         (mSize,mColours) = unzip $zipWith3 handleMapping sizes colours [1..]
 
-        fsizes   = toFunc "ordsize" mSize
-        fColours = toFunc "ordcol"  mColours
+        fsizes   = toFunc "ordSize" mSize
+        fColours = toFunc "ordCol"  mColours
 
     in  handleData $ getInfo info ++  [n_colours,n_orders,fsizes,fColours ]
 
@@ -64,7 +64,7 @@ toFunc name mappings = "letting " ++ name ++ " be function( " ++ (intercalate "\
 handleData [a,b,c,d,g,h] = unlines
     ["language Essence 1.3"
     ,""
-    ,"letting sizes        be domain int(1.." ++ a ++ " )"
+    ,"letting nbSizes      be " ++ a ++ " )"
     ,"letting col_per_slab be "        ++ b
     ,"letting n_colours    be "        ++ c
     ,"letting n_orders     be "        ++ d

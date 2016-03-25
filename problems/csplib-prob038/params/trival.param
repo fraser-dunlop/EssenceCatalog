@@ -1,6 +1,6 @@
 language Essence 1.3
 
-letting sizes        be domain int(1..2)
+letting nbSizes      be 2
 letting col_per_slab be 39
 letting n_colours    be 88
 letting n_orders     be 2
