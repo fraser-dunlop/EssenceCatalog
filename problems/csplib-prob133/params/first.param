@@ -1,6 +1,6 @@
 language Essence 1.3
 
-letting items be enum {a,b,c,d,e}
+letting items be new type enum {a,b,c,d,e}
 letting capacity be 100
 
 letting values be function
