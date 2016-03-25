@@ -1,7 +1,5 @@
 language Essence 1.3
 
-letting n_upper be 5
-
 letting deck_width   be 16 
 letting deck_length  be 16
 letting n_containers be 10
