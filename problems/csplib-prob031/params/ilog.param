@@ -16,7 +16,7 @@ letting max_connects be function
 letting price be function
 (
   1 --> 90,
-  1 --> 110
+  2 --> 110
 )
 
 letting n_types be 4
