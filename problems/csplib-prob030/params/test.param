@@ -6,7 +6,6 @@ letting minl be 1
 letting n_courses be 1
 letting maxc be 1
 letting minc be 1
-letting n_credits be 5
 
 letting credits be function (  1 -->  1)
 letting prereq be relation(  (1,1)  )
