@@ -1,0 +1,134 @@
+language Essence 1.3
+
+letting numDigits be 4
+letting dimension be 9
+
+letting blackCells be
+    { (1,5)
+    , (2,3), (2,7)
+    , (3,2), (3,5), (3,8)
+    , (4,5)
+    , (5,1), (5,3), (5,4), (5,5), (5,6), (5,7), (5,9)
+    , (6,5)
+    , (7,2), (7,5), (7,8)
+    , (8,3), (8,7)
+    , (9,5)
+    }
+
+$ $ hints -- across
+$ such that
+$     across[ 1] = across[27] * 2,                $  1: 27 across times two
+$     across[ 4] = down[4] + 71,                  $  4: 4 down plus seventy-one
+$     across[ 7] = down[18] + 4,                  $  7: 18 down plus four
+$     across[ 8] = down[6] / 16,                  $  8: 6 down divided by sixteen
+$     across[ 9] = down[2] - 18,                  $  9: 2 down minus eighteen
+$     across[10] = 6 * 144 / 12,                  $ 10: Dozen in six gross
+$     across[11] = down[5] - 70,                  $ 11: 5 down minus seventy
+$     across[13] = down[26] * across[23],         $ 13: 26 down times 23 across
+$     across[15] = down[6] - 350,                 $ 15: 6 down minus 350
+$     across[17] = across[25] * across[23],       $ 17: 25 across times 23 across
+$     exists i : number . i**2 = across[20],      $ 20: A square number
+$     [ across[23] % i != 0                       $ 23: A prime number
+$     | i : number
+$     , i >= 2
+$     , i**2 <= across[23]
+$     ],
+$     exists i : number . i**2 = across[24],      $ 24: A square number
+$     across[25] = across[20] / 17,               $ 25: 20 across divided by seventeen
+$     across[27] = down[6] / 4,                   $ 27: 6 down divided by four
+$     across[28] = 4 * 12,                        $ 28: Four dozen
+$     across[29] = 7 * 144,                       $ 29: Seven gross
+$     across[30] = down[22] + 450                 $ 30: 22 down plus 450
+$
+$
+$ $ hints -- down
+$ such that
+$     down[ 1] = across[1] + 27,                  $  1: 1 across plus twenty-seven
+$     down[ 2] = 5 * 12,                          $  2: Five dozen
+$     down[ 3] = across[30] + 888,                $  3: 30 across plus 888
+$     down[ 4] = 2 * across[17],                  $  4: Two times 17 across
+$     down[ 5] = across[29] / 12,                 $  5: 29 across divided by twelve
+$     down[ 6] = across[28] * across[23],         $  6: 28 across times 23 across
+$     down[10] = across[10] + 4,                  $ 10: 10 across plus four
+$     down[12] = 3 * across[24],                  $ 12: Three times 24 across
+$     down[14] = across[13] / 16,                 $ 14: 13 across divided by sixteen
+$     down[16] = down[28] * 15,                   $ 16: 28 down times fifteen
+$     down[17] = across[13] - 399,                $ 17: 13 across minus 399
+$     down[18] = across[29] / 18,                 $ 18: 29 across divided by eighteen
+$     down[19] = down[22] - 94,                   $ 19: 22 down minus ninety-four
+$     down[20] = across[20] - 9,                  $ 20: 20 across minus nine
+$     down[21] = across[25] - 52,                 $ 21: 25 across minus fifty-two
+$     down[22] = down[20] * 6,                    $ 22: 20 down times six
+$     down[26] = 5 * across[24],                  $ 26: Five times 24 across
+$     down[28] = down[21] + 27                    $ 28: 21 down plus twenty-seven
+$
+$
+$ $ connecting digits to numbers
+$ such that
+$     forAll n : acrossIndex .
+$         across[n] = sum (i,d) in acrossDigits[n] . (10**max([0,|acrossDigits[n]|-i])) * d,
+$     forAll n : downIndex .
+$         down[n] = sum (i,d) in downDigits[n] . (10**max([0,|downDigits[n]|-i])) * d
+$
+$
+$ $ first digits are >1
+$ $ this is probably implied, but having it just in case.
+$ such that
+$     forAll n : acrossIndex . acrossDigits[n](1) > 0,
+$     forAll n : downIndex . downDigits[n](1) > 0
+$
+$
+$ $ connecting the digits to the grid
+$ such that
+$     acrossDigits[ 1] = [ grid[i,j] | i : int(1), j : int(1..4) ],
+$     acrossDigits[ 4] = [ grid[i,j] | i : int(1), j : int(6..9) ],
+$     acrossDigits[ 7] = [ grid[i,j] | i : int(2), j : int(1..2) ],
+$     acrossDigits[ 8] = [ grid[i,j] | i : int(2), j : int(4..6) ],
+$     acrossDigits[ 9] = [ grid[i,j] | i : int(2), j : int(8..9) ],
+$     acrossDigits[10] = [ grid[i,j] | i : int(3), j : int(3..4) ],
+$     acrossDigits[11] = [ grid[i,j] | i : int(3), j : int(6..7) ],
+$     acrossDigits[13] = [ grid[i,j] | i : int(4), j : int(1..4) ],
+$     acrossDigits[15] = [ grid[i,j] | i : int(4), j : int(6..9) ],
+$     acrossDigits[17] = [ grid[i,j] | i : int(6), j : int(1..4) ],
+$     acrossDigits[20] = [ grid[i,j] | i : int(6), j : int(6..9) ],
+$     acrossDigits[23] = [ grid[i,j] | i : int(7), j : int(3..4) ],
+$     acrossDigits[24] = [ grid[i,j] | i : int(7), j : int(6..7) ],
+$     acrossDigits[25] = [ grid[i,j] | i : int(8), j : int(1..2) ],
+$     acrossDigits[27] = [ grid[i,j] | i : int(8), j : int(4..6) ],
+$     acrossDigits[28] = [ grid[i,j] | i : int(8), j : int(8..9) ],
+$     acrossDigits[29] = [ grid[i,j] | i : int(9), j : int(1..4) ],
+$     acrossDigits[30] = [ grid[i,j] | i : int(9), j : int(6..9) ],
+$
+$     downDigits[ 1] = [ grid[i,j] | i : int(1..4), j : int(1) ],
+$     downDigits[ 2] = [ grid[i,j] | i : int(1..2), j : int(2) ],
+$     downDigits[ 3] = [ grid[i,j] | i : int(1..4), j : int(4) ],
+$     downDigits[ 4] = [ grid[i,j] | i : int(1..4), j : int(6) ],
+$     downDigits[ 5] = [ grid[i,j] | i : int(1..2), j : int(8) ],
+$     downDigits[ 6] = [ grid[i,j] | i : int(1..4), j : int(9) ],
+$     downDigits[10] = [ grid[i,j] | i : int(3..4), j : int(3) ],
+$     downDigits[12] = [ grid[i,j] | i : int(3..4), j : int(7) ],
+$     downDigits[14] = [ grid[i,j] | i : int(4..6), j : int(2) ],
+$     downDigits[16] = [ grid[i,j] | i : int(4..6), j : int(8) ],
+$     downDigits[17] = [ grid[i,j] | i : int(6..9), j : int(1) ],
+$     downDigits[18] = [ grid[i,j] | i : int(6..7), j : int(3) ],
+$     downDigits[19] = [ grid[i,j] | i : int(6..9), j : int(4) ],
+$     downDigits[20] = [ grid[i,j] | i : int(6..9), j : int(6) ],
+$     downDigits[21] = [ grid[i,j] | i : int(6..7), j : int(7) ],
+$     downDigits[22] = [ grid[i,j] | i : int(6..9), j : int(9) ],
+$     downDigits[26] = [ grid[i,j] | i : int(8..9), j : int(2) ],
+$     downDigits[28] = [ grid[i,j] | i : int(8..9), j : int(8) ]
+$
+$
+$
+$ $ the black blocks
+$ such that
+$     grid[1,5] = 0,
+$     grid[2,3] = 0, grid[2,7] = 0,
+$     grid[3,2] = 0, grid[3,5] = 0, grid[3,8] = 0,
+$     grid[4,5] = 0,
+$     grid[5,1] = 0, grid[5,3] = 0, grid[5,4] = 0, grid[5,5] = 0, grid[5,6] = 0, grid[5,7] = 0, grid[5,9] = 0,
+$     grid[6,5] = 0,
+$     grid[7,2] = 0, grid[7,5] = 0, grid[7,8] = 0,
+$     grid[8,3] = 0, grid[8,7] = 0,
+$     grid[9,5] = 0
+$
