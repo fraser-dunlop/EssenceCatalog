@@ -42,6 +42,21 @@ such that
         downDigits[seq] = [ grid[row,col] | row : int(rowStart..rowEnd) ]
 
 
+letting AD be new type enum {A, D}
+letting CLUE be domain
+    variant
+        { is_constant    : int
+        , plus_constant  : (int, AD, int)
+        , minus_constant : (int, AD, int)
+        , times_constant : (int, AD, int)
+        , div_constant   : (int, AD, int)
+        , is_prime       : bool
+        , is_square      : bool
+        , times          : (int, AD, int, AD)
+        }
+
+given clues : set of (AD, int, CLUE)
+
 $ hints -- across
 such that
     across[ 1] = across[27] * 2,                $  1: 27 across times two
