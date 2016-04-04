@@ -57,8 +57,6 @@ letting downClueCoords be
     , (28, 8, 8, 9 )
     }
 
-
-
 letting clues be
     { (A,  1, variant { times_constant = (27, A, 2)     })                 $  1: 27 across times two
     , (A,  4, variant { plus_constant  = (4, D, 71)     })                 $  4: 4 down plus seventy-one
@@ -78,33 +76,23 @@ letting clues be
     , (A, 28, variant { is_constant    = 4 * 12         })                 $ 28: Four dozen
     , (A, 29, variant { is_constant    = 7 * 144        })                 $ 29: Seven gross
     , (A, 30, variant { plus_constant  = (22, D, 450)   })                 $ 30: 22 down plus 450
+
+    , (D,  1, variant { plus_constant  = (1, A, 27)     })                 $  1: 1 across plus twenty-seven
+    , (D,  2, variant { is_constant    = 5 * 12         })                 $  2: Five dozen
+    , (D,  3, variant { plus_constant  = (30, A, 888)   })                 $  3: 30 across plus 888
+    , (D,  4, variant { times_constant = (17, A, 2)     })                 $  4: Two times 17 across
+    , (D,  5, variant { div_constant   = (29, A, 12)    })                 $  5: 29 across divided by twelve
+    , (D,  6, variant { times          = (28, A, 23, A) })                 $  6: 28 across times 23 across
+    , (D, 10, variant { plus_constant  = (10, A, 4)     })                 $ 10: 10 across plus four
+    , (D, 12, variant { times_constant = (24, A, 3)     })                 $ 12: Three times 24 across
+    , (D, 14, variant { div_constant   = (13, A, 16)    })                 $ 14: 13 across divided by sixteen
+    , (D, 16, variant { times_constant = (28, D, 15)    })                 $ 16: 28 down times fifteen
+    , (D, 17, variant { minus_constant = (13, A, 399)   })                 $ 17: 13 across minus 399
+    , (D, 18, variant { div_constant   = (29, A, 18)    })                 $ 18: 29 across divided by eighteen
+    , (D, 19, variant { minus_constant = (22, D, 94)    })                 $ 19: 22 down minus ninety-four
+    , (D, 20, variant { minus_constant = (20, A, 9)     })                 $ 20: 20 across minus nine
+    , (D, 21, variant { minus_constant = (25, A, 52)    })                 $ 21: 25 across minus fifty-two
+    , (D, 22, variant { times_constant = (20, D, 6)     })                 $ 22: 20 down times six
+    , (D, 26, variant { times_constant = (24, A, 5)     })                 $ 26: Five times 24 across
+    , (D, 28, variant { plus_constant  = (21, D, 27)    })                 $ 28: 21 down plus twenty-seven
     }
-
-
-
-
-
-$
-$
-$ $ hints -- down
-$ such that
-$     down[ 1] = across[1] + 27,                  $  1: 1 across plus twenty-seven
-$     down[ 2] = 5 * 12,                          $  2: Five dozen
-$     down[ 3] = across[30] + 888,                $  3: 30 across plus 888
-$     down[ 4] = 2 * across[17],                  $  4: Two times 17 across
-$     down[ 5] = across[29] / 12,                 $  5: 29 across divided by twelve
-$     down[ 6] = across[28] * across[23],         $  6: 28 across times 23 across
-$     down[10] = across[10] + 4,                  $ 10: 10 across plus four
-$     down[12] = 3 * across[24],                  $ 12: Three times 24 across
-$     down[14] = across[13] / 16,                 $ 14: 13 across divided by sixteen
-$     down[16] = down[28] * 15,                   $ 16: 28 down times fifteen
-$     down[17] = across[13] - 399,                $ 17: 13 across minus 399
-$     down[18] = across[29] / 18,                 $ 18: 29 across divided by eighteen
-$     down[19] = down[22] - 94,                   $ 19: 22 down minus ninety-four
-$     down[20] = across[20] - 9,                  $ 20: 20 across minus nine
-$     down[21] = across[25] - 52,                 $ 21: 25 across minus fifty-two
-$     down[22] = down[20] * 6,                    $ 22: 20 down times six
-$     down[26] = 5 * across[24],                  $ 26: Five times 24 across
-$     down[28] = down[21] + 27                    $ 28: 21 down plus twenty-seven
-$
-$
