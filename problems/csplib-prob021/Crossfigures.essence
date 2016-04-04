@@ -46,16 +46,86 @@ letting AD be new type enum {A, D}
 letting CLUE be domain
     variant
         { is_constant    : int
+        , is_square      : bool
+        , is_prime       : bool
         , plus_constant  : (int, AD, int)
         , minus_constant : (int, AD, int)
         , times_constant : (int, AD, int)
         , div_constant   : (int, AD, int)
-        , is_prime       : bool
-        , is_square      : bool
         , times          : (int, AD, int, AD)
         }
 
 given clues : set of (AD, int, CLUE)
+
+$ clues
+such that
+    forAll (targetKind, targetNum, clue) in clues .
+        or(
+            [ targetKind = A -> or(
+                [ active(clue, is_constant) -> across[targetNum] = clue[is_constant]
+                , active(clue, is_square  ) -> exists i : number . i**2 = across[targetNum]
+                , active(clue, is_prime   ) -> and([ across[targetNum] % i != 0
+                                                                     | i : number
+                                                                     , i >= 2
+                                                                     , i**2 <= across[targetNum]
+                                                                     ])
+                , active(clue, plus_constant) -> or(
+                    [ clue[plus_constant ][2] = A -> across[targetNum] = across[clue[plus_constant ][1]] + clue[plus_constant ][3]
+                    , clue[plus_constant ][2] = D -> across[targetNum] = down  [clue[plus_constant ][1]] + clue[plus_constant ][3]
+                    ])
+                , active(clue, minus_constant) -> or(
+                    [ clue[minus_constant][2] = A -> across[targetNum] = across[clue[minus_constant][1]] - clue[minus_constant][3]
+                    , clue[minus_constant][2] = D -> across[targetNum] = down  [clue[minus_constant][1]] - clue[minus_constant][3]
+                    ])
+                , active(clue, times_constant) -> or(
+                    [ clue[times_constant][2] = A -> across[targetNum] = across[clue[times_constant][1]] * clue[times_constant][3]
+                    , clue[times_constant][2] = D -> across[targetNum] = down  [clue[times_constant][1]] * clue[times_constant][3]
+                    ])
+                , active(clue, div_constant) -> or (
+                    [ clue[div_constant  ][2] = A -> across[targetNum] = across[clue[div_constant  ][1]] * clue[div_constant  ][3]
+                    , clue[div_constant  ][2] = D -> across[targetNum] = down  [clue[div_constant  ][1]] * clue[div_constant  ][3]
+                    ])
+                , active(clue, times) -> or(
+                    [ (clue[times][2], clue[times][4]) = (A, A) -> across[targetNum] = across[clue[times][1]] * across[clue[times][3]]
+                    , (clue[times][2], clue[times][4]) = (A, D) -> across[targetNum] = across[clue[times][1]] * down  [clue[times][3]]
+                    , (clue[times][2], clue[times][4]) = (D, A) -> across[targetNum] = down  [clue[times][1]] * across[clue[times][3]]
+                    , (clue[times][2], clue[times][4]) = (D, D) -> across[targetNum] = down  [clue[times][1]] * down  [clue[times][3]]
+                    ])
+                ])
+
+            , targetKind = D -> or(
+                [ active(clue, is_constant) -> down[targetNum] = clue[is_constant]
+                , active(clue, is_square  ) -> exists i : number . i**2 = down[targetNum]
+
+                , active(clue, is_prime   ) -> and([ down[targetNum] % i != 0
+                                                                     | i : number
+                                                                     , i >= 2
+                                                                     , i**2 <= down[targetNum]
+                                                                     ])
+                , active(clue, plus_constant) -> or(
+                    [ clue[plus_constant ][2] = A -> down[targetNum] = across[clue[plus_constant ][1]] + clue[plus_constant ][3]
+                    , clue[plus_constant ][2] = D -> down[targetNum] = down  [clue[plus_constant ][1]] + clue[plus_constant ][3]
+                    ])
+                , active(clue, minus_constant) -> or(
+                    [ clue[minus_constant][2] = A -> down[targetNum] = across[clue[minus_constant][1]] - clue[minus_constant][3]
+                    , clue[minus_constant][2] = D -> down[targetNum] = down  [clue[minus_constant][1]] - clue[minus_constant][3]
+                    ])
+                , active(clue, times_constant) -> or(
+                    [ clue[times_constant][2] = A -> down[targetNum] = across[clue[times_constant][1]] * clue[times_constant][3]
+                    , clue[times_constant][2] = D -> down[targetNum] = down  [clue[times_constant][1]] * clue[times_constant][3]
+                    ])
+                , active(clue, div_constant) -> or (
+                    [ clue[div_constant  ][2] = A -> down[targetNum] = across[clue[div_constant  ][1]] * clue[div_constant  ][3]
+                    , clue[div_constant  ][2] = D -> down[targetNum] = down  [clue[div_constant  ][1]] * clue[div_constant  ][3]
+                    ])
+                , active(clue, times) -> or(
+                    [ (clue[times][2], clue[times][4]) = (A, A) -> down[targetNum] = across[clue[times][1]] * across[clue[times][3]]
+                    , (clue[times][2], clue[times][4]) = (A, D) -> down[targetNum] = across[clue[times][1]] * down  [clue[times][3]]
+                    , (clue[times][2], clue[times][4]) = (D, A) -> down[targetNum] = down  [clue[times][1]] * across[clue[times][3]]
+                    , (clue[times][2], clue[times][4]) = (D, D) -> down[targetNum] = down  [clue[times][1]] * down  [clue[times][3]]
+                    ])
+                ])
+           ])
 
 $ hints -- across
 such that
