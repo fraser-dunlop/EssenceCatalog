@@ -59,30 +59,31 @@ letting downClueCoords be
 
 
 
-$ $ hints -- across
-$ such that
-$     across[ 1] = across[27] * 2,                $  1: 27 across times two
-$     across[ 4] = down[4] + 71,                  $  4: 4 down plus seventy-one
-$     across[ 7] = down[18] + 4,                  $  7: 18 down plus four
-$     across[ 8] = down[6] / 16,                  $  8: 6 down divided by sixteen
-$     across[ 9] = down[2] - 18,                  $  9: 2 down minus eighteen
-$     across[10] = 6 * 144 / 12,                  $ 10: Dozen in six gross
-$     across[11] = down[5] - 70,                  $ 11: 5 down minus seventy
-$     across[13] = down[26] * across[23],         $ 13: 26 down times 23 across
-$     across[15] = down[6] - 350,                 $ 15: 6 down minus 350
-$     across[17] = across[25] * across[23],       $ 17: 25 across times 23 across
-$     exists i : number . i**2 = across[20],      $ 20: A square number
-$     [ across[23] % i != 0                       $ 23: A prime number
-$     | i : number
-$     , i >= 2
-$     , i**2 <= across[23]
-$     ],
-$     exists i : number . i**2 = across[24],      $ 24: A square number
-$     across[25] = across[20] / 17,               $ 25: 20 across divided by seventeen
-$     across[27] = down[6] / 4,                   $ 27: 6 down divided by four
-$     across[28] = 4 * 12,                        $ 28: Four dozen
-$     across[29] = 7 * 144,                       $ 29: Seven gross
-$     across[30] = down[22] + 450                 $ 30: 22 down plus 450
+letting clues be
+    { (A,  1, variant { times_constant = (27, A, 2)     })                 $  1: 27 across times two
+    , (A,  4, variant { plus_constant  = (4, D, 71)     })                 $  4: 4 down plus seventy-one
+    , (A,  7, variant { plus_constant  = (18, D, 4)     })                 $  7: 18 down plus four
+    , (A,  8, variant { div_constant   = (6, D, 16)     })                 $  8: 6 down divided by sixteen
+    , (A,  9, variant { minus_constant = (2, D, 18)     })                 $  9: 2 down minus eighteen
+    , (A, 10, variant { is_constant    = 6 * 144 / 12   })                 $ 10: Dozen in six gross
+    , (A, 11, variant { minus_constant = (5, D, 70)     })                 $ 11: 5 down minus seventy
+    , (A, 13, variant { times          = (26, D, 23, A) })                 $ 13: 26 down times 23 across
+    , (A, 15, variant { minus_constant = (6, D, 350)    })                 $ 15: 6 down minus 350
+    , (A, 17, variant { times          = (25, A, 23, A) })                 $ 17: 25 across times 23 across
+    , (A, 20, variant { is_square      = true           })                 $ 20: A square number
+    , (A, 23, variant { is_prime       = true           })                 $ 23: A prime number
+    , (A, 24, variant { is_square      = true           })                 $ 24: A square number
+    , (A, 25, variant { div_constant   = (20, A, 17)    })                 $ 25: 20 across divided by seventeen
+    , (A, 27, variant { div_constant   = (6, D, 4)      })                 $ 27: 6 down divided by four
+    , (A, 28, variant { is_constant    = 4 * 12         })                 $ 28: Four dozen
+    , (A, 29, variant { is_constant    = 7 * 144        })                 $ 29: Seven gross
+    , (A, 30, variant { plus_constant  = (22, D, 450)   })                 $ 30: 22 down plus 450
+    }
+
+
+
+
+
 $
 $
 $ $ hints -- down
@@ -106,23 +107,4 @@ $     down[22] = down[20] * 6,                    $ 22: 20 down times six
 $     down[26] = 5 * across[24],                  $ 26: Five times 24 across
 $     down[28] = down[21] + 27                    $ 28: 21 down plus twenty-seven
 $
-$
-$ $ connecting digits to numbers
-$ such that
-$     forAll n : acrossIndex .
-$         across[n] = sum (i,d) in acrossDigits[n] . (10**max([0,|acrossDigits[n]|-i])) * d,
-$     forAll n : downIndex .
-$         down[n] = sum (i,d) in downDigits[n] . (10**max([0,|downDigits[n]|-i])) * d
-$
-$
-$ $ first digits are >1
-$ $ this is probably implied, but having it just in case.
-$ such that
-$     forAll n : acrossIndex . acrossDigits[n](1) > 0,
-$     forAll n : downIndex . downDigits[n](1) > 0
-$
-$
-$ $ connecting the digits to the grid
-$ such that
-
 $
