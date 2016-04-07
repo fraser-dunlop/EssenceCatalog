@@ -1,0 +1,98 @@
+language Essence 1.3
+
+letting numDigits be 4
+letting dimension be 9
+
+letting blackCells be
+    { (1,3), (1,7)
+    , (2,5)
+    , (3,1), (3,3), (3,7), (3,9)
+    , (4,4), (4,6)
+    , (5,2), (5,5), (5,8)
+    , (6,4), (6,6)
+    , (7,1), (7,3), (7,7), (7,9)
+    , (8,5)
+    , (9,3), (9,7)
+    }
+
+letting acrossClueCoords be
+    { ( 1, 1, 1, 2)
+    , ( 3, 1, 4, 6)
+    , ( 5, 1, 8, 9)
+    , ( 7, 2, 1, 4)
+    , ( 8, 2, 6, 9)
+    , ( 9, 3, 4, 6)
+    , (11, 4, 1, 3)
+    , (13, 4, 7, 9)
+    , (15, 5, 3, 4)
+    , (16, 5, 6, 7)
+    , (17, 6, 1, 3)
+    , (20, 6, 7, 9)
+    , (22, 7, 4, 6)
+    , (24, 8, 1, 4)
+    , (25, 8, 6, 9)
+    , (27, 9, 1, 2)
+    , (28, 9, 4, 6)
+    , (29, 9, 8, 9)
+    }
+
+letting downClueCoords be
+    { ( 1, 1, 1, 2)
+    , ( 2, 2, 1, 4)
+    , ( 3, 4, 1, 3)
+    , ( 4, 6, 1, 3)
+    , ( 5, 8, 1, 4)
+    , ( 6, 9, 1, 2)
+    , (10, 5, 3, 4)
+    , (11, 1, 4, 6)
+    , (12, 3, 4, 6)
+    , (13, 7, 4, 6)
+    , (14, 9, 4, 6)
+    , (18, 2, 6, 9)
+    , (19, 5, 6, 7)
+    , (21, 8, 6, 9)
+    , (22, 4, 7, 9)
+    , (23, 6, 7, 9)
+    , (24, 1, 8, 9)
+    , (26, 9, 8, 9)
+    }
+
+letting clues be
+    { (A,  1, variant { is_prime       = true           })                 $  1: A prime number
+    , (A,  3, variant { times_constant = (27, A, 3)     })                 $  3: 27 across times three
+    , (A,  5, variant { plus_constant  = (6, D, 25)     })                 $  5: 6 down plus twenty-five
+    , (A,  7, variant { minus_constant = (5, D, 821)    })                 $  7: 5 down minus 821
+    , (A,  8, variant { plus_constant  = (2, D, 1046)   })                 $  8: 2 down plus 1046
+    , (A,  9, variant { times_constant = (24, D, 4)     })                 $  9: 24 down times four
+    , (A, 11, variant { div_constant   = (21, D, 6)     })                 $ 11: 21 down divided by six
+    , (A, 13, variant { div_constant   = (21, D, 3)     })                 $ 13: 21 down divided by three
+    , (A, 15, variant { div_constant   = (13, D, 11)    })                 $ 15: 13 down divided by eleven
+    , (A, 16, variant { div_constant   = (12, D, 7)     })                 $ 16: 12 down divided by seven
+    , (A, 17, variant { minus_constant = (9, A, 16)     })                 $ 17: 9 across minus sixteen
+    , (A, 20, variant { is_square      = true           })                 $ 20: A square number
+    , (A, 22, variant { plus_constant  = (20, A, 3)     })                 $ 22: 20 across plus three
+    , (A, 24, variant { minus_constant = (8, A, 234)    })                 $ 24: 8 across minus 234
+    , (A, 25, variant { minus_constant = (24, A, 122)   })                 $ 25: 24 across minus 122
+    , (A, 27, variant { div_constant   = (22, A, 6)     })                 $ 27: 22 across divided by six
+    , (A, 28, variant { plus_constant  = (22, D, 19)    })                 $ 28: 22 down plus nineteen
+    , (A, 29, variant { minus_constant = (26, D, 20)    })                 $ 29: 26 down minus twenty
+
+    , (D,  1, variant { times_constant = (24, D, 2)     })                 $  1: Two times 24 down
+    , (D,  2, variant { times_constant = (23, D, 4)     })                 $  2: 23 down times four
+    , (D,  3, variant { div_constant   = (21, D, 12)    })                 $  3: 21 down divided by twelve
+    , (D,  4, variant { plus_constant  = (28, A, 161)   })                 $  4: 28 across plus 161
+    , (D,  5, variant { times          = (1, A, 1, D)   })                 $  5: 1 across times 1 down
+    , (D,  6, variant { times_constant = (29, A, 2)     })                 $  6: 29 across times two
+    , (D, 10, variant { div_constant   = (13, A, 9)     })                 $ 10: 13 across divided by nine
+    , (D, 11, variant { plus_constant  = (3, D, 180)    })                 $ 11: 3 down plus 180
+    , (D, 12, variant { times_constant = (27, A, 7)     })                 $ 12: Seven times 27 across
+    , (D, 13, variant { minus_constant = (23, D, 159)   })                 $ 13: 23 down minus 159
+    , (D, 14, variant { times_constant = (26, D, 11)    })                 $ 14: 26 down times eleven
+    , (D, 18, variant { plus_constant  = (8, A, 908)    })                 $ 18: 8 across plus 908
+    , (D, 19, variant { minus_constant = (10, D, 4)     })                 $ 19: 10 down minus four
+    , (D, 21, variant { times_constant = (22, A, 9)     })                 $ 21: 22 across times nine
+    , (D, 22, variant { plus_constant  = (22, A, 34)    })                 $ 22: 22 across plus thirty-four
+    , (D, 23, variant { is_square      = true           })                 $ 23: A square number
+    , (D, 24, variant { is_prime       = true           })                 $ 24: A prime number
+    , (D, 26, variant { div_constant   = (20, A, 5)     })                 $ 26: 20 across divided by five
+    }
