@@ -1,0 +1,2 @@
+Conjure, the automated constraint modelling tool.
+Version: 8da02c807aef (2016-03-29 22:42 +0100)
