@@ -24,7 +24,7 @@ if (( ${nb_commands} > 0 )) ; then
         --results logs/gnuparallel/solutions-results        \
         --joblog  logs/gnuparallel/solutions-joblog         \
         :::: ${CMD_FILE}
-    LC_ALL=C sort -dfn logs/gnuparallel/solutions-joblog -o logs/gnuparallel/solutions-joblog
+    LC_ALL=C sort -n logs/gnuparallel/solutions-joblog -o logs/gnuparallel/solutions-joblog
 else
     echo "No commands found in \"${CMD_FILE}\""
     echo "You may want to run \"scripts/solutions/gen_conjure_commands.sh\" first."
