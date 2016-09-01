@@ -51,5 +51,7 @@ conjure solve --use-existing-models=${EPRIME} ${ESSENCE_FULL} ${PARAM_FULL} -o $
 
 rm -f ${TARGET_DIR}/*.eprime-minion         # no need to keep: generated minion file
 rm -f ${TARGET_DIR}/*.eprime-dimacs         # no need to keep: generated sat file
-rm -f ${TARGET_DIR}/${EPRIME}
+
+# do not rm the eprime file yet, it may be needed by multiple parameter files
+# it will be removed by a call to clean_up.sh
 
