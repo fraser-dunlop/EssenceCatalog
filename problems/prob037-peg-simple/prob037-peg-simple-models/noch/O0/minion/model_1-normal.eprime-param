@@ -1,0 +1,6 @@
+language ESSENCE' 1.0
+
+letting hole_1 be 3
+letting hole_2 be 3
+letting end_1 be 3
+letting end_2 be 3

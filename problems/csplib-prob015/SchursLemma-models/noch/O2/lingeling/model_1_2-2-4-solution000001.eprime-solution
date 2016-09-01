@@ -1,0 +1,4 @@
+language ESSENCE' 1.0
+
+letting boxes_PartitionAsSet_ExplicitR6_ExplicitVarSizeWithDummy be
+        [[1, 2, 5, 5; int(1..4)], [3, 4, 5, 5; int(1..4)]; int(1..2)]

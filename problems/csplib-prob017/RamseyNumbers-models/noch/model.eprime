@@ -1,0 +1,151 @@
+language ESSENCE' 1.0
+
+given n: int(1..20)
+given colours: int(1..10)
+letting num_edges be n * (n - 1)
+find graph_RelationAsMatrix: matrix indexed by [int(1..colours), int(1..n), int(1..n)] of bool
+such that
+    and([sum([toInt(graph_RelationAsMatrix[q29_1, q29_2, q29_3])
+                  | q29_1 : int(1..colours), q29_2 : int(1..n), q29_3 : int(1..n), q29_2 = i])
+         = n - 1
+         /\
+         sum([toInt(graph_RelationAsMatrix[q32_1, q32_2, q32_3])
+                  | q32_1 : int(1..colours), q32_2 : int(1..n), q32_3 : int(1..n), q32_3 = i])
+         = n - 1
+         /\
+         sum([toInt(graph_RelationAsMatrix[q35_1, q35_2, q35_3])
+                  | q35_1 : int(1..colours), q35_2 : int(1..n), q35_3 : int(1..n), q35_2 = i, q35_3 = i])
+         = 0 | i : int(1..n)]),
+    and([sum([toInt(graph_RelationAsMatrix[q6_1, q6_2, q6_3])
+                  | q6_1 : int(1..colours), q6_2 : int(1..n), q6_3 : int(1..n), q6_2 = i, q6_3 = j])
+         = 1
+         /\
+         sum([toInt(graph_RelationAsMatrix[q9_1, q9_2, q9_3])
+                  | q9_1 : int(1..colours), q9_2 : int(1..n), q9_3 : int(1..n), q9_2 = j, q9_3 = i])
+         = 1
+         /\
+         (and([graph_RelationAsMatrix[q12_1, q12_2, q12_3] ->
+               or([graph_RelationAsMatrix[q15_1, q15_2, q15_3] /\ q15_1 = q12_1
+                       | q15_1 : int(1..colours), q15_2 : int(1..n), q15_3 : int(1..n), q15_2 = j, q15_3 = i])
+                   | q12_1 : int(1..colours), q12_2 : int(1..n), q12_3 : int(1..n), q12_2 = i, q12_3 = j])
+          /\
+          and([graph_RelationAsMatrix[q17_1, q17_2, q17_3] ->
+               or([graph_RelationAsMatrix[q20_1, q20_2, q20_3] /\ q20_1 = q17_1
+                       | q20_1 : int(1..colours), q20_2 : int(1..n), q20_3 : int(1..n), q20_2 = i, q20_3 = j])
+                   | q17_1 : int(1..colours), q17_2 : int(1..n), q17_3 : int(1..n), q17_2 = j, q17_3 = i]))
+             | i : int(1..n), j : int(1..n), i != j]),
+    and([and([graph_RelationAsMatrix[q26_1, q26_2, q26_3] ->
+              and([graph_RelationAsMatrix[q23_1, q23_2, q23_3] -> !graph_RelationAsMatrix[q26_1, q23_3, q26_3]
+                       | q23_1 : int(1..colours), q23_2 : int(1..n), q23_3 : int(1..n), q23_1 = q26_1, q23_2 = i,
+                         q23_3 != q26_3])
+                  | q26_1 : int(1..colours), q26_2 : int(1..n), q26_3 : int(1..n), q26_2 = i])
+             | i : int(1..n)]),
+    num_edges =
+    sum([sum([sum([toInt(graph_RelationAsMatrix[q1, q2, q3]) | q3 : int(1..n)]) | q2 : int(1..n)])
+             | q1 : int(1..colours)])
+
+$ Conjure's
+$ {"finds": [{"Name": "graph"}],
+$  "givens": [{"Name": "n"}, {"Name": "colours"}],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"PickAll": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["q", 36]],
+$  "nbExtraGivens": 0,
+$  "representations": [[{"Name": "n"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 20}}]}]}],
+$                      [{"Name": "colours"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 10}}]}]}],
+$                      [{"Name": "graph"},
+$                       {"DomainRelation": [{"Relation_AsMatrix": []},
+$                                           [{"SizeAttr_Size": {"Reference": [{"Name": "num_edges"},
+$                                                                             {"Alias": {"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                     {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                    [{"Reference": [{"Name": "n"},
+$                                                                                                                                                                    {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                     {"Name": "n"},
+$                                                                                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                      {"Constant": {"ConstantInt": 20}}]}]}]}]},
+$                                                                                                                                                     {"Op": {"MkOpMinus": [{"Reference": [{"Name": "n"},
+$                                                                                                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                           {"Name": "n"},
+$                                                                                                                                                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                            {"Constant": {"ConstantInt": 20}}]}]}]}]},
+$                                                                                                                                                                           {"Constant": {"ConstantInt": 1}}]}}]]}}}}}]}},
+$                                            []],
+$                                           [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": [{"Name": "colours"},
+$                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                             {"Name": "colours"},
+$                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                              {"Constant": {"ConstantInt": 10}}]}]}]}]}]}]},
+$                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": [{"Name": "n"},
+$                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                             {"Name": "n"},
+$                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                              {"Constant": {"ConstantInt": 20}}]}]}]}]}]}]},
+$                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": [{"Name": "n"},
+$                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                             {"Name": "n"},
+$                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                              {"Constant": {"ConstantInt": 20}}]}]}]}]}]}]}]]}]],
+$  "representationsTree": [[{"Name": "colours"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "graph"},
+$                           [{"rootLabel": {"Relation_AsMatrix": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "n"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]]],
+$  "originalDomains": [[{"Name": "n"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 20}}]}]}],
+$                      [{"Name": "colours"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 10}}]}]}],
+$                      [{"Name": "graph"},
+$                       {"DomainRelation": [[], [{"SizeAttr_Size": {"Reference": [{"Name": "num_edges"}, null]}}, []],
+$                                           [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": [{"Name": "colours"},
+$                                                                                            null]}]}]},
+$                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": [{"Name": "n"}, null]}]}]},
+$                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": [{"Name": "n"},
+$                                                                                            null]}]}]}]]}]],
+$  "questionAnswered": []}

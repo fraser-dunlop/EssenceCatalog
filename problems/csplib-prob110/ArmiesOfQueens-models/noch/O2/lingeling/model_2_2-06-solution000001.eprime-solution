@@ -1,0 +1,22 @@
+language ESSENCE' 1.0
+
+letting black_ExplicitVarSizeWithFlags_Flags be
+        [false, false, false, false, false, 0, false, false, false, false, false, false, false, false, false, false,
+         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+         false, false, false, false; int(1..36)]
+letting black_ExplicitVarSizeWithFlags_Values_1 be
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+         1; int(1..36)]
+letting black_ExplicitVarSizeWithFlags_Values_2 be
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+         1; int(1..36)]
+letting white_ExplicitVarSizeWithFlags_Flags be
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+         false, false, false, false; int(1..36)]
+letting white_ExplicitVarSizeWithFlags_Values_1 be
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+         1; int(1..36)]
+letting white_ExplicitVarSizeWithFlags_Values_2 be
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+         1; int(1..36)]

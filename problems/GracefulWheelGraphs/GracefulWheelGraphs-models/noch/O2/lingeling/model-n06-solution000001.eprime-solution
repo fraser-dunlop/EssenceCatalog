@@ -1,0 +1,4 @@
+language ESSENCE' 1.0
+
+letting colouring_Function1D be [0, 5, 1, 9, 3, 2, 12; int(0..6)]
+letting edgeID_Function1D be [5, 4, 8, 6, 1, 2, 12, 7, 11, 3, 9, 10; int(0..11)]

@@ -1,0 +1,640 @@
+language ESSENCE' 1.0
+
+given x_size: int(1..)
+given y_size: int(1..)
+given fin1: int
+given board_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..x_size)
+given board_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..y_size)
+given fin2: int
+given init_Explicit_1: matrix indexed by [int(1..fin2)] of int(1..x_size)
+given init_Explicit_2: matrix indexed by [int(1..fin2)] of int(1..y_size)
+given fin3: int
+given goal_Explicit_1: matrix indexed by [int(1..fin3)] of int(1..x_size)
+given goal_Explicit_2: matrix indexed by [int(1..fin3)] of int(1..y_size)
+where
+    and([or([board_Explicit_1[q55] = init_Explicit_1[q48] /\ board_Explicit_2[q55] = init_Explicit_2[q48]
+                 | q55 : int(1..fin1)])
+             | q48 : int(1..fin2)])
+    /\
+    and([or([board_Explicit_1[q51] = goal_Explicit_1[q49] /\ board_Explicit_2[q51] = goal_Explicit_2[q49]
+                 | q51 : int(1..fin1)])
+             | q49 : int(1..fin3),
+               !or([init_Explicit_1[q53] = goal_Explicit_1[q49] /\ init_Explicit_2[q53] = goal_Explicit_2[q49]
+                        | q53 : int(1..fin2)])])
+letting let1 be fin1
+find plan_Function1DPartialR4_Flags: matrix indexed by [int(1..let1)] of bool
+find plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags:
+        matrix indexed by [int(1..let1), int(1..x_size * y_size)] of bool
+find plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1:
+        matrix indexed by [int(1..let1), int(1..x_size * y_size)] of int(1..x_size)
+find plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2:
+        matrix indexed by [int(1..let1), int(1..x_size * y_size)] of int(1..y_size)
+letting let2 be fin1 - 1
+find moves_Function1DPartial_Flags: matrix indexed by [int(1..let2)] of bool
+find moves_Function1DPartial_Values_1_1: matrix indexed by [int(1..let2)] of int(1..x_size)
+find moves_Function1DPartial_Values_1_2: matrix indexed by [int(1..let2)] of int(1..y_size)
+find moves_Function1DPartial_Values_2_1: matrix indexed by [int(1..let2)] of int(1..x_size)
+find moves_Function1DPartial_Values_2_2: matrix indexed by [int(1..let2)] of int(1..y_size)
+find aux1_ExplicitVarSizeWithMarkerR5_Marker: int(0..2 ** (x_size * y_size))
+find aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker:
+        matrix indexed by [int(1..2 ** (x_size * y_size))] of int(0..x_size * y_size)
+find aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..2 ** (x_size * y_size)), int(1..x_size * y_size)] of int(1..x_size)
+find aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..2 ** (x_size * y_size)), int(1..x_size * y_size)] of int(1..y_size)
+find aux2_ExplicitVarSizeWithMarker_Marker: int(0..x_size * y_size * (x_size * y_size))
+find aux2_ExplicitVarSizeWithMarker_Values_1_1:
+        matrix indexed by [int(1..x_size * y_size * (x_size * y_size))] of int(1..x_size)
+find aux2_ExplicitVarSizeWithMarker_Values_1_2:
+        matrix indexed by [int(1..x_size * y_size * (x_size * y_size))] of int(1..y_size)
+find aux2_ExplicitVarSizeWithMarker_Values_2_1:
+        matrix indexed by [int(1..x_size * y_size * (x_size * y_size))] of int(1..x_size)
+find aux2_ExplicitVarSizeWithMarker_Values_2_2:
+        matrix indexed by [int(1..x_size * y_size * (x_size * y_size))] of int(1..y_size)
+such that
+    and([plan_Function1DPartialR4_Flags[q21] -> q21 = 1 \/ plan_Function1DPartialR4_Flags[q21 - 1]
+             | q21 : int(1..let1)]),
+    and([moves_Function1DPartial_Flags[q35] ->
+         or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q35, q25] /\
+             plan_Function1DPartialR4_Flags[q35]
+             /\
+             (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q35, q25] =
+              moves_Function1DPartial_Values_1_1[q35]
+              /\
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q35, q25] =
+              moves_Function1DPartial_Values_1_2[q35])
+                 | q25 : int(1..x_size * y_size)])
+         /\
+         !or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q35 + 1, q23] /\
+              plan_Function1DPartialR4_Flags[q35 + 1]
+              /\
+              (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q35 + 1, q23] =
+               moves_Function1DPartial_Values_1_1[q35]
+               /\
+               plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q35 + 1, q23] =
+               moves_Function1DPartial_Values_1_2[q35])
+                  | q23 : int(1..x_size * y_size)])
+         /\
+         !or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q35, q27] /\
+              plan_Function1DPartialR4_Flags[q35]
+              /\
+              (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q35, q27] =
+               moves_Function1DPartial_Values_2_1[q35]
+               /\
+               plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q35, q27] =
+               moves_Function1DPartial_Values_2_2[q35])
+                  | q27 : int(1..x_size * y_size)])
+         /\
+         or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q35 + 1, q29] /\
+             plan_Function1DPartialR4_Flags[q35 + 1]
+             /\
+             (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q35 + 1, q29] =
+              moves_Function1DPartial_Values_2_1[q35]
+              /\
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q35 + 1, q29] =
+              moves_Function1DPartial_Values_2_2[q35])
+                 | q29 : int(1..x_size * y_size)])
+         /\
+         or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q35, q31] /\
+             plan_Function1DPartialR4_Flags[q35]
+             /\
+             (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q35, q31] =
+              (moves_Function1DPartial_Values_1_1[q35] + moves_Function1DPartial_Values_2_1[q35]) / 2
+              /\
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q35, q31] =
+              (moves_Function1DPartial_Values_1_2[q35] + moves_Function1DPartial_Values_2_2[q35]) / 2)
+                 | q31 : int(1..x_size * y_size)])
+         /\
+         !or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q35 + 1, q33] /\
+              plan_Function1DPartialR4_Flags[q35 + 1]
+              /\
+              (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q35 + 1, q33] =
+               (moves_Function1DPartial_Values_1_1[q35] + moves_Function1DPartial_Values_2_1[q35]) / 2
+               /\
+               plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q35 + 1, q33] =
+               (moves_Function1DPartial_Values_1_2[q35] + moves_Function1DPartial_Values_2_2[q35]) / 2)
+                  | q33 : int(1..x_size * y_size)])
+             | q35 : int(1..let2)]),
+    and([q59 + 1 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q59] <
+         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q59 + 1]
+         \/
+         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q59] =
+         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q59 + 1]
+         /\
+         (aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q59, ..] <lex
+          aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q59 + 1, ..]
+          \/
+          and([aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q59, q65] =
+               aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q59 + 1, q65]
+                   | q65 : int(1..x_size * y_size)])
+          /\ and([or([q65 = q66 | q66 : int(1..x_size * y_size)]) | q65 : int(1..x_size * y_size)])
+          /\ and([or([q65 = q66 | q66 : int(1..x_size * y_size)]) | q65 : int(1..x_size * y_size)])
+          /\
+          aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q59, ..] <lex
+          aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q59 + 1, ..])
+             | q59 : int(1..2 ** (x_size * y_size) - 1)]),
+    and([q60 > aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q60] = 0 /\
+         and([aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q60, q67] = 1 /\
+              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q60, q67] = 1
+                  | q67 : int(1..x_size * y_size)])
+             | q60 : int(1..2 ** (x_size * y_size))]),
+    and([q61 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         and([q62 + 1 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q61] ->
+              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q61, q62] <
+              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q61, q62 + 1]
+              \/
+              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q61, q62] =
+              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q61, q62 + 1]
+              /\
+              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q61, q62] <
+              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q61, q62 + 1]
+                  | q62 : int(1..x_size * y_size - 1)])
+             | q61 : int(1..2 ** (x_size * y_size))]),
+    and([q61 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         and([q63 > aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q61] ->
+              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q61, q63] = 1 /\
+              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q61, q63] = 1
+                  | q63 : int(1..x_size * y_size)])
+             | q61 : int(1..2 ** (x_size * y_size))]),
+    and([plan_Function1DPartialR4_Flags[q68] ->
+         or([q70 <= aux1_ExplicitVarSizeWithMarkerR5_Marker /\
+             (and([q72 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q70] ->
+                   or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q68, q74] /\
+                       (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q68, q74] =
+                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q70, q72]
+                        /\
+                        plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q68, q74] =
+                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q70, q72])
+                           | q74 : int(1..x_size * y_size)])
+                       | q72 : int(1..x_size * y_size)])
+              /\
+              and([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q68, q76] ->
+                   or([q78 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q70] /\
+                       (aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q70, q78] =
+                        plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q68, q76]
+                        /\
+                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q70, q78] =
+                        plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q68, q76])
+                           | q78 : int(1..x_size * y_size)])
+                       | q76 : int(1..x_size * y_size)]))
+                 | q70 : int(1..2 ** (x_size * y_size))])
+             | q68 : int(1..let1)]),
+    and([q79 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         or([plan_Function1DPartialR4_Flags[q80] /\
+             (and([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q80, q82] ->
+                   or([q84 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q79] /\
+                       (aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q79, q84] =
+                        plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q80, q82]
+                        /\
+                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q79, q84] =
+                        plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q80, q82])
+                           | q84 : int(1..x_size * y_size)])
+                       | q82 : int(1..x_size * y_size)])
+              /\
+              and([q86 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q79] ->
+                   or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q80, q88] /\
+                       (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q80, q88] =
+                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q79, q86]
+                        /\
+                        plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q80, q88] =
+                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q79, q86])
+                           | q88 : int(1..x_size * y_size)])
+                       | q86 : int(1..x_size * y_size)]))
+                 | q80 : int(1..let1)])
+             | q79 : int(1..2 ** (x_size * y_size))]),
+    and([q89 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         and([q90 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q89] ->
+              or([board_Explicit_1[q92] =
+                  aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q89, q90]
+                  /\
+                  board_Explicit_2[q92] =
+                  aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q89, q90]
+                      | q92 : int(1..fin1)])
+                  | q90 : int(1..x_size * y_size)])
+             | q89 : int(1..2 ** (x_size * y_size))]),
+    and([q105 + 1 <= aux2_ExplicitVarSizeWithMarker_Marker ->
+         aux2_ExplicitVarSizeWithMarker_Values_1_1[q105] < aux2_ExplicitVarSizeWithMarker_Values_1_1[q105 + 1] \/
+         aux2_ExplicitVarSizeWithMarker_Values_1_1[q105] = aux2_ExplicitVarSizeWithMarker_Values_1_1[q105 + 1] /\
+         aux2_ExplicitVarSizeWithMarker_Values_1_2[q105] < aux2_ExplicitVarSizeWithMarker_Values_1_2[q105 + 1]
+         \/
+         aux2_ExplicitVarSizeWithMarker_Values_1_1[q105] = aux2_ExplicitVarSizeWithMarker_Values_1_1[q105 + 1] /\
+         aux2_ExplicitVarSizeWithMarker_Values_1_2[q105] = aux2_ExplicitVarSizeWithMarker_Values_1_2[q105 + 1]
+         /\
+         (aux2_ExplicitVarSizeWithMarker_Values_2_1[q105] < aux2_ExplicitVarSizeWithMarker_Values_2_1[q105 + 1] \/
+          aux2_ExplicitVarSizeWithMarker_Values_2_1[q105] = aux2_ExplicitVarSizeWithMarker_Values_2_1[q105 + 1] /\
+          aux2_ExplicitVarSizeWithMarker_Values_2_2[q105] < aux2_ExplicitVarSizeWithMarker_Values_2_2[q105 + 1])
+             | q105 : int(1..x_size * y_size * (x_size * y_size) - 1)]),
+    and([q106 > aux2_ExplicitVarSizeWithMarker_Marker ->
+         aux2_ExplicitVarSizeWithMarker_Values_1_1[q106] = 1 /\ aux2_ExplicitVarSizeWithMarker_Values_1_2[q106] = 1 /\
+         (aux2_ExplicitVarSizeWithMarker_Values_2_1[q106] = 1 /\ aux2_ExplicitVarSizeWithMarker_Values_2_2[q106] = 1)
+             | q106 : int(1..x_size * y_size * (x_size * y_size))]),
+    and([moves_Function1DPartial_Flags[q108] ->
+         or([q110 <= aux2_ExplicitVarSizeWithMarker_Marker /\
+             (aux2_ExplicitVarSizeWithMarker_Values_1_1[q110] = moves_Function1DPartial_Values_1_1[q108] /\
+              aux2_ExplicitVarSizeWithMarker_Values_1_2[q110] = moves_Function1DPartial_Values_1_2[q108]
+              /\
+              (aux2_ExplicitVarSizeWithMarker_Values_2_1[q110] = moves_Function1DPartial_Values_2_1[q108] /\
+               aux2_ExplicitVarSizeWithMarker_Values_2_2[q110] = moves_Function1DPartial_Values_2_2[q108]))
+                 | q110 : int(1..x_size * y_size * (x_size * y_size))])
+             | q108 : int(1..let2)]),
+    and([q111 <= aux2_ExplicitVarSizeWithMarker_Marker ->
+         or([moves_Function1DPartial_Flags[q112] /\
+             (moves_Function1DPartial_Values_1_1[q112] = aux2_ExplicitVarSizeWithMarker_Values_1_1[q111] /\
+              moves_Function1DPartial_Values_1_2[q112] = aux2_ExplicitVarSizeWithMarker_Values_1_2[q111]
+              /\
+              (moves_Function1DPartial_Values_2_1[q112] = aux2_ExplicitVarSizeWithMarker_Values_2_1[q111] /\
+               moves_Function1DPartial_Values_2_2[q112] = aux2_ExplicitVarSizeWithMarker_Values_2_2[q111]))
+                 | q112 : int(1..let2)])
+             | q111 : int(1..x_size * y_size * (x_size * y_size))]),
+    and([q113 <= aux2_ExplicitVarSizeWithMarker_Marker ->
+         |aux2_ExplicitVarSizeWithMarker_Values_1_1[q113] - aux2_ExplicitVarSizeWithMarker_Values_2_1[q113]| = 2 /\
+         |aux2_ExplicitVarSizeWithMarker_Values_1_2[q113] - aux2_ExplicitVarSizeWithMarker_Values_2_2[q113]| = 0
+         \/
+         |aux2_ExplicitVarSizeWithMarker_Values_1_1[q113] - aux2_ExplicitVarSizeWithMarker_Values_2_1[q113]| = 0 /\
+         |aux2_ExplicitVarSizeWithMarker_Values_1_2[q113] - aux2_ExplicitVarSizeWithMarker_Values_2_2[q113]| = 2
+             | q113 : int(1..x_size * y_size * (x_size * y_size))]),
+    and([t <= sum([toInt(plan_Function1DPartialR4_Flags[q17]) | q17 : int(1..let1)]) - 1 ->
+         sum([toInt(plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[t, q15] /\
+                    plan_Function1DPartialR4_Flags[t])
+                  | q15 : int(1..x_size * y_size)])
+         -
+         sum([toInt(plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[t + 1, q13] /\
+                    plan_Function1DPartialR4_Flags[t + 1])
+                  | q13 : int(1..x_size * y_size)])
+         = 1 | t : int(1..fin1)]),
+    and([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[1, q96] /\ plan_Function1DPartialR4_Flags[1] ->
+         or([init_Explicit_1[q95] = plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[1, q96] /\
+             init_Explicit_2[q95] = plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[1, q96]
+             /\ plan_Function1DPartialR4_Flags[1]
+                 | q95 : int(1..fin2)])
+             | q96 : int(1..x_size * y_size)]),
+    and([or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[1, q100] /\
+             plan_Function1DPartialR4_Flags[1]
+             /\
+             (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[1, q100] = init_Explicit_1[q98] /\
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[1, q100] = init_Explicit_2[q98])
+                 | q100 : int(1..x_size * y_size)])
+             | q98 : int(1..fin2)]),
+    and([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags
+             [sum([toInt(plan_Function1DPartialR4_Flags[q37]) | q37 : int(1..let1)]), q43]
+         /\ plan_Function1DPartialR4_Flags[sum([toInt(plan_Function1DPartialR4_Flags[q39]) | q39 : int(1..let1)])]
+         ->
+         or([goal_Explicit_1[q42] =
+             plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1
+                 [sum([toInt(plan_Function1DPartialR4_Flags[q37]) | q37 : int(1..let1)]), q43]
+             /\
+             goal_Explicit_2[q42] =
+             plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2
+                 [sum([toInt(plan_Function1DPartialR4_Flags[q37]) | q37 : int(1..let1)]), q43]
+             /\ plan_Function1DPartialR4_Flags[sum([toInt(plan_Function1DPartialR4_Flags[q39]) | q39 : int(1..let1)])]
+                 | q42 : int(1..fin3)])
+             | q43 : int(1..x_size * y_size)]),
+    and([or([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags
+                 [sum([toInt(plan_Function1DPartialR4_Flags[q37]) | q37 : int(1..let1)]), q47]
+             /\ plan_Function1DPartialR4_Flags[sum([toInt(plan_Function1DPartialR4_Flags[q39]) | q39 : int(1..let1)])]
+             /\
+             (plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1
+                  [sum([toInt(plan_Function1DPartialR4_Flags[q37]) | q37 : int(1..let1)]), q47]
+              = goal_Explicit_1[q45]
+              /\
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2
+                  [sum([toInt(plan_Function1DPartialR4_Flags[q37]) | q37 : int(1..let1)]), q47]
+              = goal_Explicit_2[q45])
+                 | q47 : int(1..x_size * y_size)])
+             | q45 : int(1..fin3)]),
+    and([plan_Function1DPartialR4_Flags[q1] = false ->
+         and([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q1, q18] = false
+                  | q18 : int(1..x_size * y_size)])
+         /\
+         and([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q1, q19] = 1 /\
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q1, q19] = 1
+                  | q19 : int(1..x_size * y_size)])
+             | q1 : int(1..let1)]),
+    and([plan_Function1DPartialR4_Flags[q3] ->
+         and([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q3, q4 + 1] ->
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q3, q4] <
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q3, q4 + 1]
+              \/
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q3, q4] =
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q3, q4 + 1]
+              /\
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q3, q4] <
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q3, q4 + 1]
+                  | q4 : int(1..x_size * y_size - 1)])
+             | q3 : int(1..let1)]),
+    and([plan_Function1DPartialR4_Flags[q3] ->
+         and([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q3, q5] = false ->
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_1[q3, q5] = 1 /\
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values_2[q3, q5] = 1
+                  | q5 : int(1..x_size * y_size)])
+             | q3 : int(1..let1)]),
+    and([plan_Function1DPartialR4_Flags[q3] ->
+         and([plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q3, q6 + 1] ->
+              plan_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q3, q6]
+                  | q6 : int(1..x_size * y_size - 1)])
+             | q3 : int(1..let1)]),
+    and([moves_Function1DPartial_Flags[q9] = false ->
+         moves_Function1DPartial_Values_1_1[q9] = 1 /\ moves_Function1DPartial_Values_1_2[q9] = 1 /\
+         (moves_Function1DPartial_Values_2_1[q9] = 1 /\ moves_Function1DPartial_Values_2_2[q9] = 1)
+             | q9 : int(1..let2)])
+
+$ Conjure's
+$ {"finds": [{"Name": "plan"}, {"Name": "moves"}],
+$  "givens": [{"Name": "x_size"}, {"Name": "y_size"}, {"Name": "board"}, {"Name": "init"}, {"Name": "goal"}],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"PickAll": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 2, 2],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["aux", 3], ["q", 114]],
+$  "nbExtraGivens": 3,
+$  "representations": [[{"Name": "x_size"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "y_size"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
+$                      [{"Name": "board"},
+$                       {"DomainSet": [{"Set_Explicit": []},
+$                                      {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
+$                                                                       {"DeclHasRepr": ["Given",
+$                                                                                        {"MachineName": ["fin", 1, []]},
+$                                                                                        {"DomainInt": []}]}]}},
+$                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "x_size"},
+$                                                                                                       {"DeclHasRepr": ["Given",
+$                                                                                                                        {"Name": "x_size"},
+$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "y_size"},
+$                                                                                                       {"DeclHasRepr": ["Given",
+$                                                                                                                        {"Name": "y_size"},
+$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
+$                      [{"Name": "init"},
+$                       {"DomainSet": [{"Set_Explicit": []},
+$                                      {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 2, []]},
+$                                                                       {"DeclHasRepr": ["Given",
+$                                                                                        {"MachineName": ["fin", 2, []]},
+$                                                                                        {"DomainInt": []}]}]}},
+$                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "x_size"},
+$                                                                                                       {"DeclHasRepr": ["Given",
+$                                                                                                                        {"Name": "x_size"},
+$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "y_size"},
+$                                                                                                       {"DeclHasRepr": ["Given",
+$                                                                                                                        {"Name": "y_size"},
+$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
+$                      [{"Name": "goal"},
+$                       {"DomainSet": [{"Set_Explicit": []},
+$                                      {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
+$                                                                       {"DeclHasRepr": ["Given",
+$                                                                                        {"MachineName": ["fin", 3, []]},
+$                                                                                        {"DomainInt": []}]}]}},
+$                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "x_size"},
+$                                                                                                       {"DeclHasRepr": ["Given",
+$                                                                                                                        {"Name": "x_size"},
+$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "y_size"},
+$                                                                                                       {"DeclHasRepr": ["Given",
+$                                                                                                                        {"Name": "y_size"},
+$                                                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
+$                      [{"Name": "plan"},
+$                       {"DomainFunction": [{"Function_1DPartial": []},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 1,
+$                                                                                                            []]},
+$                                                                                           {"Alias": {"Op": {"MkOpTwoBars": {"Reference": [{"Name": "board"},
+$                                                                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                                                                            {"Name": "board"},
+$                                                                                                                                                            {"DomainSet": [{"Set_Explicit": []},
+$                                                                                                                                                                           {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                             1,
+$                                                                                                                                                                                                                             []]},
+$                                                                                                                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                             {"MachineName": ["fin",
+$                                                                                                                                                                                                                                              1,
+$                                                                                                                                                                                                                                              []]},
+$                                                                                                                                                                                                                             {"DomainInt": []}]}]}},
+$                                                                                                                                                                           {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                             {"Reference": [{"Name": "x_size"},
+$                                                                                                                                                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                                                             {"Name": "x_size"},
+$                                                                                                                                                                                                                                                             {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                                                                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                             {"Reference": [{"Name": "y_size"},
+$                                                                                                                                                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                                                             {"Name": "y_size"},
+$                                                                                                                                                                                                                                                             {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]}]}}}}]}]}]},
+$                                           {"DomainSet": [{"Set_ExplicitVarSizeWithFlags": []}, {"SizeAttr_None": []},
+$                                                          {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                            {"Reference": [{"Name": "x_size"},
+$                                                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                                                            {"Name": "x_size"},
+$                                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                            {"Reference": [{"Name": "y_size"},
+$                                                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                                                            {"Name": "y_size"},
+$                                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]}],
+$                      [{"Name": "moves"},
+$                       {"DomainFunction": [{"Function_1DPartial": []},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 2,
+$                                                                                                            []]},
+$                                                                                           {"Alias": {"Op": {"MkOpMinus": [{"Op": {"MkOpTwoBars": {"Reference": [{"Name": "board"},
+$                                                                                                                                                                 {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                  {"Name": "board"},
+$                                                                                                                                                                                  {"DomainSet": [{"Set_Explicit": []},
+$                                                                                                                                                                                                 {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                   1,
+$                                                                                                                                                                                                                                                   []]},
+$                                                                                                                                                                                                                                  {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                                                   {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                    1,
+$                                                                                                                                                                                                                                                                    []]},
+$                                                                                                                                                                                                                                                   {"DomainInt": []}]}]}},
+$                                                                                                                                                                                                 {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                   {"Reference": [{"Name": "x_size"},
+$                                                                                                                                                                                                                                                                  {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                                                                                   {"Name": "x_size"},
+$                                                                                                                                                                                                                                                                                   {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                                                                                                                                                                                  {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                   {"Reference": [{"Name": "y_size"},
+$                                                                                                                                                                                                                                                                  {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                                                                                   {"Name": "y_size"},
+$                                                                                                                                                                                                                                                                                   {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]}]}}},
+$                                                                                                                           {"Constant": {"ConstantInt": 1}}]}}}]}]}]},
+$                                           {"DomainTuple": [{"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                              {"Reference": [{"Name": "x_size"},
+$                                                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                                                              {"Name": "x_size"},
+$                                                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                              {"Reference": [{"Name": "y_size"},
+$                                                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                                                              {"Name": "y_size"},
+$                                                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]},
+$                                                            {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                              {"Reference": [{"Name": "x_size"},
+$                                                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                                                              {"Name": "x_size"},
+$                                                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                              {"Reference": [{"Name": "y_size"},
+$                                                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                                                              {"Name": "y_size"},
+$                                                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]}]],
+$  "representationsTree": [[{"Name": "board"},
+$                           [{"rootLabel": {"Set_Explicit": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          [{"MachineName": ["fin", 1, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 2, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 3, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "goal"},
+$                           [{"rootLabel": {"Set_Explicit": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          [{"Name": "init"},
+$                           [{"rootLabel": {"Set_Explicit": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          [{"Name": "moves"},
+$                           [{"rootLabel": {"Function_1DPartial": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": [{"rootLabel": null,
+$                                                                          "subForest": []},
+$                                                                         {"rootLabel": null,
+$                                                                          "subForest": []}]},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": [{"rootLabel": null,
+$                                                                          "subForest": []},
+$                                                                         {"rootLabel": null,
+$                                                                          "subForest": []}]}]}]}]],
+$                          [{"Name": "plan"},
+$                           [{"rootLabel": {"Function_1DPartial": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": {"Set_ExplicitVarSizeWithFlags": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": [{"rootLabel": null,
+$                                                                          "subForest": []},
+$                                                                         {"rootLabel": null,
+$                                                                          "subForest": []}]}]}]}]],
+$                          [{"Name": "x_size"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "y_size"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]]],
+$  "originalDomains": [[{"Name": "x_size"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "y_size"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "board"},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainTuple": [{"DomainReference": [{"Name": "X"}, null]},
+$                                                       {"DomainReference": [{"Name": "Y"}, null]}]}]}],
+$                      [{"Name": "init"},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainTuple": [{"DomainReference": [{"Name": "X"}, null]},
+$                                                       {"DomainReference": [{"Name": "Y"}, null]}]}]}],
+$                      [{"Name": "goal"},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainTuple": [{"DomainReference": [{"Name": "X"}, null]},
+$                                                       {"DomainReference": [{"Name": "Y"}, null]}]}]}],
+$                      [{"Name": "plan"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 1,
+$                                                                                                            []]},
+$                                                                                           null]}]}]},
+$                                           {"DomainSet": [[], {"SizeAttr_None": []},
+$                                                          {"DomainTuple": [{"DomainReference": [{"Name": "X"}, null]},
+$                                                                           {"DomainReference": [{"Name": "Y"},
+$                                                                                                null]}]}]}]}],
+$                      [{"Name": "moves"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 2,
+$                                                                                                            []]},
+$                                                                                           null]}]}]},
+$                                           {"DomainTuple": [{"DomainReference": [{"Name": "Hole"}, null]},
+$                                                            {"DomainReference": [{"Name": "Hole"}, null]}]}]}]],
+$  "questionAnswered": []}

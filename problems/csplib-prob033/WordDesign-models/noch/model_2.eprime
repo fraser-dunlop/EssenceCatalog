@@ -1,0 +1,146 @@
+language ESSENCE' 1.0
+
+find words_ExplicitVarSizeWithFlagsR9_Flags: matrix indexed by [int(1..4294967296)] of bool
+find words_ExplicitVarSizeWithFlagsR9_Values_Function1D: matrix indexed by [int(1..4294967296), int(1..8)] of int(1..4)
+maximising sum([toInt(words_ExplicitVarSizeWithFlagsR9_Flags[q96]) | q96 : int(1..4294967296)])
+such that
+    and([words_ExplicitVarSizeWithFlagsR9_Flags[q88] ->
+         sum([toInt(words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q88, q91] = 2) | q91 : int(1..8)]) +
+         sum([toInt(words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q88, q94] = 3) | q94 : int(1..8)])
+         = 4 | q88 : int(1..4294967296)]),
+    and([and([words_ExplicitVarSizeWithFlagsR9_Flags[q21], words_ExplicitVarSizeWithFlagsR9_Flags[q25],
+              or([!(sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q25, q26] | q26 : int(1..8), q26 = q22]) =
+                    words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q21, q22]
+                    /\ or([q27 = q22 | q27 : int(1..8)]))
+                      | q22 : int(1..8)])
+              \/
+              or([!(sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q21, q23] | q23 : int(1..8), q23 = q28]) =
+                    words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q25, q28]
+                    /\ or([q24 = q28 | q24 : int(1..8)]))
+                      | q28 : int(1..8)]); int(1..3)])
+         ->
+         sum([toInt(and([sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q21, q29] | q29 : int(1..8), q29 = i])
+                         =
+                         sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q25, q30] | q30 : int(1..8), q30 = i]),
+                         or([q31 = i | q31 : int(1..8)]), or([q32 = i | q32 : int(1..8)]); int(1..3)]))
+                  | i : int(1..8)])
+         <= 4
+             | q21 : int(1..4294967296), q25 : int(1..4294967296)]),
+    and([and([words_ExplicitVarSizeWithFlagsR9_Flags[q64], words_ExplicitVarSizeWithFlagsR9_Flags[q68],
+              and([sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q68, q69] | q69 : int(1..8), q69 = q65]) =
+                   words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q64, q65]
+                   /\ or([q70 = q65 | q70 : int(1..8)])
+                       | q65 : int(1..8)])
+              /\
+              and([sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q64, q66] | q66 : int(1..8), q66 = q71]) =
+                   words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q68, q71]
+                   /\ or([q67 = q71 | q67 : int(1..8)])
+                       | q71 : int(1..8)]); int(1..3)])
+         ->
+         sum([toInt(sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q64, q72] | q72 : int(1..8), q72 = i]) = 1
+                    /\ or([q73 = i | q73 : int(1..8)])
+                    /\
+                    (sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q68, q74] | q74 : int(1..8), q74 = 9 - i])
+                     = 4
+                     /\ or([q75 = 9 - i | q75 : int(1..8)]))
+                    \/
+                    sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q64, q76] | q76 : int(1..8), q76 = i]) = 2
+                    /\ or([q77 = i | q77 : int(1..8)])
+                    /\
+                    (sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q68, q78] | q78 : int(1..8), q78 = 9 - i])
+                     = 3
+                     /\ or([q79 = 9 - i | q79 : int(1..8)]))
+                    \/
+                    sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q64, q80] | q80 : int(1..8), q80 = i]) = 3
+                    /\ or([q81 = i | q81 : int(1..8)])
+                    /\
+                    (sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q68, q82] | q82 : int(1..8), q82 = 9 - i])
+                     = 2
+                     /\ or([q83 = 9 - i | q83 : int(1..8)]))
+                    \/
+                    sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q64, q84] | q84 : int(1..8), q84 = i]) = 4
+                    /\ or([q85 = i | q85 : int(1..8)])
+                    /\
+                    (sum([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q68, q86] | q86 : int(1..8), q86 = 9 - i])
+                     = 1
+                     /\ or([q87 = 9 - i | q87 : int(1..8)])))
+                  | i : int(1..8)])
+         <= 4
+             | q64 : int(1..4294967296), q68 : int(1..4294967296)]),
+    and([words_ExplicitVarSizeWithFlagsR9_Flags[q1 + 1] ->
+         words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q1, ..] <lex
+         words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q1 + 1, ..]
+             | q1 : int(1..4294967295)]),
+    and([words_ExplicitVarSizeWithFlagsR9_Flags[q2] = false ->
+         and([words_ExplicitVarSizeWithFlagsR9_Values_Function1D[q2, q7] = 1 | q7 : int(1..8)])
+             | q2 : int(1..4294967296)]),
+    and([words_ExplicitVarSizeWithFlagsR9_Flags[q3 + 1] -> words_ExplicitVarSizeWithFlagsR9_Flags[q3]
+             | q3 : int(1..4294967295)])
+
+$ Conjure's
+$ {"finds": [{"Name": "words"}],
+$  "givens": [],
+$  "enumGivens": [],
+$  "enumLettings": [{"LettingDomainDefnEnum": [{"Name": "Base"},
+$                                              [{"Name": "A"}, {"Name": "C"}, {"Name": "G"}, {"Name": "T"}]]}],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"PickAll": []},
+$  "trailCompact": [[1, 2, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["q", 97]],
+$  "nbExtraGivens": 0,
+$  "representations": [[{"Name": "words"},
+$                       {"DomainSet": [{"Set_ExplicitVarSizeWithFlags": []}, {"SizeAttr_None": []},
+$                                      {"DomainFunction": [{"Function_1D": []},
+$                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                           "JectivityAttr_None"],
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Constant": {"ConstantInt": 8}}]}]},
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Constant": {"ConstantInt": 4}}]}]}]}]}]],
+$  "representationsTree": [[{"Name": "words"},
+$                           [{"rootLabel": {"Set_ExplicitVarSizeWithFlags": []},
+$                             "subForest": [{"rootLabel": {"Function_1D": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]]],
+$  "originalDomains": [[{"Name": "words"},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainFunction": [[],
+$                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                           "JectivityAttr_None"],
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Constant": {"ConstantInt": 8}}]}]},
+$                                                          {"DomainEnum": [{"Name": "Base"}, null, null]}]}]}]],
+$  "questionAnswered": []}

@@ -1,0 +1,6 @@
+language ESSENCE' 1.0
+
+letting s be 34
+letting square be
+        [[6, 15, 1, 12; int(1..4)], [4, 7, 9, 14; int(1..4)], [13, 2, 16, 3; int(1..4)],
+         [11, 10, 8, 5; int(1..4)]; int(1..4)]

@@ -1,0 +1,14 @@
+language Essence 1.3
+
+letting network be
+        mset({1, 2, 5, 10, 12}, {2, 4, 6, 13}, {2, 4, 6, 13}, {2, 4, 6, 13}, {3, 6, 8, 11, 12}, {3, 9, 10, 11, 13},
+             {5, 7, 8, 9, 10})
+$ Here is a simple "visualisation" for the value above.
+$  1  2  5 10 12
+$  2  4  6 13
+$  2  4  6 13
+$  2  4  6 13
+$  3  6  8 11 12
+$  3  9 10 11 13
+$  5  7  8  9 10
+

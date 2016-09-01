@@ -1,0 +1,14 @@
+language ESSENCE' 1.0
+
+letting aux1_Occurrence be
+        [[false, false, true, true, true, false, true, false, true, false, false, false; int(1..12)],
+         [false, false, true, true, true, false, true, false, true, false, false, false; int(1..12)],
+         [false, false, true, true, true, false, true, false, true, false, false, false; int(1..12)],
+         [false, false, true, true, true, false, true, false, true, false, false, false; int(1..12)],
+         [false, false, true, true, true, false, true, false, true, false, false, false; int(1..12)]; int(1..5)]
+letting hosts_ExplicitVarSizeWithMarker_Marker be 5
+letting hosts_ExplicitVarSizeWithMarker_Values be [3, 4, 5, 7, 9, 1, 1, 1, 1, 1, 1, 1; int(1..12)]
+letting sched_ExplicitR9_Function1D be
+        [[3, 9, 3, 4, 5, 4, 7, 4, 9, 4, 9, 5; int(1..12)], [4, 3, 3, 4, 5, 3, 7, 5, 9, 9, 4, 3; int(1..12)],
+         [5, 4, 3, 4, 5, 5, 7, 9, 9, 7, 7, 7; int(1..12)], [7, 7, 3, 4, 5, 9, 7, 7, 9, 3, 5, 4; int(1..12)],
+         [9, 5, 3, 4, 5, 7, 7, 3, 9, 5, 3, 9; int(1..12)]; int(1..5)]

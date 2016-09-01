@@ -1,0 +1,275 @@
+language ESSENCE' 1.0
+
+given n_colours: int(1..)
+given n_orders: int(1..)
+given col_per_slab: int(1..)
+given nbSizes: int(1..)
+given fin1: int
+given fin2: int
+given ordSize_Function1D: matrix indexed by [int(1..n_orders)] of int(1..fin2)
+given fin3: int
+given ordCol_Function1D: matrix indexed by [int(1..n_orders)] of int(1..n_colours)
+find cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker: int(0..2 ** n_orders * nbSizes)
+find cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence:
+        matrix indexed by [int(1..2 ** n_orders * nbSizes), int(1..n_orders)] of bool
+find cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2:
+        matrix indexed by [int(1..2 ** n_orders * nbSizes)] of int(1..nbSizes)
+minimising
+    sum([toInt(q36 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker) *
+         cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q36]
+             | q36 : int(1..2 ** n_orders * nbSizes)])
+such that
+    and([and([q28 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker,
+              q34 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker,
+              or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q28, q31] /\
+                  !or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
+                           [q34, q32]
+                       /\ q32 = q31
+                           | q32 : int(1..n_orders)])
+                      | q31 : int(1..n_orders)])
+              \/
+              or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q31] /\
+                  !cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q28, q31]
+                      | q31 : int(1..n_orders)]); int(1..3)])
+         ->
+         sum([toInt(or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
+                            [q34, q30]
+                        /\ q30 = q29
+                            | q30 : int(1..n_orders)]))
+              *
+              toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q28, q29])
+                  | q29 : int(1..n_orders)])
+         = 0 | q28 : int(1..2 ** n_orders * nbSizes), q34 : int(1..2 ** n_orders * nbSizes)]),
+    and([or([q8 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
+             cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q8, o]
+                 | q8 : int(1..2 ** n_orders * nbSizes)])
+             | o : int(1..n_orders)]),
+    and([q22 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
+         or([q17 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
+             (and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q17, q18] ->
+                   or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
+                           [q22, q19]
+                       /\ q19 = q18
+                           | q19 : int(1..n_orders)])
+                       | q18 : int(1..n_orders)])
+              /\
+              and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q22, q20] ->
+                   cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q17, q20]
+                       | q20 : int(1..n_orders)])
+              /\
+              cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q17] >=
+              sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
+                             [q22, o])
+                   * ordSize_Function1D[o]
+                       | o : int(1..n_orders)]))
+                 | q17 : int(1..2 ** n_orders * nbSizes)])
+             | q22 : int(1..2 ** n_orders * nbSizes)]),
+    and([q24 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
+         sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q24, o]) *
+              ordSize_Function1D[o]
+                  | o : int(1..n_orders)])
+         <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q24]
+             | q24 : int(1..2 ** n_orders * nbSizes)]),
+    and([q26 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
+         sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q26, o]) *
+              ordCol_Function1D[o]
+                  | o : int(1..n_orders)])
+         <= col_per_slab
+             | q26 : int(1..2 ** n_orders * nbSizes)]),
+    and([q1 + 1 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
+         cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q1, ..] <lex
+         cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q1 + 1, ..]
+         \/
+         and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q1, q9] ->
+              cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q1 + 1, q9]
+                  | q9 : int(1..n_orders)])
+         /\
+         and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q1 + 1, q10] ->
+              cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q1, q10]
+                  | q10 : int(1..n_orders)])
+         /\
+         cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q1] <
+         cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q1 + 1]
+             | q1 : int(1..2 ** n_orders * nbSizes - 1)]),
+    and([q2 > cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
+         and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q2, q11] = false
+                  | q11 : int(1..n_orders)])
+         /\ cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q2] = 1
+             | q2 : int(1..2 ** n_orders * nbSizes)]),
+    and([1 >=
+         sum([toInt(q13 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
+                    (and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
+                              [q13, q14]
+                          -> q5_Occurrence[q14]
+                              | q14 : int(1..n_orders)])
+                     /\
+                     and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
+                              [q13, q15]
+                              | q15 : int(1..n_orders), q5_Occurrence[q15]])))
+                  | q13 : int(1..2 ** n_orders * nbSizes)])
+             | q5_Occurrence : matrix indexed by [int(1..n_orders)] of bool])
+
+$ Conjure's
+$ {"finds": [{"Name": "cut"}],
+$  "givens": [{"Name": "n_colours"}, {"Name": "n_orders"}, {"Name": "col_per_slab"}, {"Name": "nbSizes"},
+$             {"Name": "ordSize"}, {"Name": "ordCol"}],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"PickAll": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["q", 37]],
+$  "nbExtraGivens": 3,
+$  "representations": [[{"Name": "nbSizes"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "n_colours"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "n_orders"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
+$                      [{"Name": "cut"},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_ExplicitVarSizeWithMarker": []}}},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainSet": [{"Set_Occurrence": []}, {"SizeAttr_None": []},
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": [{"Name": "n_orders"},
+$                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                           {"Name": "n_orders"},
+$                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "nbSizes"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "nbSizes"},
+$                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
+$                      [{"Name": "ordSize"},
+$                       {"DomainFunction": [{"Function_1D": []},
+$                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
+$                                                                             {"DeclHasRepr": ["Given",
+$                                                                                              {"MachineName": ["fin", 1,
+$                                                                                                               []]},
+$                                                                                              {"DomainInt": []}]}]}},
+$                                            "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_orders"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "n_orders"},
+$                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["fin", 2,
+$                                                                                                            []]},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"MachineName": ["fin",
+$                                                                                                                             2,
+$                                                                                                                             []]},
+$                                                                                                            {"DomainInt": []}]}]}]}]}]}],
+$                      [{"Name": "ordCol"},
+$                       {"DomainFunction": [{"Function_1D": []},
+$                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
+$                                                                             {"DeclHasRepr": ["Given",
+$                                                                                              {"MachineName": ["fin", 3,
+$                                                                                                               []]},
+$                                                                                              {"DomainInt": []}]}]}},
+$                                            "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_orders"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "n_orders"},
+$                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_colours"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "n_colours"},
+$                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
+$                      [{"Name": "col_per_slab"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]],
+$  "representationsTree": [[{"Name": "col_per_slab"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "cut"},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_ExplicitVarSizeWithMarker": []}}},
+$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []}]},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"MachineName": ["fin", 1, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 2, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 3, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "n_colours"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "n_orders"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "nbSizes"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "ordCol"},
+$                           [{"rootLabel": {"Function_1D": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "ordSize"},
+$                           [{"rootLabel": {"Function_1D": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]]],
+$  "originalDomains": [[{"Name": "n_colours"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "n_orders"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "col_per_slab"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "nbSizes"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "ordSize"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_orders"},
+$                                                                                           null]}]}]},
+$                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}],
+$                      [{"Name": "ordCol"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_orders"},
+$                                                                                           null]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_colours"},
+$                                                                                           null]}]}]}]}],
+$                      [{"Name": "cut"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainSet": [[], {"SizeAttr_None": []},
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": [{"Name": "n_orders"},
+$                                                                                                          null]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "nbSizes"},
+$                                                                                           null]}]}]}]}]],
+$  "questionAnswered": []}

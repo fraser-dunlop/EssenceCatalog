@@ -1,0 +1,4 @@
+language ESSENCE' 1.0
+
+letting hexagon be [[1; int(1)]; int(1)]
+letting s be 1

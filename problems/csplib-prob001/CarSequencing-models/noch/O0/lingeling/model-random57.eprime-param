@@ -1,0 +1,58 @@
+language ESSENCE' 1.0
+
+letting n_cars be 200
+letting n_classes be 26
+letting n_options be 5
+letting quantity_Function1D be
+        [3, 8, 39, 8, 6, 10, 3, 8, 12, 2, 3, 22, 8, 14, 2, 3, 4, 1, 2, 1, 2, 4, 14, 1, 4, 16; int(1..26)]
+letting usage_RelationAsMatrix be
+        [[false, true, false, true, true; int(1..5)], [false, false, false, false, true; int(1..5)],
+         [false, true, false, false, false; int(1..5)], [false, true, true, false, false; int(1..5)],
+         [true, false, true, false, true; int(1..5)], [true, true, false, true, false; int(1..5)],
+         [false, true, true, false, true; int(1..5)], [true, false, true, false, false; int(1..5)],
+         [false, false, true, false, false; int(1..5)], [false, false, true, true, true; int(1..5)],
+         [true, true, true, true, false; int(1..5)], [true, true, false, false, false; int(1..5)],
+         [true, false, false, true, false; int(1..5)], [false, true, false, true, false; int(1..5)],
+         [true, true, true, false, false; int(1..5)], [false, false, false, true, true; int(1..5)],
+         [false, true, false, false, true; int(1..5)], [true, false, false, true, true; int(1..5)],
+         [true, true, false, false, true; int(1..5)], [false, false, true, false, true; int(1..5)],
+         [false, false, true, true, false; int(1..5)], [true, false, true, true, false; int(1..5)],
+         [false, false, false, false, false; int(1..5)], [true, false, false, false, true; int(1..5)],
+         [false, true, true, false, false; int(1..5)], [true, false, false, false, false; int(1..5)]; int(1..26)]
+$ Here is a simple "visualisation" for the value above.
+$ _ T _ T T
+$ _ _ _ _ T
+$ _ T _ _ _
+$ _ T T _ _
+$ T _ T _ T
+$ T T _ T _
+$ _ T T _ T
+$ T _ T _ _
+$ _ _ T _ _
+$ _ _ T T T
+$ T T T T _
+$ T T _ _ _
+$ T _ _ T _
+$ _ T _ T _
+$ T T T _ _
+$ _ _ _ T T
+$ _ T _ _ T
+$ T _ _ T T
+$ T T _ _ T
+$ _ _ T _ T
+$ _ _ T T _
+$ T _ T T _
+$ _ _ _ _ _
+$ T _ _ _ T
+$ _ T T _ _
+$ T _ _ _ _
+
+letting blksize_Function1D be [2, 3, 3, 5, 5; int(1..5)]
+letting maxcars_Function1D be [1, 2, 1, 2, 1; int(1..5)]
+letting fin1 be 26
+letting fin2 be 39
+letting fin3 be 5
+letting fin4 be 2
+letting fin5 be 5
+letting fin6 be 5
+letting fin7 be 57

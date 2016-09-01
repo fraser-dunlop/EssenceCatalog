@@ -1,0 +1,66 @@
+language ESSENCE' 1.0
+
+given n: int(1..)
+where n % 6 = 1 \/ n % 6 = 3
+letting nb be n * (n - 1) / 6
+find sets_Occurrence: matrix indexed by [int(1..nb), int(1..n)] of bool
+such that
+    and([and([sum([toInt(sets_Occurrence[setA, q3] /\ sets_Occurrence[setB, q3]) | q3 : int(1..n)]) <= 1
+                  | setB : int(setA + 1..nb)])
+             | setA : int(1..nb - 1)]),
+    and([3 = sum([toInt(sets_Occurrence[q1, q2]) | q2 : int(1..n)]) | q1 : int(1..nb)])
+
+$ Conjure's
+$ {"finds": [{"Name": "sets"}],
+$  "givens": [{"Name": "n"}],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"Compact": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["q", 4]],
+$  "nbExtraGivens": 0,
+$  "representations": [[{"Name": "n"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "sets"},
+$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                          {"Reference": [{"Name": "nb"},
+$                                                                                         {"Alias": {"Op": {"MkOpDiv": [{"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                     {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                                                    [{"Reference": [{"Name": "n"},
+$                                                                                                                                                                                                    {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                     {"Name": "n"},
+$                                                                                                                                                                                                                     {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                                                     {"Op": {"MkOpMinus": [{"Reference": [{"Name": "n"},
+$                                                                                                                                                                                                                          {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                                           {"Name": "n"},
+$                                                                                                                                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                                                                           {"Constant": {"ConstantInt": 1}}]}}]]}}}},
+$                                                                                                                       {"Constant": {"ConstantInt": 6}}]}}}]}]}]},
+$                                         {"DomainSet": [{"Set_Occurrence": []},
+$                                                        {"SizeAttr_Size": {"Constant": {"ConstantInt": 3}}},
+$                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": [{"Name": "n"},
+$                                                                                                        {"DeclHasRepr": ["Given",
+$                                                                                                                         {"Name": "n"},
+$                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]],
+$  "representationsTree": [[{"Name": "n"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "sets"},
+$                           [{"rootLabel": null,
+$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []}]}]}]]],
+$  "originalDomains": [[{"Name": "n"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "sets"},
+$                       {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                          {"Reference": [{"Name": "nb"}, null]}]}]},
+$                                         {"DomainSet": [[], {"SizeAttr_Size": {"Constant": {"ConstantInt": 3}}},
+$                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": [{"Name": "n"},
+$                                                                                                        null]}]}]}]}]}]],
+$  "questionAnswered": []}

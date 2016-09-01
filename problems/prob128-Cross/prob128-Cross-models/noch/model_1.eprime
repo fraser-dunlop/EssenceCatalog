@@ -1,0 +1,361 @@
+language ESSENCE' 1.0
+
+given n_upper: int(1..100)
+given n_places: int(1..100)
+given n_words: int(1..100)
+given fin1: int
+given length_Function1D: matrix indexed by [int(1..n_places)] of int(1..n_upper)
+given fin2: int
+given inter_FunctionNDPartial_Flags: matrix indexed by [int(1..n_places), int(1..n_places)] of bool
+given inter_FunctionNDPartial_Values_1: matrix indexed by [int(1..n_places), int(1..n_places)] of int(1..n_upper)
+given inter_FunctionNDPartial_Values_2: matrix indexed by [int(1..n_places), int(1..n_places)] of int(1..n_upper)
+given fin3: int
+given fin4: int
+given dict_Function1DR10_Function1DPartial_Flags: matrix indexed by [int(1..n_words), int(1..n_upper)] of bool
+given dict_Function1DR10_Function1DPartial_Values: matrix indexed by [int(1..n_words), int(1..n_upper)] of int(65..90)
+where
+    and([inter_FunctionNDPartial_Values_1[q3_2, q3_1] = inter_FunctionNDPartial_Values_2[q3_1, q3_2] /\
+         inter_FunctionNDPartial_Values_2[q3_2, q3_1] = inter_FunctionNDPartial_Values_1[q3_1, q3_2]
+         /\ inter_FunctionNDPartial_Flags[q3_2, q3_1]
+             | q3_1 : int(1..n_places), q3_2 : int(1..n_places), inter_FunctionNDPartial_Flags[q3_1, q3_2]])
+where
+    [and([q32 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+          and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q32, q34] ->
+               q34 = 1 \/ aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q32, q34 - 1]
+                   | q34 : int(1..n_upper)])
+              | q32 : int(1..2 ** (n_upper * 26))])
+         | aux1_ExplicitVarSizeWithMarkerR10_Marker : int(0..2 ** (n_upper * 26)),
+           aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags : matrix indexed by [int(1..2 **
+                                                                                                        (n_upper * 26)),
+                                                                                                 int(1..n_upper)] of bool,
+           aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values : matrix indexed by [int(1..2 **
+                                                                                                         (n_upper *
+                                                                                                          26)),
+                                                                                                  int(1..n_upper)] of int(65..90),
+           and([q11 + 1 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q11, ..] <lex
+                aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q11 + 1, ..]
+                \/
+                and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q11, q17] =
+                     aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q11 + 1, q17]
+                         | q17 : int(1..n_upper)])
+                /\ and([or([q17 = q18 | q18 : int(1..n_upper)]) | q17 : int(1..n_upper)])
+                /\ and([or([q17 = q18 | q18 : int(1..n_upper)]) | q17 : int(1..n_upper)])
+                /\
+                aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q11, ..] <lex
+                aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q11 + 1, ..]
+                    | q11 : int(1..2 ** (n_upper * 26) - 1)]),
+           and([q12 > aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q12, q19] = false
+                         | q19 : int(1..n_upper)])
+                /\
+                and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q12, q20] = 65
+                         | q20 : int(1..n_upper)])
+                    | q12 : int(1..2 ** (n_upper * 26))]),
+           and([q13 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q13, q14] = false ->
+                     aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q13, q14] = 65
+                         | q14 : int(1..n_upper)])
+                    | q13 : int(1..2 ** (n_upper * 26))]),
+           and([q13 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                sum([toInt(aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q13, q15])
+                         | q15 : int(1..n_upper)])
+                <= fin4
+                    | q13 : int(1..2 ** (n_upper * 26))]),
+           and([or([q23 <= aux1_ExplicitVarSizeWithMarkerR10_Marker /\
+                    (and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q23, q25] ->
+                          dict_Function1DR10_Function1DPartial_Values[q21, q25] =
+                          aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q23, q25]
+                          /\ dict_Function1DR10_Function1DPartial_Flags[q21, q25]
+                              | q25 : int(1..n_upper)])
+                     /\
+                     and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q23, q26] =
+                          dict_Function1DR10_Function1DPartial_Values[q21, q26]
+                          /\ aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q23, q26]
+                              | q26 : int(1..n_upper), dict_Function1DR10_Function1DPartial_Flags[q21, q26]]))
+                        | q23 : int(1..2 ** (n_upper * 26))])
+                    | q21 : int(1..n_words)]),
+           and([q27 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                or([and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q27, q30] =
+                         dict_Function1DR10_Function1DPartial_Values[q28, q30]
+                         /\ aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q27, q30]
+                             | q30 : int(1..n_upper), dict_Function1DR10_Function1DPartial_Flags[q28, q30]])
+                    /\
+                    and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q27, q31] ->
+                         dict_Function1DR10_Function1DPartial_Values[q28, q31] =
+                         aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q27, q31]
+                         /\ dict_Function1DR10_Function1DPartial_Flags[q28, q31]
+                             | q31 : int(1..n_upper)])
+                        | q28 : int(1..n_words)])
+                    | q27 : int(1..2 ** (n_upper * 26))])]
+find crossword_Function1D: matrix indexed by [int(1..n_places)] of int(1..n_words)
+such that
+    and([sum([toInt(dict_Function1DR10_Function1DPartial_Flags[crossword_Function1D[p], q5]) | q5 : int(1..n_upper)]) =
+         length_Function1D[p]
+             | p : int(1..n_places)]),
+    and([and([dict_Function1DR10_Function1DPartial_Values
+                  [crossword_Function1D[q7_1], inter_FunctionNDPartial_Values_1[q7_1, q7_2]]
+              =
+              dict_Function1DR10_Function1DPartial_Values
+                  [crossword_Function1D[q7_2], inter_FunctionNDPartial_Values_2[q7_1, q7_2]],
+              dict_Function1DR10_Function1DPartial_Flags
+                  [crossword_Function1D[q7_1], inter_FunctionNDPartial_Values_1[q7_1, q7_2]],
+              dict_Function1DR10_Function1DPartial_Flags
+                  [crossword_Function1D[q7_2], inter_FunctionNDPartial_Values_2[q7_1, q7_2]]; int(1..3)])
+             | q7_1 : int(1..n_places), q7_2 : int(1..n_places), inter_FunctionNDPartial_Flags[q7_1, q7_2]]),
+    and([crossword_Function1D[p1] = crossword_Function1D[p2] -> p1 = p2 | p1 : int(1..n_places), p2 : int(1..n_places)])
+
+$ Conjure's
+$ {"finds": [{"Name": "crossword"}],
+$  "givens": [{"Name": "n_upper"}, {"Name": "n_places"}, {"Name": "n_words"}, {"Name": "length"}, {"Name": "inter"},
+$             {"Name": "dict"}],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"PickAll": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["aux", 2], ["q", 35]],
+$  "nbExtraGivens": 4,
+$  "representations": [[{"Name": "n_places"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
+$                      [{"Name": "n_words"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
+$                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
+$                      [{"Name": "n_upper"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
+$                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
+$                      [{"Name": "inter"},
+$                       {"DomainFunction": [{"Function_NDPartial": []},
+$                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 2, []]},
+$                                                                             {"DeclHasRepr": ["Given",
+$                                                                                              {"MachineName": ["fin", 2,
+$                                                                                                               []]},
+$                                                                                              {"DomainInt": []}]}]}},
+$                                            "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "n_places"},
+$                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                             {"Name": "n_places"},
+$                                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                              {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]},
+$                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "n_places"},
+$                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                             {"Name": "n_places"},
+$                                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                              {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]}]},
+$                                           {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "n_upper"},
+$                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                             {"Name": "n_upper"},
+$                                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                              {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]},
+$                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "n_upper"},
+$                                                                                                            {"DeclHasRepr": ["Given",
+$                                                                                                                             {"Name": "n_upper"},
+$                                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                              {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]}]}]}],
+$                      [{"Name": "dict"},
+$                       {"DomainFunction": [{"Function_1D": []},
+$                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
+$                                                                             {"DeclHasRepr": ["Given",
+$                                                                                              {"MachineName": ["fin", 3,
+$                                                                                                               []]},
+$                                                                                              {"DomainInt": []}]}]}},
+$                                            "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_words"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "n_words"},
+$                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                             {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]},
+$                                           {"DomainFunction": [{"Function_1DPartial": []},
+$                                                               [{"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                     4,
+$                                                                                                                     []]},
+$                                                                                                    {"DeclHasRepr": ["Given",
+$                                                                                                                     {"MachineName": ["fin",
+$                                                                                                                                      4,
+$                                                                                                                                      []]},
+$                                                                                                                     {"DomainInt": []}]}]}},
+$                                                                "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                {"Reference": [{"Name": "n_upper"},
+$                                                                                                               {"DeclHasRepr": ["Given",
+$                                                                                                                                {"Name": "n_upper"},
+$                                                                                                                                {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                 {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]},
+$                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 65}},
+$                                                                                                {"Constant": {"ConstantInt": 90}}]}]}]}]}],
+$                      [{"Name": "crossword"},
+$                       {"DomainFunction": [{"Function_1D": []},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_places"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "n_places"},
+$                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                             {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_words"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "n_words"},
+$                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                             {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]}]}],
+$                      [{"Name": "length"},
+$                       {"DomainFunction": [{"Function_1D": []},
+$                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
+$                                                                             {"DeclHasRepr": ["Given",
+$                                                                                              {"MachineName": ["fin", 1,
+$                                                                                                               []]},
+$                                                                                              {"DomainInt": []}]}]}},
+$                                            "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_places"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "n_places"},
+$                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                             {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_upper"},
+$                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                            {"Name": "n_upper"},
+$                                                                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                             {"Constant": {"ConstantInt": 100}}]}]}]}]}]}]}]}]],
+$  "representationsTree": [[{"Name": "crossword"},
+$                           [{"rootLabel": {"Function_1D": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "dict"},
+$                           [{"rootLabel": {"Function_1D": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": {"Function_1DPartial": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          [{"MachineName": ["fin", 1, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 2, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 3, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 4, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "inter"},
+$                           [{"rootLabel": {"Function_NDPartial": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]},
+$                                           {"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          [{"Name": "length"},
+$                           [{"rootLabel": {"Function_1D": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "n_places"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "n_upper"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "n_words"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]]],
+$  "originalDomains": [[{"Name": "n_upper"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
+$                      [{"Name": "n_places"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
+$                      [{"Name": "n_words"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Constant": {"ConstantInt": 100}}]}]}],
+$                      [{"Name": "length"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_places"},
+$                                                                                           null]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_upper"},
+$                                                                                           null]}]}]}]}],
+$                      [{"Name": "inter"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "n_places"},
+$                                                                                                            null]}]}]},
+$                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "n_places"},
+$                                                                                                            null]}]}]}]},
+$                                           {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "n_upper"},
+$                                                                                                            null]}]}]},
+$                                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                             {"Reference": [{"Name": "n_upper"},
+$                                                                                                            null]}]}]}]}]}],
+$                      [{"Name": "dict"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_words"},
+$                                                                                           null]}]}]},
+$                                           {"DomainFunction": [[],
+$                                                               [{"SizeAttr_None": []}, "PartialityAttr_Partial",
+$                                                                "JectivityAttr_None"],
+$                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                {"Reference": [{"Name": "n_upper"},
+$                                                                                                               null]}]}]},
+$                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 65}},
+$                                                                                                {"Constant": {"ConstantInt": 90}}]}]}]}]}],
+$                      [{"Name": "crossword"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_places"},
+$                                                                                           null]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"Name": "n_words"},
+$                                                                                           null]}]}]}]}]],
+$  "questionAnswered": []}

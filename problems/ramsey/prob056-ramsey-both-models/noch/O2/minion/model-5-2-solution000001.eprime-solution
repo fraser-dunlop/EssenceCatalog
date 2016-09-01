@@ -1,0 +1,9 @@
+language ESSENCE' 1.0
+
+letting graph_RelationAsMatrix be
+        [[[false, false, false, true, true; int(1..5)], [false, false, true, false, true; int(1..5)],
+          [false, true, false, true, false; int(1..5)], [true, false, true, false, false; int(1..5)],
+          [true, true, false, false, false; int(1..5)]; int(1..5)],
+         [[false, true, true, false, false; int(1..5)], [true, false, false, true, false; int(1..5)],
+          [true, false, false, false, true; int(1..5)], [false, true, false, false, true; int(1..5)],
+          [false, false, true, true, false; int(1..5)]; int(1..5)]; int(1..2)]

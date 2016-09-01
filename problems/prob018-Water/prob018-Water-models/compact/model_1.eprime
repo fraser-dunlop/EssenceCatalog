@@ -1,0 +1,133 @@
+language ESSENCE' 1.0
+
+letting nBuckets be 3
+letting totalWater be 8
+find plan_Function1DPartialR9_Flags: matrix indexed by [int(1..729)] of bool
+find plan_Function1DPartialR9_Values_Function1D: matrix indexed by [int(1..729), int(1..3)] of int(0..8)
+letting let2 be 729
+find plan_len: int(1..729)
+find aux1_ExplicitVarSizeWithMarkerR9_Marker: int(0..134217728)
+find aux1_ExplicitVarSizeWithMarkerR9_Values_Function1D: matrix indexed by [int(1..134217728), int(1..3)] of int(0..8)
+minimising plan_len
+such that
+    plan_len = sum([toInt(plan_Function1DPartialR9_Flags[q34]) | q34 : int(1..729)]),
+    and([i <= plan_len -> plan_Function1DPartialR9_Flags[i] | i : int(1..729)]),
+    and([q14 + 1 <= aux1_ExplicitVarSizeWithMarkerR9_Marker ->
+         aux1_ExplicitVarSizeWithMarkerR9_Values_Function1D[q14, ..] <lex
+         aux1_ExplicitVarSizeWithMarkerR9_Values_Function1D[q14 + 1, ..]
+             | q14 : int(1..134217727)]),
+    and([q15 > aux1_ExplicitVarSizeWithMarkerR9_Marker ->
+         and([aux1_ExplicitVarSizeWithMarkerR9_Values_Function1D[q15, q18] = 0 | q18 : int(1..3)])
+             | q15 : int(1..134217728)]),
+    and([plan_Function1DPartialR9_Flags[q19] ->
+         or([q21 <= aux1_ExplicitVarSizeWithMarkerR9_Marker /\
+             (and([plan_Function1DPartialR9_Values_Function1D[q19, q23] =
+                   aux1_ExplicitVarSizeWithMarkerR9_Values_Function1D[q21, q23]
+                       | q23 : int(1..3)])
+              /\
+              and([aux1_ExplicitVarSizeWithMarkerR9_Values_Function1D[q21, q24] =
+                   plan_Function1DPartialR9_Values_Function1D[q19, q24]
+                       | q24 : int(1..3)]))
+                 | q21 : int(1..134217728)])
+             | q19 : int(1..729)]),
+    and([q25 <= aux1_ExplicitVarSizeWithMarkerR9_Marker ->
+         or([plan_Function1DPartialR9_Flags[q26] /\
+             (and([aux1_ExplicitVarSizeWithMarkerR9_Values_Function1D[q25, q28] =
+                   plan_Function1DPartialR9_Values_Function1D[q26, q28]
+                       | q28 : int(1..3)])
+              /\
+              and([plan_Function1DPartialR9_Values_Function1D[q26, q29] =
+                   aux1_ExplicitVarSizeWithMarkerR9_Values_Function1D[q25, q29]
+                       | q29 : int(1..3)]))
+                 | q26 : int(1..729)])
+             | q25 : int(1..134217728)]),
+    and([q30 <= aux1_ExplicitVarSizeWithMarkerR9_Marker ->
+         sum([sum([aux1_ExplicitVarSizeWithMarkerR9_Values_Function1D[q30, q31] | q31 : int(1..3), q31 = b])
+                  | b : int(1..3)])
+         = 8 | q30 : int(1..134217728)]),
+    and([sum([toInt(and([plan_Function1DPartialR9_Values_Function1D[i + 1, q9] =
+                         plan_Function1DPartialR9_Values_Function1D[i, q9],
+                         plan_Function1DPartialR9_Flags[i], plan_Function1DPartialR9_Flags[i + 1]; int(1..3)]))
+                  | q9 : int(1..3)])
+         = 1 | i : int(1..729)]),
+    and([plan_Function1DPartialR9_Flags[q4] = false ->
+         and([plan_Function1DPartialR9_Values_Function1D[q4, q10] = 0 | q10 : int(1..3)])
+             | q4 : int(1..729)])
+
+$ Conjure's
+$ {"finds": [{"Name": "plan"}, {"Name": "plan_len"}],
+$  "givens": [],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"Compact": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["aux", 2], ["q", 35]],
+$  "nbExtraGivens": 0,
+$  "representations": [[{"Name": "plan_len"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Reference": [{"MachineName": ["let", 2, []]},
+$                                                                       {"Alias": {"Op": {"MkOpPow": [{"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                               {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                              [{"Reference": [{"Name": "totalWater"},
+$                                                                                                                                                                              {"Alias": {"Constant": {"ConstantInt": 8}}}]},
+$                                                                                                                                                               {"Constant": {"ConstantInt": 1}}]]}}}},
+$                                                                                                     {"Reference": [{"Name": "nBuckets"},
+$                                                                                                                    {"Alias": {"Constant": {"ConstantInt": 3}}}]}]}}}]}]}]}],
+$                      [{"Name": "plan"},
+$                       {"DomainFunction": [{"Function_1DPartial": []},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Constant": {"ConstantInt": 729}}]}]},
+$                                           {"DomainFunction": [{"Function_1D": []},
+$                                                               [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                                "JectivityAttr_None"],
+$                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                {"Constant": {"ConstantInt": 3}}]}]},
+$                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
+$                                                                                                {"Constant": {"ConstantInt": 8}}]}]}]}]}]],
+$  "representationsTree": [[{"Name": "plan"},
+$                           [{"rootLabel": {"Function_1DPartial": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": {"Function_1D": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          [{"Name": "plan_len"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]]],
+$  "originalDomains": [[{"Name": "plan"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 1,
+$                                                                                                            []]},
+$                                                                                           null]}]}]},
+$                                           {"DomainFunction": [[],
+$                                                               [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                                "JectivityAttr_None"],
+$                                                               {"DomainReference": [{"Name": "Bucket"}, null]},
+$                                                               {"DomainReference": [{"Name": "Water"}, null]}]}]}],
+$                      [{"Name": "plan_len"},
+$                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                        {"Reference": [{"MachineName": ["let", 2, []]}, null]}]}]}]],
+$  "questionAnswered": []}

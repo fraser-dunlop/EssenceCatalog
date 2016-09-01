@@ -1,0 +1,18 @@
+language ESSENCE' 1.0
+
+letting aux1_Occurrence be
+        [[false, true, true, false, true, true, false, false, false, false, false, false, false, true; int(1..14)],
+         [false, true, true, false, true, true, false, false, false, false, false, false, false, true; int(1..14)],
+         [false, true, true, false, true, true, false, false, false, false, false, false, false, true; int(1..14)],
+         [false, true, true, false, true, true, false, false, false, false, false, false, false, true; int(1..14)],
+         [false, true, true, false, true, true, false, false, false, false, false, false, false,
+          true; int(1..14)]; int(1..5)]
+letting hosts_ExplicitVarSizeWithFlags_Flags be
+        [true, true, true, true, true, false, false, false, false, false, false, false, false, false; int(1..14)]
+letting hosts_ExplicitVarSizeWithFlags_Values be [2, 3, 5, 6, 14, 1, 1, 1, 1, 1, 1, 1, 1, 1; int(1..14)]
+letting sched_ExplicitR9_Function1D be
+        [[2, 2, 3, 6, 5, 6, 6, 5, 5, 14, 2, 14, 5, 14; int(1..14)],
+         [3, 2, 3, 3, 5, 6, 14, 3, 14, 6, 6, 5, 2, 14; int(1..14)],
+         [5, 2, 3, 2, 5, 6, 3, 14, 2, 5, 14, 6, 6, 14; int(1..14)],
+         [6, 2, 3, 14, 5, 6, 5, 2, 6, 3, 5, 2, 3, 14; int(1..14)],
+         [14, 2, 3, 5, 5, 6, 2, 6, 3, 2, 3, 3, 14, 14; int(1..14)]; int(1..5)]

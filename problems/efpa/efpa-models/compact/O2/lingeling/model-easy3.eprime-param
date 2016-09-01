@@ -1,0 +1,6 @@
+language ESSENCE' 1.0
+
+letting numChars be 9
+letting lam be 9
+letting numCodeWords be 7
+letting dist be 3

@@ -1,0 +1,93 @@
+language ESSENCE' 1.0
+
+given v: int(1..)
+given d: int(1..)
+given q: int(1..)
+given lam: int(1..)
+letting let1 be q * lam
+find E_Explicit: matrix indexed by [int(1..v), int(1..let1)] of int(1..q)
+such that
+    and([and([sum([toInt(E_Explicit[q4, index] = element) | index : int(1..q * lam)]) = lam | element : int(1..q)])
+             | q4 : int(1..v)]),
+    and([and([E_Explicit[q5, q7] = E_Explicit[q6, q7] | q7 : int(1..let1)]) /\
+         and([or([q7 = q8 | q8 : int(1..let1)]) | q7 : int(1..let1)])
+         /\ and([or([q7 = q8 | q8 : int(1..let1)]) | q7 : int(1..let1)])
+         \/ sum([toInt(E_Explicit[q5, index] != E_Explicit[q6, index]) | index : int(1..q * lam)]) = d
+             | q5 : int(1..v), q6 : int(1..v)]),
+    and([E_Explicit[q1, ..] <lex E_Explicit[q1 + 1, ..] | q1 : int(1..v - 1)])
+
+$ Conjure's
+$ {"finds": [{"Name": "E"}],
+$  "givens": [{"Name": "v"}, {"Name": "d"}, {"Name": "q"}, {"Name": "lam"}],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"PickAll": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["q", 9]],
+$  "nbExtraGivens": 0,
+$  "representations": [[{"Name": "q"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "lam"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "v"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "E"},
+$                       {"DomainSet": [{"Set_Explicit": []},
+$                                      {"SizeAttr_Size": {"Reference": [{"Name": "v"},
+$                                                                       {"DeclHasRepr": ["Given", {"Name": "v"},
+$                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
+$                                      {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": [{"MachineName": ["let",
+$                                                                                                                         1,
+$                                                                                                                         []]},
+$                                                                                                        {"Alias": {"Op": {"MkOpProduct": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                                               [{"Reference": [{"Name": "q"},
+$                                                                                                                                                                                               {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                {"Name": "q"},
+$                                                                                                                                                                                                                {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                                                {"Reference": [{"Name": "lam"},
+$                                                                                                                                                                                               {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                                {"Name": "lam"},
+$                                                                                                                                                                                                                {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]]}}}}}]}]}]},
+$                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": [{"Name": "q"},
+$                                                                                                        {"DeclHasRepr": ["Given",
+$                                                                                                                         {"Name": "q"},
+$                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
+$                      [{"Name": "d"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]],
+$  "representationsTree": [[{"Name": "E"},
+$                           [{"rootLabel": {"Set_Explicit": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          [{"Name": "d"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "lam"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "q"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "v"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]]],
+$  "originalDomains": [[{"Name": "v"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "d"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "q"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "lam"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "E"},
+$                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": [{"Name": "v"}, null]}},
+$                                      {"DomainMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": [{"MachineName": ["let",
+$                                                                                                                         1,
+$                                                                                                                         []]},
+$                                                                                                        null]}]}]},
+$                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                         {"Reference": [{"Name": "q"},
+$                                                                                                        null]}]}]}]}]}]],
+$  "questionAnswered": []}

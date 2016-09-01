@@ -1,0 +1,10 @@
+language Essence 1.3
+
+letting alphabet be new type enum {alphabet_1, alphabet_2}
+letting switches be new type enum {switches_1, switches_2, switches_3, switches_4, switches_5}
+letting CoverTest be
+        mset(function(switches_5 --> alphabet_2), function(switches_5 --> alphabet_1),
+             function(switches_5 --> alphabet_1), function(switches_5 --> alphabet_2),
+             function(switches_5 --> alphabet_1), function(switches_5 --> alphabet_2),
+             function(switches_5 --> alphabet_1), function(switches_5 --> alphabet_2),
+             function(switches_5 --> alphabet_2), function(switches_5 --> alphabet_1))

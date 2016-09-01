@@ -1,0 +1,7 @@
+language ESSENCE' 1.0
+
+letting network_ExplicitWithFlagsR6_Flags be [1, 1, 1, 1, 1, 1, 1; int(1..7)]
+letting network_ExplicitWithFlagsR6_Values_ExplicitVarSizeWithDummy be
+        [[1, 2, 3, 4, 12; int(1..5)], [2, 5, 6, 7, 9; int(1..5)], [3, 7, 9, 11, 12; int(1..5)],
+         [3, 14, 14, 14, 14; int(1..5)], [4, 6, 8, 10, 13; int(1..5)], [4, 9, 14, 14, 14; int(1..5)],
+         [14, 14, 14, 14, 14; int(1..5)]; int(1..7)]

@@ -1,0 +1,7 @@
+language Essence 1.3
+
+letting c be
+        {function(1 --> b, 2 --> a, 3 --> d, 4 --> a, 5 --> b, 6 --> a),
+         function(1 --> b, 2 --> a, 3 --> d, 4 --> c, 5 --> a, 6 --> d),
+         function(1 --> b, 2 --> c, 3 --> d, 4 --> a, 5 --> a, 6 --> d),
+         function(1 --> b, 2 --> c, 3 --> d, 4 --> d, 5 --> d, 6 --> d)}

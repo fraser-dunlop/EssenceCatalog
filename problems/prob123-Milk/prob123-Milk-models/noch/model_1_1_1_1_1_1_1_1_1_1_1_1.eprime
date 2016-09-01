@@ -1,0 +1,387 @@
+language ESSENCE' 1.0
+
+given n_farms: int(1..)
+given capacity: int(1..)
+letting let1 be n_farms + 1
+given fin1: int
+given small_Occurrence: matrix indexed by [int(1..let1)] of bool
+letting let2 be n_farms + 1
+given fin2: int
+given large_Occurrence: matrix indexed by [int(1..let2)] of bool
+letting let3 be n_farms + 1
+given fin3: int
+given distance_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence:
+        matrix indexed by [int(1..fin3), int(1..let3)] of bool
+given distance_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_2: matrix indexed by [int(1..fin3)] of int(0..100)
+letting let4 be n_farms + 1
+given fin4: int
+given milk_Function1D: matrix indexed by [int(1..let4)] of int(0..100)
+where
+    and([f != 1 <-> small_Occurrence[f] \/ large_Occurrence[f] /\ !(small_Occurrence[f] /\ large_Occurrence[f])
+             | f : int(1..n_farms + 1)])
+where milk_Function1D[1] = 0
+letting let5 be n_farms + 2
+letting let6 be n_farms + 1
+find odd_Function1DPartial_Flags: matrix indexed by [int(1..let5)] of bool
+find odd_Function1DPartial_Values: matrix indexed by [int(1..let5)] of int(1..let6)
+letting let7 be n_farms + 2
+letting let8 be n_farms + 1
+find even_Function1DPartial_Flags: matrix indexed by [int(1..let7)] of bool
+find even_Function1DPartial_Values: matrix indexed by [int(1..let7)] of int(1..let8)
+find aux2_Occurrence: matrix indexed by [int(1..let2), int(1..let8)] of bool
+find aux1_Occurrence: matrix indexed by [int(1..let2), int(1..let6)] of bool
+find aux3_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
+find aux5_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
+find aux4_Occurrence: matrix indexed by [int(1..let1), int(1..let8)] of bool
+find aux7_Occurrence: matrix indexed by [int(1..let1), int(1..let8)] of bool
+find aux6_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
+find aux8_Occurrence: matrix indexed by [int(1..let6)] of bool
+find aux9_Occurrence: matrix indexed by [int(1..let8)] of bool
+such that
+    odd_Function1DPartial_Values[1] = 1,
+    odd_Function1DPartial_Flags[1],
+    even_Function1DPartial_Values[1] = 1,
+    even_Function1DPartial_Flags[1],
+    and([and([even_Function1DPartial_Flags[q19] -> aux2_Occurrence[f, even_Function1DPartial_Values[q19]]
+                  | q19 : int(1..let7)])
+             | f : int(1..let2)]),
+    and([and([aux2_Occurrence[f, q16] ->
+              or([even_Function1DPartial_Flags[q20] /\ even_Function1DPartial_Values[q20] = q16 | q20 : int(1..let7)])
+                  | q16 : int(1..let8)])
+             | f : int(1..let2)]),
+    and([and([odd_Function1DPartial_Flags[q12] -> aux1_Occurrence[f, odd_Function1DPartial_Values[q12]]
+                  | q12 : int(1..let5)])
+             | f : int(1..let2)]),
+    and([and([aux1_Occurrence[f, q9] ->
+              or([odd_Function1DPartial_Flags[q13] /\ odd_Function1DPartial_Values[q13] = q9 | q13 : int(1..let5)])
+                  | q9 : int(1..let6)])
+             | f : int(1..let2)]),
+    and([or([aux1_Occurrence[f, q8] /\ or([aux2_Occurrence[f, q15] /\ q15 = q8 | q15 : int(1..let8)]) /\ q8 = f
+                 | q8 : int(1..let6)])
+             | f : int(1..let2), large_Occurrence[f]]),
+    and([and([odd_Function1DPartial_Flags[q28] -> aux3_Occurrence[f, odd_Function1DPartial_Values[q28]]
+                  | q28 : int(1..let5)])
+             | f : int(1..let1)]),
+    and([and([aux3_Occurrence[f, q25] ->
+              or([odd_Function1DPartial_Flags[q29] /\ odd_Function1DPartial_Values[q29] = q25 | q29 : int(1..let5)])
+                  | q25 : int(1..let6)])
+             | f : int(1..let1)]),
+    and([and([odd_Function1DPartial_Flags[q41] -> aux5_Occurrence[f, odd_Function1DPartial_Values[q41]]
+                  | q41 : int(1..let5)])
+             | f : int(1..let1)]),
+    and([and([aux5_Occurrence[f, q38] ->
+              or([odd_Function1DPartial_Flags[q42] /\ odd_Function1DPartial_Values[q42] = q38 | q42 : int(1..let5)])
+                  | q38 : int(1..let6)])
+             | f : int(1..let1)]),
+    and([and([even_Function1DPartial_Flags[q34] -> aux4_Occurrence[f, even_Function1DPartial_Values[q34]]
+                  | q34 : int(1..let7)])
+             | f : int(1..let1)]),
+    and([and([aux4_Occurrence[f, q31] ->
+              or([even_Function1DPartial_Flags[q35] /\ even_Function1DPartial_Values[q35] = q31 | q35 : int(1..let7)])
+                  | q31 : int(1..let8)])
+             | f : int(1..let1)]),
+    and([and([even_Function1DPartial_Flags[q55] -> aux7_Occurrence[f, even_Function1DPartial_Values[q55]]
+                  | q55 : int(1..let7)])
+             | f : int(1..let1)]),
+    and([and([aux7_Occurrence[f, q52] ->
+              or([even_Function1DPartial_Flags[q56] /\ even_Function1DPartial_Values[q56] = q52 | q56 : int(1..let7)])
+                  | q52 : int(1..let8)])
+             | f : int(1..let1)]),
+    and([and([odd_Function1DPartial_Flags[q48] -> aux6_Occurrence[f, odd_Function1DPartial_Values[q48]]
+                  | q48 : int(1..let5)])
+             | f : int(1..let1)]),
+    and([and([aux6_Occurrence[f, q45] ->
+              or([odd_Function1DPartial_Flags[q49] /\ odd_Function1DPartial_Values[q49] = q45 | q49 : int(1..let5)])
+                  | q45 : int(1..let6)])
+             | f : int(1..let1)]),
+    and([(or([aux3_Occurrence[f, q24] /\ q24 = f | q24 : int(1..let6)]) \/
+          or([aux4_Occurrence[f, q30] /\ !or([aux5_Occurrence[f, q37] /\ q37 = q30 | q37 : int(1..let6)]) /\ q30 = f
+                  | q30 : int(1..let8)]))
+         /\
+         !or([aux6_Occurrence[f, q44] /\ or([aux7_Occurrence[f, q51] /\ q51 = q44 | q51 : int(1..let8)]) /\ q44 = f
+                  | q44 : int(1..let6)])
+             | f : int(1..let1), small_Occurrence[f]]),
+    and([odd_Function1DPartial_Flags[q63] -> aux8_Occurrence[odd_Function1DPartial_Values[q63]] | q63 : int(1..let5)]),
+    and([aux8_Occurrence[q60] ->
+         or([odd_Function1DPartial_Flags[q64] /\ odd_Function1DPartial_Values[q64] = q60 | q64 : int(1..let5)])
+             | q60 : int(1..let6)]),
+    sum([toInt(aux8_Occurrence[q59]) * milk_Function1D[q59] | q59 : int(1..let6)]) <= capacity,
+    and([even_Function1DPartial_Flags[q69] -> aux9_Occurrence[even_Function1DPartial_Values[q69]]
+             | q69 : int(1..let7)]),
+    and([aux9_Occurrence[q66] ->
+         or([even_Function1DPartial_Flags[q70] /\ even_Function1DPartial_Values[q70] = q66 | q70 : int(1..let7)])
+             | q66 : int(1..let8)]),
+    sum([toInt(aux9_Occurrence[q65]) * milk_Function1D[q65] | q65 : int(1..let8)]) <= capacity,
+    and([odd_Function1DPartial_Flags[q1] = false -> odd_Function1DPartial_Values[q1] = 1 | q1 : int(1..let5)]),
+    and([even_Function1DPartial_Flags[q4] = false -> even_Function1DPartial_Values[q4] = 1 | q4 : int(1..let7)])
+
+$ Conjure's
+$ {"finds": [{"Name": "odd"}, {"Name": "even"}],
+$  "givens": [{"Name": "n_farms"}, {"Name": "capacity"}, {"Name": "small"}, {"Name": "large"}, {"Name": "distance"},
+$             {"Name": "milk"}],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"PickAll": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 2], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["aux", 10], ["q", 71]],
+$  "nbExtraGivens": 4,
+$  "representations": [[{"Name": "n_farms"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
+$                      [{"Name": "small"},
+$                       {"DomainSet": [{"Set_Occurrence": []},
+$                                      {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
+$                                                                       {"DeclHasRepr": ["Given",
+$                                                                                        {"MachineName": ["fin", 1, []]},
+$                                                                                        {"DomainInt": []}]}]}},
+$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                       {"Reference": [{"MachineName": ["let", 1, []]},
+$                                                                                      {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                          {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                         [{"Reference": [{"Name": "n_farms"},
+$                                                                                                                                                                         {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                          {"Name": "n_farms"},
+$                                                                                                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                          {"Constant": {"ConstantInt": 1}}]]}}}}}]}]}]}]}],
+$                      [{"Name": "large"},
+$                       {"DomainSet": [{"Set_Occurrence": []},
+$                                      {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 2, []]},
+$                                                                       {"DeclHasRepr": ["Given",
+$                                                                                        {"MachineName": ["fin", 2, []]},
+$                                                                                        {"DomainInt": []}]}]}},
+$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                       {"Reference": [{"MachineName": ["let", 2, []]},
+$                                                                                      {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                          {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                         [{"Reference": [{"Name": "n_farms"},
+$                                                                                                                                                                         {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                          {"Name": "n_farms"},
+$                                                                                                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                          {"Constant": {"ConstantInt": 1}}]]}}}}}]}]}]}]}],
+$                      [{"Name": "milk"},
+$                       {"DomainFunction": [{"Function_1D": []},
+$                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 4, []]},
+$                                                                             {"DeclHasRepr": ["Given",
+$                                                                                              {"MachineName": ["fin", 4,
+$                                                                                                               []]},
+$                                                                                              {"DomainInt": []}]}]}},
+$                                            "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 4,
+$                                                                                                            []]},
+$                                                                                           {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                               {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                              [{"Reference": [{"Name": "n_farms"},
+$                                                                                                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                               {"Name": "n_farms"},
+$                                                                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                               {"Constant": {"ConstantInt": 1}}]]}}}}}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
+$                                                                            {"Constant": {"ConstantInt": 100}}]}]}]}],
+$                      [{"Name": "odd"},
+$                       {"DomainFunction": [{"Function_1DPartial": []},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 5,
+$                                                                                                            []]},
+$                                                                                           {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                               {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                              [{"Reference": [{"Name": "n_farms"},
+$                                                                                                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                               {"Name": "n_farms"},
+$                                                                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                               {"Constant": {"ConstantInt": 2}}]]}}}}}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 6,
+$                                                                                                            []]},
+$                                                                                           {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                               {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                              [{"Reference": [{"Name": "n_farms"},
+$                                                                                                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                               {"Name": "n_farms"},
+$                                                                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                               {"Constant": {"ConstantInt": 1}}]]}}}}}]}]}]}]}],
+$                      [{"Name": "even"},
+$                       {"DomainFunction": [{"Function_1DPartial": []},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 7,
+$                                                                                                            []]},
+$                                                                                           {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                               {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                              [{"Reference": [{"Name": "n_farms"},
+$                                                                                                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                               {"Name": "n_farms"},
+$                                                                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                               {"Constant": {"ConstantInt": 2}}]]}}}}}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 8,
+$                                                                                                            []]},
+$                                                                                           {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                               {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                              [{"Reference": [{"Name": "n_farms"},
+$                                                                                                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                               {"Name": "n_farms"},
+$                                                                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                               {"Constant": {"ConstantInt": 1}}]]}}}}}]}]}]}]}],
+$                      [{"Name": "capacity"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "distance"},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
+$                                                                             {"DeclHasRepr": ["Given",
+$                                                                                              {"MachineName": ["fin", 3,
+$                                                                                                               []]},
+$                                                                                              {"DomainInt": []}]}]}},
+$                                            "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainSet": [{"Set_Occurrence": []},
+$                                                          {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": [{"MachineName": ["let",
+$                                                                                                                           3,
+$                                                                                                                           []]},
+$                                                                                                          {"Alias": {"Op": {"MkOpSum": {"AbstractLiteral": {"AbsLitMatrix": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                              {"Constant": {"ConstantInt": 2}}]}]},
+$                                                                                                                                                                             [{"Reference": [{"Name": "n_farms"},
+$                                                                                                                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                                                                                                                              {"Name": "n_farms"},
+$                                                                                                                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
+$                                                                                                                                                                              {"Constant": {"ConstantInt": 1}}]]}}}}}]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
+$                                                                            {"Constant": {"ConstantInt": 100}}]}]}]}]],
+$  "representationsTree": [[{"Name": "capacity"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "distance"},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []}]},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "even"},
+$                           [{"rootLabel": {"Function_1DPartial": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"MachineName": ["fin", 1, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 2, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 3, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"MachineName": ["fin", 4, []]},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "large"},
+$                           [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "milk"},
+$                           [{"rootLabel": {"Function_1D": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "n_farms"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "odd"},
+$                           [{"rootLabel": {"Function_1DPartial": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []},
+$                                           {"rootLabel": null,
+$                                            "subForest": []}]}]],
+$                          [{"Name": "small"},
+$                           [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": null,
+$                                            "subForest": []}]}]]],
+$  "originalDomains": [[{"Name": "n_farms"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "capacity"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "small"},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                       {"Reference": [{"MachineName": ["let", 1, []]},
+$                                                                                      null]}]}]}]}],
+$                      [{"Name": "large"},
+$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                       {"Reference": [{"MachineName": ["let", 2, []]},
+$                                                                                      null]}]}]}]}],
+$                      [{"Name": "distance"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainSet": [[], {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": [{"MachineName": ["let",
+$                                                                                                                           3,
+$                                                                                                                           []]},
+$                                                                                                          null]}]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
+$                                                                            {"Constant": {"ConstantInt": 100}}]}]}]}],
+$                      [{"Name": "milk"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 4,
+$                                                                                                            []]},
+$                                                                                           null]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
+$                                                                            {"Constant": {"ConstantInt": 100}}]}]}]}],
+$                      [{"Name": "odd"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 5,
+$                                                                                                            []]},
+$                                                                                           null]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 6,
+$                                                                                                            []]},
+$                                                                                           null]}]}]}]}],
+$                      [{"Name": "even"},
+$                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 7,
+$                                                                                                            []]},
+$                                                                                           null]}]}]},
+$                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                            {"Reference": [{"MachineName": ["let", 8,
+$                                                                                                            []]},
+$                                                                                           null]}]}]}]}]],
+$  "questionAnswered": []}

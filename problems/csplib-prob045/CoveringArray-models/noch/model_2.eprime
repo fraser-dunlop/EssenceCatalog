@@ -1,0 +1,102 @@
+language ESSENCE' 1.0
+
+given k: int(1..)
+given b: int(1..)
+given t: int(1..)
+given g: int(2..)
+where k >= t
+where b >= g ** t
+find CoverTest_ExplicitWithRepetitionR9_Flag: int(0..b * b)
+find CoverTest_ExplicitWithRepetitionR9_Values_Function1D: matrix indexed by [int(1..b * b), int(1..k)] of int(1..g)
+such that
+    and([or([q12 <= CoverTest_ExplicitWithRepetitionR9_Flag /\
+             and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q12, q14] =
+                  testcase_Function1DPartial_Values[q14]
+                      | q14 : int(1..k), testcase_Function1DPartial_Flags[q14]])
+                 | q12 : int(1..b * b)])
+             | testcase_Function1DPartial_Flags : matrix indexed by [int(1..k)] of bool,
+               testcase_Function1DPartial_Values : matrix indexed by [int(1..k)] of int(1..g),
+               and([testcase_Function1DPartial_Flags[q1] = false -> testcase_Function1DPartial_Values[q1] = 1
+                        | q1 : int(1..k)]),
+               sum([1 | q11 : int(1..k), testcase_Function1DPartial_Flags[q11]]) = t]),
+    and([q4 + 1 <= CoverTest_ExplicitWithRepetitionR9_Flag ->
+         CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q4, ..] <=lex
+         CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q4 + 1, ..]
+             | q4 : int(1..b * b - 1)]),
+    and([q5 > CoverTest_ExplicitWithRepetitionR9_Flag ->
+         and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q5, q15] = 1 | q15 : int(1..k)])
+             | q5 : int(1..b * b)]),
+    b = CoverTest_ExplicitWithRepetitionR9_Flag
+
+$ Conjure's
+$ {"finds": [{"Name": "CoverTest"}],
+$  "givens": [{"Name": "k"}, {"Name": "b"}, {"Name": "t"}, {"Name": "g"}],
+$  "enumGivens": [],
+$  "enumLettings": [],
+$  "unnameds": [[{"Name": "alphabet"}, {"Reference": [{"Name": "g"}, null]}],
+$               [{"Name": "switches"}, {"Reference": [{"Name": "k"}, null]}]],
+$  "strategyQ": {"PickFirst": []},
+$  "strategyA": {"PickAll": []},
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 2, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "trailVerbose": [],
+$  "trailRewrites": [],
+$  "nameGenState": [["q", 16]],
+$  "nbExtraGivens": 0,
+$  "representations": [[{"Name": "k"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "t"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "b"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "g"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 2}}}]}],
+$                      [{"Name": "CoverTest"},
+$                       {"DomainMSet": [{"MSet_ExplicitWithRepetition": []},
+$                                       [{"SizeAttr_Size": {"Reference": [{"Name": "b"},
+$                                                                         {"DeclHasRepr": ["Given", {"Name": "b"},
+$                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
+$                                        {"OccurAttr_None": []}],
+$                                       {"DomainFunction": [{"Function_1D": []},
+$                                                           [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                            "JectivityAttr_None"],
+$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                            {"Reference": [{"Name": "k"},
+$                                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                                            {"Name": "k"},
+$                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
+$                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                            {"Reference": [{"Name": "g"},
+$                                                                                                           {"DeclHasRepr": ["Given",
+$                                                                                                                            {"Name": "g"},
+$                                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 2}}}]}]}]}]}]}]}]}]],
+$  "representationsTree": [[{"Name": "CoverTest"},
+$                           [{"rootLabel": {"MSet_ExplicitWithRepetition": []},
+$                             "subForest": [{"rootLabel": {"Function_1D": []},
+$                                            "subForest": [{"rootLabel": null,
+$                                                           "subForest": []},
+$                                                          {"rootLabel": null,
+$                                                           "subForest": []}]}]}]],
+$                          [{"Name": "b"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "g"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "k"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "t"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]]],
+$  "originalDomains": [[{"Name": "k"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "b"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "t"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "g"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 2}}}]}],
+$                      [{"Name": "CoverTest"},
+$                       {"DomainMSet": [[],
+$                                       [{"SizeAttr_Size": {"Reference": [{"Name": "b"}, null]}}, {"OccurAttr_None": []}],
+$                                       {"DomainFunction": [[],
+$                                                           [{"SizeAttr_None": []}, "PartialityAttr_Total",
+$                                                            "JectivityAttr_None"],
+$                                                           {"DomainReference": [{"Name": "switches"}, null]},
+$                                                           {"DomainReference": [{"Name": "alphabet"}, null]}]}]}]],
+$  "questionAnswered": []}
