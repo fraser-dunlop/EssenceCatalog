@@ -36,106 +36,106 @@ given earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence:
 given earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence:
         matrix indexed by [int(1..fin13), int(1..Attribute_EnumSize)] of bool
 where
-    sum([capacity_FunctionND[q69_1, q69_2] | q69_1 : int(1..n_lines), q69_2 : int(1..n_days)]) * batch_size =
+    sum([capacity_FunctionND[q70_1, q70_2] | q70_1 : int(1..n_lines), q70_2 : int(1..n_days)]) * batch_size =
     sum([quantity_Function1D[o] | o : int(1..n_orders)])
 where
-    and([or([and([s1_Occurrence[q87]
-                      | q87 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q86, q87]])
+    and([or([and([s1_Occurrence[q88]
+                      | q88 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q87, q88]])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q86, q88]
-                      | q88 : int(1..Attribute_EnumSize), s1_Occurrence[q88]])
+             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q87, q89]
+                      | q89 : int(1..Attribute_EnumSize), s1_Occurrence[q89]])
              /\
-             (and([s1_Occurrence[q89]
-                       | q89 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q86, q89]])
+             (and([s1_Occurrence[q90]
+                       | q90 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q87, q90]])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q86, q90]
-                       | q90 : int(1..Attribute_EnumSize), s1_Occurrence[q90]]))
-                 | q86 : int(1..fin13)])
+              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q87, q91]
+                       | q91 : int(1..Attribute_EnumSize), s1_Occurrence[q91]]))
+                 | q87 : int(1..fin13)])
              | s1_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool])
 where
-    and([or([and([s1_Occurrence[q6]
-                      | q6 : int(1..Attribute_EnumSize), earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q5, q6]])
+    and([or([and([s1_Occurrence[q7]
+                      | q7 : int(1..Attribute_EnumSize), earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q6, q7]])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q5, q7]
-                      | q7 : int(1..Attribute_EnumSize), s1_Occurrence[q7]])
+             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q6, q8]
+                      | q8 : int(1..Attribute_EnumSize), s1_Occurrence[q8]])
              /\
-             (and([s2_Occurrence[q8]
-                       | q8 : int(1..Attribute_EnumSize), earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q5, q8]])
+             (and([s2_Occurrence[q9]
+                       | q9 : int(1..Attribute_EnumSize), earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q6, q9]])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q5, q9]
-                       | q9 : int(1..Attribute_EnumSize), s2_Occurrence[q9]]))
-                 | q5 : int(1..fin13)])
+              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q6, q10]
+                       | q10 : int(1..Attribute_EnumSize), s2_Occurrence[q10]]))
+                 | q6 : int(1..fin13)])
          /\
-         or([and([s2_Occurrence[q12]
-                      | q12 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q11, q12]])
+         or([and([s2_Occurrence[q13]
+                      | q13 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q12, q13]])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q11, q13]
-                      | q13 : int(1..Attribute_EnumSize), s2_Occurrence[q13]])
+             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q12, q14]
+                      | q14 : int(1..Attribute_EnumSize), s2_Occurrence[q14]])
              /\
-             (and([s1_Occurrence[q14]
-                       | q14 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q11, q14]])
+             (and([s1_Occurrence[q15]
+                       | q15 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q12, q15]])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q11, q15]
-                       | q15 : int(1..Attribute_EnumSize), s1_Occurrence[q15]]))
-                 | q11 : int(1..fin13)])
+              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q12, q16]
+                       | q16 : int(1..Attribute_EnumSize), s1_Occurrence[q16]]))
+                 | q12 : int(1..fin13)])
          ->
-         and([s2_Occurrence[q16] | q16 : int(1..Attribute_EnumSize), s1_Occurrence[q16]]) /\
-         and([s1_Occurrence[q17] | q17 : int(1..Attribute_EnumSize), s2_Occurrence[q17]])
+         and([s2_Occurrence[q17] | q17 : int(1..Attribute_EnumSize), s1_Occurrence[q17]]) /\
+         and([s1_Occurrence[q18] | q18 : int(1..Attribute_EnumSize), s2_Occurrence[q18]])
              | s1_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool,
                s2_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool])
 where
-    and([or([and([s1_Occurrence[q23]
-                      | q23 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q22, q23]])
+    and([or([and([s1_Occurrence[q24]
+                      | q24 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q23, q24]])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q22, q24]
-                      | q24 : int(1..Attribute_EnumSize), s1_Occurrence[q24]])
+             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q23, q25]
+                      | q25 : int(1..Attribute_EnumSize), s1_Occurrence[q25]])
              /\
-             (and([s2_Occurrence[q25]
-                       | q25 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q22, q25]])
+             (and([s2_Occurrence[q26]
+                       | q26 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q23, q26]])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q22, q26]
-                       | q26 : int(1..Attribute_EnumSize), s2_Occurrence[q26]]))
-                 | q22 : int(1..fin13)])
+              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q23, q27]
+                       | q27 : int(1..Attribute_EnumSize), s2_Occurrence[q27]]))
+                 | q23 : int(1..fin13)])
          /\
-         or([and([s2_Occurrence[q29]
-                      | q29 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q28, q29]])
+         or([and([s2_Occurrence[q30]
+                      | q30 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q29, q30]])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q28, q30]
-                      | q30 : int(1..Attribute_EnumSize), s2_Occurrence[q30]])
+             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q29, q31]
+                      | q31 : int(1..Attribute_EnumSize), s2_Occurrence[q31]])
              /\
-             (and([s3_Occurrence[q31]
-                       | q31 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q28, q31]])
+             (and([s3_Occurrence[q32]
+                       | q32 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q29, q32]])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q28, q32]
-                       | q32 : int(1..Attribute_EnumSize), s3_Occurrence[q32]]))
-                 | q28 : int(1..fin13)])
+              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q29, q33]
+                       | q33 : int(1..Attribute_EnumSize), s3_Occurrence[q33]]))
+                 | q29 : int(1..fin13)])
          ->
-         or([and([s1_Occurrence[q35]
-                      | q35 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q34, q35]])
+         or([and([s1_Occurrence[q36]
+                      | q36 : int(1..Attribute_EnumSize),
+                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q35, q36]])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q34, q36]
-                      | q36 : int(1..Attribute_EnumSize), s1_Occurrence[q36]])
+             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q35, q37]
+                      | q37 : int(1..Attribute_EnumSize), s1_Occurrence[q37]])
              /\
-             (and([s3_Occurrence[q37]
-                       | q37 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q34, q37]])
+             (and([s3_Occurrence[q38]
+                       | q38 : int(1..Attribute_EnumSize),
+                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q35, q38]])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q34, q38]
-                       | q38 : int(1..Attribute_EnumSize), s3_Occurrence[q38]]))
-                 | q34 : int(1..fin13)])
+              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q35, q39]
+                       | q39 : int(1..Attribute_EnumSize), s3_Occurrence[q39]]))
+                 | q35 : int(1..fin13)])
              | s1_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool,
                s2_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool,
                s3_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool])
-letting let1 be sum([capacity_FunctionND[q70_1, q70_2] | q70_1 : int(1..n_lines), q70_2 : int(1..n_days)])
+letting let1 be sum([capacity_FunctionND[q71_1, q71_2] | q71_1 : int(1..n_lines), q71_2 : int(1..n_days)])
 find batches_Function1DR8_ExplicitWithRepetition_Flag: matrix indexed by [int(1..let1)] of int(0..maxLot * maxLot)
 find batches_Function1DR8_ExplicitWithRepetition_Values_1:
         matrix indexed by [int(1..let1), int(1..maxLot * maxLot)] of int(1..n_orders)
@@ -147,113 +147,113 @@ find batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values:
         matrix indexed by [int(1..let1), int(1..Attribute_EnumSize)] of int(1..Attribute_EnumSize)
 find schedule_FunctionND: matrix indexed by [int(1..n_lines), int(1..n_days), int(1..n_slots)] of int(1..let1)
 such that
-    and([and([q75 <= batches_Function1DR8_ExplicitWithRepetition_Flag[b] ->
-              and([req_attr_Function1DR2_Occurrence[batches_Function1DR8_ExplicitWithRepetition_Values_1[b, q75], q71]
+    and([and([q76 <= batches_Function1DR8_ExplicitWithRepetition_Flag[b] ->
+              and([req_attr_Function1DR2_Occurrence[batches_Function1DR8_ExplicitWithRepetition_Values_1[b, q76], q72]
                    ->
-                   or([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[b, q73] /\
-                       batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[b, q73] = q71
-                           | q73 : int(1..Attribute_EnumSize)])
-                       | q71 : int(1..Attribute_EnumSize)])
-                  | q75 : int(1..maxLot * maxLot)])
+                   or([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[b, q74] /\
+                       batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[b, q74] = q72
+                           | q74 : int(1..Attribute_EnumSize)])
+                       | q72 : int(1..Attribute_EnumSize)])
+                  | q76 : int(1..maxLot * maxLot)])
              | b : int(1..let1)]),
-    and([and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[b, q53] ->
-              or([q52 <= batches_Function1DR8_ExplicitWithRepetition_Flag[b] /\
+    and([and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[b, q54] ->
+              or([q53 <= batches_Function1DR8_ExplicitWithRepetition_Flag[b] /\
                   req_attr_Function1DR2_Occurrence
-                      [batches_Function1DR8_ExplicitWithRepetition_Values_1[b, q52],
-                       batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[b, q53]]
-                      | q52 : int(1..maxLot * maxLot)])
-                  | q53 : int(1..Attribute_EnumSize)])
+                      [batches_Function1DR8_ExplicitWithRepetition_Values_1[b, q53],
+                       batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[b, q54]]
+                      | q53 : int(1..maxLot * maxLot)])
+                  | q54 : int(1..Attribute_EnumSize)])
              | b : int(1..let1)]),
-    and([and([q78 <= batches_Function1DR8_ExplicitWithRepetition_Flag[schedule_FunctionND[q80_1, q80_2, q80_3]] ->
+    and([and([q79 <= batches_Function1DR8_ExplicitWithRepetition_Flag[schedule_FunctionND[q81_1, q81_2, q81_3]] ->
               and([req_attr_Function1DR2_Occurrence
                        [batches_Function1DR8_ExplicitWithRepetition_Values_1
-                            [schedule_FunctionND[q80_1, q80_2, q80_3], q78],
-                        q76]
-                   -> line_attr_Function1DR2_Occurrence[q80_1, q76]
-                       | q76 : int(1..Attribute_EnumSize)])
-                  | q78 : int(1..maxLot * maxLot)])
-             | q80_1 : int(1..n_lines), q80_2 : int(1..n_days), q80_3 : int(1..n_slots)]),
-    and([and([q82 <= batches_Function1DR8_ExplicitWithRepetition_Flag[schedule_FunctionND[q84_1, q84_2, q84_3]] ->
-              q84_2 >=
+                            [schedule_FunctionND[q81_1, q81_2, q81_3], q79],
+                        q77]
+                   -> line_attr_Function1DR2_Occurrence[q81_1, q77]
+                       | q77 : int(1..Attribute_EnumSize)])
+                  | q79 : int(1..maxLot * maxLot)])
+             | q81_1 : int(1..n_lines), q81_2 : int(1..n_days), q81_3 : int(1..n_slots)]),
+    and([and([q83 <= batches_Function1DR8_ExplicitWithRepetition_Flag[schedule_FunctionND[q85_1, q85_2, q85_3]] ->
+              q85_2 >=
               line_on_Function1D
-                  [batches_Function1DR8_ExplicitWithRepetition_Values_1[schedule_FunctionND[q84_1, q84_2, q84_3], q82]]
+                  [batches_Function1DR8_ExplicitWithRepetition_Values_1[schedule_FunctionND[q85_1, q85_2, q85_3], q83]]
               /\
-              q84_2 <=
+              q85_2 <=
               line_off_Function1D
-                  [batches_Function1DR8_ExplicitWithRepetition_Values_1[schedule_FunctionND[q84_1, q84_2, q84_3], q82]]
-                  | q82 : int(1..maxLot * maxLot)])
-             | q84_1 : int(1..n_lines), q84_2 : int(1..n_days), q84_3 : int(1..n_slots)]),
+                  [batches_Function1DR8_ExplicitWithRepetition_Values_1[schedule_FunctionND[q85_1, q85_2, q85_3], q83]]
+                  | q83 : int(1..maxLot * maxLot)])
+             | q85_1 : int(1..n_lines), q85_2 : int(1..n_days), q85_3 : int(1..n_slots)]),
     and([and([and([or([and([or([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags
-                                    [schedule_FunctionND[l, d, s], q61]
+                                    [schedule_FunctionND[l, d, s], q62]
                                 /\
                                 batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values
-                                    [schedule_FunctionND[l, d, s], q61]
-                                = q59
-                                    | q61 : int(1..Attribute_EnumSize)])
-                                | q59 : int(1..Attribute_EnumSize),
-                                  earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q58, q59]])
+                                    [schedule_FunctionND[l, d, s], q62]
+                                = q60
+                                    | q62 : int(1..Attribute_EnumSize)])
+                                | q60 : int(1..Attribute_EnumSize),
+                                  earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q59, q60]])
                        /\
-                       and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[schedule_FunctionND[l, d, s], q63] ->
+                       and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[schedule_FunctionND[l, d, s], q64] ->
                             earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence
-                                [q58,
+                                [q59,
                                  batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values
-                                     [schedule_FunctionND[l, d, s], q63]]
-                                | q63 : int(1..Attribute_EnumSize)])
+                                     [schedule_FunctionND[l, d, s], q64]]
+                                | q64 : int(1..Attribute_EnumSize)])
                        /\
                        (and([or([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags
-                                     [schedule_FunctionND[l, d, s + 1], q66]
+                                     [schedule_FunctionND[l, d, s + 1], q67]
                                  /\
                                  batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values
-                                     [schedule_FunctionND[l, d, s + 1], q66]
-                                 = q64
-                                     | q66 : int(1..Attribute_EnumSize)])
-                                 | q64 : int(1..Attribute_EnumSize),
-                                   earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q58, q64]])
+                                     [schedule_FunctionND[l, d, s + 1], q67]
+                                 = q65
+                                     | q67 : int(1..Attribute_EnumSize)])
+                                 | q65 : int(1..Attribute_EnumSize),
+                                   earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q59, q65]])
                         /\
                         and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags
-                                 [schedule_FunctionND[l, d, s + 1], q68]
+                                 [schedule_FunctionND[l, d, s + 1], q69]
                              ->
                              earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence
-                                 [q58,
+                                 [q59,
                                   batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values
-                                      [schedule_FunctionND[l, d, s + 1], q68]]
-                                 | q68 : int(1..Attribute_EnumSize)]))
-                           | q58 : int(1..fin13)])
+                                      [schedule_FunctionND[l, d, s + 1], q69]]
+                                 | q69 : int(1..Attribute_EnumSize)]))
+                           | q59 : int(1..fin13)])
                        | s : int(1..n_slots - 1)])
                   | d : int(1..n_days)])
              | l : int(1..n_lines)]),
-    and([and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[q39, q40 + 1] ->
-              batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[q39, q40] <
-              batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[q39, q40 + 1]
-                  | q40 : int(1..Attribute_EnumSize - 1)])
-             | q39 : int(1..let1)]),
-    and([and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[q39, q41] = false ->
-              batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[q39, q41] = 1
-                  | q41 : int(1..Attribute_EnumSize)])
-             | q39 : int(1..let1)]),
-    and([and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[q39, q42 + 1] ->
-              batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[q39, q42]
-                  | q42 : int(1..Attribute_EnumSize - 1)])
-             | q39 : int(1..let1)]),
-    and([and([q46 + 1 <= batches_Function1DR8_ExplicitWithRepetition_Flag[q45] ->
-              batches_Function1DR8_ExplicitWithRepetition_Values_1[q45, q46] <
-              batches_Function1DR8_ExplicitWithRepetition_Values_1[q45, q46 + 1]
+    and([and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[q40, q41 + 1] ->
+              batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[q40, q41] <
+              batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[q40, q41 + 1]
+                  | q41 : int(1..Attribute_EnumSize - 1)])
+             | q40 : int(1..let1)]),
+    and([and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[q40, q42] = false ->
+              batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Values[q40, q42] = 1
+                  | q42 : int(1..Attribute_EnumSize)])
+             | q40 : int(1..let1)]),
+    and([and([batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[q40, q43 + 1] ->
+              batch_attr_Function1DR4_ExplicitVarSizeWithFlags_Flags[q40, q43]
+                  | q43 : int(1..Attribute_EnumSize - 1)])
+             | q40 : int(1..let1)]),
+    and([and([q47 + 1 <= batches_Function1DR8_ExplicitWithRepetition_Flag[q46] ->
+              batches_Function1DR8_ExplicitWithRepetition_Values_1[q46, q47] <
+              batches_Function1DR8_ExplicitWithRepetition_Values_1[q46, q47 + 1]
               \/
-              batches_Function1DR8_ExplicitWithRepetition_Values_1[q45, q46] =
-              batches_Function1DR8_ExplicitWithRepetition_Values_1[q45, q46 + 1]
+              batches_Function1DR8_ExplicitWithRepetition_Values_1[q46, q47] =
+              batches_Function1DR8_ExplicitWithRepetition_Values_1[q46, q47 + 1]
               /\
-              batches_Function1DR8_ExplicitWithRepetition_Values_2[q45, q46] <=
-              batches_Function1DR8_ExplicitWithRepetition_Values_2[q45, q46 + 1]
-                  | q46 : int(1..maxLot * maxLot - 1)])
-             | q45 : int(1..let1)]),
-    and([and([q47 > batches_Function1DR8_ExplicitWithRepetition_Flag[q45] ->
-              batches_Function1DR8_ExplicitWithRepetition_Values_1[q45, q47] = 1 /\
-              batches_Function1DR8_ExplicitWithRepetition_Values_2[q45, q47] = 1
-                  | q47 : int(1..maxLot * maxLot)])
-             | q45 : int(1..let1)]),
-    and([batches_Function1DR8_ExplicitWithRepetition_Flag[q45] <= maxLot | q45 : int(1..let1)]),
-    allDiff([schedule_FunctionND[q54_1, q54_2, q54_3]
-                 | q54_1 : int(1..n_lines), q54_2 : int(1..n_days), q54_3 : int(1..n_slots)])
+              batches_Function1DR8_ExplicitWithRepetition_Values_2[q46, q47] <=
+              batches_Function1DR8_ExplicitWithRepetition_Values_2[q46, q47 + 1]
+                  | q47 : int(1..maxLot * maxLot - 1)])
+             | q46 : int(1..let1)]),
+    and([and([q48 > batches_Function1DR8_ExplicitWithRepetition_Flag[q46] ->
+              batches_Function1DR8_ExplicitWithRepetition_Values_1[q46, q48] = 1 /\
+              batches_Function1DR8_ExplicitWithRepetition_Values_2[q46, q48] = 1
+                  | q48 : int(1..maxLot * maxLot)])
+             | q46 : int(1..let1)]),
+    and([batches_Function1DR8_ExplicitWithRepetition_Flag[q46] <= maxLot | q46 : int(1..let1)]),
+    allDiff([schedule_FunctionND[q55_1, q55_2, q55_3]
+                 | q55_1 : int(1..n_lines), q55_2 : int(1..n_days), q55_3 : int(1..n_slots)])
 
 $ Conjure's
 $ {"finds": [{"Name": "batches"}, {"Name": "batch_attr"}, {"Name": "schedule"}],
@@ -263,19 +263,301 @@ $             {"Name": "line_attr"}, {"Name": "line_on"}, {"Name": "line_off"}, 
 $             {"Name": "earlier"}],
 $  "enumGivens": [{"Name": "Attribute"}],
 $  "enumLettings": [],
+$  "lettings": [[{"Name": "Attribute"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "Attribute_EnumSize"},
+$                                                                           {"DeclNoRepr": ["Given",
+$                                                                                           {"Name": "Attribute_EnumSize"},
+$                                                                                           {"DomainInt": []},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "Order"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "n_orders"},
+$                                                                           {"DeclNoRepr": ["Given", {"Name": "n_orders"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "Line"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "n_lines"},
+$                                                                           {"DeclNoRepr": ["Given", {"Name": "n_lines"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "Day"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "n_days"},
+$                                                                           {"DeclNoRepr": ["Given", {"Name": "n_days"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "Slot"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "n_slots"},
+$                                                                           {"DeclNoRepr": ["Given", {"Name": "n_slots"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "Lot"},
+$                {"Domain": {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": [{"Name": "n_orders"},
+$                                                                                            {"DeclNoRepr": ["Given",
+$                                                                                                            {"Name": "n_orders"},
+$                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                            {"NoRegion": []}]}]}]}]},
+$                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                             {"Reference": [{"Name": "batch_size"},
+$                                                                                            {"DeclNoRepr": ["Given",
+$                                                                                                            {"Name": "batch_size"},
+$                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                            {"NoRegion": []}]}]}]}]}]}}],
+$               [{"MachineName": ["let", 1, []]},
+$                {"Op": {"MkOpSum": {"Comprehension": [{"Op": {"MkOpImage": [{"Reference": [{"Name": "capacity"},
+$                                                                                           {"DeclNoRepr": ["Given",
+$                                                                                                           {"Name": "capacity"},
+$                                                                                                           {"DomainFunction": [[],
+$                                                                                                                               [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                  5,
+$                                                                                                                                                                                  []]},
+$                                                                                                                                                                 {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                 {"MachineName": ["fin",
+$                                                                                                                                                                                                  5,
+$                                                                                                                                                                                                  []]},
+$                                                                                                                                                                                 {"DomainInt": []},
+$                                                                                                                                                                                 {"NoRegion": []}]}]}},
+$                                                                                                                                "PartialityAttr_Total",
+$                                                                                                                                "JectivityAttr_None"],
+$                                                                                                                               {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                 {"Reference": [{"Name": "n_lines"},
+$                                                                                                                                                                                                {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                {"Name": "n_lines"},
+$                                                                                                                                                                                                                {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                {"NoRegion": []}]}]}]}]},
+$                                                                                                                                                {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                 {"Reference": [{"Name": "n_days"},
+$                                                                                                                                                                                                {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                {"Name": "n_days"},
+$                                                                                                                                                                                                                {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                6,
+$                                                                                                                                                                                                []]},
+$                                                                                                                                                                               {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                               {"MachineName": ["fin",
+$                                                                                                                                                                                                                6,
+$                                                                                                                                                                                                                []]},
+$                                                                                                                                                                                               {"DomainInt": []},
+$                                                                                                                                                                                               {"NoRegion": []}]}]}]}]}]},
+$                                                                                                           {"NoRegion": []}]}]},
+$                                                                            {"Reference": [{"Name": "e"},
+$                                                                                           {"InComprehension": {"GenInExpr": [{"Single": {"Name": "e"}},
+$                                                                                                                              {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
+$                                                                                                                                                                    {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                    {"Name": "capacity"},
+$                                                                                                                                                                                    {"DomainFunction": [[],
+$                                                                                                                                                                                                        [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                           5,
+$                                                                                                                                                                                                                                                           []]},
+$                                                                                                                                                                                                                                          {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                          {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                           5,
+$                                                                                                                                                                                                                                                                           []]},
+$                                                                                                                                                                                                                                                          {"DomainInt": []},
+$                                                                                                                                                                                                                                                          {"NoRegion": []}]}]}},
+$                                                                                                                                                                                                         "PartialityAttr_Total",
+$                                                                                                                                                                                                         "JectivityAttr_None"],
+$                                                                                                                                                                                                        {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                          {"Reference": [{"Name": "n_lines"},
+$                                                                                                                                                                                                                                                                         {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                         {"Name": "n_lines"},
+$                                                                                                                                                                                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                                                         {"NoRegion": []}]}]}]}]},
+$                                                                                                                                                                                                                         {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                          {"Reference": [{"Name": "n_days"},
+$                                                                                                                                                                                                                                                                         {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                         {"Name": "n_days"},
+$                                                                                                                                                                                                                                                                                         {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                                                         {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                                                                        {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                         {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                         6,
+$                                                                                                                                                                                                                                                                         []]},
+$                                                                                                                                                                                                                                                        {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                        {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                         6,
+$                                                                                                                                                                                                                                                                                         []]},
+$                                                                                                                                                                                                                                                                        {"DomainInt": []},
+$                                                                                                                                                                                                                                                                        {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                                                    {"NoRegion": []}]}]}}}]}}]}]}},
+$                                                      [{"Generator": {"GenInExpr": [{"Single": {"Name": "e"}},
+$                                                                                    {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
+$                                                                                                                          {"DeclNoRepr": ["Given",
+$                                                                                                                                          {"Name": "capacity"},
+$                                                                                                                                          {"DomainFunction": [[],
+$                                                                                                                                                              [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                 5,
+$                                                                                                                                                                                                                 []]},
+$                                                                                                                                                                                                {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                {"MachineName": ["fin",
+$                                                                                                                                                                                                                                 5,
+$                                                                                                                                                                                                                                 []]},
+$                                                                                                                                                                                                                {"DomainInt": []},
+$                                                                                                                                                                                                                {"NoRegion": []}]}]}},
+$                                                                                                                                                               "PartialityAttr_Total",
+$                                                                                                                                                               "JectivityAttr_None"],
+$                                                                                                                                                              {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                {"Reference": [{"Name": "n_lines"},
+$                                                                                                                                                                                                                               {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                               {"Name": "n_lines"},
+$                                                                                                                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                               {"NoRegion": []}]}]}]}]},
+$                                                                                                                                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                {"Reference": [{"Name": "n_days"},
+$                                                                                                                                                                                                                               {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                               {"Name": "n_days"},
+$                                                                                                                                                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                               {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                              {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                               {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                               6,
+$                                                                                                                                                                                                                               []]},
+$                                                                                                                                                                                                              {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                              {"MachineName": ["fin",
+$                                                                                                                                                                                                                                               6,
+$                                                                                                                                                                                                                                               []]},
+$                                                                                                                                                                                                                              {"DomainInt": []},
+$                                                                                                                                                                                                                              {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                          {"NoRegion": []}]}]}}}]}}]]}}}],
+$               [{"Name": "Batch"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"MachineName": ["let", 1, []]},
+$                                                                           {"Alias": {"Op": {"MkOpSum": {"Comprehension": [{"Op": {"MkOpImage": [{"Reference": [{"Name": "capacity"},
+$                                                                                                                                                                {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                {"Name": "capacity"},
+$                                                                                                                                                                                {"DomainFunction": [[],
+$                                                                                                                                                                                                    [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                       5,
+$                                                                                                                                                                                                                                                       []]},
+$                                                                                                                                                                                                                                      {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                      {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                       5,
+$                                                                                                                                                                                                                                                                       []]},
+$                                                                                                                                                                                                                                                      {"DomainInt": []},
+$                                                                                                                                                                                                                                                      {"NoRegion": []}]}]}},
+$                                                                                                                                                                                                     "PartialityAttr_Total",
+$                                                                                                                                                                                                     "JectivityAttr_None"],
+$                                                                                                                                                                                                    {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                      {"Reference": [{"Name": "n_lines"},
+$                                                                                                                                                                                                                                                                     {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                     {"Name": "n_lines"},
+$                                                                                                                                                                                                                                                                                     {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                                                     {"NoRegion": []}]}]}]}]},
+$                                                                                                                                                                                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                      {"Reference": [{"Name": "n_days"},
+$                                                                                                                                                                                                                                                                     {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                     {"Name": "n_days"},
+$                                                                                                                                                                                                                                                                                     {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                                                     {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                                                                    {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                     {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                     6,
+$                                                                                                                                                                                                                                                                     []]},
+$                                                                                                                                                                                                                                                    {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                    {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                     6,
+$                                                                                                                                                                                                                                                                                     []]},
+$                                                                                                                                                                                                                                                                    {"DomainInt": []},
+$                                                                                                                                                                                                                                                                    {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                                                {"NoRegion": []}]}]},
+$                                                                                                                                                 {"Reference": [{"Name": "e"},
+$                                                                                                                                                                {"InComprehension": {"GenInExpr": [{"Single": {"Name": "e"}},
+$                                                                                                                                                                                                   {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
+$                                                                                                                                                                                                                                         {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                         {"Name": "capacity"},
+$                                                                                                                                                                                                                                                         {"DomainFunction": [[],
+$                                                                                                                                                                                                                                                                             [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                                                                5,
+$                                                                                                                                                                                                                                                                                                                                []]},
+$                                                                                                                                                                                                                                                                                                               {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                                               {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                                                                                5,
+$                                                                                                                                                                                                                                                                                                                                                []]},
+$                                                                                                                                                                                                                                                                                                                               {"DomainInt": []},
+$                                                                                                                                                                                                                                                                                                                               {"NoRegion": []}]}]}},
+$                                                                                                                                                                                                                                                                              "PartialityAttr_Total",
+$                                                                                                                                                                                                                                                                              "JectivityAttr_None"],
+$                                                                                                                                                                                                                                                                             {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                                                                                               {"Reference": [{"Name": "n_lines"},
+$                                                                                                                                                                                                                                                                                                                                              {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                                                                              {"Name": "n_lines"},
+$                                                                                                                                                                                                                                                                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                                                                                                                              {"NoRegion": []}]}]}]}]},
+$                                                                                                                                                                                                                                                                                              {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                                                                                               {"Reference": [{"Name": "n_days"},
+$                                                                                                                                                                                                                                                                                                                                              {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                                                                              {"Name": "n_days"},
+$                                                                                                                                                                                                                                                                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                                                                                                                              {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                                                                                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                                                                              {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                                                                              6,
+$                                                                                                                                                                                                                                                                                                                                              []]},
+$                                                                                                                                                                                                                                                                                                                             {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                                                             {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                                                                                              6,
+$                                                                                                                                                                                                                                                                                                                                                              []]},
+$                                                                                                                                                                                                                                                                                                                                             {"DomainInt": []},
+$                                                                                                                                                                                                                                                                                                                                             {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                                                                                                                         {"NoRegion": []}]}]}}}]}}]}]}},
+$                                                                                                                           [{"Generator": {"GenInExpr": [{"Single": {"Name": "e"}},
+$                                                                                                                                                         {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
+$                                                                                                                                                                                               {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                               {"Name": "capacity"},
+$                                                                                                                                                                                                               {"DomainFunction": [[],
+$                                                                                                                                                                                                                                   [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                      5,
+$                                                                                                                                                                                                                                                                                      []]},
+$                                                                                                                                                                                                                                                                     {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                     {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                                      5,
+$                                                                                                                                                                                                                                                                                                      []]},
+$                                                                                                                                                                                                                                                                                     {"DomainInt": []},
+$                                                                                                                                                                                                                                                                                     {"NoRegion": []}]}]}},
+$                                                                                                                                                                                                                                    "PartialityAttr_Total",
+$                                                                                                                                                                                                                                    "JectivityAttr_None"],
+$                                                                                                                                                                                                                                   {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                                                     {"Reference": [{"Name": "n_lines"},
+$                                                                                                                                                                                                                                                                                                    {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                                    {"Name": "n_lines"},
+$                                                                                                                                                                                                                                                                                                                    {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                                                                                    {"NoRegion": []}]}]}]}]},
+$                                                                                                                                                                                                                                                    {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                                                     {"Reference": [{"Name": "n_days"},
+$                                                                                                                                                                                                                                                                                                    {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                                    {"Name": "n_days"},
+$                                                                                                                                                                                                                                                                                                                    {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                                                                                                                                                                    {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                                                                                                   {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                                                    {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                                    6,
+$                                                                                                                                                                                                                                                                                                    []]},
+$                                                                                                                                                                                                                                                                                   {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                                                   {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                                                    6,
+$                                                                                                                                                                                                                                                                                                                    []]},
+$                                                                                                                                                                                                                                                                                                   {"DomainInt": []},
+$                                                                                                                                                                                                                                                                                                   {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                                                                               {"NoRegion": []}]}]}}}]}}]]}}}}]}]}]}}]],
 $  "unnameds": [[{"Name": "Batch"}, {"Reference": [{"MachineName": ["let", 1, []]}, null]}]],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 16], [1, 1, 4],
-$                   [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 16], [1, 1, 4], [1, 1, 4],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 4], [1, 1, 4], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 4], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
@@ -308,18 +590,17 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["q", 91]],
+$  "nameGenState": [["fin", 16], ["let", 2], ["q", 92]],
 $  "nbExtraGivens": 15,
-$  "representations": [[{"Name": "Attribute_EnumSize"}, {"DomainInt": []}],
+$  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_orders"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "n_lines"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "n_days"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "n_slots"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
+$                      [{"Name": "Attribute_EnumSize"}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 5, []]}, {"DomainInt": []}],
+$                      [{"Name": "n_lines"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "n_days"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"MachineName": ["fin", 6, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 7, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 8, []]}, {"DomainInt": []}],
@@ -413,6 +694,7 @@ $                                                                               
 $                                                                                                                            {"Name": "Attribute_EnumSize"},
 $                                                                                                                            {"DomainInt": []}]}]}]}]}]}]]}],
 $                      [{"Name": "maxLot"}, {"DomainInt": []}],
+$                      [{"Name": "n_slots"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "req_attr"},
 $                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},

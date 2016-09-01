@@ -15,132 +15,132 @@ find contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags:
         matrix indexed by [int(1..let1), int(1..maxMaterial * 5)] of int(0..maxMaterial)
 find contents_Function1DPartialR7_Values_ExplicitWithFlags_Values:
         matrix indexed by [int(1..let1), int(1..maxMaterial * 5)] of int(1..5)
-minimising sum([toInt(colour_Function1DPartial_Flags[q69]) | q69 : int(1..let1)])
+minimising sum([toInt(colour_Function1DPartial_Flags[q70]) | q70 : int(1..let1)])
 such that
     and([colour_Function1DPartial_Flags[b] <-> contents_Function1DPartialR7_Flags[b] | b : int(1..let1)]),
-    and([sum([toInt(contents_Function1DPartialR7_Flags[q16]) *
-              sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q16, q14] > 0 /\
-                         contents_Function1DPartialR7_Flags[q16])
-                   * toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q16, q14] = m)
-                       | q14 : int(1..maxMaterial * 5)])
-                  | q16 : int(1..let1)])
-         = quantity_Function1D[m]
-             | m : int(1..5)]),
-    and([colour_Function1DPartial_Flags[q22] ->
-         sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q22, q20] > 0 /\
-                    contents_Function1DPartialR7_Flags[q22])
-                  | q20 : int(1..maxMaterial * 5)])
-         <= capacity_Function1D[colour_Function1DPartial_Values[q22]]
-         /\ colour_Function1DPartial_Flags[q22]
-             | q22 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q28] ->
-         (colour_Function1DPartial_Values[q28] = 1 /\ colour_Function1DPartial_Flags[q28] ->
-          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q28, q24] > 0 /\
-               contents_Function1DPartialR7_Flags[q28]
-               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q28, q24] = 2
-                   | q24 : int(1..maxMaterial * 5)])
+    and([sum([toInt(contents_Function1DPartialR7_Flags[q17]) *
+              sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q17, q15] > 0 /\
+                         contents_Function1DPartialR7_Flags[q17])
+                   * toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q17, q15] = q1)
+                       | q15 : int(1..maxMaterial * 5)])
+                  | q17 : int(1..let1)])
+         = quantity_Function1D[q1]
+             | q1 : int(1..5)]),
+    and([colour_Function1DPartial_Flags[q23] ->
+         sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q23, q21] > 0 /\
+                    contents_Function1DPartialR7_Flags[q23])
+                  | q21 : int(1..maxMaterial * 5)])
+         <= capacity_Function1D[colour_Function1DPartial_Values[q23]]
+         /\ colour_Function1DPartial_Flags[q23]
+             | q23 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q29] ->
+         (colour_Function1DPartial_Values[q29] = 1 /\ colour_Function1DPartial_Flags[q29] ->
+          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q29, q25] > 0 /\
+               contents_Function1DPartialR7_Flags[q29]
+               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q29, q25] = 2
+                   | q25 : int(1..maxMaterial * 5)])
           /\
-          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q28, q26] > 0 /\
-               contents_Function1DPartialR7_Flags[q28]
-               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q28, q26] = 3
-                   | q26 : int(1..maxMaterial * 5)]))
-             | q28 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q34] ->
-         (colour_Function1DPartial_Values[q34] = 3 /\ colour_Function1DPartial_Flags[q34] ->
-          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q34, q30] > 0 /\
-               contents_Function1DPartialR7_Flags[q34]
-               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q34, q30] = 4
-                   | q30 : int(1..maxMaterial * 5)])
+          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q29, q27] > 0 /\
+               contents_Function1DPartialR7_Flags[q29]
+               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q29, q27] = 3
+                   | q27 : int(1..maxMaterial * 5)]))
+             | q29 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q35] ->
+         (colour_Function1DPartial_Values[q35] = 3 /\ colour_Function1DPartial_Flags[q35] ->
+          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q35, q31] > 0 /\
+               contents_Function1DPartialR7_Flags[q35]
+               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q35, q31] = 4
+                   | q31 : int(1..maxMaterial * 5)])
           /\
-          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q34, q32] > 0 /\
-               contents_Function1DPartialR7_Flags[q34]
-               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q34, q32] = 2
-                   | q32 : int(1..maxMaterial * 5)]))
-             | q34 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q40] ->
-         (colour_Function1DPartial_Values[q40] = 2 /\ colour_Function1DPartial_Flags[q40] ->
-          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q40, q36] > 0 /\
-               contents_Function1DPartialR7_Flags[q40]
-               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q40, q36] = 3
-                   | q36 : int(1..maxMaterial * 5)])
+          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q35, q33] > 0 /\
+               contents_Function1DPartialR7_Flags[q35]
+               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q35, q33] = 2
+                   | q33 : int(1..maxMaterial * 5)]))
+             | q35 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q41] ->
+         (colour_Function1DPartial_Values[q41] = 2 /\ colour_Function1DPartial_Flags[q41] ->
+          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q41, q37] > 0 /\
+               contents_Function1DPartialR7_Flags[q41]
+               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q41, q37] = 3
+                   | q37 : int(1..maxMaterial * 5)])
           /\
-          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q40, q38] > 0 /\
-               contents_Function1DPartialR7_Flags[q40]
-               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q40, q38] = 1
-                   | q38 : int(1..maxMaterial * 5)]))
-             | q40 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q44] ->
-         (colour_Function1DPartial_Values[q44] = 1 /\ colour_Function1DPartial_Flags[q44] ->
-          sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q44, q42] > 0 /\
-                     contents_Function1DPartialR7_Flags[q44])
-               * toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q44, q42] = 4)
-                   | q42 : int(1..maxMaterial * 5)])
+          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q41, q39] > 0 /\
+               contents_Function1DPartialR7_Flags[q41]
+               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q41, q39] = 1
+                   | q39 : int(1..maxMaterial * 5)]))
+             | q41 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q45] ->
+         (colour_Function1DPartial_Values[q45] = 1 /\ colour_Function1DPartial_Flags[q45] ->
+          sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q45, q43] > 0 /\
+                     contents_Function1DPartialR7_Flags[q45])
+               * toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q45, q43] = 4)
+                   | q43 : int(1..maxMaterial * 5)])
           <= 1)
-             | q44 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q48] ->
-         (colour_Function1DPartial_Values[q48] = 2 /\ colour_Function1DPartial_Flags[q48] ->
-          sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q48, q46] > 0 /\
-                     contents_Function1DPartialR7_Flags[q48])
-               * toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q48, q46] = 4)
-                   | q46 : int(1..maxMaterial * 5)])
+             | q45 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q49] ->
+         (colour_Function1DPartial_Values[q49] = 2 /\ colour_Function1DPartial_Flags[q49] ->
+          sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q49, q47] > 0 /\
+                     contents_Function1DPartialR7_Flags[q49])
+               * toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q49, q47] = 4)
+                   | q47 : int(1..maxMaterial * 5)])
           <= 2)
-             | q48 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q54] ->
-         (or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q54, q52] > 0 /\
-              contents_Function1DPartialR7_Flags[q54]
-              /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q54, q52] = 4
-                  | q52 : int(1..maxMaterial * 5)])
+             | q49 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q55] ->
+         (or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q55, q53] > 0 /\
+              contents_Function1DPartialR7_Flags[q55]
+              /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q55, q53] = 4
+                  | q53 : int(1..maxMaterial * 5)])
           ->
-          or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q54, q50] > 0 /\
-              contents_Function1DPartialR7_Flags[q54]
-              /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q54, q50] = 2
-                  | q50 : int(1..maxMaterial * 5)]))
-             | q54 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q60] ->
-         (or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q60, q58] > 0 /\
-              contents_Function1DPartialR7_Flags[q60]
-              /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q60, q58] = 1
-                  | q58 : int(1..maxMaterial * 5)])
+          or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q55, q51] > 0 /\
+              contents_Function1DPartialR7_Flags[q55]
+              /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q55, q51] = 2
+                  | q51 : int(1..maxMaterial * 5)]))
+             | q55 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q61] ->
+         (or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q61, q59] > 0 /\
+              contents_Function1DPartialR7_Flags[q61]
+              /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q61, q59] = 1
+                  | q59 : int(1..maxMaterial * 5)])
           ->
-          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q60, q56] > 0 /\
-               contents_Function1DPartialR7_Flags[q60]
-               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q60, q56] = 5
-                   | q56 : int(1..maxMaterial * 5)]))
-             | q60 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q66] ->
-         (or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q66, q64] > 0 /\
-              contents_Function1DPartialR7_Flags[q66]
-              /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q66, q64] = 5
-                  | q64 : int(1..maxMaterial * 5)])
+          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q61, q57] > 0 /\
+               contents_Function1DPartialR7_Flags[q61]
+               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q61, q57] = 5
+                   | q57 : int(1..maxMaterial * 5)]))
+             | q61 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q67] ->
+         (or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q67, q65] > 0 /\
+              contents_Function1DPartialR7_Flags[q67]
+              /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q67, q65] = 5
+                  | q65 : int(1..maxMaterial * 5)])
           ->
-          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q66, q62] > 0 /\
-               contents_Function1DPartialR7_Flags[q66]
-               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q66, q62] = 2
-                   | q62 : int(1..maxMaterial * 5)]))
-             | q66 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q1] = false -> colour_Function1DPartial_Values[q1] = 1 | q1 : int(1..let1)]),
-    and([contents_Function1DPartialR7_Flags[q4] = false ->
-         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q4, q17] = 0 | q17 : int(1..maxMaterial * 5)])
+          !or([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q67, q63] > 0 /\
+               contents_Function1DPartialR7_Flags[q67]
+               /\ contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q67, q63] = 2
+                   | q63 : int(1..maxMaterial * 5)]))
+             | q67 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q2] = false -> colour_Function1DPartial_Values[q2] = 1 | q2 : int(1..let1)]),
+    and([contents_Function1DPartialR7_Flags[q5] = false ->
+         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q5, q18] = 0 | q18 : int(1..maxMaterial * 5)])
          /\
-         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q4, q18] = 1
-                  | q18 : int(1..maxMaterial * 5)])
-             | q4 : int(1..let1)]),
-    and([contents_Function1DPartialR7_Flags[q6] ->
-         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q6, q7 + 1] > 0 ->
-              contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q6, q7] <
-              contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q6, q7 + 1]
-                  | q7 : int(1..maxMaterial * 5 - 1)])
-             | q6 : int(1..let1)]),
-    and([contents_Function1DPartialR7_Flags[q6] ->
-         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q6, q8] = 0 ->
-              contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q6, q8] = 1
-                  | q8 : int(1..maxMaterial * 5)])
-             | q6 : int(1..let1)]),
-    and([contents_Function1DPartialR7_Flags[q6] ->
-         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q6, q9 + 1] > 0 ->
-              contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q6, q9] > 0
-                  | q9 : int(1..maxMaterial * 5 - 1)])
-             | q6 : int(1..let1)])
+         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q5, q19] = 1
+                  | q19 : int(1..maxMaterial * 5)])
+             | q5 : int(1..let1)]),
+    and([contents_Function1DPartialR7_Flags[q7] ->
+         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q7, q8 + 1] > 0 ->
+              contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q7, q8] <
+              contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q7, q8 + 1]
+                  | q8 : int(1..maxMaterial * 5 - 1)])
+             | q7 : int(1..let1)]),
+    and([contents_Function1DPartialR7_Flags[q7] ->
+         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q7, q9] = 0 ->
+              contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q7, q9] = 1
+                  | q9 : int(1..maxMaterial * 5)])
+             | q7 : int(1..let1)]),
+    and([contents_Function1DPartialR7_Flags[q7] ->
+         and([contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q7, q10 + 1] > 0 ->
+              contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q7, q10] > 0
+                  | q10 : int(1..maxMaterial * 5 - 1)])
+             | q7 : int(1..let1)])
 
 $ Conjure's
 $ {"finds": [{"Name": "colour"}, {"Name": "contents"}],
@@ -151,6 +151,90 @@ $                                              [{"Name": "glass"}, {"Name": "pla
 $                                               {"Name": "wood"}, {"Name": "copper"}]]},
 $                   {"LettingDomainDefnEnum": [{"Name": "Colour"},
 $                                              [{"Name": "red"}, {"Name": "green"}, {"Name": "blue"}]]}],
+$  "lettings": [[{"Name": "Material"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Constant": {"ConstantInt": 5}}]}]}}],
+$               [{"Name": "Colour"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Constant": {"ConstantInt": 3}}]}]}}],
+$               [{"MachineName": ["let", 1, []]},
+$                {"Op": {"MkOpSum": {"Comprehension": [{"Op": {"MkOpImage": [{"Reference": [{"Name": "quantity"},
+$                                                                                           {"DeclNoRepr": ["Given",
+$                                                                                                           {"Name": "quantity"},
+$                                                                                                           {"DomainFunction": [[],
+$                                                                                                                               [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                  1,
+$                                                                                                                                                                                  []]},
+$                                                                                                                                                                 {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                 {"MachineName": ["fin",
+$                                                                                                                                                                                                  1,
+$                                                                                                                                                                                                  []]},
+$                                                                                                                                                                                 {"DomainInt": []},
+$                                                                                                                                                                                 {"NoRegion": []}]}]}},
+$                                                                                                                                "PartialityAttr_Total",
+$                                                                                                                                "JectivityAttr_None"],
+$                                                                                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                {"Constant": {"ConstantInt": 5}}]}]},
+$                                                                                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
+$                                                                                                                                                                {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                2,
+$                                                                                                                                                                                                []]},
+$                                                                                                                                                                               {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                               {"MachineName": ["fin",
+$                                                                                                                                                                                                                2,
+$                                                                                                                                                                                                                []]},
+$                                                                                                                                                                                               {"DomainInt": []},
+$                                                                                                                                                                                               {"NoRegion": []}]}]}]}]}]},
+$                                                                                                           {"NoRegion": []}]}]},
+$                                                                            {"Reference": [{"Name": "m"},
+$                                                                                           {"DeclNoRepr": ["Quantified",
+$                                                                                                           {"Name": "m"},
+$                                                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                            {"Constant": {"ConstantInt": 5}}]}]},
+$                                                                                                           {"NoRegion": []}]}]}]}},
+$                                                      [{"Generator": {"GenDomainNoRepr": [{"Single": {"Name": "m"}},
+$                                                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                           {"Constant": {"ConstantInt": 5}}]}]}]}}]]}}}],
+$               [{"Name": "Bin"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"MachineName": ["let", 1, []]},
+$                                                                           {"Alias": {"Op": {"MkOpSum": {"Comprehension": [{"Op": {"MkOpImage": [{"Reference": [{"Name": "quantity"},
+$                                                                                                                                                                {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                {"Name": "quantity"},
+$                                                                                                                                                                                {"DomainFunction": [[],
+$                                                                                                                                                                                                    [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                       1,
+$                                                                                                                                                                                                                                                       []]},
+$                                                                                                                                                                                                                                      {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                      {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                       1,
+$                                                                                                                                                                                                                                                                       []]},
+$                                                                                                                                                                                                                                                      {"DomainInt": []},
+$                                                                                                                                                                                                                                                      {"NoRegion": []}]}]}},
+$                                                                                                                                                                                                     "PartialityAttr_Total",
+$                                                                                                                                                                                                     "JectivityAttr_None"],
+$                                                                                                                                                                                                    {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                                     {"Constant": {"ConstantInt": 5}}]}]},
+$                                                                                                                                                                                                    {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
+$                                                                                                                                                                                                                                     {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                     2,
+$                                                                                                                                                                                                                                                                     []]},
+$                                                                                                                                                                                                                                                    {"DeclNoRepr": ["Given",
+$                                                                                                                                                                                                                                                                    {"MachineName": ["fin",
+$                                                                                                                                                                                                                                                                                     2,
+$                                                                                                                                                                                                                                                                                     []]},
+$                                                                                                                                                                                                                                                                    {"DomainInt": []},
+$                                                                                                                                                                                                                                                                    {"NoRegion": []}]}]}]}]}]},
+$                                                                                                                                                                                {"NoRegion": []}]}]},
+$                                                                                                                                                 {"Reference": [{"Name": "m"},
+$                                                                                                                                                                {"DeclNoRepr": ["Quantified",
+$                                                                                                                                                                                {"Name": "m"},
+$                                                                                                                                                                                {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                                 {"Constant": {"ConstantInt": 5}}]}]},
+$                                                                                                                                                                                {"NoRegion": []}]}]}]}},
+$                                                                                                                           [{"Generator": {"GenDomainNoRepr": [{"Single": {"Name": "m"}},
+$                                                                                                                                                               {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                                                                                {"Constant": {"ConstantInt": 5}}]}]}]}}]]}}}}]}]}]}}]],
 $  "unnameds": [[{"Name": "Bin"}, {"Reference": [{"MachineName": ["let", 1, []]}, null]}]],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"Compact": []},
@@ -187,7 +271,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["q", 70], ["shadow", 2]],
+$  "nameGenState": [["fin", 5], ["let", 2], ["q", 71]],
 $  "nbExtraGivens": 4,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],

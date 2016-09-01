@@ -17,13 +17,15 @@ such that
               or([!(sum([words_ExplicitVarSizeWithMarkerR9_Values_Function1D[q19, q21] | q21 : int(1..8), q21 = q26]) =
                     words_ExplicitVarSizeWithMarkerR9_Values_Function1D[q23, q26]
                     /\ or([q22 = q26 | q22 : int(1..8)]))
-                      | q26 : int(1..8)]); int(1..3)])
+                      | q26 : int(1..8)]);
+                  int(1..3)])
          ->
          sum([toInt(and([sum([words_ExplicitVarSizeWithMarkerR9_Values_Function1D[q19, q27] | q27 : int(1..8), q27 = i])
                          =
                          sum([words_ExplicitVarSizeWithMarkerR9_Values_Function1D[q23, q28]
                                   | q28 : int(1..8), q28 = i]),
-                         or([q29 = i | q29 : int(1..8)]), or([q30 = i | q30 : int(1..8)]); int(1..3)]))
+                         or([q29 = i | q29 : int(1..8)]), or([q30 = i | q30 : int(1..8)]);
+                             int(1..3)]))
                   | i : int(1..8)])
          <= 4
              | q19 : int(1..4294967296), q23 : int(1..4294967296)]),
@@ -36,7 +38,8 @@ such that
               and([sum([words_ExplicitVarSizeWithMarkerR9_Values_Function1D[q62, q64] | q64 : int(1..8), q64 = q69]) =
                    words_ExplicitVarSizeWithMarkerR9_Values_Function1D[q66, q69]
                    /\ or([q65 = q69 | q65 : int(1..8)])
-                       | q69 : int(1..8)]); int(1..3)])
+                       | q69 : int(1..8)]);
+                  int(1..3)])
          ->
          sum([toInt(sum([words_ExplicitVarSizeWithMarkerR9_Values_Function1D[q62, q70] | q70 : int(1..8), q70 = i]) = 1
                     /\ or([q71 = i | q71 : int(1..8)])
@@ -82,6 +85,12 @@ $  "givens": [],
 $  "enumGivens": [],
 $  "enumLettings": [{"LettingDomainDefnEnum": [{"Name": "Base"},
 $                                              [{"Name": "A"}, {"Name": "C"}, {"Name": "G"}, {"Name": "T"}]]}],
+$  "lettings": [[{"Name": "Base"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Constant": {"ConstantInt": 4}}]}]}}],
+$               [{"Name": "Index"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Constant": {"ConstantInt": 8}}]}]}}]],
 $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"Compact": []},

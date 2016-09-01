@@ -5,7 +5,8 @@ find arrangement_Function1DPartial_Flags: matrix indexed by [int(1..n)] of bool
 find arrangement_Function1DPartial_Values: matrix indexed by [int(1..n)] of int(1..n)
 such that
     and([and([|arrangement_Function1DPartial_Values[q1] - arrangement_Function1DPartial_Values[q2]| != |q1 - q2|,
-              arrangement_Function1DPartial_Flags[q1], arrangement_Function1DPartial_Flags[q2]; int(1..3)])
+              arrangement_Function1DPartial_Flags[q1], arrangement_Function1DPartial_Flags[q2];
+                  int(1..3)])
              | q1 : int(1..n), q2 : int(1..n), q1 < q2]),
     and([arrangement_Function1DPartial_Flags[q1] /\ arrangement_Function1DPartial_Flags[q2] ->
          arrangement_Function1DPartial_Values[q1] != arrangement_Function1DPartial_Values[q2]
@@ -20,6 +21,12 @@ $ {"finds": [{"Name": "arrangement"}],
 $  "givens": [{"Name": "n"}],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "lettings": [[{"Name": "Index"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "n"},
+$                                                                           {"DeclNoRepr": ["Given", {"Name": "n"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}]],
 $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},

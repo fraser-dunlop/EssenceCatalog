@@ -49,7 +49,8 @@ such that
                        cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values
                            [q64, q67]
                            | q62 : int(1..n_orders)])
-                      | q67 : int(1..n_orders)]); int(1..3)])
+                      | q67 : int(1..n_orders)]);
+                  int(1..3)])
          ->
          sum([toInt(cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags
                         [q54, q56]
@@ -253,6 +254,25 @@ $  "givens": [{"Name": "n_colours"}, {"Name": "n_orders"}, {"Name": "col_per_sla
 $             {"Name": "ordSize"}, {"Name": "ordCol"}],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "lettings": [[{"Name": "sizes"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "nbSizes"},
+$                                                                           {"DeclNoRepr": ["Given", {"Name": "nbSizes"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "Colour"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "n_colours"},
+$                                                                           {"DeclNoRepr": ["Given",
+$                                                                                           {"Name": "n_colours"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "Order"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "n_orders"},
+$                                                                           {"DeclNoRepr": ["Given", {"Name": "n_orders"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}]],
 $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
@@ -284,14 +304,14 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["q", 70]],
+$  "nameGenState": [["fin", 4], ["q", 70]],
 $  "nbExtraGivens": 3,
-$  "representations": [[{"Name": "nbSizes"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "n_colours"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_orders"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
+$                      [{"Name": "n_colours"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "nbSizes"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "cut"},
 $                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_ExplicitVarSizeWithMarker": []}}},
 $                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],

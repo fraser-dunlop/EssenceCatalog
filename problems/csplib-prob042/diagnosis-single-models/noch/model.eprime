@@ -32,7 +32,8 @@ such that
                                 [gate, q10, q11]
                             =
                             [gateOutput_Function1D[gateInpts_Function1D[gate, 1]],
-                             gateOutput_Function1D[gateInpts_Function1D[gate, 2]]; int(1..2)]
+                             gateOutput_Function1D[gateInpts_Function1D[gate, 2]];
+                                 int(1..2)]
                                 [q11]
                                 | q11 : int(1..2)])])
              \/
@@ -52,6 +53,19 @@ $ {"finds": [{"Name": "faultyGates"}],
 $  "givens": [{"Name": "numGates"}, {"Name": "gateFuncs"}, {"Name": "gateInpts"}, {"Name": "finalOutputs"}],
 $  "enumGivens": [],
 $  "enumLettings": [],
+$  "lettings": [[{"Name": "dGates"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                            {"Reference": [{"Name": "numGates"},
+$                                                                           {"DeclNoRepr": ["Given", {"Name": "numGates"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"Name": "dGatesZero"},
+$                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
+$                                                            {"Reference": [{"Name": "numGates"},
+$                                                                           {"DeclNoRepr": ["Given", {"Name": "numGates"},
+$                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"MachineName": ["let", 1, []]}, {"Op": {"MkOpNegate": {"Constant": {"ConstantInt": 1}}}}]],
 $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
@@ -65,7 +79,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["q", 19]],
+$  "nameGenState": [["fin", 5], ["let", 2], ["q", 19]],
 $  "nbExtraGivens": 4,
 $  "representations": [[{"Name": "gateFuncs"},
 $                       {"DomainFunction": [{"Function_1D": []},
