@@ -50,5 +50,6 @@ conjure solve --use-existing-models=${EPRIME} ${ESSENCE_FULL} ${PARAM_FULL} -o $
     --solver-options "${SOLVER_OPTIONS}"
 
 rm -f ${TARGET_DIR}/*.eprime-minion         # no need to keep: generated minion file
-rm -f ${TARGET_DIR}/*.dimacs                # no need to keep: generated sat file
+rm -f ${TARGET_DIR}/*.eprime-dimacs         # no need to keep: generated sat file
+rm -f ${TARGET_DIR}/${EPRIME}
 

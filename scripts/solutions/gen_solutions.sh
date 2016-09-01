@@ -26,7 +26,7 @@ if (( ${nb_commands} > 0 )) ; then
         --joblog  logs/solutions-gnuparallel-joblog         \
         :::: ${CMD_FILE}
 else
-    echo 'No commands found in "${CMD_FILE}"'
-    echo 'You may want to run "scripts/solutions/gen_conjure_commands.sh" first.'
+    echo "No commands found in \"${CMD_FILE}\""
+    echo "You may want to run \"scripts/solutions/gen_conjure_commands.sh\" first."
 fi
 
