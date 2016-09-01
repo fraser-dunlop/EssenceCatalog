@@ -4,7 +4,10 @@ set -o nounset
 set -o errexit
 shopt -s nullglob
 
-nb_commands=$(cat conjure_commands.txt | wc -l)
+ROOT_DIR=$(pwd)
+CMD_FILE="${ROOT_DIR}/scripts/solutions/conjure_commands.txt"
+
+nb_commands=$(cat ${CMD_FILE} | wc -l)
 nb_cores=$1
 
 if (( ${nb_commands} > 0 )) ; then
@@ -16,14 +19,14 @@ if (( ${nb_commands} > 0 )) ; then
     conjure --version               | tee versions/conjure_version.txt
     savilerow | head -n2 | tail -n1 | tee versions/savilerow_version.txt
     minion | head -n2               | tee versions/minion_version.txt
-    parallel                                    \
-        -j"${nb_cores}"                         \
-        --eta                                   \
-        --results logs/gnuparallel-results      \
-        --joblog  logs/gnuparallel-joblog       \
-        :::: conjure_commands.txt
+    parallel                                                \
+        -j"${nb_cores}"                                     \
+        --eta                                               \
+        --results logs/solutions-gnuparallel-results        \
+        --joblog  logs/solutions-gnuparallel-joblog         \
+        :::: ${CMD_FILE}
 else
-    echo 'No commands found in "conjure_commands.txt"'
-    echo 'You may want to run "scripts/gen_conjure_commands.sh" first.'
+    echo 'No commands found in "${CMD_FILE}"'
+    echo 'You may want to run "scripts/solutions/gen_conjure_commands.sh" first.'
 fi
 

@@ -12,10 +12,10 @@ SAVILEROW_MODE=$5
 EPRIME=$6
 SOLVER=$7
 ESSENCE_BASE="${ESSENCE%.*}"
-ESSENCE_FULL="EssenceCatalog-models/EssenceCatalog/problems/${PROBLEM}/${ESSENCE}"
-PARAM_FULL="EssenceCatalog-models/EssenceCatalog/problems/${PROBLEM}/${PARAM}"
-EPRIME_SRC="EssenceCatalog-models/models/${PROBLEM}/${ESSENCE_BASE}/${CONJURE_MODE}/${EPRIME}"
-TARGET_DIR="solutions/${PROBLEM}/${ESSENCE_BASE}/${CONJURE_MODE}/${SAVILEROW_MODE}/${SOLVER}"
+ESSENCE_FULL="problems/${PROBLEM}/${ESSENCE}"
+PARAM_FULL="problems/${PROBLEM}/${PARAM}"
+EPRIME_SRC="problems/${PROBLEM}/${ESSENCE_BASE}-models/${CONJURE_MODE}/${EPRIME}"
+TARGET_DIR="problems/${PROBLEM}/${ESSENCE_BASE}-models/${CONJURE_MODE}/${SAVILEROW_MODE}/${SOLVER}"
 mkdir -p "${TARGET_DIR}"
 
 SAVILEROW_OPTIONS="-timelimit ${LIMIT_TIME}000"

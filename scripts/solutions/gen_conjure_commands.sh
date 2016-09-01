@@ -13,14 +13,14 @@ rm -f conjure_commands.txt
 touch conjure_commands.txt                              # create an empty file to store all conjure commands
 
                                                         # go through all problems in EssenceCatalog
-pushd EssenceCatalog-models/EssenceCatalog/problems > /dev/null
+pushd problems > /dev/null
 for prob in *; do
     pushd "${prob}" > /dev/null
     for essence in *.essence; do                        # go through all essence files for this problem
         essence_base="${essence%.*}"
         for param in params/*.param "${essence_base}-params"/*.param; do
             for conjure_mode in compact noch; do
-                pushd "${ROOT_DIR}/EssenceCatalog-models/models/${prob}/${essence_base}/${conjure_mode}" > /dev/null
+                pushd "${ROOT_DIR}/${prob}/${essence_base}-models/${conjure_mode}" > /dev/null
                 for eprime in *.eprime; do
                     for savilerow_mode in O0 O2; do
                         for solver in minion lingeling; do
