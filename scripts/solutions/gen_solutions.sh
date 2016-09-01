@@ -14,16 +14,15 @@ if (( ${nb_commands} > 0 )) ; then
     echo "Number of commands to run: ${nb_commands}"
     echo "Number of cores to use   : ${nb_cores}"
     echo "Time limit in seconds    : ${LIMIT_TIME}"
-    rm -rf versions models logs
-    mkdir versions models logs
-    conjure --version               | tee versions/conjure_version.txt
-    savilerow | head -n2 | tail -n1 | tee versions/savilerow_version.txt
-    minion | head -n2               | tee versions/minion_version.txt
+    mkdir -p logs/versions logs/gnuparallel
+    conjure --version               | tee logs/versions/conjure_version.txt
+    savilerow | head -n2 | tail -n1 | tee logs/versions/savilerow_version.txt
+    minion | head -n2               | tee logs/versions/minion_version.txt
     parallel                                                \
         -j"${nb_cores}"                                     \
         --eta                                               \
-        --results logs/solutions-gnuparallel-results        \
-        --joblog  logs/solutions-gnuparallel-joblog         \
+        --results logs/gnuparallel/solutions-results        \
+        --joblog  logs/gnuparallel/solutions-joblog         \
         :::: ${CMD_FILE}
 else
     echo "No commands found in \"${CMD_FILE}\""

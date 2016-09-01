@@ -13,14 +13,13 @@ nb_cores=$1
 if (( ${nb_commands} > 0 )) ; then
     echo "Number of commands to run: ${nb_commands}"
     echo "Number of cores to use   : ${nb_cores}"
-    rm -rf versions models logs
-    mkdir versions models logs
-    conjure --version | tee versions/conjure_version.txt
+    mkdir -p logs/versions logs/gnuparallel
+    conjure --version | tee logs/versions/conjure_version.txt
     parallel                                                \
         -j"${nb_cores}"                                     \
         --eta                                               \
-        --results logs/modelling-gnuparallel-results        \
-        --joblog  logs/modelling-gnuparallel-joblog         \
+        --results logs/gnuparallel/modelling-results        \
+        --joblog  logs/gnuparallel/modelling-joblog         \
         :::: ${CMD_FILE}
 else
     echo "No commands found in \"${CMD_FILE}\""
