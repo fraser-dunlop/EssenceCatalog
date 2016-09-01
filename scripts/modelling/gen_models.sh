@@ -21,6 +21,7 @@ if (( ${nb_commands} > 0 )) ; then
         --results logs/gnuparallel/modelling-results        \
         --joblog  logs/gnuparallel/modelling-joblog         \
         :::: ${CMD_FILE}
+    LC_ALL=C sort -dfn logs/gnuparallel/modelling-joblog -o logs/gnuparallel/modelling-joblog
 else
     echo "No commands found in \"${CMD_FILE}\""
     echo "You may want to run \"scripts/modelling/gen_conjure_commands.sh\" first."
