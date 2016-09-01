@@ -16,11 +16,11 @@ if (( ${nb_commands} > 0 )) ; then
     rm -rf versions models logs
     mkdir versions models logs
     conjure --version | tee versions/conjure_version.txt
-    parallel                                    \
-        -j"${nb_cores}"                         \
-        --eta                                   \
-        --results logs/gnuparallel-results      \
-        --joblog  logs/gnuparallel-joblog       \
+    parallel                                                \
+        -j"${nb_cores}"                                     \
+        --eta                                               \
+        --results logs/modelling-gnuparallel-results        \
+        --joblog  logs/modelling-gnuparallel-joblog         \
         :::: ${CMD_FILE}
 else
     echo 'No commands found in "${CMD_FILE}"'

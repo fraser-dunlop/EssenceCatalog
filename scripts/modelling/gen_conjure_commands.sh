@@ -10,12 +10,12 @@ CMD_FILE="${ROOT_DIR}/scripts/modelling/conjure_commands.txt"
 rm -f ${CMD_FILE}
 touch ${CMD_FILE}
 
-pushd EssenceCatalog/problems > /dev/null               # go through all problems in EssenceCatalog
+pushd problems > /dev/null                              # go through all problems in EssenceCatalog
 for prob in *; do
     pushd "${prob}" > /dev/null
     for essence in *.essence; do                        # go through all essence files for this problem
-        echo "scripts/runConjure.sh ${prob} ${essence} compact" >> ${CMD_FILE}
-        echo "scripts/runConjure.sh ${prob} ${essence} noch"    >> ${CMD_FILE}
+        echo "scripts/modelling/runConjure.sh ${prob} ${essence} compact" >> ${CMD_FILE}
+        echo "scripts/modelling/runConjure.sh ${prob} ${essence} noch"    >> ${CMD_FILE}
     done
     popd > /dev/null
 done
