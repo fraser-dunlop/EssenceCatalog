@@ -4,7 +4,10 @@ set -o nounset
 set -o errexit
 shopt -s nullglob
 
-nb_commands=$(cat conjure_commands.txt | wc -l)
+ROOT_DIR=$(pwd)
+CMD_FILE="${ROOT_DIR}/scripts/modelling/conjure_commands.txt"
+
+nb_commands=$(cat ${CMD_FILE} | wc -l)
 nb_cores=$1
 
 if (( ${nb_commands} > 0 )) ; then
@@ -18,13 +21,13 @@ if (( ${nb_commands} > 0 )) ; then
         --eta                                   \
         --results logs/gnuparallel-results      \
         --joblog  logs/gnuparallel-joblog       \
-        :::: conjure_commands.txt
+        :::: ${CMD_FILE}
 else
-    echo 'No commands found in "conjure_commands.txt"'
-    echo 'You may want to run "scripts/gen_conjure_commands.sh" first.'
+    echo 'No commands found in "${CMD_FILE}"'
+    echo 'You may want to run "scripts/modelling/gen_conjure_commands.sh" first.'
 fi
 
 
 # strip the json bits from the eprimes
-# parallel "[ -f {} ] && (cat {} | grep -v '\\$' > {}.temp ; mv {}.temp {})" ::: $(find models -name "*.eprime")
+# parallel "[ -f {} ] && (cat {} | grep -v '\\$' > {}.temp ; mv {}.temp {})" ::: $(find problems -name "*.eprime")
 

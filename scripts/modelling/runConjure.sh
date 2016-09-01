@@ -8,8 +8,8 @@ PROBLEM=$1
 ESSENCE=$2
 CONJURE_MODE=$3
 ESSENCE_BASE="${ESSENCE%.*}"
-ESSENCE_FULL="EssenceCatalog/problems/${PROBLEM}/${ESSENCE}"
-TARGET_DIR="models/${PROBLEM}/${ESSENCE_BASE}/${CONJURE_MODE}"
+ESSENCE_FULL="problems/${PROBLEM}/${ESSENCE}"
+TARGET_DIR="problems/${PROBLEM}/${ESSENCE_BASE}-models/${CONJURE_MODE}"
 mkdir -p "${TARGET_DIR}"
 
 if [ "${CONJURE_MODE}" == "compact" ]; then
