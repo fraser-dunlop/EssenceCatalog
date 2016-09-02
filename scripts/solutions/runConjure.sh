@@ -44,6 +44,7 @@ fi
 cp ${EPRIME_SRC} ${TARGET_DIR}/${EPRIME}
 
 conjure solve --use-existing-models=${EPRIME} ${ESSENCE_FULL} ${PARAM_FULL} -o ${TARGET_DIR} \
+    --copy-solutions=off \
     --log-level LogNone \
     --savilerow-options "${SAVILEROW_OPTIONS}" \
     --solver "${SOLVER}" \
