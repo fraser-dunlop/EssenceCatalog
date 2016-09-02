@@ -10,9 +10,7 @@ CMD_FILE="${ROOT_DIR}/scripts/solutions/conjure_commands.txt"
 rm -f ${CMD_FILE}
 touch ${CMD_FILE}
 
-export LIMIT_TIME=${LIMIT_TIME:60}
-                                                        # go through all problems in EssenceCatalog
-pushd problems > /dev/null
+pushd problems > /dev/null                              # go through all problems in EssenceCatalog
 for prob in *; do
     pushd "${prob}" > /dev/null
     for essence in *.essence; do                        # go through all essence files for this problem

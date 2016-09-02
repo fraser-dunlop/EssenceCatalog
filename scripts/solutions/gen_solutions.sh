@@ -4,6 +4,8 @@ set -o nounset
 set -o errexit
 shopt -s nullglob
 
+export LIMIT_TIME=${LIMIT_TIME:-60}
+
 ROOT_DIR=$(pwd)
 CMD_FILE="${ROOT_DIR}/scripts/solutions/conjure_commands.txt"
 
