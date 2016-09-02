@@ -1,145 +1,145 @@
-Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
-1	:	1472749309.318	     2.207	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob001 CarSequencing.essence compact
-2	:	1472749309.322	     1.971	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob001 CarSequencing.essence noch
-3	:	1472749309.324	     1.176	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob002 TemplateDesign.essence compact
-4	:	1472749309.327	     1.422	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob002 TemplateDesign.essence noch
-5	:	1472749309.329	     3.269	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG3.essence compact
-6	:	1472749309.332	     2.651	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG3.essence noch
-7	:	1472749309.335	     2.861	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG4.essence compact
-8	:	1472749309.338	     3.427	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG4.essence noch
-9	:	1472749309.340	     3.147	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG5.essence compact
-10	:	1472749309.343	     2.983	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG5.essence noch
-11	:	1472749309.346	     3.443	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG6.essence compact
-12	:	1472749309.349	     3.420	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG6.essence noch
-13	:	1472749309.352	     3.480	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG7.essence compact
-14	:	1472749309.355	     2.974	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG7.essence noch
-15	:	1472749309.359	     1.325	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob005 LowAutocorrelationBinarySequences.essence compact
-16	:	1472749309.362	     1.361	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob005 LowAutocorrelationBinarySequences.essence noch
-17	:	1472749309.366	     5.799	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob006 GolombRuler.essence compact
-18	:	1472749309.369	    11.220	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob006 GolombRuler.essence noch
-19	:	1472749309.373	     1.555	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob007 AllIntervalSeries.essence compact
-20	:	1472749309.377	     1.603	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob007 AllIntervalSeries.essence noch
-21	:	1472749309.381	    10.280	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob008 VesselLoading.essence compact
-22	:	1472749309.384	    10.402	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob008 VesselLoading.essence noch
-23	:	1472749309.387	     3.497	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob009 PerfectSquarePlacement.essence compact
-24	:	1472749309.391	     3.724	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob009 PerfectSquarePlacement.essence noch
-25	:	1472749310.503	     4.369	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob010 SocialGolfersProblem.essence compact
-26	:	1472749310.687	    22.474	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob010 SocialGolfersProblem.essence noch
-27	:	1472749310.727	     9.029	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob012 nonogram.essence compact
-28	:	1472749310.752	     9.310	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob012 nonogram.essence noch
-29	:	1472749310.932	     4.746	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob013 ProgressivePartyProblem.essence compact
-30	:	1472749310.984	    26.246	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob013 ProgressivePartyProblem.essence noch
-31	:	1472749311.298	     2.826	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob015 SchursLemma.essence compact
-32	:	1472749311.529	    17.164	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob015 SchursLemma.essence noch
-33	:	1472749311.987	    27.390	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob016 TrafficLights.essence compact
-34	:	1472749312.200	    43.578	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob016 TrafficLights.essence noch
-35	:	1472749312.330	     9.956	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob017 RamseyNumbers.essence compact
-36	:	1472749312.334	     9.686	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob017 RamseyNumbers.essence noch
-37	:	1472749312.490	     1.566	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob019 MagicSquares.essence compact
-38	:	1472749312.602	     1.293	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob019 MagicSquares.essence noch
-39	:	1472749312.768	   600.523	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob021 Crossfigures.essence compact
-40	:	1472749312.772	   601.632	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob021 Crossfigures.essence noch
-41	:	1472749312.792	     4.662	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob022 BusDriverScheduling.essence compact
-42	:	1472749312.836	    25.206	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob022 BusDriverScheduling.essence noch
-43	:	1472749312.889	     4.828	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob023 MagicHexagon.essence compact
-44	:	1472749313.120	     4.498	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob023 MagicHexagon.essence noch
-45	:	1472749313.900	     1.497	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob024 Langford.essence compact
-46	:	1472749314.060	     1.482	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob024 Langford.essence noch
-47	:	1472749314.129	     1.463	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob025 Lam.essence compact
-48	:	1472749314.876	     1.427	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob025 Lam.essence noch
-49	:	1472749315.169	     6.154	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob026 SportsTournamentScheduling.essence compact
-50	:	1472749315.401	    13.296	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob026 SportsTournamentScheduling.essence noch
-51	:	1472749315.545	     2.657	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob027 prob027-alientiles-singlepass.essence compact
-52	:	1472749315.596	     2.506	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob027 prob027-alientiles-singlepass.essence noch
-53	:	1472749315.683	     2.457	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob028 BIBD.essence compact
-54	:	1472749316.308	     3.200	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob028 BIBD.essence noch
-55	:	1472749317.459	     2.884	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob030 BalancedAcademicCurriculumProblem.essence compact
-56	:	1472749317.621	     2.873	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob030 BalancedAcademicCurriculumProblem.essence noch
-57	:	1472749317.722	    10.328	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob031 RackConfiguration.essence compact
-58	:	1472749318.106	    50.069	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob031 RackConfiguration.essence noch
-59	:	1472749318.143	    19.903	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob032 MaximumDensityStillLife.essence compact
-60	:	1472749318.207	    37.575	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob032 MaximumDensityStillLife.essence noch
-61	:	1472749319.512	    25.827	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob033 WordDesign.essence compact
-62	:	1472749319.665	    60.736	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob033 WordDesign.essence noch
-63	:	1472749319.760	     2.615	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob034 WarehouseLocation.essence compact
-64	:	1472749319.790	     3.199	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob034 WarehouseLocation.essence noch
-65	:	1472749320.066	     3.847	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob036 FixedLengthErrorCorrectingCodes.essence compact
-66	:	1472749320.347	     3.570	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob036 FixedLengthErrorCorrectingCodes.essence noch
-67	:	1472749320.498	    23.973	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob038 SteelMillSlabDesignProblem.essence compact
-68	:	1472749320.593	   137.042	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob038 SteelMillSlabDesignProblem.essence noch
-69	:	1472749321.327	     2.911	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob039 Rehearsal.essence compact
-70	:	1472749322.025	     2.919	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob039 Rehearsal.essence noch
-71	:	1472749322.289	     2.583	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob040 DistributionWagnerWhitin.essence compact
-72	:	1472749322.379	     2.330	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob040 DistributionWagnerWhitin.essence noch
-73	:	1472749322.992	     2.146	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob041 NFractionsPuzzle.essence compact
-74	:	1472749323.916	     2.197	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob041 NFractionsPuzzle.essence noch
-75	:	1472749323.920	     5.658	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob042 diagnosis-single.essence compact
-76	:	1472749324.241	     4.621	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob042 diagnosis-single.essence noch
-77	:	1472749324.713	     1.947	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob044 steiner.essence compact
-78	:	1472749324.877	     3.167	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob044 steiner.essence noch
-79	:	1472749324.948	     3.479	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob045 CoveringArray.essence compact
-80	:	1472749325.143	     5.784	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob045 CoveringArray.essence noch
-81	:	1472749326.116	     5.779	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob048 MinimumEnergyBroadcast.essence compact
-82	:	1472749326.664	   143.546	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob048 MinimumEnergyBroadcast.essence noch
-83	:	1472749328.049	     2.977	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob049 set_partition_full.essence compact
-84	:	1472749328.053	     8.048	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob049 set_partition_full.essence noch
-85	:	1472749328.430	     3.075	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob049 set_partition_simple.essence compact
-86	:	1472749328.696	    10.296	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob049 set_partition_simple.essence noch
-87	:	1472749328.701	     3.199	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob051 TankAlloc-051.essence compact
-88	:	1472749328.866	     3.190	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob051 TankAlloc-051.essence noch
-89	:	1472749329.583	     2.225	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob054 nqueens.essence compact
-90	:	1472749330.930	     2.236	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob054 nqueens.essence noch
-91	:	1472749331.031	     2.749	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob055 EFPA.essence compact
-92	:	1472749331.510	     2.275	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob055 EFPA.essence noch
-93	:	1472749331.812	     3.546	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob056 sonet.essence compact
-94	:	1472749331.899	    38.220	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob056 sonet.essence noch
-95	:	1472749331.903	     3.050	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob057 KillerSudoku.essence compact
-96	:	1472749332.059	     2.993	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob057 KillerSudoku.essence noch
-97	:	1472749333.166	     3.375	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob065 opd.essence compact
-98	:	1472749333.170	     6.004	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob065 opd.essence noch
-99	:	1472749333.784	     5.500	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob110 ArmiesOfQueens.essence compact
-100	:	1472749333.788	    27.847	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob110 ArmiesOfQueens.essence noch
-101	:	1472749334.957	   117.836	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob115 TailAssignment.essence compact
-102	:	1472749335.057	   114.526	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob115 TailAssignment.essence noch
-103	:	1472749335.361	    49.151	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob116 Vellino.essence compact
-104	:	1472749336.104	    83.082	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob116 Vellino.essence noch
-105	:	1472749336.545	     9.417	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob132 layout.essence compact
-106	:	1472749337.234	     8.404	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob132 layout.essence noch
-107	:	1472749338.045	     1.273	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob133 knapsack.essence compact
-108	:	1472749338.049	     4.483	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob133 knapsack.essence noch
-109	:	1472749338.997	     4.727	0	0	0	0	scripts/modelling/runConjure.sh efpa efpa.essence compact
-110	:	1472749339.178	     4.441	0	0	0	0	scripts/modelling/runConjure.sh efpa efpa.essence noch
-111	:	1472749339.287	     2.830	0	0	0	0	scripts/modelling/runConjure.sh GracefulDoubleWheelGraphs GracefulDoubleWheelGraphs.essence compact
-112	:	1472749339.321	     2.892	0	0	0	0	scripts/modelling/runConjure.sh GracefulDoubleWheelGraphs GracefulDoubleWheelGraphs.essence noch
-113	:	1472749339.380	     1.819	0	0	0	0	scripts/modelling/runConjure.sh GracefulGears GracefulGears.essence compact
-114	:	1472749341.203	     1.998	0	0	0	0	scripts/modelling/runConjure.sh GracefulGears GracefulGears.essence noch
-115	:	1472749342.120	     2.151	0	0	0	0	scripts/modelling/runConjure.sh GracefulHelms GracefulHelms.essence compact
-116	:	1472749342.217	     2.259	0	0	0	0	scripts/modelling/runConjure.sh GracefulHelms GracefulHelms.essence noch
-117	:	1472749342.535	     1.740	0	0	0	0	scripts/modelling/runConjure.sh GracefulWheelGraphs GracefulWheelGraphs.essence compact
-118	:	1472749343.205	     1.755	0	0	0	0	scripts/modelling/runConjure.sh GracefulWheelGraphs GracefulWheelGraphs.essence noch
-119	:	1472749343.624	    13.839	0	0	0	0	scripts/modelling/runConjure.sh prob018-Water prob018-Water.essence compact
-120	:	1472749343.728	    14.857	0	0	0	0	scripts/modelling/runConjure.sh prob018-Water prob018-Water.essence noch
-121	:	1472749344.275	   145.593	0	0	0	0	scripts/modelling/runConjure.sh prob037 prob037.essence compact
-122	:	1472749344.279	   268.342	0	0	0	0	scripts/modelling/runConjure.sh prob037 prob037.essence noch
-123	:	1472749344.475	    40.576	0	0	0	0	scripts/modelling/runConjure.sh prob037-peg prob037-peg.essence compact
-124	:	1472749344.479	    66.596	0	0	0	0	scripts/modelling/runConjure.sh prob037-peg prob037-peg.essence noch
-125	:	1472749344.963	    22.335	0	0	0	0	scripts/modelling/runConjure.sh prob037-peg-simple prob037-peg-simple.essence compact
-126	:	1472749345.344	    37.712	0	0	0	0	scripts/modelling/runConjure.sh prob037-peg-simple prob037-peg-simple.essence noch
-127	:	1472749345.642	    36.963	0	0	0	0	scripts/modelling/runConjure.sh prob123-Milk prob123-Milk.essence compact
-128	:	1472749345.967	    38.029	0	0	0	0	scripts/modelling/runConjure.sh prob123-Milk prob123-Milk.essence noch
-129	:	1472749355.782	    36.105	0	0	0	0	scripts/modelling/runConjure.sh prob128-Cross prob128-Cross.essence compact
-130	:	1472749355.786	    36.101	0	0	0	0	scripts/modelling/runConjure.sh prob128-Cross prob128-Cross.essence noch
-131	:	1472749357.468	    62.881	0	0	0	0	scripts/modelling/runConjure.sh prob131-pls prob131-pls.essence compact
-132	:	1472749358.588	   364.133	0	0	0	0	scripts/modelling/runConjure.sh prob131-pls prob131-pls.essence noch
-133	:	1472749361.640	    11.504	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-both.essence compact
-134	:	1472749367.302	    11.451	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-both.essence noch
-135	:	1472749368.179	    11.945	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-both-sane.essence compact
-136	:	1472749370.122	    12.009	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-both-sane.essence noch
-137	:	1472749373.148	    22.118	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey.essence compact
-138	:	1472749378.758	    19.797	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey.essence noch
-139	:	1472749380.128	     2.168	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-func.essence compact
-140	:	1472749380.405	     2.082	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-func.essence noch
-141	:	1472749382.135	     2.437	0	0	0	0	scripts/modelling/runConjure.sh RamseyNumbers RamseyNumbers.essence compact
-142	:	1472749382.300	     2.213	0	0	0	0	scripts/modelling/runConjure.sh RamseyNumbers RamseyNumbers.essence noch
-143	:	1472749382.491	     2.232	0	0	0	0	scripts/modelling/runConjure.sh VanDerWaerdenNumbers VanDerWaerden.essence compact
-144	:	1472749382.608	    17.519	0	0	0	0	scripts/modelling/runConjure.sh VanDerWaerdenNumbers VanDerWaerden.essence noch
+Seq	JobRuntime	Send	Receive	Exitval	Signal	Command
+1	     2.207	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob001 CarSequencing.essence compact
+2	     1.971	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob001 CarSequencing.essence noch
+3	     1.176	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob002 TemplateDesign.essence compact
+4	     1.422	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob002 TemplateDesign.essence noch
+5	     3.269	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG3.essence compact
+6	     2.651	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG3.essence noch
+7	     2.861	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG4.essence compact
+8	     3.427	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG4.essence noch
+9	     3.147	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG5.essence compact
+10	     2.983	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG5.essence noch
+11	     3.443	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG6.essence compact
+12	     3.420	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG6.essence noch
+13	     3.480	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG7.essence compact
+14	     2.974	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob003 QG7.essence noch
+15	     1.325	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob005 LowAutocorrelationBinarySequences.essence compact
+16	     1.361	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob005 LowAutocorrelationBinarySequences.essence noch
+17	     5.799	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob006 GolombRuler.essence compact
+18	    11.220	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob006 GolombRuler.essence noch
+19	     1.555	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob007 AllIntervalSeries.essence compact
+20	     1.603	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob007 AllIntervalSeries.essence noch
+21	    10.280	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob008 VesselLoading.essence compact
+22	    10.402	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob008 VesselLoading.essence noch
+23	     3.497	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob009 PerfectSquarePlacement.essence compact
+24	     3.724	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob009 PerfectSquarePlacement.essence noch
+25	     4.369	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob010 SocialGolfersProblem.essence compact
+26	    22.474	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob010 SocialGolfersProblem.essence noch
+27	     9.029	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob012 nonogram.essence compact
+28	     9.310	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob012 nonogram.essence noch
+29	     4.746	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob013 ProgressivePartyProblem.essence compact
+30	    26.246	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob013 ProgressivePartyProblem.essence noch
+31	     2.826	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob015 SchursLemma.essence compact
+32	    17.164	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob015 SchursLemma.essence noch
+33	    27.390	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob016 TrafficLights.essence compact
+34	    43.578	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob016 TrafficLights.essence noch
+35	     9.956	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob017 RamseyNumbers.essence compact
+36	     9.686	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob017 RamseyNumbers.essence noch
+37	     1.566	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob019 MagicSquares.essence compact
+38	     1.293	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob019 MagicSquares.essence noch
+39	   600.523	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob021 Crossfigures.essence compact
+40	   601.632	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob021 Crossfigures.essence noch
+41	     4.662	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob022 BusDriverScheduling.essence compact
+42	    25.206	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob022 BusDriverScheduling.essence noch
+43	     4.828	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob023 MagicHexagon.essence compact
+44	     4.498	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob023 MagicHexagon.essence noch
+45	     1.497	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob024 Langford.essence compact
+46	     1.482	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob024 Langford.essence noch
+47	     1.463	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob025 Lam.essence compact
+48	     1.427	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob025 Lam.essence noch
+49	     6.154	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob026 SportsTournamentScheduling.essence compact
+50	    13.296	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob026 SportsTournamentScheduling.essence noch
+51	     2.657	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob027 prob027-alientiles-singlepass.essence compact
+52	     2.506	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob027 prob027-alientiles-singlepass.essence noch
+53	     2.457	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob028 BIBD.essence compact
+54	     3.200	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob028 BIBD.essence noch
+55	     2.884	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob030 BalancedAcademicCurriculumProblem.essence compact
+56	     2.873	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob030 BalancedAcademicCurriculumProblem.essence noch
+57	    10.328	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob031 RackConfiguration.essence compact
+58	    50.069	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob031 RackConfiguration.essence noch
+59	    19.903	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob032 MaximumDensityStillLife.essence compact
+60	    37.575	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob032 MaximumDensityStillLife.essence noch
+61	    25.827	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob033 WordDesign.essence compact
+62	    60.736	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob033 WordDesign.essence noch
+63	     2.615	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob034 WarehouseLocation.essence compact
+64	     3.199	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob034 WarehouseLocation.essence noch
+65	     3.847	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob036 FixedLengthErrorCorrectingCodes.essence compact
+66	     3.570	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob036 FixedLengthErrorCorrectingCodes.essence noch
+67	    23.973	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob038 SteelMillSlabDesignProblem.essence compact
+68	   137.042	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob038 SteelMillSlabDesignProblem.essence noch
+69	     2.911	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob039 Rehearsal.essence compact
+70	     2.919	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob039 Rehearsal.essence noch
+71	     2.583	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob040 DistributionWagnerWhitin.essence compact
+72	     2.330	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob040 DistributionWagnerWhitin.essence noch
+73	     2.146	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob041 NFractionsPuzzle.essence compact
+74	     2.197	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob041 NFractionsPuzzle.essence noch
+75	     5.658	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob042 diagnosis-single.essence compact
+76	     4.621	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob042 diagnosis-single.essence noch
+77	     1.947	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob044 steiner.essence compact
+78	     3.167	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob044 steiner.essence noch
+79	     3.479	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob045 CoveringArray.essence compact
+80	     5.784	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob045 CoveringArray.essence noch
+81	     5.779	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob048 MinimumEnergyBroadcast.essence compact
+82	   143.546	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob048 MinimumEnergyBroadcast.essence noch
+83	     2.977	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob049 set_partition_full.essence compact
+84	     8.048	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob049 set_partition_full.essence noch
+85	     3.075	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob049 set_partition_simple.essence compact
+86	    10.296	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob049 set_partition_simple.essence noch
+87	     3.199	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob051 TankAlloc-051.essence compact
+88	     3.190	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob051 TankAlloc-051.essence noch
+89	     2.225	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob054 nqueens.essence compact
+90	     2.236	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob054 nqueens.essence noch
+91	     2.749	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob055 EFPA.essence compact
+92	     2.275	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob055 EFPA.essence noch
+93	     3.546	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob056 sonet.essence compact
+94	    38.220	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob056 sonet.essence noch
+95	     3.050	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob057 KillerSudoku.essence compact
+96	     2.993	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob057 KillerSudoku.essence noch
+97	     3.375	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob065 opd.essence compact
+98	     6.004	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob065 opd.essence noch
+99	     5.500	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob110 ArmiesOfQueens.essence compact
+100	    27.847	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob110 ArmiesOfQueens.essence noch
+101	   117.836	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob115 TailAssignment.essence compact
+102	   114.526	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob115 TailAssignment.essence noch
+103	    49.151	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob116 Vellino.essence compact
+104	    83.082	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob116 Vellino.essence noch
+105	     9.417	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob132 layout.essence compact
+106	     8.404	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob132 layout.essence noch
+107	     1.273	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob133 knapsack.essence compact
+108	     4.483	0	0	0	0	scripts/modelling/runConjure.sh csplib-prob133 knapsack.essence noch
+109	     4.727	0	0	0	0	scripts/modelling/runConjure.sh efpa efpa.essence compact
+110	     4.441	0	0	0	0	scripts/modelling/runConjure.sh efpa efpa.essence noch
+111	     2.830	0	0	0	0	scripts/modelling/runConjure.sh GracefulDoubleWheelGraphs GracefulDoubleWheelGraphs.essence compact
+112	     2.892	0	0	0	0	scripts/modelling/runConjure.sh GracefulDoubleWheelGraphs GracefulDoubleWheelGraphs.essence noch
+113	     1.819	0	0	0	0	scripts/modelling/runConjure.sh GracefulGears GracefulGears.essence compact
+114	     1.998	0	0	0	0	scripts/modelling/runConjure.sh GracefulGears GracefulGears.essence noch
+115	     2.151	0	0	0	0	scripts/modelling/runConjure.sh GracefulHelms GracefulHelms.essence compact
+116	     2.259	0	0	0	0	scripts/modelling/runConjure.sh GracefulHelms GracefulHelms.essence noch
+117	     1.740	0	0	0	0	scripts/modelling/runConjure.sh GracefulWheelGraphs GracefulWheelGraphs.essence compact
+118	     1.755	0	0	0	0	scripts/modelling/runConjure.sh GracefulWheelGraphs GracefulWheelGraphs.essence noch
+119	    13.839	0	0	0	0	scripts/modelling/runConjure.sh prob018-Water prob018-Water.essence compact
+120	    14.857	0	0	0	0	scripts/modelling/runConjure.sh prob018-Water prob018-Water.essence noch
+121	   145.593	0	0	0	0	scripts/modelling/runConjure.sh prob037 prob037.essence compact
+122	   268.342	0	0	0	0	scripts/modelling/runConjure.sh prob037 prob037.essence noch
+123	    40.576	0	0	0	0	scripts/modelling/runConjure.sh prob037-peg prob037-peg.essence compact
+124	    66.596	0	0	0	0	scripts/modelling/runConjure.sh prob037-peg prob037-peg.essence noch
+125	    22.335	0	0	0	0	scripts/modelling/runConjure.sh prob037-peg-simple prob037-peg-simple.essence compact
+126	    37.712	0	0	0	0	scripts/modelling/runConjure.sh prob037-peg-simple prob037-peg-simple.essence noch
+127	    36.963	0	0	0	0	scripts/modelling/runConjure.sh prob123-Milk prob123-Milk.essence compact
+128	    38.029	0	0	0	0	scripts/modelling/runConjure.sh prob123-Milk prob123-Milk.essence noch
+129	    36.105	0	0	0	0	scripts/modelling/runConjure.sh prob128-Cross prob128-Cross.essence compact
+130	    36.101	0	0	0	0	scripts/modelling/runConjure.sh prob128-Cross prob128-Cross.essence noch
+131	    62.881	0	0	0	0	scripts/modelling/runConjure.sh prob131-pls prob131-pls.essence compact
+132	   364.133	0	0	0	0	scripts/modelling/runConjure.sh prob131-pls prob131-pls.essence noch
+133	    11.504	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-both.essence compact
+134	    11.451	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-both.essence noch
+135	    11.945	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-both-sane.essence compact
+136	    12.009	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-both-sane.essence noch
+137	    22.118	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey.essence compact
+138	    19.797	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey.essence noch
+139	     2.168	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-func.essence compact
+140	     2.082	0	0	0	0	scripts/modelling/runConjure.sh ramsey prob056-ramsey-func.essence noch
+141	     2.437	0	0	0	0	scripts/modelling/runConjure.sh RamseyNumbers RamseyNumbers.essence compact
+142	     2.213	0	0	0	0	scripts/modelling/runConjure.sh RamseyNumbers RamseyNumbers.essence noch
+143	     2.232	0	0	0	0	scripts/modelling/runConjure.sh VanDerWaerdenNumbers VanDerWaerden.essence compact
+144	    17.519	0	0	0	0	scripts/modelling/runConjure.sh VanDerWaerdenNumbers VanDerWaerden.essence noch
