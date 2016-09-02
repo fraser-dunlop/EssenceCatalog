@@ -22,6 +22,11 @@ if (( ${nb_commands} > 0 )) ; then
         --joblog  logs/gnuparallel/modelling-joblog         \
         :::: ${CMD_FILE}
     LC_ALL=C sort -n logs/gnuparallel/modelling-joblog -o logs/gnuparallel/modelling-joblog
+    # this is to drop the 2nd and the 3rd columns
+    # 2nd is the host, which we always expect to be ":"
+    # 3rd is the StartTime
+    cat logs/gnuparallel/modelling-joblog | cut -f 1,4- > logs/gnuparallel/modelling-joblog.cropped
+    mv logs/gnuparallel/modelling-joblog.cropped logs/gnuparallel/modelling-joblog
 else
     echo "No commands found in \"${CMD_FILE}\""
     echo "You may want to run \"scripts/modelling/gen_conjure_commands.sh\" first."
