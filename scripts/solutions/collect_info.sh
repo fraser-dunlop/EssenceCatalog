@@ -7,8 +7,8 @@ shopt -s nullglob
 ROOT_DIR=$(pwd)
 mkdir -p "${ROOT_DIR}/logs"
 
-INFO_FILE="${ROOT_DIR}/logs/infos.tsv"
-touch ${INFO_FILE}
+INFOS_TSV_FILE="${ROOT_DIR}/logs/infos.tsv"
+touch ${INFOS_TSV_FILE}
 
                                                         # go through all problems in EssenceCatalog
 pushd problems > /dev/null
@@ -34,7 +34,7 @@ for prob in *; do
                             INFO_FILE="${ROOT_DIR}/problems/${prob}/${essence_base}-models/${conjure_mode}/${savilerow_mode}/${solver}/${eprime_base}-${param_base}.eprime-info"
                             if [ -f "${INFO_FILE}" ]; then
                                 cat "${INFO_FILE}" | tr ':' '\t' | while read name value; do
-                                    echo -e "${prob}\t${essence}\t${param}\t${conjure_mode}\t${savilerow_mode}\t${eprime}\t${solver}\t${name}\t${value}" >> ${INFO_FILE}
+                                    echo -e "${prob}\t${essence}\t${param}\t${conjure_mode}\t${savilerow_mode}\t${eprime}\t${solver}\t${name}\t${value}" >> ${INFOS_TSV_FILE}
                                 done
                             fi
                         done
@@ -53,5 +53,5 @@ popd > /dev/null
 # at least for the 2 machines I tried this on...
 # -d consider only blanks and alphanumeric characters
 # -f ignore case
-LC_ALL=C sort -df ${INFO_FILE} -o ${INFO_FILE}
+LC_ALL=C sort -df ${INFOS_TSV_FILE} -o ${INFOS_TSV_FILE}
 
