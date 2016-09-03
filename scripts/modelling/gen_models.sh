@@ -20,7 +20,7 @@ if (( ${nb_commands} > 0 )) ; then
         --eta                                               \
         --results logs/gnuparallel/modelling-results        \
         --joblog  logs/gnuparallel/modelling-joblog         \
-        :::: ${CMD_FILE}
+        :::: ${CMD_FILE} || true        # allowed to fail due to SR timeouts
     LC_ALL=C sort -n logs/gnuparallel/modelling-joblog -o logs/gnuparallel/modelling-joblog
     # this is to drop the 2nd and the 3rd columns
     # 2nd is the host, which we always expect to be ":"

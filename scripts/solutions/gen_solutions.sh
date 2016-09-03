@@ -25,7 +25,7 @@ if (( ${nb_commands} > 0 )) ; then
         --eta                                               \
         --results logs/gnuparallel/solutions-results        \
         --joblog  logs/gnuparallel/solutions-joblog         \
-        :::: ${CMD_FILE}
+        :::: ${CMD_FILE} || true        # allowed to fail due to SR timeouts
     LC_ALL=C sort -n logs/gnuparallel/solutions-joblog -o logs/gnuparallel/solutions-joblog
     # this is to drop the 2nd and the 3rd columns
     # 2nd is the host, which we always expect to be ":"
