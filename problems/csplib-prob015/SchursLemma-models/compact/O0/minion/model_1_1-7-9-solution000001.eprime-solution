@@ -7,4 +7,5 @@ letting boxes_PartitionAsSet_ExplicitR2_Occurrence be
          [false, false, false, false, false, true, false, false, false; int(1..9)],
          [false, false, false, false, true, false, false, false, false; int(1..9)],
          [false, false, true, false, false, false, false, false, false; int(1..9)],
-         [true, true, false, true, false, false, false, false, false; int(1..9)]; int(1..7)]
+         [true, true, false, true, false, false, false, false, false; int(1..9)];
+             int(1..7)]

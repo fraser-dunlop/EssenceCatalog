@@ -1,8 +1,8 @@
 language ESSENCE' 1.0
 
-letting n_cars be 200
 letting n_classes be 27
 letting n_options be 5
+letting n_cars be 200
 letting quantity_Function1D be
         [7, 1, 20, 6, 12, 18, 6, 13, 29, 7, 1, 6, 1, 4, 2, 18, 6, 1, 7, 3, 2, 13, 1, 3, 5, 1, 7; int(1..27)]
 letting usage_RelationAsMatrix be
@@ -19,8 +19,9 @@ letting usage_RelationAsMatrix be
          [false, true, true, true, true; int(1..5)], [false, false, false, true, false; int(1..5)],
          [false, true, false, true, true; int(1..5)], [true, true, true, false, false; int(1..5)],
          [false, true, false, false, true; int(1..5)], [true, false, false, false, false; int(1..5)],
-         [true, false, false, false, false; int(1..5)]; int(1..27)]
-$ Here is a simple "visualisation" for the value above.
+         [true, false, false, false, false; int(1..5)];
+             int(1..27)]
+$ Visualisation for usage_RelationAsMatrix
 $ _ T T T _
 $ _ _ T _ T
 $ T T _ _ _

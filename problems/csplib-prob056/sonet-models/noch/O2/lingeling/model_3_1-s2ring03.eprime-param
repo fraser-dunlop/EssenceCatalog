@@ -18,8 +18,9 @@ letting demand_ExplicitR2_Occurrence be
          [false, false, false, false, true, false, true, false, false, false; int(1..10)],
          [false, false, false, false, true, false, false, false, true, false; int(1..10)],
          [false, false, false, false, false, true, true, false, false, false; int(1..10)],
-         [false, false, false, false, false, false, false, true, false, true; int(1..10)]; int(1..15)]
-$ Here is a simple "visualisation" for the value above.
+         [false, false, false, false, false, false, false, true, false, true; int(1..10)];
+             int(1..15)]
+$ Visualisation for demand_ExplicitR2_Occurrence
 $ T T _ _ _ _ _ _ _ _
 $ T _ _ _ T _ _ _ _ _
 $ T _ _ _ _ T _ _ _ _

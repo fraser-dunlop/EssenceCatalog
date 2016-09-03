@@ -1,32 +1,32 @@
 language ESSENCE' 1.0
 
 letting n_places be 2
-letting n_words be 2
 letting n_upper be 4
+letting n_words be 2
 letting inter_FunctionNDPartial_Flags be [[false, false; int(1..2)], [false, false; int(1..2)]; int(1..2)]
-$ Here is a simple "visualisation" for the value above.
+$ Visualisation for inter_FunctionNDPartial_Flags
 $ _ _
 $ _ _
 
 letting inter_FunctionNDPartial_Values_1 be [[1, 1; int(1..2)], [1, 1; int(1..2)]; int(1..2)]
-$ Here is a simple "visualisation" for the value above.
+$ Visualisation for inter_FunctionNDPartial_Values_1
 $ 1 1
 $ 1 1
 
 letting inter_FunctionNDPartial_Values_2 be [[1, 1; int(1..2)], [1, 1; int(1..2)]; int(1..2)]
-$ Here is a simple "visualisation" for the value above.
+$ Visualisation for inter_FunctionNDPartial_Values_2
 $ 1 1
 $ 1 1
 
 letting dict_Function1DR10_Function1DPartial_Flags be
         [[true, true, true, true; int(1..4)], [true, true, false, false; int(1..4)]; int(1..2)]
-$ Here is a simple "visualisation" for the value above.
+$ Visualisation for dict_Function1DR10_Function1DPartial_Flags
 $ T T T T
 $ T T _ _
 
 letting dict_Function1DR10_Function1DPartial_Values be
         [[65, 65, 65, 65; int(1..4)], [66, 68, 65, 65; int(1..4)]; int(1..2)]
-$ Here is a simple "visualisation" for the value above.
+$ Visualisation for dict_Function1DR10_Function1DPartial_Values
 $ 65 65 65 65
 $ 66 68 65 65
 

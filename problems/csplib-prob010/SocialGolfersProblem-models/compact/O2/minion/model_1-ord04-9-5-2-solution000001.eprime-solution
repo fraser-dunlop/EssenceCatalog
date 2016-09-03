@@ -5,44 +5,54 @@ letting sched_ExplicitR17R3R2_PartitionAsSet_ExplicitR2_Occurrence be
           [false, false, false, false, false, false, true, true, false, false; int(1..10)],
           [false, false, false, false, true, true, false, false, false, false; int(1..10)],
           [false, false, true, true, false, false, false, false, false, false; int(1..10)],
-          [true, true, false, false, false, false, false, false, false, false; int(1..10)]; int(1..5)],
+          [true, true, false, false, false, false, false, false, false, false; int(1..10)];
+              int(1..5)],
          [[false, false, false, false, false, false, false, true, false, true; int(1..10)],
           [false, false, false, false, false, false, true, false, true, false; int(1..10)],
           [false, false, false, true, false, true, false, false, false, false; int(1..10)],
           [false, true, false, false, true, false, false, false, false, false; int(1..10)],
-          [true, false, true, false, false, false, false, false, false, false; int(1..10)]; int(1..5)],
+          [true, false, true, false, false, false, false, false, false, false; int(1..10)];
+              int(1..5)],
          [[false, false, false, false, false, false, false, true, true, false; int(1..10)],
           [false, false, false, false, false, false, true, false, false, true; int(1..10)],
           [false, false, false, true, true, false, false, false, false, false; int(1..10)],
           [false, true, true, false, false, false, false, false, false, false; int(1..10)],
-          [true, false, false, false, false, true, false, false, false, false; int(1..10)]; int(1..5)],
+          [true, false, false, false, false, true, false, false, false, false; int(1..10)];
+              int(1..5)],
          [[false, false, false, false, false, true, false, false, false, true; int(1..10)],
           [false, false, false, false, true, false, false, false, true, false; int(1..10)],
           [false, false, true, false, false, false, false, true, false, false; int(1..10)],
           [false, true, false, false, false, false, true, false, false, false; int(1..10)],
-          [true, false, false, true, false, false, false, false, false, false; int(1..10)]; int(1..5)],
+          [true, false, false, true, false, false, false, false, false, false; int(1..10)];
+              int(1..5)],
          [[false, false, false, false, false, true, false, false, true, false; int(1..10)],
           [false, false, false, false, true, false, false, false, false, true; int(1..10)],
           [false, false, true, false, false, false, true, false, false, false; int(1..10)],
           [false, true, false, true, false, false, false, false, false, false; int(1..10)],
-          [true, false, false, false, false, false, false, true, false, false; int(1..10)]; int(1..5)],
+          [true, false, false, false, false, false, false, true, false, false; int(1..10)];
+              int(1..5)],
          [[false, false, false, false, false, true, false, true, false, false; int(1..10)],
           [false, false, false, true, false, false, false, false, false, true; int(1..10)],
           [false, false, true, false, true, false, false, false, false, false; int(1..10)],
           [false, true, false, false, false, false, false, false, true, false; int(1..10)],
-          [true, false, false, false, false, false, true, false, false, false; int(1..10)]; int(1..5)],
+          [true, false, false, false, false, false, true, false, false, false; int(1..10)];
+              int(1..5)],
          [[false, false, false, false, false, true, true, false, false, false; int(1..10)],
           [false, false, false, true, false, false, false, false, true, false; int(1..10)],
           [false, false, true, false, false, false, false, false, false, true; int(1..10)],
           [false, true, false, false, false, false, false, true, false, false; int(1..10)],
-          [true, false, false, false, true, false, false, false, false, false; int(1..10)]; int(1..5)],
+          [true, false, false, false, true, false, false, false, false, false; int(1..10)];
+              int(1..5)],
          [[false, false, false, false, true, false, false, true, false, false; int(1..10)],
           [false, false, false, true, false, false, true, false, false, false; int(1..10)],
           [false, false, true, false, false, false, false, false, true, false; int(1..10)],
           [false, true, false, false, false, true, false, false, false, false; int(1..10)],
-          [true, false, false, false, false, false, false, false, false, true; int(1..10)]; int(1..5)],
+          [true, false, false, false, false, false, false, false, false, true; int(1..10)];
+              int(1..5)],
          [[false, false, false, false, true, false, true, false, false, false; int(1..10)],
           [false, false, false, true, false, false, false, true, false, false; int(1..10)],
           [false, false, true, false, false, true, false, false, false, false; int(1..10)],
           [false, true, false, false, false, false, false, false, false, true; int(1..10)],
-          [true, false, false, false, false, false, false, false, true, false; int(1..10)]; int(1..5)]; int(1..9)]
+          [true, false, false, false, false, false, false, false, true, false; int(1..10)];
+              int(1..5)];
+             int(1..9)]

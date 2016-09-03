@@ -2,11 +2,11 @@ language ESSENCE' 1.0
 
 letting n_courses be 1
 letting n_periods be 1
-letting prereq_RelationAsMatrix be [[true; int(1..1)]; int(1..1)]
-$ Here is a simple "visualisation" for the value above.
+letting prereq_RelationAsMatrix be [[true; int(1)]; int(1)]
+$ Visualisation for prereq_RelationAsMatrix
 $ T
 
-letting credits_Function1D be [1; int(1..1)]
+letting credits_Function1D be [1; int(1)]
 letting maxl be 1
 letting minl be 1
 letting maxc be 1

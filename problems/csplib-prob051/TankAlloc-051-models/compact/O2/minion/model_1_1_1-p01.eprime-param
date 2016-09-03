@@ -1,83 +1,119 @@
 language ESSENCE' 1.0
 
-letting numCargos be 20
 letting numTanks be 34
+letting numCargos be 20
 letting capacities be
         [680, 674, 949, 949, 316, 420, 431, 316, 382, 451, 464, 382, 370, 428, 429, 370, 853, 991, 991, 853, 372, 420,
-         431, 372, 545, 626, 627, 545, 494, 589, 589, 494, 1017, 1017; int(1..34)]
+         431, 372, 545, 626, 627, 545, 494, 589, 589, 494, 1017, 1017;
+             int(1..34)]
 letting volumeToShip be
-        [1114, 979, 1068, 1267, 381, 508, 581, 557, 720, 1273, 593, 594, 793, 450, 826, 1491, 1527, 701, 673,
-         552; int(1..20)]
+        [1114, 979, 1068, 1267, 381, 508, 581, 557, 720, 1273, 593, 594, 793, 450, 826, 1491, 1527, 701, 673, 552;
+             int(1..20)]
 letting impossibleCargos_Occurrence be
         [[false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)],
+          false, false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false,
-          false, false, false, false, false; int(0..20)],
+          false, false, false, false, false;
+              int(0..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, false, false, false; int(0..20)]; int(1..34)]
-$ Here is a simple "visualisation" for the value above.
+          false, false, false, false, false, false;
+              int(0..20)];
+             int(1..34)]
+$ Visualisation for impossibleCargos_Occurrence
 $ _ T _ _ _ _ _ _ _ _ T _ _ T _ _ _ _ _ _ _
 $ _ T _ _ _ _ _ _ _ _ T _ _ T _ _ _ _ _ _ _
 $ _ T _ _ _ _ _ _ _ _ T _ _ T _ _ _ _ _ _ _
@@ -115,16 +151,22 @@ $ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 letting incompatibilities_ExplicitR2_Occurrence be
         [[false, false, false, false, true, false, false, false, false, false, false, false, false, false, true, false,
-          false, false, false, false; int(1..20)],
+          false, false, false, false;
+              int(1..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false,
-          false, true, false, false; int(1..20)],
+          false, true, false, false;
+              int(1..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false,
-          false, true, false, false; int(1..20)],
+          false, true, false, false;
+              int(1..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false,
-          false, false, false, true; int(1..20)],
+          false, false, false, true;
+              int(1..20)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true,
-          false, true, false, false; int(1..20)]; int(1..5)]
-$ Here is a simple "visualisation" for the value above.
+          false, true, false, false;
+              int(1..20)];
+             int(1..5)]
+$ Visualisation for incompatibilities_ExplicitR2_Occurrence
 $ _ _ _ _ T _ _ _ _ _ _ _ _ _ T _ _ _ _ _
 $ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ T _ _
 $ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ T _ _
@@ -134,107 +176,142 @@ $ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ T _ _
 letting neighbours_Occurrence be
         [[false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [true, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, true, false, true, false, false, true, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, true, false, true, false, false, true, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, true, false, false, false, false, true, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, true, false, false, false, false, true, false, false, true, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, true, false, false, true, false, true, false, false, true, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, true, false, false, true, false, true, false, false, true, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, true, false, false, true, false, false, false, false, true,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, true, false, false, false, false, true, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, true, false, false, true, false, true, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, true, false, false, true, false, true,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, true, false, false, true, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, true, false, true, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, true, false, true, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, true, false, true, false, false, true, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, true, false, true, false, false, true, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, true, false, false, false, false, true, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, true, false, false, false, false, true, false, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, true, false, false, true, false, true, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, true, false, false, true, false, true, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, true,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false,
-          true, false, false; int(1..34)],
+          true, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true,
-          false, false, false; int(1..34)],
+          false, false, false;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, false, true; int(1..34)],
+          false, false, false, true;
+              int(1..34)],
          [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
           false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-          false, false, true, false; int(1..34)]; int(1..34)]
-$ Here is a simple "visualisation" for the value above.
+          false, false, true, false;
+              int(1..34)];
+             int(1..34)]
+$ Visualisation for neighbours_Occurrence
 $ _ T T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 $ T _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 $ T _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _

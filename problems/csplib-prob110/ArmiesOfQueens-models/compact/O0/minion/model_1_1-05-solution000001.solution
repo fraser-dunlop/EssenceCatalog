@@ -1,14 +1,14 @@
 language Essence 1.3
 
 letting black be {(1, 2), (1, 4), (2, 1), (4, 1)}
-$ Here is a simple "visualisation" for the value above.
+$ Visualisation for black
 $ 1 2
 $ 1 4
 $ 2 1
 $ 4 1
 
 letting white be {(3, 3), (3, 5), (5, 3), (5, 5)}
-$ Here is a simple "visualisation" for the value above.
+$ Visualisation for white
 $ 3 3
 $ 3 5
 $ 5 3

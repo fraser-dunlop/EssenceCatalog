@@ -1,12 +1,13 @@
 language ESSENCE' 1.0
 
-letting codeWordLength be 6
 letting maxDist be 1
+letting codeWordLength be 6
 letting numOfCodeWords be 4
 letting dist_FunctionNDPartial_Flags be
         [[true, true, true, true; int(1..4)], [true, true, true, true; int(1..4)], [true, true, true, true; int(1..4)],
-         [true, true, true, true; int(1..4)]; int(1..4)]
-$ Here is a simple "visualisation" for the value above.
+         [true, true, true, true; int(1..4)];
+             int(1..4)]
+$ Visualisation for dist_FunctionNDPartial_Flags
 $ T T T T
 $ T T T T
 $ T T T T
@@ -14,7 +15,7 @@ $ T T T T
 
 letting dist_FunctionNDPartial_Values be
         [[0, 1, 1, 1; int(1..4)], [1, 0, 1, 1; int(1..4)], [1, 1, 0, 1; int(1..4)], [1, 1, 1, 0; int(1..4)]; int(1..4)]
-$ Here is a simple "visualisation" for the value above.
+$ Visualisation for dist_FunctionNDPartial_Values
 $ 0 1 1 1
 $ 1 0 1 1
 $ 1 1 0 1

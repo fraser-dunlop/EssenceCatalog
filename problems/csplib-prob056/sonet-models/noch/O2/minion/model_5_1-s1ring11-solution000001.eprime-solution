@@ -17,4 +17,5 @@ letting network_ExplicitWithRepetitionR2_Values_Occurrence be
          [false, false, false, false, false, false, false; int(1..7)],
          [false, false, false, false, false, false, false; int(1..7)],
          [false, false, false, false, false, false, false; int(1..7)],
-         [false, false, false, false, false, false, false; int(1..7)]; int(1..16)]
+         [false, false, false, false, false, false, false; int(1..7)];
+             int(1..16)]

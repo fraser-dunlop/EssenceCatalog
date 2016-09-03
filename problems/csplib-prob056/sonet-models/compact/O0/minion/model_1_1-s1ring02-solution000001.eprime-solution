@@ -5,4 +5,5 @@ letting network_ExplicitWithFlagsR2_Values_Occurrence be
         [[false, false, false, false, false, false, false; int(1..7)],
          [false, true, true, true, false, false, true; int(1..7)],
          [true, false, true, false, true, true, false; int(1..7)],
-         [false, false, false, false, false, false, false; int(1..7)]; int(1..4)]
+         [false, false, false, false, false, false, false; int(1..7)];
+             int(1..4)]

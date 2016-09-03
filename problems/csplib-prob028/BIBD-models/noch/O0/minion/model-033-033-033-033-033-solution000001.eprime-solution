@@ -2,69 +2,102 @@ language ESSENCE' 1.0
 
 letting bibd_RelationAsMatrix be
         [[true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true; int(1..33)],
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)],
          [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-          true; int(1..33)]; int(1..33)]
+          true, true, true, true, true, true, true, true, true, true, true, true, true, true, true;
+              int(1..33)];
+             int(1..33)]
