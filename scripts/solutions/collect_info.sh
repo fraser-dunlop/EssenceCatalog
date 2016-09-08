@@ -8,6 +8,7 @@ ROOT_DIR=$(pwd)
 mkdir -p "${ROOT_DIR}/logs"
 
 INFOS_TSV_FILE="${ROOT_DIR}/logs/infos.tsv"
+rm -f ${INFOS_TSV_FILE}
 touch ${INFOS_TSV_FILE}
 
                                                         # go through all problems in EssenceCatalog
