@@ -42,10 +42,11 @@ This repository contains some scripts to (mainly) achieve the following 3 things
 
 The Essence Prime model files and solution files will be kept in the repository for ease of use, ease of reference, and to have a historical recording.
 
-* Use `scripts/export_to_csplib.sh` for exporting Essence problem specification to the CSPLib submodule.
-* Use `scripts/import_from_csplib.sh` for importing Essence problem specification from the CSPLib submodule.
-* Use `scripts/modelling/recompute.sh N` to generate Essence Prime models (Using N cores)
-* Use `scripts/solutions/recompute.sh N` to generate solutions (Using N cores)
+* Use ``scripts/export_to_csplib.sh`` for exporting Essence problem specification to the CSPLib submodule.
+* Use ``scripts/import_from_csplib.sh`` for importing Essence problem specification from the CSPLib submodule.
+* Use ``scripts/modelling/recompute.sh N`` to generate Essence Prime models (Using N cores)
+* Use ``scripts/solutions/recompute.sh N`` to generate solutions (Using N cores)
+  Time limit for Savile Row, Minion, and Lingeling are all the same and is controlled by the ``LIMIT_TIME`` environment variable. The default value is 60 (seconds). To use a different value, prepend the following to the solutions recompute command: ``LIMIT_TIME=SEC``.
 
 
 License
