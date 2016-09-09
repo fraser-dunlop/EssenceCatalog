@@ -85,20 +85,43 @@ Directory structure
 ===================
 
 
-* Essence files: ``problems/[problem]/[essence].essence``.
+* Essence files:
+
+  ``problems/[problem]/[essence].essence``.
+
   Where ``[problem]`` is the name of the problem, and ``[essence]`` is the name of the problem specification in Essence.
-* Essence parameter files: ``problems/[problem]/params`` or ``problems/[problem]/[essence]-params``.
+
+* Essence parameter files:
+
+  ``problems/[problem]/params`` or ``problems/[problem]/[essence]-params``.
+
   The union of both of these directories will be taken, so either can be used on a case by case basis.
-* Essence Prime files (generated): ``problems/[problem]/[essence]-models/[conjure-mode]/#.eprime``.
+
+* Essence Prime files (generated):
+
+  ``problems/[problem]/[essence]-models/[conjure-mode]/#.eprime``.
+
   Where ``[conjure-mode]`` is the mode we use when calling Conjure for model generation (currently either "compact" or "noch").
-* Essence Prime parameter files (generated): ``problems/[problem]/[essence]-models/[conjure-mode]/[sr-mode]/[solver]/[model]-[param].eprime-param``.
+
+* Essence Prime parameter files (generated):
+
+  ``problems/[problem]/[essence]-models/[conjure-mode]/[sr-mode]/[solver]/[model]-[param].eprime-param``.
+
   Where ``[sr-mode]`` is the mode we use when calling Savile Row (currently either "O0" or "O2"),
   and ``[solver]`` is the backend solver we use (currently either "minion" or "lingeling"),
   and ``[model]`` is the name of the model used,
   and ``[param]`` is the name of the Essence level parameter file.
-* Essence Prime solution files (generated): ``problems/[problem]/[essence]-models/[conjure-mode]/[sr-mode]/[solver]/[model]-[param]-[solution].eprime-solution``.
+
+* Essence Prime solution files (generated):
+
+  ``problems/[problem]/[essence]-models/[conjure-mode]/[sr-mode]/[solver]/[model]-[param]-[solution].eprime-solution``.
+
   Where ``[solution]`` is the order of the generated solution. This is done by convention by Conjure, and it should just be "1" when a single is solution is to be found.
-* Essence solution files (generated): ``problems/[problem]/[essence]-models/[conjure-mode]/[sr-mode]/[solver]/[model]-[param]-[solution].solution``.
+
+* Essence solution files (generated):
+
+  ``problems/[problem]/[essence]-models/[conjure-mode]/[sr-mode]/[solver]/[model]-[param]-[solution].solution``.
+
   The solution converted back to Essence.
 
 
