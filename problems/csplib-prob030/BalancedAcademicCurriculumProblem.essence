@@ -4,19 +4,21 @@ $ Problem details available at http://www.csplib.org/Problems/prob030/
 $ 07 September 2007
 $
 
-given n_periods, maxl, minl, n_courses, maxc, minc : int(1..)
+given n_courses, n_periods,
+      load_per_period_lb, load_per_period_ub,
+      courses_per_period_lb, courses_per_period_ub : int(1..)
 
 letting Course be domain int(1..n_courses),
         Period be domain int(1..n_periods)
 
-given prereq : relation of (Course*Course),
+given prereq : relation of (Course * Course),
       credits : function (total) Course --> int(1..)
 
 find curr : function (total) Course --> Period
 
 such that
     forAll c1,c2 : Course . prereq(c1,c2) -> curr(c1) < curr(c2),
-    forAll p : Period . (sum c in preImage(curr,p) . credits(c)) <= maxl /\
-                        (sum c in preImage(curr,p) . credits(c)) >= minl,
-    forAll p : Period . |preImage(curr,p)| <= maxc /\ |preImage(curr,p)| >= minc
+    forAll p : Period . (sum c in preImage(curr,p) . credits(c)) <= load_per_period_ub /\
+                        (sum c in preImage(curr,p) . credits(c)) >= load_per_period_lb,
+    forAll p : Period . |preImage(curr,p)| <= courses_per_period_ub /\ |preImage(curr,p)| >= courses_per_period_lb
 
