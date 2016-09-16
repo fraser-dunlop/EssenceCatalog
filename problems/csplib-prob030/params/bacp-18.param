@@ -1,81 +1,89 @@
-include "curriculum.mzn.model";
-n_courses = 50;
-n_periods = 10;
-load_per_period_lb = 2;
-load_per_period_ub = 100;
-courses_per_period_lb = 2;
-courses_per_period_ub = 10;
-course_load = [10, 6, 6, 7, 9, 1, 9, 4, 10, 3, 6, 6, 3, 6, 4, 8, 8, 4, 7, 10, 8, 4, 6, 3, 9, 4, 5, 8, 9, 9, 5, 1, 7, 1, 9, 7, 3, 7, 2, 4, 9, 7, 9, 3, 4, 2, 10, 2, 5, 9, ];
-constraint prerequisite(6, 1);
-constraint prerequisite(5, 3);
-constraint prerequisite(6, 3);
-constraint prerequisite(5, 4);
-constraint prerequisite(13, 7);
-constraint prerequisite(15, 7);
-constraint prerequisite(10, 8);
-constraint prerequisite(11, 8);
-constraint prerequisite(12, 8);
-constraint prerequisite(13, 9);
-constraint prerequisite(14, 9);
-constraint prerequisite(15, 9);
-constraint prerequisite(17, 10);
-constraint prerequisite(19, 10);
-constraint prerequisite(20, 10);
-constraint prerequisite(21, 10);
-constraint prerequisite(20, 12);
-constraint prerequisite(16, 13);
-constraint prerequisite(18, 13);
-constraint prerequisite(16, 15);
-constraint prerequisite(19, 15);
-constraint prerequisite(21, 15);
-constraint prerequisite(22, 16);
-constraint prerequisite(23, 16);
-constraint prerequisite(24, 16);
-constraint prerequisite(27, 16);
-constraint prerequisite(23, 17);
-constraint prerequisite(26, 17);
-constraint prerequisite(27, 17);
-constraint prerequisite(26, 18);
-constraint prerequisite(24, 19);
-constraint prerequisite(26, 19);
-constraint prerequisite(24, 20);
-constraint prerequisite(23, 21);
-constraint prerequisite(24, 21);
-constraint prerequisite(25, 21);
-constraint prerequisite(26, 21);
-constraint prerequisite(30, 22);
-constraint prerequisite(31, 22);
-constraint prerequisite(32, 22);
-constraint prerequisite(32, 23);
-constraint prerequisite(28, 24);
-constraint prerequisite(29, 24);
-constraint prerequisite(30, 25);
-constraint prerequisite(32, 26);
-constraint prerequisite(29, 27);
-constraint prerequisite(31, 27);
-constraint prerequisite(32, 27);
-constraint prerequisite(36, 28);
-constraint prerequisite(37, 28);
-constraint prerequisite(33, 32);
-constraint prerequisite(40, 33);
-constraint prerequisite(42, 33);
-constraint prerequisite(39, 34);
-constraint prerequisite(38, 36);
-constraint prerequisite(41, 36);
-constraint prerequisite(38, 37);
-constraint prerequisite(40, 37);
-constraint prerequisite(41, 37);
-constraint prerequisite(44, 37);
-constraint prerequisite(46, 38);
-constraint prerequisite(47, 38);
-constraint prerequisite(49, 38);
-constraint prerequisite(48, 39);
-constraint prerequisite(47, 40);
-constraint prerequisite(49, 40);
-constraint prerequisite(48, 41);
-constraint prerequisite(47, 42);
-constraint prerequisite(49, 42);
-constraint prerequisite(50, 43);
-constraint prerequisite(46, 44);
-constraint prerequisite(48, 44);
-constraint prerequisite(47, 45);
+language Essence 1.3
+
+letting n_courses be 50
+letting n_periods be 10
+letting load_per_period_lb be 2
+letting load_per_period_ub be 100
+letting courses_per_period_lb be 2
+letting courses_per_period_ub be 10
+letting course_load be
+    function(1 --> 10, 2 --> 6, 3 --> 6, 4 --> 7, 5 --> 9, 6 --> 1, 7 --> 9, 8 --> 4, 9 --> 10, 10 --> 3, 11 --> 6,
+             12 --> 6, 13 --> 3, 14 --> 6, 15 --> 4, 16 --> 8, 17 --> 8, 18 --> 4, 19 --> 7, 20 --> 10, 21 --> 8,
+             22 --> 4, 23 --> 6, 24 --> 3, 25 --> 9, 26 --> 4, 27 --> 5, 28 --> 8, 29 --> 9, 30 --> 9, 31 --> 5,
+             32 --> 1, 33 --> 7, 34 --> 1, 35 --> 9, 36 --> 7, 37 --> 3, 38 --> 7, 39 --> 2, 40 --> 4, 41 --> 9,
+             42 --> 7, 43 --> 9, 44 --> 3, 45 --> 4, 46 --> 2, 47 --> 10, 48 --> 2, 49 --> 5, 50 --> 9)
+letting prerequisite be relation
+    ( (6, 1)
+    , (5, 3)
+    , (6, 3)
+    , (5, 4)
+    , (13, 7)
+    , (15, 7)
+    , (10, 8)
+    , (11, 8)
+    , (12, 8)
+    , (13, 9)
+    , (14, 9)
+    , (15, 9)
+    , (17, 10)
+    , (19, 10)
+    , (20, 10)
+    , (21, 10)
+    , (20, 12)
+    , (16, 13)
+    , (18, 13)
+    , (16, 15)
+    , (19, 15)
+    , (21, 15)
+    , (22, 16)
+    , (23, 16)
+    , (24, 16)
+    , (27, 16)
+    , (23, 17)
+    , (26, 17)
+    , (27, 17)
+    , (26, 18)
+    , (24, 19)
+    , (26, 19)
+    , (24, 20)
+    , (23, 21)
+    , (24, 21)
+    , (25, 21)
+    , (26, 21)
+    , (30, 22)
+    , (31, 22)
+    , (32, 22)
+    , (32, 23)
+    , (28, 24)
+    , (29, 24)
+    , (30, 25)
+    , (32, 26)
+    , (29, 27)
+    , (31, 27)
+    , (32, 27)
+    , (36, 28)
+    , (37, 28)
+    , (33, 32)
+    , (40, 33)
+    , (42, 33)
+    , (39, 34)
+    , (38, 36)
+    , (41, 36)
+    , (38, 37)
+    , (40, 37)
+    , (41, 37)
+    , (44, 37)
+    , (46, 38)
+    , (47, 38)
+    , (49, 38)
+    , (48, 39)
+    , (47, 40)
+    , (49, 40)
+    , (48, 41)
+    , (47, 42)
+    , (49, 42)
+    , (50, 43)
+    , (46, 44)
+    , (48, 44)
+    , (47, 45)
+    )
