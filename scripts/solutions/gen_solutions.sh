@@ -16,10 +16,7 @@ if (( ${nb_commands} > 0 )) ; then
     echo "Number of commands to run: ${nb_commands}"
     echo "Number of cores to use   : ${nb_cores}"
     echo "Time limit in seconds    : ${LIMIT_TIME}"
-    mkdir -p logs/versions logs/gnuparallel
-    conjure --version               | tee logs/versions/conjure_version.txt
-    savilerow | head -n2 | tail -n1 | tee logs/versions/savilerow_version.txt
-    minion | head -n2               | tee logs/versions/minion_version.txt
+    mkdir -p logs/gnuparallel
     parallel                                                \
         -j"${nb_cores}"                                     \
         --eta                                               \
