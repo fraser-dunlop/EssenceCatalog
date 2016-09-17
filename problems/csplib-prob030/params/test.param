@@ -1,11 +1,11 @@
 language Essence 1.2.0
 
-letting n_periods be 1
-letting maxl be 1
-letting minl be 1
 letting n_courses be 1
-letting maxc be 1
-letting minc be 1
+letting n_periods be 1
+letting load_per_period_lb be 1
+letting load_per_period_ub be 1
+letting courses_per_period_lb be 1
+letting courses_per_period_ub be 1
 
-letting credits be function (  1 -->  1)
-letting prereq be relation(  (1,1)  )
+letting course_load be function(1 --> 1)
+letting prerequisite be relation( (1, 1) )
