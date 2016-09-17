@@ -1,2 +1,2 @@
 # Minion Version 2
-# HG version: "34260a77a5fc"
+# HG version: "6c0a01f988dc (2016-09-06 22:10 +0100)"
