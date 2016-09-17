@@ -12,7 +12,7 @@ letting num be ceilrv * ceilrv * rvmodb + floorrv * floorrv * (b - rvmodb) - rv
 letting denom be v * (v - 1)
 letting lb_lambda be num / denom + toInt(num % denom != 0)
 find opd_ExplicitR3_Explicit: matrix indexed by [int(1..v), int(1..r)] of int(1..b)
-find lambda: int(lb_lambda..v)
+find lambda: int(lb_lambda..b)
 minimising lambda
 such that
     and([sum([toInt(or([opd_ExplicitR3_Explicit[q6, q10] = opd_ExplicitR3_Explicit[q5, q8] | q10 : int(1..r)]))
@@ -1082,8 +1082,8 @@ $                                                                               
 $                                                                                                                                                                                                                                                                                                                                                     {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
 $                                                                                                                                                                                                                                                                                                                     {"Constant": {"ConstantInt": 1}}]}}]]}}}}}]}]}},
 $                                                                                                                                                                                    {"Constant": {"ConstantInt": 0}}]}}}}]]}}}}}]},
-$                                                        {"Reference": [{"Name": "v"},
-$                                                                       {"DeclHasRepr": ["Given", {"Name": "v"},
+$                                                        {"Reference": [{"Name": "b"},
+$                                                                       {"DeclHasRepr": ["Given", {"Name": "b"},
 $                                                                                        {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}],
 $                      [{"Name": "opd"},
 $                       {"DomainSet": [{"Set_Explicit": []},
@@ -1128,5 +1128,5 @@ $                                                                               
 $                                                                                                     null]}]}]}]}]}],
 $                      [{"Name": "lambda"},
 $                       {"DomainInt": [{"RangeBounded": [{"Reference": [{"Name": "lb_lambda"}, null]},
-$                                                        {"Reference": [{"Name": "v"}, null]}]}]}]],
+$                                                        {"Reference": [{"Name": "b"}, null]}]}]}]],
 $  "questionAnswered": []}

@@ -1,0 +1,45 @@
+language ESSENCE' 1.0
+
+letting lambda be 5
+letting opd_ExplicitR2_Occurrence be
+        [[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true,
+          true, true, true, true, true;
+              int(1..37)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true,
+          true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, true,
+          true, true, true, true;
+              int(1..37)],
+         [false, false, false, false, false, false, false, false, false, false, true, true, true, true, false, false,
+          false, false, true, true, true, true, true, false, false, false, false, true, true, true, true, true, false,
+          false, false, false, false;
+              int(1..37)],
+         [false, false, false, false, false, false, false, false, false, true, false, true, true, true, true, true,
+          true, true, false, false, false, false, true, true, true, true, true, false, false, false, false, true, false,
+          false, false, false, false;
+              int(1..37)],
+         [false, false, false, false, false, false, true, true, true, true, true, false, false, false, false, false,
+          false, false, true, true, true, true, false, true, true, true, true, false, false, false, false, false, false,
+          false, false, false, true;
+              int(1..37)],
+         [false, false, false, false, false, false, true, true, true, true, true, false, false, false, true, true, true,
+          true, false, false, false, false, false, false, false, false, false, true, true, true, true, false, false,
+          false, false, true, false;
+              int(1..37)],
+         [false, false, false, false, false, true, true, true, true, false, false, true, true, true, false, false,
+          false, true, false, false, false, true, false, false, false, false, true, false, false, false, true, false,
+          true, true, true, false, false;
+              int(1..37)],
+         [false, false, false, true, true, true, false, false, false, true, true, false, true, true, false, false,
+          false, true, false, false, true, false, false, false, false, true, false, false, false, true, false, false,
+          false, false, true, true, true;
+              int(1..37)],
+         [false, false, false, true, true, true, false, false, true, false, false, false, false, true, false, false,
+          true, true, true, true, false, false, false, true, true, false, false, true, true, false, false, false, false,
+          true, false, false, false;
+              int(1..37)],
+         [false, false, false, true, true, true, false, true, false, false, true, true, false, false, true, true, false,
+          false, false, false, false, true, false, false, true, false, false, false, true, false, false, true, true,
+          false, false, false, true;
+              int(1..37)];
+             int(1..10)]

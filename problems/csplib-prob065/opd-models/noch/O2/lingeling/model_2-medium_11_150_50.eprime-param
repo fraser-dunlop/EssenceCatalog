@@ -1,0 +1,5 @@
+language ESSENCE' 1.0
+
+letting r be 50
+letting b be 150
+letting v be 11
