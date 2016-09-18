@@ -13,6 +13,7 @@ nb_cores=$1
 if (( ${nb_commands} > 0 )) ; then
     echo "Number of commands to run: ${nb_commands}"
     echo "Number of cores to use   : ${nb_cores}"
+    find problems -name '*.eprime' -delete
     mkdir -p logs/gnuparallel
     parallel                                                \
         -j"${nb_cores}"                                     \
