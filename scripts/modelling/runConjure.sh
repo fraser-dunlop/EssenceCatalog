@@ -15,7 +15,7 @@ mkdir -p "${TARGET_DIR}"
 if [ "${CONJURE_MODE}" == "compact" ]; then
     FLAGS="-ac --smart-filenames --channelling=no"
 elif [ "${CONJURE_MODE}" == "noch" ]; then
-    FLAGS="-ax --smart-filenames --channelling=no --representations-givens=c --representations-auxiliaries=c --representations-quantifieds=c --representations-cuts=c"
+    FLAGS="-ax --smart-filenames --channelling=no --representations-givens=s --representations-auxiliaries=c --representations-quantifieds=c --representations-cuts=c"
 else
     echo "CONJURE_MODE not recognised: ${CONJURE_MODE}"
     exit 1
