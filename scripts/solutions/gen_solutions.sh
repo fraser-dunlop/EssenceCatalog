@@ -17,6 +17,9 @@ if (( ${nb_commands} > 0 )) ; then
     echo "Number of cores to use   : ${nb_cores}"
     echo "Time limit in seconds    : ${LIMIT_TIME}"
     mkdir -p logs/gnuparallel
+    find problems -name '*.eprime-param' -delete
+    find problems -name '*.eprime-solution' -delete
+    find problems -name '*.solution' -delete
     parallel                                                \
         -j"${nb_cores}"                                     \
         --eta                                               \
