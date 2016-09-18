@@ -1,31 +1,35 @@
 language ESSENCE' 1.0
 
-given n_periods: int(1..)
-given maxl: int(1..)
-given minl: int(1..)
 given n_courses: int(1..)
-given maxc: int(1..)
-given minc: int(1..)
+given n_periods: int(1..)
+given load_per_period_lb: int(1..)
+given load_per_period_ub: int(1..)
+given courses_per_period_lb: int(1..)
+given courses_per_period_ub: int(1..)
 given fin1: int
-given prereq_RelationAsMatrix: matrix indexed by [int(1..n_courses), int(1..n_courses)] of bool
+given prerequisite_RelationAsMatrix: matrix indexed by [int(1..n_courses), int(1..n_courses)] of bool
 given fin2: int
 given fin3: int
-given credits_Function1D: matrix indexed by [int(1..n_courses)] of int(1..fin3)
+given course_load_Function1D: matrix indexed by [int(1..n_courses)] of int(1..fin3)
 find curr_Function1D: matrix indexed by [int(1..n_courses)] of int(1..n_periods)
 such that
-    and([prereq_RelationAsMatrix[c1, c2] -> curr_Function1D[c1] < curr_Function1D[c2]
+    and([prerequisite_RelationAsMatrix[c1, c2] -> curr_Function1D[c1] < curr_Function1D[c2]
              | c1 : int(1..n_courses), c2 : int(1..n_courses)]),
-    and([sum([toInt(curr_Function1D[q3] = p) * credits_Function1D[q3] | q3 : int(1..n_courses)]) <= maxl /\
-         sum([toInt(curr_Function1D[q5] = p) * credits_Function1D[q5] | q5 : int(1..n_courses)]) >= minl
+    and([sum([toInt(curr_Function1D[q3] = p) * course_load_Function1D[q3] | q3 : int(1..n_courses)]) <=
+         load_per_period_ub
+         /\
+         sum([toInt(curr_Function1D[q5] = p) * course_load_Function1D[q5] | q5 : int(1..n_courses)]) >=
+         load_per_period_lb
              | p : int(1..n_periods)]),
-    and([sum([toInt(curr_Function1D[q8] = p) | q8 : int(1..n_courses)]) <= maxc /\
-         sum([toInt(curr_Function1D[q11] = p) | q11 : int(1..n_courses)]) >= minc
+    and([sum([toInt(curr_Function1D[q8] = p) | q8 : int(1..n_courses)]) <= courses_per_period_ub /\
+         sum([toInt(curr_Function1D[q11] = p) | q11 : int(1..n_courses)]) >= courses_per_period_lb
              | p : int(1..n_periods)])
 
 $ Conjure's
 $ {"finds": [{"Name": "curr"}],
-$  "givens": [{"Name": "n_periods"}, {"Name": "maxl"}, {"Name": "minl"}, {"Name": "n_courses"}, {"Name": "maxc"},
-$             {"Name": "minc"}, {"Name": "prereq"}, {"Name": "credits"}],
+$  "givens": [{"Name": "n_courses"}, {"Name": "n_periods"}, {"Name": "load_per_period_lb"},
+$             {"Name": "load_per_period_ub"}, {"Name": "courses_per_period_lb"}, {"Name": "courses_per_period_ub"},
+$             {"Name": "prerequisite"}, {"Name": "course_load"}],
 $  "enumGivens": [],
 $  "enumLettings": [],
 $  "lettings": [[{"Name": "Course"},
@@ -60,7 +64,7 @@ $                      [{"Name": "n_courses"}, {"DomainInt": [{"RangeLowerBounde
 $                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_periods"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "prereq"},
+$                      [{"Name": "prerequisite"},
 $                       {"DomainRelation": [{"Relation_AsMatrix": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
@@ -91,7 +95,7 @@ $                                                                            {"R
 $                                                                                           {"DeclHasRepr": ["Given",
 $                                                                                                            {"Name": "n_periods"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
-$                      [{"Name": "credits"},
+$                      [{"Name": "course_load"},
 $                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 2, []]},
 $                                                                             {"DeclHasRepr": ["Given",
@@ -112,16 +116,26 @@ $                                                                               
 $                                                                                                                             3,
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
-$                      [{"Name": "maxl"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "minl"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "maxc"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "minc"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]],
-$  "representationsTree": [[{"Name": "credits"},
+$                      [{"Name": "load_per_period_ub"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "load_per_period_lb"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "courses_per_period_ub"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "courses_per_period_lb"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]],
+$  "representationsTree": [[{"Name": "course_load"},
 $                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
+$                          [{"Name": "courses_per_period_lb"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
+$                          [{"Name": "courses_per_period_ub"},
+$                           [{"rootLabel": null,
+$                             "subForest": []}]],
 $                          [{"Name": "curr"},
 $                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
@@ -137,16 +151,10 @@ $                             "subForest": []}]],
 $                          [{"MachineName": ["fin", 3, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
-$                          [{"Name": "maxc"},
+$                          [{"Name": "load_per_period_lb"},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
-$                          [{"Name": "maxl"},
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          [{"Name": "minc"},
-$                           [{"rootLabel": null,
-$                             "subForest": []}]],
-$                          [{"Name": "minl"},
+$                          [{"Name": "load_per_period_ub"},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "n_courses"},
@@ -155,19 +163,23 @@ $                             "subForest": []}]],
 $                          [{"Name": "n_periods"},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
-$                          [{"Name": "prereq"},
+$                          [{"Name": "prerequisite"},
 $                           [{"rootLabel": {"Relation_AsMatrix": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]]],
-$  "originalDomains": [[{"Name": "n_periods"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "maxl"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "minl"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "n_courses"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "maxc"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "minc"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
-$                      [{"Name": "prereq"},
+$  "originalDomains": [[{"Name": "n_courses"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "n_periods"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "load_per_period_lb"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "load_per_period_ub"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "courses_per_period_lb"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "courses_per_period_ub"},
+$                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
+$                      [{"Name": "prerequisite"},
 $                       {"DomainRelation": [[], [{"SizeAttr_None": []}, []],
 $                                           [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                             {"Reference": [{"Name": "n_courses"},
@@ -175,7 +187,7 @@ $                                                                               
 $                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                             {"Reference": [{"Name": "n_courses"},
 $                                                                                            null]}]}]}]]}],
-$                      [{"Name": "credits"},
+$                      [{"Name": "course_load"},
 $                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_None"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": [{"Name": "n_courses"},

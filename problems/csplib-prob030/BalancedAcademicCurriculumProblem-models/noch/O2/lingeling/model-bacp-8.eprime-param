@@ -1,0 +1,319 @@
+language ESSENCE' 1.0
+
+letting n_courses be 50
+letting n_periods be 10
+letting prerequisite_RelationAsMatrix be
+        [[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, true, true, false, true, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, true, true, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, true, false, true, true, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, true, true, false, false, true, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, true, false, true, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, true, false, true, true, true, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, true, false, false, true, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, true, false, true, false, false, false, true, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, true, false, false, false, true, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, true, true, true, false, true, true, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, true, false, true, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, true, false, false, false, false, true, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, true, false, true, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, true, false, false, false, true, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, true, false, true, false, true, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, true, true, true, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, true, true, false, false, true, false, false, false,
+          false, false, false, false;
+              int(1..50)],
+         [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+          false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false,
+          false, false, false, false;
+              int(1..50)];
+             int(1..50)]
+$ Visualisation for prerequisite_RelationAsMatrix
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ T T _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ T T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ T _ T T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T T _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ T T T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ T _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T T T _ T T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ T _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ T _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T T T T T _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ T _ T _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T T _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T T T _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ T _ _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T T _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T T _ _ T _ _ _ _ _ _ _
+$ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ T _ _ _ _ _ _ _
+
+letting course_load_Function1D be
+        [3, 6, 6, 6, 2, 3, 4, 1, 8, 1, 7, 2, 2, 3, 7, 1, 8, 8, 2, 4, 9, 7, 5, 10, 3, 10, 8, 8, 3, 5, 7, 7, 10, 5, 5, 4,
+         7, 8, 4, 6, 1, 2, 7, 2, 7, 3, 4, 6, 3, 5;
+             int(1..50)]
+letting load_per_period_ub be 100
+letting load_per_period_lb be 2
+letting courses_per_period_ub be 10
+letting courses_per_period_lb be 2
+letting fin1 be 75
+letting fin2 be 50
+letting fin3 be 10

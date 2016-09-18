@@ -2,15 +2,15 @@ language ESSENCE' 1.0
 
 letting n_courses be 1
 letting n_periods be 1
-letting prereq_RelationAsMatrix be [[true; int(1)]; int(1)]
-$ Visualisation for prereq_RelationAsMatrix
+letting prerequisite_RelationAsMatrix be [[true; int(1)]; int(1)]
+$ Visualisation for prerequisite_RelationAsMatrix
 $ T
 
-letting credits_Function1D be [1; int(1)]
-letting maxl be 1
-letting minl be 1
-letting maxc be 1
-letting minc be 1
+letting course_load_Function1D be [1; int(1)]
+letting load_per_period_ub be 1
+letting load_per_period_lb be 1
+letting courses_per_period_ub be 1
+letting courses_per_period_lb be 1
 letting fin1 be 1
 letting fin2 be 1
 letting fin3 be 1
