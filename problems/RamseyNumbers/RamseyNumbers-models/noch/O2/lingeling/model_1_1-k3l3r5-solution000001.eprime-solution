@@ -1,5 +1,0 @@
-language ESSENCE' 1.0
-
-letting colouring_FunctionND be
-        [[1, 2, 1, 2, 1; int(0..4)], [2, 1, 1, 1, 2; int(0..4)], [1, 1, 1, 2, 2; int(0..4)], [2, 1, 2, 1, 1; int(0..4)],
-         [1, 2, 2, 1, 1; int(0..4)]; int(0..4)]

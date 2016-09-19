@@ -3,48 +3,134 @@ language ESSENCE' 1.0
 given numGates: int(1..)
 given fin1: int
 given fin2: int
-given gateFuncs_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..numGates)] of int(0..fin2)
-given gateFuncs_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1:
-        matrix indexed by [int(1..numGates), int(1..fin2), int(1..2)] of bool
-given gateFuncs_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2:
-        matrix indexed by [int(1..numGates), int(1..fin2)] of bool
+given gateFuncs_FunctionAsRelationR13R16R5_RelationAsSetR13R16R5_ExplicitR13R16R5_1:
+        matrix indexed by [int(1..fin1)] of int(1..numGates)
+given gateFuncs_FunctionAsRelationR13R16R5_RelationAsSetR13R16R5_ExplicitR13R16R5_2_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker:
+        matrix indexed by [int(1..fin1)] of int(0..fin2)
+given gateFuncs_FunctionAsRelationR13R16R5_RelationAsSetR13R16R5_ExplicitR13R16R5_2_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..fin1), int(1..fin2), int(1..2)] of bool
+given gateFuncs_FunctionAsRelationR13R16R5_RelationAsSetR13R16R5_ExplicitR13R16R5_2_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..fin1), int(1..fin2)] of bool
 given fin3: int
-given gateInpts_Function1D: matrix indexed by [int(1..numGates), int(1..2)] of int(-1..numGates)
+given gateInpts_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin3)] of int(1..numGates)
+given gateInpts_FunctionAsRelation_RelationAsSet_Explicit_2:
+        matrix indexed by [int(1..fin3), int(1..2)] of int(-1..numGates)
 given fin4: int
-given finalOutputs_Function1DPartial_Flags: matrix indexed by [int(1..numGates)] of bool
-given finalOutputs_Function1DPartial_Values: matrix indexed by [int(1..numGates)] of bool
+given finalOutputs_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin4)] of int(1..numGates)
+given finalOutputs_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin4)] of bool
 find faultyGates_Function1DPartial_Flags: matrix indexed by [int(1..numGates)] of bool
 find faultyGates_Function1DPartial_Values: matrix indexed by [int(1..numGates)] of bool
-minimising sum([toInt(faultyGates_Function1DPartial_Flags[q18]) | q18 : int(1..numGates)])
+minimising sum([toInt(faultyGates_Function1DPartial_Flags[q44]) | q44 : int(1..numGates)])
 such that
-    or([or([gateOutput_Function1D[q7] | q7 : int(-1..numGates), q7 = -1]) = false /\
-        or([gateOutput_Function1D[q8] | q8 : int(-1..numGates), q8 = 0])
+    or([or([gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q12]
+                | q12 : int(1..(1 + (numGates - -1)) * 2),
+                  q12 <= gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
+                  gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q12] = -1])
+        = false
         /\
-        and([gateOutput_Function1D[gate] =
-             or([gateFuncs_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2
-                     [gate, q10]
-                     | q10 : int(1..fin2),
-                       q10 <=
-                       gateFuncs_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
-                           [gate],
-                       and([gateFuncs_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
-                                [gate, q10, q11]
-                            =
-                            [gateOutput_Function1D[gateInpts_Function1D[gate, 1]],
-                             gateOutput_Function1D[gateInpts_Function1D[gate, 2]];
-                                 int(1..2)]
-                                [q11]
-                                | q11 : int(1..2)])])
+        or([gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q13]
+                | q13 : int(1..(1 + (numGates - -1)) * 2),
+                  q13 <= gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
+                  gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q13] = 0])
+        /\
+        and([or([gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q15] = gate /\
+                 gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q15] =
+                 or([gateFuncs_FunctionAsRelationR13R16R5_RelationAsSetR13R16R5_ExplicitR13R16R5_2_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2
+                         [q19, q34]
+                         | q19 : int(1..fin1), q34 : int(1..fin2),
+                           gateFuncs_FunctionAsRelationR13R16R5_RelationAsSetR13R16R5_ExplicitR13R16R5_1[q19] = gate,
+                           q34 <=
+                           gateFuncs_FunctionAsRelationR13R16R5_RelationAsSetR13R16R5_ExplicitR13R16R5_2_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
+                               [q19],
+                           and([gateFuncs_FunctionAsRelationR13R16R5_RelationAsSetR13R16R5_ExplicitR13R16R5_2_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
+                                    [q19, q34, q35]
+                                =
+                                [or([gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q21]
+                                         | q21 : int(1..(1 + (numGates - -1)) * 2),
+                                           q21 <=
+                                           gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
+                                           gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
+                                               [q21]
+                                           =
+                                           sum([gateInpts_FunctionAsRelation_RelationAsSet_Explicit_2[q23, 1]
+                                                    | q23 : int(1..fin3),
+                                                      gateInpts_FunctionAsRelation_RelationAsSet_Explicit_1[q23] =
+                                                      gate])
+                                           /\
+                                           or([gateInpts_FunctionAsRelation_RelationAsSet_Explicit_1[q26] = gate
+                                                   | q26 : int(1..fin3)])]),
+                                 or([gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q28]
+                                         | q28 : int(1..(1 + (numGates - -1)) * 2),
+                                           q28 <=
+                                           gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
+                                           gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
+                                               [q28]
+                                           =
+                                           sum([gateInpts_FunctionAsRelation_RelationAsSet_Explicit_2[q30, 2]
+                                                    | q30 : int(1..fin3),
+                                                      gateInpts_FunctionAsRelation_RelationAsSet_Explicit_1[q30] =
+                                                      gate])
+                                           /\
+                                           or([gateInpts_FunctionAsRelation_RelationAsSet_Explicit_1[q33] = gate
+                                                   | q33 : int(1..fin3)])]);
+                                     int(1..2)]
+                                    [q35]
+                                    | q35 : int(1..2)])])
+                     | q15 : int(1..(1 + (numGates - -1)) * 2),
+                       q15 <= gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
              \/
-             gateOutput_Function1D[gate] =
-             or([faultyGates_Function1DPartial_Flags[q14] /\ faultyGates_Function1DPartial_Values[q14]
-                     | q14 : int(1..numGates), q14 = gate])
+             or([gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q38] = gate /\
+                 (gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q38] =
+                  faultyGates_Function1DPartial_Values[gate]
+                  /\ faultyGates_Function1DPartial_Flags[gate])
+                     | q38 : int(1..(1 + (numGates - -1)) * 2),
+                       q38 <= gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
                  | gate : int(1..numGates)])
         /\
-        and([gateOutput_Function1D[q16] = finalOutputs_Function1DPartial_Values[q16]
-                 | q16 : int(1..numGates), finalOutputs_Function1DPartial_Flags[q16]])
-            | gateOutput_Function1D : matrix indexed by [int(-1..numGates)] of bool]),
+        and([or([gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q40] =
+                 finalOutputs_FunctionAsRelation_RelationAsSet_Explicit_1[q42]
+                 /\
+                 gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q40] =
+                 finalOutputs_FunctionAsRelation_RelationAsSet_Explicit_2[q42]
+                     | q40 : int(1..(1 + (numGates - -1)) * 2),
+                       q40 <= gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
+                 | q42 : int(1..fin4)])
+            | gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker : int(0..(1 +
+                                                                                                     (numGates - -1))
+                                                                                                    * 2),
+              gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1 : matrix indexed by [int(1..(1
+                                                                                                                          +
+                                                                                                                          (numGates
+                                                                                                                           -
+                                                                                                                           -1))
+                                                                                                                         *
+                                                                                                                         2)] of int(-1..numGates),
+              gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2 : matrix indexed by [int(1..(1
+                                                                                                                          +
+                                                                                                                          (numGates
+                                                                                                                           -
+                                                                                                                           -1))
+                                                                                                                         *
+                                                                                                                         2)] of bool,
+              and([q6 + 1 <= gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker ->
+                   gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q6] <
+                   gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q6 + 1]
+                   \/
+                   gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q6] =
+                   gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q6 + 1]
+                   /\
+                   gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q6] <
+                   gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q6 + 1]
+                       | q6 : int(1..(1 + (numGates - -1)) * 2 - 1)]),
+              and([q7 > gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker ->
+                   gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q7] = -1 /\
+                   gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q7] = false
+                       | q7 : int(1..(1 + (numGates - -1)) * 2)]),
+              and([1 =
+                   sum([1   | q11 : int(1..(1 + (numGates - -1)) * 2),
+                              q11 <= gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
+                              gateOutput_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q11] = q9])
+                       | q9 : int(-1..numGates)])]),
     and([faultyGates_Function1DPartial_Flags[q3] = false -> faultyGates_Function1DPartial_Values[q3] = false
              | q3 : int(1..numGates)])
 
@@ -76,13 +162,22 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 5], ["let", 2], ["q", 19]],
+$  "nameGenState": [["fin", 5], ["let", 2], ["q", 45]],
 $  "nbExtraGivens": 4,
 $  "representations": [[{"Name": "gateFuncs"},
-$                       {"DomainFunction": [{"Function_1D": []},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclNoRepr": ["Given",
 $                                                                                             {"MachineName": ["fin", 1,
@@ -126,7 +221,7 @@ $                                                                               
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
 $                                           {"DomainBool": []}]}],
 $                      [{"Name": "gateInpts"},
-$                       {"DomainFunction": [{"Function_1D": []},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 3,
@@ -146,7 +241,7 @@ $                                                                               
 $                                                                                                                              {"Name": "numGates"},
 $                                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
 $                      [{"Name": "finalOutputs"},
-$                       {"DomainFunction": [{"Function_1DPartial": []},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 4, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 4,
@@ -178,13 +273,13 @@ $                          [{"MachineName": ["fin", 4, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "finalOutputs"},
-$                           [{"rootLabel": {"Function_1DPartial": []},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "gateFuncs"},
-$                           [{"rootLabel": {"Function_1D": []},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_ExplicitVarSizeWithMarker": []}}},
@@ -194,7 +289,7 @@ $                                                                          "subF
 $                                                          {"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "gateInpts"},
-$                           [{"rootLabel": {"Function_1D": []},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

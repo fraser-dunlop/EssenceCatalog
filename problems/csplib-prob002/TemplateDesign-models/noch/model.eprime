@@ -6,15 +6,17 @@ given n_variations: int(1..)
 given fin1: int
 given fin2: int
 given fin3: int
-given demand_Function1DPartial_Flags: matrix indexed by [int(1..n_variations)] of bool
-given demand_Function1DPartial_Values: matrix indexed by [int(1..n_variations)] of int(fin2..fin3)
+given demand_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..n_variations)
+given demand_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(fin2..fin3)
 find design_FunctionND: matrix indexed by [int(1..n_templates), int(1..n_variations)] of int(0..n_slots)
 letting let1 be fin3
 find printings_Function1D: matrix indexed by [int(1..n_templates)] of int(0..let1)
 minimising sum([printings_Function1D[t] | t : int(1..n_templates)])
 such that
-    and([sum([design_FunctionND[t, v] | t : int(1..n_templates)]) >= demand_Function1DPartial_Values[v] /\
-         demand_Function1DPartial_Flags[v]
+    and([or([demand_FunctionAsRelation_RelationAsSet_Explicit_1[q5] = v /\
+             demand_FunctionAsRelation_RelationAsSet_Explicit_2[q5] <=
+             sum([design_FunctionND[t, v] | t : int(1..n_templates)])
+                 | q5 : int(1..fin1)])
              | v : int(1..n_variations)])
 
 $ Conjure's
@@ -81,10 +83,10 @@ $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 4], ["let", 2], ["q", 4]],
+$  "nameGenState": [["fin", 4], ["let", 2], ["q", 6]],
 $  "nbExtraGivens": 3,
 $  "representations": [[{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
@@ -113,7 +115,7 @@ $                                                                               
 $                                                                                                            {"Name": "n_slots"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "demand"},
-$                       {"DomainFunction": [{"Function_1DPartial": []},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -159,7 +161,7 @@ $                                                                               
 $                                                                                                                                                      []]},
 $                                                                                                                                     {"DomainInt": []}]}]}}]}]}]}]}]],
 $  "representationsTree": [[{"Name": "demand"},
-$                           [{"rootLabel": {"Function_1DPartial": []},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

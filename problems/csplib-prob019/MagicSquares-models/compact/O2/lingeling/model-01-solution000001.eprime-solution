@@ -1,4 +1,0 @@
-language ESSENCE' 1.0
-
-letting s be 1
-letting square be [[1; int(1)]; int(1)]

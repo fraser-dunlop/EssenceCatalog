@@ -1,6 +1,0 @@
-language ESSENCE' 1.0
-
-letting boxes_PartitionAsSet_ExplicitR6_ExplicitVarSizeWithDummy be
-        [[1, 9, 9, 9, 9, 9, 9, 9; int(1..8)], [2, 9, 9, 9, 9, 9, 9, 9; int(1..8)], [3, 5, 6, 9, 9, 9, 9, 9; int(1..8)],
-         [4, 9, 9, 9, 9, 9, 9, 9; int(1..8)], [7, 9, 9, 9, 9, 9, 9, 9; int(1..8)],
-         [8, 9, 9, 9, 9, 9, 9, 9; int(1..8)]; int(1..6)]

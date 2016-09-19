@@ -9,23 +9,49 @@ where b >= g ** t
 find CoverTest_ExplicitWithRepetitionR9_Flag: int(0..b * b)
 find CoverTest_ExplicitWithRepetitionR9_Values_Function1D: matrix indexed by [int(1..b * b), int(1..k)] of int(1..g)
 such that
-    and([or([q12 <= CoverTest_ExplicitWithRepetitionR9_Flag /\
-             and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q12, q14] =
-                  testcase_Function1DPartial_Values[q14]
-                      | q14 : int(1..k), testcase_Function1DPartial_Flags[q14]])
-                 | q12 : int(1..b * b)])
-             | testcase_Function1DPartial_Flags : matrix indexed by [int(1..k)] of bool,
-               testcase_Function1DPartial_Values : matrix indexed by [int(1..k)] of int(1..g),
-               and([testcase_Function1DPartial_Flags[q1] = false -> testcase_Function1DPartial_Values[q1] = 1
-                        | q1 : int(1..k)]),
-               sum([1 | q11 : int(1..k), testcase_Function1DPartial_Flags[q11]]) = t]),
-    and([q4 + 1 <= CoverTest_ExplicitWithRepetitionR9_Flag ->
-         CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q4, ..] <=lex
-         CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q4 + 1, ..]
-             | q4 : int(1..b * b - 1)]),
-    and([q5 > CoverTest_ExplicitWithRepetitionR9_Flag ->
-         and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q5, q15] = 1 | q15 : int(1..k)])
-             | q5 : int(1..b * b)]),
+    and([or([q15 <= CoverTest_ExplicitWithRepetitionR9_Flag /\
+             and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D
+                      [q15, testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q17]]
+                  = testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q17]
+                      | q17 : int(1..k * g),
+                        q17 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
+                 | q15 : int(1..b * b)])
+             | testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker : int(0..k * g),
+               testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1 : matrix indexed by [int(1..k
+                                                                                                                        *
+                                                                                                                        g)] of int(1..k),
+               testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2 : matrix indexed by [int(1..k
+                                                                                                                        *
+                                                                                                                        g)] of int(1..g),
+               and([q1 + 1 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker ->
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q1] <
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
+                    \/
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q1] =
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
+                    /\
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q1] <
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q1 + 1]
+                        | q1 : int(1..k * g - 1)]),
+               and([q2 > testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker ->
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q2] = 1 /\
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q2] = 1
+                        | q2 : int(1..k * g)]),
+               and([1 >=
+                    sum([1   | q12 : int(1..k * g),
+                               q12 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
+                               testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q12] = q4])
+                        | q4 : int(1..k)]),
+               sum([1   | q14 : int(1..k * g),
+                          q14 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
+               = t]),
+    and([q6 + 1 <= CoverTest_ExplicitWithRepetitionR9_Flag ->
+         CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q6, ..] <=lex
+         CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q6 + 1, ..]
+             | q6 : int(1..b * b - 1)]),
+    and([q7 > CoverTest_ExplicitWithRepetitionR9_Flag ->
+         and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q7, q18] = 1 | q18 : int(1..k)])
+             | q7 : int(1..b * b)]),
     b = CoverTest_ExplicitWithRepetitionR9_Flag
 
 $ Conjure's
@@ -52,10 +78,12 @@ $  "strategyA": {"PickAll": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 2, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["q", 16]],
+$  "nameGenState": [["q", 19]],
 $  "nbExtraGivens": 0,
 $  "representations": [[{"Name": "k"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "t"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

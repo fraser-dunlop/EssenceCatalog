@@ -1,6 +1,0 @@
-language Essence 1.3
-
-letting hosts be {1, 3, 4, 5}
-letting sched be
-        {function(1 --> 1, 2 --> 1, 3 --> 3, 4 --> 4, 5 --> 5), function(1 --> 1, 2 --> 3, 3 --> 3, 4 --> 4, 5 --> 5),
-         function(1 --> 1, 2 --> 4, 3 --> 3, 4 --> 4, 5 --> 5), function(1 --> 1, 2 --> 5, 3 --> 3, 4 --> 4, 5 --> 5)}

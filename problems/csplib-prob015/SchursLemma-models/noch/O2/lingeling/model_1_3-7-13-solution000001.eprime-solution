@@ -1,8 +1,0 @@
-language ESSENCE' 1.0
-
-letting boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker be [1, 1, 1, 2, 2, 3, 3; int(1..7)]
-letting boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Values be
-        [[2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; int(1..13)], [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; int(1..13)],
-         [5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; int(1..13)], [1, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; int(1..13)],
-         [10, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; int(1..13)], [4, 6, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; int(1..13)],
-         [8, 9, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; int(1..13)]; int(1..7)]

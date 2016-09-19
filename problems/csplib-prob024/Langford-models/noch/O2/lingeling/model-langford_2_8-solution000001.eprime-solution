@@ -1,3 +1,0 @@
-language ESSENCE' 1.0
-
-letting seq_Function1D be [5, 8, 4, 1, 7, 1, 5, 4, 6, 3, 8, 2, 7, 3, 2, 6; int(1..16)]

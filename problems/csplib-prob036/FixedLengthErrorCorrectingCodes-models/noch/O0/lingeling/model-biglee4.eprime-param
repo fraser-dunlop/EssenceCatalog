@@ -3,29 +3,12 @@ language ESSENCE' 1.0
 letting maxDist be 2
 letting codeWordLength be 8
 letting numOfCodeWords be 9
-letting dist_FunctionNDPartial_Flags be
-        [[true, true, true, true, true; int(1..5)], [true, true, true, true, true; int(1..5)],
-         [true, true, true, true, true; int(1..5)], [true, true, true, true, true; int(1..5)],
-         [false, false, false, false, false; int(1..5)];
-             int(1..5)]
-$ Visualisation for dist_FunctionNDPartial_Flags
-$ T T T T T
-$ T T T T T
-$ T T T T T
-$ T T T T T
-$ _ _ _ _ _
-
-letting dist_FunctionNDPartial_Values be
-        [[0, 1, 2, 2, 1; int(1..5)], [1, 0, 1, 2, 2; int(1..5)], [2, 1, 0, 1, 2; int(1..5)], [2, 2, 1, 0, 1; int(1..5)],
-         [0, 0, 0, 0, 0; int(1..5)];
-             int(1..5)]
-$ Visualisation for dist_FunctionNDPartial_Values
-$ 0 1 2 2 1
-$ 1 0 1 2 2
-$ 2 1 0 1 2
-$ 2 2 1 0 1
-$ 0 0 0 0 0
-
+letting dist_FunctionAsRelation_RelationAsSet_Explicit_1_1 be
+        [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4; int(1..20)]
+letting dist_FunctionAsRelation_RelationAsSet_Explicit_1_2 be
+        [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5; int(1..20)]
+letting dist_FunctionAsRelation_RelationAsSet_Explicit_2 be
+        [0, 1, 2, 2, 1, 1, 0, 1, 2, 2, 2, 1, 0, 1, 2, 2, 2, 1, 0, 1; int(1..20)]
 letting minDist be 6
 letting fin1 be 20
 letting Character_EnumSize be 5

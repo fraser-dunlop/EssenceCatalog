@@ -1,4 +1,0 @@
-language ESSENCE' 1.0
-
-letting arrangement_Function1DPartial_Flags be [true, true, true, true; int(1..4)]
-letting arrangement_Function1DPartial_Values be [3, 1, 4, 2; int(1..4)]

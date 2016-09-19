@@ -1,5 +1,0 @@
-language ESSENCE' 1.0
-
-letting colouring_Function1D be [7, 16, 8, 1, 0, 25, 10, 24, 3, 20, 26, 14, 13, 22, 2, 5, 6, 19, 27; int(0..18)]
-letting edgeID_Function1D be
-        [9, 8, 7, 1, 25, 15, 14, 21, 4, 13, 10, 6, 12, 22, 23, 5, 18, 16, 20, 11, 19, 26, 27, 2, 17, 3, 24; int(0..26)]
