@@ -1,0 +1,4 @@
+language ESSENCE' 1.0
+
+letting Ticks_Occurrence be [true, true, false, false, false; int(0..4)]
+letting aux1 be 1

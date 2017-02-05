@@ -1,3 +1,3 @@
 Conjure: The Automated Constraint Modelling Tool
 Release version 2.0.0
-Repository version 8cf1194 (2017-02-03 17:50:16 +0000)
+Repository version 4b73188 (2017-02-04 22:33:38 +0000)
