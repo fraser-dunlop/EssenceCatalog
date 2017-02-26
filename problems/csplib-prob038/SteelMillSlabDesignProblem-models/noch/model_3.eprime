@@ -6,11 +6,9 @@ given col_per_slab: int(1..)
 given nbSizes: int(1..)
 given fin1: int
 given fin2: int
-given ordSize_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..n_orders)
-given ordSize_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..fin2)
+given ordSize_Function1D: matrix indexed by [int(1..n_orders)] of int(1..fin2)
 given fin3: int
-given ordCol_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin3)] of int(1..n_orders)
-given ordCol_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin3)] of int(1..n_colours)
+given ordCol_Function1D: matrix indexed by [int(1..n_orders)] of int(1..n_colours)
 find cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker: int(0..2 ** n_orders * nbSizes)
 find cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker:
         matrix indexed by [int(1..2 ** n_orders * nbSizes)] of int(0..n_orders)
@@ -19,61 +17,61 @@ find cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values
 find cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_2:
         matrix indexed by [int(1..2 ** n_orders * nbSizes)] of int(1..nbSizes)
 minimising
-    sum([toInt(q85 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker) *
-         cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_2[q85]
-             | q85 : int(1..2 ** n_orders * nbSizes)])
+    sum([toInt(q70 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker) *
+         cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_2[q70]
+             | q70 : int(1..2 ** n_orders * nbSizes)])
 such that
-    and([and([q70 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker,
-              q80 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker,
-              or([q75 <=
+    and([and([q55 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker,
+              q65 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker,
+              or([q60 <=
                   cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                      [q70]
+                      [q55]
                   /\
-                  !or([q82 <=
+                  !or([q67 <=
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                           [q80]
+                           [q65]
                        /\
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                           [q80, q82]
+                           [q65, q67]
                        =
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                           [q70, q75]
-                           | q82 : int(1..n_orders)])
-                      | q75 : int(1..n_orders)])
+                           [q55, q60]
+                           | q67 : int(1..n_orders)])
+                      | q60 : int(1..n_orders)])
               \/
-              or([q83 <=
+              or([q68 <=
                   cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                      [q80]
+                      [q65]
                   /\
-                  !or([q78 <=
+                  !or([q63 <=
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                           [q70]
+                           [q55]
                        /\
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                           [q70, q78]
+                           [q55, q63]
                        =
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                           [q80, q83]
-                           | q78 : int(1..n_orders)])
-                      | q83 : int(1..n_orders)]);
+                           [q65, q68]
+                           | q63 : int(1..n_orders)])
+                      | q68 : int(1..n_orders)]);
                   int(1..3)])
          ->
-         sum([toInt(q72 <=
+         sum([toInt(q57 <=
                     cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                        [q70]
+                        [q55]
                     /\
-                    or([q81 <=
+                    or([q66 <=
                         cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                            [q80]
+                            [q65]
                         /\
                         cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                            [q80, q81]
+                            [q65, q66]
                         =
                         cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                            [q70, q72]
-                            | q81 : int(1..n_orders)]))
-                  | q72 : int(1..n_orders)])
-         = 0 | q70 : int(1..2 ** n_orders * nbSizes), q80 : int(1..2 ** n_orders * nbSizes)]),
+                            [q55, q57]
+                            | q66 : int(1..n_orders)]))
+                  | q57 : int(1..n_orders)])
+         = 0 | q55 : int(1..2 ** n_orders * nbSizes), q65 : int(1..2 ** n_orders * nbSizes)]),
     and([or([q10 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker /\
              or([q12 <=
                  cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
@@ -84,99 +82,73 @@ such that
                  = o | q12 : int(1..n_orders)])
                  | q10 : int(1..2 ** n_orders * nbSizes)])
              | o : int(1..n_orders)]),
-    and([q49 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker ->
+    and([q44 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker ->
          or([q36 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker /\
-             (and([q43 <=
+             (and([q38 <=
                    cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
                        [q36]
                    ->
-                   or([q50 <=
+                   or([q45 <=
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                           [q49]
+                           [q44]
                        /\
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                           [q49, q50]
+                           [q44, q45]
                        =
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                           [q36, q43]
-                           | q50 : int(1..n_orders)])
-                       | q43 : int(1..n_orders)])
+                           [q36, q38]
+                           | q45 : int(1..n_orders)])
+                       | q38 : int(1..n_orders)])
               /\
-              and([q51 <=
+              and([q46 <=
                    cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                       [q49]
+                       [q44]
                    ->
-                   or([q47 <=
+                   or([q42 <=
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
                            [q36]
                        /\
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                           [q36, q47]
+                           [q36, q42]
                        =
                        cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                           [q49, q51]
-                           | q47 : int(1..n_orders)])
-                       | q51 : int(1..n_orders)])
+                           [q44, q46]
+                           | q42 : int(1..n_orders)])
+                       | q46 : int(1..n_orders)])
               /\
               cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_2[q36] >=
-              sum([toInt(q52 <=
+              sum([toInt(q47 <=
                          cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                             [q49])
+                             [q44])
                    *
-                   (sum([toInt(ordSize_FunctionAsRelation_RelationAsSet_Explicit_1[q38] =
-                               cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                                   [q49, q52])
-                         * ordSize_FunctionAsRelation_RelationAsSet_Explicit_2[q38]
-                             | q38 : int(1..fin1)])
-                    *
-                    toInt(or([ordSize_FunctionAsRelation_RelationAsSet_Explicit_1[q41] =
-                              cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                                  [q49, q52]
-                                  | q41 : int(1..fin1)])))
-                       | q52 : int(1..n_orders)]))
+                   ordSize_Function1D
+                       [cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
+                            [q44, q47]]
+                       | q47 : int(1..n_orders)]))
                  | q36 : int(1..2 ** n_orders * nbSizes)])
+             | q44 : int(1..2 ** n_orders * nbSizes)]),
+    and([q49 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker ->
+         sum([toInt(q50 <=
+                    cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
+                        [q49])
+              *
+              ordSize_Function1D
+                  [cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
+                       [q49, q50]]
+                  | q50 : int(1..n_orders)])
+         <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_2[q49]
              | q49 : int(1..2 ** n_orders * nbSizes)]),
-    and([q59 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker ->
-         sum([toInt(q60 <=
+    and([q52 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker ->
+         sum([toInt(q53 <=
                     cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                        [q59])
+                        [q52])
               *
-              (sum([toInt(ordSize_FunctionAsRelation_RelationAsSet_Explicit_1[q54] =
-                          cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                              [q59, q60])
-                    * ordSize_FunctionAsRelation_RelationAsSet_Explicit_2[q54]
-                        | q54 : int(1..fin1)])
-               *
-               toInt(or([ordSize_FunctionAsRelation_RelationAsSet_Explicit_1[q57] =
-                         cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                             [q59, q60]
-                             | q57 : int(1..fin1)])))
-                  | q60 : int(1..n_orders)])
-         <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_2[q59]
-             | q59 : int(1..2 ** n_orders * nbSizes)]),
-    and([q62 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker ->
-         sum([toInt(q63 <=
-                    cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                        [q62])
-              *
-              sum([toInt(ordCol_FunctionAsRelation_RelationAsSet_Explicit_1[q65] =
-                         cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                             [q62, q63])
-                   * ordCol_FunctionAsRelation_RelationAsSet_Explicit_2[q65]
-                       | q65 : int(1..fin3)])
-                  | q63 : int(1..n_orders)])
+              ordCol_Function1D
+                  [cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
+                       [q52, q53]]
+                  | q53 : int(1..n_orders)])
          <= col_per_slab
-         /\
-         and([q63 <=
-              cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
-                  [q62]
-              ->
-              or([ordCol_FunctionAsRelation_RelationAsSet_Explicit_1[q68] =
-                  cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Values
-                      [q62, q63]
-                      | q68 : int(1..fin3)])
-                  | q63 : int(1..n_orders)])
-             | q62 : int(1..2 ** n_orders * nbSizes)]),
+             | q52 : int(1..2 ** n_orders * nbSizes)]),
     and([q1 + 1 <= cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Marker ->
          cut_FunctionAsRelationR5_RelationAsSetR5_ExplicitVarSizeWithMarkerR5_Values_1_ExplicitVarSizeWithMarker_Marker
              [q1]
@@ -344,16 +316,10 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 4], ["q", 86]],
+$  "nameGenState": [["fin", 4], ["q", 71]],
 $  "nbExtraGivens": 3,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_orders"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -376,7 +342,7 @@ $                                                                               
 $                                                                                                            {"Name": "nbSizes"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "ordSize"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -397,7 +363,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "ordCol"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 3,
@@ -445,13 +411,13 @@ $                          [{"Name": "nbSizes"},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "ordCol"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "ordSize"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

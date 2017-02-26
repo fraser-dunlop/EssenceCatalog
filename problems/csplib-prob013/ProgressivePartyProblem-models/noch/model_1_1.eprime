@@ -4,16 +4,14 @@ given n_boats: int(1..)
 given n_periods: int(1..)
 given fin1: int
 given fin2: int
-given capacity_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..n_boats)
-given capacity_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..fin2)
+given capacity_Function1D: matrix indexed by [int(1..n_boats)] of int(1..fin2)
 given fin3: int
 given fin4: int
-given crew_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin3)] of int(1..n_boats)
-given crew_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin3)] of int(1..fin4)
+given crew_Function1D: matrix indexed by [int(1..n_boats)] of int(1..fin4)
 find hosts_Occurrence: matrix indexed by [int(1..n_boats)] of bool
 find sched_ExplicitR9_Function1D: matrix indexed by [int(1..n_periods), int(1..n_boats)] of int(1..n_boats)
 find aux1_Occurrence: matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
-minimising sum([toInt(hosts_Occurrence[q27]) | q27 : int(1..n_boats)])
+minimising sum([toInt(hosts_Occurrence[q20]) | q20 : int(1..n_boats)])
 such that
     and([and([aux1_Occurrence[q6, sched_ExplicitR9_Function1D[q6, q12]] | q12 : int(1..n_boats)])
              | q6 : int(1..n_periods)]),
@@ -24,17 +22,8 @@ such that
     and([and([hosts_Occurrence[h] -> sched_ExplicitR9_Function1D[q16, h] = h | h : int(1..n_boats)])
              | q16 : int(1..n_periods)]),
     and([and([hosts_Occurrence[h] ->
-              or([capacity_FunctionAsRelation_RelationAsSet_Explicit_1[q19] = h /\
-                  (capacity_FunctionAsRelation_RelationAsSet_Explicit_2[q19] >=
-                   sum([toInt(sched_ExplicitR9_Function1D[q17, q21] = h) *
-                        sum([crew_FunctionAsRelation_RelationAsSet_Explicit_2[q23]
-                                 | q23 : int(1..fin3), crew_FunctionAsRelation_RelationAsSet_Explicit_1[q23] = q21])
-                            | q21 : int(1..n_boats)])
-                   /\
-                   and([sched_ExplicitR9_Function1D[q17, q21] = h ->
-                        or([crew_FunctionAsRelation_RelationAsSet_Explicit_1[q26] = q21 | q26 : int(1..fin3)])
-                            | q21 : int(1..n_boats)]))
-                      | q19 : int(1..fin1)])
+              sum([toInt(sched_ExplicitR9_Function1D[q17, q19] = h) * crew_Function1D[q19] | q19 : int(1..n_boats)]) <=
+              capacity_Function1D[h]
                   | h : int(1..n_boats)])
              | q17 : int(1..n_periods)]),
     and([b1 < b2 ->
@@ -66,12 +55,10 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["aux", 2], ["fin", 5], ["q", 28]],
+$  "nameGenState": [["aux", 2], ["fin", 5], ["q", 21]],
 $  "nbExtraGivens": 4,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_boats"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -105,7 +92,7 @@ $                                                                               
 $                                                                                                                           {"Name": "n_boats"},
 $                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
 $                      [{"Name": "crew"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 3,
@@ -126,7 +113,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "capacity"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -147,13 +134,13 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}]],
 $  "representationsTree": [[{"Name": "capacity"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "crew"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

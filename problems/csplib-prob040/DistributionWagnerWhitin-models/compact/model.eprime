@@ -11,7 +11,7 @@ given procCost: matrix indexed by [int(1..numNodes)] of int(0..fin2)
 given fin3: int
 given demand: matrix indexed by [int(1..numLeaves), int(1..numPeriods)] of int(0..fin3)
 given fin4: int
-given children_Occurrence: matrix indexed by [int(1..numNodes), int(1..numNodes)] of bool
+given children_ExplicitVarSizeWithDummy: matrix indexed by [int(1..numNodes), int(1..fin4)] of int(1..numNodes + 1)
 find orders: matrix indexed by [int(1..numNodes), int(1..numPeriods)] of int(0..maxStock)
 find stock: matrix indexed by [int(1..numNodes), int(0..numPeriods)] of int(0..maxStock)
 minimising
@@ -20,7 +20,9 @@ minimising
 such that
     and([stock[i, 0] = 0 | i : int(1..numNodes)]),
     and([and([stock[i, t] =
-              stock[i, t - 1] + orders[i, t] - sum([orders[m, t] | m : int(1..numNodes), children_Occurrence[i, m]])
+              stock[i, t - 1] + orders[i, t] -
+              sum([orders[children_ExplicitVarSizeWithDummy[i, q5], t]
+                       | q5 : int(1..fin4), children_ExplicitVarSizeWithDummy[i, q5] != numNodes + 1])
                   | i : int(numLeaves + 1..numNodes)])
              | t : int(1..numPeriods)]),
     and([and([stock[i, t] = stock[i, t - 1] + orders[i, t] - demand[i, t] | i : int(1..numLeaves)])
@@ -63,11 +65,11 @@ $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"Compact": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 5], ["q", 5]],
+$  "nameGenState": [["fin", 5], ["q", 6]],
 $  "nbExtraGivens": 4,
 $  "representations": [[{"Name": "numNodes"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
@@ -141,7 +143,7 @@ $                                                                          {"Ref
 $                                                                                         {"DeclHasRepr": ["Given",
 $                                                                                                          {"Name": "numNodes"},
 $                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                         {"DomainSet": [{"Set_Occurrence": []},
+$                                         {"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
 $                                                        {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin", 4,
 $                                                                                                             []]},
 $                                                                                            {"DeclHasRepr": ["Given",
@@ -176,7 +178,7 @@ $                                                                               
 $                                                                                                                            {"DomainInt": []}]}]}]}]}]}]}]],
 $  "representationsTree": [[{"Name": "children"},
 $                           [{"rootLabel": null,
-$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "demand"},

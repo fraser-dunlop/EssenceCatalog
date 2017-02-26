@@ -4,20 +4,23 @@ given n_farms: int(1..)
 given capacity: int(1..)
 letting let1 be n_farms + 1
 given fin1: int
-given small_Occurrence: matrix indexed by [int(1..let1)] of bool
+given small_Explicit: matrix indexed by [int(1..fin1)] of int(1..let1)
 letting let2 be n_farms + 1
 given fin2: int
-given large_Occurrence: matrix indexed by [int(1..let2)] of bool
+given large_Explicit: matrix indexed by [int(1..fin2)] of int(1..let2)
 letting let3 be n_farms + 1
 given fin3: int
-given distance_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence:
-        matrix indexed by [int(1..fin3), int(1..let3)] of bool
-given distance_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_2: matrix indexed by [int(1..fin3)] of int(0..100)
+given distance_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit:
+        matrix indexed by [int(1..fin3), int(1..2)] of int(1..let3)
+given distance_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_2: matrix indexed by [int(1..fin3)] of int(0..100)
 letting let4 be n_farms + 1
 given fin4: int
 given milk_Function1D: matrix indexed by [int(1..let4)] of int(0..100)
 where
-    and([f != 1 <-> small_Occurrence[f] \/ large_Occurrence[f] /\ !(small_Occurrence[f] /\ large_Occurrence[f])
+    and([f != 1 <->
+         or([small_Explicit[q74] = f | q74 : int(1..fin1)]) \/
+         or([large_Explicit[q76] = f | q76 : int(1..fin2)]) /\
+         !(or([small_Explicit[q78] = f | q78 : int(1..fin1)]) /\ or([large_Explicit[q80] = f | q80 : int(1..fin2)]))
              | f : int(1..n_farms + 1)])
 where milk_Function1D[1] = 0
 letting let5 be n_farms + 2
@@ -28,13 +31,13 @@ letting let7 be n_farms + 2
 letting let8 be n_farms + 1
 find even_Function1DPartial_Flags: matrix indexed by [int(1..let7)] of bool
 find even_Function1DPartial_Values: matrix indexed by [int(1..let7)] of int(1..let8)
-find aux2_Occurrence: matrix indexed by [int(1..let2), int(1..let8)] of bool
-find aux1_Occurrence: matrix indexed by [int(1..let2), int(1..let6)] of bool
-find aux3_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
-find aux5_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
-find aux4_Occurrence: matrix indexed by [int(1..let1), int(1..let8)] of bool
-find aux7_Occurrence: matrix indexed by [int(1..let1), int(1..let8)] of bool
-find aux6_Occurrence: matrix indexed by [int(1..let1), int(1..let6)] of bool
+find aux2_Occurrence: matrix indexed by [int(1..fin2), int(1..let8)] of bool
+find aux1_Occurrence: matrix indexed by [int(1..fin2), int(1..let6)] of bool
+find aux3_Occurrence: matrix indexed by [int(1..fin1), int(1..let6)] of bool
+find aux5_Occurrence: matrix indexed by [int(1..fin1), int(1..let6)] of bool
+find aux4_Occurrence: matrix indexed by [int(1..fin1), int(1..let8)] of bool
+find aux7_Occurrence: matrix indexed by [int(1..fin1), int(1..let8)] of bool
+find aux6_Occurrence: matrix indexed by [int(1..fin1), int(1..let6)] of bool
 find aux8_Occurrence: matrix indexed by [int(1..let6)] of bool
 find aux9_Occurrence: matrix indexed by [int(1..let8)] of bool
 such that
@@ -42,76 +45,79 @@ such that
     odd_Function1DPartial_Flags[1],
     even_Function1DPartial_Values[1] = 1,
     even_Function1DPartial_Flags[1],
-    and([and([even_Function1DPartial_Flags[q19] -> aux2_Occurrence[f, even_Function1DPartial_Values[q19]]
-                  | q19 : int(1..let7)])
-             | f : int(1..let2)]),
-    and([and([aux2_Occurrence[f, q16] ->
-              or([even_Function1DPartial_Flags[q20] /\ even_Function1DPartial_Values[q20] = q16 | q20 : int(1..let7)])
-                  | q16 : int(1..let8)])
-             | f : int(1..let2)]),
-    and([and([odd_Function1DPartial_Flags[q12] -> aux1_Occurrence[f, odd_Function1DPartial_Values[q12]]
-                  | q12 : int(1..let5)])
-             | f : int(1..let2)]),
-    and([and([aux1_Occurrence[f, q9] ->
-              or([odd_Function1DPartial_Flags[q13] /\ odd_Function1DPartial_Values[q13] = q9 | q13 : int(1..let5)])
-                  | q9 : int(1..let6)])
-             | f : int(1..let2)]),
-    and([or([aux1_Occurrence[f, q8] /\ or([aux2_Occurrence[f, q15] /\ q15 = q8 | q15 : int(1..let8)]) /\ q8 = f
-                 | q8 : int(1..let6)])
-             | f : int(1..let2), large_Occurrence[f]]),
-    and([and([odd_Function1DPartial_Flags[q28] -> aux3_Occurrence[f, odd_Function1DPartial_Values[q28]]
-                  | q28 : int(1..let5)])
-             | f : int(1..let1)]),
-    and([and([aux3_Occurrence[f, q25] ->
-              or([odd_Function1DPartial_Flags[q29] /\ odd_Function1DPartial_Values[q29] = q25 | q29 : int(1..let5)])
-                  | q25 : int(1..let6)])
-             | f : int(1..let1)]),
-    and([and([odd_Function1DPartial_Flags[q41] -> aux5_Occurrence[f, odd_Function1DPartial_Values[q41]]
-                  | q41 : int(1..let5)])
-             | f : int(1..let1)]),
-    and([and([aux5_Occurrence[f, q38] ->
-              or([odd_Function1DPartial_Flags[q42] /\ odd_Function1DPartial_Values[q42] = q38 | q42 : int(1..let5)])
-                  | q38 : int(1..let6)])
-             | f : int(1..let1)]),
-    and([and([even_Function1DPartial_Flags[q34] -> aux4_Occurrence[f, even_Function1DPartial_Values[q34]]
-                  | q34 : int(1..let7)])
-             | f : int(1..let1)]),
-    and([and([aux4_Occurrence[f, q31] ->
-              or([even_Function1DPartial_Flags[q35] /\ even_Function1DPartial_Values[q35] = q31 | q35 : int(1..let7)])
-                  | q31 : int(1..let8)])
-             | f : int(1..let1)]),
-    and([and([even_Function1DPartial_Flags[q55] -> aux7_Occurrence[f, even_Function1DPartial_Values[q55]]
-                  | q55 : int(1..let7)])
-             | f : int(1..let1)]),
-    and([and([aux7_Occurrence[f, q52] ->
-              or([even_Function1DPartial_Flags[q56] /\ even_Function1DPartial_Values[q56] = q52 | q56 : int(1..let7)])
-                  | q52 : int(1..let8)])
-             | f : int(1..let1)]),
-    and([and([odd_Function1DPartial_Flags[q48] -> aux6_Occurrence[f, odd_Function1DPartial_Values[q48]]
-                  | q48 : int(1..let5)])
-             | f : int(1..let1)]),
-    and([and([aux6_Occurrence[f, q45] ->
-              or([odd_Function1DPartial_Flags[q49] /\ odd_Function1DPartial_Values[q49] = q45 | q49 : int(1..let5)])
-                  | q45 : int(1..let6)])
-             | f : int(1..let1)]),
-    and([(or([aux3_Occurrence[f, q24] /\ q24 = f | q24 : int(1..let6)]) \/
-          or([aux4_Occurrence[f, q30] /\ !or([aux5_Occurrence[f, q37] /\ q37 = q30 | q37 : int(1..let6)]) /\ q30 = f
-                  | q30 : int(1..let8)]))
+    and([and([even_Function1DPartial_Flags[q20] -> aux2_Occurrence[q7, even_Function1DPartial_Values[q20]]
+                  | q20 : int(1..let7)])
+             | q7 : int(1..fin2)]),
+    and([and([aux2_Occurrence[q7, q17] ->
+              or([even_Function1DPartial_Flags[q21] /\ even_Function1DPartial_Values[q21] = q17 | q21 : int(1..let7)])
+                  | q17 : int(1..let8)])
+             | q7 : int(1..fin2)]),
+    and([and([odd_Function1DPartial_Flags[q13] -> aux1_Occurrence[q7, odd_Function1DPartial_Values[q13]]
+                  | q13 : int(1..let5)])
+             | q7 : int(1..fin2)]),
+    and([and([aux1_Occurrence[q7, q10] ->
+              or([odd_Function1DPartial_Flags[q14] /\ odd_Function1DPartial_Values[q14] = q10 | q14 : int(1..let5)])
+                  | q10 : int(1..let6)])
+             | q7 : int(1..fin2)]),
+    and([or([aux1_Occurrence[q7, q9] /\ or([aux2_Occurrence[q7, q16] /\ q16 = q9 | q16 : int(1..let8)]) /\
+             q9 = large_Explicit[q7]
+                 | q9 : int(1..let6)])
+             | q7 : int(1..fin2)]),
+    and([and([odd_Function1DPartial_Flags[q30] -> aux3_Occurrence[q24, odd_Function1DPartial_Values[q30]]
+                  | q30 : int(1..let5)])
+             | q24 : int(1..fin1)]),
+    and([and([aux3_Occurrence[q24, q27] ->
+              or([odd_Function1DPartial_Flags[q31] /\ odd_Function1DPartial_Values[q31] = q27 | q31 : int(1..let5)])
+                  | q27 : int(1..let6)])
+             | q24 : int(1..fin1)]),
+    and([and([odd_Function1DPartial_Flags[q43] -> aux5_Occurrence[q24, odd_Function1DPartial_Values[q43]]
+                  | q43 : int(1..let5)])
+             | q24 : int(1..fin1)]),
+    and([and([aux5_Occurrence[q24, q40] ->
+              or([odd_Function1DPartial_Flags[q44] /\ odd_Function1DPartial_Values[q44] = q40 | q44 : int(1..let5)])
+                  | q40 : int(1..let6)])
+             | q24 : int(1..fin1)]),
+    and([and([even_Function1DPartial_Flags[q36] -> aux4_Occurrence[q24, even_Function1DPartial_Values[q36]]
+                  | q36 : int(1..let7)])
+             | q24 : int(1..fin1)]),
+    and([and([aux4_Occurrence[q24, q33] ->
+              or([even_Function1DPartial_Flags[q37] /\ even_Function1DPartial_Values[q37] = q33 | q37 : int(1..let7)])
+                  | q33 : int(1..let8)])
+             | q24 : int(1..fin1)]),
+    and([and([even_Function1DPartial_Flags[q57] -> aux7_Occurrence[q24, even_Function1DPartial_Values[q57]]
+                  | q57 : int(1..let7)])
+             | q24 : int(1..fin1)]),
+    and([and([aux7_Occurrence[q24, q54] ->
+              or([even_Function1DPartial_Flags[q58] /\ even_Function1DPartial_Values[q58] = q54 | q58 : int(1..let7)])
+                  | q54 : int(1..let8)])
+             | q24 : int(1..fin1)]),
+    and([and([odd_Function1DPartial_Flags[q50] -> aux6_Occurrence[q24, odd_Function1DPartial_Values[q50]]
+                  | q50 : int(1..let5)])
+             | q24 : int(1..fin1)]),
+    and([and([aux6_Occurrence[q24, q47] ->
+              or([odd_Function1DPartial_Flags[q51] /\ odd_Function1DPartial_Values[q51] = q47 | q51 : int(1..let5)])
+                  | q47 : int(1..let6)])
+             | q24 : int(1..fin1)]),
+    and([(or([aux3_Occurrence[q24, q26] /\ q26 = small_Explicit[q24] | q26 : int(1..let6)]) \/
+          or([aux4_Occurrence[q24, q32] /\ !or([aux5_Occurrence[q24, q39] /\ q39 = q32 | q39 : int(1..let6)]) /\
+              q32 = small_Explicit[q24]
+                  | q32 : int(1..let8)]))
          /\
-         !or([aux6_Occurrence[f, q44] /\ or([aux7_Occurrence[f, q51] /\ q51 = q44 | q51 : int(1..let8)]) /\ q44 = f
-                  | q44 : int(1..let6)])
-             | f : int(1..let1), small_Occurrence[f]]),
-    and([odd_Function1DPartial_Flags[q63] -> aux8_Occurrence[odd_Function1DPartial_Values[q63]] | q63 : int(1..let5)]),
-    and([aux8_Occurrence[q60] ->
-         or([odd_Function1DPartial_Flags[q64] /\ odd_Function1DPartial_Values[q64] = q60 | q64 : int(1..let5)])
-             | q60 : int(1..let6)]),
-    sum([toInt(aux8_Occurrence[q59]) * milk_Function1D[q59] | q59 : int(1..let6)]) <= capacity,
-    and([even_Function1DPartial_Flags[q69] -> aux9_Occurrence[even_Function1DPartial_Values[q69]]
-             | q69 : int(1..let7)]),
-    and([aux9_Occurrence[q66] ->
-         or([even_Function1DPartial_Flags[q70] /\ even_Function1DPartial_Values[q70] = q66 | q70 : int(1..let7)])
-             | q66 : int(1..let8)]),
-    sum([toInt(aux9_Occurrence[q65]) * milk_Function1D[q65] | q65 : int(1..let8)]) <= capacity,
+         !or([aux6_Occurrence[q24, q46] /\ or([aux7_Occurrence[q24, q53] /\ q53 = q46 | q53 : int(1..let8)]) /\
+              q46 = small_Explicit[q24]
+                  | q46 : int(1..let6)])
+             | q24 : int(1..fin1)]),
+    and([odd_Function1DPartial_Flags[q65] -> aux8_Occurrence[odd_Function1DPartial_Values[q65]] | q65 : int(1..let5)]),
+    and([aux8_Occurrence[q62] ->
+         or([odd_Function1DPartial_Flags[q66] /\ odd_Function1DPartial_Values[q66] = q62 | q66 : int(1..let5)])
+             | q62 : int(1..let6)]),
+    sum([toInt(aux8_Occurrence[q61]) * milk_Function1D[q61] | q61 : int(1..let6)]) <= capacity,
+    and([even_Function1DPartial_Flags[q71] -> aux9_Occurrence[even_Function1DPartial_Values[q71]]
+             | q71 : int(1..let7)]),
+    and([aux9_Occurrence[q68] ->
+         or([even_Function1DPartial_Flags[q72] /\ even_Function1DPartial_Values[q72] = q68 | q72 : int(1..let7)])
+             | q68 : int(1..let8)]),
+    sum([toInt(aux9_Occurrence[q67]) * milk_Function1D[q67] | q67 : int(1..let8)]) <= capacity,
     and([odd_Function1DPartial_Flags[q1] = false -> odd_Function1DPartial_Values[q1] = 1 | q1 : int(1..let5)]),
     and([even_Function1DPartial_Flags[q4] = false -> even_Function1DPartial_Values[q4] = 1 | q4 : int(1..let7)])
 
@@ -206,39 +212,40 @@ $                                                                          {"Con
 $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"Compact": []},
-$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 2], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["aux", 10], ["fin", 5], ["let", 9], ["q", 71]],
+$  "nameGenState": [["aux", 10], ["fin", 5], ["let", 9], ["q", 81]],
 $  "nbExtraGivens": 4,
 $  "representations": [[{"Name": "n_farms"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
@@ -246,7 +253,7 @@ $                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
 $                      [{"Name": "small"},
-$                       {"DomainSet": [{"Set_Occurrence": []},
+$                       {"DomainSet": [{"Set_Explicit": []},
 $                                      {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                       {"DeclHasRepr": ["Given",
 $                                                                                        {"MachineName": ["fin", 1, []]},
@@ -261,7 +268,7 @@ $                                                                               
 $                                                                                                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]},
 $                                                                                                                                                          {"Constant": {"ConstantInt": 1}}]]}}}}}]}]}]}]}],
 $                      [{"Name": "large"},
-$                       {"DomainSet": [{"Set_Occurrence": []},
+$                       {"DomainSet": [{"Set_Explicit": []},
 $                                      {"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 2, []]},
 $                                                                       {"DeclHasRepr": ["Given",
 $                                                                                        {"MachineName": ["fin", 2, []]},
@@ -350,7 +357,7 @@ $                                                                               
 $                                                                                                               []]},
 $                                                                                              {"DomainInt": []}]}]}},
 $                                            "PartialityAttr_Total", "JectivityAttr_None"],
-$                                           {"DomainSet": [{"Set_Occurrence": []},
+$                                           {"DomainSet": [{"Set_Explicit": []},
 $                                                          {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
 $                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                           {"Reference": [{"MachineName": ["let",
@@ -370,7 +377,7 @@ $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "distance"},
 $                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
-$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": {"Set_Explicit": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]},
 $                                           {"rootLabel": null,
@@ -394,7 +401,7 @@ $                          [{"MachineName": ["fin", 4, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "large"},
-$                           [{"rootLabel": {"Set_Occurrence": []},
+$                           [{"rootLabel": {"Set_Explicit": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "milk"},
@@ -413,7 +420,7 @@ $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "small"},
-$                           [{"rootLabel": {"Set_Occurrence": []},
+$                           [{"rootLabel": {"Set_Explicit": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []}]}]]],
 $  "originalDomains": [[{"Name": "n_farms"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

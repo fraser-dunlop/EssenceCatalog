@@ -13,11 +13,15 @@ given fin5: int
 given fin6: int
 given blksize_Function1D: matrix indexed by [int(1..n_options)] of int(1..fin6)
 given fin7: int
-given usage_RelationAsMatrix: matrix indexed by [int(1..n_classes), int(1..n_options)] of bool
+given usage_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin7)] of int(1..n_classes)
+given usage_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin7)] of int(1..n_options)
 find car_Function1D: matrix indexed by [int(1..n_cars)] of int(1..n_classes)
 such that
     and([sum([toInt(car_Function1D[q4] = c) | q4 : int(1..n_cars)]) = quantity_Function1D[c] | c : int(1..n_classes)]),
-    and([and([sum([toInt(usage_RelationAsMatrix[car_Function1D[i], opt]) | i : int(s..s + blksize_Function1D[opt] - 1)])
+    and([and([sum([toInt(or([usage_RelationAsSet_Explicit_1[q6] = car_Function1D[i] /\
+                             usage_RelationAsSet_Explicit_2[q6] = opt
+                                 | q6 : int(1..fin7)]))
+                       | i : int(s..s + blksize_Function1D[opt] - 1)])
               <= maxcars_Function1D[opt]
                   | s : int(1..n_cars + 1 - blksize_Function1D[opt])])
              | opt : int(1..n_options)])
@@ -54,10 +58,11 @@ $  "strategyA": {"Compact": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 8], ["q", 5]],
+$  "nameGenState": [["fin", 8], ["q", 7]],
 $  "nbExtraGivens": 7,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_classes"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -104,7 +109,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "usage"},
-$                       {"DomainRelation": [{"Relation_AsMatrix": []},
+$                       {"DomainRelation": [{"Relation_AsSet": {"Set_Explicit": []}},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 7, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 7,
@@ -218,7 +223,7 @@ $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "usage"},
-$                           [{"rootLabel": {"Relation_AsMatrix": []},
+$                           [{"rootLabel": {"Relation_AsSet": {"Set_Explicit": []}},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

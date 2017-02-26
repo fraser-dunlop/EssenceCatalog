@@ -5,14 +5,11 @@ given deck_length: int(1..)
 given n_containers: int(1..)
 given n_classes: int(1..)
 given fin1: int
-given width_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..n_containers)
-given width_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..deck_width)
+given width_Function1D: matrix indexed by [int(1..n_containers)] of int(1..deck_width)
 given fin2: int
-given length_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin2)] of int(1..n_containers)
-given length_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin2)] of int(1..deck_length)
+given length_Function1D: matrix indexed by [int(1..n_containers)] of int(1..deck_length)
 given fin3: int
-given class_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin3)] of int(1..n_containers)
-given class_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin3)] of int(1..n_classes)
+given class_Function1D: matrix indexed by [int(1..n_containers)] of int(1..n_classes)
 given fin4: int
 given fin5: int
 given separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit:
@@ -23,21 +20,11 @@ find east_Function1D: matrix indexed by [int(1..n_containers)] of int(0..deck_wi
 find north_Function1D: matrix indexed by [int(1..n_containers)] of int(0..deck_length)
 find south_Function1D: matrix indexed by [int(1..n_containers)] of int(0..deck_length)
 such that
-    and([or([width_FunctionAsRelation_RelationAsSet_Explicit_1[q14] = c /\
-             width_FunctionAsRelation_RelationAsSet_Explicit_2[q14] = east_Function1D[c] - west_Function1D[c]
-                 | q14 : int(1..fin1)])
-         /\
-         or([length_FunctionAsRelation_RelationAsSet_Explicit_1[q16] = c /\
-             length_FunctionAsRelation_RelationAsSet_Explicit_2[q16] = south_Function1D[c] - north_Function1D[c]
-                 | q16 : int(1..fin2)])
+    and([east_Function1D[c] - west_Function1D[c] = width_Function1D[c] /\
+         south_Function1D[c] - north_Function1D[c] = length_Function1D[c]
          \/
-         or([length_FunctionAsRelation_RelationAsSet_Explicit_1[q18] = c /\
-             length_FunctionAsRelation_RelationAsSet_Explicit_2[q18] = east_Function1D[c] - west_Function1D[c]
-                 | q18 : int(1..fin2)])
-         /\
-         or([width_FunctionAsRelation_RelationAsSet_Explicit_1[q20] = c /\
-             width_FunctionAsRelation_RelationAsSet_Explicit_2[q20] = south_Function1D[c] - north_Function1D[c]
-                 | q20 : int(1..fin1)])
+         east_Function1D[c] - west_Function1D[c] = length_Function1D[c] /\
+         south_Function1D[c] - north_Function1D[c] = width_Function1D[c]
              | c : int(1..n_containers)]),
     and([c1 != c2 -> west_Function1D[c1] != west_Function1D[c2] \/ north_Function1D[c1] != north_Function1D[c2]
              | c1 : int(1..n_containers), c2 : int(1..n_containers)]),
@@ -51,85 +38,37 @@ such that
          >= 0
              | c1 : int(1..n_containers), c2 : int(1..n_containers)]),
     and([c1 != c2 ->
-         or([and([or([sum([class_FunctionAsRelation_RelationAsSet_Explicit_2[q24]
-                               | q24 : int(1..fin3), class_FunctionAsRelation_RelationAsSet_Explicit_1[q24] = c1])
-                      = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q22, q38]
-                          | or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q27] = c1 | q27 : int(1..fin3)]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q32] = c2 | q32 : int(1..fin3)])])
+         or([and([class_Function1D[c1] = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q14, q20]
                   \/
-                  or([sum([class_FunctionAsRelation_RelationAsSet_Explicit_2[q29]
-                               | q29 : int(1..fin3), class_FunctionAsRelation_RelationAsSet_Explicit_1[q29] = c2])
-                      = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q22, q38]
-                          | or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q27] = c1 | q27 : int(1..fin3)]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q32] = c2 | q32 : int(1..fin3)])])
-                      | q38 : int(1..2)])
+                  class_Function1D[c2] = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q14, q20]
+                      | q20 : int(1..2)])
              /\
-             (and([or([and([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q22, q43] =
-                            sum([class_FunctionAsRelation_RelationAsSet_Explicit_2[q24]
-                                     | q24 : int(1..fin3),
-                                       class_FunctionAsRelation_RelationAsSet_Explicit_1[q24] = c1]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q27] = c1 | q27 : int(1..fin3)]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q32] = c2 | q32 : int(1..fin3)]);
-                                int(1..3)])
-                           | q43 : int(1..2)])
-                       | or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q27] = c1 | q27 : int(1..fin3)]),
-                         or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q32] = c2 | q32 : int(1..fin3)])])
+             (or([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q14, q26] = class_Function1D[c1]
+                      | q26 : int(1..2)])
               /\
-              and([or([and([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q22, q43] =
-                            sum([class_FunctionAsRelation_RelationAsSet_Explicit_2[q29]
-                                     | q29 : int(1..fin3),
-                                       class_FunctionAsRelation_RelationAsSet_Explicit_1[q29] = c2]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q27] = c1 | q27 : int(1..fin3)]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q32] = c2 | q32 : int(1..fin3)]);
-                                int(1..3)])
-                           | q43 : int(1..2)])
-                       | or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q27] = c1 | q27 : int(1..fin3)]),
-                         or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q32] = c2 | q32 : int(1..fin3)])]))
+              or([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q14, q28] = class_Function1D[c2]
+                      | q28 : int(1..2)]))
              /\
-             separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_2[q22] <=
+             separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_2[q14] <=
              max([west_Function1D[c1], west_Function1D[c2]; int(1..2)]) -
              min([east_Function1D[c1], east_Function1D[c2]; int(1..2)])
-                 | q22 : int(1..fin4)])
+                 | q14 : int(1..fin4)])
          \/
-         or([and([or([sum([class_FunctionAsRelation_RelationAsSet_Explicit_2[q48]
-                               | q48 : int(1..fin3), class_FunctionAsRelation_RelationAsSet_Explicit_1[q48] = c1])
-                      = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q46, q62]
-                          | or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q51] = c1 | q51 : int(1..fin3)]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q56] = c2 | q56 : int(1..fin3)])])
+         or([and([class_Function1D[c1] = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q30, q36]
                   \/
-                  or([sum([class_FunctionAsRelation_RelationAsSet_Explicit_2[q53]
-                               | q53 : int(1..fin3), class_FunctionAsRelation_RelationAsSet_Explicit_1[q53] = c2])
-                      = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q46, q62]
-                          | or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q51] = c1 | q51 : int(1..fin3)]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q56] = c2 | q56 : int(1..fin3)])])
-                      | q62 : int(1..2)])
+                  class_Function1D[c2] = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q30, q36]
+                      | q36 : int(1..2)])
              /\
-             (and([or([and([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q46, q67] =
-                            sum([class_FunctionAsRelation_RelationAsSet_Explicit_2[q48]
-                                     | q48 : int(1..fin3),
-                                       class_FunctionAsRelation_RelationAsSet_Explicit_1[q48] = c1]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q51] = c1 | q51 : int(1..fin3)]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q56] = c2 | q56 : int(1..fin3)]);
-                                int(1..3)])
-                           | q67 : int(1..2)])
-                       | or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q51] = c1 | q51 : int(1..fin3)]),
-                         or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q56] = c2 | q56 : int(1..fin3)])])
+             (or([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q30, q42] = class_Function1D[c1]
+                      | q42 : int(1..2)])
               /\
-              and([or([and([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q46, q67] =
-                            sum([class_FunctionAsRelation_RelationAsSet_Explicit_2[q53]
-                                     | q53 : int(1..fin3),
-                                       class_FunctionAsRelation_RelationAsSet_Explicit_1[q53] = c2]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q51] = c1 | q51 : int(1..fin3)]),
-                            or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q56] = c2 | q56 : int(1..fin3)]);
-                                int(1..3)])
-                           | q67 : int(1..2)])
-                       | or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q51] = c1 | q51 : int(1..fin3)]),
-                         or([class_FunctionAsRelation_RelationAsSet_Explicit_1[q56] = c2 | q56 : int(1..fin3)])]))
+              or([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q30, q44] = class_Function1D[c2]
+                      | q44 : int(1..2)]))
              /\
-             separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_2[q46] <=
+             separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_2[q30] <=
              max([north_Function1D[c1], north_Function1D[c2]; int(1..2)]) -
              min([south_Function1D[c1], south_Function1D[c2]; int(1..2)])
-                 | q46 : int(1..fin4)])
+                 | q30 : int(1..fin4)])
              | c1 : int(1..n_containers), c2 : int(1..n_containers)])
 
 $ Conjure's
@@ -206,17 +145,10 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 6], ["q", 69]],
+$  "nameGenState": [["fin", 6], ["q", 45]],
 $  "nbExtraGivens": 5,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_containers"},
@@ -256,7 +188,7 @@ $                                                                               
 $                                                                                                            {"Name": "deck_width"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "width"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -300,7 +232,7 @@ $                                                                               
 $                                                                                                            {"Name": "deck_length"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "length"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 2, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 2,
@@ -341,7 +273,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "class"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 3,
@@ -359,7 +291,7 @@ $                                                                               
 $                                                                                                            {"Name": "n_classes"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]],
 $  "representationsTree": [[{"Name": "class"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -392,7 +324,7 @@ $                          [{"MachineName": ["fin", 5, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "length"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -429,7 +361,7 @@ $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "width"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

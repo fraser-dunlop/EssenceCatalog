@@ -12,8 +12,8 @@ given gateFuncs_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarS
 given fin3: int
 given gateInpts_Function1D: matrix indexed by [int(1..numGates), int(1..2)] of int(-1..numGates)
 given fin4: int
-given finalOutputs_Function1DPartial_Flags: matrix indexed by [int(1..numGates)] of bool
-given finalOutputs_Function1DPartial_Values: matrix indexed by [int(1..numGates)] of bool
+given finalOutputs_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin4)] of int(1..numGates)
+given finalOutputs_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin4)] of bool
 find faultyGates_Function1DPartial_Flags: matrix indexed by [int(1..numGates)] of bool
 find faultyGates_Function1DPartial_Values: matrix indexed by [int(1..numGates)] of bool
 minimising sum([toInt(faultyGates_Function1DPartial_Flags[q18]) | q18 : int(1..numGates)])
@@ -42,8 +42,9 @@ such that
                      | q14 : int(1..numGates), q14 = gate])
                  | gate : int(1..numGates)])
         /\
-        and([gateOutput_Function1D[q16] = finalOutputs_Function1DPartial_Values[q16]
-                 | q16 : int(1..numGates), finalOutputs_Function1DPartial_Flags[q16]])
+        and([gateOutput_Function1D[finalOutputs_FunctionAsRelation_RelationAsSet_Explicit_1[q16]] =
+             finalOutputs_FunctionAsRelation_RelationAsSet_Explicit_2[q16]
+                 | q16 : int(1..fin4)])
             | gateOutput_Function1D : matrix indexed by [int(-1..numGates)] of bool]),
     and([faultyGates_Function1DPartial_Flags[q3] = false -> faultyGates_Function1DPartial_Values[q3] = false
              | q3 : int(1..numGates)])
@@ -76,7 +77,8 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 5], ["let", 2], ["q", 19]],
@@ -146,7 +148,7 @@ $                                                                               
 $                                                                                                                              {"Name": "numGates"},
 $                                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
 $                      [{"Name": "finalOutputs"},
-$                       {"DomainFunction": [{"Function_1DPartial": []},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 4, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 4,
@@ -178,7 +180,7 @@ $                          [{"MachineName": ["fin", 4, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "finalOutputs"},
-$                           [{"rootLabel": {"Function_1DPartial": []},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

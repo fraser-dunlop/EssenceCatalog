@@ -5,43 +5,25 @@ given n_classes: int(1..)
 given n_options: int(1..)
 given fin1: int
 given fin2: int
-given quantity_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..n_classes)
-given quantity_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..fin2)
+given quantity_Function1D: matrix indexed by [int(1..n_classes)] of int(1..fin2)
 given fin3: int
 given fin4: int
-given maxcars_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin3)] of int(1..n_options)
-given maxcars_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin3)] of int(1..fin4)
+given maxcars_Function1D: matrix indexed by [int(1..n_options)] of int(1..fin4)
 given fin5: int
 given fin6: int
-given blksize_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin5)] of int(1..n_options)
-given blksize_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin5)] of int(1..fin6)
+given blksize_Function1D: matrix indexed by [int(1..n_options)] of int(1..fin6)
 given fin7: int
 given usage_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin7)] of int(1..n_classes)
 given usage_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin7)] of int(1..n_options)
 find car_Function1D: matrix indexed by [int(1..n_cars)] of int(1..n_classes)
 such that
-    and([or([quantity_FunctionAsRelation_RelationAsSet_Explicit_1[q3] = c /\
-             quantity_FunctionAsRelation_RelationAsSet_Explicit_2[q3] =
-             sum([toInt(car_Function1D[q6] = c) | q6 : int(1..n_cars)])
-                 | q3 : int(1..fin1)])
-             | c : int(1..n_classes)]),
-    and([and([or([maxcars_FunctionAsRelation_RelationAsSet_Explicit_1[q8] = opt /\
-                  maxcars_FunctionAsRelation_RelationAsSet_Explicit_2[q8] >=
-                  sum([toInt(or([usage_RelationAsSet_Explicit_1[q10] = car_Function1D[i] /\
-                                 usage_RelationAsSet_Explicit_2[q10] = opt
-                                     | q10 : int(1..fin7)]))
-                           | i : int(s..s +
-                                        sum([blksize_FunctionAsRelation_RelationAsSet_Explicit_2[q12]
-                                                 | q12 : int(1..fin5),
-                                                   blksize_FunctionAsRelation_RelationAsSet_Explicit_1[q12] = opt])
-                                        - 1),
-                             or([blksize_FunctionAsRelation_RelationAsSet_Explicit_1[q15] = opt | q15 : int(1..fin5)])])
-                      | q8 : int(1..fin3)])
-                  | s : int(1..n_cars + 1 -
-                               sum([blksize_FunctionAsRelation_RelationAsSet_Explicit_2[q17]
-                                        | q17 : int(1..fin5),
-                                          blksize_FunctionAsRelation_RelationAsSet_Explicit_1[q17] = opt])),
-                    or([blksize_FunctionAsRelation_RelationAsSet_Explicit_1[q20] = opt | q20 : int(1..fin5)])])
+    and([sum([toInt(car_Function1D[q4] = c) | q4 : int(1..n_cars)]) = quantity_Function1D[c] | c : int(1..n_classes)]),
+    and([and([sum([toInt(or([usage_RelationAsSet_Explicit_1[q6] = car_Function1D[i] /\
+                             usage_RelationAsSet_Explicit_2[q6] = opt
+                                 | q6 : int(1..fin7)]))
+                       | i : int(s..s + blksize_Function1D[opt] - 1)])
+              <= maxcars_Function1D[opt]
+                  | s : int(1..n_cars + 1 - blksize_Function1D[opt])])
              | opt : int(1..n_options)])
 
 $ Conjure's
@@ -77,15 +59,10 @@ $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 8], ["q", 21]],
+$  "nameGenState": [["fin", 8], ["q", 7]],
 $  "nbExtraGivens": 7,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_classes"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -111,7 +88,7 @@ $                                                                               
 $                                                                                                            {"Name": "n_classes"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "quantity"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -150,7 +127,7 @@ $                                                                               
 $                                                                                                             {"Name": "n_options"},
 $                                                                                                             {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]]}],
 $                      [{"Name": "blksize"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 5, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 5,
@@ -171,7 +148,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "maxcars"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 3,
@@ -192,7 +169,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}]],
 $  "representationsTree": [[{"Name": "blksize"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -225,7 +202,7 @@ $                          [{"MachineName": ["fin", 7, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "maxcars"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -240,7 +217,7 @@ $                          [{"Name": "n_options"},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "quantity"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

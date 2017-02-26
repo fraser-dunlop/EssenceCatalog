@@ -6,7 +6,8 @@ given fin1: int
 given fin2: int
 given duration_Function1D: matrix indexed by [int(1..n_pieces)] of int(1..fin2)
 given fin3: int
-given plays_in_RelationAsMatrix: matrix indexed by [int(1..n_players), int(1..n_pieces)] of bool
+given plays_in_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin3)] of int(1..n_players)
+given plays_in_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin3)] of int(1..n_pieces)
 find order_Function1D: matrix indexed by [int(1..n_pieces)] of int(1..n_pieces)
 find arrive_Function1D: matrix indexed by [int(1..n_players)] of int(1..n_pieces)
 find leave_Function1D: matrix indexed by [int(1..n_players)] of int(1..n_pieces)
@@ -16,9 +17,16 @@ maximising
                   | i : int(1..n_pieces), i <= n_pieces])
              | p : int(1..n_players)])
 such that
-    and([plays_in_RelationAsMatrix[p, arrive_Function1D[p]] | p : int(1..n_players)]),
-    and([plays_in_RelationAsMatrix[p, leave_Function1D[p]] | p : int(1..n_players)]),
-    and([and([plays_in_RelationAsMatrix[p, order_Function1D[i]] -> arrive_Function1D[p] <= i /\ leave_Function1D[p] >= i
+    and([or([plays_in_RelationAsSet_Explicit_1[q11] = p /\ plays_in_RelationAsSet_Explicit_2[q11] = arrive_Function1D[p]
+                 | q11 : int(1..fin3)])
+             | p : int(1..n_players)]),
+    and([or([plays_in_RelationAsSet_Explicit_1[q7] = p /\ plays_in_RelationAsSet_Explicit_2[q7] = leave_Function1D[p]
+                 | q7 : int(1..fin3)])
+             | p : int(1..n_players)]),
+    and([and([or([plays_in_RelationAsSet_Explicit_1[q9] = p /\
+                  plays_in_RelationAsSet_Explicit_2[q9] = order_Function1D[i]
+                      | q9 : int(1..fin3)])
+              -> arrive_Function1D[p] <= i /\ leave_Function1D[p] >= i
                   | i : int(1..n_pieces)])
              | p : int(1..n_players)]),
     allDiff(order_Function1D),
@@ -55,10 +63,12 @@ $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 4], ["q", 6]],
+$  "nameGenState": [["fin", 4], ["q", 12]],
 $  "nbExtraGivens": 3,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_pieces"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -126,7 +136,7 @@ $                                                                               
 $                                                                                                            {"Name": "n_pieces"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "plays_in"},
-$                       {"DomainRelation": [{"Relation_AsMatrix": []},
+$                       {"DomainRelation": [{"Relation_AsSet": {"Set_Explicit": []}},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 3,
@@ -183,7 +193,7 @@ $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "plays_in"},
-$                           [{"rootLabel": {"Relation_AsMatrix": []},
+$                           [{"rootLabel": {"Relation_AsSet": {"Set_Explicit": []}},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

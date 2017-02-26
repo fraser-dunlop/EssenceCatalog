@@ -4,44 +4,22 @@ given n_stores: int(1..)
 given n_warehouses: int(1..)
 given fin1: int
 given fin2: int
-given capacity_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..n_warehouses)
-given capacity_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..fin2)
+given capacity_Function1D: matrix indexed by [int(1..n_warehouses)] of int(1..fin2)
 given fin3: int
 given fin4: int
-given opencost_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin3)] of int(1..n_warehouses)
-given opencost_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin3)] of int(1..fin4)
+given opencost_Function1D: matrix indexed by [int(1..n_warehouses)] of int(1..fin4)
 given fin5: int
 given fin6: int
-given cost_FunctionAsRelation_RelationAsSet_Explicit_1_1: matrix indexed by [int(1..fin5)] of int(1..n_stores)
-given cost_FunctionAsRelation_RelationAsSet_Explicit_1_2: matrix indexed by [int(1..fin5)] of int(1..n_warehouses)
-given cost_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin5)] of int(1..fin6)
+given cost_FunctionND: matrix indexed by [int(1..n_stores), int(1..n_warehouses)] of int(1..fin6)
 find open_Function1D: matrix indexed by [int(1..n_stores)] of int(1..n_warehouses)
 find aux1_Occurrence: matrix indexed by [int(1..n_warehouses)] of bool
 minimising
-    sum([toInt(aux1_Occurrence[q7]) *
-         sum([opencost_FunctionAsRelation_RelationAsSet_Explicit_2[q14]
-                  | q14 : int(1..fin3), opencost_FunctionAsRelation_RelationAsSet_Explicit_1[q14] = q7])
-             | q7 : int(1..n_warehouses)])
-    +
-    sum([sum([toInt(cost_FunctionAsRelation_RelationAsSet_Explicit_1_1[q3] = s /\
-                    cost_FunctionAsRelation_RelationAsSet_Explicit_1_2[q3] = open_Function1D[s])
-              * cost_FunctionAsRelation_RelationAsSet_Explicit_2[q3]
-                  | q3 : int(1..fin5)])
-             | s : int(1..n_stores)])
+    sum([toInt(aux1_Occurrence[q2]) * opencost_Function1D[q2] | q2 : int(1..n_warehouses)]) +
+    sum([cost_FunctionND[s, open_Function1D[s]] | s : int(1..n_stores)])
 such that
-    and([or([cost_FunctionAsRelation_RelationAsSet_Explicit_1_1[q6] = s /\
-             cost_FunctionAsRelation_RelationAsSet_Explicit_1_2[q6] = open_Function1D[s]
-                 | q6 : int(1..fin5)])
-             | s : int(1..n_stores)]),
-    and([aux1_Occurrence[open_Function1D[q11]] | q11 : int(1..n_stores)]),
-    and([aux1_Occurrence[q8] -> or([open_Function1D[q12] = q8 | q12 : int(1..n_stores)]) | q8 : int(1..n_warehouses)]),
-    and([aux1_Occurrence[q7] ->
-         or([opencost_FunctionAsRelation_RelationAsSet_Explicit_1[q17] = q7 | q17 : int(1..fin3)])
-             | q7 : int(1..n_warehouses)]),
-    and([or([capacity_FunctionAsRelation_RelationAsSet_Explicit_1[q19] = w /\
-             capacity_FunctionAsRelation_RelationAsSet_Explicit_2[q19] >=
-             sum([toInt(open_Function1D[q22] = w) | q22 : int(1..n_stores)])
-                 | q19 : int(1..fin1)])
+    and([aux1_Occurrence[open_Function1D[q6]] | q6 : int(1..n_stores)]),
+    and([aux1_Occurrence[q3] -> or([open_Function1D[q7] = q3 | q7 : int(1..n_stores)]) | q3 : int(1..n_warehouses)]),
+    and([sum([toInt(open_Function1D[q10] = w) | q10 : int(1..n_stores)]) <= capacity_Function1D[w]
              | w : int(1..n_warehouses)])
 
 $ Conjure's
@@ -67,19 +45,14 @@ $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["aux", 2], ["fin", 7], ["q", 23]],
+$  "nameGenState": [["aux", 2], ["fin", 7], ["q", 11]],
 $  "nbExtraGivens": 6,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_warehouses"},
@@ -91,7 +64,7 @@ $                      [{"MachineName": ["fin", 5, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_stores"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"MachineName": ["fin", 6, []]}, {"DomainInt": []}],
 $                      [{"Name": "opencost"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 3,
@@ -125,7 +98,7 @@ $                                                                               
 $                                                                                                            {"Name": "n_warehouses"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "cost"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_ND": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 5, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 5,
@@ -151,7 +124,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "capacity"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -172,13 +145,13 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}]],
 $  "representationsTree": [[{"Name": "capacity"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "cost"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_ND": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []},
@@ -217,7 +190,7 @@ $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "opencost"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

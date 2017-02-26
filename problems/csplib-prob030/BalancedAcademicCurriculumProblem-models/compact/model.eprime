@@ -7,22 +7,25 @@ given load_per_period_ub: int(1..)
 given courses_per_period_lb: int(1..)
 given courses_per_period_ub: int(1..)
 given fin1: int
-given prerequisite_RelationAsMatrix: matrix indexed by [int(1..n_courses), int(1..n_courses)] of bool
+given prerequisite_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..n_courses)
+given prerequisite_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..n_courses)
 given fin2: int
 given fin3: int
 given course_load_Function1D: matrix indexed by [int(1..n_courses)] of int(1..fin3)
 find curr_Function1D: matrix indexed by [int(1..n_courses)] of int(1..n_periods)
 such that
-    and([prerequisite_RelationAsMatrix[c1, c2] -> curr_Function1D[c1] < curr_Function1D[c2]
+    and([or([prerequisite_RelationAsSet_Explicit_1[q3] = c1 /\ prerequisite_RelationAsSet_Explicit_2[q3] = c2
+                 | q3 : int(1..fin1)])
+         -> curr_Function1D[c1] < curr_Function1D[c2]
              | c1 : int(1..n_courses), c2 : int(1..n_courses)]),
-    and([sum([toInt(curr_Function1D[q3] = p) * course_load_Function1D[q3] | q3 : int(1..n_courses)]) <=
+    and([sum([toInt(curr_Function1D[q5] = p) * course_load_Function1D[q5] | q5 : int(1..n_courses)]) <=
          load_per_period_ub
          /\
-         sum([toInt(curr_Function1D[q5] = p) * course_load_Function1D[q5] | q5 : int(1..n_courses)]) >=
+         sum([toInt(curr_Function1D[q7] = p) * course_load_Function1D[q7] | q7 : int(1..n_courses)]) >=
          load_per_period_lb
              | p : int(1..n_periods)]),
-    and([sum([toInt(curr_Function1D[q8] = p) | q8 : int(1..n_courses)]) <= courses_per_period_ub /\
-         sum([toInt(curr_Function1D[q11] = p) | q11 : int(1..n_courses)]) >= courses_per_period_lb
+    and([sum([toInt(curr_Function1D[q10] = p) | q10 : int(1..n_courses)]) <= courses_per_period_ub /\
+         sum([toInt(curr_Function1D[q13] = p) | q13 : int(1..n_courses)]) >= courses_per_period_lb
              | p : int(1..n_periods)])
 
 $ Conjure's
@@ -54,10 +57,11 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 4], ["q", 12]],
+$  "nameGenState": [["fin", 4], ["q", 14]],
 $  "nbExtraGivens": 3,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_courses"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -65,7 +69,7 @@ $                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_periods"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "prerequisite"},
-$                       {"DomainRelation": [{"Relation_AsMatrix": []},
+$                       {"DomainRelation": [{"Relation_AsSet": {"Set_Explicit": []}},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -164,7 +168,7 @@ $                          [{"Name": "n_periods"},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "prerequisite"},
-$                           [{"rootLabel": {"Relation_AsMatrix": []},
+$                           [{"rootLabel": {"Relation_AsSet": {"Set_Explicit": []}},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

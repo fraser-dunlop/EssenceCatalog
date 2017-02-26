@@ -12,73 +12,14 @@ letting let3 be gridSize * gridSize
 find solutionGrid: matrix indexed by [int(1..let1), int(1..let2)] of int(1..let3)
 such that
     and([allDiff(solutionGrid[.., i, ..]) /\ allDiff(solutionGrid[i, ..]) | i : int(1..gridSize * gridSize)]),
-    and([or([and([or([numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q13] =
-                      boxColumn + (boxRow - 1) * gridSize
-                      /\
-                      numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q13] =
-                      solutionGrid[gridColumn * gridSize + boxColumn, gridRow * gridSize + boxRow]
-                          | q13 : int(1..gridSize * gridSize * (gridSize * gridSize)),
-                            q13 <= numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
+    and([or([and([numberMapping_Function1D[boxColumn + (boxRow - 1) * gridSize] =
+                  solutionGrid[gridColumn * gridSize + boxColumn, gridRow * gridSize + boxRow]
                       | boxColumn : int(1..gridSize), boxRow : int(1..gridSize)])
-                 | numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker : int(0..gridSize *
-                                                                                                            gridSize
-                                                                                                            *
-                                                                                                            (gridSize *
-                                                                                                             gridSize)),
-                   numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1 : matrix indexed by [int(1..gridSize
-                                                                                                                                 *
-                                                                                                                                 gridSize
-                                                                                                                                 *
-                                                                                                                                 (gridSize
-                                                                                                                                  *
-                                                                                                                                  gridSize))] of int(1..gridSize
-                                                                                                                                                        *
-                                                                                                                                                        gridSize),
-                   numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2 : matrix indexed by [int(1..gridSize
-                                                                                                                                 *
-                                                                                                                                 gridSize
-                                                                                                                                 *
-                                                                                                                                 (gridSize
-                                                                                                                                  *
-                                                                                                                                  gridSize))] of int(1..gridSize
-                                                                                                                                                        *
-                                                                                                                                                        gridSize),
-                   and([q3 + 1 <= numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker ->
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q3] <
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q3 + 1]
-                        \/
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q3] =
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q3 + 1]
-                        /\
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q3] <
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q3 + 1]
-                            | q3 : int(1..gridSize * gridSize * (gridSize * gridSize) - 1)]),
-                   and([q4 > numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker ->
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q4] = 1 /\
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q4] = 1
-                            | q4 : int(1..gridSize * gridSize * (gridSize * gridSize))]),
-                   and([1 =
-                        sum([1   | q14 : int(1..gridSize * gridSize * (gridSize * gridSize)),
-                                   q14 <=
-                                   numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
-                                   numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
-                                       [q14]
-                                   = q6])
-                            | q6 : int(1..gridSize * gridSize)]),
-                   and([numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q16] <
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q17]
-                        ->
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q16] !=
-                        numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q17]
-                            | q16 : int(1..gridSize * gridSize * (gridSize * gridSize)),
-                              q17 : int(1..gridSize * gridSize * (gridSize * gridSize)),
-                              q16 <= numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
-                              q17 <= numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker]),
-                   and([or([numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q15] = q10
-                                | q15 : int(1..gridSize * gridSize * (gridSize * gridSize)),
-                                  q15 <=
-                                  numberMapping_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
-                            | q10 : int(1..gridSize * gridSize)])])
+                 | numberMapping_Function1D : matrix indexed by [int(1..gridSize * gridSize)] of int(1..gridSize *
+                                                                                                        gridSize),
+                   allDiff(numberMapping_Function1D),
+                   and([or([numberMapping_Function1D[q4] = q3 | q4 : int(1..gridSize * gridSize)])
+                            | q3 : int(1..gridSize * gridSize)])])
              | gridColumn : int(0..gridSize - 1), gridRow : int(0..gridSize - 1)]),
     and([sum([solutionGrid[hintMatrix[hintSet, index, 1], hintMatrix[hintSet, index, 2]]
                   | index : int(1..hintMatrix[hintSet, hintSumIndex, 2])])
@@ -172,14 +113,10 @@ $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 2], ["let", 4], ["q", 18]],
+$  "nameGenState": [["fin", 2], ["let", 4], ["q", 6]],
 $  "nbExtraGivens": 1,
 $  "representations": [[{"Name": "maxHintCells"},
 $                       {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

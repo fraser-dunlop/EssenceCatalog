@@ -8,60 +8,46 @@ given grid_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..x_max)
 given grid_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..y_max)
 given fin2: int
 given fin3: int
-given form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_1: matrix indexed by [int(1..fin2)] of int(1..n_shapes)
-given form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_2_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..fin2)] of int(0..fin3)
-given form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_2_ExplicitVarSizeWithMarker_Values_1:
-        matrix indexed by [int(1..fin2), int(1..fin3)] of int(1..x_max)
-given form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_2_ExplicitVarSizeWithMarker_Values_2:
-        matrix indexed by [int(1..fin2), int(1..fin3)] of int(1..y_max)
+given form_Function1DR5_ExplicitVarSizeWithMarker_Marker: matrix indexed by [int(1..n_shapes)] of int(0..fin3)
+given form_Function1DR5_ExplicitVarSizeWithMarker_Values_1:
+        matrix indexed by [int(1..n_shapes), int(1..fin3)] of int(1..x_max)
+given form_Function1DR5_ExplicitVarSizeWithMarker_Values_2:
+        matrix indexed by [int(1..n_shapes), int(1..fin3)] of int(1..y_max)
 find layout_FunctionNDPartial_Flags: matrix indexed by [int(1..x_max), int(1..y_max)] of bool
 find layout_FunctionNDPartial_Values: matrix indexed by [int(1..x_max), int(1..y_max)] of int(1..n_shapes)
 such that
-    and([layout_FunctionNDPartial_Flags[q42_1, q42_2] ->
-         or([grid_Explicit_1[q44] = q42_1 /\ grid_Explicit_2[q44] = q42_2 | q44 : int(1..fin1)])
-             | q42_1 : int(1..x_max), q42_2 : int(1..y_max)]),
-    and([or([or([and([or([sx_ExplicitVarSizeWithDummy[q26] = q32_1
-                              | q26 : int(1..x_max), sx_ExplicitVarSizeWithDummy[q26] != x_max + 1])
+    and([layout_FunctionNDPartial_Flags[q34_1, q34_2] ->
+         or([grid_Explicit_1[q36] = q34_1 /\ grid_Explicit_2[q36] = q34_2 | q36 : int(1..fin1)])
+             | q34_1 : int(1..x_max), q34_2 : int(1..y_max)]),
+    and([or([or([and([or([sx_ExplicitVarSizeWithDummy[q23] = q29_1
+                              | q23 : int(1..x_max), sx_ExplicitVarSizeWithDummy[q23] != x_max + 1])
                       /\
-                      or([sy_ExplicitVarSizeWithDummy[q28] = q32_2
-                              | q28 : int(1..y_max), sy_ExplicitVarSizeWithDummy[q28] != y_max + 1])
+                      or([sy_ExplicitVarSizeWithDummy[q25] = q29_2
+                              | q25 : int(1..y_max), sy_ExplicitVarSizeWithDummy[q25] != y_max + 1])
                       <->
-                      or([layout_FunctionNDPartial_Flags[q31_1, q31_2] /\
-                          layout_FunctionNDPartial_Values[q31_1, q31_2] = s
-                          /\ (q31_1 = q32_1 /\ q31_2 = q32_2)
-                              | q31_1 : int(1..x_max), q31_2 : int(1..y_max)])
-                          | q32_1 : int(1..x_max), q32_2 : int(1..y_max)])
+                      or([layout_FunctionNDPartial_Flags[q28_1, q28_2] /\
+                          layout_FunctionNDPartial_Values[q28_1, q28_2] = s
+                          /\ (q28_1 = q29_1 /\ q28_2 = q29_2)
+                              | q28_1 : int(1..x_max), q28_2 : int(1..y_max)])
+                          | q29_1 : int(1..x_max), q29_2 : int(1..y_max)])
                  /\
                  and([layout_FunctionNDPartial_Values
                           [min([sx_ExplicitVarSizeWithDummy[q13]
                                     | q13 : int(1..x_max), sx_ExplicitVarSizeWithDummy[q13] != x_max + 1])
-                           +
-                           form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_2_ExplicitVarSizeWithMarker_Values_1
-                               [q23, q24],
+                           + form_Function1DR5_ExplicitVarSizeWithMarker_Values_1[s, q21],
                            min([sy_ExplicitVarSizeWithDummy[q15]
                                     | q15 : int(1..y_max), sy_ExplicitVarSizeWithDummy[q15] != y_max + 1])
-                           +
-                           form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_2_ExplicitVarSizeWithMarker_Values_2
-                               [q23, q24]]
+                           + form_Function1DR5_ExplicitVarSizeWithMarker_Values_2[s, q21]]
                       = s
                       /\
                       layout_FunctionNDPartial_Flags
                           [min([sx_ExplicitVarSizeWithDummy[q17]
                                     | q17 : int(1..x_max), sx_ExplicitVarSizeWithDummy[q17] != x_max + 1])
-                           +
-                           form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_2_ExplicitVarSizeWithMarker_Values_1
-                               [q23, q24],
+                           + form_Function1DR5_ExplicitVarSizeWithMarker_Values_1[s, q21],
                            min([sy_ExplicitVarSizeWithDummy[q19]
                                     | q19 : int(1..y_max), sy_ExplicitVarSizeWithDummy[q19] != y_max + 1])
-                           +
-                           form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_2_ExplicitVarSizeWithMarker_Values_2
-                               [q23, q24]]
-                          | q23 : int(1..fin2), q24 : int(1..fin3),
-                            form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_1[q23] = s,
-                            q24 <=
-                            form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_2_ExplicitVarSizeWithMarker_Marker
-                                [q23]])
+                           + form_Function1DR5_ExplicitVarSizeWithMarker_Values_2[s, q21]]
+                          | q21 : int(1..fin3), q21 <= form_Function1DR5_ExplicitVarSizeWithMarker_Marker[s]])
                      | sy_ExplicitVarSizeWithDummy : matrix indexed by [int(1..y_max)] of int(1..y_max + 1),
                        and([sy_ExplicitVarSizeWithDummy[q8] < sy_ExplicitVarSizeWithDummy[q8 + 1] \/
                             sy_ExplicitVarSizeWithDummy[q8] = y_max + 1
@@ -76,13 +62,9 @@ such that
                    and([sx_ExplicitVarSizeWithDummy[q5] = x_max + 1 -> sx_ExplicitVarSizeWithDummy[q5 + 1] = x_max + 1
                             | q5 : int(1..x_max - 1)])])
              | s : int(1..n_shapes)]),
-    and([sum([1   | q36 : int(1..fin2), q37 : int(1..fin3),
-                    form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_1[q36] = s,
-                    q37 <=
-                    form_FunctionAsRelationR5_RelationAsSetR5_ExplicitR5_2_ExplicitVarSizeWithMarker_Marker[q36]])
-         =
-         sum([toInt(layout_FunctionNDPartial_Flags[q40_1, q40_2] /\ layout_FunctionNDPartial_Values[q40_1, q40_2] = s)
-                  | q40_1 : int(1..x_max), q40_2 : int(1..y_max)])
+    and([form_Function1DR5_ExplicitVarSizeWithMarker_Marker[s] =
+         sum([toInt(layout_FunctionNDPartial_Flags[q32_1, q32_2] /\ layout_FunctionNDPartial_Values[q32_1, q32_2] = s)
+                  | q32_1 : int(1..x_max), q32_2 : int(1..y_max)])
              | s : int(1..n_shapes)]),
     and([layout_FunctionNDPartial_Flags[q1_1, q1_2] = false -> layout_FunctionNDPartial_Values[q1_1, q1_2] = 1
              | q1_1 : int(1..x_max), q1_2 : int(1..y_max)])
@@ -137,12 +119,10 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 4], ["q", 45]],
+$  "nameGenState": [["fin", 4], ["q", 37]],
 $  "nbExtraGivens": 3,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "x_max"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -185,7 +165,7 @@ $                                                                               
 $                                                                                                            {"Name": "n_shapes"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "form"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 2, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 2,
@@ -225,7 +205,7 @@ $                          [{"MachineName": ["fin", 3, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "form"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": {"Set_ExplicitVarSizeWithMarker": []},

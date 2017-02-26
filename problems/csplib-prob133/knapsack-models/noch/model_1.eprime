@@ -4,30 +4,15 @@ given items_EnumSize: int
 given fin1: int
 given fin2: int
 given fin3: int
-given weight_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..items_EnumSize)
-given weight_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(fin2..fin3)
+given weight_Function1D: matrix indexed by [int(1..items_EnumSize)] of int(fin2..fin3)
 given fin4: int
 given fin5: int
 given fin6: int
-given gain_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin4)] of int(1..items_EnumSize)
-given gain_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin4)] of int(fin5..fin6)
+given gain_Function1D: matrix indexed by [int(1..items_EnumSize)] of int(fin5..fin6)
 given capacity: int
 find picked_Occurrence: matrix indexed by [int(1..items_EnumSize)] of bool
-maximising
-    sum([toInt(picked_Occurrence[i]) *
-         sum([gain_FunctionAsRelation_RelationAsSet_Explicit_2[q3]
-                  | q3 : int(1..fin4), gain_FunctionAsRelation_RelationAsSet_Explicit_1[q3] = i])
-             | i : int(1..items_EnumSize)])
-such that
-    and([picked_Occurrence[i] -> or([gain_FunctionAsRelation_RelationAsSet_Explicit_1[q6] = i | q6 : int(1..fin4)])
-             | i : int(1..items_EnumSize)]),
-    sum([toInt(picked_Occurrence[i]) *
-         sum([weight_FunctionAsRelation_RelationAsSet_Explicit_2[q8]
-                  | q8 : int(1..fin1), weight_FunctionAsRelation_RelationAsSet_Explicit_1[q8] = i])
-             | i : int(1..items_EnumSize)])
-    <= capacity,
-    and([picked_Occurrence[i] -> or([weight_FunctionAsRelation_RelationAsSet_Explicit_1[q11] = i | q11 : int(1..fin1)])
-             | i : int(1..items_EnumSize)])
+maximising sum([toInt(picked_Occurrence[i]) * gain_Function1D[i] | i : int(1..items_EnumSize)])
+such that sum([toInt(picked_Occurrence[i]) * weight_Function1D[i] | i : int(1..items_EnumSize)]) <= capacity
 
 $ Conjure's
 $ {"finds": [{"Name": "picked"}],
@@ -46,14 +31,10 @@ $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 7], ["q", 12]],
+$  "nameGenState": [["fin", 7], ["q", 2]],
 $  "nbExtraGivens": 6,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "items_EnumSize"}, {"DomainInt": []}],
@@ -63,7 +44,7 @@ $                      [{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 5, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 6, []]}, {"DomainInt": []}],
 $                      [{"Name": "gain"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 4, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 4,
@@ -97,7 +78,7 @@ $                                                                               
 $                                                                                                       {"Name": "items_EnumSize"},
 $                                                                                                       {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "weight"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -146,7 +127,7 @@ $                          [{"MachineName": ["fin", 6, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "gain"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -159,7 +140,7 @@ $                           [{"rootLabel": {"Set_Occurrence": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "weight"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

@@ -4,36 +4,22 @@ given items_EnumSize: int
 given fin1: int
 given fin2: int
 given fin3: int
-given weight_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..items_EnumSize)
-given weight_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(fin2..fin3)
+given weight_Function1D: matrix indexed by [int(1..items_EnumSize)] of int(fin2..fin3)
 given fin4: int
 given fin5: int
 given fin6: int
-given gain_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin4)] of int(1..items_EnumSize)
-given gain_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin4)] of int(fin5..fin6)
+given gain_Function1D: matrix indexed by [int(1..items_EnumSize)] of int(fin5..fin6)
 given capacity: int
 find picked_ExplicitVarSizeWithDummy: matrix indexed by [int(1..items_EnumSize)] of int(1..items_EnumSize + 1)
 maximising
     sum([toInt(picked_ExplicitVarSizeWithDummy[q5] != items_EnumSize + 1) *
-         sum([toInt(gain_FunctionAsRelation_RelationAsSet_Explicit_1[q7] = picked_ExplicitVarSizeWithDummy[q5]) *
-              gain_FunctionAsRelation_RelationAsSet_Explicit_2[q7]
-                  | q7 : int(1..fin4)])
+         gain_Function1D[picked_ExplicitVarSizeWithDummy[q5]]
              | q5 : int(1..items_EnumSize)])
 such that
-    and([picked_ExplicitVarSizeWithDummy[q5] != items_EnumSize + 1 ->
-         or([gain_FunctionAsRelation_RelationAsSet_Explicit_1[q10] = picked_ExplicitVarSizeWithDummy[q5]
-                 | q10 : int(1..fin4)])
-             | q5 : int(1..items_EnumSize)]),
-    sum([toInt(picked_ExplicitVarSizeWithDummy[q11] != items_EnumSize + 1) *
-         sum([toInt(weight_FunctionAsRelation_RelationAsSet_Explicit_1[q13] = picked_ExplicitVarSizeWithDummy[q11]) *
-              weight_FunctionAsRelation_RelationAsSet_Explicit_2[q13]
-                  | q13 : int(1..fin1)])
-             | q11 : int(1..items_EnumSize)])
+    sum([toInt(picked_ExplicitVarSizeWithDummy[q6] != items_EnumSize + 1) *
+         weight_Function1D[picked_ExplicitVarSizeWithDummy[q6]]
+             | q6 : int(1..items_EnumSize)])
     <= capacity,
-    and([picked_ExplicitVarSizeWithDummy[q11] != items_EnumSize + 1 ->
-         or([weight_FunctionAsRelation_RelationAsSet_Explicit_1[q16] = picked_ExplicitVarSizeWithDummy[q11]
-                 | q16 : int(1..fin1)])
-             | q11 : int(1..items_EnumSize)]),
     and([picked_ExplicitVarSizeWithDummy[q1] < picked_ExplicitVarSizeWithDummy[q1 + 1] \/
          picked_ExplicitVarSizeWithDummy[q1] = items_EnumSize + 1
              | q1 : int(1..items_EnumSize - 1)]),
@@ -58,15 +44,10 @@ $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 2, 4],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 7], ["q", 17]],
+$  "nameGenState": [["fin", 7], ["q", 7]],
 $  "nbExtraGivens": 6,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "items_EnumSize"}, {"DomainInt": []}],
@@ -76,7 +57,7 @@ $                      [{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 5, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 6, []]}, {"DomainInt": []}],
 $                      [{"Name": "gain"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 4, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 4,
@@ -110,7 +91,7 @@ $                                                                               
 $                                                                                                       {"Name": "items_EnumSize"},
 $                                                                                                       {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "weight"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -159,7 +140,7 @@ $                          [{"MachineName": ["fin", 6, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "gain"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -172,7 +153,7 @@ $                           [{"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "weight"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

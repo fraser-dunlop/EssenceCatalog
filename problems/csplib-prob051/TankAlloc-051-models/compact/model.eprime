@@ -5,26 +5,33 @@ given numTanks: int(1..)
 given fin1: int
 given capacities: matrix indexed by [int(1..numTanks)] of int(1..fin1)
 given fin2: int
-given neighbours_Occurrence: matrix indexed by [int(1..numTanks), int(1..numTanks)] of bool
+given neighbours_ExplicitVarSizeWithDummy: matrix indexed by [int(1..numTanks), int(1..fin2)] of int(1..numTanks + 1)
 given fin3: int
-given impossibleCargos_Occurrence: matrix indexed by [int(1..numTanks), int(0..numCargos)] of bool
+given impossibleCargos_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..numTanks), int(1..fin3)] of int(0..numCargos + 1)
 given fin4: int
 given volumeToShip: matrix indexed by [int(1..numCargos)] of int(1..fin4)
 given fin5: int
-given incompatibilities_ExplicitR2_Occurrence: matrix indexed by [int(1..fin5), int(1..numCargos)] of bool
+given incompatibilities_ExplicitR3_Explicit: matrix indexed by [int(1..fin5), int(1..2)] of int(1..numCargos)
 find allocation: matrix indexed by [int(1..numTanks)] of int(0..numCargos)
 maximising sum([toInt(allocation[tank] = 0) | tank : int(1..numTanks)])
 such that
     and([sum([capacities[tank] * toInt(allocation[tank] = cargo) | tank : int(1..numTanks)]) >= volumeToShip[cargo]
              | cargo : int(1..numCargos)]),
-    and([!impossibleCargos_Occurrence[tank, allocation[tank]] /\
-         and([!or([and([allocation[tank] = q4 \/ allocation[neighbour] = q4
-                            | q4 : int(1..numCargos), incompatibilities_ExplicitR2_Occurrence[q3, q4]])
+    and([!or([impossibleCargos_ExplicitVarSizeWithDummy[tank, q16] = allocation[tank]
+                  | q16 : int(1..fin3), impossibleCargos_ExplicitVarSizeWithDummy[tank, q16] != numCargos + 1])
+         /\
+         and([!or([and([allocation[tank] = incompatibilities_ExplicitR3_Explicit[q4, q6] \/
+                        allocation[neighbours_ExplicitVarSizeWithDummy[tank, q2]] =
+                        incompatibilities_ExplicitR3_Explicit[q4, q6]
+                            | q6 : int(1..2)])
                    /\
-                   (incompatibilities_ExplicitR2_Occurrence[q3, allocation[tank]] /\
-                    incompatibilities_ExplicitR2_Occurrence[q3, allocation[neighbour]])
-                       | q3 : int(1..fin5)])
-                  | neighbour : int(1..numTanks), neighbours_Occurrence[tank, neighbour]])
+                   (or([incompatibilities_ExplicitR3_Explicit[q4, q12] = allocation[tank] | q12 : int(1..2)]) /\
+                    or([incompatibilities_ExplicitR3_Explicit[q4, q14] =
+                        allocation[neighbours_ExplicitVarSizeWithDummy[tank, q2]]
+                            | q14 : int(1..2)]))
+                       | q4 : int(1..fin5)])
+                  | q2 : int(1..fin2), neighbours_ExplicitVarSizeWithDummy[tank, q2] != numTanks + 1])
              | tank : int(1..numTanks)])
 
 $ Conjure's
@@ -57,14 +64,15 @@ $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"Compact": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 2], [1, 1, 4], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 6], ["q", 9]],
+$  "nameGenState": [["fin", 6], ["q", 17]],
 $  "nbExtraGivens": 5,
 $  "representations": [[{"Name": "numTanks"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
@@ -116,7 +124,7 @@ $                                                                          {"Ref
 $                                                                                         {"DeclHasRepr": ["Given",
 $                                                                                                          {"Name": "numTanks"},
 $                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                         {"DomainSet": [{"Set_Occurrence": []},
+$                                         {"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
 $                                                        {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin", 3,
 $                                                                                                             []]},
 $                                                                                            {"DeclHasRepr": ["Given",
@@ -135,7 +143,7 @@ $                                      {"SizeAttr_Size": {"Reference": [{"Machin
 $                                                                       {"DeclHasRepr": ["Given",
 $                                                                                        {"MachineName": ["fin", 5, []]},
 $                                                                                        {"DomainInt": []}]}]}},
-$                                      {"DomainSet": [{"Set_Occurrence": []},
+$                                      {"DomainSet": [{"Set_Explicit": []},
 $                                                     {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
 $                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                      {"Reference": [{"Name": "numCargos"},
@@ -148,7 +156,7 @@ $                                                                          {"Ref
 $                                                                                         {"DeclHasRepr": ["Given",
 $                                                                                                          {"Name": "numTanks"},
 $                                                                                                          {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                         {"DomainSet": [{"Set_Occurrence": []},
+$                                         {"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
 $                                                        {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin", 2,
 $                                                                                                             []]},
 $                                                                                            {"DeclHasRepr": ["Given",
@@ -186,17 +194,17 @@ $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "impossibleCargos"},
 $                           [{"rootLabel": null,
-$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "incompatibilities"},
 $                           [{"rootLabel": {"Set_Explicit": []},
-$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": {"Set_Explicit": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "neighbours"},
 $                           [{"rootLabel": null,
-$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "numCargos"},

@@ -4,7 +4,7 @@ given nnodes: int(1..)
 given nrings: int(1..)
 given capacity: int(1..)
 given fin1: int
-given demand_ExplicitR2_Occurrence: matrix indexed by [int(1..fin1), int(1..nnodes)] of bool
+given demand_ExplicitR3_Explicit: matrix indexed by [int(1..fin1), int(1..2)] of int(1..nnodes)
 find network_ExplicitWithFlagsR2_Flags: matrix indexed by [int(1..nrings)] of int(0..nrings)
 find network_ExplicitWithFlagsR2_Values_Occurrence: matrix indexed by [int(1..nrings), int(1..nnodes)] of bool
 minimising
@@ -13,8 +13,8 @@ minimising
              | q9 : int(1..nrings)])
 such that
     and([or([network_ExplicitWithFlagsR2_Flags[q12] > 0 /\
-             and([network_ExplicitWithFlagsR2_Values_Occurrence[q12, q13]
-                      | q13 : int(1..nnodes), demand_ExplicitR2_Occurrence[q11, q13]])
+             and([network_ExplicitWithFlagsR2_Values_Occurrence[q12, demand_ExplicitR3_Explicit[q11, q14]]
+                      | q14 : int(1..2)])
                  | q12 : int(1..nrings)])
              | q11 : int(1..fin1)]),
     and([network_ExplicitWithFlagsR2_Flags[q1 + 1] > 0 ->
@@ -45,14 +45,14 @@ $                                                                               
 $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"Compact": []},
-$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 8], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 8], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 2], ["q", 14]],
+$  "nameGenState": [["fin", 2], ["q", 15]],
 $  "nbExtraGivens": 1,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "nnodes"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -80,7 +80,7 @@ $                                      {"SizeAttr_Size": {"Reference": [{"Machin
 $                                                                       {"DeclHasRepr": ["Given",
 $                                                                                        {"MachineName": ["fin", 1, []]},
 $                                                                                        {"DomainInt": []}]}]}},
-$                                      {"DomainSet": [{"Set_Occurrence": []},
+$                                      {"DomainSet": [{"Set_Explicit": []},
 $                                                     {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
 $                                                     {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                      {"Reference": [{"Name": "nnodes"},
@@ -92,7 +92,7 @@ $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "demand"},
 $                           [{"rootLabel": {"Set_Explicit": []},
-$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": {"Set_Explicit": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"MachineName": ["fin", 1, []]},

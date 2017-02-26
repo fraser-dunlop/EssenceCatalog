@@ -3,20 +3,24 @@ language ESSENCE' 1.0
 given Tasks_EnumSize: int
 given fin1: int
 given fin2: int
-given shifts_ExplicitR2_Occurrence: matrix indexed by [int(1..fin1), int(1..Tasks_EnumSize)] of bool
+given shifts_ExplicitR6_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..fin1), int(1..fin2)] of int(1..Tasks_EnumSize + 1)
 find sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Marker: int(0..2 ** Tasks_EnumSize)
 find sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence:
         matrix indexed by [int(1..2 ** Tasks_EnumSize), int(1..Tasks_EnumSize)] of bool
 minimising
-    sum([toInt(q20 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Marker) | q20 : int(1..2 ** Tasks_EnumSize)])
+    sum([toInt(q23 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Marker) | q23 : int(1..2 ** Tasks_EnumSize)])
 such that
     and([q11 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Marker ->
-         or([and([sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence[q11, q14]
-                      | q14 : int(1..Tasks_EnumSize), shifts_ExplicitR2_Occurrence[q13, q14]])
+         or([and([sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence
+                      [q11, shifts_ExplicitR6_ExplicitVarSizeWithDummy[q13, q15]]
+                      | q15 : int(1..fin2), shifts_ExplicitR6_ExplicitVarSizeWithDummy[q13, q15] != Tasks_EnumSize + 1])
              /\
-             and([sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence[q11, q15] ->
-                  shifts_ExplicitR2_Occurrence[q13, q15]
-                      | q15 : int(1..Tasks_EnumSize)])
+             and([sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence[q11, q16] ->
+                  or([shifts_ExplicitR6_ExplicitVarSizeWithDummy[q13, q18] = q16
+                          | q18 : int(1..fin2),
+                            shifts_ExplicitR6_ExplicitVarSizeWithDummy[q13, q18] != Tasks_EnumSize + 1])
+                      | q16 : int(1..Tasks_EnumSize)])
                  | q13 : int(1..fin1)])
              | q11 : int(1..2 ** Tasks_EnumSize)]),
     and([1 =
@@ -24,11 +28,11 @@ such that
                     sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence[q8, q1])
                   | q8 : int(1..2 ** Tasks_EnumSize)])
              | q1 : int(1..Tasks_EnumSize)]),
-    and([q16 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Marker ->
-         sum([toInt(sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence[q16, q17])
-                  | q17 : int(1..Tasks_EnumSize)])
+    and([q19 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Marker ->
+         sum([toInt(sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence[q19, q20])
+                  | q20 : int(1..Tasks_EnumSize)])
          >= 1
-             | q16 : int(1..2 ** Tasks_EnumSize)]),
+             | q19 : int(1..2 ** Tasks_EnumSize)]),
     and([q4 + 1 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Marker ->
          sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence[q4, ..] <lex
          sched_PartitionAsSet_ExplicitVarSizeWithMarkerR2_Values_Occurrence[q4 + 1, ..]
@@ -53,16 +57,17 @@ $                                                                               
 $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"Compact": []},
-$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 3], ["q", 21]],
+$  "nameGenState": [["fin", 3], ["q", 24]],
 $  "nbExtraGivens": 2,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
@@ -84,7 +89,7 @@ $                                      {"SizeAttr_Size": {"Reference": [{"Machin
 $                                                                       {"DeclHasRepr": ["Given",
 $                                                                                        {"MachineName": ["fin", 1, []]},
 $                                                                                        {"DomainInt": []}]}]}},
-$                                      {"DomainSet": [{"Set_Occurrence": []},
+$                                      {"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
 $                                                     {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin", 2, []]},
 $                                                                                         {"DeclHasRepr": ["Given",
 $                                                                                                          {"MachineName": ["fin",
@@ -112,7 +117,7 @@ $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "shifts"},
 $                           [{"rootLabel": {"Set_Explicit": []},
-$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]]],
 $  "originalDomains": [[{"Name": "shifts"},

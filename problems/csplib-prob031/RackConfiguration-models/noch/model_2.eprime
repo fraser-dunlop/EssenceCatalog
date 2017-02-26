@@ -6,95 +6,62 @@ given n_cards: int(1..)
 given n_racks: int(1..)
 given fin1: int
 given fin2: int
-given max_power_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..n_models)
-given max_power_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..fin2)
+given max_power_Function1D: matrix indexed by [int(1..n_models)] of int(1..fin2)
 given fin3: int
 given fin4: int
-given max_connects_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin3)] of int(1..n_models)
-given max_connects_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin3)] of int(1..fin4)
+given max_connects_Function1D: matrix indexed by [int(1..n_models)] of int(1..fin4)
 given fin5: int
 given fin6: int
-given price_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin5)] of int(1..n_models)
-given price_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin5)] of int(1..fin6)
+given price_Function1D: matrix indexed by [int(1..n_models)] of int(1..fin6)
 given fin7: int
 given fin8: int
-given req_power_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin7)] of int(1..n_types)
-given req_power_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin7)] of int(1..fin8)
+given req_power_Function1D: matrix indexed by [int(1..n_types)] of int(1..fin8)
 given fin9: int
-given ctype_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin9)] of int(1..n_cards)
-given ctype_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin9)] of int(1..n_types)
+given ctype_Function1D: matrix indexed by [int(1..n_cards)] of int(1..n_types)
 find model_Function1DPartial_Flags: matrix indexed by [int(1..n_racks)] of bool
 find model_Function1DPartial_Values: matrix indexed by [int(1..n_racks)] of int(1..n_models)
 find plugged_Function1DPartialR6_Flags: matrix indexed by [int(1..n_racks)] of bool
 find plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy:
         matrix indexed by [int(1..n_racks), int(1..n_cards)] of int(1..n_cards + 1)
 minimising
-    sum([toInt(model_Function1DPartial_Flags[q18]) *
-         sum([toInt(price_FunctionAsRelation_RelationAsSet_Explicit_1[q13] = model_Function1DPartial_Values[q18] /\
-                    model_Function1DPartial_Flags[q18])
-              * price_FunctionAsRelation_RelationAsSet_Explicit_2[q13]
-                  | q13 : int(1..fin5)])
-             | q18 : int(1..n_racks)])
+    sum([toInt(model_Function1DPartial_Flags[q13]) * price_Function1D[model_Function1DPartial_Values[q13]]
+             | q13 : int(1..n_racks)])
 such that
-    and([model_Function1DPartial_Flags[q18] ->
-         or([price_FunctionAsRelation_RelationAsSet_Explicit_1[q16] = model_Function1DPartial_Values[q18] /\
-             model_Function1DPartial_Flags[q18]
-                 | q16 : int(1..fin5)])
-             | q18 : int(1..n_racks)]),
-    and([or([model_Function1DPartial_Flags[q22] /\
-             or([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q22, q20] != n_cards + 1 /\
-                 plugged_Function1DPartialR6_Flags[q22]
-                 /\ plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q22, q20] = c
-                     | q20 : int(1..n_cards)])
-                 | q22 : int(1..n_racks)])
+    and([model_Function1DPartial_Flags[q13] -> model_Function1DPartial_Flags[q13] | q13 : int(1..n_racks)]),
+    and([or([model_Function1DPartial_Flags[q17] /\
+             or([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q17, q15] != n_cards + 1 /\
+                 plugged_Function1DPartialR6_Flags[q17]
+                 /\ plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q17, q15] = c
+                     | q15 : int(1..n_cards)])
+                 | q17 : int(1..n_racks)])
              | c : int(1..n_cards)]),
-    and([model_Function1DPartial_Flags[q28] /\ model_Function1DPartial_Flags[q30] ->
-         sum([toInt(and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q28, q24] != n_cards + 1,
-                         or([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q30, q26] != n_cards + 1 /\
-                             plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q30, q26] =
-                             plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q28, q24]
-                                 | q26 : int(1..n_cards)]),
-                         plugged_Function1DPartialR6_Flags[q28], plugged_Function1DPartialR6_Flags[q30];
+    and([model_Function1DPartial_Flags[q23] /\ model_Function1DPartial_Flags[q25] ->
+         sum([toInt(and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q23, q19] != n_cards + 1,
+                         or([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q25, q21] != n_cards + 1 /\
+                             plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q25, q21] =
+                             plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q23, q19]
+                                 | q21 : int(1..n_cards)]),
+                         plugged_Function1DPartialR6_Flags[q23], plugged_Function1DPartialR6_Flags[q25];
                              int(1..4)]))
-                  | q24 : int(1..n_cards)])
-         = 0 | q28 : int(1..n_racks), q30 : int(1..n_racks), q28 != q30]),
-    and([model_Function1DPartial_Flags[q44] ->
-         or([max_power_FunctionAsRelation_RelationAsSet_Explicit_1[q32] = model_Function1DPartial_Values[q44] /\
-             model_Function1DPartial_Flags[q44]
-             /\
-             max_power_FunctionAsRelation_RelationAsSet_Explicit_2[q32] >=
-             sum([toInt(plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q44, q42] != n_cards + 1 /\
-                        plugged_Function1DPartialR6_Flags[q44])
-                  *
-                  (sum([toInt(or([ctype_FunctionAsRelation_RelationAsSet_Explicit_1[q36] =
-                                  plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q44, q42]
-                                  /\
-                                  ctype_FunctionAsRelation_RelationAsSet_Explicit_2[q36] =
-                                  req_power_FunctionAsRelation_RelationAsSet_Explicit_1[q34]
-                                      | q36 : int(1..fin9)]))
-                        * req_power_FunctionAsRelation_RelationAsSet_Explicit_2[q34]
-                            | q34 : int(1..fin7)])
-                   *
-                   toInt(or([or([ctype_FunctionAsRelation_RelationAsSet_Explicit_1[q39] =
-                                 plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q44, q42]
-                                 /\
-                                 ctype_FunctionAsRelation_RelationAsSet_Explicit_2[q39] =
-                                 req_power_FunctionAsRelation_RelationAsSet_Explicit_1[q41]
-                                     | q39 : int(1..fin9)])
-                                 | q41 : int(1..fin7)])))
-                      | q42 : int(1..n_cards)])
-                 | q32 : int(1..fin1)])
-             | q44 : int(1..n_racks)]),
-    and([model_Function1DPartial_Flags[q50] ->
-         or([max_connects_FunctionAsRelation_RelationAsSet_Explicit_1[q46] = model_Function1DPartial_Values[q50] /\
-             model_Function1DPartial_Flags[q50]
-             /\
-             max_connects_FunctionAsRelation_RelationAsSet_Explicit_2[q46] >=
-             sum([toInt(plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q50, q48] != n_cards + 1 /\
-                        plugged_Function1DPartialR6_Flags[q50])
-                      | q48 : int(1..n_cards)])
-                 | q46 : int(1..fin3)])
-             | q50 : int(1..n_racks)]),
+                  | q19 : int(1..n_cards)])
+         = 0 | q23 : int(1..n_racks), q25 : int(1..n_racks), q23 != q25]),
+    and([model_Function1DPartial_Flags[q28] ->
+         sum([toInt(plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q28, q26] != n_cards + 1 /\
+                    plugged_Function1DPartialR6_Flags[q28])
+              *
+              req_power_Function1D
+                  [ctype_Function1D[plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q28, q26]]]
+                  | q26 : int(1..n_cards)])
+         <= max_power_Function1D[model_Function1DPartial_Values[q28]]
+         /\ model_Function1DPartial_Flags[q28]
+             | q28 : int(1..n_racks)]),
+    and([model_Function1DPartial_Flags[q32] ->
+         sum([toInt(plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q32, q30] != n_cards + 1 /\
+                    plugged_Function1DPartialR6_Flags[q32])
+                  | q30 : int(1..n_cards)])
+         <= max_connects_Function1D[model_Function1DPartial_Values[q32]]
+         /\ model_Function1DPartial_Flags[q32]
+             | q32 : int(1..n_racks)]),
     and([model_Function1DPartial_Flags[q1] = false -> model_Function1DPartial_Values[q1] = 1 | q1 : int(1..n_racks)]),
     and([plugged_Function1DPartialR6_Flags[q4] = false ->
          and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q4, q11] = 1 | q11 : int(1..n_cards)])
@@ -160,16 +127,10 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 10], ["q", 51]],
+$  "nameGenState": [["fin", 10], ["q", 33]],
 $  "nbExtraGivens": 9,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_models"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -185,7 +146,7 @@ $                      [{"MachineName": ["fin", 9, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_cards"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "n_racks"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "price"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 5, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 5,
@@ -233,7 +194,7 @@ $                                                                               
 $                                                                                                                           {"Name": "n_cards"},
 $                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}],
 $                      [{"Name": "req_power"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 7, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 7,
@@ -254,7 +215,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "ctype"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 9, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 9,
@@ -272,7 +233,7 @@ $                                                                               
 $                                                                                                            {"Name": "n_types"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "max_power"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -293,7 +254,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "max_connects"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 3,
@@ -314,7 +275,7 @@ $                                                                               
 $                                                                                                                             []]},
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}]],
 $  "representationsTree": [[{"Name": "ctype"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -347,13 +308,13 @@ $                          [{"MachineName": ["fin", 9, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "max_connects"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "max_power"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -384,13 +345,13 @@ $                                           {"rootLabel": {"Set_ExplicitVarSizeW
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "price"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "req_power"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,

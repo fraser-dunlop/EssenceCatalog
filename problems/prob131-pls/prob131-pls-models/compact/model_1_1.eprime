@@ -12,130 +12,283 @@ given fin2: int
 given quantity_Function1D: matrix indexed by [int(1..n_orders)] of int(1..fin2)
 given fin3: int
 given fin4: int
-given req_attr_Function1DR2_Occurrence: matrix indexed by [int(1..n_orders), int(1..Attribute_EnumSize)] of bool
+given req_attr_Function1DR6_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..n_orders), int(1..fin4)] of int(1..Attribute_EnumSize + 1)
 given fin5: int
 given fin6: int
 given capacity_FunctionND: matrix indexed by [int(1..n_lines), int(1..n_days)] of int(1..fin6)
 given fin7: int
 given fin8: int
-given line_attr_Function1DR2_Occurrence: matrix indexed by [int(1..n_lines), int(1..Attribute_EnumSize)] of bool
+given line_attr_Function1DR6_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..n_lines), int(1..fin8)] of int(1..Attribute_EnumSize + 1)
 given fin9: int
 given line_on_Function1D: matrix indexed by [int(1..n_orders)] of int(1..n_days)
 given fin10: int
 given line_off_Function1D: matrix indexed by [int(1..n_orders)] of int(1..n_days)
 given fin11: int
 given fin12: int
-given dist_except_FunctionNDPartialR2_Flags: matrix indexed by [int(1..n_days), int(1..Attribute_EnumSize)] of bool
-given dist_except_FunctionNDPartialR2_Values_Occurrence:
-        matrix indexed by [int(1..n_days), int(1..Attribute_EnumSize), int(0..fin12)] of bool
+given dist_except_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_1:
+        matrix indexed by [int(1..fin11)] of int(1..n_days)
+given dist_except_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_2:
+        matrix indexed by [int(1..fin11)] of int(1..Attribute_EnumSize)
+given dist_except_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_2_Explicit:
+        matrix indexed by [int(1..fin11), int(1..2)] of int(0..fin12)
 given fin13: int
 given fin14: int
 given fin15: int
-given earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence:
-        matrix indexed by [int(1..fin13), int(1..Attribute_EnumSize)] of bool
-given earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence:
-        matrix indexed by [int(1..fin13), int(1..Attribute_EnumSize)] of bool
+given earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..fin13), int(1..fin14)] of int(1..Attribute_EnumSize + 1)
+given earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..fin13), int(1..fin15)] of int(1..Attribute_EnumSize + 1)
 where
-    sum([capacity_FunctionND[q60_1, q60_2] | q60_1 : int(1..n_lines), q60_2 : int(1..n_days)]) * batch_size =
+    sum([capacity_FunctionND[q170_1, q170_2] | q170_1 : int(1..n_lines), q170_2 : int(1..n_days)]) * batch_size =
     sum([quantity_Function1D[o] | o : int(1..n_orders)])
 where
-    and([or([and([s1_Occurrence[q76]
-                      | q76 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q75, q76]])
+    and([or([and([or([s1_ExplicitVarSizeWithDummy[q11] =
+                      earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q7, q9]
+                          | q11 : int(1..Attribute_EnumSize),
+                            s1_ExplicitVarSizeWithDummy[q11] != Attribute_EnumSize + 1])
+                      | q9 : int(1..fin14),
+                        earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q7, q9] !=
+                        Attribute_EnumSize + 1])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q75, q77]
-                      | q77 : int(1..Attribute_EnumSize), s1_Occurrence[q77]])
+             and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q7, q15] =
+                      s1_ExplicitVarSizeWithDummy[q13]
+                          | q15 : int(1..fin14),
+                            earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q7, q15] !=
+                            Attribute_EnumSize + 1])
+                      | q13 : int(1..Attribute_EnumSize), s1_ExplicitVarSizeWithDummy[q13] != Attribute_EnumSize + 1])
              /\
-             (and([s1_Occurrence[q78]
-                       | q78 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q75, q78]])
+             (and([or([s1_ExplicitVarSizeWithDummy[q19] =
+                       earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q7, q17]
+                           | q19 : int(1..Attribute_EnumSize),
+                             s1_ExplicitVarSizeWithDummy[q19] != Attribute_EnumSize + 1])
+                       | q17 : int(1..fin15),
+                         earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q7, q17] !=
+                         Attribute_EnumSize + 1])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q75, q79]
-                       | q79 : int(1..Attribute_EnumSize), s1_Occurrence[q79]]))
-                 | q75 : int(1..fin13)])
-             | s1_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool])
+              and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q7, q23] =
+                       s1_ExplicitVarSizeWithDummy[q21]
+                           | q23 : int(1..fin15),
+                             earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q7, q23] !=
+                             Attribute_EnumSize + 1])
+                       | q21 : int(1..Attribute_EnumSize), s1_ExplicitVarSizeWithDummy[q21] != Attribute_EnumSize + 1]))
+                 | q7 : int(1..fin13)])
+             | s1_ExplicitVarSizeWithDummy : matrix indexed by [int(1..Attribute_EnumSize)] of int(1..Attribute_EnumSize
+                                                                                                      + 1),
+               and([s1_ExplicitVarSizeWithDummy[q2] < s1_ExplicitVarSizeWithDummy[q2 + 1] \/
+                    s1_ExplicitVarSizeWithDummy[q2] = Attribute_EnumSize + 1
+                        | q2 : int(1..Attribute_EnumSize - 1)]),
+               and([s1_ExplicitVarSizeWithDummy[q3] = Attribute_EnumSize + 1 ->
+                    s1_ExplicitVarSizeWithDummy[q3 + 1] = Attribute_EnumSize + 1
+                        | q3 : int(1..Attribute_EnumSize - 1)])])
 where
-    and([or([and([s1_Occurrence[q7]
-                      | q7 : int(1..Attribute_EnumSize), earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q6, q7]])
+    and([or([and([or([s1_ExplicitVarSizeWithDummy[q37] =
+                      earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q33, q35]
+                          | q37 : int(1..Attribute_EnumSize),
+                            s1_ExplicitVarSizeWithDummy[q37] != Attribute_EnumSize + 1])
+                      | q35 : int(1..fin14),
+                        earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q33, q35] !=
+                        Attribute_EnumSize + 1])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q6, q8]
-                      | q8 : int(1..Attribute_EnumSize), s1_Occurrence[q8]])
+             and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q33, q41] =
+                      s1_ExplicitVarSizeWithDummy[q39]
+                          | q41 : int(1..fin14),
+                            earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q33, q41] !=
+                            Attribute_EnumSize + 1])
+                      | q39 : int(1..Attribute_EnumSize), s1_ExplicitVarSizeWithDummy[q39] != Attribute_EnumSize + 1])
              /\
-             (and([s2_Occurrence[q9]
-                       | q9 : int(1..Attribute_EnumSize), earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q6, q9]])
+             (and([or([s2_ExplicitVarSizeWithDummy[q45] =
+                       earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q33, q43]
+                           | q45 : int(1..Attribute_EnumSize),
+                             s2_ExplicitVarSizeWithDummy[q45] != Attribute_EnumSize + 1])
+                       | q43 : int(1..fin15),
+                         earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q33, q43] !=
+                         Attribute_EnumSize + 1])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q6, q10]
-                       | q10 : int(1..Attribute_EnumSize), s2_Occurrence[q10]]))
-                 | q6 : int(1..fin13)])
+              and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q33, q49] =
+                       s2_ExplicitVarSizeWithDummy[q47]
+                           | q49 : int(1..fin15),
+                             earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q33, q49] !=
+                             Attribute_EnumSize + 1])
+                       | q47 : int(1..Attribute_EnumSize), s2_ExplicitVarSizeWithDummy[q47] != Attribute_EnumSize + 1]))
+                 | q33 : int(1..fin13)])
          /\
-         or([and([s2_Occurrence[q13]
-                      | q13 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q12, q13]])
+         or([and([or([s2_ExplicitVarSizeWithDummy[q55] =
+                      earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q51, q53]
+                          | q55 : int(1..Attribute_EnumSize),
+                            s2_ExplicitVarSizeWithDummy[q55] != Attribute_EnumSize + 1])
+                      | q53 : int(1..fin14),
+                        earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q51, q53] !=
+                        Attribute_EnumSize + 1])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q12, q14]
-                      | q14 : int(1..Attribute_EnumSize), s2_Occurrence[q14]])
+             and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q51, q59] =
+                      s2_ExplicitVarSizeWithDummy[q57]
+                          | q59 : int(1..fin14),
+                            earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q51, q59] !=
+                            Attribute_EnumSize + 1])
+                      | q57 : int(1..Attribute_EnumSize), s2_ExplicitVarSizeWithDummy[q57] != Attribute_EnumSize + 1])
              /\
-             (and([s1_Occurrence[q15]
-                       | q15 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q12, q15]])
+             (and([or([s1_ExplicitVarSizeWithDummy[q63] =
+                       earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q51, q61]
+                           | q63 : int(1..Attribute_EnumSize),
+                             s1_ExplicitVarSizeWithDummy[q63] != Attribute_EnumSize + 1])
+                       | q61 : int(1..fin15),
+                         earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q51, q61] !=
+                         Attribute_EnumSize + 1])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q12, q16]
-                       | q16 : int(1..Attribute_EnumSize), s1_Occurrence[q16]]))
-                 | q12 : int(1..fin13)])
+              and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q51, q67] =
+                       s1_ExplicitVarSizeWithDummy[q65]
+                           | q67 : int(1..fin15),
+                             earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q51, q67] !=
+                             Attribute_EnumSize + 1])
+                       | q65 : int(1..Attribute_EnumSize), s1_ExplicitVarSizeWithDummy[q65] != Attribute_EnumSize + 1]))
+                 | q51 : int(1..fin13)])
          ->
-         and([s2_Occurrence[q17] | q17 : int(1..Attribute_EnumSize), s1_Occurrence[q17]]) /\
-         and([s1_Occurrence[q18] | q18 : int(1..Attribute_EnumSize), s2_Occurrence[q18]])
-             | s1_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool,
-               s2_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool])
+         and([or([s2_ExplicitVarSizeWithDummy[q71] = s1_ExplicitVarSizeWithDummy[q69]
+                      | q71 : int(1..Attribute_EnumSize), s2_ExplicitVarSizeWithDummy[q71] != Attribute_EnumSize + 1])
+                  | q69 : int(1..Attribute_EnumSize), s1_ExplicitVarSizeWithDummy[q69] != Attribute_EnumSize + 1])
+         /\
+         and([or([s1_ExplicitVarSizeWithDummy[q75] = s2_ExplicitVarSizeWithDummy[q73]
+                      | q75 : int(1..Attribute_EnumSize), s1_ExplicitVarSizeWithDummy[q75] != Attribute_EnumSize + 1])
+                  | q73 : int(1..Attribute_EnumSize), s2_ExplicitVarSizeWithDummy[q73] != Attribute_EnumSize + 1])
+             | s1_ExplicitVarSizeWithDummy : matrix indexed by [int(1..Attribute_EnumSize)] of int(1..Attribute_EnumSize
+                                                                                                      + 1),
+               s2_ExplicitVarSizeWithDummy : matrix indexed by [int(1..Attribute_EnumSize)] of int(1..Attribute_EnumSize
+                                                                                                      + 1),
+               and([s1_ExplicitVarSizeWithDummy[q24] < s1_ExplicitVarSizeWithDummy[q24 + 1] \/
+                    s1_ExplicitVarSizeWithDummy[q24] = Attribute_EnumSize + 1
+                        | q24 : int(1..Attribute_EnumSize - 1)]),
+               and([s1_ExplicitVarSizeWithDummy[q25] = Attribute_EnumSize + 1 ->
+                    s1_ExplicitVarSizeWithDummy[q25 + 1] = Attribute_EnumSize + 1
+                        | q25 : int(1..Attribute_EnumSize - 1)]),
+               and([s2_ExplicitVarSizeWithDummy[q28] < s2_ExplicitVarSizeWithDummy[q28 + 1] \/
+                    s2_ExplicitVarSizeWithDummy[q28] = Attribute_EnumSize + 1
+                        | q28 : int(1..Attribute_EnumSize - 1)]),
+               and([s2_ExplicitVarSizeWithDummy[q29] = Attribute_EnumSize + 1 ->
+                    s2_ExplicitVarSizeWithDummy[q29 + 1] = Attribute_EnumSize + 1
+                        | q29 : int(1..Attribute_EnumSize - 1)])])
 where
-    and([or([and([s1_Occurrence[q24]
-                      | q24 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q23, q24]])
+    and([or([and([or([s1_ExplicitVarSizeWithDummy[q93] =
+                      earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q89, q91]
+                          | q93 : int(1..Attribute_EnumSize),
+                            s1_ExplicitVarSizeWithDummy[q93] != Attribute_EnumSize + 1])
+                      | q91 : int(1..fin14),
+                        earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q89, q91] !=
+                        Attribute_EnumSize + 1])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q23, q25]
-                      | q25 : int(1..Attribute_EnumSize), s1_Occurrence[q25]])
+             and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q89, q97] =
+                      s1_ExplicitVarSizeWithDummy[q95]
+                          | q97 : int(1..fin14),
+                            earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q89, q97] !=
+                            Attribute_EnumSize + 1])
+                      | q95 : int(1..Attribute_EnumSize), s1_ExplicitVarSizeWithDummy[q95] != Attribute_EnumSize + 1])
              /\
-             (and([s2_Occurrence[q26]
-                       | q26 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q23, q26]])
+             (and([or([s2_ExplicitVarSizeWithDummy[q101] =
+                       earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q89, q99]
+                           | q101 : int(1..Attribute_EnumSize),
+                             s2_ExplicitVarSizeWithDummy[q101] != Attribute_EnumSize + 1])
+                       | q99 : int(1..fin15),
+                         earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q89, q99] !=
+                         Attribute_EnumSize + 1])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q23, q27]
-                       | q27 : int(1..Attribute_EnumSize), s2_Occurrence[q27]]))
-                 | q23 : int(1..fin13)])
+              and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q89, q105] =
+                       s2_ExplicitVarSizeWithDummy[q103]
+                           | q105 : int(1..fin15),
+                             earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q89, q105] !=
+                             Attribute_EnumSize + 1])
+                       | q103 : int(1..Attribute_EnumSize),
+                         s2_ExplicitVarSizeWithDummy[q103] != Attribute_EnumSize + 1]))
+                 | q89 : int(1..fin13)])
          /\
-         or([and([s2_Occurrence[q30]
-                      | q30 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q29, q30]])
+         or([and([or([s2_ExplicitVarSizeWithDummy[q111] =
+                      earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q107, q109]
+                          | q111 : int(1..Attribute_EnumSize),
+                            s2_ExplicitVarSizeWithDummy[q111] != Attribute_EnumSize + 1])
+                      | q109 : int(1..fin14),
+                        earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q107, q109] !=
+                        Attribute_EnumSize + 1])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q29, q31]
-                      | q31 : int(1..Attribute_EnumSize), s2_Occurrence[q31]])
+             and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q107, q115] =
+                      s2_ExplicitVarSizeWithDummy[q113]
+                          | q115 : int(1..fin14),
+                            earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q107, q115] !=
+                            Attribute_EnumSize + 1])
+                      | q113 : int(1..Attribute_EnumSize), s2_ExplicitVarSizeWithDummy[q113] != Attribute_EnumSize + 1])
              /\
-             (and([s3_Occurrence[q32]
-                       | q32 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q29, q32]])
+             (and([or([s3_ExplicitVarSizeWithDummy[q119] =
+                       earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q107, q117]
+                           | q119 : int(1..Attribute_EnumSize),
+                             s3_ExplicitVarSizeWithDummy[q119] != Attribute_EnumSize + 1])
+                       | q117 : int(1..fin15),
+                         earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q107, q117] !=
+                         Attribute_EnumSize + 1])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q29, q33]
-                       | q33 : int(1..Attribute_EnumSize), s3_Occurrence[q33]]))
-                 | q29 : int(1..fin13)])
+              and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q107, q123] =
+                       s3_ExplicitVarSizeWithDummy[q121]
+                           | q123 : int(1..fin15),
+                             earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q107, q123] !=
+                             Attribute_EnumSize + 1])
+                       | q121 : int(1..Attribute_EnumSize),
+                         s3_ExplicitVarSizeWithDummy[q121] != Attribute_EnumSize + 1]))
+                 | q107 : int(1..fin13)])
          ->
-         or([and([s1_Occurrence[q36]
-                      | q36 : int(1..Attribute_EnumSize),
-                        earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q35, q36]])
+         or([and([or([s1_ExplicitVarSizeWithDummy[q129] =
+                      earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q125, q127]
+                          | q129 : int(1..Attribute_EnumSize),
+                            s1_ExplicitVarSizeWithDummy[q129] != Attribute_EnumSize + 1])
+                      | q127 : int(1..fin14),
+                        earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q125, q127] !=
+                        Attribute_EnumSize + 1])
              /\
-             and([earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q35, q37]
-                      | q37 : int(1..Attribute_EnumSize), s1_Occurrence[q37]])
+             and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q125, q133] =
+                      s1_ExplicitVarSizeWithDummy[q131]
+                          | q133 : int(1..fin14),
+                            earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q125, q133] !=
+                            Attribute_EnumSize + 1])
+                      | q131 : int(1..Attribute_EnumSize), s1_ExplicitVarSizeWithDummy[q131] != Attribute_EnumSize + 1])
              /\
-             (and([s3_Occurrence[q38]
-                       | q38 : int(1..Attribute_EnumSize),
-                         earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q35, q38]])
+             (and([or([s3_ExplicitVarSizeWithDummy[q137] =
+                       earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q125, q135]
+                           | q137 : int(1..Attribute_EnumSize),
+                             s3_ExplicitVarSizeWithDummy[q137] != Attribute_EnumSize + 1])
+                       | q135 : int(1..fin15),
+                         earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q125, q135] !=
+                         Attribute_EnumSize + 1])
               /\
-              and([earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q35, q39]
-                       | q39 : int(1..Attribute_EnumSize), s3_Occurrence[q39]]))
-                 | q35 : int(1..fin13)])
-             | s1_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool,
-               s2_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool,
-               s3_Occurrence : matrix indexed by [int(1..Attribute_EnumSize)] of bool])
-letting let1 be sum([capacity_FunctionND[q61_1, q61_2] | q61_1 : int(1..n_lines), q61_2 : int(1..n_days)])
+              and([or([earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q125, q141] =
+                       s3_ExplicitVarSizeWithDummy[q139]
+                           | q141 : int(1..fin15),
+                             earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q125, q141] !=
+                             Attribute_EnumSize + 1])
+                       | q139 : int(1..Attribute_EnumSize),
+                         s3_ExplicitVarSizeWithDummy[q139] != Attribute_EnumSize + 1]))
+                 | q125 : int(1..fin13)])
+             | s1_ExplicitVarSizeWithDummy : matrix indexed by [int(1..Attribute_EnumSize)] of int(1..Attribute_EnumSize
+                                                                                                      + 1),
+               s2_ExplicitVarSizeWithDummy : matrix indexed by [int(1..Attribute_EnumSize)] of int(1..Attribute_EnumSize
+                                                                                                      + 1),
+               s3_ExplicitVarSizeWithDummy : matrix indexed by [int(1..Attribute_EnumSize)] of int(1..Attribute_EnumSize
+                                                                                                      + 1),
+               and([s1_ExplicitVarSizeWithDummy[q76] < s1_ExplicitVarSizeWithDummy[q76 + 1] \/
+                    s1_ExplicitVarSizeWithDummy[q76] = Attribute_EnumSize + 1
+                        | q76 : int(1..Attribute_EnumSize - 1)]),
+               and([s1_ExplicitVarSizeWithDummy[q77] = Attribute_EnumSize + 1 ->
+                    s1_ExplicitVarSizeWithDummy[q77 + 1] = Attribute_EnumSize + 1
+                        | q77 : int(1..Attribute_EnumSize - 1)]),
+               and([s2_ExplicitVarSizeWithDummy[q80] < s2_ExplicitVarSizeWithDummy[q80 + 1] \/
+                    s2_ExplicitVarSizeWithDummy[q80] = Attribute_EnumSize + 1
+                        | q80 : int(1..Attribute_EnumSize - 1)]),
+               and([s2_ExplicitVarSizeWithDummy[q81] = Attribute_EnumSize + 1 ->
+                    s2_ExplicitVarSizeWithDummy[q81 + 1] = Attribute_EnumSize + 1
+                        | q81 : int(1..Attribute_EnumSize - 1)]),
+               and([s3_ExplicitVarSizeWithDummy[q84] < s3_ExplicitVarSizeWithDummy[q84 + 1] \/
+                    s3_ExplicitVarSizeWithDummy[q84] = Attribute_EnumSize + 1
+                        | q84 : int(1..Attribute_EnumSize - 1)]),
+               and([s3_ExplicitVarSizeWithDummy[q85] = Attribute_EnumSize + 1 ->
+                    s3_ExplicitVarSizeWithDummy[q85 + 1] = Attribute_EnumSize + 1
+                        | q85 : int(1..Attribute_EnumSize - 1)])])
+letting let1 be sum([capacity_FunctionND[q171_1, q171_2] | q171_1 : int(1..n_lines), q171_2 : int(1..n_days)])
 find batches_Function1DR7_ExplicitWithFlags_Flags: matrix indexed by [int(1..let1), int(1..maxLot)] of int(0..maxLot)
 find batches_Function1DR7_ExplicitWithFlags_Values_1:
         matrix indexed by [int(1..let1), int(1..maxLot)] of int(1..n_orders)
@@ -144,79 +297,112 @@ find batches_Function1DR7_ExplicitWithFlags_Values_2:
 find batch_attr_Function1DR2_Occurrence: matrix indexed by [int(1..let1), int(1..Attribute_EnumSize)] of bool
 find schedule_FunctionND: matrix indexed by [int(1..n_lines), int(1..n_days), int(1..n_slots)] of int(1..let1)
 such that
-    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[b, q64] > 0 ->
-              and([req_attr_Function1DR2_Occurrence[batches_Function1DR7_ExplicitWithFlags_Values_1[b, q64], q62] ->
-                   batch_attr_Function1DR2_Occurrence[b, q62]
-                       | q62 : int(1..Attribute_EnumSize)])
-                  | q64 : int(1..maxLot)])
+    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[b, q175] > 0 ->
+              and([req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                       [batches_Function1DR7_ExplicitWithFlags_Values_1[b, q175], q173]
+                   != Attribute_EnumSize + 1
+                   ->
+                   batch_attr_Function1DR2_Occurrence
+                       [b,
+                        req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                            [batches_Function1DR7_ExplicitWithFlags_Values_1[b, q175], q173]]
+                       | q173 : int(1..fin4)])
+                  | q175 : int(1..maxLot)])
              | b : int(1..let1)]),
     and([and([batch_attr_Function1DR2_Occurrence[b, a] ->
-              or([batches_Function1DR7_ExplicitWithFlags_Flags[b, q50] > 0 /\
-                  req_attr_Function1DR2_Occurrence[batches_Function1DR7_ExplicitWithFlags_Values_1[b, q50], a]
-                      | q50 : int(1..maxLot)])
+              or([batches_Function1DR7_ExplicitWithFlags_Flags[b, q154] > 0 /\
+                  or([req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                          [batches_Function1DR7_ExplicitWithFlags_Values_1[b, q154], q152]
+                      != Attribute_EnumSize + 1
+                      /\
+                      req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                          [batches_Function1DR7_ExplicitWithFlags_Values_1[b, q154], q152]
+                      = a | q152 : int(1..fin4)])
+                      | q154 : int(1..maxLot)])
                   | a : int(1..Attribute_EnumSize)])
              | b : int(1..let1)]),
-    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[schedule_FunctionND[q69_1, q69_2, q69_3], q67] > 0 ->
-              and([req_attr_Function1DR2_Occurrence
-                       [batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q69_1, q69_2, q69_3], q67],
-                        q65]
-                   -> line_attr_Function1DR2_Occurrence[q69_1, q65]
-                       | q65 : int(1..Attribute_EnumSize)])
-                  | q67 : int(1..maxLot)])
-             | q69_1 : int(1..n_lines), q69_2 : int(1..n_days), q69_3 : int(1..n_slots)]),
-    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[schedule_FunctionND[q73_1, q73_2, q73_3], q71] > 0 ->
-              q73_2 >=
+    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[schedule_FunctionND[q183_1, q183_2, q183_3], q181] > 0 ->
+              and([req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                       [batches_Function1DR7_ExplicitWithFlags_Values_1
+                            [schedule_FunctionND[q183_1, q183_2, q183_3], q181],
+                        q177]
+                   != Attribute_EnumSize + 1
+                   ->
+                   or([line_attr_Function1DR6_ExplicitVarSizeWithDummy[q183_1, q179] =
+                       req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                           [batches_Function1DR7_ExplicitWithFlags_Values_1
+                                [schedule_FunctionND[q183_1, q183_2, q183_3], q181],
+                            q177]
+                           | q179 : int(1..fin8),
+                             line_attr_Function1DR6_ExplicitVarSizeWithDummy[q183_1, q179] != Attribute_EnumSize + 1])
+                       | q177 : int(1..fin4)])
+                  | q181 : int(1..maxLot)])
+             | q183_1 : int(1..n_lines), q183_2 : int(1..n_days), q183_3 : int(1..n_slots)]),
+    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[schedule_FunctionND[q187_1, q187_2, q187_3], q185] > 0 ->
+              q187_2 >=
               line_on_Function1D
-                  [batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q73_1, q73_2, q73_3], q71]]
+                  [batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q187_1, q187_2, q187_3], q185]]
               /\
-              q73_2 <=
+              q187_2 <=
               line_off_Function1D
-                  [batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q73_1, q73_2, q73_3], q71]]
-                  | q71 : int(1..maxLot)])
-             | q73_1 : int(1..n_lines), q73_2 : int(1..n_days), q73_3 : int(1..n_slots)]),
-    and([and([and([or([and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s], q56]
-                                | q56 : int(1..Attribute_EnumSize),
-                                  earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q55, q56]])
+                  [batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q187_1, q187_2, q187_3], q185]]
+                  | q185 : int(1..maxLot)])
+             | q187_1 : int(1..n_lines), q187_2 : int(1..n_days), q187_3 : int(1..n_slots)]),
+    and([and([and([or([and([batch_attr_Function1DR2_Occurrence
+                                [schedule_FunctionND[l, d, s],
+                                 earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q159, q161]]
+                                | q161 : int(1..fin14),
+                                  earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q159, q161] !=
+                                  Attribute_EnumSize + 1])
                        /\
-                       and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s], q57] ->
-                            earlier_RelationAsSetR2R2_ExplicitR2R2_1_Occurrence[q55, q57]
-                                | q57 : int(1..Attribute_EnumSize)])
+                       and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s], q162] ->
+                            or([earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q159, q164] = q162
+                                    | q164 : int(1..fin14),
+                                      earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q159, q164] !=
+                                      Attribute_EnumSize + 1])
+                                | q162 : int(1..Attribute_EnumSize)])
                        /\
-                       (and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s + 1], q58]
-                                 | q58 : int(1..Attribute_EnumSize),
-                                   earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q55, q58]])
+                       (and([batch_attr_Function1DR2_Occurrence
+                                 [schedule_FunctionND[l, d, s + 1],
+                                  earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q159, q166]]
+                                 | q166 : int(1..fin15),
+                                   earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q159, q166] !=
+                                   Attribute_EnumSize + 1])
                         /\
-                        and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s + 1], q59] ->
-                             earlier_RelationAsSetR2R2_ExplicitR2R2_2_Occurrence[q55, q59]
-                                 | q59 : int(1..Attribute_EnumSize)]))
-                           | q55 : int(1..fin13)])
+                        and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s + 1], q167] ->
+                             or([earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q159, q169] = q167
+                                     | q169 : int(1..fin15),
+                                       earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q159, q169] !=
+                                       Attribute_EnumSize + 1])
+                                 | q167 : int(1..Attribute_EnumSize)]))
+                           | q159 : int(1..fin13)])
                        | s : int(1..n_slots - 1)])
                   | d : int(1..n_days)])
              | l : int(1..n_lines)]),
-    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[q42, q43 + 1] > 0 ->
-              batches_Function1DR7_ExplicitWithFlags_Values_1[q42, q43] <
-              batches_Function1DR7_ExplicitWithFlags_Values_1[q42, q43 + 1]
+    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[q144, q145 + 1] > 0 ->
+              batches_Function1DR7_ExplicitWithFlags_Values_1[q144, q145] <
+              batches_Function1DR7_ExplicitWithFlags_Values_1[q144, q145 + 1]
               \/
-              batches_Function1DR7_ExplicitWithFlags_Values_1[q42, q43] =
-              batches_Function1DR7_ExplicitWithFlags_Values_1[q42, q43 + 1]
+              batches_Function1DR7_ExplicitWithFlags_Values_1[q144, q145] =
+              batches_Function1DR7_ExplicitWithFlags_Values_1[q144, q145 + 1]
               /\
-              batches_Function1DR7_ExplicitWithFlags_Values_2[q42, q43] <
-              batches_Function1DR7_ExplicitWithFlags_Values_2[q42, q43 + 1]
-                  | q43 : int(1..maxLot - 1)])
-             | q42 : int(1..let1)]),
-    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[q42, q44] = 0 ->
-              batches_Function1DR7_ExplicitWithFlags_Values_1[q42, q44] = 1 /\
-              batches_Function1DR7_ExplicitWithFlags_Values_2[q42, q44] = 1
-                  | q44 : int(1..maxLot)])
-             | q42 : int(1..let1)]),
-    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[q42, q45 + 1] > 0 ->
-              batches_Function1DR7_ExplicitWithFlags_Flags[q42, q45] > 0
-                  | q45 : int(1..maxLot - 1)])
-             | q42 : int(1..let1)]),
-    and([sum([batches_Function1DR7_ExplicitWithFlags_Flags[q42, q47] | q47 : int(1..maxLot)]) <= maxLot
-             | q42 : int(1..let1)]),
-    allDiff([schedule_FunctionND[q51_1, q51_2, q51_3]
-                 | q51_1 : int(1..n_lines), q51_2 : int(1..n_days), q51_3 : int(1..n_slots)])
+              batches_Function1DR7_ExplicitWithFlags_Values_2[q144, q145] <
+              batches_Function1DR7_ExplicitWithFlags_Values_2[q144, q145 + 1]
+                  | q145 : int(1..maxLot - 1)])
+             | q144 : int(1..let1)]),
+    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[q144, q146] = 0 ->
+              batches_Function1DR7_ExplicitWithFlags_Values_1[q144, q146] = 1 /\
+              batches_Function1DR7_ExplicitWithFlags_Values_2[q144, q146] = 1
+                  | q146 : int(1..maxLot)])
+             | q144 : int(1..let1)]),
+    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[q144, q147 + 1] > 0 ->
+              batches_Function1DR7_ExplicitWithFlags_Flags[q144, q147] > 0
+                  | q147 : int(1..maxLot - 1)])
+             | q144 : int(1..let1)]),
+    and([sum([batches_Function1DR7_ExplicitWithFlags_Flags[q144, q149] | q149 : int(1..maxLot)]) <= maxLot
+             | q144 : int(1..let1)]),
+    allDiff([schedule_FunctionND[q155_1, q155_2, q155_3]
+                 | q155_1 : int(1..n_lines), q155_2 : int(1..n_days), q155_3 : int(1..n_slots)])
 
 $ Conjure's
 $ {"finds": [{"Name": "batches"}, {"Name": "batch_attr"}, {"Name": "schedule"}],
@@ -513,29 +699,6 @@ $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"Compact": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 16], [1, 1, 4], [1, 1, 4],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 4], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 4], [1, 1, 4], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
@@ -548,10 +711,50 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 2], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 16], ["let", 2], ["q", 80]],
+$  "nameGenState": [["fin", 16], ["let", 2], ["q", 188]],
 $  "nbExtraGivens": 15,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_orders"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -628,7 +831,7 @@ $                                                                               
 $                                                                                                               []]},
 $                                                                                              {"DomainInt": []}]}]}},
 $                                            []],
-$                                           [{"DomainSet": [{"Set_Occurrence": []},
+$                                           [{"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
 $                                                           {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                14, []]},
 $                                                                                               {"DeclHasRepr": ["Given",
@@ -641,7 +844,7 @@ $                                                                               
 $                                                                                                           {"DeclHasRepr": ["Given",
 $                                                                                                                            {"Name": "Attribute_EnumSize"},
 $                                                                                                                            {"DomainInt": []}]}]}]}]}]},
-$                                            {"DomainSet": [{"Set_Occurrence": []},
+$                                            {"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
 $                                                           {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                15, []]},
 $                                                                                               {"DeclHasRepr": ["Given",
@@ -669,7 +872,7 @@ $                                                                            {"R
 $                                                                                           {"DeclHasRepr": ["Given",
 $                                                                                                            {"Name": "n_orders"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                           {"DomainSet": [{"Set_Occurrence": []},
+$                                           {"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
 $                                                          {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin", 4,
 $                                                                                                               []]},
 $                                                                                              {"DeclHasRepr": ["Given",
@@ -933,7 +1136,7 @@ $                                                                            {"R
 $                                                                                           {"DeclHasRepr": ["Given",
 $                                                                                                            {"Name": "n_lines"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                           {"DomainSet": [{"Set_Occurrence": []},
+$                                           {"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
 $                                                          {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["fin", 8,
 $                                                                                                               []]},
 $                                                                                              {"DeclHasRepr": ["Given",
@@ -1106,7 +1309,7 @@ $                                                                               
 $                                                                                                            {"Name": "n_days"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "dist_except"},
-$                       {"DomainFunction": [{"Function_NDPartial": []},
+$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 11, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 11,
@@ -1123,7 +1326,7 @@ $                                                                               
 $                                                                                                            {"DeclHasRepr": ["Given",
 $                                                                                                                             {"Name": "Attribute_EnumSize"},
 $                                                                                                                             {"DomainInt": []}]}]}]}]}]},
-$                                           {"DomainSet": [{"Set_Occurrence": []},
+$                                           {"DomainSet": [{"Set_Explicit": []},
 $                                                          {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
 $                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 0}},
 $                                                                                           {"Reference": [{"MachineName": ["fin",
@@ -1167,21 +1370,21 @@ $                                                           "subForest": []}]},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "dist_except"},
-$                           [{"rootLabel": {"Function_NDPartial": []},
+$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []},
 $                                                          {"rootLabel": null,
 $                                                           "subForest": []}]},
-$                                           {"rootLabel": {"Set_Occurrence": []},
+$                                           {"rootLabel": {"Set_Explicit": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "earlier"},
 $                           [{"rootLabel": {"Relation_AsSet": {"Set_Explicit": []}},
-$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]},
-$                                           {"rootLabel": {"Set_Occurrence": []},
+$                                           {"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"MachineName": ["fin", 1, []]},
@@ -1233,7 +1436,7 @@ $                          [{"Name": "line_attr"},
 $                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
-$                                           {"rootLabel": {"Set_Occurrence": []},
+$                                           {"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "line_off"},
@@ -1273,7 +1476,7 @@ $                          [{"Name": "req_attr"},
 $                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
-$                                           {"rootLabel": {"Set_Occurrence": []},
+$                                           {"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "schedule"},

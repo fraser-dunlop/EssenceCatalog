@@ -9,25 +9,52 @@ where b >= g ** t
 find CoverTest_ExplicitWithFlagsR9_Flags: matrix indexed by [int(1..b)] of int(0..b)
 find CoverTest_ExplicitWithFlagsR9_Values_Function1D: matrix indexed by [int(1..b), int(1..k)] of int(1..g)
 such that
-    and([or([CoverTest_ExplicitWithFlagsR9_Flags[q13] > 0 /\
-             and([CoverTest_ExplicitWithFlagsR9_Values_Function1D[q13, q15] = testcase_Function1DPartial_Values[q15]
-                      | q15 : int(1..k), testcase_Function1DPartial_Flags[q15]])
-                 | q13 : int(1..b)])
-             | testcase_Function1DPartial_Flags : matrix indexed by [int(1..k)] of bool,
-               testcase_Function1DPartial_Values : matrix indexed by [int(1..k)] of int(1..g),
-               and([testcase_Function1DPartial_Flags[q1] = false -> testcase_Function1DPartial_Values[q1] = 1
-                        | q1 : int(1..k)]),
-               sum([1 | q12 : int(1..k), testcase_Function1DPartial_Flags[q12]]) = t]),
-    and([CoverTest_ExplicitWithFlagsR9_Flags[q4 + 1] > 0 ->
-         CoverTest_ExplicitWithFlagsR9_Values_Function1D[q4, ..] <lex
-         CoverTest_ExplicitWithFlagsR9_Values_Function1D[q4 + 1, ..]
-             | q4 : int(1..b - 1)]),
-    and([CoverTest_ExplicitWithFlagsR9_Flags[q5] = 0 ->
-         and([CoverTest_ExplicitWithFlagsR9_Values_Function1D[q5, q16] = 1 | q16 : int(1..k)])
-             | q5 : int(1..b)]),
-    and([CoverTest_ExplicitWithFlagsR9_Flags[q6 + 1] > 0 -> CoverTest_ExplicitWithFlagsR9_Flags[q6] > 0
+    and([or([CoverTest_ExplicitWithFlagsR9_Flags[q16] > 0 /\
+             and([CoverTest_ExplicitWithFlagsR9_Values_Function1D
+                      [q16, testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q18]]
+                  = testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q18]
+                      | q18 : int(1..k * g),
+                        q18 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
+                 | q16 : int(1..b)])
+             | testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker : int(0..k * g),
+               testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1 : matrix indexed by [int(1..k
+                                                                                                                        *
+                                                                                                                        g)] of int(1..k),
+               testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2 : matrix indexed by [int(1..k
+                                                                                                                        *
+                                                                                                                        g)] of int(1..g),
+               and([q1 + 1 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker ->
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q1] <
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
+                    \/
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q1] =
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q1 + 1]
+                    /\
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q1] <
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q1 + 1]
+                        | q1 : int(1..k * g - 1)]),
+               and([q2 > testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker ->
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q2] = 1 /\
+                    testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q2] = 1
+                        | q2 : int(1..k * g)]),
+               and([1 >=
+                    sum([1   | q13 : int(1..k * g),
+                               q13 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
+                               testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q13] = q4])
+                        | q4 : int(1..k)]),
+               sum([1   | q15 : int(1..k * g),
+                          q15 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
+               = t]),
+    and([CoverTest_ExplicitWithFlagsR9_Flags[q6 + 1] > 0 ->
+         CoverTest_ExplicitWithFlagsR9_Values_Function1D[q6, ..] <lex
+         CoverTest_ExplicitWithFlagsR9_Values_Function1D[q6 + 1, ..]
              | q6 : int(1..b - 1)]),
-    b = sum([CoverTest_ExplicitWithFlagsR9_Flags[q8] | q8 : int(1..b)])
+    and([CoverTest_ExplicitWithFlagsR9_Flags[q7] = 0 ->
+         and([CoverTest_ExplicitWithFlagsR9_Values_Function1D[q7, q19] = 1 | q19 : int(1..k)])
+             | q7 : int(1..b)]),
+    and([CoverTest_ExplicitWithFlagsR9_Flags[q8 + 1] > 0 -> CoverTest_ExplicitWithFlagsR9_Flags[q8] > 0
+             | q8 : int(1..b - 1)]),
+    b = sum([CoverTest_ExplicitWithFlagsR9_Flags[q10] | q10 : int(1..b)])
 
 $ Conjure's
 $ {"finds": [{"Name": "CoverTest"}],
@@ -53,10 +80,12 @@ $  "strategyA": {"Compact": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["q", 17]],
+$  "nameGenState": [["q", 20]],
 $  "nbExtraGivens": 0,
 $  "representations": [[{"Name": "k"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "t"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

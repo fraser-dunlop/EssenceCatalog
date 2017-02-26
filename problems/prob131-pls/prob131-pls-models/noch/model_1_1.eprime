@@ -9,29 +9,22 @@ given batch_size: int(1..)
 given Attribute_EnumSize: int
 given fin1: int
 given fin2: int
-given quantity_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin1)] of int(1..n_orders)
-given quantity_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin1)] of int(1..fin2)
+given quantity_Function1D: matrix indexed by [int(1..n_orders)] of int(1..fin2)
 given fin3: int
 given fin4: int
-given req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_1: matrix indexed by [int(1..fin3)] of int(1..n_orders)
-given req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy:
-        matrix indexed by [int(1..fin3), int(1..fin4)] of int(1..Attribute_EnumSize + 1)
+given req_attr_Function1DR6_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..n_orders), int(1..fin4)] of int(1..Attribute_EnumSize + 1)
 given fin5: int
 given fin6: int
-given capacity_FunctionAsRelation_RelationAsSet_Explicit_1_1: matrix indexed by [int(1..fin5)] of int(1..n_lines)
-given capacity_FunctionAsRelation_RelationAsSet_Explicit_1_2: matrix indexed by [int(1..fin5)] of int(1..n_days)
-given capacity_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin5)] of int(1..fin6)
+given capacity_FunctionND: matrix indexed by [int(1..n_lines), int(1..n_days)] of int(1..fin6)
 given fin7: int
 given fin8: int
-given line_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_1: matrix indexed by [int(1..fin7)] of int(1..n_lines)
-given line_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy:
-        matrix indexed by [int(1..fin7), int(1..fin8)] of int(1..Attribute_EnumSize + 1)
+given line_attr_Function1DR6_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..n_lines), int(1..fin8)] of int(1..Attribute_EnumSize + 1)
 given fin9: int
-given line_on_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin9)] of int(1..n_orders)
-given line_on_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin9)] of int(1..n_days)
+given line_on_Function1D: matrix indexed by [int(1..n_orders)] of int(1..n_days)
 given fin10: int
-given line_off_FunctionAsRelation_RelationAsSet_Explicit_1: matrix indexed by [int(1..fin10)] of int(1..n_orders)
-given line_off_FunctionAsRelation_RelationAsSet_Explicit_2: matrix indexed by [int(1..fin10)] of int(1..n_days)
+given line_off_Function1D: matrix indexed by [int(1..n_orders)] of int(1..n_days)
 given fin11: int
 given fin12: int
 given dist_except_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_1:
@@ -48,30 +41,8 @@ given earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy:
 given earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy:
         matrix indexed by [int(1..fin13), int(1..fin15)] of int(1..Attribute_EnumSize + 1)
 where
-    sum([sum([capacity_FunctionAsRelation_RelationAsSet_Explicit_2[q205]
-                  | q205 : int(1..fin5),
-                    capacity_FunctionAsRelation_RelationAsSet_Explicit_1_1[q205] =
-                    capacity_FunctionAsRelation_RelationAsSet_Explicit_1_1[q203]
-                    /\
-                    capacity_FunctionAsRelation_RelationAsSet_Explicit_1_2[q205] =
-                    capacity_FunctionAsRelation_RelationAsSet_Explicit_1_2[q203]])
-             | q203 : int(1..fin5)])
-    * batch_size
-    =
-    sum([sum([quantity_FunctionAsRelation_RelationAsSet_Explicit_2[q210]
-                  | q210 : int(1..fin1), quantity_FunctionAsRelation_RelationAsSet_Explicit_1[q210] = o])
-             | o : int(1..n_orders)])
-    /\
-    and([or([capacity_FunctionAsRelation_RelationAsSet_Explicit_1_1[q208] =
-             capacity_FunctionAsRelation_RelationAsSet_Explicit_1_1[q203]
-             /\
-             capacity_FunctionAsRelation_RelationAsSet_Explicit_1_2[q208] =
-             capacity_FunctionAsRelation_RelationAsSet_Explicit_1_2[q203]
-                 | q208 : int(1..fin5)])
-             | q203 : int(1..fin5)])
-    /\
-    and([or([quantity_FunctionAsRelation_RelationAsSet_Explicit_1[q213] = o | q213 : int(1..fin1)])
-             | o : int(1..n_orders)])
+    sum([capacity_FunctionND[q170_1, q170_2] | q170_1 : int(1..n_lines), q170_2 : int(1..n_days)]) * batch_size =
+    sum([quantity_Function1D[o] | o : int(1..n_orders)])
 where
     and([or([and([or([s1_ExplicitVarSizeWithDummy[q11] =
                       earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q7, q9]
@@ -317,15 +288,7 @@ where
                and([s3_ExplicitVarSizeWithDummy[q85] = Attribute_EnumSize + 1 ->
                     s3_ExplicitVarSizeWithDummy[q85 + 1] = Attribute_EnumSize + 1
                         | q85 : int(1..Attribute_EnumSize - 1)])])
-letting let1 be
-        sum([sum([capacity_FunctionAsRelation_RelationAsSet_Explicit_2[q217]
-                      | q217 : int(1..fin5),
-                        capacity_FunctionAsRelation_RelationAsSet_Explicit_1_1[q217] =
-                        capacity_FunctionAsRelation_RelationAsSet_Explicit_1_1[q215]
-                        /\
-                        capacity_FunctionAsRelation_RelationAsSet_Explicit_1_2[q217] =
-                        capacity_FunctionAsRelation_RelationAsSet_Explicit_1_2[q215]])
-                 | q215 : int(1..fin5)])
+letting let1 be sum([capacity_FunctionND[q171_1, q171_2] | q171_1 : int(1..n_lines), q171_2 : int(1..n_days)])
 find batches_Function1DR7_ExplicitWithFlags_Flags: matrix indexed by [int(1..let1), int(1..maxLot)] of int(0..maxLot)
 find batches_Function1DR7_ExplicitWithFlags_Values_1:
         matrix indexed by [int(1..let1), int(1..maxLot)] of int(1..n_orders)
@@ -334,94 +297,85 @@ find batches_Function1DR7_ExplicitWithFlags_Values_2:
 find batch_attr_Function1DR2_Occurrence: matrix indexed by [int(1..let1), int(1..Attribute_EnumSize)] of bool
 find schedule_FunctionND: matrix indexed by [int(1..n_lines), int(1..n_days), int(1..n_slots)] of int(1..let1)
 such that
-    and([or([capacity_FunctionAsRelation_RelationAsSet_Explicit_1_1[q220] =
-             capacity_FunctionAsRelation_RelationAsSet_Explicit_1_1[q215]
-             /\
-             capacity_FunctionAsRelation_RelationAsSet_Explicit_1_2[q220] =
-             capacity_FunctionAsRelation_RelationAsSet_Explicit_1_2[q215]
-                 | q220 : int(1..fin5)])
-             | q215 : int(1..fin5)]),
-    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[b, q179] > 0 ->
-              and([req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_1[q176] =
-                   batches_Function1DR7_ExplicitWithFlags_Values_1[b, q179]
+    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[b, q175] > 0 ->
+              and([req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                       [batches_Function1DR7_ExplicitWithFlags_Values_1[b, q175], q173]
+                   != Attribute_EnumSize + 1
                    ->
                    batch_attr_Function1DR2_Occurrence
                        [b,
-                        req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy[q176, q177]]
-                       | q176 : int(1..fin3), q177 : int(1..fin4),
-                         req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy[q176, q177]
-                         != Attribute_EnumSize + 1])
-                  | q179 : int(1..maxLot)])
+                        req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                            [batches_Function1DR7_ExplicitWithFlags_Values_1[b, q175], q173]]
+                       | q173 : int(1..fin4)])
+                  | q175 : int(1..maxLot)])
              | b : int(1..let1)]),
     and([and([batch_attr_Function1DR2_Occurrence[b, a] ->
-              or([batches_Function1DR7_ExplicitWithFlags_Flags[b, q157] > 0 /\
-                  or([req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_1[q154] =
-                      batches_Function1DR7_ExplicitWithFlags_Values_1[b, q157]
+              or([batches_Function1DR7_ExplicitWithFlags_Flags[b, q154] > 0 /\
+                  or([req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                          [batches_Function1DR7_ExplicitWithFlags_Values_1[b, q154], q152]
+                      != Attribute_EnumSize + 1
                       /\
-                      req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy[q154, q155] =
-                      a   | q154 : int(1..fin3), q155 : int(1..fin4),
-                            req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy
-                                [q154, q155]
-                            != Attribute_EnumSize + 1])
-                      | q157 : int(1..maxLot)])
+                      req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                          [batches_Function1DR7_ExplicitWithFlags_Values_1[b, q154], q152]
+                      = a | q152 : int(1..fin4)])
+                      | q154 : int(1..maxLot)])
                   | a : int(1..Attribute_EnumSize)])
              | b : int(1..let1)]),
-    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[schedule_FunctionND[q193_1, q193_2, q193_3], q191] > 0 ->
-              and([req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_1[q183] =
-                   batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q193_1, q193_2, q193_3], q191]
+    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[schedule_FunctionND[q183_1, q183_2, q183_3], q181] > 0 ->
+              and([req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                       [batches_Function1DR7_ExplicitWithFlags_Values_1
+                            [schedule_FunctionND[q183_1, q183_2, q183_3], q181],
+                        q177]
+                   != Attribute_EnumSize + 1
                    ->
-                   or([line_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy[q188, q189]
-                       = req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy[q183, q184]
-                           | q188 : int(1..fin7), q189 : int(1..fin8),
-                             line_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_1[q188] = q193_1,
-                             line_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy
-                                 [q188, q189]
-                             != Attribute_EnumSize + 1])
-                       | q183 : int(1..fin3), q184 : int(1..fin4),
-                         req_attr_FunctionAsRelationR6_RelationAsSetR6_ExplicitR6_2_ExplicitVarSizeWithDummy[q183, q184]
-                         != Attribute_EnumSize + 1])
-                  | q191 : int(1..maxLot)])
-             | q193_1 : int(1..n_lines), q193_2 : int(1..n_days), q193_3 : int(1..n_slots)]),
-    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[schedule_FunctionND[q201_1, q201_2, q201_3], q199] > 0 ->
-              or([line_on_FunctionAsRelation_RelationAsSet_Explicit_1[q195] =
-                  batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q201_1, q201_2, q201_3], q199]
-                  /\ line_on_FunctionAsRelation_RelationAsSet_Explicit_2[q195] <= q201_2
-                      | q195 : int(1..fin9)])
+                   or([line_attr_Function1DR6_ExplicitVarSizeWithDummy[q183_1, q179] =
+                       req_attr_Function1DR6_ExplicitVarSizeWithDummy
+                           [batches_Function1DR7_ExplicitWithFlags_Values_1
+                                [schedule_FunctionND[q183_1, q183_2, q183_3], q181],
+                            q177]
+                           | q179 : int(1..fin8),
+                             line_attr_Function1DR6_ExplicitVarSizeWithDummy[q183_1, q179] != Attribute_EnumSize + 1])
+                       | q177 : int(1..fin4)])
+                  | q181 : int(1..maxLot)])
+             | q183_1 : int(1..n_lines), q183_2 : int(1..n_days), q183_3 : int(1..n_slots)]),
+    and([and([batches_Function1DR7_ExplicitWithFlags_Flags[schedule_FunctionND[q187_1, q187_2, q187_3], q185] > 0 ->
+              q187_2 >=
+              line_on_Function1D
+                  [batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q187_1, q187_2, q187_3], q185]]
               /\
-              or([line_off_FunctionAsRelation_RelationAsSet_Explicit_1[q197] =
-                  batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q201_1, q201_2, q201_3], q199]
-                  /\ line_off_FunctionAsRelation_RelationAsSet_Explicit_2[q197] >= q201_2
-                      | q197 : int(1..fin10)])
-                  | q199 : int(1..maxLot)])
-             | q201_1 : int(1..n_lines), q201_2 : int(1..n_days), q201_3 : int(1..n_slots)]),
+              q187_2 <=
+              line_off_Function1D
+                  [batches_Function1DR7_ExplicitWithFlags_Values_1[schedule_FunctionND[q187_1, q187_2, q187_3], q185]]
+                  | q185 : int(1..maxLot)])
+             | q187_1 : int(1..n_lines), q187_2 : int(1..n_days), q187_3 : int(1..n_slots)]),
     and([and([and([or([and([batch_attr_Function1DR2_Occurrence
                                 [schedule_FunctionND[l, d, s],
-                                 earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q162, q164]]
-                                | q164 : int(1..fin14),
-                                  earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q162, q164] !=
+                                 earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q159, q161]]
+                                | q161 : int(1..fin14),
+                                  earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q159, q161] !=
                                   Attribute_EnumSize + 1])
                        /\
-                       and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s], q165] ->
-                            or([earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q162, q167] = q165
-                                    | q167 : int(1..fin14),
-                                      earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q162, q167] !=
+                       and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s], q162] ->
+                            or([earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q159, q164] = q162
+                                    | q164 : int(1..fin14),
+                                      earlier_RelationAsSetR6R6_ExplicitR6R6_1_ExplicitVarSizeWithDummy[q159, q164] !=
                                       Attribute_EnumSize + 1])
-                                | q165 : int(1..Attribute_EnumSize)])
+                                | q162 : int(1..Attribute_EnumSize)])
                        /\
                        (and([batch_attr_Function1DR2_Occurrence
                                  [schedule_FunctionND[l, d, s + 1],
-                                  earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q162, q169]]
-                                 | q169 : int(1..fin15),
-                                   earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q162, q169] !=
+                                  earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q159, q166]]
+                                 | q166 : int(1..fin15),
+                                   earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q159, q166] !=
                                    Attribute_EnumSize + 1])
                         /\
-                        and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s + 1], q170] ->
-                             or([earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q162, q172] = q170
-                                     | q172 : int(1..fin15),
-                                       earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q162, q172] !=
+                        and([batch_attr_Function1DR2_Occurrence[schedule_FunctionND[l, d, s + 1], q167] ->
+                             or([earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q159, q169] = q167
+                                     | q169 : int(1..fin15),
+                                       earlier_RelationAsSetR6R6_ExplicitR6R6_2_ExplicitVarSizeWithDummy[q159, q169] !=
                                        Attribute_EnumSize + 1])
-                                 | q170 : int(1..Attribute_EnumSize)]))
-                           | q162 : int(1..fin13)])
+                                 | q167 : int(1..Attribute_EnumSize)]))
+                           | q159 : int(1..fin13)])
                        | s : int(1..n_slots - 1)])
                   | d : int(1..n_days)])
              | l : int(1..n_lines)]),
@@ -447,8 +401,8 @@ such that
              | q144 : int(1..let1)]),
     and([sum([batches_Function1DR7_ExplicitWithFlags_Flags[q144, q149] | q149 : int(1..maxLot)]) <= maxLot
              | q144 : int(1..let1)]),
-    allDiff([schedule_FunctionND[q158_1, q158_2, q158_3]
-                 | q158_1 : int(1..n_lines), q158_2 : int(1..n_days), q158_3 : int(1..n_slots)])
+    allDiff([schedule_FunctionND[q155_1, q155_2, q155_3]
+                 | q155_1 : int(1..n_lines), q155_2 : int(1..n_days), q155_3 : int(1..n_slots)])
 
 $ Conjure's
 $ {"finds": [{"Name": "batches"}, {"Name": "batch_attr"}, {"Name": "schedule"}],
@@ -797,20 +751,10 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 16], ["let", 2], ["q", 221]],
+$  "nameGenState": [["fin", 16], ["let", 2], ["q", 188]],
 $  "nbExtraGivens": 15,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_orders"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -832,7 +776,7 @@ $                      [{"MachineName": ["fin", 13, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 14, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 15, []]}, {"DomainInt": []}],
 $                      [{"Name": "capacity"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_ND": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 5, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 5,
@@ -859,7 +803,7 @@ $                                                                               
 $                                                                                                            {"DomainInt": []}]}]}]}]}]}],
 $                      [{"Name": "batch_size"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "quantity"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 1, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 1,
@@ -916,7 +860,7 @@ $                                                                               
 $                      [{"Name": "maxLot"}, {"DomainInt": []}],
 $                      [{"Name": "n_slots"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "req_attr"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 3, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 3,
@@ -950,7 +894,7 @@ $                                                                               
 $                                                                                           {"Alias": {"Op": {"MkOpSum": {"Comprehension": [{"Op": {"MkOpImage": [{"Reference": [{"Name": "capacity"},
 $                                                                                                                                                                                {"DeclHasRepr": ["Given",
 $                                                                                                                                                                                                 {"Name": "capacity"},
-$                                                                                                                                                                                                 {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                                                                                                                                                                                 {"DomainFunction": [{"Function_ND": []},
 $                                                                                                                                                                                                                     [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                                                                                                                                                                        5,
 $                                                                                                                                                                                                                                                                        []]},
@@ -985,7 +929,7 @@ $                                                                               
 $                                                                                                                                                                                                                   {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
 $                                                                                                                                                                                                                                                         {"DeclHasRepr": ["Given",
 $                                                                                                                                                                                                                                                                          {"Name": "capacity"},
-$                                                                                                                                                                                                                                                                          {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                                                                                                                                                                                                                                                          {"DomainFunction": [{"Function_ND": []},
 $                                                                                                                                                                                                                                                                                              [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                                                                                                                                                                                                                                                 5,
 $                                                                                                                                                                                                                                                                                                                                                 []]},
@@ -1019,7 +963,7 @@ $                                                                               
 $                                                                                                                                                                         {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
 $                                                                                                                                                                                                               {"DeclHasRepr": ["Given",
 $                                                                                                                                                                                                                                {"Name": "capacity"},
-$                                                                                                                                                                                                                                {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                                                                                                                                                                                                                {"DomainFunction": [{"Function_ND": []},
 $                                                                                                                                                                                                                                                    [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                                                                                                                                                                                                       5,
 $                                                                                                                                                                                                                                                                                                       []]},
@@ -1064,7 +1008,7 @@ $                                                                               
 $                                                                                           {"Alias": {"Op": {"MkOpSum": {"Comprehension": [{"Op": {"MkOpImage": [{"Reference": [{"Name": "capacity"},
 $                                                                                                                                                                                {"DeclHasRepr": ["Given",
 $                                                                                                                                                                                                 {"Name": "capacity"},
-$                                                                                                                                                                                                 {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                                                                                                                                                                                 {"DomainFunction": [{"Function_ND": []},
 $                                                                                                                                                                                                                     [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                                                                                                                                                                        5,
 $                                                                                                                                                                                                                                                                        []]},
@@ -1099,7 +1043,7 @@ $                                                                               
 $                                                                                                                                                                                                                   {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
 $                                                                                                                                                                                                                                                         {"DeclHasRepr": ["Given",
 $                                                                                                                                                                                                                                                                          {"Name": "capacity"},
-$                                                                                                                                                                                                                                                                          {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                                                                                                                                                                                                                                                          {"DomainFunction": [{"Function_ND": []},
 $                                                                                                                                                                                                                                                                                              [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                                                                                                                                                                                                                                                 5,
 $                                                                                                                                                                                                                                                                                                                                                 []]},
@@ -1133,7 +1077,7 @@ $                                                                               
 $                                                                                                                                                                         {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
 $                                                                                                                                                                                                               {"DeclHasRepr": ["Given",
 $                                                                                                                                                                                                                                {"Name": "capacity"},
-$                                                                                                                                                                                                                                {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                                                                                                                                                                                                                {"DomainFunction": [{"Function_ND": []},
 $                                                                                                                                                                                                                                                    [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                                                                                                                                                                                                       5,
 $                                                                                                                                                                                                                                                                                                       []]},
@@ -1180,7 +1124,7 @@ $                                                                               
 $                                                                                                                                             {"Name": "batch_size"},
 $                                                                                                                                             {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]}]}],
 $                      [{"Name": "line_attr"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 7, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 7,
@@ -1229,7 +1173,7 @@ $                                                                               
 $                                                                                           {"Alias": {"Op": {"MkOpSum": {"Comprehension": [{"Op": {"MkOpImage": [{"Reference": [{"Name": "capacity"},
 $                                                                                                                                                                                {"DeclHasRepr": ["Given",
 $                                                                                                                                                                                                 {"Name": "capacity"},
-$                                                                                                                                                                                                 {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                                                                                                                                                                                 {"DomainFunction": [{"Function_ND": []},
 $                                                                                                                                                                                                                     [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                                                                                                                                                                        5,
 $                                                                                                                                                                                                                                                                        []]},
@@ -1264,7 +1208,7 @@ $                                                                               
 $                                                                                                                                                                                                                   {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
 $                                                                                                                                                                                                                                                         {"DeclHasRepr": ["Given",
 $                                                                                                                                                                                                                                                                          {"Name": "capacity"},
-$                                                                                                                                                                                                                                                                          {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                                                                                                                                                                                                                                                          {"DomainFunction": [{"Function_ND": []},
 $                                                                                                                                                                                                                                                                                              [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                                                                                                                                                                                                                                                 5,
 $                                                                                                                                                                                                                                                                                                                                                 []]},
@@ -1298,7 +1242,7 @@ $                                                                               
 $                                                                                                                                                                         {"Op": {"MkOpDefined": {"Reference": [{"Name": "capacity"},
 $                                                                                                                                                                                                               {"DeclHasRepr": ["Given",
 $                                                                                                                                                                                                                                {"Name": "capacity"},
-$                                                                                                                                                                                                                                {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                                                                                                                                                                                                                                {"DomainFunction": [{"Function_ND": []},
 $                                                                                                                                                                                                                                                    [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
 $                                                                                                                                                                                                                                                                                                       5,
 $                                                                                                                                                                                                                                                                                                       []]},
@@ -1329,7 +1273,7 @@ $                                                                               
 $                                                                                                                                                                                                                                                                                                                                      []]},
 $                                                                                                                                                                                                                                                                                                                     {"DomainInt": []}]}]}]}]}]}]}]}}}]}}]]}}}}]}]}]}]}],
 $                      [{"Name": "line_on"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 9, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 9,
@@ -1347,7 +1291,7 @@ $                                                                               
 $                                                                                                            {"Name": "n_days"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}],
 $                      [{"Name": "line_off"},
-$                       {"DomainFunction": [{"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                       {"DomainFunction": [{"Function_1D": []},
 $                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin", 10, []]},
 $                                                                             {"DeclHasRepr": ["Given",
 $                                                                                              {"MachineName": ["fin", 10,
@@ -1417,7 +1361,7 @@ $                                                                          "subF
 $                                                                         {"rootLabel": null,
 $                                                                          "subForest": []}]}]}]}]],
 $                          [{"Name": "capacity"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_ND": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []},
@@ -1489,20 +1433,20 @@ $                          [{"MachineName": ["fin", 9, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "line_attr"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "line_off"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "line_on"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -1523,13 +1467,13 @@ $                          [{"Name": "n_slots"},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "quantity"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "req_attr"},
-$                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},

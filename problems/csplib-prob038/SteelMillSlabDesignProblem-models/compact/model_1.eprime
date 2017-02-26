@@ -15,68 +15,68 @@ find cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values
 find cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2:
         matrix indexed by [int(1..2 ** n_orders * nbSizes)] of int(1..nbSizes)
 minimising
-    sum([toInt(q36 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker) *
-         cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q36]
-             | q36 : int(1..2 ** n_orders * nbSizes)])
+    sum([toInt(q42 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker) *
+         cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q42]
+             | q42 : int(1..2 ** n_orders * nbSizes)])
 such that
-    and([and([q28 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker,
-              q34 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker,
-              or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q28, q31] /\
+    and([and([q34 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker,
+              q40 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker,
+              or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q37] /\
                   !or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
-                           [q34, q32]
-                       /\ q32 = q31
-                           | q32 : int(1..n_orders)])
-                      | q31 : int(1..n_orders)])
+                           [q40, q38]
+                       /\ q38 = q37
+                           | q38 : int(1..n_orders)])
+                      | q37 : int(1..n_orders)])
               \/
-              or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q31] /\
-                  !cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q28, q31]
-                      | q31 : int(1..n_orders)]);
+              or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q40, q37] /\
+                  !cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q37]
+                      | q37 : int(1..n_orders)]);
                   int(1..3)])
          ->
          sum([toInt(or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
-                            [q34, q30]
-                        /\ q30 = q29
-                            | q30 : int(1..n_orders)]))
+                            [q40, q36]
+                        /\ q36 = q35
+                            | q36 : int(1..n_orders)]))
               *
-              toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q28, q29])
-                  | q29 : int(1..n_orders)])
-         = 0 | q28 : int(1..2 ** n_orders * nbSizes), q34 : int(1..2 ** n_orders * nbSizes)]),
+              toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q35])
+                  | q35 : int(1..n_orders)])
+         = 0 | q34 : int(1..2 ** n_orders * nbSizes), q40 : int(1..2 ** n_orders * nbSizes)]),
     and([or([q8 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
              cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q8, o]
                  | q8 : int(1..2 ** n_orders * nbSizes)])
              | o : int(1..n_orders)]),
-    and([q22 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
-         or([q17 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
-             (and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q17, q18] ->
+    and([q28 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
+         or([q23 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
+             (and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q23, q24] ->
                    or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
-                           [q22, q19]
-                       /\ q19 = q18
-                           | q19 : int(1..n_orders)])
-                       | q18 : int(1..n_orders)])
+                           [q28, q25]
+                       /\ q25 = q24
+                           | q25 : int(1..n_orders)])
+                       | q24 : int(1..n_orders)])
               /\
-              and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q22, q20] ->
-                   cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q17, q20]
-                       | q20 : int(1..n_orders)])
+              and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q28, q26] ->
+                   cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q23, q26]
+                       | q26 : int(1..n_orders)])
               /\
-              cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q17] >=
+              cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q23] >=
               sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
-                             [q22, o])
+                             [q28, o])
                    * ordSize_Function1D[o]
                        | o : int(1..n_orders)]))
-                 | q17 : int(1..2 ** n_orders * nbSizes)])
-             | q22 : int(1..2 ** n_orders * nbSizes)]),
-    and([q24 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
-         sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q24, o]) *
+                 | q23 : int(1..2 ** n_orders * nbSizes)])
+             | q28 : int(1..2 ** n_orders * nbSizes)]),
+    and([q30 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
+         sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q30, o]) *
               ordSize_Function1D[o]
                   | o : int(1..n_orders)])
-         <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q24]
-             | q24 : int(1..2 ** n_orders * nbSizes)]),
-    and([q26 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
-         sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q26, o]) *
+         <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q30]
+             | q30 : int(1..2 ** n_orders * nbSizes)]),
+    and([q32 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
+         sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q32, o]) *
               ordCol_Function1D[o]
                   | o : int(1..n_orders)])
          <= col_per_slab
-             | q26 : int(1..2 ** n_orders * nbSizes)]),
+             | q32 : int(1..2 ** n_orders * nbSizes)]),
     and([q1 + 1 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
          cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q1, ..] <lex
          cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q1 + 1, ..]
@@ -98,17 +98,25 @@ such that
          /\ cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q2] = 1
              | q2 : int(1..2 ** n_orders * nbSizes)]),
     and([1 >=
-         sum([toInt(q13 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
+         sum([toInt(q16 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
                     (and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
-                              [q13, q14]
-                          -> q5_Occurrence[q14]
-                              | q14 : int(1..n_orders)])
+                              [q16, q17]
+                          ->
+                          or([q5_ExplicitVarSizeWithDummy[q19] = q17
+                                  | q19 : int(1..n_orders), q5_ExplicitVarSizeWithDummy[q19] != n_orders + 1])
+                              | q17 : int(1..n_orders)])
                      /\
                      and([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
-                              [q13, q15]
-                              | q15 : int(1..n_orders), q5_Occurrence[q15]])))
-                  | q13 : int(1..2 ** n_orders * nbSizes)])
-             | q5_Occurrence : matrix indexed by [int(1..n_orders)] of bool])
+                              [q16, q5_ExplicitVarSizeWithDummy[q21]]
+                              | q21 : int(1..n_orders), q5_ExplicitVarSizeWithDummy[q21] != n_orders + 1])))
+                  | q16 : int(1..2 ** n_orders * nbSizes)])
+             | q5_ExplicitVarSizeWithDummy : matrix indexed by [int(1..n_orders)] of int(1..n_orders + 1),
+               and([q5_ExplicitVarSizeWithDummy[q12] < q5_ExplicitVarSizeWithDummy[q12 + 1] \/
+                    q5_ExplicitVarSizeWithDummy[q12] = n_orders + 1
+                        | q12 : int(1..n_orders - 1)]),
+               and([q5_ExplicitVarSizeWithDummy[q13] = n_orders + 1 ->
+                    q5_ExplicitVarSizeWithDummy[q13 + 1] = n_orders + 1
+                        | q13 : int(1..n_orders - 1)])])
 
 $ Conjure's
 $ {"finds": [{"Name": "cut"}],
@@ -143,7 +151,6 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
@@ -158,10 +165,12 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 4], ["q", 37]],
+$  "nameGenState": [["fin", 4], ["q", 43]],
 $  "nbExtraGivens": 3,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_orders"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

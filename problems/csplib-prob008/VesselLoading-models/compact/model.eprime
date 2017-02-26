@@ -12,9 +12,9 @@ given fin3: int
 given class_Function1D: matrix indexed by [int(1..n_containers)] of int(1..n_classes)
 given fin4: int
 given fin5: int
-given separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence:
-        matrix indexed by [int(1..fin4), int(1..n_classes)] of bool
-given separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_2: matrix indexed by [int(1..fin4)] of int(0..fin5)
+given separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit:
+        matrix indexed by [int(1..fin4), int(1..2)] of int(1..n_classes)
+given separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_2: matrix indexed by [int(1..fin4)] of int(0..fin5)
 find west_Function1D: matrix indexed by [int(1..n_containers)] of int(0..deck_width)
 find east_Function1D: matrix indexed by [int(1..n_containers)] of int(0..deck_width)
 find north_Function1D: matrix indexed by [int(1..n_containers)] of int(0..deck_length)
@@ -38,29 +38,37 @@ such that
          >= 0
              | c1 : int(1..n_containers), c2 : int(1..n_containers)]),
     and([c1 != c2 ->
-         or([and([class_Function1D[c1] = q19 \/ class_Function1D[c2] = q19
-                      | q19 : int(1..n_classes),
-                        separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence[q14, q19]])
+         or([and([class_Function1D[c1] = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q14, q20]
+                  \/
+                  class_Function1D[c2] = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q14, q20]
+                      | q20 : int(1..2)])
              /\
-             (separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence[q14, class_Function1D[c1]] /\
-              separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence[q14, class_Function1D[c2]])
+             (or([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q14, q26] = class_Function1D[c1]
+                      | q26 : int(1..2)])
+              /\
+              or([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q14, q28] = class_Function1D[c2]
+                      | q28 : int(1..2)]))
              /\
-             separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_2[q14] <=
+             separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_2[q14] <=
              max([west_Function1D[c1], west_Function1D[c2]; int(1..2)]) -
              min([east_Function1D[c1], east_Function1D[c2]; int(1..2)])
                  | q14 : int(1..fin4)])
          \/
-         or([and([class_Function1D[c1] = q30 \/ class_Function1D[c2] = q30
-                      | q30 : int(1..n_classes),
-                        separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence[q25, q30]])
+         or([and([class_Function1D[c1] = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q30, q36]
+                  \/
+                  class_Function1D[c2] = separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q30, q36]
+                      | q36 : int(1..2)])
              /\
-             (separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence[q25, class_Function1D[c1]] /\
-              separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_1_Occurrence[q25, class_Function1D[c2]])
+             (or([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q30, q42] = class_Function1D[c1]
+                      | q42 : int(1..2)])
+              /\
+              or([separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_1_Explicit[q30, q44] = class_Function1D[c2]
+                      | q44 : int(1..2)]))
              /\
-             separation_FunctionAsRelationR2_RelationAsSetR2_ExplicitR2_2[q25] <=
+             separation_FunctionAsRelationR3_RelationAsSetR3_ExplicitR3_2[q30] <=
              max([north_Function1D[c1], north_Function1D[c2]; int(1..2)]) -
              min([south_Function1D[c1], south_Function1D[c2]; int(1..2)])
-                 | q25 : int(1..fin4)])
+                 | q30 : int(1..fin4)])
              | c1 : int(1..n_containers), c2 : int(1..n_containers)])
 
 $ Conjure's
@@ -122,7 +130,6 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
@@ -136,10 +143,12 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 6], ["q", 35]],
+$  "nameGenState": [["fin", 6], ["q", 45]],
 $  "nbExtraGivens": 5,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_containers"},
@@ -248,7 +257,7 @@ $                                                                               
 $                                                                                                               []]},
 $                                                                                              {"DomainInt": []}]}]}},
 $                                            "PartialityAttr_Total", "JectivityAttr_None"],
-$                                           {"DomainSet": [{"Set_Occurrence": []},
+$                                           {"DomainSet": [{"Set_Explicit": []},
 $                                                          {"SizeAttr_Size": {"Constant": {"ConstantInt": 2}}},
 $                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                           {"Reference": [{"Name": "n_classes"},
@@ -334,7 +343,7 @@ $                                           {"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "separation"},
 $                           [{"rootLabel": {"Function_AsRelation": {"Relation_AsSet": {"Set_Explicit": []}}},
-$                             "subForest": [{"rootLabel": {"Set_Occurrence": []},
+$                             "subForest": [{"rootLabel": {"Set_Explicit": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]},
 $                                           {"rootLabel": null,
