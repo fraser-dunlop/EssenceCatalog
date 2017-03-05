@@ -4,16 +4,11 @@ letting n_models be 2
 letting n_types be 4
 letting n_cards be 4
 letting n_racks be 5
-letting price_FunctionAsRelation_RelationAsSet_Explicit_1 be [1, 2; int(1..2)]
-letting price_FunctionAsRelation_RelationAsSet_Explicit_2 be [90, 110; int(1..2)]
-letting req_power_FunctionAsRelation_RelationAsSet_Explicit_1 be [1, 2, 3, 4; int(1..4)]
-letting req_power_FunctionAsRelation_RelationAsSet_Explicit_2 be [20, 45, 50, 65; int(1..4)]
-letting ctype_FunctionAsRelation_RelationAsSet_Explicit_1 be [1, 2, 3, 4; int(1..4)]
-letting ctype_FunctionAsRelation_RelationAsSet_Explicit_2 be [1, 2, 3, 4; int(1..4)]
-letting max_power_FunctionAsRelation_RelationAsSet_Explicit_1 be [1, 2; int(1..2)]
-letting max_power_FunctionAsRelation_RelationAsSet_Explicit_2 be [90, 110; int(1..2)]
-letting max_connects_FunctionAsRelation_RelationAsSet_Explicit_1 be [1, 2; int(1..2)]
-letting max_connects_FunctionAsRelation_RelationAsSet_Explicit_2 be [3, 3; int(1..2)]
+letting price_Function1D be [90, 110; int(1..2)]
+letting req_power_Function1D be [20, 45, 50, 65; int(1..4)]
+letting ctype_Function1D be [1, 2, 3, 4; int(1..4)]
+letting max_power_Function1D be [90, 110; int(1..2)]
+letting max_connects_Function1D be [3, 3; int(1..2)]
 letting fin1 be 2
 letting fin2 be 110
 letting fin3 be 2
