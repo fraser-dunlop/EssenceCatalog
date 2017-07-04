@@ -13,7 +13,7 @@ such that
               and([q25 <= sched_ExplicitR18_PartitionOccurrence_NumParts[q19] ->
                    sum([toInt(or([sched_ExplicitR18_PartitionOccurrence_WhichPart[q19, q27] = q25 /\ q27 = q23
                                       | q27 : int(1..let1)]))
-                        * toInt(sched_ExplicitR18_PartitionOccurrence_WhichPart[q18, q23] = q20)
+                        * catchUndef(toInt(sched_ExplicitR18_PartitionOccurrence_WhichPart[q18, q23] = q20), 0)
                             | q23 : int(1..let1)])
                    < 2 | q25 : int(1..g)])
                   | q20 : int(1..g)])
@@ -137,7 +137,8 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["let", 2], ["q", 28]],

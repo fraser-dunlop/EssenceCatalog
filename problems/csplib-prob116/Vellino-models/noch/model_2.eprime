@@ -19,10 +19,15 @@ minimising sum([toInt(colour_Function1DPartial_Flags[q70]) | q70 : int(1..let1)]
 such that
     and([colour_Function1DPartial_Flags[b] <-> contents_Function1DPartialR8_Flags[b] | b : int(1..let1)]),
     and([sum([toInt(contents_Function1DPartialR8_Flags[q16]) *
-              sum([toInt(q14 <= contents_Function1DPartialR8_Values_ExplicitWithRepetition_Flag[q16] /\
-                         contents_Function1DPartialR8_Flags[q16])
-                   * toInt(contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values[q16, q14] = q1)
-                       | q14 : int(1..maxMaterial * 5 * maxMaterial)])
+              catchUndef(sum([toInt(q14 <= contents_Function1DPartialR8_Values_ExplicitWithRepetition_Flag[q16] /\
+                                    contents_Function1DPartialR8_Flags[q16])
+                              *
+                              catchUndef(toInt(contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values
+                                                   [q16, q14]
+                                               = q1),
+                                         0)
+                                  | q14 : int(1..maxMaterial * 5 * maxMaterial)]),
+                         0)
                   | q16 : int(1..let1)])
          = quantity_Function1D[q1]
              | q1 : int(1..5)]),
@@ -73,7 +78,7 @@ such that
          (colour_Function1DPartial_Values[q45] = 1 /\ colour_Function1DPartial_Flags[q45] ->
           sum([toInt(q43 <= contents_Function1DPartialR8_Values_ExplicitWithRepetition_Flag[q45] /\
                      contents_Function1DPartialR8_Flags[q45])
-               * toInt(contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values[q45, q43] = 4)
+               * catchUndef(toInt(contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values[q45, q43] = 4), 0)
                    | q43 : int(1..maxMaterial * 5 * maxMaterial)])
           <= 1)
              | q45 : int(1..let1)]),
@@ -81,7 +86,7 @@ such that
          (colour_Function1DPartial_Values[q49] = 2 /\ colour_Function1DPartial_Flags[q49] ->
           sum([toInt(q47 <= contents_Function1DPartialR8_Values_ExplicitWithRepetition_Flag[q49] /\
                      contents_Function1DPartialR8_Flags[q49])
-               * toInt(contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values[q49, q47] = 4)
+               * catchUndef(toInt(contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values[q49, q47] = 4), 0)
                    | q47 : int(1..maxMaterial * 5 * maxMaterial)])
           <= 2)
              | q49 : int(1..let1)]),
@@ -138,8 +143,9 @@ such that
     and([contents_Function1DPartialR8_Flags[q7] ->
          and([q11 <= contents_Function1DPartialR8_Values_ExplicitWithRepetition_Flag[q7] ->
               sum([toInt(q19 <= contents_Function1DPartialR8_Values_ExplicitWithRepetition_Flag[q7]) *
-                   toInt(contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values[q7, q19] =
-                         contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values[q7, q11])
+                   catchUndef(toInt(contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values[q7, q19] =
+                                    contents_Function1DPartialR8_Values_ExplicitWithRepetition_Values[q7, q11]),
+                              0)
                        | q19 : int(1..maxMaterial * 5 * maxMaterial)])
               <= maxMaterial
                   | q11 : int(1..maxMaterial * 5 * maxMaterial)])
@@ -271,7 +277,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 5], ["let", 2], ["q", 71]],

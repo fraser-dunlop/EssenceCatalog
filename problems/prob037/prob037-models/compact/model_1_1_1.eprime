@@ -35,21 +35,21 @@ find moves_Function1DPartial_Values_1_1: matrix indexed by [int(1..let2)] of int
 find moves_Function1DPartial_Values_1_2: matrix indexed by [int(1..let2)] of int(1..y_size)
 find moves_Function1DPartial_Values_2_1: matrix indexed by [int(1..let2)] of int(1..x_size)
 find moves_Function1DPartial_Values_2_2: matrix indexed by [int(1..let2)] of int(1..y_size)
-find aux1_ExplicitVarSizeWithMarkerR5_Marker: int(0..2 ** (x_size * y_size))
-find aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker:
+find conjure_aux1_ExplicitVarSizeWithMarkerR5_Marker: int(0..2 ** (x_size * y_size))
+find conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker:
         matrix indexed by [int(1..2 ** (x_size * y_size))] of int(0..x_size * y_size)
-find aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1:
+find conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1:
         matrix indexed by [int(1..2 ** (x_size * y_size)), int(1..x_size * y_size)] of int(1..x_size)
-find aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2:
+find conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2:
         matrix indexed by [int(1..2 ** (x_size * y_size)), int(1..x_size * y_size)] of int(1..y_size)
-find aux2_ExplicitVarSizeWithMarker_Marker: int(0..x_size * y_size * (x_size * y_size))
-find aux2_ExplicitVarSizeWithMarker_Values_1_1:
+find conjure_aux2_ExplicitVarSizeWithMarker_Marker: int(0..x_size * y_size * (x_size * y_size))
+find conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1:
         matrix indexed by [int(1..x_size * y_size * (x_size * y_size))] of int(1..x_size)
-find aux2_ExplicitVarSizeWithMarker_Values_1_2:
+find conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2:
         matrix indexed by [int(1..x_size * y_size * (x_size * y_size))] of int(1..y_size)
-find aux2_ExplicitVarSizeWithMarker_Values_2_1:
+find conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1:
         matrix indexed by [int(1..x_size * y_size * (x_size * y_size))] of int(1..x_size)
-find aux2_ExplicitVarSizeWithMarker_Values_2_2:
+find conjure_aux2_ExplicitVarSizeWithMarker_Values_2_2:
         matrix indexed by [int(1..x_size * y_size * (x_size * y_size))] of int(1..y_size)
 such that
     and([plan_Function1DPartialR5_Flags[q18] -> q18 = 1 \/ plan_Function1DPartialR5_Flags[q18 - 1]
@@ -115,146 +115,171 @@ such that
                (moves_Function1DPartial_Values_1_2[q32] + moves_Function1DPartial_Values_2_2[q32]) / 2)
                   | q30 : int(1..x_size * y_size)])
              | q32 : int(1..let2)]),
-    and([q56 + 1 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
-         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q56] <
-         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q56 + 1]
+    and([q56 + 1 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q56] <
+         conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q56 + 1]
          \/
-         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q56] =
-         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q56 + 1]
+         conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q56] =
+         conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q56 + 1]
          /\
-         (aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q56, ..] <lex
-          aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q56 + 1, ..]
+         (conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q56, ..] <lex
+          conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q56 + 1, ..]
           \/
-          and([aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q56, q62] =
-               aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q56 + 1, q62]
+          and([conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q56, q62] =
+               conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q56 + 1, q62]
                    | q62 : int(1..x_size * y_size)])
           /\ and([or([q62 = q63 | q63 : int(1..x_size * y_size)]) | q62 : int(1..x_size * y_size)])
           /\ and([or([q62 = q63 | q63 : int(1..x_size * y_size)]) | q62 : int(1..x_size * y_size)])
           /\
-          aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q56, ..] <lex
-          aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q56 + 1, ..])
+          conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q56, ..] <lex
+          conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q56 + 1, ..])
              | q56 : int(1..2 ** (x_size * y_size) - 1)]),
-    and([q57 > aux1_ExplicitVarSizeWithMarkerR5_Marker ->
-         aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q57] = 0 /\
-         and([aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q57, q64] = 1 /\
-              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q57, q64] = 1
+    and([q57 > conjure_aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q57] = 0 /\
+         and([conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q57, q64] = 1 /\
+              conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q57, q64] = 1
                   | q64 : int(1..x_size * y_size)])
              | q57 : int(1..2 ** (x_size * y_size))]),
-    and([q58 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
-         and([q59 + 1 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q58] ->
-              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q59] <
-              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q59 + 1]
+    and([q58 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         and([q59 + 1 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q58] ->
+              conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q59] <
+              conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q59 + 1]
               \/
-              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q59] =
-              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q59 + 1]
+              conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q59] =
+              conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q59 + 1]
               /\
-              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q58, q59] <
-              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q58, q59 + 1]
+              conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q58, q59] <
+              conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q58, q59 + 1]
                   | q59 : int(1..x_size * y_size - 1)])
              | q58 : int(1..2 ** (x_size * y_size))]),
-    and([q58 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
-         and([q60 > aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q58] ->
-              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q60] = 1 /\
-              aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q58, q60] = 1
+    and([q58 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         and([q60 > conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q58] ->
+              conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q58, q60] = 1 /\
+              conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q58, q60] = 1
                   | q60 : int(1..x_size * y_size)])
              | q58 : int(1..2 ** (x_size * y_size))]),
     and([plan_Function1DPartialR5_Flags[q65] ->
-         or([q67 <= aux1_ExplicitVarSizeWithMarkerR5_Marker /\
-             (and([q69 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q67] ->
+         or([q67 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Marker /\
+             (and([q69 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q67] ->
                    or([q71 <= plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Marker[q65] /\
                        (plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values_1[q65, q71] =
-                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q67, q69]
+                        conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q67, q69]
                         /\
                         plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values_2[q65, q71] =
-                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q67, q69])
+                        conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q67, q69])
                            | q71 : int(1..x_size * y_size)])
                        | q69 : int(1..x_size * y_size)])
               /\
               and([q73 <= plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Marker[q65] ->
-                   or([q75 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q67] /\
-                       (aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q67, q75] =
+                   or([q75 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q67] /\
+                       (conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q67, q75] =
                         plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values_1[q65, q73]
                         /\
-                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q67, q75] =
+                        conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q67, q75] =
                         plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values_2[q65, q73])
                            | q75 : int(1..x_size * y_size)])
                        | q73 : int(1..x_size * y_size)]))
                  | q67 : int(1..2 ** (x_size * y_size))])
              | q65 : int(1..let1)]),
-    and([q76 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+    and([q76 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Marker ->
          or([plan_Function1DPartialR5_Flags[q77] /\
              (and([q79 <= plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Marker[q77] ->
-                   or([q81 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q76] /\
-                       (aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q76, q81] =
+                   or([q81 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q76] /\
+                       (conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q76, q81] =
                         plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values_1[q77, q79]
                         /\
-                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q76, q81] =
+                        conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q76, q81] =
                         plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values_2[q77, q79])
                            | q81 : int(1..x_size * y_size)])
                        | q79 : int(1..x_size * y_size)])
               /\
-              and([q83 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q76] ->
+              and([q83 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q76] ->
                    or([q85 <= plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Marker[q77] /\
                        (plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values_1[q77, q85] =
-                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q76, q83]
+                        conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q76, q83]
                         /\
                         plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values_2[q77, q85] =
-                        aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q76, q83])
+                        conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q76, q83])
                            | q85 : int(1..x_size * y_size)])
                        | q83 : int(1..x_size * y_size)]))
                  | q77 : int(1..let1)])
              | q76 : int(1..2 ** (x_size * y_size))]),
-    and([q86 <= aux1_ExplicitVarSizeWithMarkerR5_Marker ->
-         and([q87 <= aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q86] ->
+    and([q86 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Marker ->
+         and([q87 <= conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q86] ->
               or([board_Explicit_1[q89] =
-                  aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q86, q87]
+                  conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_1[q86, q87]
                   /\
                   board_Explicit_2[q89] =
-                  aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q86, q87]
+                  conjure_aux1_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values_2[q86, q87]
                       | q89 : int(1..fin1)])
                   | q87 : int(1..x_size * y_size)])
              | q86 : int(1..2 ** (x_size * y_size))]),
-    and([q102 + 1 <= aux2_ExplicitVarSizeWithMarker_Marker ->
-         aux2_ExplicitVarSizeWithMarker_Values_1_1[q102] < aux2_ExplicitVarSizeWithMarker_Values_1_1[q102 + 1] \/
-         aux2_ExplicitVarSizeWithMarker_Values_1_1[q102] = aux2_ExplicitVarSizeWithMarker_Values_1_1[q102 + 1] /\
-         aux2_ExplicitVarSizeWithMarker_Values_1_2[q102] < aux2_ExplicitVarSizeWithMarker_Values_1_2[q102 + 1]
+    and([q102 + 1 <= conjure_aux2_ExplicitVarSizeWithMarker_Marker ->
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q102] <
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q102 + 1]
          \/
-         aux2_ExplicitVarSizeWithMarker_Values_1_1[q102] = aux2_ExplicitVarSizeWithMarker_Values_1_1[q102 + 1] /\
-         aux2_ExplicitVarSizeWithMarker_Values_1_2[q102] = aux2_ExplicitVarSizeWithMarker_Values_1_2[q102 + 1]
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q102] =
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q102 + 1]
          /\
-         (aux2_ExplicitVarSizeWithMarker_Values_2_1[q102] < aux2_ExplicitVarSizeWithMarker_Values_2_1[q102 + 1] \/
-          aux2_ExplicitVarSizeWithMarker_Values_2_1[q102] = aux2_ExplicitVarSizeWithMarker_Values_2_1[q102 + 1] /\
-          aux2_ExplicitVarSizeWithMarker_Values_2_2[q102] < aux2_ExplicitVarSizeWithMarker_Values_2_2[q102 + 1])
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2[q102] <
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2[q102 + 1]
+         \/
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q102] =
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q102 + 1]
+         /\
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2[q102] =
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2[q102 + 1]
+         /\
+         (conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1[q102] <
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1[q102 + 1]
+          \/
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1[q102] =
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1[q102 + 1]
+          /\
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_2[q102] <
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_2[q102 + 1])
              | q102 : int(1..x_size * y_size * (x_size * y_size) - 1)]),
-    and([q103 > aux2_ExplicitVarSizeWithMarker_Marker ->
-         aux2_ExplicitVarSizeWithMarker_Values_1_1[q103] = 1 /\ aux2_ExplicitVarSizeWithMarker_Values_1_2[q103] = 1 /\
-         (aux2_ExplicitVarSizeWithMarker_Values_2_1[q103] = 1 /\ aux2_ExplicitVarSizeWithMarker_Values_2_2[q103] = 1)
+    and([q103 > conjure_aux2_ExplicitVarSizeWithMarker_Marker ->
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q103] = 1 /\
+         conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2[q103] = 1
+         /\
+         (conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1[q103] = 1 /\
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_2[q103] = 1)
              | q103 : int(1..x_size * y_size * (x_size * y_size))]),
     and([moves_Function1DPartial_Flags[q105] ->
-         or([q107 <= aux2_ExplicitVarSizeWithMarker_Marker /\
-             (aux2_ExplicitVarSizeWithMarker_Values_1_1[q107] = moves_Function1DPartial_Values_1_1[q105] /\
-              aux2_ExplicitVarSizeWithMarker_Values_1_2[q107] = moves_Function1DPartial_Values_1_2[q105]
+         or([q107 <= conjure_aux2_ExplicitVarSizeWithMarker_Marker /\
+             (conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q107] = moves_Function1DPartial_Values_1_1[q105] /\
+              conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2[q107] = moves_Function1DPartial_Values_1_2[q105]
               /\
-              (aux2_ExplicitVarSizeWithMarker_Values_2_1[q107] = moves_Function1DPartial_Values_2_1[q105] /\
-               aux2_ExplicitVarSizeWithMarker_Values_2_2[q107] = moves_Function1DPartial_Values_2_2[q105]))
+              (conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1[q107] = moves_Function1DPartial_Values_2_1[q105] /\
+               conjure_aux2_ExplicitVarSizeWithMarker_Values_2_2[q107] = moves_Function1DPartial_Values_2_2[q105]))
                  | q107 : int(1..x_size * y_size * (x_size * y_size))])
              | q105 : int(1..let2)]),
-    and([q108 <= aux2_ExplicitVarSizeWithMarker_Marker ->
+    and([q108 <= conjure_aux2_ExplicitVarSizeWithMarker_Marker ->
          or([moves_Function1DPartial_Flags[q109] /\
-             (moves_Function1DPartial_Values_1_1[q109] = aux2_ExplicitVarSizeWithMarker_Values_1_1[q108] /\
-              moves_Function1DPartial_Values_1_2[q109] = aux2_ExplicitVarSizeWithMarker_Values_1_2[q108]
+             (moves_Function1DPartial_Values_1_1[q109] = conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q108] /\
+              moves_Function1DPartial_Values_1_2[q109] = conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2[q108]
               /\
-              (moves_Function1DPartial_Values_2_1[q109] = aux2_ExplicitVarSizeWithMarker_Values_2_1[q108] /\
-               moves_Function1DPartial_Values_2_2[q109] = aux2_ExplicitVarSizeWithMarker_Values_2_2[q108]))
+              (moves_Function1DPartial_Values_2_1[q109] = conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1[q108] /\
+               moves_Function1DPartial_Values_2_2[q109] = conjure_aux2_ExplicitVarSizeWithMarker_Values_2_2[q108]))
                  | q109 : int(1..let2)])
              | q108 : int(1..x_size * y_size * (x_size * y_size))]),
-    and([q110 <= aux2_ExplicitVarSizeWithMarker_Marker ->
-         |aux2_ExplicitVarSizeWithMarker_Values_1_1[q110] - aux2_ExplicitVarSizeWithMarker_Values_2_1[q110]| = 2 /\
-         |aux2_ExplicitVarSizeWithMarker_Values_1_2[q110] - aux2_ExplicitVarSizeWithMarker_Values_2_2[q110]| = 0
+    and([q110 <= conjure_aux2_ExplicitVarSizeWithMarker_Marker ->
+         |conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q110] -
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1[q110]|
+         = 2
+         /\
+         |conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2[q110] -
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_2[q110]|
+         = 0
          \/
-         |aux2_ExplicitVarSizeWithMarker_Values_1_1[q110] - aux2_ExplicitVarSizeWithMarker_Values_2_1[q110]| = 0 /\
-         |aux2_ExplicitVarSizeWithMarker_Values_1_2[q110] - aux2_ExplicitVarSizeWithMarker_Values_2_2[q110]| = 2
-             | q110 : int(1..x_size * y_size * (x_size * y_size))]),
+         |conjure_aux2_ExplicitVarSizeWithMarker_Values_1_1[q110] -
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_1[q110]|
+         = 0
+         /\
+         |conjure_aux2_ExplicitVarSizeWithMarker_Values_1_2[q110] -
+          conjure_aux2_ExplicitVarSizeWithMarker_Values_2_2[q110]|
+         = 2 | q110 : int(1..x_size * y_size * (x_size * y_size))]),
     and([t <= sum([toInt(plan_Function1DPartialR5_Flags[q15]) | q15 : int(1..let1)]) - 1 ->
          sum([toInt(q13 <= plan_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Marker[t] /\
                     plan_Function1DPartialR5_Flags[t])
@@ -474,7 +499,8 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
@@ -489,17 +515,17 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["aux", 3], ["fin", 4], ["let", 3], ["q", 111]],
+$  "nameGenState": [["conjure_aux", 3], ["fin", 4], ["let", 3], ["q", 111]],
 $  "nbExtraGivens": 3,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "x_size"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -707,16 +733,28 @@ $  "originalDomains": [[{"Name": "x_size"}, {"DomainInt": [{"RangeLowerBounded":
 $                      [{"Name": "y_size"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "board"},
 $                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainTuple": [{"DomainReference": [{"Name": "X"}, null]},
-$                                                       {"DomainReference": [{"Name": "Y"}, null]}]}]}],
+$                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "x_size"},
+$                                                                                                       null]}]}]},
+$                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "y_size"},
+$                                                                                                       null]}]}]}]}]}],
 $                      [{"Name": "init"},
 $                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainTuple": [{"DomainReference": [{"Name": "X"}, null]},
-$                                                       {"DomainReference": [{"Name": "Y"}, null]}]}]}],
+$                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "x_size"},
+$                                                                                                       null]}]}]},
+$                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "y_size"},
+$                                                                                                       null]}]}]}]}]}],
 $                      [{"Name": "goal"},
 $                       {"DomainSet": [[], {"SizeAttr_None": []},
-$                                      {"DomainTuple": [{"DomainReference": [{"Name": "X"}, null]},
-$                                                       {"DomainReference": [{"Name": "Y"}, null]}]}]}],
+$                                      {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "x_size"},
+$                                                                                                       null]}]}]},
+$                                                       {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                        {"Reference": [{"Name": "y_size"},
+$                                                                                                       null]}]}]}]}]}],
 $                      [{"Name": "plan"},
 $                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
@@ -724,15 +762,28 @@ $                                                                            {"R
 $                                                                                                            []]},
 $                                                                                           null]}]}]},
 $                                           {"DomainSet": [[], {"SizeAttr_None": []},
-$                                                          {"DomainTuple": [{"DomainReference": [{"Name": "X"}, null]},
-$                                                                           {"DomainReference": [{"Name": "Y"},
-$                                                                                                null]}]}]}]}],
+$                                                          {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                            {"Reference": [{"Name": "x_size"},
+$                                                                                                                           null]}]}]},
+$                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                            {"Reference": [{"Name": "y_size"},
+$                                                                                                                           null]}]}]}]}]}]}],
 $                      [{"Name": "moves"},
 $                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": [{"MachineName": ["let", 2,
 $                                                                                                            []]},
 $                                                                                           null]}]}]},
-$                                           {"DomainTuple": [{"DomainReference": [{"Name": "Hole"}, null]},
-$                                                            {"DomainReference": [{"Name": "Hole"}, null]}]}]}]],
+$                                           {"DomainTuple": [{"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                              {"Reference": [{"Name": "x_size"},
+$                                                                                                                             null]}]}]},
+$                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                              {"Reference": [{"Name": "y_size"},
+$                                                                                                                             null]}]}]}]},
+$                                                            {"DomainTuple": [{"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                              {"Reference": [{"Name": "x_size"},
+$                                                                                                                             null]}]}]},
+$                                                                             {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                              {"Reference": [{"Name": "y_size"},
+$                                                                                                                             null]}]}]}]}]}]}]],
 $  "questionAnswered": []}

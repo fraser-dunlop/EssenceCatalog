@@ -33,65 +33,67 @@ where
                  | q3 : int(1..fin2)])
              | q5 : int(1..fin2)])
 where
-    [and([q45 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-          and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q45, q47] ->
-               q47 = 1 \/ aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q45, q47 - 1]
+    [and([q45 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+          and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q45, q47] ->
+               q47 = 1 \/ conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q45, q47 - 1]
                    | q47 : int(1..n_upper)])
               | q45 : int(1..2 ** (n_upper * 26))])
-         | aux1_ExplicitVarSizeWithMarkerR10_Marker : int(0..2 ** (n_upper * 26)),
-           aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags : matrix indexed by [int(1..2 **
-                                                                                                        (n_upper * 26)),
-                                                                                                 int(1..n_upper)] of bool,
-           aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values : matrix indexed by [int(1..2 **
-                                                                                                         (n_upper *
-                                                                                                          26)),
-                                                                                                  int(1..n_upper)] of int(65..90),
-           and([q20 + 1 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-                aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20, ..] <lex
-                aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20 + 1, ..]
+         | conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker : int(0..2 ** (n_upper * 26)),
+           conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags : matrix indexed by [int(1..2 **
+                                                                                                                (n_upper
+                                                                                                                 * 26)),
+                                                                                                         int(1..n_upper)] of bool,
+           conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values : matrix indexed by [int(1..2 **
+                                                                                                                 (n_upper
+                                                                                                                  *
+                                                                                                                  26)),
+                                                                                                          int(1..n_upper)] of int(65..90),
+           and([q20 + 1 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20, ..] <lex
+                conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20 + 1, ..]
                 \/
-                and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20, q26] =
-                     aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20 + 1, q26]
+                and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20, q26] =
+                     conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20 + 1, q26]
                          | q26 : int(1..n_upper)])
                 /\ and([or([q26 = q27 | q27 : int(1..n_upper)]) | q26 : int(1..n_upper)])
                 /\ and([or([q26 = q27 | q27 : int(1..n_upper)]) | q26 : int(1..n_upper)])
                 /\
-                aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q20, ..] <lex
-                aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q20 + 1, ..]
+                conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q20, ..] <lex
+                conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q20 + 1, ..]
                     | q20 : int(1..2 ** (n_upper * 26) - 1)]),
-           and([q21 > aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-                and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q21, q28] = false
+           and([q21 > conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q21, q28] = false
                          | q28 : int(1..n_upper)])
                 /\
-                and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q21, q29] = 65
+                and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q21, q29] = 65
                          | q29 : int(1..n_upper)])
                     | q21 : int(1..2 ** (n_upper * 26))]),
-           and([q22 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-                and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q22, q23] = false ->
-                     aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q22, q23] = 65
+           and([q22 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q22, q23] = false ->
+                     conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q22, q23] = 65
                          | q23 : int(1..n_upper)])
                     | q22 : int(1..2 ** (n_upper * 26))]),
-           and([q22 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-                sum([toInt(aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q22, q24])
+           and([q22 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                sum([toInt(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q22, q24])
                          | q24 : int(1..n_upper)])
                 <= fin4
                     | q22 : int(1..2 ** (n_upper * 26))]),
-           and([or([q32 <= aux1_ExplicitVarSizeWithMarkerR10_Marker /\
-                    (and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q32, q34] ->
+           and([or([q32 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker /\
+                    (and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q32, q34] ->
                           or([dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
                                   [q30, q36]
                               = q34
                               /\
                               dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2
                                   [q30, q36]
-                              = aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q32, q34]
+                              = conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q32, q34]
                                   | q36 : int(1..fin4),
                                     q36 <=
                                     dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
                                         [q30]])
                               | q34 : int(1..n_upper)])
                      /\
-                     and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values
+                     and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values
                               [q32,
                                dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
                                    [q30, q37]]
@@ -99,7 +101,7 @@ where
                           dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2
                               [q30, q37]
                           /\
-                          aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags
+                          conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags
                               [q32,
                                dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
                                    [q30, q37]]
@@ -109,8 +111,8 @@ where
                                     [q30]]))
                         | q32 : int(1..2 ** (n_upper * 26))])
                     | q30 : int(1..n_words)]),
-           and([q38 <= aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-                or([and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values
+           and([q38 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+                or([and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values
                              [q38,
                               dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
                                   [q39, q41]]
@@ -118,7 +120,7 @@ where
                          dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2
                              [q39, q41]
                          /\
-                         aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags
+                         conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags
                              [q38,
                               dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
                                   [q39, q41]]
@@ -127,14 +129,14 @@ where
                                dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
                                    [q39]])
                     /\
-                    and([aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q38, q42] ->
+                    and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q38, q42] ->
                          or([dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1
                                  [q39, q44]
                              = q42
                              /\
                              dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2
                                  [q39, q44]
-                             = aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q38, q42]
+                             = conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q38, q42]
                                  | q44 : int(1..fin4),
                                    q44 <=
                                    dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker
@@ -169,8 +171,9 @@ such that
                               [crossword_Function1D[inter_FunctionAsRelation_RelationAsSet_Explicit_1_2[q16]], q9]
                           = inter_FunctionAsRelation_RelationAsSet_Explicit_2_2[q16])
                     *
-                    dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2
-                        [crossword_Function1D[inter_FunctionAsRelation_RelationAsSet_Explicit_1_2[q16]], q9]
+                    catchUndef(dict_Function1DR13R16R5_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2
+                                   [crossword_Function1D[inter_FunctionAsRelation_RelationAsSet_Explicit_1_2[q16]], q9],
+                               0)
                         | q9 : int(1..fin4)])
                /\
                or([q12 <=
@@ -223,7 +226,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
@@ -235,10 +238,10 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["aux", 2], ["fin", 5], ["q", 48]],
+$  "nameGenState": [["conjure_aux", 2], ["fin", 5], ["q", 48]],
 $  "nbExtraGivens": 4,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_places"},

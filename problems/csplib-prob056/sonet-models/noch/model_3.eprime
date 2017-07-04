@@ -12,7 +12,7 @@ find network_ExplicitWithFlagsR5_Values_ExplicitVarSizeWithMarker_Values:
         matrix indexed by [int(1..nrings), int(1..capacity)] of int(1..nnodes)
 minimising
     sum([toInt(network_ExplicitWithFlagsR5_Flags[q11] > 0) *
-         network_ExplicitWithFlagsR5_Values_ExplicitVarSizeWithMarker_Marker[q11]
+         catchUndef(network_ExplicitWithFlagsR5_Values_ExplicitVarSizeWithMarker_Marker[q11], 0)
              | q11 : int(1..nrings)])
 such that
     and([or([network_ExplicitWithFlagsR5_Flags[q13] > 0 /\

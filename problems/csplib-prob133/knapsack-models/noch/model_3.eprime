@@ -14,11 +14,11 @@ find picked_ExplicitVarSizeWithMarker_Marker: int(0..items_EnumSize)
 find picked_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..items_EnumSize)] of int(1..items_EnumSize)
 maximising
     sum([toInt(q4 <= picked_ExplicitVarSizeWithMarker_Marker) *
-         gain_Function1D[picked_ExplicitVarSizeWithMarker_Values[q4]]
+         catchUndef(gain_Function1D[picked_ExplicitVarSizeWithMarker_Values[q4]], 0)
              | q4 : int(1..items_EnumSize)])
 such that
     sum([toInt(q5 <= picked_ExplicitVarSizeWithMarker_Marker) *
-         weight_Function1D[picked_ExplicitVarSizeWithMarker_Values[q5]]
+         catchUndef(weight_Function1D[picked_ExplicitVarSizeWithMarker_Values[q5]], 0)
              | q5 : int(1..items_EnumSize)])
     <= capacity,
     and([q1 + 1 <= picked_ExplicitVarSizeWithMarker_Marker ->

@@ -120,14 +120,16 @@ such that
              | q24 : int(1..fin15)]),
     and([across[n] =
          sum([toInt(q26 <= acrossDigits_ExplicitBounded_Length[n]) *
-              (10 ** max([0, acrossDigits_ExplicitBounded_Length[n] - q26; int(1..2)]) *
-               acrossDigits_ExplicitBounded_Values[n, q26])
+              catchUndef(10 ** max([0, acrossDigits_ExplicitBounded_Length[n] - q26; int(1..2)]) *
+                         acrossDigits_ExplicitBounded_Values[n, q26],
+                         0)
                   | q26 : int(1..numDigits)])
              | n : int([acrossClueCoords_Explicit_1[q27] | q27 : int(1..fin6)])]),
     and([down[n] =
          sum([toInt(q29 <= downDigits_ExplicitBounded_Length[n]) *
-              (10 ** max([0, downDigits_ExplicitBounded_Length[n] - q29; int(1..2)]) *
-               downDigits_ExplicitBounded_Values[n, q29])
+              catchUndef(10 ** max([0, downDigits_ExplicitBounded_Length[n] - q29; int(1..2)]) *
+                         downDigits_ExplicitBounded_Values[n, q29],
+                         0)
                   | q29 : int(1..numDigits)])
              | n : int([downClueCoords_Explicit_1[q30] | q30 : int(1..fin15)])]),
     and([acrossDigits_ExplicitBounded_Values[n, 1] > 0 /\ 1 <= acrossDigits_ExplicitBounded_Length[n]

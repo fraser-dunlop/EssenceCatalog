@@ -16,7 +16,7 @@ find cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values
         matrix indexed by [int(1..2 ** n_orders * nbSizes)] of int(1..nbSizes)
 minimising
     sum([toInt(q42 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker) *
-         cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q42]
+         catchUndef(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q42], 0)
              | q42 : int(1..2 ** n_orders * nbSizes)])
 such that
     and([and([q34 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker,
@@ -38,7 +38,9 @@ such that
                         /\ q36 = q35
                             | q36 : int(1..n_orders)]))
               *
-              toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q35])
+              catchUndef(toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
+                                   [q34, q35]),
+                         0)
                   | q35 : int(1..n_orders)])
          = 0 | q34 : int(1..2 ** n_orders * nbSizes), q40 : int(1..2 ** n_orders * nbSizes)]),
     and([or([q8 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
@@ -61,19 +63,19 @@ such that
               cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q23] >=
               sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
                              [q28, o])
-                   * ordSize_Function1D[o]
+                   * catchUndef(ordSize_Function1D[o], 0)
                        | o : int(1..n_orders)]))
                  | q23 : int(1..2 ** n_orders * nbSizes)])
              | q28 : int(1..2 ** n_orders * nbSizes)]),
     and([q30 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
          sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q30, o]) *
-              ordSize_Function1D[o]
+              catchUndef(ordSize_Function1D[o], 0)
                   | o : int(1..n_orders)])
          <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q30]
              | q30 : int(1..2 ** n_orders * nbSizes)]),
     and([q32 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker ->
          sum([toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q32, o]) *
-              ordCol_Function1D[o]
+              catchUndef(ordCol_Function1D[o], 0)
                   | o : int(1..n_orders)])
          <= col_per_slab
              | q32 : int(1..2 ** n_orders * nbSizes)]),
@@ -167,7 +169,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 4], ["q", 43]],

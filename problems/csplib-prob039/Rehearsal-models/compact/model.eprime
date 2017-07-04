@@ -12,8 +12,10 @@ find order_Function1D: matrix indexed by [int(1..n_pieces)] of int(1..n_pieces)
 find arrive_Function1D: matrix indexed by [int(1..n_players)] of int(1..n_pieces)
 find leave_Function1D: matrix indexed by [int(1..n_players)] of int(1..n_pieces)
 maximising
-    sum([sum([toInt(i <= arrive_Function1D[p]) * duration_Function1D[order_Function1D[i]] | i : int(1..n_pieces)]) +
-         sum([toInt(i >= leave_Function1D[p]) * duration_Function1D[order_Function1D[i]]
+    sum([sum([toInt(i <= arrive_Function1D[p]) * catchUndef(duration_Function1D[order_Function1D[i]], 0)
+                  | i : int(1..n_pieces)])
+         +
+         sum([toInt(i >= leave_Function1D[p]) * catchUndef(duration_Function1D[order_Function1D[i]], 0)
                   | i : int(1..n_pieces), i <= n_pieces])
              | p : int(1..n_players)])
 such that

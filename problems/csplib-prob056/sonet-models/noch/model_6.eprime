@@ -10,8 +10,9 @@ find network_ExplicitWithRepetitionR6_Values_ExplicitVarSizeWithDummy:
         matrix indexed by [int(1..nrings * nrings), int(1..capacity)] of int(1..nnodes + 1)
 minimising
     sum([toInt(q11 <= network_ExplicitWithRepetitionR6_Flag) *
-         sum([toInt(network_ExplicitWithRepetitionR6_Values_ExplicitVarSizeWithDummy[q11, q13] != nnodes + 1)
-                  | q13 : int(1..capacity)])
+         catchUndef(sum([toInt(network_ExplicitWithRepetitionR6_Values_ExplicitVarSizeWithDummy[q11, q13] != nnodes + 1)
+                             | q13 : int(1..capacity)]),
+                    0)
              | q11 : int(1..nrings * nrings)])
 such that
     and([or([q15 <= network_ExplicitWithRepetitionR6_Flag /\
@@ -66,7 +67,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 2], ["q", 20]],

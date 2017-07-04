@@ -26,7 +26,8 @@ find plugged_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Marker:
 find plugged_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values:
         matrix indexed by [int(1..n_racks), int(1..n_cards)] of int(1..n_cards)
 minimising
-    sum([toInt(model_Function1DPartial_Flags[q12]) * price_Function1D[model_Function1DPartial_Values[q12]]
+    sum([toInt(model_Function1DPartial_Flags[q12]) *
+         catchUndef(price_Function1D[model_Function1DPartial_Values[q12]], 0)
              | q12 : int(1..n_racks)])
 such that
     and([model_Function1DPartial_Flags[q12] -> model_Function1DPartial_Flags[q12] | q12 : int(1..n_racks)]),
@@ -51,8 +52,10 @@ such that
          sum([toInt(q25 <= plugged_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Marker[q27] /\
                     plugged_Function1DPartialR5_Flags[q27])
               *
-              req_power_Function1D
-                  [ctype_Function1D[plugged_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values[q27, q25]]]
+              catchUndef(req_power_Function1D
+                             [ctype_Function1D
+                                  [plugged_Function1DPartialR5_Values_ExplicitVarSizeWithMarker_Values[q27, q25]]],
+                         0)
                   | q25 : int(1..n_cards)])
          <= max_power_Function1D[model_Function1DPartial_Values[q27]]
          /\ model_Function1DPartial_Flags[q27]
@@ -129,7 +132,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 10], ["q", 32]],

@@ -12,8 +12,9 @@ find network_ExplicitWithRepetitionR4_Values_ExplicitVarSizeWithFlags_Values:
         matrix indexed by [int(1..nrings * nrings), int(1..capacity)] of int(1..nnodes)
 minimising
     sum([toInt(q15 <= network_ExplicitWithRepetitionR4_Flag) *
-         sum([toInt(network_ExplicitWithRepetitionR4_Values_ExplicitVarSizeWithFlags_Flags[q15, q17])
-                  | q17 : int(1..capacity)])
+         catchUndef(sum([toInt(network_ExplicitWithRepetitionR4_Values_ExplicitVarSizeWithFlags_Flags[q15, q17])
+                             | q17 : int(1..capacity)]),
+                    0)
              | q15 : int(1..nrings * nrings)])
 such that
     and([or([q19 <= network_ExplicitWithRepetitionR4_Flag /\
@@ -87,7 +88,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 2], ["q", 24]],

@@ -28,9 +28,10 @@ such that
                  | q20 : int(1..numNodes)])
          /\
          sum([toInt(directChildrenMatrix_ExplicitVarSizeWithFlags_Flags[node, q14]) *
-              sum([toInt(totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags
-                             [directChildrenMatrix_ExplicitVarSizeWithFlags_Values[node, q14], q16])
-                       | q16 : int(1..numNodes)])
+              catchUndef(sum([toInt(totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags
+                                        [directChildrenMatrix_ExplicitVarSizeWithFlags_Values[node, q14], q16])
+                                  | q16 : int(1..numNodes)]),
+                         0)
                   | q14 : int(1..numNodes)])
          = sum([toInt(totalChildrenMatrix_ExplicitVarSizeWithFlags_Flags[node, q18]) | q18 : int(1..numNodes)]) - 1
          /\
@@ -106,7 +107,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["q", 32]],

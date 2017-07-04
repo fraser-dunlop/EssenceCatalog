@@ -13,11 +13,12 @@ given capacity: int
 find picked_ExplicitVarSizeWithFlags_Flags: matrix indexed by [int(1..items_EnumSize)] of bool
 find picked_ExplicitVarSizeWithFlags_Values: matrix indexed by [int(1..items_EnumSize)] of int(1..items_EnumSize)
 maximising
-    sum([toInt(picked_ExplicitVarSizeWithFlags_Flags[q6]) * gain_Function1D[picked_ExplicitVarSizeWithFlags_Values[q6]]
+    sum([toInt(picked_ExplicitVarSizeWithFlags_Flags[q6]) *
+         catchUndef(gain_Function1D[picked_ExplicitVarSizeWithFlags_Values[q6]], 0)
              | q6 : int(1..items_EnumSize)])
 such that
     sum([toInt(picked_ExplicitVarSizeWithFlags_Flags[q7]) *
-         weight_Function1D[picked_ExplicitVarSizeWithFlags_Values[q7]]
+         catchUndef(weight_Function1D[picked_ExplicitVarSizeWithFlags_Values[q7]], 0)
              | q7 : int(1..items_EnumSize)])
     <= capacity,
     and([picked_ExplicitVarSizeWithFlags_Flags[q1 + 1] ->

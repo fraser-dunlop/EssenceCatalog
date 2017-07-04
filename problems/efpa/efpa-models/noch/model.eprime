@@ -161,6 +161,10 @@ $                       {"DomainSet": [[], {"SizeAttr_Size": {"Reference": [{"Na
 $                                      {"DomainFunction": [[],
 $                                                          [{"SizeAttr_None": []}, "PartialityAttr_Total",
 $                                                           "JectivityAttr_None"],
-$                                                          {"DomainReference": [{"Name": "Index"}, null]},
-$                                                          {"DomainReference": [{"Name": "Character"}, null]}]}]}]],
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": [{"Name": "wordLength"},
+$                                                                                                          null]}]}]},
+$                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                           {"Reference": [{"Name": "numChars"},
+$                                                                                                          null]}]}]}]}]}]],
 $  "questionAnswered": []}

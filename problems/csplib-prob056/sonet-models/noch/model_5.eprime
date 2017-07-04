@@ -10,7 +10,7 @@ find network_ExplicitWithRepetitionR2_Values_Occurrence:
         matrix indexed by [int(1..nrings * nrings), int(1..nnodes)] of bool
 minimising
     sum([toInt(q8 <= network_ExplicitWithRepetitionR2_Flag) *
-         sum([toInt(network_ExplicitWithRepetitionR2_Values_Occurrence[q8, q9]) | q9 : int(1..nnodes)])
+         catchUndef(sum([toInt(network_ExplicitWithRepetitionR2_Values_Occurrence[q8, q9]) | q9 : int(1..nnodes)]), 0)
              | q8 : int(1..nrings * nrings)])
 such that
     and([or([q11 <= network_ExplicitWithRepetitionR2_Flag /\
@@ -48,7 +48,7 @@ $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 5, 8], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 2], ["q", 14]],

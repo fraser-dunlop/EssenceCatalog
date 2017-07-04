@@ -26,7 +26,8 @@ find plugged_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags:
 find plugged_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values:
         matrix indexed by [int(1..n_racks), int(1..n_cards)] of int(1..n_cards)
 minimising
-    sum([toInt(model_Function1DPartial_Flags[q15]) * price_Function1D[model_Function1DPartial_Values[q15]]
+    sum([toInt(model_Function1DPartial_Flags[q15]) *
+         catchUndef(price_Function1D[model_Function1DPartial_Values[q15]], 0)
              | q15 : int(1..n_racks)])
 such that
     and([model_Function1DPartial_Flags[q15] -> model_Function1DPartial_Flags[q15] | q15 : int(1..n_racks)]),
@@ -51,8 +52,10 @@ such that
          sum([toInt(plugged_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Flags[q30, q28] /\
                     plugged_Function1DPartialR4_Flags[q30])
               *
-              req_power_Function1D
-                  [ctype_Function1D[plugged_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values[q30, q28]]]
+              catchUndef(req_power_Function1D
+                             [ctype_Function1D
+                                  [plugged_Function1DPartialR4_Values_ExplicitVarSizeWithFlags_Values[q30, q28]]],
+                         0)
                   | q28 : int(1..n_cards)])
          <= max_power_Function1D[model_Function1DPartial_Values[q30]]
          /\ model_Function1DPartial_Flags[q30]
@@ -137,7 +140,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 10], ["q", 35]],

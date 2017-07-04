@@ -18,10 +18,10 @@ such that
                  | q3 : int(1..fin1)])
          -> curr_Function1D[c1] < curr_Function1D[c2]
              | c1 : int(1..n_courses), c2 : int(1..n_courses)]),
-    and([sum([toInt(curr_Function1D[q5] = p) * course_load_Function1D[q5] | q5 : int(1..n_courses)]) <=
+    and([sum([toInt(curr_Function1D[q5] = p) * catchUndef(course_load_Function1D[q5], 0) | q5 : int(1..n_courses)]) <=
          load_per_period_ub
          /\
-         sum([toInt(curr_Function1D[q7] = p) * course_load_Function1D[q7] | q7 : int(1..n_courses)]) >=
+         sum([toInt(curr_Function1D[q7] = p) * catchUndef(course_load_Function1D[q7], 0) | q7 : int(1..n_courses)]) >=
          load_per_period_lb
              | p : int(1..n_periods)]),
     and([sum([toInt(curr_Function1D[q10] = p) | q10 : int(1..n_courses)]) <= courses_per_period_ub /\
@@ -58,7 +58,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 4], ["q", 14]],

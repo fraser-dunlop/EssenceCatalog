@@ -12,8 +12,8 @@ such that
     sum([toInt(setB_Occurrence[q3] /\ !setA_Occurrence[q3]) | q3 : int(1..n)])
     = n,
     sum([toInt(setA_Occurrence[q4] /\ setB_Occurrence[q4]) | q4 : int(1..n)]) = 0,
-    and([sum([toInt(setA_Occurrence[i]) * i ** power | i : int(1..n)]) =
-         sum([toInt(setB_Occurrence[i]) * i ** power | i : int(1..n)])
+    and([sum([toInt(setA_Occurrence[i]) * catchUndef(i ** power, 0) | i : int(1..n)]) =
+         sum([toInt(setB_Occurrence[i]) * catchUndef(i ** power, 0) | i : int(1..n)])
              | power : int(0..P)]),
     let1 = sum([toInt(setA_Occurrence[q1]) | q1 : int(1..n)]),
     let2 = sum([toInt(setB_Occurrence[q2]) | q2 : int(1..n)])
@@ -48,7 +48,7 @@ $  "trailCompact": [[1, 1, 1], [1, 1, 2], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["let", 3], ["q", 5]],

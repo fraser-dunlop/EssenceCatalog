@@ -10,20 +10,22 @@ given fin4: int
 given crew_Function1D: matrix indexed by [int(1..n_boats)] of int(1..fin4)
 find hosts_Occurrence: matrix indexed by [int(1..n_boats)] of bool
 find sched_ExplicitR9_Function1D: matrix indexed by [int(1..n_periods), int(1..n_boats)] of int(1..n_boats)
-find aux1_Occurrence: matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
+find conjure_aux1_Occurrence: matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
 minimising sum([toInt(hosts_Occurrence[q20]) | q20 : int(1..n_boats)])
 such that
-    and([and([aux1_Occurrence[q6, sched_ExplicitR9_Function1D[q6, q12]] | q12 : int(1..n_boats)])
+    and([and([conjure_aux1_Occurrence[q6, sched_ExplicitR9_Function1D[q6, q12]] | q12 : int(1..n_boats)])
              | q6 : int(1..n_periods)]),
-    and([and([aux1_Occurrence[q6, q9] -> or([sched_ExplicitR9_Function1D[q6, q13] = q9 | q13 : int(1..n_boats)])
+    and([and([conjure_aux1_Occurrence[q6, q9] -> or([sched_ExplicitR9_Function1D[q6, q13] = q9 | q13 : int(1..n_boats)])
                   | q9 : int(1..n_boats)])
              | q6 : int(1..n_periods)]),
-    and([and([aux1_Occurrence[q6, q8] -> hosts_Occurrence[q8] | q8 : int(1..n_boats)]) | q6 : int(1..n_periods)]),
+    and([and([conjure_aux1_Occurrence[q6, q8] -> hosts_Occurrence[q8] | q8 : int(1..n_boats)])
+             | q6 : int(1..n_periods)]),
     and([and([hosts_Occurrence[h] -> sched_ExplicitR9_Function1D[q16, h] = h | h : int(1..n_boats)])
              | q16 : int(1..n_periods)]),
     and([and([hosts_Occurrence[h] ->
-              sum([toInt(sched_ExplicitR9_Function1D[q17, q19] = h) * crew_Function1D[q19] | q19 : int(1..n_boats)]) <=
-              capacity_Function1D[h]
+              sum([toInt(sched_ExplicitR9_Function1D[q17, q19] = h) * catchUndef(crew_Function1D[q19], 0)
+                       | q19 : int(1..n_boats)])
+              <= capacity_Function1D[h]
                   | h : int(1..n_boats)])
              | q17 : int(1..n_periods)]),
     and([b1 < b2 ->
@@ -55,10 +57,10 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["aux", 2], ["fin", 5], ["q", 21]],
+$  "nameGenState": [["conjure_aux", 2], ["fin", 5], ["q", 21]],
 $  "nbExtraGivens": 4,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_boats"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],

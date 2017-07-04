@@ -13,7 +13,7 @@ such that
     = n,
     sum([toInt(setB_Occurrence[setA_Explicit[q10]]) | q10 : int(1..let1)]) = 0,
     and([sum([setA_Explicit[q4] ** power | q4 : int(1..let1)]) =
-         sum([toInt(setB_Occurrence[i]) * i ** power | i : int(1..n)])
+         sum([toInt(setB_Occurrence[i]) * catchUndef(i ** power, 0) | i : int(1..n)])
              | power : int(0..P)]),
     and([setA_Explicit[q1] < setA_Explicit[q1 + 1] | q1 : int(1..let1 - 1)]),
     let2 = sum([toInt(setB_Occurrence[q3]) | q3 : int(1..n)])
@@ -48,7 +48,7 @@ $  "trailCompact": [[1, 1, 1], [1, 2, 2], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["let", 3], ["q", 11]],

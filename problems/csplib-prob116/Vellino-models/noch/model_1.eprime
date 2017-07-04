@@ -19,10 +19,14 @@ minimising sum([toInt(colour_Function1DPartial_Flags[q70]) | q70 : int(1..let1)]
 such that
     and([colour_Function1DPartial_Flags[b] <-> contents_Function1DPartialR7_Flags[b] | b : int(1..let1)]),
     and([sum([toInt(contents_Function1DPartialR7_Flags[q17]) *
-              sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q17, q15] > 0 /\
-                         contents_Function1DPartialR7_Flags[q17])
-                   * toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q17, q15] = q1)
-                       | q15 : int(1..maxMaterial * 5)])
+              catchUndef(sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q17, q15] > 0 /\
+                                    contents_Function1DPartialR7_Flags[q17])
+                              *
+                              catchUndef(toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q17, q15] =
+                                               q1),
+                                         0)
+                                  | q15 : int(1..maxMaterial * 5)]),
+                         0)
                   | q17 : int(1..let1)])
          = quantity_Function1D[q1]
              | q1 : int(1..5)]),
@@ -73,7 +77,7 @@ such that
          (colour_Function1DPartial_Values[q45] = 1 /\ colour_Function1DPartial_Flags[q45] ->
           sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q45, q43] > 0 /\
                      contents_Function1DPartialR7_Flags[q45])
-               * toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q45, q43] = 4)
+               * catchUndef(toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q45, q43] = 4), 0)
                    | q43 : int(1..maxMaterial * 5)])
           <= 1)
              | q45 : int(1..let1)]),
@@ -81,7 +85,7 @@ such that
          (colour_Function1DPartial_Values[q49] = 2 /\ colour_Function1DPartial_Flags[q49] ->
           sum([toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Flags[q49, q47] > 0 /\
                      contents_Function1DPartialR7_Flags[q49])
-               * toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q49, q47] = 4)
+               * catchUndef(toInt(contents_Function1DPartialR7_Values_ExplicitWithFlags_Values[q49, q47] = 4), 0)
                    | q47 : int(1..maxMaterial * 5)])
           <= 2)
              | q49 : int(1..let1)]),
@@ -268,7 +272,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 5], ["let", 2], ["q", 71]],

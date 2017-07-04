@@ -23,7 +23,8 @@ find model_Function1DPartial_Values: matrix indexed by [int(1..n_racks)] of int(
 find plugged_Function1DPartialR2_Flags: matrix indexed by [int(1..n_racks)] of bool
 find plugged_Function1DPartialR2_Values_Occurrence: matrix indexed by [int(1..n_racks), int(1..n_cards)] of bool
 minimising
-    sum([toInt(model_Function1DPartial_Flags[q10]) * price_Function1D[model_Function1DPartial_Values[q10]]
+    sum([toInt(model_Function1DPartial_Flags[q10]) *
+         catchUndef(price_Function1D[model_Function1DPartial_Values[q10]], 0)
              | q10 : int(1..n_racks)])
 such that
     and([model_Function1DPartial_Flags[q10] -> model_Function1DPartial_Flags[q10] | q10 : int(1..n_racks)]),
@@ -42,7 +43,7 @@ such that
          = 0 | q16 : int(1..n_racks), q18 : int(1..n_racks), q16 != q18]),
     and([model_Function1DPartial_Flags[q20] ->
          sum([toInt(plugged_Function1DPartialR2_Values_Occurrence[q20, c] /\ plugged_Function1DPartialR2_Flags[q20]) *
-              req_power_Function1D[ctype_Function1D[c]]
+              catchUndef(req_power_Function1D[ctype_Function1D[c]], 0)
                   | c : int(1..n_cards)])
          <= max_power_Function1D[model_Function1DPartial_Values[q20]]
          /\ model_Function1DPartial_Flags[q20]
@@ -105,7 +106,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 10], ["q", 24]],

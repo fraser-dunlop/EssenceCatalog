@@ -15,7 +15,9 @@ such that
                   | w : int(1..let1)])
              | t : int(1..n_teams)]),
     and([and([sum([toInt(sched_RelationAsSetR2_ExplicitR2_2[q7] = p) *
-                   toInt(or([sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q7, q4] /\ q4 = t | q4 : int(1..n_teams)]))
+                   catchUndef(toInt(or([sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q7, q4] /\ q4 = t
+                                            | q4 : int(1..n_teams)])),
+                              0)
                        | q7 : int(1..let3)])
               <= 2
                   | p : int(1..let2)])
@@ -107,7 +109,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["let", 4], ["q", 20]],

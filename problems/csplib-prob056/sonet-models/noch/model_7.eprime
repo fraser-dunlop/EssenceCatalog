@@ -12,7 +12,7 @@ find network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Values:
         matrix indexed by [int(1..nrings * nrings), int(1..capacity)] of int(1..nnodes)
 minimising
     sum([toInt(q10 <= network_ExplicitWithRepetitionR5_Flag) *
-         network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q10]
+         catchUndef(network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q10], 0)
              | q10 : int(1..nrings * nrings)])
 such that
     and([or([q12 <= network_ExplicitWithRepetitionR5_Flag /\

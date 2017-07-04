@@ -11,8 +11,9 @@ given fin6: int
 given gain_Function1D: matrix indexed by [int(1..items_EnumSize)] of int(fin5..fin6)
 given capacity: int
 find picked_Occurrence: matrix indexed by [int(1..items_EnumSize)] of bool
-maximising sum([toInt(picked_Occurrence[i]) * gain_Function1D[i] | i : int(1..items_EnumSize)])
-such that sum([toInt(picked_Occurrence[i]) * weight_Function1D[i] | i : int(1..items_EnumSize)]) <= capacity
+maximising sum([toInt(picked_Occurrence[i]) * catchUndef(gain_Function1D[i], 0) | i : int(1..items_EnumSize)])
+such that
+    sum([toInt(picked_Occurrence[i]) * catchUndef(weight_Function1D[i], 0) | i : int(1..items_EnumSize)]) <= capacity
 
 $ Conjure's
 $ {"finds": [{"Name": "picked"}],

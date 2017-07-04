@@ -26,8 +26,9 @@ such that
                  | q13 : int(1..numNodes)])
          /\
          sum([toInt(directChildrenMatrix_ExplicitVarSizeWithDummy[node, q11] != numNodes + 1) *
-              totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker
-                  [directChildrenMatrix_ExplicitVarSizeWithDummy[node, q11]]
+              catchUndef(totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker
+                             [directChildrenMatrix_ExplicitVarSizeWithDummy[node, q11]],
+                         0)
                   | q11 : int(1..numNodes)])
          = totalChildrenMatrix_ExplicitVarSizeWithMarker_Marker[node] - 1
          /\
@@ -92,7 +93,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["q", 23]],
