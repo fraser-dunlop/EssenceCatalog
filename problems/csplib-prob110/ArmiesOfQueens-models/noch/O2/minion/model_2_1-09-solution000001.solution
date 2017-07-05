@@ -1,0 +1,24 @@
+language Essence 1.3
+
+letting black be {(1, 1), (1, 2), (1, 3), (1, 4), (1, 6), (1, 8), (2, 2), (2, 3)}
+$ Visualisation for black
+$ 1 1
+$ 1 2
+$ 1 3
+$ 1 4
+$ 1 6
+$ 1 8
+$ 2 2
+$ 2 3
+
+letting white be {(3, 7), (3, 9), (5, 9), (6, 5), (7, 5), (8, 5), (8, 7), (9, 5)}
+$ Visualisation for white
+$ 3 7
+$ 3 9
+$ 5 9
+$ 6 5
+$ 7 5
+$ 8 5
+$ 8 7
+$ 9 5
+
