@@ -7,13 +7,15 @@ letting let1 be g * s
 find sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit:
         matrix indexed by [int(1..w), int(1..g), int(1..s)] of int(1..let1)
 such that
-    and([and([and([sum([toInt(or([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q19, q23, q27] =
-                                  sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q18, q21, q25]
-                                      | q27 : int(1..s)]))
-                            | q25 : int(1..s)])
-                   < 2 | q23 : int(1..g)])
-                  | q21 : int(1..g)])
-             | q18 : int(1..w), q19 : int(1..w), q19 > q18]),
+    and([sum([toInt(or([or([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q18, q21, q25] = g1
+                                | q25 : int(1..s)])
+                        /\
+                        or([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q18, q21, q27] = g2
+                                | q27 : int(1..s)])
+                            | q21 : int(1..g)]))
+                  | q18 : int(1..w)])
+         <= 1
+             | g1 : int(1..let1), g2 : int(1..let1), g1 < g2]),
     and([flatten(sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q1, .., ..]) <lex
          flatten(sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q1 + 1, .., ..])
              | q1 : int(1..w - 1)]),
@@ -71,13 +73,14 @@ $                                                                               
 $  "unnameds": [[{"Name": "Golfers"}, {"Reference": [{"MachineName": ["let", 1, []]}, null]}]],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
-$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 2, 3], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 2, 3], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["let", 2], ["q", 28]],

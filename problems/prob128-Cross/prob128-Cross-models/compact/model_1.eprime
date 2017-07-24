@@ -55,8 +55,6 @@ where
                 and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20, q26] =
                      conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q20 + 1, q26]
                          | q26 : int(1..n_upper)])
-                /\ and([or([q26 = q27 | q27 : int(1..n_upper)]) | q26 : int(1..n_upper)])
-                /\ and([or([q26 = q27 | q27 : int(1..n_upper)]) | q26 : int(1..n_upper)])
                 /\
                 conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q20, ..] <lex
                 conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q20 + 1, ..]
@@ -237,8 +235,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["conjure_aux", 2], ["fin", 5], ["q", 48]],

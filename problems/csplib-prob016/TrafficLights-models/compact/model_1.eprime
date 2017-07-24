@@ -64,8 +64,6 @@ such that
          and([valid_ExplicitVarSizeWithMarkerR9_Values_Function1D_1[q27, q31] =
               valid_ExplicitVarSizeWithMarkerR9_Values_Function1D_1[q27 + 1, q31]
                   | q31 : int(1..n_roads)])
-         /\ and([or([q31 = q32 | q32 : int(1..n_roads)]) | q31 : int(1..n_roads)])
-         /\ and([or([q31 = q32 | q32 : int(1..n_roads)]) | q31 : int(1..n_roads)])
          /\
          valid_ExplicitVarSizeWithMarkerR9_Values_Function1D_2[q27, ..] <lex
          valid_ExplicitVarSizeWithMarkerR9_Values_Function1D_2[q27 + 1, ..]
@@ -121,7 +119,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["q", 35]],

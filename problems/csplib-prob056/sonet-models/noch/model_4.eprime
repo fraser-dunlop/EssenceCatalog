@@ -32,8 +32,6 @@ such that
          and([network_ExplicitWithFlagsR4_Values_ExplicitVarSizeWithFlags_Flags[q1, q12] =
               network_ExplicitWithFlagsR4_Values_ExplicitVarSizeWithFlags_Flags[q1 + 1, q12]
                   | q12 : int(1..capacity)])
-         /\ and([or([q12 = q13 | q13 : int(1..capacity)]) | q12 : int(1..capacity)])
-         /\ and([or([q12 = q13 | q13 : int(1..capacity)]) | q12 : int(1..capacity)])
          /\
          network_ExplicitWithFlagsR4_Values_ExplicitVarSizeWithFlags_Values[q1, ..] <lex
          network_ExplicitWithFlagsR4_Values_ExplicitVarSizeWithFlags_Values[q1 + 1, ..]
@@ -89,8 +87,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 2], ["q", 25]],

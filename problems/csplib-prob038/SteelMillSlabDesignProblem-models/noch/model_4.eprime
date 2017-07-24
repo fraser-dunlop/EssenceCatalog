@@ -151,8 +151,6 @@ such that
               cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Flags
                   [q1 + 1, q15]
                   | q15 : int(1..n_orders)])
-         /\ and([or([q15 = q16 | q16 : int(1..n_orders)]) | q15 : int(1..n_orders)])
-         /\ and([or([q15 = q16 | q16 : int(1..n_orders)]) | q15 : int(1..n_orders)])
          /\
          cut_FunctionAsRelationR4_RelationAsSetR4_ExplicitVarSizeWithMarkerR4_Values_1_ExplicitVarSizeWithFlags_Values
              [q1, ..]
@@ -311,8 +309,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 4], ["q", 76]],
