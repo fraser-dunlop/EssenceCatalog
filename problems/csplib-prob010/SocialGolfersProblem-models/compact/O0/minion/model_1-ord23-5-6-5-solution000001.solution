@@ -36,3 +36,40 @@ letting sched be
                    {Golfers_16, Golfers_17, Golfers_18, Golfers_19, Golfers_20},
                    {Golfers_21, Golfers_22, Golfers_23, Golfers_24, Golfers_25},
                    {Golfers_26, Golfers_27, Golfers_28, Golfers_29, Golfers_30})}
+$ Visualisation for sched
+$ Golfers_1  Golfers_10 Golfers_12 Golfers_19 Golfers_28
+$ Golfers_11 Golfers_18 Golfers_24 Golfers_27 Golfers_7 
+$ Golfers_13 Golfers_17 Golfers_25 Golfers_29 Golfers_4 
+$ Golfers_14 Golfers_2  Golfers_20 Golfers_21 Golfers_8 
+$ Golfers_15 Golfers_23 Golfers_26 Golfers_3  Golfers_6 
+$ Golfers_16 Golfers_22 Golfers_30 Golfers_5  Golfers_9 
+$ 
+$ Golfers_1  Golfers_11 Golfers_16 Golfers_21 Golfers_6 
+$ Golfers_10 Golfers_15 Golfers_20 Golfers_25 Golfers_30
+$ Golfers_12 Golfers_17 Golfers_2  Golfers_26 Golfers_7 
+$ Golfers_13 Golfers_22 Golfers_27 Golfers_3  Golfers_8 
+$ Golfers_14 Golfers_19 Golfers_24 Golfers_29 Golfers_5 
+$ Golfers_18 Golfers_23 Golfers_28 Golfers_4  Golfers_9 
+$ 
+$ Golfers_1  Golfers_13 Golfers_23 Golfers_30 Golfers_7 
+$ Golfers_10 Golfers_14 Golfers_18 Golfers_22 Golfers_26
+$ Golfers_11 Golfers_20 Golfers_29 Golfers_3  Golfers_9 
+$ Golfers_12 Golfers_16 Golfers_24 Golfers_4  Golfers_8 
+$ Golfers_15 Golfers_17 Golfers_21 Golfers_28 Golfers_5 
+$ Golfers_19 Golfers_2  Golfers_25 Golfers_27 Golfers_6 
+$ 
+$ Golfers_1  Golfers_14 Golfers_17 Golfers_27 Golfers_9 
+$ Golfers_10 Golfers_16 Golfers_2  Golfers_23 Golfers_29
+$ Golfers_11 Golfers_25 Golfers_26 Golfers_5  Golfers_8 
+$ Golfers_12 Golfers_18 Golfers_21 Golfers_3  Golfers_30
+$ Golfers_13 Golfers_20 Golfers_24 Golfers_28 Golfers_6 
+$ Golfers_15 Golfers_19 Golfers_22 Golfers_4  Golfers_7 
+$ 
+$ Golfers_1  Golfers_2  Golfers_3  Golfers_4  Golfers_5 
+$ Golfers_10 Golfers_6  Golfers_7  Golfers_8  Golfers_9 
+$ Golfers_11 Golfers_12 Golfers_13 Golfers_14 Golfers_15
+$ Golfers_16 Golfers_17 Golfers_18 Golfers_19 Golfers_20
+$ Golfers_21 Golfers_22 Golfers_23 Golfers_24 Golfers_25
+$ Golfers_26 Golfers_27 Golfers_28 Golfers_29 Golfers_30
+$ 
+

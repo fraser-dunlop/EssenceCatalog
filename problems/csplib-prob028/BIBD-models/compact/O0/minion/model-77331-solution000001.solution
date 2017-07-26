@@ -8,3 +8,26 @@ letting bibd be
                  (Obj_4, Block_3), (Obj_4, Block_5), (Obj_5, Block_1), (Obj_5, Block_4), (Obj_5, Block_5),
                  (Obj_6, Block_1), (Obj_6, Block_3), (Obj_6, Block_6), (Obj_7, Block_1), (Obj_7, Block_2),
                  (Obj_7, Block_7))
+$ Visualisation for bibd
+$ Obj_1   Block_5
+$ Obj_1   Block_6
+$ Obj_1   Block_7
+$ Obj_2   Block_3
+$ Obj_2   Block_4
+$ Obj_2   Block_7
+$ Obj_3   Block_2
+$ Obj_3   Block_4
+$ Obj_3   Block_6
+$ Obj_4   Block_2
+$ Obj_4   Block_3
+$ Obj_4   Block_5
+$ Obj_5   Block_1
+$ Obj_5   Block_4
+$ Obj_5   Block_5
+$ Obj_6   Block_1
+$ Obj_6   Block_3
+$ Obj_6   Block_6
+$ Obj_7   Block_1
+$ Obj_7   Block_2
+$ Obj_7   Block_7
+

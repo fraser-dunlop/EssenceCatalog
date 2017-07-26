@@ -46,3 +46,93 @@ letting sched be
                    {Golfers_13, Golfers_18, Golfers_20}, {Golfers_14, Golfers_16, Golfers_21},
                    {Golfers_15, Golfers_17, Golfers_19}, {Golfers_22, Golfers_27, Golfers_29},
                    {Golfers_23, Golfers_25, Golfers_30}, {Golfers_24, Golfers_26, Golfers_28})}
+$ Visualisation for sched
+$ Golfers_1  Golfers_10 Golfers_13
+$ Golfers_11 Golfers_17 Golfers_21
+$ Golfers_12 Golfers_5  Golfers_8 
+$ Golfers_14 Golfers_18 Golfers_19
+$ Golfers_15 Golfers_16 Golfers_20
+$ Golfers_2  Golfers_6  Golfers_7 
+$ Golfers_22 Golfers_26 Golfers_30
+$ Golfers_23 Golfers_27 Golfers_28
+$ Golfers_24 Golfers_25 Golfers_29
+$ Golfers_3  Golfers_4  Golfers_9 
+$ 
+$ Golfers_1  Golfers_11 Golfers_23
+$ Golfers_10 Golfers_14 Golfers_3 
+$ Golfers_12 Golfers_18 Golfers_26
+$ Golfers_13 Golfers_22 Golfers_4 
+$ Golfers_15 Golfers_2  Golfers_25
+$ Golfers_16 Golfers_30 Golfers_6 
+$ Golfers_17 Golfers_28 Golfers_5 
+$ Golfers_19 Golfers_24 Golfers_7 
+$ Golfers_20 Golfers_27 Golfers_8 
+$ Golfers_21 Golfers_29 Golfers_9 
+$ 
+$ Golfers_1  Golfers_14 Golfers_6 
+$ Golfers_10 Golfers_18 Golfers_27
+$ Golfers_11 Golfers_19 Golfers_28
+$ Golfers_12 Golfers_20 Golfers_29
+$ Golfers_13 Golfers_21 Golfers_30
+$ Golfers_15 Golfers_24 Golfers_4 
+$ Golfers_16 Golfers_25 Golfers_7 
+$ Golfers_17 Golfers_26 Golfers_9 
+$ Golfers_2  Golfers_22 Golfers_8 
+$ Golfers_23 Golfers_3  Golfers_5 
+$ 
+$ Golfers_1  Golfers_15 Golfers_8 
+$ Golfers_10 Golfers_19 Golfers_26
+$ Golfers_11 Golfers_20 Golfers_30
+$ Golfers_12 Golfers_21 Golfers_28
+$ Golfers_13 Golfers_17 Golfers_29
+$ Golfers_14 Golfers_2  Golfers_24
+$ Golfers_16 Golfers_23 Golfers_4 
+$ Golfers_18 Golfers_25 Golfers_9 
+$ Golfers_22 Golfers_3  Golfers_6 
+$ Golfers_27 Golfers_5  Golfers_7 
+$ 
+$ Golfers_1  Golfers_16 Golfers_22
+$ Golfers_10 Golfers_21 Golfers_25
+$ Golfers_11 Golfers_18 Golfers_29
+$ Golfers_12 Golfers_19 Golfers_30
+$ Golfers_13 Golfers_24 Golfers_3 
+$ Golfers_14 Golfers_4  Golfers_8 
+$ Golfers_15 Golfers_26 Golfers_5 
+$ Golfers_17 Golfers_27 Golfers_6 
+$ Golfers_2  Golfers_23 Golfers_9 
+$ Golfers_20 Golfers_28 Golfers_7 
+$ 
+$ Golfers_1  Golfers_2  Golfers_3 
+$ Golfers_10 Golfers_11 Golfers_12
+$ Golfers_13 Golfers_14 Golfers_15
+$ Golfers_16 Golfers_17 Golfers_18
+$ Golfers_19 Golfers_20 Golfers_21
+$ Golfers_22 Golfers_23 Golfers_24
+$ Golfers_25 Golfers_26 Golfers_27
+$ Golfers_28 Golfers_29 Golfers_30
+$ Golfers_4  Golfers_5  Golfers_6 
+$ Golfers_7  Golfers_8  Golfers_9 
+$ 
+$ Golfers_1  Golfers_4  Golfers_7 
+$ Golfers_10 Golfers_2  Golfers_5 
+$ Golfers_11 Golfers_3  Golfers_8 
+$ Golfers_12 Golfers_6  Golfers_9 
+$ Golfers_13 Golfers_16 Golfers_19
+$ Golfers_14 Golfers_17 Golfers_20
+$ Golfers_15 Golfers_18 Golfers_21
+$ Golfers_22 Golfers_25 Golfers_28
+$ Golfers_23 Golfers_26 Golfers_29
+$ Golfers_24 Golfers_27 Golfers_30
+$ 
+$ Golfers_1  Golfers_5  Golfers_9 
+$ Golfers_10 Golfers_6  Golfers_8 
+$ Golfers_11 Golfers_2  Golfers_4 
+$ Golfers_12 Golfers_3  Golfers_7 
+$ Golfers_13 Golfers_18 Golfers_20
+$ Golfers_14 Golfers_16 Golfers_21
+$ Golfers_15 Golfers_17 Golfers_19
+$ Golfers_22 Golfers_27 Golfers_29
+$ Golfers_23 Golfers_25 Golfers_30
+$ Golfers_24 Golfers_26 Golfers_28
+$ 
+

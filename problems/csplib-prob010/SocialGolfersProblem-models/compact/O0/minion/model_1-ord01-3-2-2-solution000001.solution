@@ -5,3 +5,14 @@ letting sched be
         {partition({Golfers_1, Golfers_2}, {Golfers_3, Golfers_4}),
          partition({Golfers_1, Golfers_3}, {Golfers_2, Golfers_4}),
          partition({Golfers_1, Golfers_4}, {Golfers_2, Golfers_3})}
+$ Visualisation for sched
+$ Golfers_1 Golfers_2
+$ Golfers_3 Golfers_4
+$ 
+$ Golfers_1 Golfers_3
+$ Golfers_2 Golfers_4
+$ 
+$ Golfers_1 Golfers_4
+$ Golfers_2 Golfers_3
+$ 
+

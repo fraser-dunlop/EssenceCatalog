@@ -8,3 +8,12 @@ letting c be
          function(1 --> a, 2 --> a, 3 --> a, 4 --> b, 5 --> a, 6 --> b),
          function(1 --> a, 2 --> a, 3 --> a, 4 --> b, 5 --> b, 6 --> a),
          function(1 --> a, 2 --> a, 3 --> a, 4 --> b, 5 --> c, 6 --> d)}
+$ Visualisation for c
+$ a a a a a a
+$ a a a a b b
+$ a a a a c c
+$ a a a a d d
+$ a a a b a b
+$ a a a b b a
+$ a a a b c d
+

@@ -11,3 +11,15 @@ letting c be
          function(1 --> a, 2 --> a, 3 --> c, 4 --> a, 5 --> c, 6 --> a),
          function(1 --> a, 2 --> a, 3 --> c, 4 --> b, 5 --> d, 6 --> d),
          function(1 --> a, 2 --> a, 3 --> c, 4 --> c, 5 --> a, 6 --> a)}
+$ Visualisation for c
+$ a a a a a a
+$ a a a a c c
+$ a a a c a c
+$ a a a c c a
+$ a a a d d d
+$ a a b b b b
+$ a a c a a c
+$ a a c a c a
+$ a a c b d d
+$ a a c c a a
+
