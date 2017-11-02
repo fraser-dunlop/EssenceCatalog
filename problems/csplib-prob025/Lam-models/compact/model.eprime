@@ -6,7 +6,7 @@ such that
     and([sum([toInt(!m[r, c]) | c : int(1..indexSize)]) = 11 | r : int(1..indexSize)]),
     and([sum([toInt(!m[r, c]) | r : int(1..indexSize)]) = 11 | c : int(1..indexSize)]),
     and([sum([toInt(!(m[r1, c] \/ m[r2, c])) | c : int(1..indexSize)]) = 1
-             | r1 : int(1..indexSize), r2 : int(1..indexSize), r1 != r2])
+             | r1 : int(1..indexSize), r2 : int(1..indexSize), r2 > r1])
 
 $ Conjure's
 $ {"finds": [{"Name": "m"}],

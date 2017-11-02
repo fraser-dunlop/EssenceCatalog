@@ -289,11 +289,11 @@ where
                     s3_ExplicitVarSizeWithDummy[q85 + 1] = Attribute_EnumSize + 1
                         | q85 : int(1..Attribute_EnumSize - 1)])])
 letting let1 be sum([capacity_FunctionND[q179_1, q179_2] | q179_1 : int(1..n_lines), q179_2 : int(1..n_days)])
-find batches_Function1DR8_ExplicitWithRepetition_Flag: matrix indexed by [int(1..let1)] of int(0..maxLot * maxLot)
+find batches_Function1DR8_ExplicitWithRepetition_Flag: matrix indexed by [int(1..let1)] of int(0..maxLot)
 find batches_Function1DR8_ExplicitWithRepetition_Values_1:
-        matrix indexed by [int(1..let1), int(1..maxLot * maxLot)] of int(1..n_orders)
+        matrix indexed by [int(1..let1), int(1..maxLot)] of int(1..n_orders)
 find batches_Function1DR8_ExplicitWithRepetition_Values_2:
-        matrix indexed by [int(1..let1), int(1..maxLot * maxLot)] of int(1..batch_size)
+        matrix indexed by [int(1..let1), int(1..maxLot)] of int(1..batch_size)
 find batch_attr_Function1DR5_ExplicitVarSizeWithMarker_Marker:
         matrix indexed by [int(1..let1)] of int(0..Attribute_EnumSize)
 find batch_attr_Function1DR5_ExplicitVarSizeWithMarker_Values:
@@ -311,7 +311,7 @@ such that
                            [batches_Function1DR8_ExplicitWithRepetition_Values_1[b, q185], q181]
                            | q183 : int(1..Attribute_EnumSize)])
                        | q181 : int(1..fin4)])
-                  | q185 : int(1..maxLot * maxLot)])
+                  | q185 : int(1..maxLot)])
              | b : int(1..let1)]),
     and([and([q156 <= batch_attr_Function1DR5_ExplicitVarSizeWithMarker_Marker[b] ->
               or([q155 <= batches_Function1DR8_ExplicitWithRepetition_Flag[b] /\
@@ -323,7 +323,7 @@ such that
                           [batches_Function1DR8_ExplicitWithRepetition_Values_1[b, q155], q153]
                       = batch_attr_Function1DR5_ExplicitVarSizeWithMarker_Values[b, q156]
                           | q153 : int(1..fin4)])
-                      | q155 : int(1..maxLot * maxLot)])
+                      | q155 : int(1..maxLot)])
                   | q156 : int(1..Attribute_EnumSize)])
              | b : int(1..let1)]),
     and([and([q191 <= batches_Function1DR8_ExplicitWithRepetition_Flag[schedule_FunctionND[q193_1, q193_2, q193_3]] ->
@@ -341,7 +341,7 @@ such that
                            | q189 : int(1..fin8),
                              line_attr_Function1DR6_ExplicitVarSizeWithDummy[q193_1, q189] != Attribute_EnumSize + 1])
                        | q187 : int(1..fin4)])
-                  | q191 : int(1..maxLot * maxLot)])
+                  | q191 : int(1..maxLot)])
              | q193_1 : int(1..n_lines), q193_2 : int(1..n_days), q193_3 : int(1..n_slots)]),
     and([and([q195 <= batches_Function1DR8_ExplicitWithRepetition_Flag[schedule_FunctionND[q197_1, q197_2, q197_3]] ->
               q197_2 >=
@@ -353,7 +353,7 @@ such that
               line_off_Function1D
                   [batches_Function1DR8_ExplicitWithRepetition_Values_1
                        [schedule_FunctionND[q197_1, q197_2, q197_3], q195]]
-                  | q195 : int(1..maxLot * maxLot)])
+                  | q195 : int(1..maxLot)])
              | q197_1 : int(1..n_lines), q197_2 : int(1..n_days), q197_3 : int(1..n_slots)]),
     and([and([and([or([and([or([q165 <=
                                 batch_attr_Function1DR5_ExplicitVarSizeWithMarker_Marker[schedule_FunctionND[l, d, s]]
@@ -421,12 +421,12 @@ such that
               /\
               batches_Function1DR8_ExplicitWithRepetition_Values_2[q146, q147] <=
               batches_Function1DR8_ExplicitWithRepetition_Values_2[q146, q147 + 1]
-                  | q147 : int(1..maxLot * maxLot - 1)])
+                  | q147 : int(1..maxLot - 1)])
              | q146 : int(1..let1)]),
     and([and([q148 > batches_Function1DR8_ExplicitWithRepetition_Flag[q146] ->
               batches_Function1DR8_ExplicitWithRepetition_Values_1[q146, q148] = 1 /\
               batches_Function1DR8_ExplicitWithRepetition_Values_2[q146, q148] = 1
-                  | q148 : int(1..maxLot * maxLot)])
+                  | q148 : int(1..maxLot)])
              | q146 : int(1..let1)]),
     and([batches_Function1DR8_ExplicitWithRepetition_Flag[q146] <= maxLot | q146 : int(1..let1)]),
     allDiff([schedule_FunctionND[q157_1, q157_2, q157_3]
@@ -780,7 +780,8 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 16], ["let", 2], ["q", 198]],

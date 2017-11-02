@@ -18,7 +18,7 @@ such that
                             | q14_1 : int(1..v), q14_2 : int(1..b), q14_1 = o2]))
                   | q11_1 : int(1..v), q11_2 : int(1..b), q11_1 = o1])
          = lambda
-             | o1 : int(1..v), o2 : int(1..v), o1 != o2])
+             | o1 : int(1..v), o2 : int(1..v), o2 > o1])
 
 $ Conjure's
 $ {"finds": [{"Name": "bibd"}],

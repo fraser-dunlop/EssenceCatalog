@@ -19,30 +19,30 @@ minimising
          catchUndef(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_2[q42], 0)
              | q42 : int(1..2 ** n_orders * nbSizes)])
 such that
-    and([and([q34 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker,
-              q40 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker,
-              or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q37] /\
-                  !or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
-                           [q40, q38]
-                       /\ q38 = q37
-                           | q38 : int(1..n_orders)])
-                      | q37 : int(1..n_orders)])
-              \/
-              or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q40, q37] /\
-                  !cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q37]
-                      | q37 : int(1..n_orders)]);
-                  int(1..3)])
+    and([q34 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
+         q40 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker
          ->
-         sum([toInt(or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
-                            [q40, q36]
-                        /\ q36 = q35
-                            | q36 : int(1..n_orders)]))
-              *
-              catchUndef(toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
-                                   [q34, q35]),
-                         0)
-                  | q35 : int(1..n_orders)])
-         = 0 | q34 : int(1..2 ** n_orders * nbSizes), q40 : int(1..2 ** n_orders * nbSizes)]),
+         (or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q37] /\
+              !or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q40, q38] /\
+                   q38 = q37
+                       | q38 : int(1..n_orders)])
+                  | q37 : int(1..n_orders)])
+          \/
+          or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q40, q37] /\
+              !cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q34, q37]
+                  | q37 : int(1..n_orders)])
+          ->
+          sum([toInt(or([cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
+                             [q40, q36]
+                         /\ q36 = q35
+                             | q36 : int(1..n_orders)]))
+               *
+               catchUndef(toInt(cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence
+                                    [q34, q35]),
+                          0)
+                   | q35 : int(1..n_orders)])
+          = 0)
+             | q34 : int(1..2 ** n_orders * nbSizes), q40 : int(1..2 ** n_orders * nbSizes)]),
     and([or([q8 <= cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Marker /\
              cut_FunctionAsRelationR2_RelationAsSetR2_ExplicitVarSizeWithMarkerR2_Values_1_Occurrence[q8, o]
                  | q8 : int(1..2 ** n_orders * nbSizes)])

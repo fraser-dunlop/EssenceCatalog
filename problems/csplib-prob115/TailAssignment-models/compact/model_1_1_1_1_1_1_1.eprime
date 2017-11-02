@@ -112,83 +112,83 @@ such that
                       | q83 : int(1..fin2), can_fly_RelationAsSet_Explicit_1[q83] = p])
                   | q75 : int(1..n_flights)])
              | p : int(1..n_planes)]),
-    and([q16 + 1 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-         conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q16, ..] <lex
-         conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q16 + 1, ..]
+    and([q17 + 1 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+         conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q17, ..] <lex
+         conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q17 + 1, ..]
          \/
-         and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q16, q22] =
-              conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q16 + 1, q22]
-                  | q22 : int(1..n_flights)])
+         and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q17, q23] =
+              conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q17 + 1, q23]
+                  | q23 : int(1..n_flights)])
          /\
-         conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q16, ..] <lex
-         conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q16 + 1, ..]
-             | q16 : int(1..2 ** (n_flights * n_flights) - 1)]),
-    and([q17 > conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-         and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q17, q24] = false
-                  | q24 : int(1..n_flights)])
-         /\
-         and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q17, q25] = 1
+         conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q17, ..] <lex
+         conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q17 + 1, ..]
+             | q17 : int(1..2 ** (n_flights * n_flights) - 1)]),
+    and([q18 > conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+         and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q18, q25] = false
                   | q25 : int(1..n_flights)])
-             | q17 : int(1..2 ** (n_flights * n_flights))]),
-    and([q18 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-         and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q18, q19] = false ->
-              conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q18, q19] = 1
-                  | q19 : int(1..n_flights)])
+         /\
+         and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q18, q26] = 1
+                  | q26 : int(1..n_flights)])
              | q18 : int(1..2 ** (n_flights * n_flights))]),
-    and([or([q28 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker /\
-             (and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q28, q30] ->
-                   route_Function1DR10_Function1DPartial_Values[q26, q30] =
-                   conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q28, q30]
-                   /\ route_Function1DR10_Function1DPartial_Flags[q26, q30]
-                       | q30 : int(1..n_flights)])
+    and([q19 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+         and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q19, q20] = false ->
+              conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q19, q20] = 1
+                  | q20 : int(1..n_flights)])
+             | q19 : int(1..2 ** (n_flights * n_flights))]),
+    and([or([q29 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker /\
+             (and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q29, q31] ->
+                   route_Function1DR10_Function1DPartial_Values[q27, q31] =
+                   conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q29, q31]
+                   /\ route_Function1DR10_Function1DPartial_Flags[q27, q31]
+                       | q31 : int(1..n_flights)])
               /\
-              and([route_Function1DR10_Function1DPartial_Flags[q26, q31] ->
-                   conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q28, q31] =
-                   route_Function1DR10_Function1DPartial_Values[q26, q31]
-                   /\ conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q28, q31]
-                       | q31 : int(1..n_flights)]))
-                 | q28 : int(1..2 ** (n_flights * n_flights))])
-             | q26 : int(1..n_planes)]),
-    and([q32 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
-         or([and([route_Function1DR10_Function1DPartial_Flags[q33, q35] ->
-                  conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q32, q35] =
-                  route_Function1DR10_Function1DPartial_Values[q33, q35]
-                  /\ conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q32, q35]
-                      | q35 : int(1..n_flights)])
-             /\
-             and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q32, q36] ->
-                  route_Function1DR10_Function1DPartial_Values[q33, q36] =
-                  conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q32, q36]
-                  /\ route_Function1DR10_Function1DPartial_Flags[q33, q36]
+              and([route_Function1DR10_Function1DPartial_Flags[q27, q32] ->
+                   conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q29, q32] =
+                   route_Function1DR10_Function1DPartial_Values[q27, q32]
+                   /\ conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q29, q32]
+                       | q32 : int(1..n_flights)]))
+                 | q29 : int(1..2 ** (n_flights * n_flights))])
+             | q27 : int(1..n_planes)]),
+    and([q33 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+         or([and([route_Function1DR10_Function1DPartial_Flags[q34, q36] ->
+                  conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q33, q36] =
+                  route_Function1DR10_Function1DPartial_Values[q34, q36]
+                  /\ conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q33, q36]
                       | q36 : int(1..n_flights)])
-                 | q33 : int(1..n_planes)])
-             | q32 : int(1..2 ** (n_flights * n_flights))]),
-    and([q37 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
+             /\
+             and([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q33, q37] ->
+                  route_Function1DR10_Function1DPartial_Values[q34, q37] =
+                  conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q33, q37]
+                  /\ route_Function1DR10_Function1DPartial_Flags[q34, q37]
+                      | q37 : int(1..n_flights)])
+                 | q34 : int(1..n_planes)])
+             | q33 : int(1..2 ** (n_flights * n_flights))]),
+    and([q38 <= conjure_aux1_ExplicitVarSizeWithMarkerR10_Marker ->
          and([i <=
-              sum([toInt(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q37, q43])
+              sum([toInt(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q38, q43])
                        | q43 : int(1..n_flights)])
               - 1
               ->
               or([network_RelationAsSet_Explicit_1[q6] =
-                  sum([toInt(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q37, q38]) *
-                       catchUndef(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q37, q38],
+                  sum([toInt(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q38, q39]) *
+                       catchUndef(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q38, q39],
                                   0)
-                           | q38 : int(1..n_flights), q38 = i])
+                           | q39 : int(1..n_flights), q39 = i])
                   /\
-                  or([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q37, q39] /\ q39 = i
-                          | q39 : int(1..n_flights)])
+                  or([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q38, q40] /\ q40 = i
+                          | q40 : int(1..n_flights)])
                   /\
                   (network_RelationAsSet_Explicit_2[q6] =
-                   sum([toInt(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q37, q40]) *
-                        catchUndef(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q37, q40],
+                   sum([toInt(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q38, q41]) *
+                        catchUndef(conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Values[q38, q41],
                                    0)
-                            | q40 : int(1..n_flights), q40 = i + 1])
+                            | q41 : int(1..n_flights), q41 = i + 1])
                    /\
-                   or([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q37, q41] /\ q41 = i + 1
-                           | q41 : int(1..n_flights)]))
+                   or([conjure_aux1_ExplicitVarSizeWithMarkerR10_Values_Function1DPartial_Flags[q38, q42] /\ q42 = i + 1
+                           | q42 : int(1..n_flights)]))
                       | q6 : int(1..fin1)])
                   | i : int(1..n_flights)])
-             | q37 : int(1..2 ** (n_flights * n_flights))]),
+             | q38 : int(1..2 ** (n_flights * n_flights))]),
     and([and([and([route_Function1DR10_Function1DPartial_Flags[p, q49] ->
                    conjure_aux2_Occurrence[f, p, route_Function1DR10_Function1DPartial_Values[p, q49]]
                        | q49 : int(1..n_flights)])
@@ -321,7 +321,7 @@ $  "strategyA": {"Compact": []},
 $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],

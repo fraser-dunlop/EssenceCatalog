@@ -5,30 +5,23 @@ given nrings: int(1..)
 given capacity: int(1..)
 given fin1: int
 given demand_ExplicitR3_Explicit: matrix indexed by [int(1..fin1), int(1..2)] of int(1..nnodes)
-find network_ExplicitWithRepetitionR2_Flag: int(0..nrings * nrings)
-find network_ExplicitWithRepetitionR2_Values_Occurrence:
-        matrix indexed by [int(1..nrings * nrings), int(1..nnodes)] of bool
+find network_ExplicitWithRepetitionR2_Flag: int(nrings)
+find network_ExplicitWithRepetitionR2_Values_Occurrence: matrix indexed by [int(1..nrings), int(1..nnodes)] of bool
 minimising
-    sum([toInt(q8 <= network_ExplicitWithRepetitionR2_Flag) *
-         catchUndef(sum([toInt(network_ExplicitWithRepetitionR2_Values_Occurrence[q8, q9]) | q9 : int(1..nnodes)]), 0)
-             | q8 : int(1..nrings * nrings)])
+    sum([sum([toInt(network_ExplicitWithRepetitionR2_Values_Occurrence[q8, q9]) | q9 : int(1..nnodes)])
+             | q8 : int(1..nrings), q8 <= nrings])
 such that
-    and([or([q11 <= network_ExplicitWithRepetitionR2_Flag /\
-             and([network_ExplicitWithRepetitionR2_Values_Occurrence[q11, demand_ExplicitR3_Explicit[q10, q13]]
+    and([or([and([network_ExplicitWithRepetitionR2_Values_Occurrence[q11, demand_ExplicitR3_Explicit[q10, q13]]
                       | q13 : int(1..2)])
-                 | q11 : int(1..nrings * nrings)])
+                 | q11 : int(1..nrings), q11 <= nrings])
              | q10 : int(1..fin1)]),
-    and([q1 + 1 <= network_ExplicitWithRepetitionR2_Flag ->
-         network_ExplicitWithRepetitionR2_Values_Occurrence[q1, ..] <=lex
+    and([network_ExplicitWithRepetitionR2_Values_Occurrence[q1, ..] <=lex
          network_ExplicitWithRepetitionR2_Values_Occurrence[q1 + 1, ..]
-             | q1 : int(1..nrings * nrings - 1)]),
-    and([q2 > network_ExplicitWithRepetitionR2_Flag ->
-         and([network_ExplicitWithRepetitionR2_Values_Occurrence[q2, q7] = false | q7 : int(1..nnodes)])
-             | q2 : int(1..nrings * nrings)]),
-    nrings = network_ExplicitWithRepetitionR2_Flag,
-    and([q5 <= network_ExplicitWithRepetitionR2_Flag ->
-         sum([toInt(network_ExplicitWithRepetitionR2_Values_Occurrence[q5, q6]) | q6 : int(1..nnodes)]) <= capacity
-             | q5 : int(1..nrings * nrings)])
+             | q1 : int(1..nrings - 1), q1 + 1 <= nrings]),
+    and([and([network_ExplicitWithRepetitionR2_Values_Occurrence[q2, q7] = false | q7 : int(1..nnodes)])
+             | q2 : int(1..nrings), q2 > nrings]),
+    and([sum([toInt(network_ExplicitWithRepetitionR2_Values_Occurrence[q5, q6]) | q6 : int(1..nnodes)]) <= capacity
+             | q5 : int(1..nrings), q5 <= nrings])
 
 $ Conjure's
 $ {"finds": [{"Name": "network"}],
@@ -48,7 +41,7 @@ $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 5, 8], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 2], ["q", 14]],

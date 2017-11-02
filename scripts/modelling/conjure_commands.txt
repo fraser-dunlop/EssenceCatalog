@@ -34,6 +34,8 @@ scripts/modelling/runConjure.sh csplib-prob016 TrafficLights.essence compact
 scripts/modelling/runConjure.sh csplib-prob016 TrafficLights.essence noch
 scripts/modelling/runConjure.sh csplib-prob017 RamseyNumbers.essence compact
 scripts/modelling/runConjure.sh csplib-prob017 RamseyNumbers.essence noch
+scripts/modelling/runConjure.sh csplib-prob018 water_buckets.essence compact
+scripts/modelling/runConjure.sh csplib-prob018 water_buckets.essence noch
 scripts/modelling/runConjure.sh csplib-prob019 MagicSquares.essence compact
 scripts/modelling/runConjure.sh csplib-prob019 MagicSquares.essence noch
 scripts/modelling/runConjure.sh csplib-prob021 Crossfigures.essence compact
@@ -96,6 +98,8 @@ scripts/modelling/runConjure.sh csplib-prob057 KillerSudoku.essence compact
 scripts/modelling/runConjure.sh csplib-prob057 KillerSudoku.essence noch
 scripts/modelling/runConjure.sh csplib-prob065 opd.essence compact
 scripts/modelling/runConjure.sh csplib-prob065 opd.essence noch
+scripts/modelling/runConjure.sh csplib-prob074 naive-maxclique.essence compact
+scripts/modelling/runConjure.sh csplib-prob074 naive-maxclique.essence noch
 scripts/modelling/runConjure.sh csplib-prob110 ArmiesOfQueens.essence compact
 scripts/modelling/runConjure.sh csplib-prob110 ArmiesOfQueens.essence noch
 scripts/modelling/runConjure.sh csplib-prob115 TailAssignment.essence compact

@@ -10,13 +10,14 @@ such that
     and([or([nums_Explicit[q13] != nums_Explicit[q14] /\ nums_Explicit[q13] + nums_Explicit[q14] = nums_Explicit[q15]
                  | q13 : int(1..3), q14 : int(1..3), q15 : int(1..3)])
          ->
-         !or([q17 <= boxes_PartitionOccurrence_NumParts /\
-              and([or([boxes_PartitionOccurrence_WhichPart[q22] = q17 /\ q22 = nums_Explicit[q20] | q22 : int(1..n)])
-                       | q20 : int(1..3)])
-                  | q17 : int(1..k)])
+         and([q20 <= boxes_PartitionOccurrence_NumParts ->
+              !and([or([boxes_PartitionOccurrence_WhichPart[q25] = q20 /\ q25 = nums_Explicit[q23] | q25 : int(1..n)])
+                        | q23 : int(1..3)])
+                  | q20 : int(1..k)])
+         /\ and([or([nums_Explicit[q19] = q18 | q18 : int(1..n)]) | q19 : int(1..3)])
              | nums_Explicit : matrix indexed by [int(1..3)] of int(1..n),
                and([nums_Explicit[q1] < nums_Explicit[q1 + 1] | q1 : int(1..2)])]),
-    and([true | q3 : int(1..k)]),
+    and([q3 <= boxes_PartitionOccurrence_NumParts -> boxes_PartitionOccurrence_PartSizes[q3] <= n | q3 : int(1..k)]),
     and([q3 > boxes_PartitionOccurrence_NumParts -> boxes_PartitionOccurrence_PartSizes[q3] = 0 | q3 : int(1..k)]),
     k = boxes_PartitionOccurrence_NumParts,
     and([q4 <= boxes_PartitionOccurrence_NumParts -> or([boxes_PartitionOccurrence_WhichPart[q5] = q4 | q5 : int(1..n)])
@@ -58,10 +59,11 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["q", 23]],
+$  "nameGenState": [["q", 26]],
 $  "nbExtraGivens": 0,
 $  "representations": [[{"Name": "k"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "n"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -72,7 +74,10 @@ $                                             "partsNum": {"SizeAttr_Size": {"Re
 $                                                                                          {"DeclHasRepr": ["Given",
 $                                                                                                           {"Name": "k"},
 $                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
-$                                             "partsSize": {"SizeAttr_None": []}},
+$                                             "partsSize": {"SizeAttr_MaxSize": {"Reference": [{"Name": "n"},
+$                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                               {"Name": "n"},
+$                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}}},
 $                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                             {"Reference": [{"Name": "n"},
 $                                                                                            {"DeclHasRepr": ["Given",
@@ -94,7 +99,11 @@ $                      [{"Name": "boxes"},
 $                       {"DomainPartition": [[],
 $                                            {"isRegular": false,
 $                                             "partsNum": {"SizeAttr_Size": {"Reference": [{"Name": "k"}, null]}},
-$                                             "partsSize": {"SizeAttr_None": []}},
+$                                             "partsSize": {"SizeAttr_MaxSize": {"Reference": [{"Name": "n"},
+$                                                                                              {"DeclNoRepr": ["Given",
+$                                                                                                              {"Name": "n"},
+$                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                              {"NoRegion": []}]}]}}},
 $                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                             {"Reference": [{"Name": "n"},
 $                                                                                            null]}]}]}]}]],

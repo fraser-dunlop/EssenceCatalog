@@ -8,46 +8,60 @@ given capacity_Function1D: matrix indexed by [int(1..n_boats)] of int(1..fin2)
 given fin3: int
 given fin4: int
 given crew_Function1D: matrix indexed by [int(1..n_boats)] of int(1..fin4)
-find hosts_ExplicitVarSizeWithMarker_Marker: int(0..n_boats)
-find hosts_ExplicitVarSizeWithMarker_Values: matrix indexed by [int(1..n_boats)] of int(1..n_boats)
+find hosts_ExplicitVarSizeWithDummy: matrix indexed by [int(1..n_boats)] of int(1..n_boats + 1)
 find sched_ExplicitR9_Function1D: matrix indexed by [int(1..n_periods), int(1..n_boats)] of int(1..n_boats)
 find conjure_aux1_Occurrence: matrix indexed by [int(1..n_periods), int(1..n_boats)] of bool
-minimising hosts_ExplicitVarSizeWithMarker_Marker
+find conjure_aux2_Occurrence: matrix indexed by [int(1..n_periods), int(1..n_boats), int(1..n_boats)] of bool
+minimising sum([toInt(hosts_ExplicitVarSizeWithDummy[q39] != n_boats + 1) | q39 : int(1..n_boats)])
 such that
-    and([and([conjure_aux1_Occurrence[q8, sched_ExplicitR9_Function1D[q8, q14]] | q14 : int(1..n_boats)])
-             | q8 : int(1..n_periods)]),
-    and([and([conjure_aux1_Occurrence[q8, q11] ->
-              or([sched_ExplicitR9_Function1D[q8, q15] = q11 | q15 : int(1..n_boats)])
+    and([and([conjure_aux1_Occurrence[q9, sched_ExplicitR9_Function1D[q9, q15]] | q15 : int(1..n_boats)])
+             | q9 : int(1..n_periods)]),
+    and([and([conjure_aux1_Occurrence[q9, q12] ->
+              or([sched_ExplicitR9_Function1D[q9, q16] = q12 | q16 : int(1..n_boats)])
+                  | q12 : int(1..n_boats)])
+             | q9 : int(1..n_periods)]),
+    and([and([and([conjure_aux2_Occurrence[q9, q20, sched_ExplicitR9_Function1D[q9, q26]] | q26 : int(1..n_boats)])
+                  | q20 : int(1..n_boats)])
+             | q9 : int(1..n_periods)]),
+    and([and([and([conjure_aux2_Occurrence[q9, q20, q23] ->
+                   or([sched_ExplicitR9_Function1D[q9, q27] = q23 | q27 : int(1..n_boats)])
+                       | q23 : int(1..n_boats)])
+                  | q20 : int(1..n_boats)])
+             | q9 : int(1..n_periods)]),
+    and([and([conjure_aux1_Occurrence[q9, q11] ->
+              or([hosts_ExplicitVarSizeWithDummy[q18] != n_boats + 1 /\ hosts_ExplicitVarSizeWithDummy[q18] = q11
+                      | q18 : int(1..n_boats)])
                   | q11 : int(1..n_boats)])
-             | q8 : int(1..n_periods)]),
-    and([and([conjure_aux1_Occurrence[q8, q10] ->
-              or([q17 <= hosts_ExplicitVarSizeWithMarker_Marker /\ hosts_ExplicitVarSizeWithMarker_Values[q17] = q10
-                      | q17 : int(1..n_boats)])
-                  | q10 : int(1..n_boats)])
-             | q8 : int(1..n_periods)]),
-    and([and([q21 <= hosts_ExplicitVarSizeWithMarker_Marker ->
-              sched_ExplicitR9_Function1D[q20, hosts_ExplicitVarSizeWithMarker_Values[q21]] =
-              hosts_ExplicitVarSizeWithMarker_Values[q21]
-                  | q21 : int(1..n_boats)])
-             | q20 : int(1..n_periods)]),
-    and([and([q23 <= hosts_ExplicitVarSizeWithMarker_Marker ->
-              sum([toInt(sched_ExplicitR9_Function1D[q22, q25] = hosts_ExplicitVarSizeWithMarker_Values[q23]) *
-                   catchUndef(crew_Function1D[q25], 0)
-                       | q25 : int(1..n_boats)])
-              <= capacity_Function1D[hosts_ExplicitVarSizeWithMarker_Values[q23]]
-                  | q23 : int(1..n_boats)])
-             | q22 : int(1..n_periods)]),
+         /\
+         and([hosts_ExplicitVarSizeWithDummy[q20] != n_boats + 1 ->
+              or([conjure_aux2_Occurrence[q9, q20, q22] /\ q22 = hosts_ExplicitVarSizeWithDummy[q20]
+                      | q22 : int(1..n_boats)])
+                  | q20 : int(1..n_boats)])
+             | q9 : int(1..n_periods)]),
+    and([and([hosts_ExplicitVarSizeWithDummy[q33] != n_boats + 1 ->
+              sched_ExplicitR9_Function1D[q32, hosts_ExplicitVarSizeWithDummy[q33]] =
+              hosts_ExplicitVarSizeWithDummy[q33]
+                  | q33 : int(1..n_boats)])
+             | q32 : int(1..n_periods)]),
+    and([and([hosts_ExplicitVarSizeWithDummy[q35] != n_boats + 1 ->
+              sum([toInt(sched_ExplicitR9_Function1D[q34, q37] = hosts_ExplicitVarSizeWithDummy[q35]) *
+                   catchUndef(crew_Function1D[q37], 0)
+                       | q37 : int(1..n_boats)])
+              <= capacity_Function1D[hosts_ExplicitVarSizeWithDummy[q35]]
+                  | q35 : int(1..n_boats)])
+             | q34 : int(1..n_periods)]),
     and([b1 < b2 ->
-         sum([toInt(sched_ExplicitR9_Function1D[q7, b1] = sched_ExplicitR9_Function1D[q7, b2])
-                  | q7 : int(1..n_periods)])
+         sum([toInt(sched_ExplicitR9_Function1D[q8, b1] = sched_ExplicitR9_Function1D[q8, b2])
+                  | q8 : int(1..n_periods)])
          <= 1
              | b1 : int(1..n_boats), b2 : int(1..n_boats)]),
-    and([q1 + 1 <= hosts_ExplicitVarSizeWithMarker_Marker ->
-         hosts_ExplicitVarSizeWithMarker_Values[q1] < hosts_ExplicitVarSizeWithMarker_Values[q1 + 1]
+    and([hosts_ExplicitVarSizeWithDummy[q1] < hosts_ExplicitVarSizeWithDummy[q1 + 1] \/
+         hosts_ExplicitVarSizeWithDummy[q1] = n_boats + 1
              | q1 : int(1..n_boats - 1)]),
-    and([q2 > hosts_ExplicitVarSizeWithMarker_Marker -> hosts_ExplicitVarSizeWithMarker_Values[q2] = 1
-             | q2 : int(1..n_boats)]),
-    and([sched_ExplicitR9_Function1D[q4, ..] <lex sched_ExplicitR9_Function1D[q4 + 1, ..] | q4 : int(1..n_periods - 1)])
+    and([hosts_ExplicitVarSizeWithDummy[q2] = n_boats + 1 -> hosts_ExplicitVarSizeWithDummy[q2 + 1] = n_boats + 1
+             | q2 : int(1..n_boats - 1)]),
+    1 <= sum([toInt(hosts_ExplicitVarSizeWithDummy[q3] != n_boats + 1) | q3 : int(1..n_boats)]),
+    and([sched_ExplicitR9_Function1D[q5, ..] <lex sched_ExplicitR9_Function1D[q5 + 1, ..] | q5 : int(1..n_periods - 1)])
 
 $ Conjure's
 $ {"finds": [{"Name": "hosts"}, {"Name": "sched"}],
@@ -63,18 +77,23 @@ $                                                                               
 $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
-$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 3, 4], [1, 1, 1], [1, 1, 1],
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 2, 4], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 4], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["conjure_aux", 2], ["fin", 5], ["q", 26]],
+$  "nameGenState": [["conjure_aux", 3], ["fin", 5], ["q", 40]],
 $  "nbExtraGivens": 4,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_boats"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -83,7 +102,8 @@ $                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_periods"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "hosts"},
-$                       {"DomainSet": [{"Set_ExplicitVarSizeWithMarker": []}, {"SizeAttr_None": []},
+$                       {"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
+$                                      {"SizeAttr_MinSize": {"Constant": {"ConstantInt": 1}}},
 $                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                       {"Reference": [{"Name": "n_boats"},
 $                                                                                      {"DeclHasRepr": ["Given",
@@ -174,7 +194,7 @@ $                          [{"MachineName": ["fin", 4, []]},
 $                           [{"rootLabel": null,
 $                             "subForest": []}]],
 $                          [{"Name": "hosts"},
-$                           [{"rootLabel": {"Set_ExplicitVarSizeWithMarker": []},
+$                           [{"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []}]}]],
 $                          [{"Name": "n_boats"},
@@ -205,7 +225,7 @@ $                                                                            {"R
 $                                                                                           null]}]}]},
 $                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}],
 $                      [{"Name": "hosts"},
-$                       {"DomainSet": [[], {"SizeAttr_None": []},
+$                       {"DomainSet": [[], {"SizeAttr_MinSize": {"Constant": {"ConstantInt": 1}}},
 $                                      {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                       {"Reference": [{"Name": "n_boats"}, null]}]}]}]}],
 $                      [{"Name": "sched"},

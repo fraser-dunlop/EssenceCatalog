@@ -1,20 +1,12 @@
 language ESSENCE' 1.0
 
 given n: int(1..)
-find arrangement_Function1DPartial_Flags: matrix indexed by [int(1..n)] of bool
-find arrangement_Function1DPartial_Values: matrix indexed by [int(1..n)] of int(1..n)
+find arrangement_Function1D: matrix indexed by [int(1..n)] of int(1..n)
 such that
-    and([and([|arrangement_Function1DPartial_Values[q1] - arrangement_Function1DPartial_Values[q2]| != |q1 - q2|,
-              arrangement_Function1DPartial_Flags[q1], arrangement_Function1DPartial_Flags[q2];
-                  int(1..3)])
+    and([|arrangement_Function1D[q1] - arrangement_Function1D[q2]| != |q1 - q2|
              | q1 : int(1..n), q2 : int(1..n), q1 < q2]),
-    and([arrangement_Function1DPartial_Flags[q1] /\ arrangement_Function1DPartial_Flags[q2] ->
-         arrangement_Function1DPartial_Values[q1] != arrangement_Function1DPartial_Values[q2]
-             | q1 : int(1..n), q2 : int(1..n), q1 < q2]),
-    and([or([arrangement_Function1DPartial_Flags[q4] /\ arrangement_Function1DPartial_Values[q4] = q3 | q4 : int(1..n)])
-             | q3 : int(1..n)]),
-    and([arrangement_Function1DPartial_Flags[q5] = false -> arrangement_Function1DPartial_Values[q5] = 1
-             | q5 : int(1..n)])
+    allDiff(arrangement_Function1D),
+    and([or([arrangement_Function1D[q4] = q3 | q4 : int(1..n)]) | q3 : int(1..n)])
 
 $ Conjure's
 $ {"finds": [{"Name": "arrangement"}],
@@ -30,17 +22,15 @@ $                                                                               
 $  "unnameds": [],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
-$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1]],
+$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["q", 8]],
+$  "nameGenState": [["q", 6]],
 $  "nbExtraGivens": 0,
 $  "representations": [[{"Name": "n"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "arrangement"},
-$                       {"DomainFunction": [{"Function_1DPartial": []},
-$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_Bijective"],
+$                       {"DomainFunction": [{"Function_1D": []},
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_Bijective"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": [{"Name": "n"},
 $                                                                                           {"DeclHasRepr": ["Given",
@@ -52,7 +42,7 @@ $                                                                               
 $                                                                                                            {"Name": "n"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]}]}]],
 $  "representationsTree": [[{"Name": "arrangement"},
-$                           [{"rootLabel": {"Function_1DPartial": []},
+$                           [{"rootLabel": {"Function_1D": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
 $                                           {"rootLabel": null,
@@ -63,7 +53,7 @@ $                             "subForest": []}]]],
 $  "originalDomains": [[{"Name": "n"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "arrangement"},
 $                       {"DomainFunction": [[],
-$                                           [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_Bijective"],
+$                                           [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAttr_Bijective"],
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                            {"Reference": [{"Name": "n"}, null]}]}]},
 $                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},

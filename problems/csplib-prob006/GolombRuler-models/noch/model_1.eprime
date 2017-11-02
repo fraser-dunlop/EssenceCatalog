@@ -7,7 +7,10 @@ find conjure_aux1: int(0..bound)
 minimising conjure_aux1
 such that
     and([Ticks_Occurrence[q13] -> q13 <= conjure_aux1 | q13 : int(0..bound)]),
+    sum([toInt(Ticks_Occurrence[q13]) | q13 : int(0..bound)]) > 0 ->
     or([Ticks_Occurrence[q13] /\ q13 = conjure_aux1 | q13 : int(0..bound)]),
+    sum([toInt(Ticks_Occurrence[q13]) | q13 : int(0..bound)]) = 0 -> conjure_aux1 = 0,
+    sum([toInt(Ticks_Occurrence[q13]) | q13 : int(0..bound)]) > 0,
     Ticks_Occurrence[0],
     and([Ticks_Occurrence[i] /\ Ticks_Occurrence[j] ->
          and([Ticks_Occurrence[k] /\ Ticks_Occurrence[l] ->
@@ -39,7 +42,8 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["conjure_aux", 2], ["q", 14]],

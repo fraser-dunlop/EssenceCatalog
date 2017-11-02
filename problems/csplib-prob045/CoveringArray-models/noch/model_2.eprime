@@ -6,16 +6,15 @@ given t: int(1..)
 given g: int(2..)
 where k >= t
 where b >= g ** t
-find CoverTest_ExplicitWithRepetitionR9_Flag: int(0..b * b)
-find CoverTest_ExplicitWithRepetitionR9_Values_Function1D: matrix indexed by [int(1..b * b), int(1..k)] of int(1..g)
+find CoverTest_ExplicitWithRepetitionR9_Flag: int(b)
+find CoverTest_ExplicitWithRepetitionR9_Values_Function1D: matrix indexed by [int(1..b), int(1..k)] of int(1..g)
 such that
-    and([or([q15 <= CoverTest_ExplicitWithRepetitionR9_Flag /\
-             and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D
-                      [q15, testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q17]]
-                  = testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q17]
-                      | q17 : int(1..k * g),
-                        q17 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
-                 | q15 : int(1..b * b)])
+    and([or([and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D
+                      [q16, testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q18]]
+                  = testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q18]
+                      | q18 : int(1..k * g),
+                        q18 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
+                 | q16 : int(1..b), q16 <= b])
              | testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker : int(0..k * g),
                testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1 : matrix indexed by [int(1..k
                                                                                                                         *
@@ -38,21 +37,18 @@ such that
                     testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_2[q2] = 1
                         | q2 : int(1..k * g)]),
                and([1 >=
-                    sum([1   | q12 : int(1..k * g),
-                               q12 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
-                               testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q12] = q4])
+                    sum([1   | q13 : int(1..k * g),
+                               q13 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker,
+                               testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Values_1[q13] = q4])
                         | q4 : int(1..k)]),
-               sum([1   | q14 : int(1..k * g),
-                          q14 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
+               sum([1   | q15 : int(1..k * g),
+                          q15 <= testcase_FunctionAsRelation_RelationAsSet_ExplicitVarSizeWithMarker_Marker])
                = t]),
-    and([q6 + 1 <= CoverTest_ExplicitWithRepetitionR9_Flag ->
-         CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q6, ..] <=lex
+    and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q6, ..] <=lex
          CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q6 + 1, ..]
-             | q6 : int(1..b * b - 1)]),
-    and([q7 > CoverTest_ExplicitWithRepetitionR9_Flag ->
-         and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q7, q18] = 1 | q18 : int(1..k)])
-             | q7 : int(1..b * b)]),
-    b = CoverTest_ExplicitWithRepetitionR9_Flag
+             | q6 : int(1..b - 1), q6 + 1 <= b]),
+    and([and([CoverTest_ExplicitWithRepetitionR9_Values_Function1D[q7, q12] = 1 | q12 : int(1..k)])
+             | q7 : int(1..b), q7 > b])
 
 $ Conjure's
 $ {"finds": [{"Name": "CoverTest"}],
@@ -80,7 +76,7 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["q", 19]],

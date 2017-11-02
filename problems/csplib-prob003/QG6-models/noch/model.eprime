@@ -7,10 +7,10 @@ letting let3 be n - 1
 find quasigroup_FunctionND: matrix indexed by [int(0..let1), int(0..let2)] of int(0..let3)
 such that
     and([allDiff([quasigroup_FunctionND[v, q5_2] | q5_2 : int(0..n - 1)]) /\
-         and([or([v = v /\ q6_2 = q5_2 | q6_2 : int(0..n - 1)]) | q5_2 : int(0..n - 1)])
+         and([or([q6_2 = q5_2 | q6_2 : int(0..n - 1)]) | q5_2 : int(0..n - 1)])
              | v : int(0..n - 1)]),
     and([allDiff([quasigroup_FunctionND[q3_1, v] | q3_1 : int(0..n - 1)]) /\
-         and([or([q4_1 = q3_1 /\ v = v | q4_1 : int(0..n - 1)]) | q3_1 : int(0..n - 1)])
+         and([or([q4_1 = q3_1 | q4_1 : int(0..n - 1)]) | q3_1 : int(0..n - 1)])
              | v : int(0..n - 1)]),
     and([quasigroup_FunctionND[quasigroup_FunctionND[a, b], b] = quasigroup_FunctionND[a, quasigroup_FunctionND[a, b]]
              | a : int(0..n - 1), b : int(0..n - 1)])
@@ -57,7 +57,8 @@ $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["let", 4], ["q", 7]],

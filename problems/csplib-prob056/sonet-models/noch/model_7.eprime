@@ -5,26 +5,23 @@ given nrings: int(1..)
 given capacity: int(1..)
 given fin1: int
 given demand_ExplicitR3_Explicit: matrix indexed by [int(1..fin1), int(1..2)] of int(1..nnodes)
-find network_ExplicitWithRepetitionR5_Flag: int(0..nrings * nrings)
+find network_ExplicitWithRepetitionR5_Flag: int(nrings)
 find network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..nrings * nrings)] of int(0..capacity)
+        matrix indexed by [int(1..nrings)] of int(0..capacity)
 find network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Values:
-        matrix indexed by [int(1..nrings * nrings), int(1..capacity)] of int(1..nnodes)
+        matrix indexed by [int(1..nrings), int(1..capacity)] of int(1..nnodes)
 minimising
-    sum([toInt(q10 <= network_ExplicitWithRepetitionR5_Flag) *
-         catchUndef(network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q10], 0)
-             | q10 : int(1..nrings * nrings)])
+    sum([network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q10]
+             | q10 : int(1..nrings), q10 <= nrings])
 such that
-    and([or([q12 <= network_ExplicitWithRepetitionR5_Flag /\
-             and([or([q16 <= network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q12] /\
+    and([or([and([or([q16 <= network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q12] /\
                       network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Values[q12, q16] =
                       demand_ExplicitR3_Explicit[q11, q14]
                           | q16 : int(1..capacity)])
                       | q14 : int(1..2)])
-                 | q12 : int(1..nrings * nrings)])
+                 | q12 : int(1..nrings), q12 <= nrings])
              | q11 : int(1..fin1)]),
-    and([q1 + 1 <= network_ExplicitWithRepetitionR5_Flag ->
-         network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q1] <
+    and([network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q1] <
          network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q1 + 1]
          \/
          network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q1] =
@@ -32,27 +29,22 @@ such that
          /\
          network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Values[q1, ..] <=lex
          network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Values[q1 + 1, ..]
-             | q1 : int(1..nrings * nrings - 1)]),
-    and([q2 > network_ExplicitWithRepetitionR5_Flag ->
-         network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q2] = 0 /\
+             | q1 : int(1..nrings - 1), q1 + 1 <= nrings]),
+    and([network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q2] = 0 /\
          and([network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Values[q2, q9] = 1
                   | q9 : int(1..capacity)])
-             | q2 : int(1..nrings * nrings)]),
-    nrings = network_ExplicitWithRepetitionR5_Flag,
-    and([q5 <= network_ExplicitWithRepetitionR5_Flag ->
-         and([q6 + 1 <= network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q5] ->
+             | q2 : int(1..nrings), q2 > nrings]),
+    and([and([q6 + 1 <= network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q5] ->
               network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Values[q5, q6] <
               network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Values[q5, q6 + 1]
                   | q6 : int(1..capacity - 1)])
-             | q5 : int(1..nrings * nrings)]),
-    and([q5 <= network_ExplicitWithRepetitionR5_Flag ->
-         and([q7 > network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q5] ->
+             | q5 : int(1..nrings), q5 <= nrings]),
+    and([and([q7 > network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q5] ->
               network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Values[q5, q7] = 1
                   | q7 : int(1..capacity)])
-             | q5 : int(1..nrings * nrings)]),
-    and([q5 <= network_ExplicitWithRepetitionR5_Flag ->
-         network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q5] <= capacity
-             | q5 : int(1..nrings * nrings)])
+             | q5 : int(1..nrings), q5 <= nrings]),
+    and([network_ExplicitWithRepetitionR5_Values_ExplicitVarSizeWithMarker_Marker[q5] <= capacity
+             | q5 : int(1..nrings), q5 <= nrings])
 
 $ Conjure's
 $ {"finds": [{"Name": "network"}],
@@ -72,7 +64,8 @@ $  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 7, 8], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
 $  "nameGenState": [["fin", 2], ["q", 17]],

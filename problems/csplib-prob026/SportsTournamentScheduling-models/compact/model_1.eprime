@@ -28,7 +28,7 @@ such that
                     (sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q10, t1] /\
                      sched_RelationAsSetR2_ExplicitR2_3_Occurrence[q10, t2]))
                   | q10 : int(1..let3)])
-         = 1 | t1 : int(1..n_teams), t2 : int(1..n_teams), t1 != t2]),
+         = 1 | t1 : int(1..n_teams), t2 : int(1..n_teams), t2 > t1]),
     and([sched_RelationAsSetR2_ExplicitR2_1[q1] < sched_RelationAsSetR2_ExplicitR2_1[q1 + 1] \/
          sched_RelationAsSetR2_ExplicitR2_1[q1] = sched_RelationAsSetR2_ExplicitR2_1[q1 + 1] /\
          (sched_RelationAsSetR2_ExplicitR2_2[q1] < sched_RelationAsSetR2_ExplicitR2_2[q1 + 1] \/

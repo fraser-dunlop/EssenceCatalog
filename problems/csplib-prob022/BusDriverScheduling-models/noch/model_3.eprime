@@ -5,46 +5,44 @@ given fin1: int
 given fin2: int
 given shifts_ExplicitR6_ExplicitVarSizeWithDummy:
         matrix indexed by [int(1..fin1), int(1..fin2)] of int(1..Tasks_EnumSize + 1)
-find sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker: int(0..2 ** Tasks_EnumSize)
+find sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker: int(0..Tasks_EnumSize)
 find sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker:
-        matrix indexed by [int(1..2 ** Tasks_EnumSize)] of int(0..Tasks_EnumSize)
+        matrix indexed by [int(1..Tasks_EnumSize)] of int(0..Tasks_EnumSize)
 find sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values:
-        matrix indexed by [int(1..2 ** Tasks_EnumSize), int(1..Tasks_EnumSize)] of int(1..Tasks_EnumSize)
-minimising
-    sum([toInt(q29 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker) | q29 : int(1..2 ** Tasks_EnumSize)])
+        matrix indexed by [int(1..Tasks_EnumSize), int(1..Tasks_EnumSize)] of int(1..Tasks_EnumSize)
+minimising sum([toInt(q30 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker) | q30 : int(1..Tasks_EnumSize)])
 such that
-    and([q15 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
-         or([and([or([q21 <=
-                      sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q15]
+    and([q14 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
+         or([and([or([q20 <=
+                      sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q14]
                       /\
-                      sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q15, q21]
-                      = shifts_ExplicitR6_ExplicitVarSizeWithDummy[q17, q19]
-                          | q21 : int(1..Tasks_EnumSize)])
-                      | q19 : int(1..fin2), shifts_ExplicitR6_ExplicitVarSizeWithDummy[q17, q19] != Tasks_EnumSize + 1])
+                      sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q14, q20]
+                      = shifts_ExplicitR6_ExplicitVarSizeWithDummy[q16, q18]
+                          | q20 : int(1..Tasks_EnumSize)])
+                      | q18 : int(1..fin2), shifts_ExplicitR6_ExplicitVarSizeWithDummy[q16, q18] != Tasks_EnumSize + 1])
              /\
-             and([q23 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q15]
+             and([q22 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q14]
                   ->
-                  or([shifts_ExplicitR6_ExplicitVarSizeWithDummy[q17, q25] =
-                      sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q15, q23]
-                          | q25 : int(1..fin2),
-                            shifts_ExplicitR6_ExplicitVarSizeWithDummy[q17, q25] != Tasks_EnumSize + 1])
-                      | q23 : int(1..Tasks_EnumSize)])
-                 | q17 : int(1..fin1)])
-             | q15 : int(1..2 ** Tasks_EnumSize)]),
-    and([1 =
-         sum([toInt(q10 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker /\
-                    or([q12 <=
-                        sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q10]
-                        /\
-                        sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values
-                            [q10, q12]
-                        = q1
-                            | q12 : int(1..Tasks_EnumSize)]))
-                  | q10 : int(1..2 ** Tasks_EnumSize)])
-             | q1 : int(1..Tasks_EnumSize)]),
-    and([q26 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
-         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q26] >= 1
-             | q26 : int(1..2 ** Tasks_EnumSize)]),
+                  or([shifts_ExplicitR6_ExplicitVarSizeWithDummy[q16, q24] =
+                      sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q14, q22]
+                          | q24 : int(1..fin2),
+                            shifts_ExplicitR6_ExplicitVarSizeWithDummy[q16, q24] != Tasks_EnumSize + 1])
+                      | q22 : int(1..Tasks_EnumSize)])
+                 | q16 : int(1..fin1)])
+             | q14 : int(1..Tasks_EnumSize)]),
+    alldifferent_except([toInt(q25 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker /\
+                               q26 <=
+                               sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker
+                                   [q25])
+                         *
+                         catchUndef(sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values
+                                        [q25, q26],
+                                    0)
+                             | q25 : int(1..Tasks_EnumSize), q26 : int(1..Tasks_EnumSize)],
+                        0),
+    and([q27 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q27] >= 1
+             | q27 : int(1..Tasks_EnumSize)]),
     and([q4 + 1 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
          sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q4] <
          sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q4 + 1]
@@ -54,23 +52,31 @@ such that
          /\
          sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q4, ..] <lex
          sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q4 + 1, ..]
-             | q4 : int(1..2 ** Tasks_EnumSize - 1)]),
+             | q4 : int(1..Tasks_EnumSize - 1)]),
     and([q5 > sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
          sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q5] = 0 /\
-         and([sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q5, q13] = 1
-                  | q13 : int(1..Tasks_EnumSize)])
-             | q5 : int(1..2 ** Tasks_EnumSize)]),
+         and([sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q5, q11] = 1
+                  | q11 : int(1..Tasks_EnumSize)])
+             | q5 : int(1..Tasks_EnumSize)]),
+    sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker <= Tasks_EnumSize,
     and([q6 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
          and([q7 + 1 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q6] ->
               sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q6, q7] <
               sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q6, q7 + 1]
                   | q7 : int(1..Tasks_EnumSize - 1)])
-             | q6 : int(1..2 ** Tasks_EnumSize)]),
+             | q6 : int(1..Tasks_EnumSize)]),
     and([q6 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
          and([q8 > sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q6] ->
               sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Values[q6, q8] = 1
                   | q8 : int(1..Tasks_EnumSize)])
-             | q6 : int(1..2 ** Tasks_EnumSize)])
+             | q6 : int(1..Tasks_EnumSize)]),
+    and([q6 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker ->
+         sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q6] <= Tasks_EnumSize
+             | q6 : int(1..Tasks_EnumSize)]),
+    Tasks_EnumSize =
+    sum([toInt(q12 <= sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Marker) *
+         catchUndef(sched_PartitionAsSet_ExplicitVarSizeWithMarkerR5_Values_ExplicitVarSizeWithMarker_Marker[q12], 0)
+             | q12 : int(1..Tasks_EnumSize)])
 
 $ Conjure's
 $ {"finds": [{"Name": "sched"}],
@@ -95,10 +101,10 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 3], ["q", 30]],
+$  "nameGenState": [["fin", 3], ["q", 31]],
 $  "nbExtraGivens": 2,
 $  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
@@ -107,8 +113,14 @@ $                      [{"Name": "sched"},
 $                       {"DomainPartition": [{"Partition_AsSet": [{"Set_ExplicitVarSizeWithMarker": []},
 $                                                                 {"Set_ExplicitVarSizeWithMarker": []}]},
 $                                            {"isRegular": false,
-$                                             "partsNum": {"SizeAttr_None": []},
-$                                             "partsSize": {"SizeAttr_None": []}},
+$                                             "partsNum": {"SizeAttr_MaxSize": {"Reference": [{"Name": "Tasks_EnumSize"},
+$                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                              {"Name": "Tasks_EnumSize"},
+$                                                                                                              {"DomainInt": []}]}]}},
+$                                             "partsSize": {"SizeAttr_MaxSize": {"Reference": [{"Name": "Tasks_EnumSize"},
+$                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                               {"Name": "Tasks_EnumSize"},
+$                                                                                                               {"DomainInt": []}]}]}}},
 $                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                             {"Reference": [{"Name": "Tasks_EnumSize"},
 $                                                                                            {"DeclHasRepr": ["Given",
@@ -158,7 +170,13 @@ $                                                     {"DomainEnum": [{"Name": "
 $                      [{"Name": "sched"},
 $                       {"DomainPartition": [[],
 $                                            {"isRegular": false,
-$                                             "partsNum": {"SizeAttr_None": []},
-$                                             "partsSize": {"SizeAttr_None": []}},
+$                                             "partsNum": {"SizeAttr_MaxSize": {"Reference": [{"Name": "Tasks_EnumSize"},
+$                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                              {"Name": "Tasks_EnumSize"},
+$                                                                                                              {"DomainInt": []}]}]}},
+$                                             "partsSize": {"SizeAttr_MaxSize": {"Reference": [{"Name": "Tasks_EnumSize"},
+$                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                               {"Name": "Tasks_EnumSize"},
+$                                                                                                               {"DomainInt": []}]}]}}},
 $                                            {"DomainEnum": [{"Name": "Tasks"}, null, null]}]}]],
 $  "questionAnswered": []}

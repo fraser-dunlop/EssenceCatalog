@@ -19,57 +19,58 @@ minimising
          catchUndef(cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_2[q71], 0)
              | q71 : int(1..2 ** n_orders * nbSizes)])
 such that
-    and([and([q56 <= cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Marker,
-              q66 <= cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Marker,
-              or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                      [q56, q61]
-                  != n_orders + 1
-                  /\
-                  !or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                           [q66, q68]
-                       != n_orders + 1
-                       /\
-                       cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                           [q66, q68]
-                       =
-                       cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                           [q56, q61]
-                           | q68 : int(1..n_orders)])
-                      | q61 : int(1..n_orders)])
-              \/
-              or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                      [q66, q69]
-                  != n_orders + 1
-                  /\
-                  !or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                           [q56, q64]
-                       != n_orders + 1
-                       /\
-                       cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                           [q56, q64]
-                       =
-                       cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                           [q66, q69]
-                           | q64 : int(1..n_orders)])
-                      | q69 : int(1..n_orders)]);
-                  int(1..3)])
+    and([q56 <= cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Marker /\
+         q66 <= cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Marker
          ->
-         sum([toInt(cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                        [q56, q58]
-                    != n_orders + 1
-                    /\
-                    or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                            [q66, q67]
-                        != n_orders + 1
-                        /\
-                        cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                            [q66, q67]
-                        =
-                        cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
-                            [q56, q58]
-                            | q67 : int(1..n_orders)]))
-                  | q58 : int(1..n_orders)])
-         = 0 | q56 : int(1..2 ** n_orders * nbSizes), q66 : int(1..2 ** n_orders * nbSizes)]),
+         (or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                  [q56, q61]
+              != n_orders + 1
+              /\
+              !or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                       [q66, q67]
+                   != n_orders + 1
+                   /\
+                   cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                       [q66, q67]
+                   =
+                   cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                       [q56, q61]
+                       | q67 : int(1..n_orders)])
+                  | q61 : int(1..n_orders)])
+          \/
+          or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                  [q66, q68]
+              != n_orders + 1
+              /\
+              !or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                       [q56, q64]
+                   != n_orders + 1
+                   /\
+                   cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                       [q56, q64]
+                   =
+                   cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                       [q66, q68]
+                       | q64 : int(1..n_orders)])
+                  | q68 : int(1..n_orders)])
+          ->
+          sum([toInt(cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                         [q56, q58]
+                     != n_orders + 1
+                     /\
+                     or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                             [q66, q69]
+                         != n_orders + 1
+                         /\
+                         cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                             [q66, q69]
+                         =
+                         cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
+                             [q56, q58]
+                             | q69 : int(1..n_orders)]))
+                   | q58 : int(1..n_orders)])
+          = 0)
+             | q56 : int(1..2 ** n_orders * nbSizes), q66 : int(1..2 ** n_orders * nbSizes)]),
     and([or([q11 <= cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Marker /\
              or([cut_FunctionAsRelationR6_RelationAsSetR6_ExplicitVarSizeWithMarkerR6_Values_1_ExplicitVarSizeWithDummy
                      [q11, q13]

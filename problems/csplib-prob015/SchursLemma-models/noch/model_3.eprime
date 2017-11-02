@@ -6,23 +6,22 @@ find boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker: matrix in
 find boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Values:
         matrix indexed by [int(1..k), int(1..n)] of int(1..n)
 such that
-    and([or([nums_Explicit[q14] != nums_Explicit[q15] /\ nums_Explicit[q14] + nums_Explicit[q15] = nums_Explicit[q16]
-                 | q14 : int(1..3), q15 : int(1..3), q16 : int(1..3)])
+    and([or([nums_Explicit[q13] != nums_Explicit[q14] /\ nums_Explicit[q13] + nums_Explicit[q14] = nums_Explicit[q15]
+                 | q13 : int(1..3), q14 : int(1..3), q15 : int(1..3)])
          ->
-         !or([and([or([q23 <= boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q19] /\
-                       boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Values[q19, q23] = nums_Explicit[q21]
-                           | q23 : int(1..n)])
-                       | q21 : int(1..3)])
-                  | q19 : int(1..k)])
+         and([!and([or([q25 <= boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q21] /\
+                        boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Values[q21, q25] = nums_Explicit[q23]
+                            | q25 : int(1..n)])
+                        | q23 : int(1..3)])
+                  | q21 : int(1..k)])
+         /\ and([or([nums_Explicit[q19] = q18 | q18 : int(1..n)]) | q19 : int(1..3)])
              | nums_Explicit : matrix indexed by [int(1..3)] of int(1..n),
                and([nums_Explicit[q1] < nums_Explicit[q1 + 1] | q1 : int(1..2)])]),
-    and([1 =
-         sum([toInt(or([q13 <= boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q11] /\
-                        boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Values[q11, q13] = q3
-                            | q13 : int(1..n)]))
-                  | q11 : int(1..k)])
-             | q3 : int(1..n)]),
-    and([boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q24] >= 1 | q24 : int(1..k)]),
+    alldifferent_except([toInt(q27 <= boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q26]) *
+                         catchUndef(boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Values[q26, q27], 0)
+                             | q26 : int(1..k), q27 : int(1..n)],
+                        0),
+    and([boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q28] >= 1 | q28 : int(1..k)]),
     and([boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q6] <
          boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q6 + 1]
          \/
@@ -40,7 +39,9 @@ such that
     and([and([q9 > boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q7] ->
               boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Values[q7, q9] = 1
                   | q9 : int(1..n)])
-             | q7 : int(1..k)])
+             | q7 : int(1..k)]),
+    and([boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q7] <= n | q7 : int(1..k)]),
+    n = sum([boxes_PartitionAsSet_ExplicitR5_ExplicitVarSizeWithMarker_Marker[q12] | q12 : int(1..k)])
 
 $ Conjure's
 $ {"finds": [{"Name": "boxes"}],
@@ -61,10 +62,11 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["q", 25]],
+$  "nameGenState": [["q", 29]],
 $  "nbExtraGivens": 0,
 $  "representations": [[{"Name": "k"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"Name": "n"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
@@ -76,7 +78,10 @@ $                                             "partsNum": {"SizeAttr_Size": {"Re
 $                                                                                          {"DeclHasRepr": ["Given",
 $                                                                                                           {"Name": "k"},
 $                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}},
-$                                             "partsSize": {"SizeAttr_None": []}},
+$                                             "partsSize": {"SizeAttr_MaxSize": {"Reference": [{"Name": "n"},
+$                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                               {"Name": "n"},
+$                                                                                                               {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}}},
 $                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                             {"Reference": [{"Name": "n"},
 $                                                                                            {"DeclHasRepr": ["Given",
@@ -99,7 +104,11 @@ $                      [{"Name": "boxes"},
 $                       {"DomainPartition": [[],
 $                                            {"isRegular": false,
 $                                             "partsNum": {"SizeAttr_Size": {"Reference": [{"Name": "k"}, null]}},
-$                                             "partsSize": {"SizeAttr_None": []}},
+$                                             "partsSize": {"SizeAttr_MaxSize": {"Reference": [{"Name": "n"},
+$                                                                                              {"DeclNoRepr": ["Given",
+$                                                                                                              {"Name": "n"},
+$                                                                                                              {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                              {"NoRegion": []}]}]}}},
 $                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                             {"Reference": [{"Name": "n"},
 $                                                                                            null]}]}]}]}]],

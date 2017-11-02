@@ -16,7 +16,7 @@ such that
          max([y_Function1D[s1], y_Function1D[s2]; int(1..2)]) -
          min([y_Function1D[s1] + s1, y_Function1D[s2] + s2; int(1..2)])
          >= 0
-             | s1 : int(1..nbSizes), s2 : int(1..nbSizes), s1 != s2])
+             | s1 : int(1..nbSizes), s2 : int(1..nbSizes), s2 > s1])
 
 $ Conjure's
 $ {"finds": [{"Name": "x"}, {"Name": "y"}],

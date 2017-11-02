@@ -20,44 +20,71 @@ given fin9: int
 given ctype_Function1D: matrix indexed by [int(1..n_cards)] of int(1..n_types)
 find model_Function1DPartial_Flags: matrix indexed by [int(1..n_racks)] of bool
 find model_Function1DPartial_Values: matrix indexed by [int(1..n_racks)] of int(1..n_models)
-find plugged_Function1DPartialR2_Flags: matrix indexed by [int(1..n_racks)] of bool
-find plugged_Function1DPartialR2_Values_Occurrence: matrix indexed by [int(1..n_racks), int(1..n_cards)] of bool
+letting let1 be fin4
+find plugged_Function1DPartialR6_Flags: matrix indexed by [int(1..n_racks)] of bool
+find plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy:
+        matrix indexed by [int(1..n_racks), int(1..let1)] of int(1..n_cards + 1)
 minimising
-    sum([toInt(model_Function1DPartial_Flags[q10]) *
-         catchUndef(price_Function1D[model_Function1DPartial_Values[q10]], 0)
-             | q10 : int(1..n_racks)])
+    sum([toInt(model_Function1DPartial_Flags[q13]) *
+         catchUndef(price_Function1D[model_Function1DPartial_Values[q13]], 0)
+             | q13 : int(1..n_racks)])
 such that
-    and([model_Function1DPartial_Flags[q10] -> model_Function1DPartial_Flags[q10] | q10 : int(1..n_racks)]),
-    and([or([model_Function1DPartial_Flags[q13] /\
-             or([plugged_Function1DPartialR2_Values_Occurrence[q13, q11] /\ plugged_Function1DPartialR2_Flags[q13] /\
-                 q11 = c
-                     | q11 : int(1..n_cards)])
-                 | q13 : int(1..n_racks)])
+    and([model_Function1DPartial_Flags[q13] -> model_Function1DPartial_Flags[q13] | q13 : int(1..n_racks)]),
+    and([or([model_Function1DPartial_Flags[q17] /\
+             or([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q17, q15] != n_cards + 1 /\
+                 plugged_Function1DPartialR6_Flags[q17]
+                 /\ plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q17, q15] = c
+                     | q15 : int(1..let1)])
+                 | q17 : int(1..n_racks)])
              | c : int(1..n_cards)]),
-    and([model_Function1DPartial_Flags[q16] /\ model_Function1DPartial_Flags[q18] ->
-         sum([toInt(and([plugged_Function1DPartialR2_Values_Occurrence[q16, q14],
-                         plugged_Function1DPartialR2_Values_Occurrence[q18, q14],
-                         plugged_Function1DPartialR2_Flags[q16], plugged_Function1DPartialR2_Flags[q18];
+    and([model_Function1DPartial_Flags[q23] /\ model_Function1DPartial_Flags[q25] ->
+         sum([toInt(and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q23, q19] != n_cards + 1,
+                         or([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q25, q21] != n_cards + 1 /\
+                             plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q25, q21] =
+                             plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q23, q19]
+                                 | q21 : int(1..let1)]),
+                         plugged_Function1DPartialR6_Flags[q23], plugged_Function1DPartialR6_Flags[q25];
                              int(1..4)]))
-                  | q14 : int(1..n_cards)])
-         = 0 | q16 : int(1..n_racks), q18 : int(1..n_racks), q16 != q18]),
-    and([model_Function1DPartial_Flags[q20] ->
-         sum([toInt(plugged_Function1DPartialR2_Values_Occurrence[q20, c] /\ plugged_Function1DPartialR2_Flags[q20]) *
-              catchUndef(req_power_Function1D[ctype_Function1D[c]], 0)
-                  | c : int(1..n_cards)])
-         <= max_power_Function1D[model_Function1DPartial_Values[q20]]
-         /\ model_Function1DPartial_Flags[q20]
-             | q20 : int(1..n_racks)]),
-    and([model_Function1DPartial_Flags[q23] ->
-         sum([toInt(plugged_Function1DPartialR2_Values_Occurrence[q23, q21] /\ plugged_Function1DPartialR2_Flags[q23])
-                  | q21 : int(1..n_cards)])
-         <= max_connects_Function1D[model_Function1DPartial_Values[q23]]
-         /\ model_Function1DPartial_Flags[q23]
-             | q23 : int(1..n_racks)]),
+                  | q19 : int(1..let1)])
+         = 0 | q23 : int(1..n_racks), q25 : int(1..n_racks), q25 > q23]),
+    and([model_Function1DPartial_Flags[q28] ->
+         sum([toInt(plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q28, q26] != n_cards + 1 /\
+                    plugged_Function1DPartialR6_Flags[q28])
+              *
+              catchUndef(req_power_Function1D
+                             [ctype_Function1D[plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q28, q26]]],
+                         0)
+                  | q26 : int(1..let1)])
+         <= max_power_Function1D[model_Function1DPartial_Values[q28]]
+         /\ model_Function1DPartial_Flags[q28]
+             | q28 : int(1..n_racks)]),
+    and([model_Function1DPartial_Flags[q32] ->
+         sum([toInt(plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q32, q30] != n_cards + 1 /\
+                    plugged_Function1DPartialR6_Flags[q32])
+                  | q30 : int(1..let1)])
+         <= max_connects_Function1D[model_Function1DPartial_Values[q32]]
+         /\ model_Function1DPartial_Flags[q32]
+             | q32 : int(1..n_racks)]),
     and([model_Function1DPartial_Flags[q1] = false -> model_Function1DPartial_Values[q1] = 1 | q1 : int(1..n_racks)]),
-    and([plugged_Function1DPartialR2_Flags[q4] = false ->
-         and([plugged_Function1DPartialR2_Values_Occurrence[q4, q8] = false | q8 : int(1..n_cards)])
-             | q4 : int(1..n_racks)])
+    and([plugged_Function1DPartialR6_Flags[q4] = false ->
+         and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q4, q11] = 1 | q11 : int(1..let1)])
+             | q4 : int(1..n_racks)]),
+    and([plugged_Function1DPartialR6_Flags[q6] ->
+         and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q7] <
+              plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q7 + 1]
+              \/ plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q7] = n_cards + 1
+                  | q7 : int(1..let1 - 1)])
+             | q6 : int(1..n_racks)]),
+    and([plugged_Function1DPartialR6_Flags[q6] ->
+         and([plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q8] = n_cards + 1 ->
+              plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q8 + 1] = n_cards + 1
+                  | q8 : int(1..let1 - 1)])
+             | q6 : int(1..n_racks)]),
+    and([plugged_Function1DPartialR6_Flags[q6] ->
+         sum([toInt(plugged_Function1DPartialR6_Values_ExplicitVarSizeWithDummy[q6, q9] != n_cards + 1)
+                  | q9 : int(1..let1)])
+         <= let1
+             | q6 : int(1..n_racks)])
 
 $ Conjure's
 $ {"finds": [{"Name": "model"}, {"Name": "plugged"}],
@@ -88,12 +115,44 @@ $                {"Domain": {"DomainInt": [{"RangeBounded": [{"Constant": {"Cons
 $                                                            {"Reference": [{"Name": "n_racks"},
 $                                                                           {"DeclNoRepr": ["Given", {"Name": "n_racks"},
 $                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
-$                                                                                           {"NoRegion": []}]}]}]}]}}]],
+$                                                                                           {"NoRegion": []}]}]}]}]}}],
+$               [{"MachineName": ["let", 1, []]},
+$                {"Op": {"MkOpMax": {"Op": {"MkOpRange": {"Reference": [{"Name": "max_connects"},
+$                                                                       {"DeclNoRepr": ["Given", {"Name": "max_connects"},
+$                                                                                       {"DomainFunction": [[],
+$                                                                                                           [{"SizeAttr_Size": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                              3,
+$                                                                                                                                                              []]},
+$                                                                                                                                             {"DeclNoRepr": ["Given",
+$                                                                                                                                                             {"MachineName": ["fin",
+$                                                                                                                                                                              3,
+$                                                                                                                                                                              []]},
+$                                                                                                                                                             {"DomainInt": []},
+$                                                                                                                                                             {"NoRegion": []}]}]}},
+$                                                                                                            "PartialityAttr_Total",
+$                                                                                                            "JectivityAttr_None"],
+$                                                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                            {"Reference": [{"Name": "n_models"},
+$                                                                                                                                                           {"DeclNoRepr": ["Given",
+$                                                                                                                                                                           {"Name": "n_models"},
+$                                                                                                                                                                           {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]},
+$                                                                                                                                                                           {"NoRegion": []}]}]}]}]},
+$                                                                                                           {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
+$                                                                                                                                            {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                                                            4,
+$                                                                                                                                                                            []]},
+$                                                                                                                                                           {"DeclNoRepr": ["Given",
+$                                                                                                                                                                           {"MachineName": ["fin",
+$                                                                                                                                                                                            4,
+$                                                                                                                                                                                            []]},
+$                                                                                                                                                                           {"DomainInt": []},
+$                                                                                                                                                                           {"NoRegion": []}]}]}]}]}]},
+$                                                                                       {"NoRegion": []}]}]}}}}}]],
 $  "unnameds": [[{"Name": "Rack"}, {"Reference": [{"Name": "n_racks"}, null]}]],
 $  "strategyQ": {"PickFirst": []},
 $  "strategyA": {"PickAll": []},
-$  "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 4], [1, 1, 1],
+$  "trailCompact": [[1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 2, 4],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
@@ -106,16 +165,18 @@ $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$                   [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$                   [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
 $  "trailVerbose": [],
 $  "trailRewrites": [],
-$  "nameGenState": [["fin", 10], ["q", 24]],
+$  "nameGenState": [["fin", 10], ["let", 2], ["q", 33]],
 $  "nbExtraGivens": 9,
-$  "representations": [[{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
+$  "representations": [[{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
+$                      [{"MachineName": ["fin", 1, []]}, {"DomainInt": []}],
 $                      [{"Name": "n_models"}, {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}],
 $                      [{"MachineName": ["fin", 2, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 3, []]}, {"DomainInt": []}],
-$                      [{"MachineName": ["fin", 4, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 5, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 6, []]}, {"DomainInt": []}],
 $                      [{"MachineName": ["fin", 7, []]}, {"DomainInt": []}],
@@ -166,7 +227,17 @@ $                                                                            {"R
 $                                                                                           {"DeclHasRepr": ["Given",
 $                                                                                                            {"Name": "n_racks"},
 $                                                                                                            {"DomainInt": [{"RangeLowerBounded": {"Constant": {"ConstantInt": 1}}}]}]}]}]}]},
-$                                           {"DomainSet": [{"Set_Occurrence": []}, {"SizeAttr_None": []},
+$                                           {"DomainSet": [{"Set_ExplicitVarSizeWithDummy": []},
+$                                                          {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["let", 1,
+$                                                                                                               []]},
+$                                                                                              {"Alias": {"Reference": [{"MachineName": ["fin",
+$                                                                                                                                        4,
+$                                                                                                                                        []]},
+$                                                                                                                       {"DeclHasRepr": ["Given",
+$                                                                                                                                        {"MachineName": ["fin",
+$                                                                                                                                                         4,
+$                                                                                                                                                         []]},
+$                                                                                                                                        {"DomainInt": []}]}]}}]}},
 $                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                           {"Reference": [{"Name": "n_cards"},
 $                                                                                                          {"DeclHasRepr": ["Given",
@@ -320,7 +391,7 @@ $                          [{"Name": "plugged"},
 $                           [{"rootLabel": {"Function_1DPartial": []},
 $                             "subForest": [{"rootLabel": null,
 $                                            "subForest": []},
-$                                           {"rootLabel": {"Set_Occurrence": []},
+$                                           {"rootLabel": {"Set_ExplicitVarSizeWithDummy": []},
 $                                            "subForest": [{"rootLabel": null,
 $                                                           "subForest": []}]}]}]],
 $                          [{"Name": "price"},
@@ -380,7 +451,10 @@ $                                                                               
 $                      [{"Name": "plugged"},
 $                       {"DomainFunction": [[], [{"SizeAttr_None": []}, "PartialityAttr_Partial", "JectivityAttr_None"],
 $                                           {"DomainReference": [{"Name": "Rack"}, null]},
-$                                           {"DomainSet": [[], {"SizeAttr_None": []},
+$                                           {"DomainSet": [[],
+$                                                          {"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["let", 1,
+$                                                                                                               []]},
+$                                                                                              null]}},
 $                                                          {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                                           {"Reference": [{"Name": "n_cards"},
 $                                                                                                          null]}]}]}]}]}]],

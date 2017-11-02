@@ -33,7 +33,7 @@ such that
                or([graph_RelationAsMatrix[q20_1, q20_2, q20_3] /\ q20_1 = q17_1
                        | q20_1 : int(1..colours), q20_2 : int(1..n), q20_3 : int(1..n), q20_2 = i, q20_3 = j])
                    | q17_1 : int(1..colours), q17_2 : int(1..n), q17_3 : int(1..n), q17_2 = j, q17_3 = i]))
-             | i : int(1..n), j : int(1..n), i != j]),
+             | i : int(1..n), j : int(1..n), j > i]),
     and([and([graph_RelationAsMatrix[q26_1, q26_2, q26_3] ->
               and([graph_RelationAsMatrix[q23_1, q23_2, q23_3] -> !graph_RelationAsMatrix[q26_1, q23_3, q26_3]
                        | q23_1 : int(1..colours), q23_2 : int(1..n), q23_3 : int(1..n), q23_1 = q26_1, q23_2 = i,

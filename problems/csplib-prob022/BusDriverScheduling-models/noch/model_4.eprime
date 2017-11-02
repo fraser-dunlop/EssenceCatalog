@@ -24,9 +24,11 @@ such that
                       | q20 : int(1..Tasks_EnumSize)])
                  | q14 : int(1..fin1)])
              | q11 : int(1..Tasks_EnumSize)]),
-    and([true | q1 : int(1..Tasks_EnumSize)]),
+    and([q1 <= sched_PartitionOccurrence_NumParts -> sched_PartitionOccurrence_PartSizes[q1] <= Tasks_EnumSize
+             | q1 : int(1..Tasks_EnumSize)]),
     and([q1 > sched_PartitionOccurrence_NumParts -> sched_PartitionOccurrence_PartSizes[q1] = 0
              | q1 : int(1..Tasks_EnumSize)]),
+    sched_PartitionOccurrence_NumParts <= Tasks_EnumSize,
     and([q2 <= sched_PartitionOccurrence_NumParts ->
          or([sched_PartitionOccurrence_WhichPart[q3] = q2 | q3 : int(1..Tasks_EnumSize)])
              | q2 : int(3..Tasks_EnumSize)]),
@@ -82,8 +84,14 @@ $                      [{"Name": "Tasks_EnumSize"}, {"DomainInt": []}],
 $                      [{"Name": "sched"},
 $                       {"DomainPartition": [{"Partition_Occurrence": []},
 $                                            {"isRegular": false,
-$                                             "partsNum": {"SizeAttr_None": []},
-$                                             "partsSize": {"SizeAttr_None": []}},
+$                                             "partsNum": {"SizeAttr_MaxSize": {"Reference": [{"Name": "Tasks_EnumSize"},
+$                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                              {"Name": "Tasks_EnumSize"},
+$                                                                                                              {"DomainInt": []}]}]}},
+$                                             "partsSize": {"SizeAttr_MaxSize": {"Reference": [{"Name": "Tasks_EnumSize"},
+$                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                               {"Name": "Tasks_EnumSize"},
+$                                                                                                               {"DomainInt": []}]}]}}},
 $                                            {"DomainInt": [{"RangeBounded": [{"Constant": {"ConstantInt": 1}},
 $                                                                             {"Reference": [{"Name": "Tasks_EnumSize"},
 $                                                                                            {"DeclHasRepr": ["Given",
@@ -132,7 +140,13 @@ $                                                     {"DomainEnum": [{"Name": "
 $                      [{"Name": "sched"},
 $                       {"DomainPartition": [[],
 $                                            {"isRegular": false,
-$                                             "partsNum": {"SizeAttr_None": []},
-$                                             "partsSize": {"SizeAttr_None": []}},
+$                                             "partsNum": {"SizeAttr_MaxSize": {"Reference": [{"Name": "Tasks_EnumSize"},
+$                                                                                             {"DeclHasRepr": ["Given",
+$                                                                                                              {"Name": "Tasks_EnumSize"},
+$                                                                                                              {"DomainInt": []}]}]}},
+$                                             "partsSize": {"SizeAttr_MaxSize": {"Reference": [{"Name": "Tasks_EnumSize"},
+$                                                                                              {"DeclHasRepr": ["Given",
+$                                                                                                               {"Name": "Tasks_EnumSize"},
+$                                                                                                               {"DomainInt": []}]}]}}},
 $                                            {"DomainEnum": [{"Name": "Tasks"}, null, null]}]}]],
 $  "questionAnswered": []}

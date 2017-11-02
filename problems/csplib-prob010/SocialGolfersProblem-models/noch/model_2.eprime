@@ -7,35 +7,33 @@ letting let1 be g * s
 find sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit:
         matrix indexed by [int(1..w), int(1..g), int(1..s)] of int(1..let1)
 such that
-    and([sum([toInt(or([or([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q18, q21, q25] = g1
+    and([sum([toInt(or([or([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q15, q21, q25] = g1
                                 | q25 : int(1..s)])
                         /\
-                        or([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q18, q21, q27] = g2
+                        or([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q15, q21, q27] = g2
                                 | q27 : int(1..s)])
-                            | q21 : int(1..g)]))
-                  | q18 : int(1..w)])
+                            | q21 : int(1..g)])
+                    /\ (or([g1 = q18 | q18 : int(1..let1)]) /\ or([g2 = q18 | q18 : int(1..let1)])))
+                  | q15 : int(1..w)])
          <= 1
              | g1 : int(1..let1), g2 : int(1..let1), g1 < g2]),
     and([flatten(sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q1, .., ..]) <lex
          flatten(sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q1 + 1, .., ..])
              | q1 : int(1..w - 1)]),
-    and([and([1 =
-              sum([toInt(or([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q12, q14] = q3
-                                 | q14 : int(1..s)]))
-                       | q12 : int(1..g)])
-                  | q3 : int(1..let1)])
+    and([allDiff([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q11, q12]
+                      | q11 : int(1..g), q12 : int(1..s)])
              | q2 : int(1..w)]),
-    and([and([s = s | q15 : int(1..g), q16 : int(1..g)]) | q2 : int(1..w)]),
-    and([and([s >= 1 | q17 : int(1..g)]) | q2 : int(1..w)]),
-    and([and([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q8, ..] <lex
-              sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q8 + 1, ..]
-                  | q8 : int(1..g - 1)])
+    and([and([s >= 1 | q13 : int(1..g)]) | q2 : int(1..w)]),
+    and([and([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q6, ..] <lex
+              sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q6 + 1, ..]
+                  | q6 : int(1..g - 1)])
              | q2 : int(1..w)]),
-    and([and([and([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q9, q10] <
-                   sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q9, q10 + 1]
-                       | q10 : int(1..s - 1)])
-                  | q9 : int(1..g)])
-             | q2 : int(1..w)])
+    and([and([and([sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q7, q8] <
+                   sched_ExplicitR17R3R3_PartitionAsSet_ExplicitR3_Explicit[q2, q7, q8 + 1]
+                       | q8 : int(1..s - 1)])
+                  | q7 : int(1..g)])
+             | q2 : int(1..w)]),
+    and([let1 = sum([s | q14 : int(1..g)]) | q2 : int(1..w)])
 
 $ Conjure's
 $ {"finds": [{"Name": "sched"}],

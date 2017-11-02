@@ -27,7 +27,7 @@ such that
                     (or([sched_RelationAsSetR3_ExplicitR3_3_Explicit[q12, q20] = t1 | q20 : int(1..2)]) /\
                      or([sched_RelationAsSetR3_ExplicitR3_3_Explicit[q12, q22] = t2 | q22 : int(1..2)])))
                   | q12 : int(1..let3)])
-         = 1 | t1 : int(1..n_teams), t2 : int(1..n_teams), t1 != t2]),
+         = 1 | t1 : int(1..n_teams), t2 : int(1..n_teams), t2 > t1]),
     and([sched_RelationAsSetR3_ExplicitR3_1[q1] < sched_RelationAsSetR3_ExplicitR3_1[q1 + 1] \/
          sched_RelationAsSetR3_ExplicitR3_1[q1] = sched_RelationAsSetR3_ExplicitR3_1[q1 + 1] /\
          (sched_RelationAsSetR3_ExplicitR3_2[q1] < sched_RelationAsSetR3_ExplicitR3_2[q1 + 1] \/
