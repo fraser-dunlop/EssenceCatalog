@@ -11,15 +11,13 @@ maximising |words|
 
 such that
     forAll w in words . |preImage(w,C)| + |preImage(w,G)| = 4,
-    forAll w1,w2 in words
-        , w2 > w1
-        . (sum i : Index . toInt(w1(i) = w2(i))) <= 4,
-    forAll w1,w2 in words
-        , w1 = w2
-        . (sum i : Index
-            . toInt(w1(i) = A /\ w2(9-i) = T \/
-               w1(i) = C /\ w2(9-i) = G \/
-               w1(i) = G /\ w2(9-i) = C \/
-               w1(i) = T /\ w2(9-i) = A)
-          ) <= 4
+    forAll {w1,w2} subsetEq words .
+        (sum i : Index . toInt(w1(i) = w2(i))) <= 4,
+    forAll {w1,w2} subsetEq words .
+        4 >=
+            sum i : Index .
+                toInt(w1(i) = A /\ w2(9-i) = T \/
+                      w1(i) = C /\ w2(9-i) = G \/
+                      w1(i) = G /\ w2(9-i) = C \/
+                      w1(i) = T /\ w2(9-i) = A)
 
