@@ -8,15 +8,13 @@ given n : int(1..)
 
 letting seqLength be k * n
 
-letting seqIndex be domain int(1..seqLength)
-
 find seq : sequence (size seqLength) of int(1..n)
 
 $ symmetry breaking
 such that seq(1) < seq(seqLength)
 
 $ Each number from 1 to n appear exactly k times in seq.
-$ This constraint is implied, and it probably doesn't help search very much either.
+$ This constraint is implied, and it probably doesn't help search either.
 such that
     forAll i : int(1..n) . |preImage(seq, i)| = k
 
