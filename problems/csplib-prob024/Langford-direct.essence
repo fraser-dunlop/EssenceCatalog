@@ -8,6 +8,7 @@ given n : int(1..)
 
 letting seqLength be k * n
 
+$ The sequence of numbers
 find seq : sequence (size seqLength) of int(1..n)
 
 $ symmetry breaking
@@ -31,4 +32,3 @@ such that
             $ positions start, start+(number+1), start+2*(number+1), ... 
             $ all contain the value "number"
             forAll i : int(1..k) . seq(start + (i-1) * (number+1)) = number
-
