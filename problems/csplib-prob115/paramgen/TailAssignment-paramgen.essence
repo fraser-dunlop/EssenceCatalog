@@ -1,0 +1,26 @@
+language Essence 1.3
+
+letting n_flights_max be 10
+letting n_planes_max be 5
+letting maint_freq_max be 10
+
+find n_flights: int(1..n_flights_max)
+find n_planes: int(1..n_planes_max)
+find maint_freq: int(1..maint_freq_max)
+
+letting Flight be domain int(1..n_flights_max)
+letting Plane be domain int(1..n_planes_max)
+
+find network: relation of (Flight * Flight)
+such that forAll (i,j) in network . i <= n_flights /\ j <= n_flights
+
+find can_fly: relation of (Plane * Flight)
+such that forAll (i,j) in can_fly . i <= n_planes /\ j <= n_flights
+
+find carry_in: function Plane --> Flight
+such that forAll i : Plane . i <= n_planes -> carry_in(i) <= n_flights
+such that forAll i : Plane . i > n_planes -> !(i in defined(carry_in))
+
+find maint: set of Flight
+such that forAll i in maint . i <= n_flights
+
